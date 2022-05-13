@@ -7,10 +7,45 @@
     <link rel="stylesheet" href="style.css">
     <script src="code.js"></script>
 </head>
-<body class="homepage">
+<body class="homepage" >
     <div class="samelineheader">
-        <img src="langlogo.png" class="topleftlogo">
+        
+        <h1 class="bigselection" id="startbtn" onclick="selectWord('pc')">START</h1>
+        
+        <button id="return" class = "returnbutton" onclick="returnMain()">return</button>
+       
     </div>
+    <div class="inputdiv">
+        <h1 class="displayWord" id="displayWord"></h1>
+    </div>
+    <div class="inputdiv">
+        <div class="stats" id="stats">
+            <h5 class="statsText" id="crctst">Passe Composee Practice</h5>
+            
+            <h5 class="statsText" id="incorrect"></h5>
+        </div>
+        <input class="input" id="input">
+        <button class="goButton" id="goButton" onclick="getInput()"></button>
+    </div>
+    <div class="inputdiv">
+        <p class="explanation" id="e1"></p>
+    </div>
+    <div class="inputdiv">
+        <p class="explanation" id="e2"></p>
+    </div>
+    <div class="inputdiv">
+        <p class="explanation" id="e3"></p>
+    </div>
+    <div class="inputdiv">
+        <p class="explanation" id="e4"></p>
+    </div>
+    <div class="inputdiv">
+        <p class="explanation" id="e5"></p>
+    </div>
+    
+        
+        
+    
     
 </body>
 </html>

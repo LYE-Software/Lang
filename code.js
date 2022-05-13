@@ -29,6 +29,14 @@ function returnMain(){
     window.open("index.html","_self")
 }
 
+function checkEnter(){
+    e = e || window.event;
+    if (e.keyCode == 13){
+        getInput()
+    }
+    return True
+}
+
 function selectWord(language){
     document.getElementById("crctst").innerHTML="Correct: "+correctCounter
     document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter
@@ -64,6 +72,17 @@ function selectWord(language){
         wchoice = Math.floor(Math.random() * condtWords.length)
         word = condtWords[wchoice]
         document.getElementById("displayWord").innerHTML="What is the conditional stem of "+word
+    }
+    else if (language =="pc"){
+        type = "pc"
+        input = document.getElementById("input")
+        input.style.display = "flex";
+        buttonStyling=document.getElementById("goButton")
+        buttonStyling.style.display = "flex";
+        buttonStyling.innerHTML=">"+"\n"+"Go!"
+        wchoice = Math.floor(Math.random() * words.length)
+        word = words[wchoice]
+        document.getElementById("displayWord").innerHTML="Enter [avoir] or [être] and the past participle of "+word+". Assume no endings for the [être] verbs."
     }
 }
 
@@ -220,6 +239,26 @@ function getInput(){
             input.value =""
             
             afterCorrect("fastpass", "condt")
+        }
+        else{
+            console.log("3")
+            buttonStyling.style.backgroundColor = "red"
+            setTimeout(function(){buttonStyling.style.backgroundColor="grey"}, 1000)
+            input.value =""
+            incorrectCounter+=1
+            document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter
+            afterCorrect("incorrect")
+        }
+    }
+    else if (type == "pc"){
+        if (pc[wchoice] == usrInput){
+            console.log("2")
+            correctCounter+=1
+            buttonStyling.style.backgroundColor = "green"
+            
+            input.value =""
+            
+            afterCorrect("fastpass", "pc")
         }
         else{
             console.log("3")
