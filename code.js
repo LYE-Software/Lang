@@ -94,7 +94,7 @@ function getInput(){
     console.log("into getinput")
 
     if (usrInput == ""){
-
+        
     }
 
     else if (type == "pr"){
