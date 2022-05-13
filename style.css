@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+.topleftlogo{
+    width:186px;
+    height:157px;
+}
+
+.homepage{
+    background-color: wheat;
+}
+
+.samelineheader{
+    display: flex;
+    justify-content: space-between;
+}
+
+.bigselection:hover{
+    font-weight:bolder;
+    text-decoration: underline;
+    transition:.2s;
+    
+}
+
+.bigselection{
+    font-family: 'Varela Round';
+    color:#001945;
+   
+
+}
+
+.header{
+    font-family: 'Varela Round';
+    color:#001945;
+}
+
+.sameline{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.smallselection{
+    font-family: 'Varela Round';
+    color:#001945;
+    
+}
+
+.testing{
+    background-color: aqua;
+}
+
+.dropbtn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+.inputdiv{
+    display:flex;
+    justify-content:center;
+    width:100%;
+}
+
+.input{
+    border:5px;
+    border-color: #001945;
+    border-radius: 15px;
+    width:500px;
+    height:150px;
+    font-size:500%;
+    font-family: 'Varela Round';
+    color:#001945;
+    display:none;
+        
+}
+
+.displayWord{
+    font-family: 'Varela Round';
+    color:#001945;
+}
+
+.goButton{
+    border:5px;
+    border-color: #001945;
+    border-radius: 15px;
+    width:100px;
+    height:150px;
+    font-size: 250%;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    font-family: 'Varela Round';
+    color:#001945;
+    display:none;
+    margin-left:15px;
+}
+
+.explanation{
+    font-family: 'Varela Round';
+    color:#001945;
+}
+
+.statsText{
+    color: wheat;
+    font-family: 'Varela Round';
+
+}
+
+.stats{
+    margin-right:15px;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    padding: 20px;
+    width:70px;
+    height:110px;
+    border:5px;
+    border-color: #001945;
+    border-radius: 15px;
+    background-color: #001945;
+    color: wheat;
+}
+
+.returnbutton{
+    border:5px;
+    border-color: #001945;
+    border-radius: 15px;
+    
+    font-size: 250%;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    font-family: 'Varela Round';
+    color:#001945;
+  
+    margin-left:15px;
+}
