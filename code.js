@@ -9,6 +9,8 @@ var Nous = ["devons", "venons", "prenons", "partons", "suivons", "voyons", "diso
 var Vous = ["devez", "venez", "prenez", "partez", "suivez", "voyez", "dites", "conduisez", "buvez", "savez", "recevez", "ouvrez", "vivez", "vous assoyez", "mettez", "connaissez", "écrivez"]
 var Ils = ["doivent", "viennent", "prennent", "partent", "suivent", "voient", "disent", "conduisent", "boivent", "savent", "reçoivent", "ouvrent", "vivent", "s'assoient", "mettent", "connaissent", "écrivent"]
 var pc = ["avoir dû", "être venu", "avoir pris", "être parti", "avoir suivi", "avoir vu", "avoir dit", "avoir conduit", "avoir bu", "avoir su", "avoir reçu", "avoir ouvert", "avoir vécu", "s'être assis", "avoir mis", "avoir connu", "avoir écrit"]
+var condtWords = ["Aller", "s'asseoir", "avoir", "devoir", "envoyer", "être", "faire", "falloir", "pouvoir", "recevoir", "savoir", "venir", "voir", "vouloir"]
+var contdStem = ["ir", "assiér", "aur", "devr", "enverr", "ser", "fer", "faudr", "pourr", "recevr", "saur", "viendr", "verr", "voudr"]
 
 var passe = false
 var correct = 0
@@ -21,7 +23,7 @@ var wchoice = 0
 var firstRun = false
 var correctCounter = 0
 var incorrectCounter = 0
-
+var type = ""
 
 function returnMain(){
     window.open("index.html","_self")
@@ -34,6 +36,7 @@ function selectWord(language){
     console.log("SELECT WORD")
     document.getElementById("startbtn").innerHTML=""
     if (language=="PR"){
+        type = "pr"
         input = document.getElementById("input")
         input.style.display = "flex";
         buttonStyling=document.getElementById("goButton")
@@ -51,6 +54,17 @@ function selectWord(language){
         
         return toReturn
     }
+    else if (language =="condt"){
+        input = document.getElementById("input")
+        input.style.display = "flex";
+        buttonStyling=document.getElementById("goButton")
+        buttonStyling.style.display = "flex";
+        buttonStyling.innerHTML=">"+"\n"+"Go!"
+        type = "condt"
+        wchoice = Math.floor(Math.random() * condtWords.length)
+        word = condtWords[wchoice]
+        document.getElementById("displayWord").innerHTML="What is the conditional stem of "+word
+    }
 }
 
 //i think that the thing always turns red because of how it is called afterwards, not giving time for input. idk
@@ -59,17 +73,153 @@ function getInput(){
     usrInput = input.value;
     buttonStyling=document.getElementById("goButton")
     console.log("into getinput")
-    if (pro =="Je"){
-        console.log(wchoice)
-        console.log(Je[wchoice])
-        if (Je[wchoice] == usrInput){
+    if (type == "pr"){
+        if (pro =="Je"){
+            console.log(wchoice)
+            console.log(Je[wchoice])
+            if (Je[wchoice] == usrInput){
+                console.log("2")
+                
+                buttonStyling.style.backgroundColor = "green"
+                
+                input.value =""
+                correctCounter+=1
+                afterCorrect("PR")
+            }
+            else{
+                console.log("3")
+                buttonStyling.style.backgroundColor = "red"
+                setTimeout(function(){buttonStyling.style.backgroundColor="grey"}, 1000)
+                input.value =""
+                incorrectCounter+=1
+                document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter
+                afterCorrect("incorrect")
+            }
+    
+        }
+        else if (pro =="Tu"){
+            console.log(wchoice)
+            console.log(Tu[wchoice])
+            if (Tu[wchoice] == usrInput){
+                console.log("2")
+                
+                buttonStyling.style.backgroundColor = "green"
+                
+                input.value =""
+                correctCounter+=1
+                afterCorrect("PR")
+            }
+            else{
+                console.log("3")
+                buttonStyling.style.backgroundColor = "red"
+                setTimeout(function(){buttonStyling.style.backgroundColor="grey"}, 1000)
+                input.value =""
+                incorrectCounter+=1
+                document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter 
+                afterCorrect("incorrect")
+            }
+    
+        }
+        else if (pro =="Il"){
+            console.log(wchoice)
+            console.log(Il[wchoice])
+            if (Il[wchoice] == usrInput){
+                console.log("2")
+                
+                buttonStyling.style.backgroundColor = "green"
+                correctCounter+=1
+                input.value =""
+                afterCorrect("PR")
+            }
+            else{
+                console.log("3")
+                buttonStyling.style.backgroundColor = "red"
+                setTimeout(function(){buttonStyling.style.backgroundColor="grey"}, 1000)
+                input.value =""
+                incorrectCounter+=1
+                document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter
+                afterCorrect("incorrect")
+            }
+    
+        }
+        else if (pro =="Nous"){
+            console.log(wchoice)
+            console.log(Nous[wchoice])
+            if (Nous[wchoice] == usrInput){
+                console.log("2")
+                correctCounter+=1
+                buttonStyling.style.backgroundColor = "green"
+                
+                input.value =""
+                
+                afterCorrect("PR")
+            }
+            else{
+                console.log("3")
+                buttonStyling.style.backgroundColor = "red"
+                setTimeout(function(){buttonStyling.style.backgroundColor="grey"}, 1000)
+                input.value =""
+                incorrectCounter+=1
+                document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter
+                afterCorrect("incorrect")
+            }
+    
+        }
+        else if (pro =="Vous"){
+            console.log(wchoice)
+            console.log(Vous[wchoice])
+            if (Vous[wchoice] == usrInput){
+                console.log("2")
+                correctCounter+=1
+                buttonStyling.style.backgroundColor = "green"
+                
+                input.value =""
+                afterCorrect("PR")
+            }
+            else{
+                console.log("3")
+                buttonStyling.style.backgroundColor = "red"
+                setTimeout(function(){buttonStyling.style.backgroundColor="grey"}, 1000)
+                input.value =""
+                incorrectCounter+=1
+                document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter
+                afterCorrect("incorrect")
+            }
+    
+        }
+        else if (pro =="Ils"){
+            console.log(wchoice)
+            console.log(Ils[wchoice])
+            if (Ils[wchoice] == usrInput){
+                console.log("2")
+                correctCounter+=1
+                buttonStyling.style.backgroundColor = "green"
+                
+                input.value =""
+                
+                afterCorrect("PR")
+            }
+            else{
+                console.log("3")
+                buttonStyling.style.backgroundColor = "red"
+                setTimeout(function(){buttonStyling.style.backgroundColor="grey"}, 1000)
+                input.value =""
+                incorrectCounter+=1
+                document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter
+                afterCorrect("incorrect")
+            }
+    
+        }
+    }
+    else if (type == "condt"){
+        if (contdStem[wchoice] == usrInput){
             console.log("2")
-            
+            correctCounter+=1
             buttonStyling.style.backgroundColor = "green"
             
             input.value =""
-            correctCounter+=1
-            afterCorrect("PR")
+            
+            afterCorrect("fastpass", "condt")
         }
         else{
             console.log("3")
@@ -80,129 +230,15 @@ function getInput(){
             document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter
             afterCorrect("incorrect")
         }
-
-    }
-    else if (pro =="Tu"){
-        console.log(wchoice)
-        console.log(Tu[wchoice])
-        if (Tu[wchoice] == usrInput){
-            console.log("2")
-            
-            buttonStyling.style.backgroundColor = "green"
-            
-            input.value =""
-            correctCounter+=1
-            afterCorrect("PR")
-        }
-        else{
-            console.log("3")
-            buttonStyling.style.backgroundColor = "red"
-            setTimeout(function(){buttonStyling.style.backgroundColor="grey"}, 1000)
-            input.value =""
-            incorrectCounter+=1
-            document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter 
-            afterCorrect("incorrect")
-        }
-
-    }
-    else if (pro =="Il"){
-        console.log(wchoice)
-        console.log(Il[wchoice])
-        if (Il[wchoice] == usrInput){
-            console.log("2")
-            
-            buttonStyling.style.backgroundColor = "green"
-            correctCounter+=1
-            input.value =""
-            afterCorrect("PR")
-        }
-        else{
-            console.log("3")
-            buttonStyling.style.backgroundColor = "red"
-            setTimeout(function(){buttonStyling.style.backgroundColor="grey"}, 1000)
-            input.value =""
-            incorrectCounter+=1
-            document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter
-            afterCorrect("incorrect")
-        }
-
-    }
-    else if (pro =="Nous"){
-        console.log(wchoice)
-        console.log(Nous[wchoice])
-        if (Nous[wchoice] == usrInput){
-            console.log("2")
-            correctCounter+=1
-            buttonStyling.style.backgroundColor = "green"
-            
-            input.value =""
-            
-            afterCorrect("PR")
-        }
-        else{
-            console.log("3")
-            buttonStyling.style.backgroundColor = "red"
-            setTimeout(function(){buttonStyling.style.backgroundColor="grey"}, 1000)
-            input.value =""
-            incorrectCounter+=1
-            document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter
-            afterCorrect("incorrect")
-        }
-
-    }
-    else if (pro =="Vous"){
-        console.log(wchoice)
-        console.log(Vous[wchoice])
-        if (Vous[wchoice] == usrInput){
-            console.log("2")
-            correctCounter+=1
-            buttonStyling.style.backgroundColor = "green"
-            
-            input.value =""
-            afterCorrect("PR")
-        }
-        else{
-            console.log("3")
-            buttonStyling.style.backgroundColor = "red"
-            setTimeout(function(){buttonStyling.style.backgroundColor="grey"}, 1000)
-            input.value =""
-            incorrectCounter+=1
-            document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter
-            afterCorrect("incorrect")
-        }
-
-    }
-    else if (pro =="Ils"){
-        console.log(wchoice)
-        console.log(Ils[wchoice])
-        if (Ils[wchoice] == usrInput){
-            console.log("2")
-            correctCounter+=1
-            buttonStyling.style.backgroundColor = "green"
-            
-            input.value =""
-            
-            afterCorrect("PR")
-        }
-        else{
-            console.log("3")
-            buttonStyling.style.backgroundColor = "red"
-            setTimeout(function(){buttonStyling.style.backgroundColor="grey"}, 1000)
-            input.value =""
-            incorrectCounter+=1
-            document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter
-            afterCorrect("incorrect")
-        }
-
     }
     
 }
 
 
 
-function afterCorrect(passthru){
+function afterCorrect(passthru, snd){
     if (passthru=="fastpass"){
-
+        selectWord(snd)
     }
     else if(passthru =="incorrect"){
         document.getElementById("e1").innerHTML = ""
