@@ -92,7 +92,12 @@ function getInput(){
     usrInput = input.value;
     buttonStyling=document.getElementById("goButton")
     console.log("into getinput")
-    if (type == "pr"){
+
+    if (usrInput == ""){
+
+    }
+
+    else if (type == "pr"){
         if (pro =="Je"){
             console.log(wchoice)
             console.log(Je[wchoice])
