@@ -25,6 +25,26 @@ var correctCounter = 0
 var incorrectCounter = 0
 var type = ""
 
+
+function showVerbs(language){
+    if(language == "fr"){
+        document.getElementById("presentverbs").innerHTML="Present Tense Verbs: "+words
+        document.getElementById("pastverbs").innerHTML="Past Tense Verbs: "+words
+        document.getElementById("futureverbs").innerHTML="Future Tense Verbs: "+condtWords
+    }
+    else if(language == "FrSV"){
+        console.log("showing present conjugations")
+        document.getElementById("conj1").innerHTML="Present Tense Verbs conjugated as Je: "+Je
+        document.getElementById("conj2").innerHTML="Present Tense Verbs conjugated as Tu: "+Tu
+        document.getElementById("conj3").innerHTML="Present Tense Verbs conjugated as Il/Elle/On: "+Il
+        document.getElementById("conj4").innerHTML="Present Tense Verbs conjugated as Nous: "+Nous
+        document.getElementById("conj5").innerHTML="Present Tense Verbs conjugated as Vous: "+Vous
+        document.getElementById("conj6").innerHTML="Present Tense Verbs conjugated as Ils: "+Ils
+    }
+
+}
+
+
 function returnMain(){
     window.open("index.html","_self")
 }
