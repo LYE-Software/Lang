@@ -7,6 +7,5 @@ Lang is a project that i made to be an alternative to programs like Memrise and 
 
 Currently only French is supported, as that is the language i am taking right now. Past tense, present tense, and future tense all work for French.
 
-To make a feature request, email me at nwvbug@gmail.com
 
 
