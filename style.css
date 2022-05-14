@@ -196,6 +196,15 @@
 .copyrighttext{
     color:001945;
     font-family: "Varela Round";
-    margin-top: 35%;
-    margin-left:73%;
+    
+}
+
+footer{
+    text-align: center;
+    padding: 3px;
+    background-color: #3e8e41;
+    color: white;
+    width: 100%;
+    bottom: 0%;
+    position: fixed;
 }

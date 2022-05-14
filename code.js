@@ -42,7 +42,7 @@ function selectWord(language){
     document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter
    
     console.log("SELECT WORD")
-    document.getElementById("startbtn").innerHTML=""
+    document.getElementById("startbtn").style.display = "none"
     if (language=="PR"){
         type = "pr"
         input = document.getElementById("input")
