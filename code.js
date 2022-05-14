@@ -50,6 +50,11 @@ function selectWord(language){
         buttonStyling=document.getElementById("goButton")
         buttonStyling.style.display = "flex";
         buttonStyling.innerHTML=">"+"\n"+"Go!"
+        document.getElementById("stats").style.width="70"
+        document.getElementById("stats").style.height="110"
+        document.getElementById("crctst").style.fontSize = "15"
+        document.getElementById("incorrect").style.fontSize = "15"
+
         
         wchoice = Math.floor(Math.random() * words.length)
         pchoice = Math.floor(Math.random() * pronouns.length)

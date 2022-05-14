@@ -164,14 +164,32 @@
 
 }
 
+.statsTextPr{
+    color: wheat;
+    font-family: 'Varela Round';
+    font-size: 32px;
+}
+
+.statsTextPc{
+    color: wheat;
+    font-family: 'Varela Round';
+    font-size: 28px;
+}
+
+.statsTextCondt{
+    color: wheat;
+    font-family: 'Varela Round';
+    font-size: 36px;
+}
+
 .stats{
     margin-right:15px;
     align-items: center;
     align-content: center;
     justify-content: center;
     padding: 20px;
-    width:70px;
-    height:110px;
+    width:350px;
+    height:160px;
     border:5px;
     border-color: #001945;
     border-radius: 15px;
