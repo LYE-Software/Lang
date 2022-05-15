@@ -24,11 +24,59 @@ var firstRun = false
 var correctCounter = 0
 var incorrectCounter = 0
 var type = ""
+var textBlock = ""
+
+
+
+function getRandomQuestion() {
+    console.log("random question ran")
+    let arrayText = textBlock.split("\n")
+    let random_number = Math.floor(Math.random() * 321);
+    let random_question = arrayText[random_number]; 
+    var questionArray= JSON.parse(random_question)
+    console.log(questionArray)
+    return random_question
+        // document.getElementById('file').innerText = this.result; // places text into webpage
+}
+
+function onBtnPress(){
+    document.getElementById("myBtn").addEventListener("click", function() {
+ 
+        var reader = new FileReader();
+        loadQuestions()
+    
+        tryIt = document.getElementById("myBtn")
+        tryIt.style.display = "none";
+        fileInput = document.getElementById("fileinput")
+        fileInput.style.display = "none";
+        
+        console.log(reader)
+        console.log(getRandomQuestion())
+    
+      
+    });
+}
+
+
+//look into order of execution for filereader and similar things
+
+
+function loadQuestions() {
+    reader.addEventListener('load', function() {
+        textBlock = this.result;
+        console.log(textBlock)
+    })
+}
+
 
 function redirectToInformation(choice){
     if (choice=="htc"){
         window.location.href= "howtochoose.html";
     }
+    if (choice="sc"){
+        window.location.href="singleRead.html";
+    }
+
 }
 
 function showVerbs(language){

@@ -7,6 +7,10 @@ so we can just do, for example:
 
 ["parler", "parle", "parles", "parle", "parlons", "parlez", "parlent"]
 
+["faire", "fer"]
+
+
+
 print("conjugate "+list[0]+" in the "+[pronoun]+" form.")
 
 if userinput == list[pchoice]:
