@@ -105,6 +105,13 @@
       transition: 2ms;
     }
 
+    .dropbtn:hover {
+        background-color: #3e8e41;
+        height:150px;
+        width:200px;
+        transition: 2ms;
+      }
+
   .dropbtn{
     border:5px;
     border-color: #001945;

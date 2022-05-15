@@ -25,6 +25,11 @@ var correctCounter = 0
 var incorrectCounter = 0
 var type = ""
 
+function redirectToInformation(choice){
+    if (choice=="htc"){
+        window.location.href= "howtochoose.html";
+    }
+}
 
 function showVerbs(language){
     if(language == "fr"){
