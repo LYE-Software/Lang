@@ -7,5 +7,5 @@ Lang is a project that i made to be an alternative to programs like Memrise and 
 
 Currently only French is supported with preloaded verbs, as that is the language i am taking right now. Past tense, present tense, and future tense all work for French.
 
-
+Lang may not work on some wifi systems right now as the domain is newly registered and some security settings require domains to be at least 32 days old.
 
