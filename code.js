@@ -73,7 +73,7 @@ function redirectToInformation(choice){
     if (choice=="htc"){
         window.location.href= "howtochoose.html";
     }
-    if (choice="sc"){
+    if (choice=="sc"){
         window.location.href="singleRead.html";
     }
 
