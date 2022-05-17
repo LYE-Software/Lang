@@ -7,5 +7,27 @@ Lang is a project that i made to be an alternative to programs like Memrise and 
 
 Currently only French is supported with preloaded verbs, as that is the language i am taking right now. Past tense, present tense, and future tense all work for French.
 
-Lang may not work on some wifi systems right now as the domain is newly registered and some security settings require domains to be at least 32 days old.
+How To Create Custom Verb Sheets:
 
+Manual:
+Create a .txt file (name does not matter).
+input the verbs you want in this syntax:
+mutli verbs
+  [infinitive form, je, tu, il, nous, vous, ils]
+  for example,
+  [parler, parle, parles, parle, parlons, parlez, parlent]
+single verbs
+  [infinitive form, stem]
+  for example,
+  [être, avoir été]
+  
+
+Within Site (unreleased):
+select the option of multi vs single verb
+follow on screen prompts
+select save and download the .txt file
+
+How to read verb sheets
+select whether it is single verb or mutli
+upload sheet
+follow on screen instructions
