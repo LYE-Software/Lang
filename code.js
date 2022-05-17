@@ -141,6 +141,10 @@ function selectWord(language){
         return toReturn
     }
     else if (language =="condt"){
+        document.getElementById("stats").style.width="70"
+        document.getElementById("stats").style.height="110"
+        document.getElementById("crctst").style.fontSize = "15"
+        document.getElementById("incorrect").style.fontSize = "15"
         input = document.getElementById("input")
         input.style.display = "flex";
         buttonStyling=document.getElementById("goButton")
