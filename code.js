@@ -198,7 +198,7 @@ function prCorrect(){
 
 
 function getInput(){
-    showCorrect = document.getElementById("showCorrect").style.display = "none";
+    //showCorrect = document.getElementById("showCorrect").style.display = "none";
 
     usrInput = input.value;
     buttonStyling=document.getElementById("goButton")
@@ -280,6 +280,8 @@ function getInput(){
         if (contdStem[wchoice] == usrInput){
             console.log("2")
             correctCounter+=1
+            buttonStyling = document.getElementById("goButton")
+
             buttonStyling.style.backgroundColor = "green"
             
             input.value =""
@@ -288,6 +290,8 @@ function getInput(){
         }
         else{
             console.log("3")
+            buttonStyling = document.getElementById("goButton")
+
             buttonStyling.style.backgroundColor = "red"
             setTimeout(function(){buttonStyling.style.backgroundColor="grey"}, 1000)
             input.value =""
