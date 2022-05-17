@@ -156,6 +156,10 @@ function selectWord(language){
         document.getElementById("displayWord").innerHTML="What is the conditional stem of "+word
     }
     else if (language =="pc"){
+        document.getElementById("stats").style.width="70"
+        document.getElementById("stats").style.height="110"
+        document.getElementById("crctst").style.fontSize = "15"
+        document.getElementById("incorrect").style.fontSize = "15"
         type = "pc"
         input = document.getElementById("input")
         input.style.display = "flex";
