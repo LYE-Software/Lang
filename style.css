@@ -161,6 +161,22 @@
     margin-left:15px;
 }
 
+.showCorrect{
+    border:5px;
+    border-color: #001945;
+    border-radius: 15px;
+    width:100px;
+    height:150px;
+    font-size: 250%;
+    display:none;
+    justify-content:center;
+    align-items: center;
+    font-family: 'Varela Round';
+    color:#001945;
+    display:none;
+    margin-left:15px;
+}
+
 .explanation{
     font-family: 'Varela Round';
     color:#001945;

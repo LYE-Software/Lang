@@ -172,9 +172,34 @@ function selectWord(language){
     }
 }
 
-//i think that the thing always turns red because of how it is called afterwards, not giving time for input. idk
-function getInput(){
+
+function prIncorrect(){
+    console.log("3")
+    buttonStyling.style.backgroundColor = "red"
+    setTimeout(function(){buttonStyling.style.backgroundColor="grey"}, 1000)
+    input.value =""
+    incorrectCounter+=1
+    document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter
+    afterCorrect("incorrect")
+    showCorrect = document.getElementById("showCorrect").style.display = "flex";
+
+}
+
+function prCorrect(){
+    console.log("2")
+                
+    buttonStyling.style.backgroundColor = "green"
     
+    input.value =""
+    correctCounter+=1
+    afterCorrect("PR")
+}
+
+
+
+function getInput(){
+    showCorrect = document.getElementById("showCorrect").style.display = "none";
+
     usrInput = input.value;
     buttonStyling=document.getElementById("goButton")
     console.log("into getinput")
@@ -188,22 +213,10 @@ function getInput(){
             console.log(wchoice)
             console.log(Je[wchoice])
             if (Je[wchoice] == usrInput){
-                console.log("2")
-                
-                buttonStyling.style.backgroundColor = "green"
-                
-                input.value =""
-                correctCounter+=1
-                afterCorrect("PR")
+                prCorrect()
             }
             else{
-                console.log("3")
-                buttonStyling.style.backgroundColor = "red"
-                setTimeout(function(){buttonStyling.style.backgroundColor="grey"}, 1000)
-                input.value =""
-                incorrectCounter+=1
-                document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter
-                afterCorrect("incorrect")
+                prIncorrect()
             }
     
         }
@@ -211,22 +224,10 @@ function getInput(){
             console.log(wchoice)
             console.log(Tu[wchoice])
             if (Tu[wchoice] == usrInput){
-                console.log("2")
-                
-                buttonStyling.style.backgroundColor = "green"
-                
-                input.value =""
-                correctCounter+=1
-                afterCorrect("PR")
+                prCorrect()
             }
             else{
-                console.log("3")
-                buttonStyling.style.backgroundColor = "red"
-                setTimeout(function(){buttonStyling.style.backgroundColor="grey"}, 1000)
-                input.value =""
-                incorrectCounter+=1
-                document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter 
-                afterCorrect("incorrect")
+                prIncorrect()
             }
     
         }
@@ -234,21 +235,10 @@ function getInput(){
             console.log(wchoice)
             console.log(Il[wchoice])
             if (Il[wchoice] == usrInput){
-                console.log("2")
-                
-                buttonStyling.style.backgroundColor = "green"
-                correctCounter+=1
-                input.value =""
-                afterCorrect("PR")
+                prCorrect()
             }
             else{
-                console.log("3")
-                buttonStyling.style.backgroundColor = "red"
-                setTimeout(function(){buttonStyling.style.backgroundColor="grey"}, 1000)
-                input.value =""
-                incorrectCounter+=1
-                document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter
-                afterCorrect("incorrect")
+                prIncorrect()
             }
     
         }
@@ -256,22 +246,10 @@ function getInput(){
             console.log(wchoice)
             console.log(Nous[wchoice])
             if (Nous[wchoice] == usrInput){
-                console.log("2")
-                correctCounter+=1
-                buttonStyling.style.backgroundColor = "green"
-                
-                input.value =""
-                
-                afterCorrect("PR")
+                prCorrect()
             }
             else{
-                console.log("3")
-                buttonStyling.style.backgroundColor = "red"
-                setTimeout(function(){buttonStyling.style.backgroundColor="grey"}, 1000)
-                input.value =""
-                incorrectCounter+=1
-                document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter
-                afterCorrect("incorrect")
+                prIncorrect()
             }
     
         }
@@ -279,21 +257,10 @@ function getInput(){
             console.log(wchoice)
             console.log(Vous[wchoice])
             if (Vous[wchoice] == usrInput){
-                console.log("2")
-                correctCounter+=1
-                buttonStyling.style.backgroundColor = "green"
-                
-                input.value =""
-                afterCorrect("PR")
+                prCorrect()
             }
             else{
-                console.log("3")
-                buttonStyling.style.backgroundColor = "red"
-                setTimeout(function(){buttonStyling.style.backgroundColor="grey"}, 1000)
-                input.value =""
-                incorrectCounter+=1
-                document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter
-                afterCorrect("incorrect")
+                prIncorrect()
             }
     
         }
@@ -301,22 +268,10 @@ function getInput(){
             console.log(wchoice)
             console.log(Ils[wchoice])
             if (Ils[wchoice] == usrInput){
-                console.log("2")
-                correctCounter+=1
-                buttonStyling.style.backgroundColor = "green"
-                
-                input.value =""
-                
-                afterCorrect("PR")
+                prCorrect()
             }
             else{
-                console.log("3")
-                buttonStyling.style.backgroundColor = "red"
-                setTimeout(function(){buttonStyling.style.backgroundColor="grey"}, 1000)
-                input.value =""
-                incorrectCounter+=1
-                document.getElementById("incorrect").innerHTML="Incorrect: "+incorrectCounter
-                afterCorrect("incorrect")
+                prIncorrect()
             }
     
         }
