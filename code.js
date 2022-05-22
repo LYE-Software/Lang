@@ -41,9 +41,23 @@ function getRandomQuestion() {
 
 function onBtnPress(){
     document.getElementById("myBtn").addEventListener("click", function() {
- 
         var reader = new FileReader();
-        loadQuestions()
+        
+              
+            
+        reader.onload=function(){
+            document.getElementById('output')
+                    .textContent=reader.result;
+        }
+            
+        reader.readAsText(this.files);
+        
+
+
+        textBlock = reader.result;
+        console.log("textblock" +textBlock)
+    
+        // loadQuestions(reader)
     
         tryIt = document.getElementById("myBtn")
         tryIt.style.display = "none";
@@ -61,11 +75,8 @@ function onBtnPress(){
 //look into order of execution for filereader and similar things
 
 
-function loadQuestions() {
-    reader.addEventListener('load', function() {
-        textBlock = this.result;
-        console.log(textBlock)
-    })
+function loadQuestions(reader) {
+    
 }
 
 
