@@ -7,9 +7,9 @@ Lang is a project that i made to be an alternative to programs like Memrise and 
 
 Currently only French is supported with preloaded verbs, as that is the language i am taking right now. Past tense, present tense, and future tense all work for French.
 
-How To Create Custom Verb Sheets:
+*How To Create Custom Verb Sheets:*
 
-Manual:
+**Manual:**
 Create a .txt file (name does not matter).
 
 
@@ -32,7 +32,7 @@ single verbs
   [être, avoir été]
   
 
-Within Site (unreleased):
+**Within Site (unreleased):**
 
 
 select the option of multi vs single verb
@@ -41,7 +41,7 @@ select the option of multi vs single verb
 follow on screen prompts
 select save and download the .txt file
 
-How to read verb sheets
+*How to read verb sheets*
 
 
 select whether it is single verb or mutli
