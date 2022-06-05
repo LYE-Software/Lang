@@ -11,23 +11,43 @@ How To Create Custom Verb Sheets:
 
 Manual:
 Create a .txt file (name does not matter).
+
+
 input the verbs you want in this syntax:
+
+
 mutli verbs
   [infinitive form, je, tu, il, nous, vous, ils]
+  
+  
   for example,
   [parler, parle, parles, parle, parlons, parlez, parlent]
+  
+  
 single verbs
   [infinitive form, stem]
+  
+  
   for example,
   [être, avoir été]
   
 
 Within Site (unreleased):
+
+
 select the option of multi vs single verb
+
+
 follow on screen prompts
 select save and download the .txt file
 
 How to read verb sheets
+
+
 select whether it is single verb or mutli
+
+
 upload sheet
+
+
 follow on screen instructions
