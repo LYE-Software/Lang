@@ -189,7 +189,7 @@ function showVerbs(language) {
 
 
 function returnMain() {
-    window.open("index.html", "_self")
+    location.href = "index.html";
 }
 
 function checkEnter() {
@@ -265,7 +265,7 @@ function selectWord(language) {
 
 function prIncorrect() {
     console.log("3")
-    buttonStyling.style.backgroundColor = "red"
+    buttonStyling.style.backgroundColor = "#ce1483"
     setTimeout(function () { buttonStyling.style.backgroundColor = "grey" }, 1000)
     input.value = ""
     incorrectCounter += 1
@@ -382,7 +382,7 @@ function getInput() {
             console.log("3")
             buttonStyling = document.getElementById("goButton")
 
-            buttonStyling.style.backgroundColor = "red"
+            buttonStyling.style.backgroundColor = "#ce1483"
             setTimeout(function () { buttonStyling.style.backgroundColor = "grey" }, 1000)
             input.value = ""
             incorrectCounter += 1
@@ -402,7 +402,7 @@ function getInput() {
         }
         else {
             console.log("3")
-            buttonStyling.style.backgroundColor = "red"
+            buttonStyling.style.backgroundColor = "#ce1483"
             setTimeout(function () { buttonStyling.style.backgroundColor = "grey" }, 1000)
             input.value = ""
             incorrectCounter += 1
@@ -436,4 +436,55 @@ function afterCorrect(passthru, snd) {
         selectWord(passthru)
     }
 
+}
+
+function settings(){
+    console.log("asmoguis")
+    window.location.href = "settings.html";
+}
+
+var ankcheck = false;
+
+
+
+function anklebowlMode(){
+    
+    
+    feet = document.getElementById("feet");
+    copyright = document.getElementById("copyright")
+    if (ankcheck == false){
+        console.log("anklebowl mode toggled on");
+        feet.style.backgroundColor = "#001945";
+        ankcheck = true;
+        window.localStorage.setItem("anklebowl", "true");
+        let test = window.localStorage.getItem("anklebowl")
+        console.log(test);
+        copyright.style.color="wheat";
+
+    }
+    else{
+        console.log("anklebowl mode toggled off");
+        feet.style.backgroundColor = "#3e8e41";
+        ankcheck = false;
+        window.localStorage.setItem("anklebowl", "false");
+        copyright.style.color="#001945";
+       // foot.style.backgroundColor = "#3e8e41";
+        
+    }
+    
+    
+}
+
+function checkSettings(){
+    let ank = window.localStorage.getItem("anklebowl");
+    console.log(ank);
+    if (ank=="true"){
+        document.getElementById("ankcheck").checked = true;
+        feet.style.backgroundColor = "#001945";
+        copyright.style.color="wheat";
+        console.log("ank true")
+    }
+    else{
+        console.log("ank untue")
+    }
 }

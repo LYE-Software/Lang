@@ -8,16 +8,18 @@
     <!-- <script src="code.js"></script> -->
     <link rel="icon" href="langicon.png">
 </head>
-<body class="homepage">
+<body onload = "checkSettings()"  class="homepage">
+    <img src="langicon.png" class="topleftlogoicon">
     <button class="dropbtn" id="myBtn" onclick="onBtnPress()">Begin</button>
     
     <pre id="output"></pre>
-    <footer>
+    <footer id = "feet" class="foot">
         <div class="samelineheader">
-            <h1 class="bigselection">This feature is currently under development. We thank you for your interest, however we ask that you please leave this page if you are not a developer. Messing with this page could have unintended consequences on your Lang experience as it is not complete yet. </h1>
+            <h1 id = "copyright" class="bigselection">This feature is currently under development. We thank you for your interest, however we ask that you please leave this page if you are not a developer. Messing with this page could have unintended consequences on your Lang experience as it is not complete yet. </h1>
             <button id="return" class = "returnbutton" onclick="returnMain()">Go Home</button>
         </div>
     </footer>
+    <input id = "ankcheck" type="checkbox" style="display:none;">
     <script src="code.js"></script>
 </body>
 </html>
