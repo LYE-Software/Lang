@@ -592,3 +592,92 @@ function amongusmode(){
     }
    
 }
+
+
+
+function startCreator(version){
+    
+    if (version=="single"){
+        console.log("start creator")
+        document.getElementById("answerInput").style.display = "";
+        document.getElementById("promptInput").placeholder = "Put Infinitive Here";
+        document.getElementById("promptInput").style.display="";
+        document.getElementById("answerInput").placeholder = "Put Answer Here";
+        document.getElementById("addnew").style.display = "";
+        document.getElementById("startSingle").style.display = "none";
+        document.getElementById("startMulti").style.display = "none";
+        document.getElementById("download").style.display="";
+
+        
+    }   
+}
+
+var generateIdV = 0
+var generateIdA = 0
+
+function makeInputs(){
+    var br = document.createElement("br")
+    document.getElementById("minicreator").appendChild(br);
+    id1 = "verbInput"+generateIdV
+    id2 = "answerInput"+generateIdA
+    var verbInput = document.createElement('INPUT');
+    verbInput.setAttribute("type", "text");
+    verbInput.setAttribute("id",id1)
+    generateIdV++
+    verbInput.placeholder="Put Infinitive Here";
+    document.getElementById("minicreator").appendChild(verbInput);
+
+    var answerInput = document.createElement("INPUT");
+    answerInput.setAttribute("type", "text");
+    verbInput.setAttribute("id",id2)
+    generateIdA++
+    answerInput.placeholder="Put Answer Here";
+    document.getElementById("minicreator").appendChild(answerInput);
+
+    var br = document.createElement("br")
+    document.getElementById("minicreator").appendChild(br);
+}
+
+
+
+function downloadVerbs(){
+    var downloadArray = ""
+    var childarray = []
+    var children = minicreator.children;
+    for(var i=0; i<children.length; i++){
+        var childx = children[i];
+        if (childx.tagName.toLowerCase() === 'input'){
+            childarray.push(childx);
+        }
+
+    }
+    console.log(childarray);
+    for (var i=0; i<childarray.length; i+=2){
+        var child = childarray[i];
+        value1 = '["'+child.value+'"';
+        var child2 = childarray[i+1];
+        value2 = '"'+child2.value+'"]'+"\n";
+        toAdd = [value1, value2];
+        console.log(toAdd);
+        downloadArray = downloadArray + toAdd;
+        console.log(downloadArray);
+    }
+    save("LangCustomVerbSheet", downloadArray);
+}
+
+function save(filename, data) {
+    const blob = new Blob([data], {type: 'text'});
+    if(window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveBlob(blob, filename);
+    }
+    else{
+        const elem = window.document.createElement('a');
+        elem.href = window.URL.createObjectURL(blob);
+        elem.download = filename;        
+        document.body.appendChild(elem);
+        elem.click();        
+        document.body.removeChild(elem);
+    }
+}
+
+        

@@ -11,21 +11,52 @@
 <body onload = "checkSettings()" class="homepage">
     <img src="langicon.png" class="topleftlogoicon">
     <h1 class="header">You can make custom verb sheets using either the built in sheet creator or do it manually.</h1>
-    <h3 class="header">Manual:</h3>
-    <p class="header">Create a .txt file (name does not matter).
-     <p class="header">input the verbs you want in this syntax:</p>   
-     <p class="header">mutli verbs</p>   
-    <p class="header">[infinitive form, je, tu, il, nous, vous, ils]</p>
-     <p class="header"> for example,
-        [parler, parle, parles, parle, parlons, parlez, parlent]</p>     
-     <p class="header"> single verbs</p>     
-     <p class="header">[infinitive form, stem]</p>    
-     <p class="header">for example,
-        [être, avoir été]</p>   
-    <a class="header"href="howtochoose.html">What's the difference between Single and Multi verbs?</a>
+    
+
+    <div class="flexbox">
+        <div class="flexitem">
+            <h3 class="header">Manual:</h3>
+            <p class="header">Create a .txt file (name does not matter).
+            <p class="header">input the verbs you want in this syntax:</p>   
+            <p class="header">mutli verbs</p>   
+            <p class="header">[infinitive form, je, tu, il, nous, vous, ils]</p>
+            <p class="header"> for example,
+                [parler, parle, parles, parle, parlons, parlez, parlent]</p>     
+            <p class="header"> single verbs</p>     
+            <p class="header">[infinitive form, stem]</p>    
+            <p class="header">for example,
+                [être, avoir été]</p>   
+            <a class="header"href="howtochoose.html">What's the difference between Single and Multi verbs?</a>
+        </div>
+
+        <div id="creator" class="flexitem">
+            <h3 class="header">Online Creator</h3>
+            <button id="startSingle" class="dropbtn" onclick='startCreator("single")'>Single</button>
+            <button id="startMulti" class="dropbtn">Multi</button>
+            <br>
+            <br>
+            <button id="addnew" class="dropbtn" style="display:none;" onclick="makeInputs()">Add New Line</button>
+            <br>
+            <div id="minicreator">
+                <input id="promptInput" style="display:none;">
+                <input id="answerInput" style="display:none;">
+                
+            </div>
+            <br>
+            <button id="download" class="dropbtn" style="display:none;" onclick="downloadVerbs()">Download</button>
+
+            
+
+            
+
+
+        </div>
+    </div>
+    
+    
           
        
-          
+    
           
           
           

@@ -147,6 +147,9 @@
         
 }
 
+
+
+
 .displayWord{
     font-family: 'Varela Round';
     color:#001945;
@@ -248,6 +251,15 @@
     font-family: "Varela Round";
     
 }
+
+.flexbox{
+    display:flex;
+}
+
+.flexitem{
+    flex:1;
+}
+
 
 .foot{
     text-align: center;
