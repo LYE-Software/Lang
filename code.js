@@ -461,6 +461,8 @@ function anklebowlMode(){
         let test = window.localStorage.getItem("anklebowl")
         console.log(test);
         copyright.style.color="wheat";
+        document.getElementById("ankcheck").checked = true;
+
         
 
     }
@@ -470,7 +472,7 @@ function anklebowlMode(){
         ankcheck = false;
         window.localStorage.setItem("anklebowl", "false");
         copyright.style.color="#001945";
-       
+        document.getElementById("ankcheck").checked = false;
        // foot.style.backgroundColor = "#3e8e41";
         
     }
@@ -500,7 +502,7 @@ function checkSettings(){
 
     }
     else{
-        
+
     }
 
 
@@ -515,12 +517,16 @@ function amongusmode(){
         document.body.style.backgroundImage = 'url("amongus.jpg")'
         amongUsChecker = true;
         window.localStorage.setItem("among", "true");
+        document.getElementById("amongcheck").checked = true;
+
     }
     else{
         document.body.style.backgroundImage = "none";
         document.body.style.backgroundColor = "wheat";
         amongUsChecker = false;
         window.localStorage.setItem("among", "false");
+        document.getElementById("amongcheck").checked = false;
+
 
     }
    
