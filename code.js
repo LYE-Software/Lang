@@ -607,6 +607,7 @@ function startCreator(version){
         document.getElementById("startSingle").style.display = "none";
         document.getElementById("startMulti").style.display = "none";
         document.getElementById("download").style.display="";
+        document.getElementById("warning").style.display="none";
 
         
     }   
@@ -663,24 +664,40 @@ function downloadVerbs(){
         console.log(downloadArray);
     }
     downloadArray = downloadArray.slice(0,-1);
-    save("LangCustomVerbSheet", downloadArray);
+    save(downloadArray);
 }
 
-function save(filename, data) {
+function save(data) {
     namefile = window.prompt("Enter the name for the study sheet","LangCustomVerbSheet");
     filename = namefile;
-    const blob = new Blob([data], {type: 'text'});
-    if(window.navigator.msSaveOrOpenBlob) {
-        window.navigator.msSaveBlob(blob, filename);
+    if (filename == null){
+
     }
     else{
-        const elem = window.document.createElement('a');
-        elem.href = window.URL.createObjectURL(blob);
-        elem.download = filename;        
-        document.body.appendChild(elem);
-        elem.click();        
-        document.body.removeChild(elem);
+        const blob = new Blob([data], {type: 'text'});
+        if(window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveBlob(blob, filename);
+        }
+        else{
+            const elem = window.document.createElement('a');
+            elem.href = window.URL.createObjectURL(blob);
+            elem.download = filename;        
+            document.body.appendChild(elem);
+            elem.click();        
+            document.body.removeChild(elem);
+        }
     }
+    
+}
+
+function reload(){
+    if (confirm("Any data you entered may not be saved. Press 'OK' to continue or 'Cancel' to go back.") == true){
+        window.location.reload();
+    }
+    else{
+        
+    }
+    
 }
 
         
