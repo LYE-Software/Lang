@@ -23,6 +23,18 @@ var incorrectCounter = 0
 var type = ""
 var customWords = []
 var customAnswer = ""
+
+//colors
+
+var defaultMainColor = "#001945";
+var defaultAccentColor = "#3e8e41";
+
+var usedMainColor = defaultMainColor;
+var usedAccentColor = defaultAccentColor;
+
+
+
+
 // var textBlock = ""
 
 // store a reference to our file handle
@@ -698,6 +710,27 @@ function reload(){
         
     }
     
+}
+
+var customcolor = false;
+
+function doCustomColors(){
+    if (customcolor == false){
+        document.getElementById("colorpicker").style.display = "";
+        document.getElementById("colorpicker2").style.display = "";
+        document.getElementById("colorpickertext").style.display = "";
+        document.getElementById("colorpickertext2").style.display = "";
+        document.getElementById("colorinst").style.display="";
+        customcolor=true;
+
+    }else{
+        document.getElementById("colorpicker").style.display = "none";
+        document.getElementById("colorpicker2").style.display = "none";
+        document.getElementById("colorpickertext").style.display = "none";
+        document.getElementById("colorpickertext2").style.display = "none";
+        document.getElementById("colorinst").style.display="none";
+        customcolor=false;
+    }
 }
 
         
