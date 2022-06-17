@@ -170,6 +170,7 @@ function redirectToInformation(choice) {
 }
 
 function showVerbs(language) {
+    checkSettings()
     if (language == "fr") {
         document.getElementById("presentverbs").innerHTML = "Present Tense Verbs: " + words
         document.getElementById("pastverbs").innerHTML = "Past Tense Verbs: " + words
