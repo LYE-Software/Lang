@@ -451,7 +451,8 @@ function anklebowlMode(){
     
     
     feet = document.getElementById("feet");
-    copyright = document.getElementById("copyright")
+    copyright = document.getElementById("copyright");
+    dropbutton = document.getElementsByClassName("dropbtn");
     if (ankcheck == false){
         console.log("anklebowl mode toggled on");
         feet.style.backgroundColor = "#001945";
@@ -460,6 +461,7 @@ function anklebowlMode(){
         let test = window.localStorage.getItem("anklebowl")
         console.log(test);
         copyright.style.color="wheat";
+        
 
     }
     else{
@@ -468,6 +470,7 @@ function anklebowlMode(){
         ankcheck = false;
         window.localStorage.setItem("anklebowl", "false");
         copyright.style.color="#001945";
+       
        // foot.style.backgroundColor = "#3e8e41";
         
     }
@@ -476,15 +479,49 @@ function anklebowlMode(){
 }
 
 function checkSettings(){
+    let dropbutton = document.getElementsByClassName("dropbtn");
     let ank = window.localStorage.getItem("anklebowl");
+    let among = window.localStorage.getItem("among");
     console.log(ank);
     if (ank=="true"){
         document.getElementById("ankcheck").checked = true;
         feet.style.backgroundColor = "#001945";
         copyright.style.color="wheat";
         console.log("ank true")
+        
     }
     else{
         console.log("ank untue")
     }
+
+    if(among =="true"){
+        document.body.style.backgroundImage = 'url("amongus.jpg")'
+        document.getElementById("amongcheck").checked = true;
+
+    }
+    else{
+        
+    }
+
+
+
+}
+
+var amongUsChecker = false;
+
+function amongusmode(){
+    console.log("among us mode");
+    if (amongUsChecker == false){
+        document.body.style.backgroundImage = 'url("amongus.jpg")'
+        amongUsChecker = true;
+        window.localStorage.setItem("among", "true");
+    }
+    else{
+        document.body.style.backgroundImage = "none";
+        document.body.style.backgroundColor = "wheat";
+        amongUsChecker = false;
+        window.localStorage.setItem("among", "false");
+
+    }
+   
 }
