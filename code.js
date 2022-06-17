@@ -1,5 +1,3 @@
-//colors: #001945, wheat
-
 var words = ["devoir", "venir", "prendre", "partir", "suivre", "voir", "dire", "conduire", "boire", "savoir", "recevoir", "ouvrir", "vivre", "s'asseoir", "mettre", "connaître", "écrire"]
 var pronouns = ["Je", "Tu", "Il", "Nous", "Vous", "Ils"]
 var Je = ["dois", "viens", "prends", "pars", "suis", "vois", "dis", "conduis", "bois", "sais", "reçois", "ouvre", "vis", "m'assois", "mets", "connais", "écris"]
@@ -11,7 +9,6 @@ var Ils = ["doivent", "viennent", "prennent", "partent", "suivent", "voient", "d
 var pc = ["avoir dû", "être venu", "avoir pris", "être parti", "avoir suivi", "avoir vu", "avoir dit", "avoir conduit", "avoir bu", "avoir su", "avoir reçu", "avoir ouvert", "avoir vécu", "s'être assis", "avoir mis", "avoir connu", "avoir écrit"]
 var condtWords = ["Aller", "s'asseoir", "avoir", "devoir", "envoyer", "être", "faire", "falloir", "pouvoir", "recevoir", "savoir", "venir", "voir", "vouloir"]
 var contdStem = ["ir", "assiér", "aur", "devr", "enverr", "ser", "fer", "faudr", "pourr", "recevr", "saur", "viendr", "verr", "voudr"]
-
 var passe = false
 var correct = 0
 var incorrect = 0
@@ -24,6 +21,8 @@ var firstRun = false
 var correctCounter = 0
 var incorrectCounter = 0
 var type = ""
+var customWords = []
+var customAnswer = ""
 // var textBlock = ""
 
 // store a reference to our file handle
@@ -58,7 +57,7 @@ function getRandomQuestion(textBlock) {
     let random_question = arrayText[random_number];
     var questionArray = JSON.parse(random_question)
     console.log(questionArray)
-    return random_question
+    return questionArray
     
     // document.getElementById('file').innerText = this.result; // places text into webpage
 }
@@ -106,9 +105,13 @@ function onBtnPress() {
     var reader = new FileReader();
     reader.onload = function(e) {
         var text = reader.result;
-        console.log( getRandomQuestion(text) )
         
-
+        customWords = text;
+        question = getRandomQuestion(customWords);
+        console.log( customWords )
+        console.log(question)
+        doCustomSheets()
+        uploadButton.style.display="none";
         // var textArea = document.createElement('textarea');
         // textArea.value = text;
         // document.body.appendChild(textArea);
@@ -148,6 +151,39 @@ function onBtnPress() {
 
 
 }
+
+
+
+
+
+function doCustomSheets(){
+    document.getElementById("crctst").innerHTML = "Correct: " + correctCounter
+    document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectCounter
+
+    document.getElementById("myBtnBegin").style.display = "none";
+    document.getElementById("file").style.display = "none";
+
+    console.log("SELECT WORD")
+    
+    
+        
+    input = document.getElementById("input")
+    input.style.display = "flex";
+    buttonStyling = document.getElementById("goButton")
+    buttonStyling.style.display = "flex";
+    buttonStyling.innerHTML = ">" + "\n" + "Go!"
+    document.getElementById("stats").style.width = "70"
+    document.getElementById("stats").style.height = "110"
+    document.getElementById("crctst").style.fontSize = "15"
+    document.getElementById("incorrect").style.fontSize = "15"
+    wordPair = getRandomQuestion(customWords);
+    document.getElementById("displayWord").innerHTML = "conjugate: "+wordPair[0];
+    customAnswer = wordPair[1];
+}
+
+
+
+
 
 
 
@@ -412,12 +448,36 @@ function getInput() {
         }
     }
 
+   
+
+}
+
+function checkCustom(){
+    usrInput = input.value;
+    if (usrInput == customAnswer){
+        correctCounter += 1
+        buttonStyling.style.backgroundColor = "green"
+
+        input.value = ""
+        afterCorrect("amogus", "custom")
+    }
+    else{
+        buttonStyling.style.backgroundColor = "#ce1483"
+        setTimeout(function () { buttonStyling.style.backgroundColor = "grey" }, 1000)
+        input.value = ""
+        incorrectCounter += 1
+        document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectCounter
+    }
+    
 }
 
 
 
 function afterCorrect(passthru, snd) {
-    if (passthru == "fastpass") {
+    if (snd=="custom"){
+        doCustomSheets()
+    }
+    else if (passthru == "fastpass") {
         selectWord(snd)
     }
     else if (passthru == "incorrect") {
