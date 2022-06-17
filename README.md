@@ -7,7 +7,7 @@ Lang is a project that i made to be an alternative to programs like Memrise and 
 
 Currently only French is supported with preloaded verbs, as that is the language i am taking right now. Past tense, present tense, and future tense all work for French.
 
-In addition to French, the user can make Custom Verb Sheets using either manually on their PC, or using the Online Creator built into Lang.
+In addition to French, the user can make Custom Verb Sheets either manually on their PC, or using the Online Creator built into Lang.
 
 *How To Create Custom Verb Sheets:*
 
