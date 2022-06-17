@@ -662,10 +662,13 @@ function downloadVerbs(){
         downloadArray = downloadArray + toAdd;
         console.log(downloadArray);
     }
+    downloadArray = downloadArray.slice(0,-1);
     save("LangCustomVerbSheet", downloadArray);
 }
 
 function save(filename, data) {
+    namefile = window.prompt("Enter the name for the study sheet","LangCustomVerbSheet");
+    filename = namefile;
     const blob = new Blob([data], {type: 'text'});
     if(window.navigator.msSaveOrOpenBlob) {
         window.navigator.msSaveBlob(blob, filename);
