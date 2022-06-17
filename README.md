@@ -3,11 +3,26 @@
 *Visit the website at www.nwvbug.com *
 
 
-Lang is a project that i made to be an alternative to programs like Memrise and Quizlet. with an extremely simple user interface and focus on verbs, it is good for studying. I am currently developing the ability to upload your own verbs so you are not stuck with the ones that I have put in there. 
+Lang is a project that i made to be an alternative to programs like Memrise and Quizlet. with a simple and customizable user interface and focus on verbs, it is good for studying. 
 
 Currently only French is supported with preloaded verbs, as that is the language i am taking right now. Past tense, present tense, and future tense all work for French.
 
+In addition to French, the user can make Custom Verb Sheets using either manually on their PC, or using the Online Creator built into Lang.
+
 *How To Create Custom Verb Sheets:*
+
+
+**Within Site:**
+
+
+select the option of multi vs single verb
+
+
+follow on screen prompts- put the infinitive verb in the correct box and the conjugations in the boxes adjacent to it.
+Click "New Line" to add a new verb.
+select Download to save the .txt file
+
+
 
 **Manual:**
 Create a .txt file (name does not matter).
@@ -32,14 +47,6 @@ single verbs
   [être, avoir été]
   
 
-**Within Site:**
-
-
-select the option of multi vs single verb
-
-
-follow on screen prompts
-select save and download the .txt file
 
 *How to read verb sheets*
 
@@ -47,7 +54,8 @@ select save and download the .txt file
 select whether it is single verb or mutli
 
 
-upload sheet
+Select the correct sheet
 
 
-follow on screen instructions
+Click Upload and begin studying!
+
