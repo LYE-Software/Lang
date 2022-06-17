@@ -8,12 +8,35 @@
     <script src="code.js"></script>
     <link rel="icon" href="langicon.png">
 </head>
-<body class="homepage">
+<body onload = "checkSettings()" class="homepage">
     <img src="langicon.png" class="topleftlogoicon">
-    <h1 class="bigselection">This feature is currently under development. Thank you for your interest.</h1>
-    <button id="return" class = "returnbutton" onclick="returnMain()">return</button>
+    <h1 class="header">You can make custom verb sheets using either the built in sheet creator or do it manually.</h1>
+    <h3 class="header">Manual:</h3>
+    <p class="header">Create a .txt file (name does not matter).
+     <p class="header">input the verbs you want in this syntax:</p>   
+     <p class="header">mutli verbs</p>   
+    <p class="header">[infinitive form, je, tu, il, nous, vous, ils]</p>
+     <p class="header"> for example,
+        [parler, parle, parles, parle, parlons, parlez, parlent]</p>     
+     <p class="header"> single verbs</p>     
+     <p class="header">[infinitive form, stem]</p>    
+     <p class="header">for example,
+        [être, avoir été]</p>   
+    <a class="header"href="howtochoose.html">What's the difference between Single and Multi verbs?</a>
+          
+       
+          
+          
+          
+          
     <input id = "ankcheck" type="checkbox" style="display:none;">
     <input id = "amongcheck" type="checkbox" style="display:none;">
+    <footer id = "feet" class="foot">
+        <div class="samelineheader">
+            <p  id = "copyright" class="copyrighttext">Copyright nwvbug, 2022. <a href="https://github.com/nwvbug/Lang">GitHub Repo & Source</a></p>
+            <button id="return" class = "returnbutton" onclick="returnMain()">Exit</button>
+        </div>
 
+    </footer>
 </body>
 </html>

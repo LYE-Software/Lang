@@ -9,6 +9,7 @@
 .homepage{
     background-color: wheat;
     margin: 0;
+    padding:20px;
 }
 
 .samelineheader{
@@ -250,12 +251,16 @@
 
 .foot{
     text-align: center;
-    padding: 3px;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
     background-color: #3e8e41;
     color: white;
     width: 100%;
     bottom: 0%;
     position: fixed;
+    transform:translateX(-20px);
+    
 }
 
 .topleftlogoicon{
