@@ -30,7 +30,7 @@ var defaultMainColor = "#001945";
 var defaultAccentColor = "#3e8e41";
 
 
-
+var mainColorItems = []
 
 var usedMainColor = defaultMainColor;
 var usedAccentColor = defaultAccentColor;
@@ -586,9 +586,18 @@ function checkSettings(){
             }
             customcolor = false;
         }
-        doCustomColors()
+        
         
     
+    }
+
+    let domainswitch = window.localStorage.getItem("domainswitch");
+    let maincolor = window.localStorage.getItem("maincolor");
+    let auxcolor = window.localStorage.getItem("auxcolor");
+    colorItems = grabAllClasses()
+    if(domainswitch == "true"){
+        console.log("inside check settings: maincoloritems = " +mainColorItems)
+        mainColorSwitch(colorItems, maincolor, auxcolor);
     }
         
 
@@ -755,6 +764,7 @@ function doCustomColors(){
         document.getElementById("confirmbutton").innerHTML="";
         document.getElementById("resettonormal").style.display="none";
         document.getElementById("resettonormal").innerHTML="";
+        resetColors();
     }
 }
 
@@ -764,6 +774,9 @@ function confirmColor(){
     auxColor = document.getElementById("colorpicker2");
     backColor = document.getElementById("colorpicker3");
     console.log(mainColor.value, auxColor.value, backColor.value);
+
+
+    //background colors
     var childarray = [];
     var children = document.getElementsByClassName("homepage");
     for(var i=0; i<children.length; i++){
@@ -781,7 +794,20 @@ function confirmColor(){
     window.localStorage.setItem("dobackground", "true");
     window.localStorage.setItem("background", backColor.value);
 
-   
+
+    window.localStorage.setItem("domainswitch", "true");
+    window.localStorage.setItem("maincolor", mainColor.value);
+
+    window.localStorage.setItem("auxcolor", auxColor.value);
+
+  
+
+    
+    
+    mainColorItems = grabAllClasses()
+    mainColorSwitch(mainColorItems, mainColor.value, auxColor.value);
+
+    
 }
 
 
@@ -801,6 +827,92 @@ function resetColors(){
         obj.style.backgroundColor = "wheat";
     }
     window.localStorage.setItem("dobackground", "false");
+    window.localStorage.setItem("domainswitch", "false");
+    location.reload();
 
+    // var items = mainColorItems 
+    // console.log("items = "+items)
+    // for(var z=0; z<items.length; z++){
+    //     var childarray = [];
+    //     var children = items[z]
+    //     console.log(items[z])
+    //     for(var i=0; i<children.length; i++){
+    //         var childx = children[i];
+            
+    //         childarray.push(childx);
+            
+    
+    //     }
+        
+    //     for (var i=0; i<childarray.length; i++){
+    //         var obj = childarray[i];
+            
+    //         obj.style.color = "#001945";
+
+    //         if (childx.tagName.toLowerCase() === 'button'){
+    //             obj.style.backgroundColor = "#001945";
+    //             obj.style.color = "wheat";
+    //         }else if (childx.tagName.toLowerCase()==='footer'){
+    //             obj.style.backgroundColor = "#3e8e41";
+    //         }
+            
+    //     }
+    // }
+
+}
+
+
+function mainColorSwitch(items, maincolor, auxcolor){
+    console.log("items = "+items)
+    for(var z=0; z<items.length; z++){
+        var childarray = [];
+        var children = items[z]
+        console.log(items[z])
+        for(var i=0; i<children.length; i++){
+            var childx = children[i];
+            
+            childarray.push(childx);
+            
+    
+        }
+        
+        for (var i=0; i<childarray.length; i++){
+            var obj = childarray[i];
+            
+            obj.style.color = maincolor;
+
+            if (childx.tagName.toLowerCase() === 'button'){
+                obj.style.backgroundColor = auxcolor;
+            }else if (childx.tagName.toLowerCase()==='footer'){
+                obj.style.backgroundColor = maincolor;
+            }
+            
+        }
+    }
+        
+    
+}
+
+
+function grabAllClasses(){
+    var dropbtnclass = document.getElementsByClassName("dropbtn"); //change hover & text color in aux color
+    var smallbuttonclass = document.getElementsByClassName("smallbutton"); //change text color in aux color
+    var headerclass = document.getElementsByClassName("header");
+    var inputtextclass = document.getElementsByClassName("input");
+    var displaywordclass = document.getElementsByClassName("displayword");
+    var bigselectionclass = document.getElementsByClassName("bigselection");
+    var smallselectionclass = document.getElementsByClassName("smallselection");
+    var showcorrectclass = document.getElementsByClassName("showCorrect");
+    var explanationclass = document.getElementsByClassName("explanation");
+    var statsclass = document.getElementsByClassName("stats");
+    var returnbuttonclass = document.getElementsByClassName("returnbutton");
+    var footerclass=document.getElementsByClassName("foot");
+    var statstextclass = document.getElementsByClassName("statsText");
+    var statstextpcclass = document.getElementsByClassName("statsTextPc");
+    var statstextcondtclass = document.getElementsByClassName("statsTextCondt");
+    var copyrighttextclass = document.getElementsByClassName("copyrighttext");
+
+    var toSwitch = [copyrighttextclass, statstextcondtclass, statstextpcclass, statstextclass, dropbtnclass, smallbuttonclass, headerclass, inputtextclass, displaywordclass, bigselectionclass, smallselectionclass, showcorrectclass, explanationclass, statsclass, returnbuttonclass, footerclass]
+    return toSwitch;
 }
         
