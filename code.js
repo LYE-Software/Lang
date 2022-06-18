@@ -740,7 +740,8 @@ function doCustomColors(){
         customcolor=true;
         document.getElementById("confirmbutton").style.display="";
         document.getElementById("confirmbutton").innerHTML="Confirm Custom Colors";
-
+        document.getElementById("resettonormal").style.display="";
+        document.getElementById("resettonormal").innerHTML="Reset to default colors";
     }else{
         document.getElementById("colorpicker").style.display = "none";
         document.getElementById("colorpicker2").style.display = "none";
@@ -752,6 +753,8 @@ function doCustomColors(){
         customcolor=false;
         document.getElementById("confirmbutton").style.display="none";
         document.getElementById("confirmbutton").innerHTML="";
+        document.getElementById("resettonormal").style.display="none";
+        document.getElementById("resettonormal").innerHTML="";
     }
 }
 
@@ -779,5 +782,25 @@ function confirmColor(){
     window.localStorage.setItem("background", backColor.value);
 
    
+}
+
+
+function resetColors(){
+    var childarray = [];
+    var children = document.getElementsByClassName("homepage");
+    for(var i=0; i<children.length; i++){
+        var childx = children[i];
+        
+        childarray.push(childx);
+        
+
+    }
+    
+    for (var i=0; i<childarray.length; i++){
+        var obj = childarray[i];
+        obj.style.backgroundColor = "wheat";
+    }
+    window.localStorage.setItem("dobackground", "false");
+
 }
         
