@@ -29,6 +29,9 @@ var customAnswer = ""
 var defaultMainColor = "#001945";
 var defaultAccentColor = "#3e8e41";
 
+
+
+
 var usedMainColor = defaultMainColor;
 var usedAccentColor = defaultAccentColor;
 
@@ -45,21 +48,7 @@ var usedAccentColor = defaultAccentColor;
 
 
 
-// function uploadFile() {
-//     var file = document.getElementById("file").files[0];
-//     var reader = new FileReader();
-//     reader.onload = function (e) {
-//         var textArea = document.getElementById("text-area");
-//         textArea.value = e.target.result;
-//     };
-//     reader.readAsText(file);
-// }
 
-// function go() {
-//     var textArea = document.getElementById("text-area");
-//     var text = textArea.value;
-//     var textArray = text.split("\n");
-//     var textArrayLength = textArray.length;
 
 
 function getRandomQuestion(textBlock) {
@@ -132,17 +121,7 @@ function onBtnPress() {
     };
     document.body.appendChild(uploadButton);
 
-    // document.getElementById("myBtn").addEventListener("click", function() {
-    //     var reader = new FileReader();
-
-
-
-    //     reader.onload=function(){
-    //         document.getElementById('output')
-    //                 .textContent=reader.result;
-    //     }
-
-    //     reader.readAsText(this.files);
+    
 
 
     
@@ -526,7 +505,7 @@ function anklebowlMode(){
     feet = document.getElementById("feet");
     copyright = document.getElementById("copyright");
     dropbutton = document.getElementsByClassName("dropbtn");
-    if (ankcheck == false){
+    if (document.getElementById("ankcheck").checked == true){
         console.log("anklebowl mode toggled on");
         feet.style.backgroundColor = "#001945";
         ankcheck = true;
@@ -578,6 +557,41 @@ function checkSettings(){
 
     }
 
+    let backgroundthing = window.localStorage.getItem("dobackground");
+    let backgroundcolor = window.localStorage.getItem("background");
+    if(backgroundthing == "true"){
+        try{
+            document.getElementById("customcolors").checked = true;
+            var childarray = [];
+            var children = document.getElementsByClassName("homepage");
+            for(var i=0; i<children.length; i++){
+                var childx = children[i];          
+                childarray.push(childx);
+            }
+            for (var i=0; i<childarray.length; i++){
+                var obj = childarray[i];
+                obj.style.backgroundColor = backgroundcolor
+            }
+            customcolor = false;
+        }catch(error){
+            var childarray = [];
+            var children = document.getElementsByClassName("homepage");
+            for(var i=0; i<children.length; i++){
+                var childx = children[i];          
+                childarray.push(childx);
+            }
+            for (var i=0; i<childarray.length; i++){
+                var obj = childarray[i];
+                obj.style.backgroundColor = backgroundcolor
+            }
+            customcolor = false;
+        }
+        doCustomColors()
+        
+    
+    }
+        
+
 
 
 }
@@ -586,7 +600,7 @@ var amongUsChecker = false;
 
 function amongusmode(){
     console.log("among us mode");
-    if (amongUsChecker == false){
+    if (document.getElementById("amongcheck").checked == true){
         document.body.style.backgroundImage = 'url("amongus.jpg")'
         amongUsChecker = true;
         window.localStorage.setItem("among", "true");
@@ -715,13 +729,17 @@ function reload(){
 var customcolor = false;
 
 function doCustomColors(){
-    if (customcolor == false){
+    if (document.getElementById("customcolors").checked == true){
         document.getElementById("colorpicker").style.display = "";
         document.getElementById("colorpicker2").style.display = "";
         document.getElementById("colorpickertext").style.display = "";
         document.getElementById("colorpickertext2").style.display = "";
         document.getElementById("colorinst").style.display="";
+        document.getElementById("colorpicker3").style.display = "";
+        document.getElementById("colorpickertext3").style.display = "";
         customcolor=true;
+        document.getElementById("confirmbutton").style.display="";
+        document.getElementById("confirmbutton").innerHTML="Confirm Custom Colors";
 
     }else{
         document.getElementById("colorpicker").style.display = "none";
@@ -729,8 +747,37 @@ function doCustomColors(){
         document.getElementById("colorpickertext").style.display = "none";
         document.getElementById("colorpickertext2").style.display = "none";
         document.getElementById("colorinst").style.display="none";
+        document.getElementById("colorpicker3").style.display = "none";
+        document.getElementById("colorpickertext3").style.display = "none";
         customcolor=false;
+        document.getElementById("confirmbutton").style.display="none";
+        document.getElementById("confirmbutton").innerHTML="";
     }
 }
 
+
+function confirmColor(){
+    mainColor = document.getElementById("colorpicker");
+    auxColor = document.getElementById("colorpicker2");
+    backColor = document.getElementById("colorpicker3");
+    console.log(mainColor.value, auxColor.value, backColor.value);
+    var childarray = [];
+    var children = document.getElementsByClassName("homepage");
+    for(var i=0; i<children.length; i++){
+        var childx = children[i];
+        
+        childarray.push(childx);
+        
+
+    }
+    
+    for (var i=0; i<childarray.length; i++){
+        var obj = childarray[i];
+        obj.style.backgroundColor = backColor.value;
+    }
+    window.localStorage.setItem("dobackground", "true");
+    window.localStorage.setItem("background", backColor.value);
+
+   
+}
         

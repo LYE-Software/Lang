@@ -125,6 +125,17 @@
    
   }
 
+  .smallbutton{
+    border:5px;
+    border-color: #001945;
+    border-radius: 15px;
+    width:100px;
+    height:50px;
+    color: wheat;
+    background-color: #001945;
+    font-family: 'Varela Round';
+  }
+
 
 
 
