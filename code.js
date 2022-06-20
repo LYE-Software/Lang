@@ -532,6 +532,40 @@ function anklebowlMode(){
     
 }
 
+
+function darkMode(){
+    
+    
+    feet = document.getElementById("feet");
+    copyright = document.getElementById("copyright");
+    dropbutton = document.getElementsByClassName("dropbtn");
+    if (document.getElementById("ankcheck").checked == true){
+        console.log("anklebowl mode toggled on");
+        feet.style.backgroundColor = "#001945";
+        ankcheck = true;
+        window.localStorage.setItem("anklebowl", "true");
+        let test = window.localStorage.getItem("anklebowl")
+        console.log(test);
+        copyright.style.color="wheat";
+        document.getElementById("ankcheck").checked = true;
+
+        
+
+    }
+    else{
+        console.log("anklebowl mode toggled off");
+        feet.style.backgroundColor = "#3e8e41";
+        ankcheck = false;
+        window.localStorage.setItem("anklebowl", "false");
+        copyright.style.color="#001945";
+        document.getElementById("ankcheck").checked = false;
+       // foot.style.backgroundColor = "#3e8e41";
+        
+    }
+    
+    
+}
+
 function checkSettings(){
     let dropbutton = document.getElementsByClassName("dropbtn");
     let ank = window.localStorage.getItem("anklebowl");
@@ -645,33 +679,159 @@ function startCreator(version){
         document.getElementById("warning").style.display="none";
 
         
+    }
+    else{
+        // var childarray = []
+        // var children = document.getElementsByClassName("header");
+        // console.log(children)
+        // for(var i=0; i<children.length; i++){
+        //     var childx = children[i];
+            
+        //     childarray.push(childx);
+            
+
+        // }
+
+        // for (var i=0; i<childarray.length; i++){
+        //     console.log("childarray")
+        //     childarray[i].style.display="none";
+        // }
+
+
+        console.log("start creator")
+        //document.getElementById("jeinpt").style.display = "";
+        //document.getElementById("promptInput").placeholder = "Put Infinitive Here";
+        //document.getElementById("promptInput").style.display="";
+        //document.getElementById("jeinpt").placeholder = "I/Je";
+        document.getElementById("addnewmulti").style.display = "";
+        document.getElementById("startSingle").style.display = "none";
+        document.getElementById("startMulti").style.display = "none";
+        document.getElementById("download").style.display="";
+        document.getElementById("warning").style.display="none";
+        // document.getElementById("youinput").style.display = "";
+        // document.getElementById("youinput").placeholder = "You/Tu";
+        // document.getElementById("weinput").style.display = "";
+        // document.getElementById("weinput").placeholder = "We/Nous";
+        // document.getElementById("vousinput").style.display = "";
+        // document.getElementById("vousinput").placeholder = "You(formal)/Vous";
+        // document.getElementById("theyinput").style.display = "";
+        // document.getElementById("theyinput").placeholder = "They/Ils(elles)";
+        // document.getElementById("heinput").style.display = "";
+        // document.getElementById("heinput").placeholder = "He/Il(Elle)";
+        makeInputs("multi");
     }   
 }
 
 var generateIdV = 0
 var generateIdA = 0
 
-function makeInputs(){
-    var br = document.createElement("br")
-    document.getElementById("minicreator").appendChild(br);
-    id1 = "verbInput"+generateIdV
-    id2 = "answerInput"+generateIdA
-    var verbInput = document.createElement('INPUT');
-    verbInput.setAttribute("type", "text");
-    verbInput.setAttribute("id",id1)
-    generateIdV++
-    verbInput.placeholder="Put Infinitive Here";
-    document.getElementById("minicreator").appendChild(verbInput);
+var generateIdI = 0
+var generateIdYou = 0
+var generateIdHe = 0
+var generateIdWe = 0
+var generateIdVous = 0
+var generateIdThem = 0
 
-    var answerInput = document.createElement("INPUT");
-    answerInput.setAttribute("type", "text");
-    verbInput.setAttribute("id",id2)
-    generateIdA++
-    answerInput.placeholder="Put Answer Here";
-    document.getElementById("minicreator").appendChild(answerInput);
 
-    var br = document.createElement("br")
-    document.getElementById("minicreator").appendChild(br);
+function makeInputs(version){
+    var inputMap = new Map();
+    inputMap.set("")
+
+    if (version=="single"){
+        var br = document.createElement("br")
+        document.getElementById("minicreator").appendChild(br);
+        id1 = "verbInput"+generateIdV
+        id2 = "answerInput"+generateIdA
+        var verbInput = document.createElement('INPUT');
+        verbInput.setAttribute("type", "text");
+        verbInput.setAttribute("id",id1)
+        generateIdV++
+        verbInput.placeholder="Put Infinitive Here";
+        document.getElementById("minicreator").appendChild(verbInput);
+    
+        var answerInput = document.createElement("INPUT");
+        answerInput.setAttribute("type", "text");
+        verbInput.setAttribute("id",id2)
+        generateIdA++
+        answerInput.placeholder="Put Answer Here";
+        document.getElementById("minicreator").appendChild(answerInput);
+    
+        var br = document.createElement("br")
+        document.getElementById("minicreator").appendChild(br);
+    }
+    else{
+        
+        id1 = "verbInput"+generateIdV
+        id2 = "jeinput"+generateIdI
+        id3 = "youinput"+generateIdYou
+        id4 = "heinput"+generateIdHe
+        id5 = "weinput"+generateIdWe
+        id6 = "vousinput"+generateIdVous
+        id7 = "theminput"+generateIdThem
+
+        var br = document.createElement("br")
+        document.getElementById("multicreator").appendChild(br);
+
+        var verbInput = document.createElement('INPUT');
+        verbInput.setAttribute("type", "text");
+        verbInput.setAttribute("id",id1)
+        generateIdV++
+        verbInput.placeholder="Put Infinitive Here";
+        document.getElementById("multicreator").appendChild(verbInput);
+    
+       
+
+        var answerInput = document.createElement("INPUT");
+        answerInput.setAttribute("type", "text");
+        verbInput.setAttribute("id",id2)
+        generateIdI++
+        answerInput.placeholder="I/Je";
+        document.getElementById("multicreator").appendChild(answerInput);
+
+        var answerInput = document.createElement("INPUT");
+        answerInput.setAttribute("type", "text");
+        verbInput.setAttribute("id",id3)
+        generateIdYou++
+        answerInput.placeholder="You/Tu";
+        document.getElementById("multicreator").appendChild(answerInput);
+    
+
+        var answerInput = document.createElement("INPUT");
+        answerInput.setAttribute("type", "text");
+        verbInput.setAttribute("id",id4)
+        generateIdHe++
+        answerInput.placeholder="He(She)/Il(Elle)";
+        document.getElementById("multicreator").appendChild(answerInput);
+    
+
+        var answerInput = document.createElement("INPUT");
+        answerInput.setAttribute("type", "text");
+        verbInput.setAttribute("id",id5)
+        generateIdWe++
+        answerInput.placeholder="We/Nous";
+        document.getElementById("multicreator").appendChild(answerInput);
+    
+
+        var answerInput = document.createElement("INPUT");
+        answerInput.setAttribute("type", "text");
+        verbInput.setAttribute("id",id6)
+        generateIdVous++
+        answerInput.placeholder="Vous";
+        document.getElementById("multicreator").appendChild(answerInput);
+    
+
+
+        var answerInput = document.createElement("INPUT");
+        answerInput.setAttribute("type", "text");
+        verbInput.setAttribute("id",id7)
+        generateIdThem++
+        answerInput.placeholder="Them/Ils(Elles)";
+        document.getElementById("multicreator").appendChild(answerInput);
+    
+        var br = document.createElement("br")
+        document.getElementById("multicreator").appendChild(br);
+    }
+    
 }
 
 
@@ -811,6 +971,7 @@ function confirmColor(){
 }
 
 
+
 function resetColors(){
     var childarray = [];
     var children = document.getElementsByClassName("homepage");
@@ -915,4 +1076,7 @@ function grabAllClasses(){
     var toSwitch = [copyrighttextclass, statstextcondtclass, statstextpcclass, statstextclass, dropbtnclass, smallbuttonclass, headerclass, inputtextclass, displaywordclass, bigselectionclass, smallselectionclass, showcorrectclass, explanationclass, statsclass, returnbuttonclass, footerclass]
     return toSwitch;
 }
+
+
+
         

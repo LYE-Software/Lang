@@ -14,6 +14,45 @@
     
 
     <div class="flexbox">
+
+
+        <div id="creator" class="flexitem">
+            <h3 class="header">Online Creator</h3>
+            <button id="startSingle" class="dropbtn" onclick='startCreator("single")'>Single</button>
+            <button id="startMulti" class="dropbtn" onclick="startCreator('multi')">Multi</button>
+            <p id="warning" class="copyrighttext">Notice: The Multi Creator is still under development. <br> The Single Creator is functioning as intended still.</p>
+            <br>
+            <br>
+            <button id="addnew" class="dropbtn" style="display:none;" onclick="makeInputs('single')">Add New Line</button>
+            <button id="addnewmulti" class="dropbtn" style="display:none;" onclick="makeInputs('multi')">Add New Line</button>
+
+            <br>
+            <div id="minicreator">
+                <input id="promptInput" style="display:none;">
+                <input id="answerInput" style="display:none;">
+                <br>
+            </div>
+
+            <div id="multicreator">
+                <input id="promptInput" style="display:none;">
+                <input id="jeinpt" style="display:none;">
+                <input id="youinput" style="display:none;">
+                <input id="heinput" style="display:none;">
+                <input id="weinput" style="display:none;">
+                <input id="vousinput" style="display:none;">
+                <input id="theyinput" style="display:none;">
+
+            </div>
+            <br>
+            <button id="download" class="dropbtn" style="display:none;" onclick="downloadVerbs()">Download</button>
+
+            
+
+            
+
+
+        </div>
+
         <div class="flexitem">
             <h3 class="header">Manual:</h3>
             <p class="header">Create a .txt file (name does not matter).
@@ -29,29 +68,7 @@
             <a class="header"href="howtochoose.html">What's the difference between Single and Multi verbs?</a>
         </div>
 
-        <div id="creator" class="flexitem">
-            <h3 class="header">Online Creator</h3>
-            <button id="startSingle" class="dropbtn" onclick='startCreator("single")'>Single</button>
-            <button id="startMulti" class="dropbtn">Multi</button>
-            <p id="warning" class="copyrighttext">Notice: The Multi Creator is still under development. <br> The Single Creator is functioning as intended still.</p>
-            <br>
-            <br>
-            <button id="addnew" class="dropbtn" style="display:none;" onclick="makeInputs()">Add New Line</button>
-            <br>
-            <div id="minicreator">
-                <input id="promptInput" style="display:none;">
-                <input id="answerInput" style="display:none;">
-                <br>
-            </div>
-            <br>
-            <button id="download" class="dropbtn" style="display:none;" onclick="downloadVerbs()">Download</button>
-
-            
-
-            
-
-
-        </div>
+        
     </div>
     
     
