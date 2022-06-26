@@ -7,9 +7,9 @@ Lang is a project that i made to be an alternative to programs like Memrise and 
 
 Lang is completely **free** and features **no ads**. 
 
-Currently only French is supported with preloaded verbs, as that is the language i am taking right now. Past tense, present tense, and future tense all work for French.
+Currently only French is supported with *preloaded* verbs, as that is the language i am taking right now. Past tense, present tense, and future tense all work for French.
 
-In addition to French, the user can make Custom Verb Sheets either manually on their PC, or using the Online Creator built into Lang.
+**However, in addition to French, the user can make Custom Verb Sheets either manually on their PC, or using the Online Creator built into Lang.**
 
 *How To Create Custom Verb Sheets:*
 
@@ -61,3 +61,18 @@ Select the correct sheet
 
 Click Upload and begin studying!
 
+
+
+Potentially Upcoming Features:
+
+These are some features that have been suggested for Lang. None of these are guaranteed to come, and not all are in development at the current time for one reason or another. However, I think that all of these have merit and am considering them to be added in the future. 
+
+If you want to suggest one, go to Github Issues page and use the "Suggestion" tag.
+
+- Flashcard mode 
+- Accounts
+- Better offline / (unlikely) Desktop App
+
+
+
+<img src="circular lang icon.png">
