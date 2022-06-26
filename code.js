@@ -54,14 +54,51 @@ var usedAccentColor = defaultAccentColor;
 function getRandomQuestion(textBlock) {
     console.log("random question ran")
     let arrayText = textBlock.split("\n")
+    console.log(arrayText)
     let random_number = Math.floor(Math.random() *arrayText.length);
+    console.log(random_number)
     let random_question = arrayText[random_number];
+    console.log(random_question)
     var questionArray = JSON.parse(random_question)
     console.log(questionArray)
     return questionArray
     
     // document.getElementById('file').innerText = this.result; // places text into webpage
 }
+
+
+function getRandomMultiQ(textBlock){
+    console.log("random multi q ran")
+    let arrayCont = textBlock.split("\n");
+    let random_num = Math.floor(Math.random()*arrayCont.length);
+    let random_qS = Math.floor(Math.random()*6);
+    while (random_qS == 0){
+        let random_qS = Math.floor(Math.random()*6);
+    }
+    let randomQ = arrayCont[random_num];
+    var questionArray = JSON.parse(randomQ);
+    let pronoun = "";
+    
+    if (random_qS==1){
+        pronoun = "I / Je"
+    }else if(random_qS ==2){
+        pronoun = "You (I. S.) / Tu"
+    }else if(random_qS == 3){
+        pronoun = "He-She / Il-Elle-On"
+    }else if(random_qS == 4){
+        pronoun = "We / Nous"
+    }else if(random_qS == 5){
+        pronoun = "You (F. P.) / Vous"
+    }else if(random_qS == 6){
+        pronoun = "They / Ils-Elles"
+    }else{
+        pronoun = "--// An internal error occured. Please refresh your page and try again. //--"
+    }
+    let toRet = [questionArray[0], questionArray[random_qS], pronoun]
+    console.log(toRet)
+    return toRet 
+}
+
 
 let fileHandle;
 
@@ -92,7 +129,7 @@ async function getTheFile() {
 
 }
 
-function onBtnPress() {
+function onBtnPress(v) {
     var uploadFile = document.createElement('input');
     uploadFile.type = 'file';
     uploadFile.id = 'file';
@@ -111,7 +148,7 @@ function onBtnPress() {
         question = getRandomQuestion(customWords);
         console.log( customWords )
         console.log(question)
-        doCustomSheets()
+        doCustomSheets(v);
         uploadButton.style.display="none";
         // var textArea = document.createElement('textarea');
         // textArea.value = text;
@@ -147,7 +184,7 @@ function onBtnPress() {
 
 
 
-function doCustomSheets(){
+function doCustomSheets(v){
     document.getElementById("crctst").innerHTML = "Correct: " + correctCounter
     document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectCounter
 
@@ -167,10 +204,19 @@ function doCustomSheets(){
     document.getElementById("stats").style.height = "110"
     document.getElementById("crctst").style.fontSize = "15"
     document.getElementById("incorrect").style.fontSize = "15"
-    wordPair = getRandomQuestion(customWords);
-    document.getElementById("displayWord").innerHTML = "conjugate: "+wordPair[0];
-    customAnswer = wordPair[1];
-}
+    if (v=="s"){
+        wordPair = getRandomQuestion(customWords);
+        document.getElementById("displayWord").innerHTML = "conjugate: "+wordPair[0];
+        customAnswer = wordPair[1];
+    }
+    else{
+        wordPair = getRandomMultiQ(customWords);
+        
+        document.getElementById("displayWord").innerHTML = "conjugate: "+wordPair[0] + " in the "+wordPair[2] + " form.";
+        customAnswer = wordPair[1];    
+    }
+    }
+    
 
 
 
@@ -192,6 +238,9 @@ function redirectToInformation(choice) {
     }
     if (choice == "sc") {
         window.location.href = "singleRead.html";
+    }
+    if (choice=="mc"){
+        window.location.href = "multiRead.html";
     }
 
 }
@@ -706,8 +755,8 @@ function startCreator(version){
         document.getElementById("addnewmulti").style.display = "";
         document.getElementById("startSingle").style.display = "none";
         document.getElementById("startMulti").style.display = "none";
-        document.getElementById("download").style.display="";
-        document.getElementById("warning").style.display="none";
+        document.getElementById("multidownload").style.display="";
+        
         // document.getElementById("youinput").style.display = "";
         // document.getElementById("youinput").placeholder = "You/Tu";
         // document.getElementById("weinput").style.display = "";
@@ -836,31 +885,78 @@ function makeInputs(version){
 
 
 
-function downloadVerbs(){
-    var downloadArray = ""
-    var childarray = []
-    var children = minicreator.children;
-    for(var i=0; i<children.length; i++){
-        var childx = children[i];
-        if (childx.tagName.toLowerCase() === 'input'){
-            childarray.push(childx);
+function downloadVerbs(select){
+    if(select == "s"){
+        var downloadArray = ""
+        var childarray = []
+        var children = minicreator.children;
+        for(var i=0; i<children.length; i++){
+            var childx = children[i];
+            if (childx.tagName.toLowerCase() === 'input'){
+                childarray.push(childx);
+            }
+    
         }
+        console.log(childarray);
+        for (var i=0; i<childarray.length; i+=2){
+            var child = childarray[i];
+            value1 = '["'+child.value+'"';
+            var child2 = childarray[i+1];
+            value2 = '"'+child2.value+'"]'+"\n";
+            toAdd = [value1, value2];
+            console.log(toAdd);
+            downloadArray = downloadArray + toAdd;
+            console.log(downloadArray);
+        }
+        downloadArray = downloadArray.slice(0,-1);
+        save(downloadArray);
+    }
+
+    else{
+        var downloadArray = ""
+        var childarray = []
+        var children = multicreator.children;
+        for(var i=0; i<children.length; i++){
+            var childx = children[i];
+            if (childx.tagName.toLowerCase() === 'input'){
+                childarray.push(childx);
+            }
+    
+        }
+        console.log(childarray);
+        console.log("into multi down, planes are pogg")
+        for (var i=0; i<childarray.length; i+=7){
+            //same thing as above but it does 7 except of 2
+            var child = childarray[i];
+            value1 = '["'+child.value+'"';
+            var child2 = childarray[i+1];
+            value2 = '"'+child2.value+'"';
+            var child3 = childarray[i+2];
+            value3 = '"'+child3.value+'"';
+            var child4 = childarray[i+3];
+            value4 = '"'+child4.value+'"';
+            var child5 = childarray[i+4];
+            value5 = '"'+child5.value+'"';
+            var child6 = childarray[i+5];
+            value6 = '"'+child6.value+'"';
+            var child7 = childarray[i+6];
+            value7 = '"'+child7.value+'"]'+"\n";
+
+            toAdd = [value1, value2, value3, value4, value5, value6, value7];
+            console.log(toAdd);
+            downloadArray = downloadArray + toAdd;
+            console.log(downloadArray);
+        }
+        downloadArray = downloadArray.slice(0,-1);
+        save(downloadArray);
 
     }
-    console.log(childarray);
-    for (var i=0; i<childarray.length; i+=2){
-        var child = childarray[i];
-        value1 = '["'+child.value+'"';
-        var child2 = childarray[i+1];
-        value2 = '"'+child2.value+'"]'+"\n";
-        toAdd = [value1, value2];
-        console.log(toAdd);
-        downloadArray = downloadArray + toAdd;
-        console.log(downloadArray);
-    }
-    downloadArray = downloadArray.slice(0,-1);
-    save(downloadArray);
+
+    
 }
+
+
+
 
 function save(data) {
     namefile = window.prompt("Enter the name for the study sheet","LangCustomVerbSheet");

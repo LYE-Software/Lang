@@ -20,7 +20,6 @@
             <h3 class="header">Online Creator</h3>
             <button id="startSingle" class="dropbtn" onclick='startCreator("single")'>Single</button>
             <button id="startMulti" class="dropbtn" onclick="startCreator('multi')">Multi</button>
-            <p id="warning" class="copyrighttext">Notice: The Multi Creator is still under development. <br> The Single Creator is functioning as intended still.</p>
             <br>
             <br>
             <button id="addnew" class="dropbtn" style="display:none;" onclick="makeInputs('single')">Add New Line</button>
@@ -34,17 +33,18 @@
             </div>
 
             <div id="multicreator">
-                <input id="promptInput" style="display:none;">
+                <!-- <input id="promptInput" style="display:none;">
                 <input id="jeinpt" style="display:none;">
                 <input id="youinput" style="display:none;">
                 <input id="heinput" style="display:none;">
                 <input id="weinput" style="display:none;">
                 <input id="vousinput" style="display:none;">
-                <input id="theyinput" style="display:none;">
+                <input id="theyinput" style="display:none;"> -->
 
             </div>
             <br>
-            <button id="download" class="dropbtn" style="display:none;" onclick="downloadVerbs()">Download</button>
+            <button id="download" class="dropbtn" style="display:none;" onclick="downloadVerbs('s')">Download</button>
+            <button id="multidownload" class="dropbtn" style="display:none;" onclick="downloadVerbs('m')">Download</button>
 
             
 
