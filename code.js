@@ -1,3 +1,9 @@
+//This is the main JavaScript file for Lang (www.nwvbug.com)
+//Written by nwvbug- https://github.com/nwvbug 
+
+
+//Global Variables (used by many functions)
+
 var words = ["devoir", "venir", "prendre", "partir", "suivre", "voir", "dire", "conduire", "boire", "savoir", "recevoir", "ouvrir", "vivre", "s'asseoir", "mettre", "connaître", "écrire"]
 var pronouns = ["Je", "Tu", "Il", "Nous", "Vous", "Ils"]
 var Je = ["dois", "viens", "prends", "pars", "suis", "vois", "dis", "conduis", "bois", "sais", "reçois", "ouvre", "vis", "m'assois", "mets", "connais", "écris"]
@@ -23,15 +29,9 @@ var incorrectCounter = 0
 var type = ""
 var customWords = []
 var customAnswer = ""
-
-//colors
-
 var defaultMainColor = "#001945";
 var defaultAccentColor = "#3e8e41";
-
-
 var mainColorItems = []
-
 var usedMainColor = defaultMainColor;
 var usedAccentColor = defaultAccentColor;
 
@@ -49,7 +49,7 @@ var usedAccentColor = defaultAccentColor;
 
 
 
-
+//used to acquire random question & answer pair (single verbs)
 
 function getRandomQuestion(textBlock) {
     console.log("random question ran")
@@ -66,6 +66,7 @@ function getRandomQuestion(textBlock) {
     // document.getElementById('file').innerText = this.result; // places text into webpage
 }
 
+//used to acquire random question & answer pair (mutli verbs)
 
 function getRandomMultiQ(textBlock){
     console.log("random multi q ran")
@@ -99,6 +100,7 @@ function getRandomMultiQ(textBlock){
     return toRet 
 }
 
+//code to make file picker appear in read custom and retreive data from it
 
 let fileHandle;
 
@@ -128,6 +130,8 @@ async function getTheFile() {
     
 
 }
+
+//function called when button to begin custom verb read is called- creates inputs & calls other functions to get questions
 
 function onBtnPress(v) {
     var uploadFile = document.createElement('input');
@@ -182,7 +186,7 @@ function onBtnPress(v) {
 
 
 
-
+///function to make custom sheet UI & general loop
 
 function doCustomSheets(v){
     document.getElementById("crctst").innerHTML = "Correct: " + correctCounter
@@ -224,13 +228,13 @@ function doCustomSheets(v){
 
 
 
-//look into order of execution for filereader and similar things
 
 
 function loadQuestions(reader) {
 
 }
 
+//basically just window.location.href but other JS can be injected
 
 function redirectToInformation(choice) {
     if (choice == "htc") {
@@ -244,6 +248,8 @@ function redirectToInformation(choice) {
     }
 
 }
+
+//function for showing correct answers in present tense french after answering
 
 function showVerbs(language) {
     checkSettings()
@@ -269,6 +275,9 @@ function returnMain() {
     location.href = "index.html";
 }
 
+
+//function to allow press of enter to submit answer (non-functional)
+
 function checkEnter() {
     e = e || window.event;
     if (e.keyCode == 13) {
@@ -276,6 +285,10 @@ function checkEnter() {
     }
     return True
 }
+
+
+
+//Main loop for preloaded verbs- gets Q&A, creates Ui, etc
 
 function selectWord(language) {
     document.getElementById("crctst").innerHTML = "Correct: " + correctCounter
@@ -339,6 +352,8 @@ function selectWord(language) {
     }
 }
 
+//if present tense answer is incorrect
+
 
 function prIncorrect() {
     console.log("3")
@@ -352,6 +367,8 @@ function prIncorrect() {
 
 }
 
+// if present tense answer is correct
+
 function prCorrect() {
     console.log("2")
 
@@ -363,6 +380,7 @@ function prCorrect() {
 }
 
 
+//getting & checking user inputs for preloaded fields
 
 function getInput() {
     //showCorrect = document.getElementById("showCorrect").style.display = "none";
@@ -492,6 +510,9 @@ function getInput() {
 
 }
 
+
+//get & check user inputs for custom verbs
+
 function checkCustom(){
     usrInput = input.value;
     if (usrInput == customAnswer){
@@ -512,6 +533,7 @@ function checkCustom(){
 }
 
 
+//what to display after user gets answer correct or incorrect (Custom and preloaded)
 
 function afterCorrect(passthru, snd) {
     if (snd=="custom"){
@@ -539,6 +561,8 @@ function afterCorrect(passthru, snd) {
 
 }
 
+//changes location to settings?? tbh im not sure what this does but the codes working and i dont wanna break it
+
 function settings(){
     console.log("asmoguis")
     window.location.href = "settings.html";
@@ -547,6 +571,8 @@ function settings(){
 var ankcheck = false;
 
 
+//activates / deactivates anklebowl mode
+//LocalStorage edited here
 
 function anklebowlMode(){
     
@@ -582,6 +608,9 @@ function anklebowlMode(){
 }
 
 
+//curretly non functional dark mode 
+//Local Storage edited here
+
 function darkMode(){
     
     
@@ -614,6 +643,11 @@ function darkMode(){
     
     
 }
+
+
+
+//runs onload of all pages to check and apply cosmetic settings
+//Local Storage read here
 
 function checkSettings(){
     let dropbutton = document.getElementsByClassName("dropbtn");
@@ -690,6 +724,10 @@ function checkSettings(){
 
 var amongUsChecker = false;
 
+
+
+//function to activate among us mode
+//local storage activated here
 function amongusmode(){
     console.log("among us mode");
     if (document.getElementById("amongcheck").checked == true){
@@ -711,7 +749,7 @@ function amongusmode(){
    
 }
 
-
+//function to start the online custom sheet creator UI
 
 function startCreator(version){
     
@@ -771,6 +809,8 @@ function startCreator(version){
     }   
 }
 
+
+//more global variables because i code like a monkey (used for the IDs of new custom inpt fields)
 var generateIdV = 0
 var generateIdA = 0
 
@@ -781,6 +821,9 @@ var generateIdWe = 0
 var generateIdVous = 0
 var generateIdThem = 0
 
+
+
+//creates new input fields for multi & single creators + assigns them ids
 
 function makeInputs(version){
     var inputMap = new Map();
@@ -883,7 +926,7 @@ function makeInputs(version){
     
 }
 
-
+//preps the user input custom sheet for downloading by putting all into one string
 
 function downloadVerbs(select){
     if(select == "s"){
@@ -956,7 +999,7 @@ function downloadVerbs(select){
 }
 
 
-
+//actually downloads the string created above (this function ONLY runs after the previous one)
 
 function save(data) {
     namefile = window.prompt("Enter the name for the study sheet","LangCustomVerbSheet");
@@ -981,6 +1024,8 @@ function save(data) {
     
 }
 
+//function to reset the custom sheet creator
+
 function reload(){
     if (confirm("Any data you entered may not be saved. Press 'OK' to continue or 'Cancel' to go back.") == true){
         window.location.reload();
@@ -992,6 +1037,8 @@ function reload(){
 }
 
 var customcolor = false;
+
+//function to display color picker UI
 
 function doCustomColors(){
     if (document.getElementById("customcolors").checked == true){
@@ -1024,7 +1071,7 @@ function doCustomColors(){
     }
 }
 
-
+//functon to read colors in picker 
 function confirmColor(){
     mainColor = document.getElementById("colorpicker");
     auxColor = document.getElementById("colorpicker2");
@@ -1118,6 +1165,7 @@ function resetColors(){
 
 }
 
+// function to apply colors in picker
 
 function mainColorSwitch(items, maincolor, auxcolor){
     console.log("items = "+items)
@@ -1150,6 +1198,7 @@ function mainColorSwitch(items, maincolor, auxcolor){
     
 }
 
+//function to grab every element that can be visually edited in settings
 
 function grabAllClasses(){
     var dropbtnclass = document.getElementsByClassName("dropbtn"); //change hover & text color in aux color
@@ -1172,6 +1221,9 @@ function grabAllClasses(){
     var toSwitch = [copyrighttextclass, statstextcondtclass, statstextpcclass, statstextclass, dropbtnclass, smallbuttonclass, headerclass, inputtextclass, displaywordclass, bigselectionclass, smallselectionclass, showcorrectclass, explanationclass, statsclass, returnbuttonclass, footerclass]
     return toSwitch;
 }
+
+
+
 
 
 
