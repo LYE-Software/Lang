@@ -38,17 +38,6 @@ var usedAccentColor = defaultAccentColor;
 
 
 
-// var textBlock = ""
-
-// store a reference to our file handle
-
-
-
-
-
-
-
-
 //used to acquire random question & answer pair (single verbs)
 
 function getRandomQuestion(textBlock) {
