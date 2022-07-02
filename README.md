@@ -69,7 +69,6 @@ These are some features that have been suggested for Lang. None of these are gua
 
 If you want to suggest one, go to Github Issues page and use the "Suggestion" tag.
 
-- Flashcard mode 
 - Accounts
 - Better offline / (unlikely) Desktop App
 
