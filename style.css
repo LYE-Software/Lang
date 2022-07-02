@@ -266,10 +266,11 @@
 
 .flexbox{
     display:flex;
+    flex:1;
 }
 
 .flexitem{
-    flex:2;
+    flex:1;
 }
 
 

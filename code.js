@@ -3,7 +3,6 @@
 
 
 //Global Variables (used by many functions)
-
 var words = ["devoir", "venir", "prendre", "partir", "suivre", "voir", "dire", "conduire", "boire", "savoir", "recevoir", "ouvrir", "vivre", "s'asseoir", "mettre", "connaître", "écrire"]
 var pronouns = ["Je", "Tu", "Il", "Nous", "Vous", "Ils"]
 var Je = ["dois", "viens", "prends", "pars", "suis", "vois", "dis", "conduis", "bois", "sais", "reçois", "ouvre", "vis", "m'assois", "mets", "connais", "écris"]
@@ -35,6 +34,16 @@ var mainColorItems = []
 var usedMainColor = defaultMainColor;
 var usedAccentColor = defaultAccentColor;
 var whichCustom = "";
+var doRandom = true;
+var generateIdV = 0
+var generateIdA = 0
+var generateIdI = 0
+var generateIdYou = 0
+var generateIdHe = 0
+var generateIdWe = 0
+var generateIdVous = 0
+var generateIdThem = 0
+
 
 //onload multiple functions
 function execute(){
@@ -56,16 +65,19 @@ function execute(){
 //used to acquire random question & answer pair (single verbs)
 
 function getRandomQuestion(textBlock) {
-    console.log("random question ran")
-    let arrayText = textBlock.split("\n")
-    console.log(arrayText)
-    let random_number = Math.floor(Math.random() *arrayText.length);
-    console.log(random_number)
-    let random_question = arrayText[random_number];
-    console.log(random_question)
-    var questionArray = JSON.parse(random_question)
-    console.log(questionArray)
-    return questionArray
+    if (doRandom == true){
+        console.log("random question ran")
+        let arrayText = textBlock.split("\n")
+        console.log(arrayText)
+        let random_number = Math.floor(Math.random() *arrayText.length);
+        console.log(random_number)
+        let random_question = arrayText[random_number];
+        console.log(random_question)
+        var questionArray = JSON.parse(random_question)
+        console.log(questionArray)
+        return questionArray
+    }
+   
     
     // document.getElementById('file').innerText = this.result; // places text into webpage
 }
@@ -858,16 +870,7 @@ function startCreator(version){
 }
 
 
-//more global variables because i code like a monkey (used for the IDs of new custom inpt fields)
-var generateIdV = 0
-var generateIdA = 0
 
-var generateIdI = 0
-var generateIdYou = 0
-var generateIdHe = 0
-var generateIdWe = 0
-var generateIdVous = 0
-var generateIdThem = 0
 
 
 

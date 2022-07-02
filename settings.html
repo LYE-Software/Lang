@@ -10,45 +10,69 @@
 </head>
 <body onload = "checkSettings()" class="homepage">
     <img src="transparenticon.png" class="topleftlogoicon">
-    <h1 class="header">Graphics & User Interface Settings</h1>
-    <p class="header">Double Click to Disable after leaving this page</p>
-    <label class="switch"> 
-        <input id = "ankcheck" type="checkbox" onclick="anklebowlMode()">
-        <span class="slider round"></span>
-        <p class="slidertext">anklebowl mode</p>
-      </label>
-      <br>  
-      <br>
-    <label class="switch"> 
-        <input id = "amongcheck" type="checkbox" onclick="amongusmode()">
-        <span class="slider round"></span>
-        <p class="slidertext">AMONG US MODE</p>
-    </label>
-    <br>
-    <br>
-    <label class="switch"> 
-        <input id = "customcolors" type="checkbox" onclick="doCustomColors()">
-        <span class="slider round"></span>
-        <p class="slidertext">Use custom colors</p>
-    </label>
-    <h4 class="header" id="colorinst" style="display:none;">Choose color pallate</h4>
-    <label class="header"for="colorpicker" id="colorpickertext" style="display:none;">Color Picker- main color:</label>
-    <input type="color" id="colorpicker" style="display:none;" value="#001945">
-    <br>
-    <br>
-    <label class="header"for="colorpicker2" id="colorpickertext2" style="display:none;">Color Picker- accent color:</label>
-    <input type="color" id="colorpicker2" style="display:none;" value="#3e8e41">
-    <br>
-    <br>
-    <label class="header"for="colorpicker2" id="colorpickertext3" style="display:none;">Color Picker- background color:</label>
-    <input type="color" id="colorpicker3" style="display:none;" value="#f5deb3">
-    <br>
-    <br>
-    <button class="smallbutton" style="display:none;" id="confirmbutton" onclick="confirmColor()"></button>
-    <br>
-    <br>
-    <button class="smallbutton" style="display:none;" id="resettonormal" onclick="resetColors()"></button>
 
+    <div class="flexbox">
+
+        <div id="graph settings" class="flexitem">
+            <h1 class="header">Graphics & User Interface Settings</h1>
+            <label class="switch"> 
+                <input id = "ankcheck" type="checkbox" onclick="anklebowlMode()">
+                <span class="slider round"></span>
+                <p class="slidertext">anklebowl mode</p>
+            </label>
+            <br>  
+            <br>
+            <label class="switch"> 
+                <input id = "amongcheck" type="checkbox" onclick="amongusmode()">
+                <span class="slider round"></span>
+                <p class="slidertext">AMONG US MODE</p>
+            </label>
+            <br>
+            <br>
+            <label class="switch"> 
+                <input id = "customcolors" type="checkbox" onclick="doCustomColors()">
+                <span class="slider round"></span>
+                <p class="slidertext">Use custom colors</p>
+            </label>
+            <h4 class="header" id="colorinst" style="display:none;">Choose color pallate</h4>
+            <label class="header"for="colorpicker" id="colorpickertext" style="display:none;">Color Picker- main color:</label>
+            <input type="color" id="colorpicker" style="display:none;" value="#001945">
+            <br>
+            <br>
+            <label class="header"for="colorpicker2" id="colorpickertext2" style="display:none;">Color Picker- accent color:</label>
+            <input type="color" id="colorpicker2" style="display:none;" value="#3e8e41">
+            <br>
+            <br>
+            <label class="header"for="colorpicker2" id="colorpickertext3" style="display:none;">Color Picker- background color:</label>
+            <input type="color" id="colorpicker3" style="display:none;" value="#f5deb3">
+            <br>
+            <br>
+            <button class="smallbutton" style="display:none;" id="confirmbutton" onclick="confirmColor()"></button>
+            <br>
+            <br>
+            <button class="smallbutton" style="display:none;" id="resettonormal" onclick="resetColors()"></button>
+        </div>
+        <div id="study settings" class="flexitem">
+            <h1 class="header">Study Settings</h1>
+
+            <label class="switch"> 
+                <input id = "randomchoice" type="checkbox" onclick="notRandom()">
+                <span class="slider round"></span>
+                <button style="background-color:#001945;color:wheat; margin-left:150%; "onclick="alert('This changes how the questions are chosen- by default, it is read down the list with little change of repeating. This changes it to random, which switches the order but allows repeats.')">?</button>
+
+                <div class="samelineheader">
+                    <p class="slidertext">Turn on Random Selection (experimental)</p>
+                    
+
+                </div>
+                
+            </label>
+
+        </div>
+
+    
+
+    </div>
     <p class="header" >Suggestions for how to improve Lang for all? Click <a href="https://github.com/nwvbug/Lang/issues/new">here</a></p>
     <footer id = "feet" class="foot">
         <div class="samelineheader">
