@@ -34,7 +34,7 @@ var defaultAccentColor = "#3e8e41";
 var mainColorItems = []
 var usedMainColor = defaultMainColor;
 var usedAccentColor = defaultAccentColor;
-
+var whichCustom = "";
 
 
 
@@ -141,7 +141,12 @@ function onBtnPress(v) {
         question = getRandomQuestion(customWords);
         console.log( customWords )
         console.log(question)
-        doCustomSheets(v);
+        if(v=="f"){
+            doFlashcards();
+        }
+        else{
+            doCustomSheets(v);
+        }
         uploadButton.style.display="none";
         // var textArea = document.createElement('textarea');
         // textArea.value = text;
@@ -173,6 +178,15 @@ function onBtnPress(v) {
 
 }
 
+//main loop and code for flashcard functionality
+
+function doFlashcards(){
+    document.getElementById("stats").display = "none";
+    document.getElementById("MyBtnBegin").display = "none";
+
+}
+
+
 
 
 ///function to make custom sheet UI & general loop
@@ -197,6 +211,7 @@ function doCustomSheets(v){
     document.getElementById("stats").style.height = "110"
     document.getElementById("crctst").style.fontSize = "15"
     document.getElementById("incorrect").style.fontSize = "15"
+    whichCustom = v;
     if (v=="s"){
         wordPair = getRandomQuestion(customWords);
         document.getElementById("displayWord").innerHTML = "conjugate: "+wordPair[0];
@@ -523,10 +538,11 @@ function checkCustom(){
 
 
 //what to display after user gets answer correct or incorrect (Custom and preloaded)
-
+//also restarts loop 
 function afterCorrect(passthru, snd) {
     if (snd=="custom"){
-        doCustomSheets()
+        console.log("which custom "+whichCustom)
+        doCustomSheets(whichCustom)
     }
     else if (passthru == "fastpass") {
         selectWord(snd)
