@@ -372,6 +372,8 @@
   border: 1px solid #f1f1f1;
   margin-left: 40%;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  border-radius: 15px;
+
 }
 
 /* This container is needed to position the front and back side */
@@ -382,6 +384,8 @@
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
+  border-radius: 15px;
+
 }
 
 /* Do an horizontal flip when you move the mouse over the flip box container */
@@ -396,12 +400,17 @@
   height: 100%;
   -webkit-backface-visibility: hidden; /* Safari */
   backface-visibility: hidden; 
+  border-radius: 15px;
+
+  
 }
 
 /* Style the front side (fallback if image is missing) */
 .flip-card-front {
   background-color: #001945;
   color: wheat;
+  border-radius: 15px;
+
 }
 
 .frontcardtext{
