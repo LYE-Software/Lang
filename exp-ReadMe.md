@@ -1,0 +1,1 @@
+The experimental branch is used for radical changes to the site that may disable feaures before working properly. As the live site is built from main, altering this branch does not directly change the site. Changes should only be pushed to main once they are verified to be fully functioning. 
