@@ -34,7 +34,7 @@ var mainColorItems = []
 var usedMainColor = defaultMainColor;
 var usedAccentColor = defaultAccentColor;
 var whichCustom = "";
-var doRandom = true;
+var doRandom = false;
 var generateIdV = 0
 var generateIdA = 0
 var generateIdI = 0
@@ -43,7 +43,8 @@ var generateIdHe = 0
 var generateIdWe = 0
 var generateIdVous = 0
 var generateIdThem = 0
-
+var whatQuestion = 0
+var whatPro = 1;
 
 //onload multiple functions
 function execute(){
@@ -65,10 +66,11 @@ function execute(){
 //used to acquire random question & answer pair (single verbs)
 
 function getRandomQuestion(textBlock) {
+    console.log("random question ran")
+    let arrayText = textBlock.split("\n")
+    console.log(arrayText)
     if (doRandom == true){
-        console.log("random question ran")
-        let arrayText = textBlock.split("\n")
-        console.log(arrayText)
+        
         let random_number = Math.floor(Math.random() *arrayText.length);
         console.log(random_number)
         let random_question = arrayText[random_number];
@@ -77,43 +79,111 @@ function getRandomQuestion(textBlock) {
         console.log(questionArray)
         return questionArray
     }
-   
+    else{
+        let random_question = arrayText[whatQuestion];
+        console.log("what quest " + whatQuestion)
+        console.log("array text length "+arrayText.length)
+        var questionArray = JSON.parse(random_question);
+        whatQuestion++;
+        if (whatQuestion >= arrayText.length){
+            whatQuestion=0;
+            console.log("whatquestion reset")
+        }
+        return questionArray
+    }
+    
     
     // document.getElementById('file').innerText = this.result; // places text into webpage
 }
+
+function makeRandom(){
+    if (document.getElementById("randomchoice").checked == true){
+        console.log("random mode toggled on");
+        window.localStorage.setItem("random", "true");
+        
+        copyright.style.color="wheat";
+        document.getElementById("randomchoice").checked = true;
+
+        
+
+    }
+    else{
+        console.log("random mode toggled off");
+        window.localStorage.setItem("random", "false");
+        document.getElementById("randomchoice").checked = false;
+       // foot.style.backgroundColor = "#3e8e41";
+        
+    }
+}
+
+
 
 //used to acquire random question & answer pair (mutli verbs)
 
 function getRandomMultiQ(textBlock){
     console.log("random multi q ran")
     let arrayCont = textBlock.split("\n");
-    let random_num = Math.floor(Math.random()*arrayCont.length);
-    let random_qS = Math.floor(Math.random()*6);
-    while (random_qS == 0){
+
+    if(doRandom == true){
+        let random_num = Math.floor(Math.random()*arrayCont.length);
         let random_qS = Math.floor(Math.random()*6);
+        while (random_qS == 0){
+            let random_qS = Math.floor(Math.random()*6);
+        }
+        let randomQ = arrayCont[random_num];
+        var questionArray = JSON.parse(randomQ);
+        let pronoun = "";
+        
+        if (random_qS==1){
+            pronoun = "I / Je"
+        }else if(random_qS ==2){
+            pronoun = "You (I. S.) / Tu"
+        }else if(random_qS == 3){
+            pronoun = "He-She / Il-Elle-On"
+        }else if(random_qS == 4){
+            pronoun = "We / Nous"
+        }else if(random_qS == 5){
+            pronoun = "You (F. P.) / Vous"
+        }else if(random_qS == 6){
+            pronoun = "They / Ils-Elles"
+        }else{
+            pronoun = "--// An internal error occured. Please refresh your page and try again. //--"
+        }
+        let toRet = [questionArray[0], questionArray[random_qS], pronoun]
+        console.log(toRet)
+        return toRet 
     }
-    let randomQ = arrayCont[random_num];
-    var questionArray = JSON.parse(randomQ);
-    let pronoun = "";
+    else{
+        if (whatPro>6){
+            whatQuestion++
+            whatPro = 1
+        }
+        let randomQ = arrayCont[whatQuestion];
+        var questionArray = JSON.parse(randomQ);
+        let pronoun = "";
+        
+        if (whatPro==1){
+            pronoun = "I / Je"
+        }else if(whatPro ==2){
+            pronoun = "You (I. S.) / Tu"
+        }else if(whatPro == 3){
+            pronoun = "He-She / Il-Elle-On"
+        }else if(whatPro == 4){
+            pronoun = "We / Nous"
+        }else if(whatPro == 5){
+            pronoun = "You (F. P.) / Vous"
+        }else if(whatPro == 6){
+            pronoun = "They / Ils-Elles"
+        }else{
+            pronoun = "--// An internal error occured. Please refresh your page and try again. //--"
+        }
+        let toRet = [questionArray[0], questionArray[whatPro], pronoun]
+        whatPro++;
+        console.log(toRet)
+        return toRet 
+
+    }
     
-    if (random_qS==1){
-        pronoun = "I / Je"
-    }else if(random_qS ==2){
-        pronoun = "You (I. S.) / Tu"
-    }else if(random_qS == 3){
-        pronoun = "He-She / Il-Elle-On"
-    }else if(random_qS == 4){
-        pronoun = "We / Nous"
-    }else if(random_qS == 5){
-        pronoun = "You (F. P.) / Vous"
-    }else if(random_qS == 6){
-        pronoun = "They / Ils-Elles"
-    }else{
-        pronoun = "--// An internal error occured. Please refresh your page and try again. //--"
-    }
-    let toRet = [questionArray[0], questionArray[random_qS], pronoun]
-    console.log(toRet)
-    return toRet 
 }
 
 //code to make file picker appear in read custom and retreive data from it
@@ -165,9 +235,7 @@ function onBtnPress(v) {
         var text = reader.result;
         
         customWords = text;
-        question = getRandomQuestion(customWords);
         console.log( customWords )
-        console.log(question)
         if(v=="f"){
             doFlashcards();
         }
@@ -775,6 +843,16 @@ function checkSettings(){
     if(domainswitch == "true"){
         console.log("inside check settings: maincoloritems = " +mainColorItems)
         mainColorSwitch(colorItems, maincolor, auxcolor);
+    }
+    let randomthing = window.localStorage.getItem("random");
+    if (randomthing == "true"){
+        doRandom = true;
+        document.getElementById("randomchoice").checked = true;
+
+    }
+    else{
+        document.getElementById("randomchoice").checked = false;
+
     }
         
 
