@@ -2,6 +2,7 @@
 
 *Visit the website at www.nwvbug.com *
 
+<img src="circular lang icon.png" width="270" height="270"> <img src="nwvbugpurple.png" width="270" height="270">
 
 Lang is a project that i made to be an alternative to programs like Memrise and Quizlet. with a simple and customizable user interface and focus on verbs, it is good for studying. 
 
@@ -21,4 +22,3 @@ If you want to suggest one, go to Github Issues page and use the "Suggestion" ta
 
 
 
-<img src="circular lang icon.png" width="270" height="270"> <img src="nwvbugpurple.png" width="270" height="270">
