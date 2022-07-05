@@ -21,4 +21,4 @@ If you want to suggest one, go to Github Issues page and use the "Suggestion" ta
 
 
 
-<img src="circular lang icon.png">
+<img src="circular lang icon.png"> <img src="nwvbug.png">
