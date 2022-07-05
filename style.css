@@ -269,10 +269,24 @@
     flex:1;
 }
 
+.flexboxset{
+  
+  display:flex;
+  flex:1;
+  margin-top:-5%;
+
+}
+
 .flexitem{
     flex:1;
 }
 
+
+.nwvbuglogo{
+  width:270px;
+  height:270px;
+  margin-top:-6%;
+}
 
 .foot{
     text-align: center;
