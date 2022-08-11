@@ -7,7 +7,7 @@
 }
 
 .homepage{
-    background-color: wheat;
+    background-color: #FFEFD1;
     margin: 0;
     padding:20px;
 }
@@ -39,6 +39,8 @@
 .sameline{
     display: flex;
     justify-content: space-evenly;
+    flex-wrap:wrap;
+    padding:15px;
 }
 
 .smallselection{
@@ -55,11 +57,107 @@
     background-color: #001945;
     color: white;
     padding: 16px;
-    font-size: 27px;
+    font-size: 2vh;
+    font-size-adjust:initial;
     border: none;
     font-family:'Varela Round';
-  }
+    min-width:200px;
   
+    border:5px;
+    border-color: #001945;
+    border-radius: 15px;
+    width:10vw;
+    height:10vh;
+    color: #FFEFD1;
+   
+  }
+
+  .dropbtn2 {
+    background-color: #001945;
+    color: white;
+    padding: 16px;
+    font-size: 2vh;
+    font-size-adjust:initial;
+    border: none;
+    font-family:'Varela Round';
+    min-width:200px;
+  
+    border:5px;
+    border-color: #001945;
+    border-radius: 15px;
+    width:10vw;
+    height:10vh;
+    color: #FFEFD1;
+   
+  }
+  .dropbtn3 {
+    background-color: #d23e3e;
+    color: white;
+    padding: 16px;
+    font-size: 2vh;
+    font-size-adjust:initial;
+    border: none;
+    font-family:'Varela Round';
+    min-width:200px;
+  
+    border:5px;
+    border-color: #d23e3e;
+    border-radius: 15px;
+    width:20vw;
+    height:10vh;
+    color: #FFEFD1;
+    margin:50px;
+   
+  }
+
+
+  .testimonial {
+    margin: 25px;
+    width: 350px;
+    background-color:#252525;
+    border-radius: 20px;
+    text-align:center;
+}
+
+.testimonial img {
+    width: 300px;
+    height: auto;
+    border-radius: 20px;
+    margin: 25px;
+}
+
+.testimonial .text {
+    padding: 25px;
+}
+
+.testimonialcontainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap:wrap;
+  
+  text-align:center;
+}
+
+.testimonial .textproj {
+    padding: 25px;
+}
+
+.header1 {
+    /* background-color: orange; */
+    color: #d23e3e;
+    font-size: 30px;
+    font-family:'Varela Round';
+    padding:25px;
+
+}
+
+  .dropbtn3:hover {
+    background-color: #3e8e41;
+    transition: 2ms;
+    
+  }
   /* The container <div> - needed to position the dropdown content */
   .dropdown {
     position: relative;
@@ -67,6 +165,7 @@
     border:5px;
     border-color: #001945;
     border-radius: 15px;
+    min-width:70px;
   }
   
   /* Dropdown Content (Hidden by Default) */
@@ -102,29 +201,30 @@
   /* Change the background color of the dropdown button when the dropdown content is shown */
   .dropdown:hover .dropbtn {
       background-color: #3e8e41;
-      height:150px;
-      width:200px;
+
       transition: 2ms;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
     }
 
     .dropbtn:hover {
         background-color: #3e8e41;
-        height:150px;
-        width:200px;
+        transition: 2ms;
+        
+      }
+
+      .dropbtnmain:hover {
+        background-color: #3e8e41;
         transition: 2ms;
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
       }
 
-  .dropbtn{
-    border:5px;
-    border-color: #001945;
-    border-radius: 15px;
-    width:160px;
-    height:100px;
-    color: wheat;
-   
-  }
+      .dropbtn2:hover {
+        background-color: #3e8e41;
+        transition: 2ms;
+        
+      }
 
   .smallbutton{
     border:5px;
@@ -132,7 +232,7 @@
     border-radius: 15px;
     width:100px;
     height:50px;
-    color: wheat;
+    color: #FFEFD1;
     background-color: #001945;
     font-family: 'Varela Round';
   }
@@ -144,19 +244,44 @@
     display:flex;
     justify-content:center;
     width:100%;
+    flex-wrap:wrap;
 }
 
-.input{
-    border:5px;
-    border-color: #001945;
-    border-radius: 15px;
-    width:500px;
-    height:150px;
-    font-size:500%;
-    font-family: 'Varela Round';
-    color:#001945;
-    display:none;
-        
+.input {
+  border: 5px;
+  border-color: #001945;
+  border-radius: 15px;
+  width: 50vw;
+  height: 150px;
+  font-size: 500%;
+  font-family: 'Varela Round';
+  color: #001945;
+  display: none;
+}
+
+.inputSeen {
+  border: 5px;
+  border-color: #001945;
+  border-radius: 15px;
+  width: 40vw;
+  height: 100px;
+  font-size: 200%;
+  font-family: 'Varela Round';
+  color: #001945;
+  text-align: center;
+  
+}
+
+.largeinputbox {
+  border: 5px;
+  border-color: #001945;
+  border-radius: 15px;
+  width: 38vw;
+  height: 50vh;
+  
+  font-family: 'Varela Round';
+  color: #001945;
+ 
 }
 
 
@@ -167,20 +292,20 @@
     color:#001945;
 }
 
-.goButton{
-    border:5px;
-    border-color: #001945;
-    border-radius: 15px;
-    width:100px;
-    height:150px;
-    font-size: 250%;
-    display:flex;
-    justify-content:center;
-    align-items: center;
-    font-family: 'Varela Round';
-    color:#001945;
-    display:none;
-    margin-left:15px;
+.goButton {
+  border: 5px;
+  border-color: #001945;
+  border-radius: 15px;
+  width: 15vw;
+  height: 150px;
+  font-size: 250%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Varela Round';
+  color: #001945;
+  display: none;
+  margin-left: 15px;
 }
 
 .showCorrect{
@@ -205,25 +330,25 @@
 }
 
 .statsText{
-    color: wheat;
+    color: #FFEFD1;
     font-family: 'Varela Round';
 
 }
 
 .statsTextPr{
-    color: wheat;
+    color: #FFEFD1;
     font-family: 'Varela Round';
     font-size: 32px;
 }
 
 .statsTextPc{
-    color: wheat;
+    color: #FFEFD1;
     font-family: 'Varela Round';
     font-size: 28px;
 }
 
 .statsTextCondt{
-    color: wheat;
+    color: #FFEFD1;
     font-family: 'Varela Round';
     font-size: 36px;
 }
@@ -240,7 +365,7 @@
     border-color: #001945;
     border-radius: 15px;
     background-color: #001945;
-    color: wheat;
+    color: #FFEFD1;
 }
 
 .returnbutton{
@@ -248,7 +373,8 @@
     border-color: #001945;
     border-radius: 15px;
     
-    font-size: 250%;
+    width:10vw;
+    font-size:1.25vw;
     display:flex;
     justify-content:center;
     align-items: center;
@@ -267,27 +393,109 @@
 .flexbox{
     display:flex;
     flex:1;
+    flex-wrap:wrap;
+}
+.flexbox2{
+  display:flex;
+  height:45vh;
+  flex-wrap:wrap;
+  flex-direction: row;
+  margin:15px;
+  
+}
+
+.flexitem2{
+  align-items:center; 
+  text-align:center; 
+  justify-content:space-around; 
+  padding:10%; 
+  padding-top:0%;
+  padding-bottom:0%;
+  flex:1;
+  min-width:230px;
+  margin-bottom:20%;
 }
 
 .flexboxset{
   
   display:flex;
   flex:1;
-  margin-top:-5%;
+  flex-wrap: wrap;
 
 }
 
 .flexitem{
     flex:1;
+    min-width:230px;
+    margin-bottom:20%;
 }
 
 
 .nwvbuglogo{
-  width:270px;
-  height:270px;
-  margin-top:-6%;
+  width:20vw;
+  height:20vw;
+  border-radius:20px;
+  min-width: 200px;
+  min-height:200px;
 }
 
+
+.infodiv{
+  background-color:#FFEFD1; 
+  height:20vw; 
+  width:20vw; 
+  border-radius:20px;
+  text-align:center;
+  align-items: center;
+  justify-content:center;
+  font-family:'Varela Round';
+  font-size:1.5vw;
+  min-width:250px;
+  
+}
+
+.welcometext{
+  font-family: 'Varela Round';
+  font-size: 120%;
+  padding: 10px;
+  padding-bottom: 0px;
+  color: #001945;
+  font-weight: 900;
+}
+
+.newbutton {
+  width: 13vw;
+  height: 4vw;
+  border: none;
+  border-radius: 15px;
+  background-color: #001945;
+  color: #FFEFD1;
+  font-family: 'varela round';
+  font-size: 2vw;
+  min-width: 80px;
+  min-height: 20px;
+}
+
+.deletebutton {
+  width: 13vw;
+  height: 4vw;
+  border: none;
+  border-radius: 15px;
+  background-color: #001945;
+  color: #FFEFD1;
+  font-family: 'varela round';
+  font-size: 1vw;
+  min-width: 80px;
+  min-height: 20px;
+  margin:15px;
+}
+
+.deletebutton:hover{
+  background-color:#ce1483;
+}
+.newbutton:hover{
+  background-color:#ce1483;
+}
 .foot{
     text-align: center;
     padding-left: 20px;
@@ -295,16 +503,17 @@
     box-sizing: border-box;
     background-color: #3e8e41;
     color: white;
-    width: 100%;
+    width: 101%;
     bottom: 0%;
     position: fixed;
     transform:translateX(-20px);
+    margin-top:15px;
     
 }
 
 .topleftlogoicon{
-    width:98px;
-    height:100px;
+    height:10vh;
+    width:auto;
     
 }
 
@@ -385,7 +594,6 @@
   width: 300px;
   height: 200px;
   border: 1px solid #f1f1f1;
-  margin-left: 40%;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
   border-radius: 15px;
 
@@ -423,13 +631,13 @@
 /* Style the front side (fallback if image is missing) */
 .flip-card-front {
   background-color: #001945;
-  color: wheat;
+  color: #FFEFD1;
   border-radius: 15px;
 
 }
 
 .frontcardtext{
-  color:wheat;
+  color:#FFEFD1;
   font-family: 'Varela Round';
 }
 
@@ -438,4 +646,66 @@
   background-color: #3e8e41;
   color: white;
   transform: rotateY(180deg);
+}
+
+.largebox{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  margin: 2.5vw;
+  padding: 2.5vw;
+  background-color: #001945;
+  border-radius: 40px;
+  flex-wrap:wrap;
+}
+
+.largeboxclr{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  margin: 2.5vw;
+  padding: 2.5vw;
+  border-radius: 40px;
+  flex-wrap:wrap;
+}
+
+.medbox{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items:center;
+  padding:20px;
+  flex-wrap:wrap;
+}
+
+.testholder{
+  justify-content: center;
+  align-items:center;
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.multiplechoice{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  margin: 2.5vw;
+  padding: 2.5vw;
+  border-radius: 40px;
+  flex-wrap:wrap;
+}
+
+#myProgress {
+  width: 100%;
+  background-color: grey;
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: #001945;
 }

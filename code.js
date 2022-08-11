@@ -45,7 +45,256 @@ var generateIdVous = 0
 var generateIdThem = 0
 var whatQuestion = 0
 var whatPro = 1;
+var testLength = 0;
+var sessionid = ""
 
+
+function fakeload(){
+    console.log("loading")
+    window.location.href="homepage.html"
+}
+
+var i = 0;
+function move() {
+  if (i == 0) {
+    i = 1;
+    var elem = document.getElementById("myBar");
+    var width = 1;
+    var id = setInterval(frame, 50);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        i = 0;
+        fakeload()
+      } else {
+        width++;
+        elem.style.width = width + "%";
+      }
+    }
+  }
+}
+
+var url_string = window.location.href; //window.location.href
+var url = new URL(url_string);
+var c = url.searchParams.get("token");
+console.log(c);
+if (c != null) {
+    window.localStorage.setItem("usertoken", c);
+}else{
+
+}
+sessionid = c;
+
+function changelibrary(){
+    if (window.localStorage.getItem("usertoken") != null) {
+        try {
+            document.getElementById("sil").innerHTML = "Library";
+            document.getElementById("sil").onclick = function(){
+                window.location.href = "library.html"; 
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+
+function callmultiple(){
+    getLibrary()
+    checkSettings()
+    
+}
+
+function uploadFiles(){
+    if(document.getElementById("file")!=null){
+        return "brh";
+    }
+    var uploadFile = document.createElement('input');
+    uploadFile.type = 'file';
+    uploadFile.id = 'file';
+    uploadFile.name = 'file';
+    uploadFile.accept = '.txt';
+    document.getElementById("libraryholder").appendChild(uploadFile)
+    var uploadButton = document.createElement('button');
+    uploadButton.innerHTML = 'Upload';
+    uploadButton.onclick = function() {
+        console.log("clicked lol")
+        var file = document.getElementById('file').files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            console.log("reading lol")
+            var text = reader.result;
+            var filename = file.name;
+            var url = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/upload/"+filename;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", url);
+
+            xhr.setRequestHeader("Content-Type", "text/plain");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    console.log(xhr.status);
+                    console.log(xhr.responseText);
+                }
+            };
+            var data = text;
+            console.log("sending " + data + " to " + url);
+            xhr.send(data);
+            window.location.reload()
+
+            
+            // var textArea = document.createElement('textarea');
+            // textArea.value = text;
+            // document.body.appendChild(textArea);
+        };
+        reader.readAsText(file);
+
+    }
+    document.getElementById("libraryholder").appendChild(uploadButton)
+}
+
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+
+
+function getLibrary(){
+    // if (c==null){
+    //     document.getElementById("library").innerHTML = "Something went wrong. Check your network connection and try again.";
+    //     document.getElementById("top").innerHTML = "Lang Cloudsave requires an internet connection. You can still use locally saved Studysheets while offline. ";
+    //     document.getElementById("biguploadbutton").style.display = "none";
+
+
+
+    // }
+    sessionid = window.localStorage.getItem("usertoken");
+    library = httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/list")
+    username = httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/name")
+    if(library == "[]"){
+        document.getElementById("library").innerHTML = "You have no cloudsaved Lang Studysheets.";
+
+    }
+    else{
+        library = library.split(",")
+        if (library==""){
+            document.getElementById("library").innerHTML = "You have no cloudsaved Lang Studysheets.";
+        }
+        for (i=0;i<library.length;i++){
+            if (library[i]==""){
+                continue
+            }
+            var librarytext = document.createElement('h1')
+            librarytext.className="header";
+            text =library[i]
+            librarytext.innerHTML = text
+            link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+librarytext.innerHTML
+            
+            console.log(link)
+            id = "library"+generateIdA
+            generateIdA++
+            librarytext.id = id;
+            document.getElementById("libraryholder").appendChild(librarytext)
+            console.log(id)
+            // document.getElementById(id).onclick = function(){
+            //     kids = document.getElementById("libraryholder")
+            //     var element = document.getElementById(this.id);
+            //     console.log(element)
+            //     link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+element.innerHTML
+            //     console.log("link is: "+link)
+            //     window.location.href=link
+            // }
+
+            var downbutton = document.createElement('button')
+            downbutton.className="deletebutton";
+            text =library[i]
+            downbutton.innerHTML = "Download "+text
+            link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+librarytext.innerHTML
+            
+            console.log(link)
+            id = "library"+generateIdA
+            generateIdA++
+            downbutton.id = id;
+            // set the studysheet attribute to the name of the studysheet
+            downbutton.setAttribute("studysheet", text)
+            document.getElementById("libraryholder").appendChild(downbutton)
+            console.log(id)
+            document.getElementById(id).onclick = function(){
+                var element = document.getElementById(this.id);
+                console.log(element)
+                link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+ element.getAttribute("studysheet")
+                console.log("link is: "+link)
+                window.location.href=link;
+            }
+
+
+            var libutton = document.createElement('button')
+            libutton.className="deletebutton";
+            text =library[i]
+            libutton.innerHTML = "Delete "+text
+            link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+text+"/delete"
+            
+            console.log(link)
+            id = "library"+generateIdA
+            generateIdA++
+            libutton.id = id;
+            // set the studysheet attribute to the name of the studysheet
+            libutton.setAttribute("studysheet", text)
+            document.getElementById("libraryholder").appendChild(libutton)
+            console.log(id)
+            document.getElementById(id).onclick = function(){
+                var element = document.getElementById(this.id);
+                console.log(element)
+                link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+ element.getAttribute("studysheet")+"/delete"
+                console.log("link is: "+link)
+                httpGet(link)
+                window.location.reload()
+            }
+            
+        }
+
+        // kids = libraryholder.children
+        // for (i=0;i<kids.length;i++){
+        //     text = library[i]
+        //     link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+text
+        //     kids[i].onclick=function(){window.location.href=link}
+        //     console.log(link)
+
+        // }
+    }
+    var usernametest = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+                <title>500 Internal Server Error</title>
+                <h1>Internal Server Error</h1>
+                <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>`
+    console.log(username+"Username - username test "+usernametest)
+    if (document.getElementById("library0").innerHTML == "Invalid token"){
+        document.getElementById("top").innerHTML = "Uh oh. It seems like your login has expired. Please log in again.";
+        document.getElementById("top2").innerHTML = "Click here to sign in to your account.";
+        document.getElementById("top2").style.border = "1px solid black";
+        document.getElementById("top2").style.borderRadius = "15px";
+
+        document.getElementById("top2").onclick = function(){window.location.href="login.html"};
+        document.getElementById("library0").innerHTML = "Please log in again."
+        document.getElementById("library1").style.display="none"
+        document.getElementById("library2").style.display="none"
+
+        document.getElementById("biguploadbutton").style.display="none"
+
+        
+    }else{
+        document.getElementById("top").innerHTML = "Here are your cloudsaved Lang Studysheets, "+username+". Click on the Studysheet you want to use.";
+        document.getElementById("top2").innerHTML = "Not "+username+"? Click here to sign in to your account.";
+        document.getElementById("top2").onclick = function(){window.location.href="login.html"};
+    }
+    
+    
+    console.log(library);
+    
+}
 //onload multiple functions
 function execute(){
     //checks if user is on mobile
@@ -59,6 +308,7 @@ function execute(){
         return check;
     };
     checkSettings()
+    changelibrary()
 }
 
 
@@ -101,7 +351,7 @@ function makeRandom(){
         console.log("random mode toggled on");
         window.localStorage.setItem("random", "true");
         
-        copyright.style.color="wheat";
+        copyright.style.color="#FFEFD1";
         document.getElementById("randomchoice").checked = true;
 
         
@@ -186,6 +436,96 @@ function getRandomMultiQ(textBlock){
     
 }
 
+
+function doMultiTest(){
+    document.getElementById("myBtnBegin").style.display = "none";
+    document.getElementById("file").style.display = "none";
+
+    console.log("this is what customwords is "+customWords)
+    console.log("random question ran")
+    let arrayText = customWords.split("\n")
+    var button = document.createElement("BUTTON")
+    testLength = arrayText.length;
+    for(i=0; i<=arrayText.length; i++){
+        try {
+            var questionText = document.createElement('h1')
+            questionText.className="header";
+            let random_question = arrayText[i];
+            var questionArray = JSON.parse(random_question)
+            questionText.innerHTML=questionArray[0];
+
+            id = "answerInput"+generateIdA
+            var verbInput = document.createElement('INPUT');
+            verbInput.className="inputSeen"
+            verbInput.setAttribute("type", "text");
+            verbInput.setAttribute("id",id)
+            generateIdA++
+            verbInput.placeholder="Answer";
+            document.getElementById("minicreator").appendChild(questionText);
+            document.getElementById("minicreator").appendChild(verbInput);
+        } catch (error) {
+            break;
+        }
+    }
+    var br = document.createElement("br")
+    document.getElementById("minicreator").appendChild(br);
+    var br = document.createElement("br")
+    document.getElementById("minicreator").appendChild(br);
+    button.className = "dropbtn"
+    button.innerHTML= "Submit"
+    button.onclick = function(){
+        let arrayText = customWords.split("\n")
+        for(i=0; i<testLength;i++){
+            let random_question = arrayText[i];
+            var questionArray = JSON.parse(random_question)
+            let id = "answerInput"+i
+            if (document.getElementById(id).value == questionArray[1]){
+                document.getElementById(id).style.backgroundColor="green";
+            }else{
+                document.getElementById(id).style.backgroundColor="red";
+            }
+    
+        }
+        sussy = document.createElement("button")
+        sussy.onclick = function(){
+            if (confirm("Any data you entered may not be saved. Press 'OK' to continue or 'Cancel' to go back.") == true){
+                window.location.reload();
+            }
+            else{
+                
+            }
+        }
+        var br = document.createElement("br")
+        document.getElementById("minicreator").appendChild(br);
+        var br = document.createElement("br")
+        document.getElementById("minicreator").appendChild(br);
+        sussy.innerHTML = "Reset"
+        sussy.className="dropbtn2"
+        document.getElementById("minicreator").appendChild(sussy);
+    }
+    
+    document.getElementById("minicreator").appendChild(button);
+    
+    
+
+
+
+    // console.log("arrtext= "+arrayText)
+    
+        
+    // let random_number = Math.floor(Math.random() *arrayText.length);
+    // console.log(random_number)
+    // let random_question = arrayText[random_number];
+    // console.log(random_question)
+    // var questionArray = JSON.parse(random_question)
+    // console.log(questionArray)
+    // return questionArray
+    
+}
+
+
+
+
 //code to make file picker appear in read custom and retreive data from it
 
 let fileHandle;
@@ -220,11 +560,12 @@ async function getTheFile() {
 //function called when button to begin custom verb read is called- creates inputs & calls other functions to get questions
 
 function onBtnPress(v) {
+    
     var uploadFile = document.createElement('input');
     uploadFile.type = 'file';
     uploadFile.id = 'file';
     uploadFile.name = 'file';
-    uploadFile.accept = '.txt';
+    uploadFile.accept = '.lang, .txt';
     document.body.appendChild(uploadFile);
     var uploadButton = document.createElement('button');
     uploadButton.innerHTML = 'Upload';
@@ -237,9 +578,31 @@ function onBtnPress(v) {
         customWords = text;
         console.log( customWords )
         if(v=="f"){
+            uploadButton.style.display="none";
             doFlashcards();
+        }else if(v=='prac'){
+            uploadButton.style.display="none";
+
+            doPracticeTest()
+        }else if(v=='speed'){
+            var wage = document.getElementById("input");
+            wage.addEventListener("keydown", function (e) {
+                if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+                    checkCustom("Speed")
+                }
+            });
+            uploadButton.style.display="none";
+            timer("Start")
+            doSpeedTest()
         }
         else{
+            var wage = document.getElementById("input");
+            wage.addEventListener("keydown", function (e) {
+                if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+                    checkCustom()
+                }
+            });
+            uploadButton.style.display="none";
             doCustomSheets(v);
         }
         uploadButton.style.display="none";
@@ -310,11 +673,31 @@ function doFlashcards(){
 }
 
 
+function toggleAudio(){
+    var music = new Audio('speedmusic.mp3');
+    if (document.getElementById("soundcheck").checked == true){
+        
+        music.play();
+        music.loop =true;
+        music.playbackRate = 1;
+        document.getElementById("soundcheck").checked == true
+
+
+    }
+    else{
+        music.pause();
+        music.loop =false;
+        music.currentTime = 0;
+
+    }
+    
+}
+
 
 
 ///function to make custom sheet UI & general loop
-
-function doCustomSheets(v){
+function doSpeedTest(v){
+    
     document.getElementById("crctst").innerHTML = "Correct: " + correctCounter
     document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectCounter
 
@@ -330,7 +713,45 @@ function doCustomSheets(v){
     buttonStyling = document.getElementById("goButton")
     buttonStyling.style.display = "flex";
     buttonStyling.innerHTML = ">" + "\n" + "Go!"
-    document.getElementById("stats").style.width = "70"
+    document.getElementById("stats").style.width = "15vw"
+    document.getElementById("stats").style.height = "110"
+    document.getElementById("crctst").style.fontSize = "15"
+    document.getElementById("incorrect").style.fontSize = "15"
+    document.getElementById("timerchange").style.display = "none";
+
+    whichCustom = v;
+    
+    wordPair = getRandomQuestion(customWords);
+    console.log("Got random question: " + wordPair)
+    document.getElementById("displayWord").innerHTML = "conjugate: "+wordPair[0];
+    customAnswer = wordPair[1];
+    
+    
+    }
+
+function doCustomSheets(v){
+    var wage = document.getElementById("input");
+    wage.addEventListener("keydown", function (e) {
+        if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+            getInput()
+        }
+    });
+    document.getElementById("crctst").innerHTML = "Correct: " + correctCounter
+    document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectCounter
+
+    document.getElementById("myBtnBegin").style.display = "none";
+    document.getElementById("file").style.display = "none";
+
+    console.log("SELECT WORD")
+    
+    
+        
+    input = document.getElementById("input")
+    input.style.display = "flex";
+    buttonStyling = document.getElementById("goButton")
+    buttonStyling.style.display = "flex";
+    buttonStyling.innerHTML = ">" + "\n" + "Go!"
+    document.getElementById("stats").style.width = "15vw"
     document.getElementById("stats").style.height = "110"
     document.getElementById("crctst").style.fontSize = "15"
     document.getElementById("incorrect").style.fontSize = "15"
@@ -349,9 +770,98 @@ function doCustomSheets(v){
     }
     
 
+function doPracticeTest(){
+    document.getElementById("myBtnBegin").style.display = "none";
+    document.getElementById("file").style.display = "none";
+
+    console.log("this is what customwords is "+customWords)
+    console.log("random question ran")
+    let arrayText = customWords.split("\n")
+    var button = document.createElement("BUTTON")
+    testLength = arrayText.length;
+    for(i=0; i<=arrayText.length; i++){
+        try {
+            var questionText = document.createElement('h1')
+            questionText.className="header";
+            let random_question = arrayText[i];
+            var questionArray = JSON.parse(random_question)
+            questionText.innerHTML=questionArray[0];
+
+            id = "answerInput"+generateIdA
+            var verbInput = document.createElement('INPUT');
+            verbInput.className="inputSeen"
+            verbInput.setAttribute("type", "text");
+            verbInput.setAttribute("id",id)
+            generateIdA++
+            verbInput.placeholder="Answer";
+            document.getElementById("minicreator").appendChild(questionText);
+            document.getElementById("minicreator").appendChild(verbInput);
+        } catch (error) {
+            break;
+        }
+    }
+    var br = document.createElement("br")
+    document.getElementById("minicreator").appendChild(br);
+    var br = document.createElement("br")
+    document.getElementById("minicreator").appendChild(br);
+    button.className = "dropbtn"
+    button.innerHTML= "Submit"
+    button.onclick = function(){
+        let arrayText = customWords.split("\n")
+        for(i=0; i<testLength;i++){
+            let random_question = arrayText[i];
+            var questionArray = JSON.parse(random_question)
+            let id = "answerInput"+i
+            if (document.getElementById(id).value == questionArray[1]){
+                document.getElementById(id).style.backgroundColor="green";
+            }else{
+                document.getElementById(id).style.backgroundColor="red";
+            }
+    
+        }
+        sussy = document.createElement("button")
+        sussy.onclick = function(){
+            if (confirm("Any data you entered may not be saved. Press 'OK' to continue or 'Cancel' to go back.") == true){
+                window.location.reload();
+            }
+            else{
+                
+            }
+        }
+        var br = document.createElement("br")
+        document.getElementById("minicreator").appendChild(br);
+        var br = document.createElement("br")
+        document.getElementById("minicreator").appendChild(br);
+        sussy.innerHTML = "Reset"
+        sussy.className="dropbtn2"
+        document.getElementById("minicreator").appendChild(sussy);
+    }
+    
+    document.getElementById("minicreator").appendChild(button);
+    
+    
 
 
 
+    // console.log("arrtext= "+arrayText)
+    
+        
+    // let random_number = Math.floor(Math.random() *arrayText.length);
+    // console.log(random_number)
+    // let random_question = arrayText[random_number];
+    // console.log(random_question)
+    // var questionArray = JSON.parse(random_question)
+    // console.log(questionArray)
+    // return questionArray
+    
+}
+
+
+function checkTest(){
+    
+
+    
+}
 
 
 
@@ -399,7 +909,7 @@ function showVerbs(language) {
 
 
 function returnMain() {
-    location.href = "index.html";
+    location.href = "homepage.html";
 }
 
 
@@ -418,6 +928,13 @@ function checkEnter() {
 //Main loop for preloaded verbs- gets Q&A, creates Ui, etc
 
 function selectWord(language) {
+
+    var wage = document.getElementById("input");
+    wage.addEventListener("keydown", function (e) {
+        if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+            getInput()
+        }
+    });
     document.getElementById("crctst").innerHTML = "Correct: " + correctCounter
     document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectCounter
 
@@ -430,7 +947,7 @@ function selectWord(language) {
         buttonStyling = document.getElementById("goButton")
         buttonStyling.style.display = "flex";
         buttonStyling.innerHTML = ">" + "\n" + "Go!"
-        document.getElementById("stats").style.width = "70"
+        document.getElementById("stats").style.width = "15vw"
         document.getElementById("stats").style.height = "110"
         document.getElementById("crctst").style.fontSize = "15"
         document.getElementById("incorrect").style.fontSize = "15"
@@ -448,7 +965,7 @@ function selectWord(language) {
         return toReturn
     }
     else if (language == "condt") {
-        document.getElementById("stats").style.width = "70"
+        document.getElementById("stats").style.width = "15vw"
         document.getElementById("stats").style.height = "110"
         document.getElementById("crctst").style.fontSize = "15"
         document.getElementById("incorrect").style.fontSize = "15"
@@ -463,7 +980,7 @@ function selectWord(language) {
         document.getElementById("displayWord").innerHTML = "What is the conditional stem of " + word
     }
     else if (language == "pc") {
-        document.getElementById("stats").style.width = "70"
+        document.getElementById("stats").style.width = "15vw"
         document.getElementById("stats").style.height = "110"
         document.getElementById("crctst").style.fontSize = "15"
         document.getElementById("incorrect").style.fontSize = "15"
@@ -640,7 +1157,7 @@ function getInput() {
 
 //get & check user inputs for custom verbs
 
-function checkCustom(){
+function checkCustom(v){
     usrInput = input.value;
     if (usrInput == customAnswer){
         correctCounter += 1
@@ -655,6 +1172,10 @@ function checkCustom(){
         input.value = ""
         incorrectCounter += 1
         document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectCounter
+        timer("clear")
+        if (v == "Speed"){
+            doSpeedTest("Speed")
+        }
     }
     
 }
@@ -715,7 +1236,7 @@ function anklebowlMode(){
         window.localStorage.setItem("anklebowl", "true");
         let test = window.localStorage.getItem("anklebowl")
         console.log(test);
-        copyright.style.color="wheat";
+        copyright.style.color="#FFEFD1";
         document.getElementById("ankcheck").checked = true;
 
         
@@ -752,7 +1273,7 @@ function darkMode(){
         window.localStorage.setItem("anklebowl", "true");
         let test = window.localStorage.getItem("anklebowl")
         console.log(test);
-        copyright.style.color="wheat";
+        copyright.style.color="#FFEFD1";
         document.getElementById("ankcheck").checked = true;
 
         
@@ -785,7 +1306,7 @@ function checkSettings(){
     if (ank=="true"){
         document.getElementById("ankcheck").checked = true;
         feet.style.backgroundColor = "#001945";
-        copyright.style.color="wheat";
+        copyright.style.color="#FFEFD1";
         console.log("ank true")
         
     }
@@ -877,7 +1398,7 @@ function amongusmode(){
     }
     else{
         document.body.style.backgroundImage = "none";
-        document.body.style.backgroundColor = "wheat";
+        document.body.style.backgroundColor = "#FFEFD1";
         amongUsChecker = false;
         window.localStorage.setItem("among", "false");
         document.getElementById("amongcheck").checked = false;
@@ -894,7 +1415,7 @@ function startCreator(version){
     if (version=="single"){
         console.log("start creator")
         document.getElementById("answerInput").style.display = "";
-        document.getElementById("promptInput").placeholder = "Put Infinitive Here";
+        document.getElementById("promptInput").placeholder = "Put Term / Question Here";
         document.getElementById("promptInput").style.display="";
         document.getElementById("answerInput").placeholder = "Put Answer Here";
         document.getElementById("addnew").style.display = "";
@@ -967,7 +1488,7 @@ function makeInputs(version){
         verbInput.setAttribute("type", "text");
         verbInput.setAttribute("id",id1)
         generateIdV++
-        verbInput.placeholder="Put Infinitive Here";
+        verbInput.placeholder="Put Term / Question Here";
         document.getElementById("minicreator").appendChild(verbInput);
     
         var answerInput = document.createElement("INPUT");
@@ -1132,7 +1653,7 @@ function downloadVerbs(select){
 
 function save(data) {
     namefile = window.prompt("Enter the name for the study sheet","LangCustomVerbSheet");
-    filename = namefile;
+    filename = namefile+".lang";
     if (filename == null){
 
     }
@@ -1153,7 +1674,50 @@ function save(data) {
     
 }
 
-//function to reset the custom sheet creator
+
+
+//converting quizlet study set into lang studysheet
+function downloadQuizlet(check){
+    if(check == true){
+        let input = document.getElementById('quizletinput').value;
+        newData = input.split("\n")
+        console.log(newData)
+        toDownload = ""
+        for(var i=0;i<newData.length; i+=1){
+            newSplit = newData[i].split(",");
+            console.log(newSplit)
+            value1 = '["'+newSplit[0]+'"';
+            value2 = '"'+newSplit[1]+'"]'+"\n";
+            toAdd = [value1, value2];
+            console.log(toAdd);
+            
+            toDownload = toDownload + toAdd
+        }
+        console.log(toDownload);
+        save(toDownload);
+    }
+    else{
+        let input = document.getElementById('quizletinput').value;
+        newData = input.split("\n")
+        console.log(newData)
+        toDownload = ""
+        for(var i=0;i<newData.length; i+=1){
+            newSplit = newData[i].split(",");
+            console.log(newSplit)
+            value1 = '["'+newSplit[1]+'"';
+            value2 = '"'+newSplit[0]+'"]'+"\n";
+            toAdd = [value1, value2];
+            console.log(toAdd);
+            
+            toDownload = toDownload + toAdd
+        }
+        console.log(toDownload);
+        save(toDownload);
+    }
+    
+}
+
+//function to reset the custom sheet creator & other places you can enter text
 
 function reload(){
     if (confirm("Any data you entered may not be saved. Press 'OK' to continue or 'Cancel' to go back.") == true){
@@ -1257,7 +1821,7 @@ function resetColors(){
     
     for (var i=0; i<childarray.length; i++){
         var obj = childarray[i];
-        obj.style.backgroundColor = "wheat";
+        obj.style.backgroundColor = "#FFEFD1";
     }
     window.localStorage.setItem("dobackground", "false");
     window.localStorage.setItem("domainswitch", "false");
@@ -1284,7 +1848,7 @@ function resetColors(){
 
     //         if (childx.tagName.toLowerCase() === 'button'){
     //             obj.style.backgroundColor = "#001945";
-    //             obj.style.color = "wheat";
+    //             obj.style.color = "#FFEFD1";
     //         }else if (childx.tagName.toLowerCase()==='footer'){
     //             obj.style.backgroundColor = "#3e8e41";
     //         }
@@ -1352,8 +1916,65 @@ function grabAllClasses(){
 }
 
 
+var time = 5;
+var timer1 = null;
+function timer(ck){
+
+    var sec = time; 
+    if(ck =="Start"){
+        console.log("Timer created")
+        timer1 = setInterval(function(){
+            console.log("Timer " + timer + " ticked");
+            document.getElementById('timertext').innerHTML=sec;
+            sec--;
+            if (sec<0){
+                clearInterval(timer);
+                document.getElementById("timertext").innerHTML = time
+                incorrectSpeed()
+                sec = time
+            }
+        }, 1000)
+    }
+    else{
+        clearInterval(timer1);
+        console.log("Clearing timer: " + timer)
+        document.getElementById("timertext").innerHTML = time
+        sec = time
+        this.timer("Start");
+        
+        
+        
+    }
+    
+}
+
+function incorrectSpeed(){
+    timer("clear")
+    buttonStyling.style.backgroundColor = "#ce1483"
+    setTimeout(function () { buttonStyling.style.backgroundColor = "grey" }, 1000)
+    input.value = ""
+    incorrectCounter += 1
+    document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectCounter
+    doSpeedTest("speed")    
+
+}
 
 
+function changeSpeed(){
+    newSpeed = document.createElement("input");
+    newSpeed.type = "number";
+    newSpeed.id = "newSpeed";
+    newSpeed.placeholder = "Enter new time limit in seconds";
+    document.getElementById("timediv").appendChild(newSpeed);
+    document.getElementById("timerchange").innerHTML = "Submit New Speed"
+    document.getElementById("timerchange").onclick = function(){
+        time = document.getElementById("newSpeed").value;
+        document.getElementById("timediv").removeChild(newSpeed);
+        document.getElementById("timerchange").innerHTML = "Change Time Limit"
+        document.getElementById('timertext').innerHTML=time;
+        
+    }
 
+}
 
         
