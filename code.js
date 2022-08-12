@@ -278,7 +278,7 @@ function getLibrary(){
         document.getElementById("top2").style.borderRadius = "15px";
 
         document.getElementById("top2").onclick = function(){window.location.href="login.html"};
-        document.getElementById("library0").innerHTML = "Please log in again."
+        document.getElementById("library0").innerHTML = "Please log in again. Error code: HAX0R"
         document.getElementById("library1").style.display="none"
         document.getElementById("library2").style.display="none"
 
