@@ -47,7 +47,7 @@ var whatQuestion = 0
 var whatPro = 1;
 var testLength = 0;
 var sessionid = ""
-
+var helpsused = 0;
 
 function fakeload(){
     console.log("loading")
@@ -1170,7 +1170,8 @@ function checkCustom(v){
     if (usrInput == customAnswer){
         correctCounter += 1
         buttonStyling.style.backgroundColor = "green"
-
+        document.getElementById("helpbutton").style.display = "none";
+        document.getElementById("howmanyhelps").innerHTML = ""
         input.value = ""
         afterCorrect("amogus", "custom")
     }
@@ -1179,12 +1180,22 @@ function checkCustom(v){
         setTimeout(function () { buttonStyling.style.backgroundColor = "grey" }, 1000)
         input.value = ""
         incorrectCounter += 1
+        document.getElementById("howmanyhelps").innerHTML = "You have used "+helpsused+" helps."
+        document.getElementById("helpbutton").style.display = "flex";
         document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectCounter
         timer("clear")
         if (v == "Speed"){
             doSpeedTest("Speed")
         }
     }
+    
+}
+
+
+function helpCustom(){
+    input.value = customAnswer;
+    helpsused++
+    document.getElementById("howmanyhelps").innerHTML = "You have used "+helpsused+" help(s)."
     
 }
 
@@ -1927,32 +1938,36 @@ function grabAllClasses(){
 var time = 5;
 var timer1 = null;
 function timer(ck){
-
-    var sec = time; 
-    if(ck =="Start"){
-        console.log("Timer created")
-        timer1 = setInterval(function(){
-            console.log("Timer " + timer + " ticked");
-            document.getElementById('timertext').innerHTML=sec;
-            sec--;
-            if (sec<0){
-                clearInterval(timer);
-                document.getElementById("timertext").innerHTML = time
-                incorrectSpeed()
-                sec = time
-            }
-        }, 1000)
+    try {
+        var sec = time; 
+        if(ck =="Start"){
+            console.log("Timer created")
+            timer1 = setInterval(function(){
+                console.log("Timer " + timer + " ticked");
+                document.getElementById('timertext').innerHTML=sec;
+                sec--;
+                if (sec<0){
+                    clearInterval(timer);
+                    document.getElementById("timertext").innerHTML = time
+                    incorrectSpeed()
+                    sec = time
+                }
+            }, 1000)
+        }
+        else{
+            clearInterval(timer1);
+            console.log("Clearing timer: " + timer)
+            document.getElementById("timertext").innerHTML = time
+            sec = time
+            this.timer("Start");
+            
+            
+            
+        }
+    } catch (error) {
+        console.log("Errored out on Timer")
     }
-    else{
-        clearInterval(timer1);
-        console.log("Clearing timer: " + timer)
-        document.getElementById("timertext").innerHTML = time
-        sec = time
-        this.timer("Start");
-        
-        
-        
-    }
+    
     
 }
 
