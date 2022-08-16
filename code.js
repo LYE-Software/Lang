@@ -144,7 +144,7 @@ function uploadFiles(){
         reader.onload = function(e) {
             console.log("reading lol")
             var text = reader.result;
-            text = text.replaceAll("\n", "sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
+            // text = text.replaceAll("\n", "sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
 
             var filename = file.name;
             var url = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/upload/"+filename;
@@ -163,7 +163,7 @@ function uploadFiles(){
             var data = text;
             console.log("sending " + data + " to " + url);
             xhr.send(data);
-            window.location.reload()
+            window.location.reload() 
 
             
             // var textArea = document.createElement('textarea');
