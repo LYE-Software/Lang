@@ -821,7 +821,9 @@ function doPracticeTest(){
             if (document.getElementById(id).value == theanswer){
                 document.getElementById(id).style.backgroundColor="green";
             }else{
+                tempinpt = document.getElementById(id).value
                 document.getElementById(id).style.backgroundColor="red";
+                document.getElementById(id).value = "Your Answer: "+tempinpt+" Correct Answer: "+theanswer;
             }
     
         }
