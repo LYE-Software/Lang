@@ -723,8 +723,9 @@ function doSpeedTest(v){
     
     wordPair = getRandomQuestion(customWords);
     console.log("Got random question: " + wordPair)
-    document.getElementById("displayWord").innerHTML = "conjugate: "+wordPair[0];
+    document.getElementById("displayWord").innerHTML = wordPair[0];
     customAnswer = wordPair[1];
+    customAnswer = customAnswer.toLowerCase();
     
     
     }
@@ -758,14 +759,18 @@ function doCustomSheets(v){
     whichCustom = v;
     if (v=="s"){
         wordPair = getRandomQuestion(customWords);
-        document.getElementById("displayWord").innerHTML = "conjugate: "+wordPair[0];
+        document.getElementById("displayWord").innerHTML = wordPair[0];
         customAnswer = wordPair[1];
+        customAnswer = customAnswer.toLowerCase();
+
     }
     else{
         wordPair = getRandomMultiQ(customWords);
         
         document.getElementById("displayWord").innerHTML = "conjugate: "+wordPair[0] + " in the "+wordPair[2] + " form.";
         customAnswer = wordPair[1];    
+        customAnswer = customAnswer.toLowerCase();
+
     }
     }
     
@@ -811,8 +816,9 @@ function doPracticeTest(){
         for(i=0; i<testLength;i++){
             let random_question = arrayText[i];
             var questionArray = JSON.parse(random_question)
+            theanswer = questionArray[1].toLowerCase();
             let id = "answerInput"+i
-            if (document.getElementById(id).value == questionArray[1]){
+            if (document.getElementById(id).value == theanswer){
                 document.getElementById(id).style.backgroundColor="green";
             }else{
                 document.getElementById(id).style.backgroundColor="red";
@@ -1158,7 +1164,7 @@ function getInput() {
 //get & check user inputs for custom verbs
 
 function checkCustom(v){
-    usrInput = input.value;
+    usrInput = input.value.toLowerCase();
     if (usrInput == customAnswer){
         correctCounter += 1
         buttonStyling.style.backgroundColor = "green"

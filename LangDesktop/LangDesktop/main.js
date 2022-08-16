@@ -24,7 +24,7 @@ const createWindow = () => {
 
 const startServer = () => {
     win.loadFile('startingserver.html')
-    const host = '0.0.0.0';
+    const host = '127.0.0.1';
     const port = 9362;
     
     const requestListener = function (req, res) {
@@ -64,7 +64,7 @@ const startServer = () => {
     server.listen(port, host, () => {
         console.log(`Server is running on http://${host}:${port}`);
     });
-    win.loadURL('http://0.0.0.0:9362/index.html')
+    win.loadURL('http://127.0.0.1:9362/index.html')
 }
 
 const updateLang = () => {
