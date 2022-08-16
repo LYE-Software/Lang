@@ -714,3 +714,8 @@ body{
   height: 30px;
   background-color: #001945;
 }
+
+.verticalbox{
+  display:flex;
+  flex-direction: column;
+}

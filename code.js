@@ -1,6 +1,6 @@
-//This is the main JavaScript file for Lang (www.nwvbug.com)
+//This is the main JavaScript file for Lang (www.langstudy.tech)
 //Written by nwvbug- https://github.com/nwvbug 
-
+//GitHub Repo: https://github.com/nwvbug/Lang
 
 //Global Variables (used by many functions)
 var words = ["devoir", "venir", "prendre", "partir", "suivre", "voir", "dire", "conduire", "boire", "savoir", "recevoir", "ouvrir", "vivre", "s'asseoir", "mettre", "connaître", "écrire"]
@@ -49,6 +49,24 @@ var testLength = 0;
 var sessionid = ""
 
 
+
+
+function doPreviewAndLocal(){
+    console.log("in dopreview")
+    chosensheet = window.localStorage.getItem("chosenSheet")
+    toek = window.localStorage.getItem("usertoken")
+    document.getElementById("studysheetname").innerHTML = chosensheet
+    sheet = httpGet("https://nwvbug.pythonanywhere.com/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
+    console.log(sheet)
+    document.getElementById("previewstudysheet").innerHTML = sheet;
+    window.localStorage.setItem("fullstudysheet", sheet)
+    checkSettings()
+
+
+}
+
+
+
 function fakeload(){
     console.log("loading")
     window.location.href="homepage.html"
@@ -60,7 +78,7 @@ function move() {
     i = 1;
     var elem = document.getElementById("myBar");
     var width = 1;
-    var id = setInterval(frame, 15);
+    var id = setInterval(frame, 10);
     function frame() {
       if (width >= 100) {
         clearInterval(id);
@@ -232,6 +250,28 @@ function getLibrary(){
             }
 
 
+            var usebutton = document.createElement('button')
+            usebutton.className="deletebutton";
+            text =library[i]
+            usebutton.innerHTML = "Study "+text
+            link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+librarytext.innerHTML
+            
+            console.log(link)
+            id = "library"+generateIdA
+            generateIdA++
+            usebutton.id = id;
+            // set the studysheet attribute to the name of the studysheet
+            usebutton.setAttribute("studysheet", text)
+            document.getElementById("libraryholder").appendChild(usebutton)
+            console.log(id)
+            document.getElementById(id).onclick = function(){
+                window.localStorage.setItem("chosenSheet", text)
+                window.location.href="studysheetpage.html";
+
+            }
+
+
+
             var libutton = document.createElement('button')
             libutton.className="deletebutton";
             text =library[i]
@@ -317,8 +357,9 @@ function execute(){
 
 function getRandomQuestion(textBlock) {
     console.log("random question ran")
-    let arrayText = textBlock.split("\n")
-    console.log(arrayText)
+    let arrayText = textBlock.split('\n')
+    
+    console.log("arr text fdaf "+arrayText)
     if (doRandom == true){
         
         let random_number = Math.floor(Math.random() *arrayText.length);
@@ -439,7 +480,12 @@ function getRandomMultiQ(textBlock){
 
 function doMultiTest(){
     document.getElementById("myBtnBegin").style.display = "none";
-    document.getElementById("file").style.display = "none";
+    try {
+        document.getElementById("file").style.display = "none";
+
+    } catch (error) {
+        
+    }
 
     console.log("this is what customwords is "+customWords)
     console.log("random question ran")
@@ -561,6 +607,39 @@ async function getTheFile() {
 
 function onBtnPress(v) {
     
+    if (window.localStorage.getItem("fullstudysheet")!="" && window.localStorage.getItem("fullstudysheet")!=null){
+        customWords = window.localStorage.getItem("fullstudysheet")
+        console.log( customWords )
+        if(v=="f"){
+            doFlashcards();
+        }else if(v=='prac'){
+
+            doPracticeTest()
+        }else if(v=='speed'){
+            var wage = document.getElementById("input");
+            wage.addEventListener("keydown", function (e) {
+                if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+                    checkCustom("Speed")
+                }
+            });
+            
+            timer("Start")
+            doSpeedTest()
+        }
+        else{
+            var wage = document.getElementById("input");
+            wage.addEventListener("keydown", function (e) {
+                if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+                    checkCustom()
+                }
+            });
+            doCustomSheets(v);
+        }
+    }
+
+
+
+
     var uploadFile = document.createElement('input');
     uploadFile.type = 'file';
     uploadFile.id = 'file';
@@ -643,7 +722,12 @@ function doFlashcards(){
     document.getElementById("stats").style.display = "none";
     document.getElementById("myBtnBegin").style.display = "none";
     document.getElementById("mainflipcard").style.display = "";
-    document.getElementById("file").style.display = "none";
+    try {
+        document.getElementById("file").style.display = "none";
+
+    } catch (error) {
+        
+    }
     buttonStyling = document.getElementById("goButton")
     buttonStyling.style.display = "flex";
     buttonStyling.innerHTML = ">" + "\n" + "Next";
@@ -702,7 +786,12 @@ function doSpeedTest(v){
     document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectCounter
 
     document.getElementById("myBtnBegin").style.display = "none";
-    document.getElementById("file").style.display = "none";
+    try {
+        document.getElementById("file").style.display = "none";
+
+    } catch (error) {
+        
+    }
 
     console.log("SELECT WORD")
     
@@ -741,7 +830,12 @@ function doCustomSheets(v){
     document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectCounter
 
     document.getElementById("myBtnBegin").style.display = "none";
-    document.getElementById("file").style.display = "none";
+    try {
+        document.getElementById("file").style.display = "none";
+
+    } catch (error) {
+        
+    }
 
     console.log("SELECT WORD")
     
@@ -777,7 +871,12 @@ function doCustomSheets(v){
 
 function doPracticeTest(){
     document.getElementById("myBtnBegin").style.display = "none";
-    document.getElementById("file").style.display = "none";
+    try {
+        document.getElementById("file").style.display = "none";
+
+    } catch (error) {
+        
+    }
 
     console.log("this is what customwords is "+customWords)
     console.log("random question ran")
