@@ -113,7 +113,7 @@ function uploadFiles(){
     uploadFile.type = 'file';
     uploadFile.id = 'file';
     uploadFile.name = 'file';
-    uploadFile.accept = '.txt';
+    uploadFile.accept = '.lang';
     document.getElementById("libraryholder").appendChild(uploadFile)
     var uploadButton = document.createElement('button');
     uploadButton.innerHTML = 'Upload';
