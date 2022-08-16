@@ -57,6 +57,8 @@ function doPreviewAndLocal(){
     toek = window.localStorage.getItem("usertoken")
     document.getElementById("studysheetname").innerHTML = chosensheet
     sheet = httpGet("https://nwvbug.pythonanywhere.com/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
+    console.log("og sheet: "+sheet)
+    sheet = sheet.replaceAll("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823", "\n")
     console.log(sheet)
     document.getElementById("previewstudysheet").innerHTML = sheet;
     window.localStorage.setItem("fullstudysheet", sheet)
@@ -142,6 +144,8 @@ function uploadFiles(){
         reader.onload = function(e) {
             console.log("reading lol")
             var text = reader.result;
+            text = text.replaceAll("\n", "sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
+
             var filename = file.name;
             var url = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/upload/"+filename;
 
@@ -257,7 +261,7 @@ function getLibrary(){
             link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+librarytext.innerHTML
             
             console.log(link)
-            id = "library"+generateIdA
+            id = "study"+generateIdA
             generateIdA++
             usebutton.id = id;
             // set the studysheet attribute to the name of the studysheet
@@ -265,7 +269,9 @@ function getLibrary(){
             document.getElementById("libraryholder").appendChild(usebutton)
             console.log(id)
             document.getElementById(id).onclick = function(){
-                window.localStorage.setItem("chosenSheet", text)
+                var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
+
+                window.localStorage.setItem("chosenSheet", studysheetname)
                 window.location.href="studysheetpage.html";
 
             }
