@@ -163,7 +163,7 @@ function uploadFiles(){
             var data = text;
             console.log("sending " + data + " to " + url);
             xhr.send(data);
-            // window.location.reload() 
+            window.location.reload() 
 
             
             // var textArea = document.createElement('textarea');
