@@ -144,7 +144,7 @@ function uploadFiles(){
         reader.onload = function(e) {
             console.log("reading lol")
             var text = reader.result;
-            // text = text.replaceAll("\n", "sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
+            text = text.replaceAll("\n", "sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
 
             var filename = file.name;
             var url = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/upload/"+filename;
@@ -163,7 +163,7 @@ function uploadFiles(){
             var data = text;
             console.log("sending " + data + " to " + url);
             xhr.send(data);
-            window.location.reload() 
+            // window.location.reload() 
 
             
             // var textArea = document.createElement('textarea');
@@ -185,6 +185,16 @@ function httpGet(theUrl)
 }
 
 
+function submitNewUN(){
+    sessionid = window.localStorage.getItem("usertoken")
+    tmpurl = "https://anklebowl.pythonanywhere.com/setusername/"+sessionid+"/"+document.getElementById("newusername").value
+    httpGet(tmpurl);
+    window.location.href="library.html";
+}
+
+
+
+
 function getLibrary(){
     // if (c==null){
     //     document.getElementById("library").innerHTML = "Something went wrong. Check your network connection and try again.";
@@ -197,6 +207,8 @@ function getLibrary(){
     sessionid = window.localStorage.getItem("usertoken");
     library = httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/list")
     username = httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/name")
+    customuser = httpGet("https://anklebowl.pythonanywhere.com/usernamefromtoken/"+sessionid)
+    console.log("custom user name: "+customuser)
     if(library == "[]"){
         document.getElementById("library").innerHTML = "You have no cloudsaved Lang Studysheets.";
 
@@ -332,8 +344,8 @@ function getLibrary(){
 
         
     }else{
-        document.getElementById("top").innerHTML = "Here are your cloudsaved Lang Studysheets, "+username+". Click on the Studysheet you want to use.";
-        document.getElementById("top2").innerHTML = "Not "+username+"? Click here to sign in to your account.";
+        document.getElementById("top").innerHTML = "Here are your cloudsaved Lang Studysheets, "+customuser+". Click on the Studysheet you want to use.";
+        document.getElementById("top2").innerHTML = "Not "+customuser+"? Click here to sign in to your account.";
         document.getElementById("top2").onclick = function(){window.location.href="login.html"};
     }
     
@@ -644,80 +656,82 @@ function onBtnPress(v) {
     }
 
 
-
-
-    var uploadFile = document.createElement('input');
-    uploadFile.type = 'file';
-    uploadFile.id = 'file';
-    uploadFile.name = 'file';
-    uploadFile.accept = '.lang, .txt';
-    document.body.appendChild(uploadFile);
-    var uploadButton = document.createElement('button');
-    uploadButton.innerHTML = 'Upload';
-    uploadButton.onclick = function() {
-    var file = document.getElementById('file').files[0];
-    var reader = new FileReader();
-    reader.onload = function(e) {
-        var text = reader.result;
+    else{
+        var uploadFile = document.createElement('input');
+        uploadFile.type = 'file';
+        uploadFile.id = 'file';
+        uploadFile.name = 'file';
+        uploadFile.accept = '.lang, .txt';
+        document.body.appendChild(uploadFile);
+        var uploadButton = document.createElement('button');
+        uploadButton.innerHTML = 'Upload';
+        uploadButton.onclick = function() {
+        var file = document.getElementById('file').files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var text = reader.result;
+            
+            customWords = text;
+            console.log( customWords )
+            if(v=="f"){
+                uploadButton.style.display="none";
+                doFlashcards();
+            }else if(v=='prac'){
+                uploadButton.style.display="none";
+    
+                doPracticeTest()
+            }else if(v=='speed'){
+                var wage = document.getElementById("input");
+                wage.addEventListener("keydown", function (e) {
+                    if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+                        checkCustom("Speed")
+                    }
+                });
+                uploadButton.style.display="none";
+                timer("Start")
+                doSpeedTest()
+            }
+            else{
+                var wage = document.getElementById("input");
+                wage.addEventListener("keydown", function (e) {
+                    if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+                        checkCustom()
+                    }
+                });
+                uploadButton.style.display="none";
+                doCustomSheets(v);
+            }
+            uploadButton.style.display="none";
+            // var textArea = document.createElement('textarea');
+            // textArea.value = text;
+            // document.body.appendChild(textArea);
+        };
+        reader.readAsText(file);
+        };
+        document.body.appendChild(uploadButton);
+    
         
-        customWords = text;
-        console.log( customWords )
-        if(v=="f"){
-            uploadButton.style.display="none";
-            doFlashcards();
-        }else if(v=='prac'){
-            uploadButton.style.display="none";
-
-            doPracticeTest()
-        }else if(v=='speed'){
-            var wage = document.getElementById("input");
-            wage.addEventListener("keydown", function (e) {
-                if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
-                    checkCustom("Speed")
-                }
-            });
-            uploadButton.style.display="none";
-            timer("Start")
-            doSpeedTest()
-        }
-        else{
-            var wage = document.getElementById("input");
-            wage.addEventListener("keydown", function (e) {
-                if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
-                    checkCustom()
-                }
-            });
-            uploadButton.style.display="none";
-            doCustomSheets(v);
-        }
-        uploadButton.style.display="none";
-        // var textArea = document.createElement('textarea');
-        // textArea.value = text;
-        // document.body.appendChild(textArea);
-    };
-    reader.readAsText(file);
-    };
-    document.body.appendChild(uploadButton);
+    
+    
+        
+    
+    
+        // textBlock = reader.result;
+        // console.log("textblock" + textBlock)
+    
+        // loadQuestions(reader)
+    
+        // tryIt = document.getElementById("myBtn")
+        // tryIt.style.display = "none";
+        // fileInput = document.getElementById("fileinput")
+        // fileInput.style.display = "none";
+    
+        // console.log(reader)
+        // console.log(getRandomQuestion())
+    
+    }
 
     
-
-
-    
-
-
-    // textBlock = reader.result;
-    // console.log("textblock" + textBlock)
-
-    // loadQuestions(reader)
-
-    // tryIt = document.getElementById("myBtn")
-    // tryIt.style.display = "none";
-    // fileInput = document.getElementById("fileinput")
-    // fileInput.style.display = "none";
-
-    // console.log(reader)
-    // console.log(getRandomQuestion())
-
 
 }
 
