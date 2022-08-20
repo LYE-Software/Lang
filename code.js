@@ -916,7 +916,8 @@ function onBtnPress(v) {
     
     }
 
-    
+    window.localStorage.setItem("fullstudysheet", "");
+    window.localStorage.setItem("chosenSheet", "");
 
 }
 
