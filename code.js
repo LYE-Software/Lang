@@ -48,7 +48,7 @@ var whatPro = 1;
 var testLength = 0;
 var sessionid = ""
 var helpsused = 0;
-
+var whichId= "";
 
 
 function doPreviewAndLocal(){
@@ -369,6 +369,34 @@ function execute(){
     changelibrary()
 }
 
+function getOtherAnswers(textBlock){
+    let arrayText = textBlock.split('\n')
+    console.log("arr text fdaf "+arrayText) 
+    let random_number = Math.floor(Math.random() *arrayText.length);
+    console.log(random_number)
+    let random_question = arrayText[random_number];
+    console.log(random_question)
+    var questionArray = JSON.parse(random_question)
+    console.log(questionArray)
+    let random_number2 = Math.floor(Math.random() *arrayText.length);
+    console.log(random_number2)
+    let random_question2 = arrayText[random_number2];
+    console.log(random_question2)
+    var questionArray2 = JSON.parse(random_question2)
+    console.log(questionArray2)
+    let random_number3 = Math.floor(Math.random() *arrayText.length);
+    console.log(random_number3)
+    let random_question3 = arrayText[random_number3];
+    console.log(random_question3)
+    var questionArray3 = JSON.parse(random_question3)
+    console.log(questionArray3)
+
+    fakeout = [questionArray[1], questionArray2[1], questionArray3[1]]
+
+    
+    return fakeout
+}
+
 
 
 //used to acquire random question & answer pair (single verbs)
@@ -425,6 +453,151 @@ function makeRandom(){
     }
 }
 
+function doMultipleChoice(){
+    try {
+        document.getElementById("file").style.display="none";
+
+    } catch (error) {
+        
+    }
+    question = getRandomQuestion(customWords);
+    document.getElementById("questionheader").innerHTML = question[0];
+    let random_number = Math.floor(Math.random() *4);
+    if (random_number == 0){
+        let element = document.getElementById("a")
+        element.id = "correct"
+        console.log("correct: "+element)
+        element.onclick = function(){
+            theid = this.id
+            checkMulti(theid)
+        }
+        element.innerHTML = question[1];
+
+        fakeout = getOtherAnswers(customWords)
+        document.getElementById("b").innerHTML = fakeout[0]
+        document.getElementById("b").onclick=function(){
+            checkMulti("b")
+        }
+        document.getElementById("c").onclick=function(){
+            checkMulti("c")
+        }
+        document.getElementById("d").onclick=function(){
+            checkMulti("d")
+        }
+        document.getElementById("c").innerHTML = fakeout[1]
+        document.getElementById("d").innerHTML = fakeout[2]
+        whichId = "a";
+    } 
+    else if (random_number == 1){
+        let element = document.getElementById("b")
+        element.id = "correct"
+        console.log("correct: "+element)
+        element.onclick = function(){
+            theid = this.id
+            checkMulti(theid)
+        }
+        element.innerHTML = question[1];
+        fakeout = getOtherAnswers(customWords)
+
+        document.getElementById("a").innerHTML = fakeout[0]
+        document.getElementById("c").innerHTML = fakeout[1]
+        document.getElementById("d").innerHTML = fakeout[2]
+        document.getElementById("a").onclick=function(){
+            checkMulti("a")
+        }
+        document.getElementById("d").onclick=function(){
+            checkMulti("d")
+        }
+        document.getElementById("c").onclick=function(){
+            checkMulti("c")
+        }
+        whichId = "b";
+
+
+    } 
+    else if (random_number == 2){
+        let element = document.getElementById("c")
+        element.id = "correct"
+        console.log("correct: "+element)
+        element.onclick = function(){
+            theid = this.id
+            checkMulti(theid)
+        }
+        fakeout = getOtherAnswers(customWords)
+
+        element.innerHTML = question[1];
+        document.getElementById("b").innerHTML = fakeout[0]
+        document.getElementById("a").innerHTML = fakeout[1]
+        document.getElementById("d").innerHTML = fakeout[2]
+        document.getElementById("b").onclick=function(){
+            checkMulti("b")
+        }
+        document.getElementById("a").onclick=function(){
+            checkMulti("a")
+        }
+        document.getElementById("d").onclick=function(){
+            checkMulti("d")
+        }
+        whichId = "c";
+
+
+    } 
+    else if (random_number == 3){
+        let element = document.getElementById("d")
+        element.id = "correct"
+        console.log("correct: "+element)
+        element.onclick = function(){
+            theid = this.id
+            checkMulti(theid)
+        }
+        fakeout = getOtherAnswers(customWords)
+
+        element.innerHTML = question[1];
+        document.getElementById("b").innerHTML = fakeout[0]
+        document.getElementById("b").onclick=function(){
+            checkMulti("b")
+        }
+        document.getElementById("c").innerHTML = fakeout[1]
+        document.getElementById("c").onclick=function(){
+            checkMulti("c")
+        }
+        document.getElementById("a").innerHTML = fakeout[2]
+        document.getElementById("a").onclick=function(){
+            checkMulti("a")
+        }
+        whichId = "d";
+
+
+    } 
+
+
+}
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+ }
+
+async function checkMulti(checkAgainst){
+    console.log(checkAgainst)
+    if (checkAgainst =="correct"){
+        document.getElementById("correct").style.backgroundColor = "green";
+        await sleep(1000);
+        document.getElementById("correct").style.backgroundColor = "#001945";
+        document.getElementById("correct").id = whichId;
+        whichId = ""
+        
+    }
+    else{
+        document.getElementById("correct").style.backgroundColor = "green";
+        document.getElementById(checkAgainst).style.backgroundColor = "red";
+        await sleep(1000);
+        document.getElementById("correct").style.backgroundColor = "#001945";
+        document.getElementById(checkAgainst).style.backgroundColor = "#001945";
+
+        document.getElementById("correct").id = whichId;
+        whichId = ""
+    }
+    doMultipleChoice()
+}
 
 
 //used to acquire random question & answer pair (mutli verbs)
@@ -627,6 +800,8 @@ function onBtnPress(v) {
     
     if (window.localStorage.getItem("fullstudysheet")!="" && window.localStorage.getItem("fullstudysheet")!=null){
         customWords = window.localStorage.getItem("fullstudysheet")
+        window.localStorage.setItem("fullstudysheet", "");
+        window.localStorage.setItem("chosenSheet", "");
         console.log( customWords )
         if(v=="f"){
             doFlashcards();
@@ -643,6 +818,11 @@ function onBtnPress(v) {
             
             timer("Start")
             doSpeedTest()
+        }
+        else if (v=="multipleChoice"){
+            
+            
+            doMultipleChoice()
         }
         else{
             var wage = document.getElementById("input");
@@ -690,6 +870,11 @@ function onBtnPress(v) {
                 uploadButton.style.display="none";
                 timer("Start")
                 doSpeedTest()
+            }
+            else if (v=="multipleChoice"){
+                
+                
+                doMultipleChoice()
             }
             else{
                 var wage = document.getElementById("input");
@@ -921,6 +1106,7 @@ function doPracticeTest(){
             document.getElementById("minicreator").appendChild(questionText);
             document.getElementById("minicreator").appendChild(verbInput);
         } catch (error) {
+            console.log(error)
             break;
         }
     }
@@ -1510,7 +1696,12 @@ function checkSettings(){
 
     }
     else{
-        document.getElementById("randomchoice").checked = false;
+        try {
+            document.getElementById("randomchoice").checked = false;
+
+        } catch (error) {
+            
+        }
 
     }
         
@@ -1796,7 +1987,7 @@ function save(data) {
 
     }
     else{
-        const blob = new Blob([data], {type: 'text'});
+        const blob = new Blob([data], {type: ''});
         if(window.navigator.msSaveOrOpenBlob) {
             window.navigator.msSaveBlob(blob, filename);
         }

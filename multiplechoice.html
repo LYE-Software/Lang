@@ -9,18 +9,23 @@
     <script src="code.js"></script> 
 </head>
 <body onload = "checkSettings()" class="homepage">
-    <img src="transparenticon.png" class="topleftlogoicon" style = 'height:10vh; width:auto; min-height:150px;' onclick="window.location.href='index.html'">
+    <div class="samelineheader">
+        <img src="transparenticon.png" class="topleftlogoicon" style = 'height:10vh; width:auto; min-height:150px;' onclick="window.location.href='index.html'">
+        <h1 class="header">Multiple Choice- Single Term/Def</h1>
+        <button class="dropbtn" id="myBtnBegin" onclick="onBtnPress('multipleChoice')">Begin</button>
+    </div>
     
     <!-- multiple choice interface -->
     <div class="multiplechoice">
-        <h1 class="header">Multiple Choice</h1>
+        <h1 id="questionheader" class="header">Multiple Choice</h1>
         
-        
+        <br>
+        <br>
         <div class="multiplechoicefooter">
-                <button class="dropbtn" onclick="checkAnswer('multiplechoice', 'A')">A</button>
-                <button class="dropbtn" onclick="checkAnswer('multiplechoice', 'B')">B</button>
-                <button class="dropbtn" onclick="checkAnswer('multiplechoice', 'C')">C</button>
-                <button class="dropbtn" onclick="checkAnswer('multiplechoice', 'D')">D</button>
+                <button class="dropbtn" id = "a">A</button>
+                <button class="dropbtn" id = "b">B</button>
+                <button class="dropbtn" id = "c">C</button>
+                <button class="dropbtn" id = "d">D</button>
         </div>
     </div>
 

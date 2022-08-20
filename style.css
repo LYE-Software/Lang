@@ -119,7 +119,7 @@ body{
   .testimonial {
     margin: 25px;
     width: 350px;
-    background-color:#252525;
+    background-color:white;
     border-radius: 20px;
     text-align:center;
 }
@@ -151,7 +151,7 @@ body{
 
 .header1 {
     /* background-color: orange; */
-    color: #d23e3e;
+    color: black;
     font-size: 30px;
     font-family:'Varela Round';
     padding:25px;
