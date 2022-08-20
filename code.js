@@ -152,7 +152,7 @@ function uploadFiles(){
             var xhr = new XMLHttpRequest();
             xhr.open("POST", url);
 
-            xhr.setRequestHeader("Content-Type", "text/plain");
+            xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
 
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {
