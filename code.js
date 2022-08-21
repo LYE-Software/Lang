@@ -1479,8 +1479,13 @@ function checkCustom(v){
     if (usrInput == customAnswer){
         correctCounter += 1
         buttonStyling.style.backgroundColor = "green"
-        document.getElementById("helpbutton").style.display = "none";
-        document.getElementById("howmanyhelps").innerHTML = ""
+        try {
+            document.getElementById("helpbutton").style.display = "none";
+            document.getElementById("howmanyhelps").innerHTML = ""
+        } catch (error) {
+            
+        }
+        
         input.value = ""
         afterCorrect("amogus", "custom")
     }
@@ -1489,8 +1494,13 @@ function checkCustom(v){
         setTimeout(function () { buttonStyling.style.backgroundColor = "grey" }, 1000)
         input.value = ""
         incorrectCounter += 1
-        document.getElementById("howmanyhelps").innerHTML = "You have used "+helpsused+" helps."
-        document.getElementById("helpbutton").style.display = "flex";
+        try {
+            document.getElementById("howmanyhelps").innerHTML = "You have used "+helpsused+" helps."
+            document.getElementById("helpbutton").style.display = "flex";
+        } catch (error) {
+            
+        }
+        
         document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectCounter
         timer("clear")
         if (v == "Speed"){
