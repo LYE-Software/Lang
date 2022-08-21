@@ -349,6 +349,8 @@ function getLibrary(){
     }else{
         document.getElementById("top").innerHTML = "Here are your cloudsaved Lang Studysheets, "+customuser+". Click on the Studysheet you want to use.";
         document.getElementById("top2").innerHTML = "Not "+customuser+"? Click here to sign in to your account.";
+        document.getElementById("top2").style.border = "1px solid black";
+        document.getElementById("top2").style.borderRadius = "15px";
         document.getElementById("top2").onclick = function(){window.location.href="login.html"};
     }
     
