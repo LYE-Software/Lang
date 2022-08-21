@@ -255,15 +255,15 @@ function getLibrary(){
             downbutton.id = id;
             // set the studysheet attribute to the name of the studysheet
             downbutton.setAttribute("studysheet", text)
-            document.getElementById("libraryholder").appendChild(downbutton)
+            //document.getElementById("libraryholder").appendChild(downbutton)
             console.log(id)
-            document.getElementById(id).onclick = function(){
-                var element = document.getElementById(this.id);
-                console.log(element)
-                link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+ element.getAttribute("studysheet")
-                console.log("link is: "+link)
-                window.location.href=link;
-            }
+            // document.getElementById(id).onclick = function(){
+            //     var element = document.getElementById(this.id);
+            //     console.log(element)
+            //     link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+ element.getAttribute("studysheet")
+            //     console.log("link is: "+link)
+            //     window.location.href=link;
+            // }
 
 
             var usebutton = document.createElement('button')
