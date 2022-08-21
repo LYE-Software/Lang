@@ -158,12 +158,12 @@ function uploadFiles(){
                 if (xhr.readyState === 4) {
                     console.log(xhr.status);
                     console.log(xhr.responseText);
+                    window.location.reload();
                 }
             };
             var data = text;
             console.log("sending " + data + " to " + url);
             xhr.send(data);
-            window.location.reload() 
 
             
             // var textArea = document.createElement('textarea');
@@ -338,9 +338,12 @@ function getLibrary(){
         document.getElementById("top2").onclick = function(){window.location.href="login.html"};
         document.getElementById("library0").innerHTML = "Please log in again. Error code: HAX0R"
         document.getElementById("library1").style.display="none"
+        document.getElementById("library3").style.display="none"
+        document.getElementById("library3").style.display="none"
+        document.getElementById("biguploadbutton").style.display="none"
+        document.getElementById("study2").style.display="none"
         document.getElementById("library2").style.display="none"
 
-        document.getElementById("biguploadbutton").style.display="none"
 
         
     }else{
