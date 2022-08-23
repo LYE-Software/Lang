@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
 .topleftlogo{
     width:270px;
     height:270px;
@@ -13,8 +15,174 @@
 
 }
 
+
+        
+        .pfp {
+            margin-left: 10px;
+        }
+
+        .changelogshown {
+            transform: translate(-50%, -50%);
+            animation: showchangelog 0.5s ease-in-out;
+        }
+
+        .changeloghidden {
+            transform: translate(-50%, 60%);
+            animation: hidechangelog 0.5s ease-in-out;
+        }
+
+        @keyframes showchangelog {
+            0% {
+                transform: translate(-50%, 60%);
+            }
+            100% {
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        @keyframes hidechangelog {
+            0% {
+                transform: translate(-50%, -50%);
+            }
+            100% {
+                transform: translate(-50%, 60%);
+            }
+        }
+
+        #changelog {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 75vw; height: 75vh; background-color: wheat;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .headerContainer {
+            position: absolute;
+        }
+
+        .homepageheader {
+            height: 10vh;
+            background-color: wheat;
+            width: 100vw;
+        }
+
+        .body {
+            position: absolute;
+        }
+
+        .horizontalFlex {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .centerFlex {
+            justify-content: center;
+            align-items: center;
+        }
+
+        .flexSpacer {
+            flex: 1;
+        }
+
+        
+
+
+
+        .uploadConvertContainer {
+            background-color: rgb(47, 61, 115);
+            width: 100vw;
+            color: wheat;
+        }
+
+        .largeButton {
+            border-radius: 1000000px;
+            height: 5vh;
+            width: 35vw;
+            padding: 2.5vh;
+            background-color: #001945;
+            margin: 5vh;
+        }
+
+        .button {
+            border-radius: 1000000px;
+            height: 3vh;
+            width: 10vw;
+            padding: 1vh;
+            background-color: #001945;
+            margin: 2vh;
+        }
+
+        .centerText {
+            text-align: center;
+        }
+
+        .headerText {
+            /* font-weight: bold; */
+            color: wheat;
+            margin: 5vh;
+            font-size: 50px;
+            font-family:"Rubik Mono One";
+        }
+
+        .studysetlist {
+            background-color: rgb(7, 15, 35);
+            margin-left: 10vw;
+            margin-right: 10vw;
+
+            max-height: 40vh;
+            overflow-y: scroll;
+        }
+
+        .studysetentry {
+            color: wheat; 
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .debugArea {
+            background-color: wheat;
+            width: 100vw;
+            margin: 0;
+        }
+
+        .footer {
+            color: wheat;
+        }
+
+        .fadeIn {
+            transition: opacity 0.25s ease-in-out;
+            opacity: 1;
+        }
+
+        .fadeOut {
+            transition: opacity 0.25s ease-in-out;
+            opacity: 0;
+        }
+
+        .sussybody{
+          overflow-y: hidden;
+          height: 100vh;
+          width: 100vw;
+        }
+
+        /* https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-animation-from-running-on-page-load */
+        .preload {
+        animation-duration: 0s !important;
+        -webkit-animation-duration: 0s !important;
+        transition:background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;}
+
+
+
 body{
   -webkit-app-region: drag; 
+  margin: 0;
+  background-color: #001945;
+  font-family: 'Poppins', sans-serif;
+
+  
 }
 
 .samelineheader{
@@ -30,14 +198,14 @@ body{
 }
 
 .bigselection{
-    font-family: 'Varela Round';
+    font-family: 'Poppins', sans-serif;
     color:#001945;
    
 
 }
 
 .header{
-    font-family: 'Varela Round';
+    font-family: 'Poppins', sans-serif;
     color:#001945;
 }
 
@@ -49,7 +217,7 @@ body{
 }
 
 .smallselection{
-    font-family: 'Varela Round';
+    font-family: 'Poppins', sans-serif;
     color:#001945;
     
 }
@@ -65,7 +233,7 @@ body{
     font-size: 2vh;
     font-size-adjust:initial;
     border: none;
-    font-family:'Varela Round';
+    font-family: 'Poppins', sans-serif;
     min-width:200px;
   
     border:5px;
@@ -84,7 +252,7 @@ body{
     font-size: 2vh;
     font-size-adjust:initial;
     border: none;
-    font-family:'Varela Round';
+    font-family: 'Poppins', sans-serif;
     min-width:200px;
   
     border:5px;
@@ -102,7 +270,7 @@ body{
     font-size: 2vh;
     font-size-adjust:initial;
     border: none;
-    font-family:'Varela Round';
+    font-family: 'Poppins', sans-serif;
     min-width:200px;
   
     border:5px;
@@ -153,7 +321,7 @@ body{
     /* background-color: orange; */
     color: black;
     font-size: 30px;
-    font-family:'Varela Round';
+    font-family: 'Poppins', sans-serif;
     padding:25px;
 
 }
@@ -239,7 +407,7 @@ body{
     height:50px;
     color: #FFEFD1;
     background-color: #001945;
-    font-family: 'Varela Round';
+    font-family: 'Poppins', sans-serif;
   }
 
 
@@ -259,7 +427,7 @@ body{
   width: 50vw;
   height: 150px;
   font-size: 500%;
-  font-family: 'Varela Round';
+  font-family: 'Poppins', sans-serif;
   color: #001945;
   display: none;
 }
@@ -271,7 +439,7 @@ body{
   width: 40vw;
   height: 100px;
   font-size: 200%;
-  font-family: 'Varela Round';
+  font-family: 'Poppins', sans-serif;
   color: #001945;
   text-align: center;
   
@@ -284,7 +452,7 @@ body{
   width: 38vw;
   height: 50vh;
   
-  font-family: 'Varela Round';
+  font-family: 'Poppins', sans-serif;
   color: #001945;
  
 }
@@ -293,7 +461,7 @@ body{
 
 
 .displayWord{
-    font-family: 'Varela Round';
+    font-family: 'Poppins', sans-serif;
     color:#001945;
 }
 
@@ -307,7 +475,7 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Varela Round';
+  font-family: 'Poppins', sans-serif;
   color: #001945;
   display: none;
   margin-left: 15px;
@@ -323,38 +491,38 @@ body{
     display:none;
     justify-content:center;
     align-items: center;
-    font-family: 'Varela Round';
+    font-family: 'Poppins', sans-serif;
     color:#001945;
     display:none;
     margin-left:15px;
 }
 
 .explanation{
-    font-family: 'Varela Round';
+    font-family: 'Poppins', sans-serif;
     color:#001945;
 }
 
 .statsText{
     color: #FFEFD1;
-    font-family: 'Varela Round';
+    font-family: 'Poppins', sans-serif;
 
 }
 
 .statsTextPr{
     color: #FFEFD1;
-    font-family: 'Varela Round';
+    font-family: 'Poppins', sans-serif;
     font-size: 32px;
 }
 
 .statsTextPc{
     color: #FFEFD1;
-    font-family: 'Varela Round';
+    font-family: 'Poppins', sans-serif;
     font-size: 28px;
 }
 
 .statsTextCondt{
     color: #FFEFD1;
-    font-family: 'Varela Round';
+    font-family: 'Poppins', sans-serif;
     font-size: 36px;
 }
 
@@ -383,7 +551,7 @@ body{
     display:flex;
     justify-content:center;
     align-items: center;
-    font-family: 'Varela Round';
+    font-family: 'Poppins', sans-serif;
     color:#001945;
   
     margin-left:15px;
@@ -391,8 +559,14 @@ body{
 
 .copyrighttext{
     color:#001945;
-    font-family: "Varela Round";
+    font-family: 'Poppins', sans-serif;
     
+}
+
+.copyrighttext2{
+  color:wheat;
+  font-family: 'Poppins', sans-serif;
+  
 }
 
 .flexbox{
@@ -453,14 +627,14 @@ body{
   text-align:center;
   align-items: center;
   justify-content:center;
-  font-family:'Varela Round';
+  font-family: 'Poppins', sans-serif;
   font-size:1.5vw;
   min-width:250px;
   
 }
 
 .welcometext{
-  font-family: 'Varela Round';
+  font-family: 'Poppins', sans-serif;
   font-size: 120%;
   padding: 10px;
   padding-bottom: 0px;
@@ -475,7 +649,7 @@ body{
   border-radius: 15px;
   background-color: #001945;
   color: #FFEFD1;
-  font-family: 'varela round';
+  font-family: 'Poppins', sans-serif;
   font-size: 2vw;
   min-width: 80px;
   min-height: 20px;
@@ -488,7 +662,7 @@ body{
   border-radius: 15px;
   background-color: #001945;
   color: #FFEFD1;
-  font-family: 'varela round';
+  font-family: 'Poppins', sans-serif;
   font-size: 1vw;
   min-width: 80px;
   min-height: 20px;
@@ -514,6 +688,20 @@ body{
     transform:translateX(-20px);
     margin-top:15px;
     
+}
+.foot2{
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+  background-color: rgb(47, 61, 115);
+  color: white;
+  width: 100%;
+  bottom: 0%;
+  position: fixed;
+  margin-top:15px;
+
+  
 }
 
 .topleftlogoicon{
@@ -586,7 +774,7 @@ body{
 
 
   .slidertext{
-    font-family: 'Varela Round';
+    font-family: 'Poppins', sans-serif;
     color:#001945;
     margin-left: 150%;
     margin-top: 0%;
@@ -643,7 +831,7 @@ body{
 
 .frontcardtext{
   color:#FFEFD1;
-  font-family: 'Varela Round';
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Style the back side */

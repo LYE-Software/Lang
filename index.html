@@ -1,152 +1,148 @@
 <html lang="en">
 <head>
-    <meta name="description" content="Lang is a study program by students, for students. NWVBUG Development.">
-    <meta name="keywords" content="Lang, Study, verbs, french, language, Lye Software, The Lang Project">
-    <meta name="author" content="NWVBUG Development">    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lang!</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="circular lang icon.png">
     <script src="code.js"></script>
-    
-</head>
-<body onload = "execute()" class="homepage">
-    <div class="medbox">
-
-        <img src="transparenticon.png" class="topleftlogoicon" style = 'height:10vh; width:auto; min-height:150px;' onclick="window.location.href='index.html'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lang</title>
+    <style>
         
+    </style>
+</head>
+<body class="sussybody" onload="generateLibraryList()">
+    <div class="body preload">
+        <div style="height: 100vh;">
+            <div style="height: 10vh; width: 100vw;">This is the header spacer, nobody should see this</div>
 
-        <div class="dropdown">
-            <button class="dropbtn">Pre-Made Study Sources</button>
-            <div class="dropdown-content">
-              <a class = "smallselection" href="frenchPresent.html">French: Present Tense</a>
-              <a class = "smallselection" href="frenchPast.html">French: Passe Composée</a>
-              <a class = "smallselection" href="frenchCondt.html">French: Conditionnel</a>
-              <a class = "smallselection" href="showVerbList.html">See full French verb list</a>
-              <a class = "smallselection" href="https://github.com/nwvbug/Lang/tree/main/featured">See Featured Lang Studysheets</a>
-            </div>
-          </div>
+            <div style="height: 5vh; width: 100vw;"></div>
     
-        <div>
-            <div class="dropdown">
-                <button class="dropbtn">Convert</button>
-                <div class="dropdown-content">
-                <a href="compatibility.html" class = "smallselection" >Quizlet Study Sets to Lang Studysheets</a>
-                
+            <div class="uploadConvertContainer horizontalFlex">
+                <div class="flexSpacer"></div>
+                <div class="largeButton horizontalFlex">
+                    <div style="width: 100%" class="centerText" onclick="window.location.href='compatibility.html'">Convert From Quizlet</div>
                 </div>
-            </div>
-            
-        </div>
-
-        <div>
-            <div class="dropdown">
-                <button class="dropbtn">Custom</button>
-                <div class="dropdown-content">
-                <a href="createCustom.html" class = "smallselection" >Create Custom Lang Studysheet</a>
-                <a href="readCustom.html" class = "smallselection" >Read & Study Custom Lang Studysheet</a>
-                
+                <div class="flexSpacer"></div>
+                <div class="largeButton horizontalFlex">
+                    <div style="width: 100%;" class="centerText" onclick="window.location.href='library.html'">Upload Lang Studysheet</div>
                 </div>
+                <div class="flexSpacer"></div>
             </div>
-            
-        </div>
-
-        <div>
-            <div class="dropdown">
-                <button class="dropbtn">Other Ways to Study</button>
-                <div class="dropdown-content">
-                <a href="flashcards.html" class = "smallselection" >Flashcards</a>
-                <a href="practest.html" class = "smallselection" >Practice Test- Single (Term/Def)</a>
-                <a href="other\notready.html" class = "smallselection" >Practice Test- Multi (Full Conjugation)</a>
-                <a href="speed.html" class = "smallselection" >Speed Review</a>
-
-                
-                </div>
-            </div>
-            
-        </div>
-
-        <div>
-            <div class="dropdown">
-                <button class="dropbtn2" onclick="settings()">Settings</button>
+    
+            <div style="color: wheat;" class="centerText headerText">Your Studysheets</div>
+    
+            <div id = "studysetholder" class="studysetlist">
                 
             </div>
-            
         </div>
-        <div>
-            <div class="dropdown">
-                <button class="dropbtn3" id="sil" style = "width:10vw; margin:auto;"onclick="window.location.href='login.html'">Sign in to Lang</button>
+
+
+
+
+
+        <!-- <div style="height: 100vh; margin: 0; width: 90vw;"> -->
+            <!-- <div class="uploadConvertContainer horizontalFlex centerText" style="padding-left: 2.5vw; padding-right: 2.5vw; width: 95vw;">
+                <div>
+                    <img style="height: 10vh;" src="assets/logos/lang-wheat.png">
+                </div>
+                <div class="headerText">Changelog</div>
+            </div> -->
+        <!-- </div> -->
+
+        <!-- <div style="height: 15vh; width: 100vw;" class="footer horizontalFlex centerText">
+            <div>
+                <img style="height: 10vh;" src="assets/logos/nwvbug.png">
+            </div>
+            <div style="width: 100vw;">
+                About | Privacy Policy | Terms of Service
+            </div>
+            <div>
+                <img style="height: 10vh;" src="assets/logos/lang-wheat.png">
+            </div>
+        </div> -->
+    </div>
+    <div id="header0" class="headerContainer" style="width: 100vw">
+        <div class="horizontalFlex homepageheader">
+            <div>
+                <img style="height: 10vh;" src="assets/logos/lang.png">
+            </div>
+            <div class="flexSpacer"></div>
+            <!-- <div class="horizontalFlex" style="justify-content: space-between; width: 40vw;">
+                <div>What is Lang?</div>
+                <div>How do I use Lang?</div>
+                <div>Lang Creators or sumthing</div>
+            </div> -->
+            <div class="flexSpacer"></div>
+            <div>Username</div>
+            <div>
+                <img class="pfp" style="height: 5vh;" src="assets/logos/lang.png">
+            </div>
+        </div>
+    </div>
+    <div id="header1" class="headerContainer horizontalFlex centerText" style="height: 10vh; width: 100vw; justify-content: center;;">
+        <div class="horizontalFlex" style="width: 70vw;">
+            <div class="flexSpacer button horizontalFlex" onclick="window.location.href='about.html'" style="align-items: center; justify-content: center;">
+                <div style="color: wheat;" >What is Lang?</div>
+            </div>
+            <div class="flexSpacer button horizontalFlex" onclick="window.location.href='studyfromfiletemp.html'" style="align-items: center; justify-content: center;">
+                <div style="color: wheat;" >Study from File</div>
                 
             </div>
-            
-            
+            <div class="flexSpacer button horizontalFlex" style="align-items: center; justify-content: center;"onclick="window.location.href = 'createCustom.html'">
+                <div style="color: wheat;" >Create</div>
+            </div>
         </div>
-        </div>
-
-        <div class="largebox">
-                <div class="medbox">
-                    <div class="infodiv">
-                        <p class="welcometext">Help us improve!</p>
-                        
-                        <p class="welcometext" style="font-size:100%;">Lang is still in beta. If you have any suggestions to improve Lang, please submit them here.</p>
-                        <button class="newbutton" onclick="window.location.href='https://github.com/nwvbug/nwvbug/issues/new'" style="font-size:1.5vw;">Go to Suggestions</button>
-
-                    </div>                   
-                    <div class="infodiv">
-                        <p class="welcometext">Welcome to Lang, the open-source and customizable study program.</p>
-                        
-                        <p class="welcometext">You can begin by making a Studysheet!</p>
-                    </div>
-                    <div class="infodiv">
-
-                        <h1 class="welcometext">Lang now supports accounts and cloudsaving your Studysheets!</h1>
-                        <button class="newbutton" style="font-size:1.5vw; margin-bottom:3px;" onclick="window.location.href='login.html'">Lye Accounts</button>
-                        <button class="newbutton" style="font-size:1.5vw;" onclick="window.location.href='library.html' ">See your library</button>
-                    </div>
-                </div>
-                <br>
-                <br>
-                <br>
-                <div class="medbox">
-                    <img src="nwvbugpurple.png" class="nwvbuglogo">
-                    <div class="infodiv" style="background-color:#95A1F1">
-                        <h1 class="welcometext"w>Return to NWVBUG Development Homepage and discover new & exciting projects</h1>
-                        <button class="newbutton" onclick="window.location.href='https://nwvbug.com'">Return</button>
-                    </div>
-                </div>
-                <div class="medbox">
-                    <div class="infodiv" style="background-color:#3e8e41">
-                        <h1 class="welcometext">Want to learn about Lang? Read about us on our parent company, Lye Software's site.</h1>
-                        <button class="newbutton" onclick="window.location.href='https://lye.software/education.html'" style="font-size:1.5vw;">About Lang</button>
-                    </div>  
-                    <div class="infodiv" style="background-color:#3e8e41">
-
-                        
-                        <p class="welcometext">Learn about The NWVBUG Lang Project and those who make it possible.</p>
-                        <button class="newbutton" style="font-size:1.5vw;" onclick="window.location.href='about.html'">About Lang</button>
-                    </div>
-
-                    
-
-                    <div class="infodiv" style="background-color:#3e8e41">
-                        <h1 class="welcometext">Lang is still in beta, so it is possible you may encounter bugs. If so, please post an Issue here:</h1>
-                        
-                        <button class="newbutton" onclick="window.location.href='https://github.com/nwvbug/nwvbug/issues/new'" style="font-size:1.5vw;">Go to Issues</button>
-                    </div>
-                </div>
-        </div>
-
-   
-
-    <footer id = "feet" class="foot">
-        <p  id = "copyright" class="copyrighttext">Copyright NWVBUG Development, 2022. <a href="https://github.com/nwvbug/Lang">GitHub Repo & Source</a></p>
-    </footer>
-    <input id = "ankcheck" type="checkbox" style="display:none;">
-    <input id = "amongcheck" type="checkbox" style="display:none;">
-    <input id = "randomchoice" style="display:none;" type="checkbox">
+    </div>
 
     
+    <div id="changelog" class="changeloghidden preload centerText">
+        <div id="showchangelogtext" style="font-size: 3vh; margin-top: 1vh; font-family:'Rubik Mono One';">Click here to open the changelog!</div>
+        <div class="headerText" style="color:#001945">Changelog</div>
+        <div class="header">Major Lang Update! As you can see, the homepage has been radically re-designed for the 2nd time. Some things have been moved around, including the library, which is now on the home page.</div>
+        <br>
+        <div class="header">The NWVBUG Development team has been hard at work to make Lang look and function better than ever. More changes, UI and not, coming soon. Stay Tuned!</div>
+        <br>
+        <div class="header">Make sure to follow <a href="https://github.com/nwvbug/Lang">This GitHub Repository</a> if you want to be notified as soon as Lang is updated.</div>
+    
+        <footer id = "feet" class="foot2">
+            <div class="samelineheader">
+                <p  id = "copyright" class="copyrighttext2">Copyright NWVBUG Development & Lye Software, 2022. </p>
+                <img src="shortnwvbug.png" style="height:3vw;">
+            </div>
+        </footer>
+    </div>
 </body>
+<script>
+    
+    // Add an event listener to id changelog, when it is clicked toggle the class changeloghidden and changelogshown
+    document.getElementById("changelog").addEventListener("click", function(){
+        if (document.getElementById("changelog").classList.contains("changeloghidden")){
+            document.getElementById("changelog").classList.remove("changeloghidden");
+            document.getElementById("changelog").classList.add("changelogshown");
+
+            document.getElementById("showchangelogtext").classList.remove("fadein");
+            document.getElementById("showchangelogtext").classList.add("fadeout");
+        } else {
+            document.getElementById("changelog").classList.remove("changelogshown");
+            document.getElementById("changelog").classList.add("changeloghidden");
+
+            document.getElementById("showchangelogtext").classList.remove("fadeout");
+            document.getElementById("showchangelogtext").classList.add("fadein");
+        }
+    });
+
+    setTimeout(function(){
+        document.getElementById("changelog").classList.remove("preload")
+    },500);
+
+    // disbale scrolling
+    window.addEventListener("scroll", function(){
+        window.scrollTo(0,0);
+    });
+
+</script>
 </html>
 
+<!-- Webpage designed by aspeli, realized by ankleBowl -->
+<!-- If anyone else comes along and adds to the page, add your name here -->

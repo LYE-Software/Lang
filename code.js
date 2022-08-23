@@ -193,6 +193,115 @@ function submitNewUN(){
 }
 
 
+function generateLibraryList(){
+    window.localStorage.setItem("chosenSheet", "")
+    window.localStorage.setItem("fullstudysheet", "")
+
+    sessionid = window.localStorage.getItem("usertoken");
+    username = httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/name")
+    if (username == "Invalid token"){
+        loginbutton = document.createElement("button");
+        loginbutton.className = "newbutton"
+        loginbutton.onclick = function(){
+            window.location.href="login.html";
+        }
+        document.getElementById("studysetholder").append(loginbutton);
+    }
+
+    library = httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/list")
+    username = httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/name")
+    customuser = httpGet("https://anklebowl.pythonanywhere.com/usernamefromtoken/"+sessionid)
+    console.log("custom user name: "+customuser)
+    if(library == "[]"){
+        document.getElementById("library").innerHTML = "You have no cloudsaved Lang Studysheets.";
+
+    }
+    else{
+        library = library.split(",")
+        if (library==""){
+            document.getElementById("library").innerHTML = "You have no cloudsaved Lang Studysheets.";
+        }
+        var listelement = `<div class='horizontalFlex studysetentry'>
+                            <div>(name)</div>
+                            <div class="flexSpacer"></div>
+                            <div>(date)</div>
+                            <div style="width: 10vw;"></div>
+                            <div><a href="(link)">View</a></div>
+                        </div>`
+        for (i=0;i<library.length;i++){
+            if (library[i]==""){
+                continue
+            }
+            if (library[i]=="Invalid token"){
+                loginbutton = document.createElement("button");
+                loginbutton.className = "flexSpacer"
+                loginbutton.style.backgroundColor = "wheat"
+                loginbutton.style.width = "50vw"
+                loginbutton.style.height = "10vh"
+                loginbutton.style.fontFamily = "Poppins"
+                loginbutton.style.fontSize = "2vw"
+                document.getElementById("studysetholder").style.alignItems = "center";
+                document.getElementById("studysetholder").style.justifyContent = "center";
+                document.getElementById("studysetholder").style.textAlign = "center";
+
+                loginbutton.onclick = function(){
+                    window.location.href="login.html";
+                }
+                loginbutton.innerHTML = "Login or Create Account"
+                document.getElementById("studysetholder").append(loginbutton);
+                document.getElementById("Invalid token").style.display = "none";
+            }
+            // var newlistelement = listelement.replace("(name)", library[i])
+            // newlistelement = listelement.replace("(link)", )
+            // chosensheet = window.localStorage.getItem("chosenSheet")
+
+    // toek = window.localStorage.getItem("usertoken")
+    // document.getElementById("studysheetname").innerHTML = chosensheet
+    // sheet = httpGet("https://nwvbug.pythonanywhere.com/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
+            
+            let horizontalflexstudysetentry = document.createElement("div")
+            horizontalflexstudysetentry.className = "horizontalFlex studysetentry"
+            document.getElementById("studysetholder").append(horizontalflexstudysetentry);
+            let namediv = document.createElement("div")
+            namediv.innerHTML = library[i]
+            horizontalflexstudysetentry.append(namediv);
+            let spacer = document.createElement("div")
+            spacer.className = "flexSpacer"
+            horizontalflexstudysetentry.append(spacer);
+            let datediv = document.createElement("div")
+            horizontalflexstudysetentry.append(datediv);
+            let newspacer = document.createElement("div");
+            newspacer.style.width="10vw";
+            horizontalflexstudysetentry.append(newspacer);
+            let view = document.createElement("div");
+            view.setAttribute("studysheet", library[i])
+            view.innerHTML = "View"
+            view.id=library[i]
+            horizontalflexstudysetentry.append(view);
+
+
+            view.onclick=function(){
+                var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
+
+                window.localStorage.setItem("chosenSheet", studysheetname)
+                window.location.href="studysheetpage.html";
+                
+            }
+
+
+
+
+
+
+            
+        }
+}
+}
+
+    
+
+
+
 
 
 function getLibrary(){
