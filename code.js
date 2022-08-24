@@ -209,8 +209,16 @@ function generateLibraryList(){
     }
 
     library = httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/list")
-    username = httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/name")
-    customuser = httpGet("https://anklebowl.pythonanywhere.com/usernamefromtoken/"+sessionid)
+    link = "https://anklebowl.pythonanywhere.com/usernamefromtoken/"+sessionid
+    customuser = httpGet(link)
+    console.log(link)
+    if (customuser == "Invalid token"){
+        document.getElementById("homeusername").innerHTML = "You are not signed in";
+
+    }else{
+        document.getElementById("homeusername").innerHTML = "Hello, "+customuser;
+
+    }
     console.log("custom user name: "+customuser)
     if(library == "[]"){
         document.getElementById("library").innerHTML = "You have no cloudsaved Lang Studysheets.";
