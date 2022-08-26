@@ -1050,6 +1050,10 @@ function onBtnPress(v) {
 
 }
 
+function signout(){
+    window.localStorage.setItem("fullstudysheet", "");
+    window.localStorage.setItem("chosenSheet", "");
+}
 //main loop and code for flashcard functionality
 
 function doFlashcards(){
