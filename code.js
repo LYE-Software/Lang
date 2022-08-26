@@ -214,20 +214,23 @@ function generateLibraryList(){
     console.log(link)
     if (customuser == "Invalid token"){
         document.getElementById("homeusername").innerHTML = "You are not signed in";
+        document.getElementById("yourstudysheets").innerHTML = "Sign In to use Lang Cloudsave";
 
     }else{
         document.getElementById("homeusername").innerHTML = "Hello, "+customuser;
+        document.getElementById("yourstudysheets").innerHTML = "Your Studysheets";
+
 
     }
     console.log("custom user name: "+customuser)
     if(library == "[]"){
-        document.getElementById("library").innerHTML = "You have no cloudsaved Lang Studysheets.";
+        document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
 
     }
     else{
         library = library.split(",")
         if (library==""){
-            document.getElementById("library").innerHTML = "You have no cloudsaved Lang Studysheets.";
+            document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
         }
         var listelement = `<div class='horizontalFlex studysetentry'>
                             <div>(name)</div>
