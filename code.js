@@ -966,10 +966,14 @@ function onBtnPress(v) {
         uploadFile.type = 'file';
         uploadFile.id = 'file';
         uploadFile.name = 'file';
+        uploadFile.style.width = "15vw";
+        uploadFile.style.marginRight = "2vw";
+
         uploadFile.accept = '.lang, .txt';
         document.body.appendChild(uploadFile);
         var uploadButton = document.createElement('button');
-        uploadButton.innerHTML = 'Upload';
+        uploadButton.innerHTML = 'Confirm upload';
+        uploadButton.className = "dropbtn";
         uploadButton.onclick = function() {
         var file = document.getElementById('file').files[0];
         var reader = new FileReader();
@@ -1046,6 +1050,10 @@ function onBtnPress(v) {
 
 }
 
+function signout(){
+    window.localStorage.setItem("fullstudysheet", "");
+    window.localStorage.setItem("chosenSheet", "");
+}
 //main loop and code for flashcard functionality
 
 function doFlashcards(){
