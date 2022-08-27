@@ -1348,7 +1348,7 @@ function showVerbs(language) {
 
 
 function returnMain() {
-    location.href = "homepage.html";
+    location.href = "index.html";
 }
 
 
