@@ -1257,7 +1257,8 @@ function doPracticeTest(){
             var questionArray = JSON.parse(random_question)
             theanswer = questionArray[1].toLowerCase();
             let id = "answerInput"+i
-            if (document.getElementById(id).value == theanswer){
+            let userInputAnswer = document.getElementById(id).value.toLowerCase();
+            if (userInputAnswer == theanswer){
                 document.getElementById(id).style.backgroundColor="green";
             }else{
                 tempinpt = document.getElementById(id).value
