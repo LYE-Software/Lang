@@ -175,13 +175,42 @@ function uploadFiles(){
     }
     document.getElementById("libraryholder").appendChild(uploadButton)
 }
-
-function httpGet(theUrl)
-{
+var runagain = false;
+function httpGet(theUrl){
+    //this needs to be async as we cannot set timeout for sync request and sync reqs halt all js for browser
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-    xmlHttp.send( null );
-    return xmlHttp.responseText;
+    console.log("Opening Connection to "+theUrl)
+    xmlHttp.timeout = 5000;
+    
+    xmlHttp.ontimeout = () => {
+        console.error(`The request for ${url} timed out.`);
+        alert('The request for '+theUrl+' timed out. Please check your connection or try again later.')
+    };
+    xmlHttp.onload = () => {
+        if (xmlHttp.readyState === 4) {
+        if (xmlHttp.status === 200) {
+            console.log("status200")
+            console.log( xmlHttp.responseText);
+        } else {
+            console.error(xmlHttp.statusText);
+        }
+        }
+    };
+    xmlHttp.open( "GET", theUrl, true ); // false for synchronous request
+    console.log(xmlHttp.status)
+    try {
+        xmlHttp.send( null );
+    } catch (error) {
+        console.log(error)
+    }
+    
+    
+    console.log(xmlHttp.status)
+    return new Promise(resolve => {
+        setTimeout(() => {
+          resolve(xmlHttp.responseText);
+        }, 2000);
+      });
 }
 
 
@@ -193,12 +222,18 @@ function submitNewUN(){
 }
 
 
-function generateLibraryList(){
+async function generateLibraryList(){
     window.localStorage.setItem("chosenSheet", "")
     window.localStorage.setItem("fullstudysheet", "")
 
     sessionid = window.localStorage.getItem("usertoken");
-    username = httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/name")
+    try {
+        username = await httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/name")
+        console.log("Username = "+username)
+    } catch (error) {
+        document.getElementById("yourstudysheets").innerHTML = "Your Lang client could not establish a connection to the server. Please check your connection and try again in a few minutes.";
+        document.getElementById("homeusername").innerHTML = ":(";
+    }
     if (username == "Invalid token"){
         loginbutton = document.createElement("button");
         loginbutton.className = "newbutton"
@@ -208,12 +243,13 @@ function generateLibraryList(){
         document.getElementById("studysetholder").append(loginbutton);
     }
 
-    library = httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/list")
+    library = await httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/list")
     link = "https://anklebowl.pythonanywhere.com/usernamefromtoken/"+sessionid
-    customuser = httpGet(link)
+    customuser = await httpGet(link)
     console.log(link)
+    document.getElementById("studyloader").style.display="none";
     if (customuser == "Invalid token"){
-        document.getElementById("homeusername").innerHTML = "You are not signed in";
+        document.getElementById("homeusername").innerHTML = "Guest";
         document.getElementById("yourstudysheets").innerHTML = "Sign In to use Lang Cloudsave";
 
     }else{
