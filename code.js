@@ -58,7 +58,7 @@ async function doPreviewAndLocal(){
     toek = window.localStorage.getItem("usertoken")
     document.getElementById("studysheetname").innerHTML = chosensheet
     sheet = await httpGet("https://nwvbug.pythonanywhere.com/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
-    document.getElementById("studyloader").style.display = "none";
+    document.getElementById("noclickdiv").style.display = "none";
     console.log("og sheet: "+sheet)
     sheet = sheet.replaceAll("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823", "\n")
     console.log(sheet)

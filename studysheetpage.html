@@ -9,37 +9,50 @@
     <script src="code.js"></script> 
 </head>
 <body onload = "doPreviewAndLocal()" class="homepage">
-    <div class="samelineheader">
-        <img src="transparenticon.png" class="topleftlogoicon">
-        <h1 class="header" id="studysheetname">Loading...</h1>
-    </div>
-    
-
-    <div class="medbox" style="flex:wrap;">
-        <div class="verticalbox">
-            <button class="dropbtn"style="margin:20px;" onclick="window.location.href='readCustom.html'">Mastery</button>
-            <button class="dropbtn"style="margin:20px;"onclick="window.location.href='flashcards.html'">Flashcards</button>
-            <button class="dropbtn"style="margin:20px;"onclick="window.location.href='practest.html'">Practice Test (Single)</button>
-            <button class="dropbtn"style="margin:20px;"onclick="window.location.href='other/notready.html'">Practice Test (Multi)</button>
-            <button class="dropbtn"style="margin:20px;"onclick="window.location.href='speed.html'">Speed Review</button>
-            <button class="dropbtn"style="margin:20px;"onclick="window.location.href='multiplechoice.html'">Multiple Choice</button>
-
-
-
-        </div>
-        <div style="flex:0.35; border-radius:15px; border:solid; border-color:#001945; padding:20px; overflow:scroll; max-height:70vh;">
-            <h3 class="header" id="previewstudysheet"></h3>
-            <div style="width: 100%; justify-content: center; align-items: center; text-align: center;">
-                <div class="lds-ellipsisdark" id="studyloader"><div></div><div></div><div></div><div></div></div>
+    <div style="width:95vw; height:105vh; position:relative;">
+        <div style="height:99vh; width:97vw; position:absolute;" id="noclickdiv">
+            <div style="position:absolute; top:40%; left:45%; background-color: wheat; border-radius:15px; padding:20px; text-align: center;">
+                <div class="lds-ellipsisdark" id="studyloader" ><div></div><div></div><div></div><div></div></div>
+                <p class="header">Loading your Studysheet</p>
             </div>
-
         </div>
+        
+        
+        <div>
+            <div class="samelineheader">
+                <img src="transparenticon.png" class="topleftlogoicon">
+                <h1 class="header" id="studysheetname">Loading...</h1>
+            </div>
+            
+        
+            <div class="medbox" style="flex:wrap;">
+                <div class="verticalbox">
+                    <button class="dropbtn"style="margin:20px;" onclick="window.location.href='readCustom.html'">Mastery</button>
+                    <button class="dropbtn"style="margin:20px;"onclick="window.location.href='flashcards.html'">Flashcards</button>
+                    <button class="dropbtn"style="margin:20px;"onclick="window.location.href='practest.html'">Practice Test (Single)</button>
+                    <button class="dropbtn"style="margin:20px;"onclick="window.location.href='other/notready.html'">Practice Test (Multi)</button>
+                    <button class="dropbtn"style="margin:20px;"onclick="window.location.href='speed.html'">Speed Review</button>
+                    <button class="dropbtn"style="margin:20px;"onclick="window.location.href='multiplechoice.html'">Multiple Choice</button>
+        
+        
+        
+                </div>
+                <div style="flex:0.35; border-radius:15px; border:solid; border-color:#001945; padding:20px; overflow:scroll; max-height:70vh;">
+                    <h3 class="header" id="previewstudysheet"></h3>
+                    <div style="width: 100%; justify-content: center; align-items: center; text-align: center;">
+                    </div>
+        
+                </div>
+            </div>
+            
+        
+        
+        
+        
+            
+        </div>
+        
     </div>
-    
-
-
-
-
     <footer id = "feet" class="foot">
         <div class="samelineheader">
             <p  id = "copyright" class="copyrighttext">Copyright NWVBUG Development, 2022. <a href="https://github.com/nwvbug/Lang">GitHub Repo & Source</a></p>
