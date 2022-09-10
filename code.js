@@ -186,6 +186,7 @@ function httpGet(theUrl){
     xmlHttp.ontimeout = () => {
         console.error(`The request for ${url} timed out.`);
         alert('The request for '+theUrl+' timed out. Please check your connection or try again later.')
+        changeToOffline();
     };
     xmlHttp.onload = () => {
         if (xmlHttp.readyState === 4) {
@@ -227,7 +228,12 @@ function submitNewUN(){
     window.location.href="library.html";
 }
 
+function changeToOffline(){
+    document.getElementById("yourstudysheets").innerHTML = "Your Lang client could not establish a connection to the server. Please check your connection and try again in a few minutes.";
+    document.getElementById("homeusername").innerHTML = "Offline";
+    document.getElementById("offlinetext").style.display = "";
 
+}
 async function generateLibraryList(){
     window.localStorage.setItem("chosenSheet", "")
     window.localStorage.setItem("fullstudysheet", "")
@@ -238,7 +244,9 @@ async function generateLibraryList(){
         console.log("Username = "+username)
     } catch (error) {
         document.getElementById("yourstudysheets").innerHTML = "Your Lang client could not establish a connection to the server. Please check your connection and try again in a few minutes.";
-        document.getElementById("homeusername").innerHTML = ":(";
+        document.getElementById("homeusername").innerHTML = "Offline";
+        document.getElementById("offlinetext").style.display = "";
+
     }
     if (username == "Invalid token"){
         loginbutton = document.createElement("button");
