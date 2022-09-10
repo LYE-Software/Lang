@@ -202,6 +202,7 @@ function httpGet(theUrl){
         xmlHttp.send( null );
     } catch (error) {
         console.log(error)
+        //put a splash screen error here
     }
     
     
@@ -242,10 +243,14 @@ async function generateLibraryList(){
         }
         document.getElementById("studysetholder").append(loginbutton);
     }
-
-    library = await httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/list")
-    link = "https://anklebowl.pythonanywhere.com/usernamefromtoken/"+sessionid
-    customuser = await httpGet(link)
+    try {
+        library = await httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/list")
+        link = "https://anklebowl.pythonanywhere.com/usernamefromtoken/"+sessionid
+        customuser = await httpGet(link)
+    } catch (error) {
+        console.log("error recognized")
+    }
+    
     console.log(link)
     document.getElementById("studyloader").style.display="none";
     if (customuser == "Invalid token"){
