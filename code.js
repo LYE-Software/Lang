@@ -51,12 +51,13 @@ var helpsused = 0;
 var whichId= "";
 
 
-function doPreviewAndLocal(){
+async function doPreviewAndLocal(){
     console.log("in dopreview")
     chosensheet = window.localStorage.getItem("chosenSheet")
     toek = window.localStorage.getItem("usertoken")
     document.getElementById("studysheetname").innerHTML = chosensheet
-    sheet = httpGet("https://nwvbug.pythonanywhere.com/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
+    sheet = await httpGet("https://nwvbug.pythonanywhere.com/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
+    document.getElementById("studyloader").style.display = "none";
     console.log("og sheet: "+sheet)
     sheet = sheet.replaceAll("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823", "\n")
     console.log(sheet)
@@ -202,6 +203,7 @@ function httpGet(theUrl){
         xmlHttp.send( null );
     } catch (error) {
         console.log(error)
+        alert("error line 205 alt ")
         //put a splash screen error here
     }
     
@@ -209,6 +211,9 @@ function httpGet(theUrl){
     console.log(xmlHttp.status)
     return new Promise(resolve => {
         setTimeout(() => {
+            console.log("XMLHTTP RESPONSE BEGIN")
+            console.log(xmlHttp.responseText)
+            console.log("XMLHTTP RESPONSE END")
           resolve(xmlHttp.responseText);
         }, 2000);
       });
@@ -1092,8 +1097,10 @@ function onBtnPress(v) {
 }
 
 function signout(){
+    console.log("signout")
     window.localStorage.setItem("fullstudysheet", "");
     window.localStorage.setItem("chosenSheet", "");
+    window.localStorage.setItem("usertoken", null);
 }
 //main loop and code for flashcard functionality
 
