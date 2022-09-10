@@ -49,6 +49,7 @@ var testLength = 0;
 var sessionid = ""
 var helpsused = 0;
 var whichId= "";
+var offline = false;
 
 
 async function doPreviewAndLocal(){
@@ -176,7 +177,6 @@ function uploadFiles(){
     }
     document.getElementById("libraryholder").appendChild(uploadButton)
 }
-var runagain = false;
 function httpGet(theUrl){
     //this needs to be async as we cannot set timeout for sync request and sync reqs halt all js for browser
     var xmlHttp = new XMLHttpRequest();
@@ -212,6 +212,11 @@ function httpGet(theUrl){
     console.log(xmlHttp.status)
     return new Promise(resolve => {
         setTimeout(() => {
+            console.log("HTTPGET STATUS: "+xmlHttp.status)
+            if(xmlHttp.status == 0){
+                offline = true;
+                changeToOffline()
+            }
             console.log("XMLHTTP RESPONSE BEGIN")
             console.log(xmlHttp.responseText)
             console.log("XMLHTTP RESPONSE END")
@@ -232,135 +237,150 @@ function changeToOffline(){
     document.getElementById("yourstudysheets").innerHTML = "Your Lang client could not establish a connection to the server. Please check your connection and try again in a few minutes.";
     document.getElementById("homeusername").innerHTML = "Offline";
     document.getElementById("offlinetext").style.display = "";
+    offline = true;
 
 }
 async function generateLibraryList(){
-    window.localStorage.setItem("chosenSheet", "")
-    window.localStorage.setItem("fullstudysheet", "")
-
-    sessionid = window.localStorage.getItem("usertoken");
-    try {
-        username = await httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/name")
-        console.log("Username = "+username)
-    } catch (error) {
-        document.getElementById("yourstudysheets").innerHTML = "Your Lang client could not establish a connection to the server. Please check your connection and try again in a few minutes.";
-        document.getElementById("homeusername").innerHTML = "Offline";
-        document.getElementById("offlinetext").style.display = "";
-
-    }
-    if (username == "Invalid token"){
-        loginbutton = document.createElement("button");
-        loginbutton.className = "newbutton"
-        loginbutton.onclick = function(){
-            window.location.href="login.html";
-        }
-        document.getElementById("studysetholder").append(loginbutton);
-    }
-    try {
-        library = await httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/list")
-        link = "https://anklebowl.pythonanywhere.com/usernamefromtoken/"+sessionid
-        customuser = await httpGet(link)
-    } catch (error) {
-        console.log("error recognized")
-    }
-    
-    console.log(link)
-    document.getElementById("studyloader").style.display="none";
-    if (customuser == "Invalid token"){
-        document.getElementById("homeusername").innerHTML = "Guest";
-        document.getElementById("yourstudysheets").innerHTML = "Sign In to use Lang Cloudsave";
-
-    }else{
-        document.getElementById("homeusername").innerHTML = "Hello, "+customuser;
-        document.getElementById("yourstudysheets").innerHTML = "Your Studysheets";
-
-
-    }
-    console.log("custom user name: "+customuser)
-    if(library == "[]"){
-        document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
-
+    if(offline == true){
+        console.log("Lang is offline");
     }
     else{
-        library = library.split(",")
-        if (library==""){
-            document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
+        
+        window.localStorage.setItem("chosenSheet", "")
+        window.localStorage.setItem("fullstudysheet", "")
+    
+        sessionid = window.localStorage.getItem("usertoken");
+        try {
+            username = await httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/name")
+            console.log("Username = "+username)
+        } catch (error) {
+            document.getElementById("yourstudysheets").innerHTML = "Your Lang client could not establish a connection to the server. Please check your connection and try again in a few minutes.";
+            document.getElementById("homeusername").innerHTML = "Offline";
+            document.getElementById("offlinetext").style.display = "";
+    
         }
-        var listelement = `<div class='horizontalFlex studysetentry'>
-                            <div>(name)</div>
-                            <div class="flexSpacer"></div>
-                            <div>(date)</div>
-                            <div style="width: 10vw;"></div>
-                            <div><a href="(link)">View</a></div>
-                        </div>`
-        for (i=0;i<library.length;i++){
-            if (library[i]==""){
-                continue
+        
+        if (username == "Invalid token"){
+            loginbutton = document.createElement("button");
+            loginbutton.className = "newbutton"
+            loginbutton.onclick = function(){
+                window.location.href="login.html";
             }
-            if (library[i]=="Invalid token"){
-                loginbutton = document.createElement("button");
-                loginbutton.className = "flexSpacer"
-                loginbutton.style.backgroundColor = "wheat"
-                loginbutton.style.width = "50vw"
-                loginbutton.style.height = "10vh"
-                loginbutton.style.fontFamily = "Poppins"
-                loginbutton.style.fontSize = "2vw"
-                document.getElementById("studysetholder").style.alignItems = "center";
-                document.getElementById("studysetholder").style.justifyContent = "center";
-                document.getElementById("studysetholder").style.textAlign = "center";
-
-                loginbutton.onclick = function(){
-                    window.location.href="login.html";
+            document.getElementById("studysetholder").append(loginbutton);
+        }
+        try {
+            library = await httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/list")
+            link = "https://anklebowl.pythonanywhere.com/usernamefromtoken/"+sessionid
+            customuser = await httpGet(link)
+        } catch (error) {
+            console.log("error recognized")
+        }
+        if(offline == true){
+            console.log("Lang is offline");
+            document.getElementById("studyloader").style.display = "none";
+        }
+        else{
+            console.log(link)
+            document.getElementById("studyloader").style.display="none";
+            if (customuser == "Invalid token"){
+                document.getElementById("homeusername").innerHTML = "Guest";
+                document.getElementById("yourstudysheets").innerHTML = "Sign In to use Lang Cloudsave";
+        
+            }else{
+                document.getElementById("homeusername").innerHTML = "Hello, "+customuser;
+                document.getElementById("yourstudysheets").innerHTML = "Your Studysheets";
+        
+        
+            }
+            console.log("custom user name: "+customuser)
+            if(library == "[]"){
+                document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
+        
+            }
+            else{
+                library = library.split(",")
+                if (library==""){
+                    document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
                 }
-                loginbutton.innerHTML = "Login or Create Account"
-                document.getElementById("studysetholder").append(loginbutton);
-                document.getElementById("Invalid token").style.display = "none";
-            }
-            // var newlistelement = listelement.replace("(name)", library[i])
-            // newlistelement = listelement.replace("(link)", )
-            // chosensheet = window.localStorage.getItem("chosenSheet")
-
-    // toek = window.localStorage.getItem("usertoken")
-    // document.getElementById("studysheetname").innerHTML = chosensheet
-    // sheet = httpGet("https://nwvbug.pythonanywhere.com/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
-            
-            let horizontalflexstudysetentry = document.createElement("div")
-            horizontalflexstudysetentry.className = "horizontalFlex studysetentry"
-            document.getElementById("studysetholder").append(horizontalflexstudysetentry);
-            let namediv = document.createElement("div")
-            namediv.innerHTML = library[i]
-            horizontalflexstudysetentry.append(namediv);
-            let spacer = document.createElement("div")
-            spacer.className = "flexSpacer"
-            horizontalflexstudysetentry.append(spacer);
-            let datediv = document.createElement("div")
-            horizontalflexstudysetentry.append(datediv);
-            let newspacer = document.createElement("div");
-            newspacer.style.width="10vw";
-            horizontalflexstudysetentry.append(newspacer);
-            let view = document.createElement("div");
-            view.setAttribute("studysheet", library[i])
-            view.innerHTML = "View"
-            view.id=library[i]
-            horizontalflexstudysetentry.append(view);
-
-
-            view.onclick=function(){
-                var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
-
-                window.localStorage.setItem("chosenSheet", studysheetname)
-                window.location.href="studysheetpage.html";
-                
-            }
-
-
-
-
-
-
-            
+                var listelement = `<div class='horizontalFlex studysetentry'>
+                                    <div>(name)</div>
+                                    <div class="flexSpacer"></div>
+                                    <div>(date)</div>
+                                    <div style="width: 10vw;"></div>
+                                    <div><a href="(link)">View</a></div>
+                                </div>`
+                for (i=0;i<library.length;i++){
+                    if (library[i]==""){
+                        continue
+                    }
+                    if (library[i]=="Invalid token"){
+                        loginbutton = document.createElement("button");
+                        loginbutton.className = "flexSpacer"
+                        loginbutton.style.backgroundColor = "wheat"
+                        loginbutton.style.width = "50vw"
+                        loginbutton.style.height = "10vh"
+                        loginbutton.style.fontFamily = "Poppins"
+                        loginbutton.style.fontSize = "2vw"
+                        document.getElementById("studysetholder").style.alignItems = "center";
+                        document.getElementById("studysetholder").style.justifyContent = "center";
+                        document.getElementById("studysetholder").style.textAlign = "center";
+        
+                        loginbutton.onclick = function(){
+                            window.location.href="login.html";
+                        }
+                        loginbutton.innerHTML = "Login or Create Account"
+                        document.getElementById("studysetholder").append(loginbutton);
+                        document.getElementById("Invalid token").style.display = "none";
+                    }
+                    // var newlistelement = listelement.replace("(name)", library[i])
+                    // newlistelement = listelement.replace("(link)", )
+                    // chosensheet = window.localStorage.getItem("chosenSheet")
+        
+            // toek = window.localStorage.getItem("usertoken")
+            // document.getElementById("studysheetname").innerHTML = chosensheet
+            // sheet = httpGet("https://nwvbug.pythonanywhere.com/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
+                    
+                    let horizontalflexstudysetentry = document.createElement("div")
+                    horizontalflexstudysetentry.className = "horizontalFlex studysetentry"
+                    document.getElementById("studysetholder").append(horizontalflexstudysetentry);
+                    let namediv = document.createElement("div")
+                    namediv.innerHTML = library[i]
+                    horizontalflexstudysetentry.append(namediv);
+                    let spacer = document.createElement("div")
+                    spacer.className = "flexSpacer"
+                    horizontalflexstudysetentry.append(spacer);
+                    let datediv = document.createElement("div")
+                    horizontalflexstudysetentry.append(datediv);
+                    let newspacer = document.createElement("div");
+                    newspacer.style.width="10vw";
+                    horizontalflexstudysetentry.append(newspacer);
+                    let view = document.createElement("div");
+                    view.setAttribute("studysheet", library[i])
+                    view.innerHTML = "View"
+                    view.id=library[i]
+                    horizontalflexstudysetentry.append(view);
+        
+        
+                    view.onclick=function(){
+                        var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
+        
+                        window.localStorage.setItem("chosenSheet", studysheetname)
+                        window.location.href="studysheetpage.html";
+                        
+                    }
+        
+        
+        
+        
+        
+        
+                    
+                }
         }
-}
+        }
+        }
+        
+    
 }
 
     
