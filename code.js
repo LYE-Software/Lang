@@ -241,6 +241,7 @@ function changeToOffline(){
 
 }
 async function generateLibraryList(){
+    console.log("generating library list")
     if(offline == true){
         console.log("Lang is offline");
     }
@@ -277,18 +278,20 @@ async function generateLibraryList(){
         }
         if(offline == true){
             console.log("Lang is offline");
-            document.getElementById("studyloader").style.display = "none";
+            // document.getElementById("studyloader").style.display = "none";
         }
         else{
             console.log(link)
-            document.getElementById("studyloader").style.display="none";
             if (customuser == "Invalid token"){
-                document.getElementById("homeusername").innerHTML = "Guest";
-                document.getElementById("yourstudysheets").innerHTML = "Sign In to use Lang Cloudsave";
+                console.log("Failed sign in process")
+                failedSignIn()
+                // document.getElementById("homeusername").innerHTML = "Guest";
+                // document.getElementById("yourstudysheets").innerHTML = "Sign In to use Lang Cloudsave";
         
             }else{
                 document.getElementById("homeusername").innerHTML = "Hello, "+customuser;
-                document.getElementById("yourstudysheets").innerHTML = "Your Studysheets";
+                // document.getElementById("yourstudysheets").innerHTML = "Your Studysheets";
+                hideLoadingView();
         
         
             }

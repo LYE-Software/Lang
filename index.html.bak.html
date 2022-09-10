@@ -1,0 +1,155 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="circular lang icon.png">
+    <script src="code.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lang</title>
+    <style>
+        
+    </style>
+</head>
+<body class="sussybody" onload="generateLibraryList()">
+    
+    <div class="body preload">
+        <div style="height: 100vh;">
+            <div style="height: 10vh; width: 100vw;">This is the header spacer, nobody should see this</div>
+
+            <div style="height: 5vh; width: 100vw;"></div>
+    
+            <div class="uploadConvertContainer horizontalFlex">
+                <div class="flexSpacer"></div>
+                <div class="largeButton horizontalFlex" onclick="window.location.href='compatibility.html'">
+                    <div style="width: 100%" class="centerText">Convert From Quizlet</div>
+                </div>
+                <div class="flexSpacer"></div>
+                <div class="largeButton horizontalFlex" onclick="window.location.href='library.html'">
+                    <div style="width: 100%;" class="centerText" >Upload & Manage Lang Studysheets</div>
+                </div>
+                <div class="flexSpacer"></div>
+            </div>
+    
+            <div style="color: wheat;" id="yourstudysheets" class="centerText headerText">Please wait as we contact our servers</div>
+    
+            <div id = "studysetholder" class="studysetlist">
+                <div style="width:100%; justify-content:center; align-items:center; text-align:center;">
+                    <div class="lds-ellipsis" id="studyloader"><div></div><div></div><div></div><div></div></div>
+                    <p class="header" id="offlinetext" style="display:none; color:wheat;">Lang is currently operating in offline mode as it could not reach the server. You may still be able to use locally saved Studysheets.</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <!-- <div style="height: 100vh; margin: 0; width: 90vw;"> -->
+            <!-- <div class="uploadConvertContainer horizontalFlex centerText" style="padding-left: 2.5vw; padding-right: 2.5vw; width: 95vw;">
+                <div>
+                    <img style="height: 10vh;" src="assets/logos/lang-wheat.png">
+                </div>
+                <div class="headerText">Changelog</div>
+            </div> -->
+        <!-- </div> -->
+
+        <!-- <div style="height: 15vh; width: 100vw;" class="footer horizontalFlex centerText">
+            <div>
+                <img style="height: 10vh;" src="assets/logos/nwvbug.png">
+            </div>
+            <div style="width: 100vw;">
+                About | Privacy Policy | Terms of Service
+            </div>
+            <div>
+                <img style="height: 10vh;" src="assets/logos/lang-wheat.png">
+            </div>
+        </div> -->
+    </div>
+    <div id="header0" class="headerContainer" style="width: 100vw">
+        <div class="horizontalFlex homepageheader">
+            <div>
+                <img style="height: 10vh;" src="assets/logos/lang.png">
+            </div>
+            <div class="flexSpacer"></div>
+            <!-- <div class="horizontalFlex" style="justify-content: space-between; width: 40vw;">
+                <div>What is Lang?</div>
+                <div>How do I use Lang?</div>
+                <div>Lang Creators or sumthing</div>
+            </div> -->
+            <div class="flexSpacer"></div>
+            <div id = "homeusername" style="margin-right:20px;">Loading...</div>
+            <img style="height: 6vh;" src="settings.png" onclick="window.location.href='settings.html'">
+
+            <div>
+            </div>
+        </div>
+    </div>
+    <div id="header1" class="headerContainer horizontalFlex centerText" style="pointer-events: none;    height: 10vh; width: 100vw; justify-content: center;;">
+        <div class="horizontalFlex" style="width: 70vw; pointer-events: none;">
+            <div class="flexSpacer button horizontalFlex" onclick="window.location.href='about.html'" style="pointer-events: auto; align-items: center; justify-content: center;">
+                <div style="color: wheat;" >What is Lang?</div>
+            </div>
+            <div class="flexSpacer button horizontalFlex" onclick="window.location.href='studyfromfiletemp.html'" style="pointer-events: auto; align-items: center; justify-content: center;">
+                <div style="color: wheat;" >Study from File</div>
+                
+            </div>
+            <div class="flexSpacer button horizontalFlex" style="pointer-events: auto; align-items: center; justify-content: center;"onclick="window.location.href = 'createCustom.html'">
+                <div style="color: wheat;" >Create</div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="changelog" class="changeloghidden preload centerText">
+        <div id="showchangelogtext" style="font-size: 3vh; margin-top: 1vh; font-family:'Rubik Mono One';">Click here to open the changelog!</div>
+        <div class="headerText" style="color:#001945">Changelog</div>
+        <div class="header">Lang has been updated from Lang 3.0 to Lang 3.1. The main hallmarks of this update is the addition of asynchronous pings to the server, in place of the previous synchronous ones. This improves user experience greatly and allows for more versatile features.</div>
+        <br>
+        <div class="header">Various UI changes have been made, but we still are working on the homepage (when not logged in) and are deciding what we want the studying pages to look like. Thank you for supporting Lang.</div>
+        <br>
+        <div class="header">Make sure to follow <a href="https://github.com/nwvbug/Lang">This GitHub Repository</a> if you want to be notified as soon as Lang is updated.</div>
+        <br>
+        <div class="header"><a href="updates.html">About the Lang update system</a></div>
+        <footer id = "feet" class="foot2">
+            <div class="samelineheader">
+                <p  id = "copyright" class="copyrighttext2">Copyright NWVBUG Development & Lye Software, 2022. </p>
+                <p class="copyrighttext2">Current Version: Lang 3.1.5</p>
+                <img src="shortnwvbug.png" style="height:3vw;">
+            </div>
+        </footer>
+    </div>
+</body>
+<script>
+    
+    // Add an event listener to id changelog, when it is clicked toggle the class changeloghidden and changelogshown
+    document.getElementById("changelog").addEventListener("click", function(){
+        if (document.getElementById("changelog").classList.contains("changeloghidden")){
+            document.getElementById("changelog").classList.remove("changeloghidden");
+            document.getElementById("changelog").classList.add("changelogshown");
+
+            document.getElementById("showchangelogtext").classList.remove("fadein");
+            document.getElementById("showchangelogtext").classList.add("fadeout");
+        } else {
+            document.getElementById("changelog").classList.remove("changelogshown");
+            document.getElementById("changelog").classList.add("changeloghidden");
+
+            document.getElementById("showchangelogtext").classList.remove("fadeout");
+            document.getElementById("showchangelogtext").classList.add("fadein");
+        }
+    });
+
+    setTimeout(function(){
+        document.getElementById("changelog").classList.remove("preload")
+    },500);
+
+    // disbale scrolling
+    window.addEventListener("scroll", function(){
+        window.scrollTo(0,0);
+    });
+
+</script>
+</html>
+
+<!-- Webpage designed by aspeli, realized by ankleBowl & tyn -->
+<!-- If anyone else comes along and adds to the page, add your name here -->
