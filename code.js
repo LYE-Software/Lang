@@ -51,7 +51,6 @@ var helpsused = 0;
 var whichId= "";
 var offline = false;
 
-
 async function doPreviewAndLocal(){
     console.log("in dopreview")
     chosensheet = window.localStorage.getItem("chosenSheet")
@@ -224,6 +223,33 @@ function httpGet(theUrl){
         }, 2000);
       });
 }
+
+function hideLoadingView() {
+    document.getElementById("loadingscreen").classList.add("fadeOut");
+    setTimeout(function(){
+        document.getElementById("loadingscreen").style.display = "none";
+    }, 1000);
+}
+
+function failedSignIn() {
+    document.getElementById("failedSignIn").style.display = "flex";
+}
+
+function setLocalUsage() {
+    document.getElementById("failedSignIn").style.display = "none";
+    document.getElementById("homeusername").innerHTML = "Guest";
+    document.getElementById("studyloader").style.display="none";
+    document.getElementById("uploadmanage").innerHTML = "Create a Lye Account"
+    document.getElementById("uploadmanagebutton").addEventListener("click", function(){ 
+        document.getElementById("failedSignIn").style.display = ""
+    }); 
+    document.getElementById('uploadmanage').removeAttribute("onclick");
+    document.getElementById('uploadmanage').onclick = '';
+    document.getElementById("uploadmanage").onclick = function(){ 
+        document.getElementById("failedSignIn").style.display = ""
+    }
+}
+
 
 
 function submitNewUN(){
