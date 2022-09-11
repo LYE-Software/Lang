@@ -1155,9 +1155,15 @@ function onBtnPress(v) {
 
 function signout(){
     console.log("signout")
-    window.localStorage.setItem("fullstudysheet", "");
-    window.localStorage.setItem("chosenSheet", "");
-    window.localStorage.setItem("usertoken", null);
+    if (confirm("Are you sure you want to sign out?")) {
+        window.localStorage.setItem("fullstudysheet", "");
+        window.localStorage.setItem("chosenSheet", "");
+        window.localStorage.setItem("usertoken", null);
+        window.location.href="index.html"
+      } else {
+        
+      }
+    
 }
 //main loop and code for flashcard functionality
 
