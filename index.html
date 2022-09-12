@@ -2,18 +2,254 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="circular lang icon.png">
-    <script src="code.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="circular lang icon.png">
     <title>Lang</title>
+    <script src="code.js"></script>
+    <link rel="stylesheet" href="style.css">
     <style>
+        /* @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap'); */
+        @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Rubik+Mono+One&display=swap');
         
+        
+        .pfp {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        /* .heightShrink {
+            height: 0% !important;
+            animation: heightShrink 1s !important;
+        }
+
+        @keyframes heightShrink {
+            0% {
+                height: 100%;
+            }
+            100% {
+                height: 0%;
+            }
+        } */
+        
+        .changelogshown {
+            transform: translate(-50%, -50%);
+            animation: showchangelog 0.5s ease-in-out;
+        }
+
+        .changeloghidden {
+            transform: translate(-50%, 60%);
+            animation: hidechangelog 0.5s ease-in-out;
+        }
+
+        @keyframes showchangelog {
+            0% {
+                transform: translate(-50%, 60%);
+            }
+            100% {
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        @keyframes hidechangelog {
+            0% {
+                transform: translate(-50%, -50%);
+            }
+            100% {
+                transform: translate(-50%, 60%);
+            }
+        }
+
+        #changelog {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 75vw; height: 75vh; background-color: wheat;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .headerContainer {
+            position: absolute;
+        }
+
+        .header {
+            height: 10vh;
+            background-color: wheat;
+            width: 100vw;
+        }
+
+        .absolute {
+            position: absolute;
+        }
+
+        .horizontalFlex {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .centerFlex {
+            justify-content: center;
+            align-items: center;
+        }
+
+        .flexSpacer {
+            flex: 1;
+        }
+
+        body {
+            margin: 0;
+            background-color: #001945;
+            /* font-family: 'Josefin Sans', sans-serif; */
+            font-family: 'Poppins', sans-serif;
+
+            overflow-y: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+
+
+        .uploadConvertContainer {
+            background-color: rgb(47, 61, 115);
+            width: 100vw;
+            color: wheat;
+        }
+
+        .largeButton {
+            border-radius: 1000000px;
+            height: 5vh;
+            width: 35vw;
+            padding: 2.5vh;
+            background-color: #001945;
+            margin: 5vh;
+        }
+
+        .button {
+            border-radius: 1000000px;
+            height: 3vh;
+            width: 10vw;
+            padding: 1vh;
+            background-color: #001945;
+            margin: 2vh;
+        }
+
+        .centerText {
+            text-align: center;
+        }
+
+        .headerText {
+            /* font-weight: bold; */
+            color: wheat;
+            margin: 5vh;
+            font-size: 50px;
+
+            font-family: 'Rubik Mono One', sans-serif;
+        }
+
+        .studysetlist {
+            background-color: rgb(7, 15, 35);
+            margin-left: 10vw;
+            margin-right: 10vw;
+
+            max-height: 40vh;
+            overflow-y: scroll;
+        }
+
+        .studysetentry {
+            color: wheat; 
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .debugArea {
+            background-color: wheat;
+            width: 100vw;
+            margin: 0;
+        }
+
+        .footer {
+            color: wheat;
+        }
+
+        .fadeIn {
+            transition: opacity 0.25s ease-in-out;
+            opacity: 1;
+        }
+
+        .fadeOut {
+            transition: opacity 0.25s ease-in-out;
+            opacity: 0;
+        }
+
+        /* https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-animation-from-running-on-page-load */
+        .preload {
+        animation-duration: 0s !important;
+        -webkit-animation-duration: 0s !important;
+        transition:background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;}
+
+
+        /* https://cssloaders.github.io */
+        .lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: wheat;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}      
     </style>
 </head>
-<body class="sussybody" onload="generateLibraryList()">
-    
-    <div class="body preload">
+<body onload="generateLibraryList()">
+    <div class="absolute preload">
         <div style="height: 100vh;">
             <div style="height: 10vh; width: 100vw;">This is the header spacer, nobody should see this</div>
 
@@ -21,81 +257,60 @@
     
             <div class="uploadConvertContainer horizontalFlex">
                 <div class="flexSpacer"></div>
-                <div class="largeButton horizontalFlex" onclick="window.location.href='compatibility.html'">
-                    <div style="width: 100%" class="centerText">Convert From Quizlet</div>
+                <div class="largeButton horizontalFlex">
+                    <div onclick="window.location.href='compatibility.html'" style="width: 100%" class="centerText">Convert From Quizlet</div>
                 </div>
                 <div class="flexSpacer"></div>
-                <div class="largeButton horizontalFlex" onclick="window.location.href='library.html'">
-                    <div style="width: 100%;" class="centerText" >Upload & Manage Lang Studysheets</div>
+                <div class="largeButton horizontalFlex" id="uploadmanagebutton">
+                    <div id="uploadmanage" onclick="window.location.href='library.html'" style="width: 100%;" class="centerText">Upload & Manage Lang Studysheets</div>
                 </div>
                 <div class="flexSpacer"></div>
-            </div>
-    
-            <div style="color: wheat;" id="yourstudysheets" class="centerText headerText">Please wait as we contact our servers</div>
-    
-            <div id = "studysetholder" class="studysetlist">
-                <div style="width:100%; justify-content:center; align-items:center; text-align:center;">
-                    <div class="lds-ellipsis" id="studyloader"><div></div><div></div><div></div><div></div></div>
+            </div>    
 
+
+
+            <div class="absolute" id="loadingscreen" style="height: 100%; width: 100%; background-color: #001945; overflow: hidden; pointer-events: none;">
+                <div class="horizontalFlex" style="height: 40vh; width: 100%; flex-direction: column; align-items: center; justify-content: center;">
+                    <div>
+                        <div class="lds-ellipsis" id="studyloader"><div></div><div></div><div></div><div></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- If the user has an account and study sheets a loaded properly -->
+            <div id="hasAccountView" class=absolute">
+                <div class="horizontalFlex" style="justify-content: center;">
+                    <div style="color: wheat; margin-right: 0;" class="centerText headerText">Your</div>
+                    <div style="color: wheat; margin-left: 1vw;" class="centerText headerText">Studysheets</div>
+                </div>
+                <div id="studysetholder" class="studysetlist">
                 </div>
             </div>
         </div>
-
-
-
-
-
-        <!-- <div style="height: 100vh; margin: 0; width: 90vw;"> -->
-            <!-- <div class="uploadConvertContainer horizontalFlex centerText" style="padding-left: 2.5vw; padding-right: 2.5vw; width: 95vw;">
-                <div>
-                    <img style="height: 10vh;" src="assets/logos/lang-wheat.png">
-                </div>
-                <div class="headerText">Changelog</div>
-            </div> -->
-        <!-- </div> -->
-
-        <!-- <div style="height: 15vh; width: 100vw;" class="footer horizontalFlex centerText">
-            <div>
-                <img style="height: 10vh;" src="assets/logos/nwvbug.png">
-            </div>
-            <div style="width: 100vw;">
-                About | Privacy Policy | Terms of Service
-            </div>
-            <div>
-                <img style="height: 10vh;" src="assets/logos/lang-wheat.png">
-            </div>
-        </div> -->
     </div>
     <div id="header0" class="headerContainer" style="width: 100vw">
-        <div class="horizontalFlex homepageheader">
+        <div class="horizontalFlex header">
             <div>
                 <img style="height: 10vh;" src="assets/logos/lang.png">
             </div>
             <div class="flexSpacer"></div>
-            <!-- <div class="horizontalFlex" style="justify-content: space-between; width: 40vw;">
-                <div>What is Lang?</div>
-                <div>How do I use Lang?</div>
-                <div>Lang Creators or sumthing</div>
-            </div> -->
             <div class="flexSpacer"></div>
-            <div id = "homeusername" style="margin-right:20px;">Loading...</div>
-            <img style="height: 6vh;" src="settings.png" onclick="window.location.href='settings.html'">
-
+            <div id="homeusername">Loading</div>
             <div>
+                <img class="pfp" style="height: 5vh;" src="settings.png" onclick="window.location.href='settings.html'">
             </div>
         </div>
     </div>
-    <div id="header1" class="headerContainer horizontalFlex centerText" style="pointer-events: none;    height: 10vh; width: 100vw; justify-content: center;;">
-        <div class="horizontalFlex" style="width: 70vw; pointer-events: none;">
-            <div class="flexSpacer button horizontalFlex" onclick="window.location.href='about.html'" style="pointer-events: auto; align-items: center; justify-content: center;">
-                <div style="color: wheat;" >What is Lang?</div>
+    <div id="header1" class="headerContainer horizontalFlex centerText" style="pointer-events: none; height: 10vh; width: 100vw; justify-content: center;;">
+        <div class="horizontalFlex" style="width: 70vw;">
+            <div class="flexSpacer button horizontalFlex" style="pointer-events: all; align-items: center; justify-content: center;" onclick="window.location.href='about.html'">
+                <div style="color: wheat;">What is Lang?</div>
             </div>
-            <div class="flexSpacer button horizontalFlex" onclick="window.location.href='studyfromfiletemp.html'" style="pointer-events: auto; align-items: center; justify-content: center;">
-                <div style="color: wheat;" >Study from File</div>
-                
+            <div class="flexSpacer button horizontalFlex" style="pointer-events: all; align-items: center; justify-content: center;" onclick="window.location.href='studyfromfiletemp.html'">
+                <div style="color: wheat;">Study From File</div>
             </div>
-            <div class="flexSpacer button horizontalFlex" style="pointer-events: auto; align-items: center; justify-content: center;"onclick="window.location.href = 'createCustom.html'">
-                <div style="color: wheat;" >Create</div>
+            <div class="flexSpacer button horizontalFlex" style="pointer-events: all; align-items: center; justify-content: center;" onclick="window.location.href = 'createCustom.html'">
+                <div style="color: wheat;">Create</div>
             </div>
         </div>
     </div>
@@ -104,19 +319,37 @@
     <div id="changelog" class="changeloghidden preload centerText">
         <div id="showchangelogtext" style="font-size: 3vh; margin-top: 1vh; font-family:'Rubik Mono One';">Click here to open the changelog!</div>
         <div class="headerText" style="color:#001945">Changelog</div>
-        <div class="header">Major Lang Update! As you can see, the homepage has been radically re-designed for the 2nd time. Some things have been moved around, including the library, which is now on the home page.</div>
+        <div class="">Lang has been updated from Lang 3.1.x to Lang 3.2.x. The main hallmark of this update is changing the login screen and loading screens.</div>
         <br>
-        <div class="header">The NWVBUG Development team has been hard at work to make Lang look and function better than ever. More changes, UI and not, coming soon. Stay Tuned!</div>
+        <div class="">Various other UI changes were made, but we are still deciding what we want the studying pages to look like. Thank you for supporting Lang.</div>
         <br>
-        <div class="header">Make sure to follow <a href="https://github.com/nwvbug/Lang">This GitHub Repository</a> if you want to be notified as soon as Lang is updated.</div>
-    
+        <div class="">Make sure to follow <a href="https://github.com/nwvbug/Lang">This GitHub Repository</a> if you want to be notified as soon as Lang is updated.</div>
+        <br>
+        <div class=""><a href="updates.html">About the Lang update system</a></div>
         <footer id = "feet" class="foot2">
             <div class="samelineheader">
                 <p  id = "copyright" class="copyrighttext2">Copyright NWVBUG Development & Lye Software, 2022. </p>
+                <p class="copyrighttext2">Current Version: Lang 3.2.6</p>
                 <img src="shortnwvbug.png" style="height:3vw;">
             </div>
         </footer>
     </div>
+
+    <div id="failedSignIn" class="absolute" style="display: none; height: 100vh; width: 100vw; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="horizontalFlex" style="align-items: center; justify-content: center; height: 100vh; width: 100vw;">
+            <div class="horizontalFlex centerText" style="border-radius: 15px; padding: 20px; align-items: center; justify-content: center; flex-direction: column; width: 25vw; height: 50vh; background-color: wheat;">
+                <img src="goodsizelye.png" style="height:10vh;">
+                <div style="margin-top: 30px;"></div>
+                <div style="margin-top: 30px;"></div>
+                <div>We did not find a Lye account associated with this computer.</div>
+                <div style="margin-top: 30px;"></div>
+                <div class="button" style="color: wheat;" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signin/www.langstudy.tech-index.html'">Log In</div>
+                <div class="button" style="color: wheat;" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signup'">Sign Up</div>
+                <div id="useAsGuest" style="font-size: 10px; text-decoration: underline;">No thanks, I'd like to use Lang as a guest</div>
+            </div>
+        </div>
+    </div>
+    
 </body>
 <script>
     
@@ -137,6 +370,10 @@
         }
     });
 
+    document.getElementById("useAsGuest").addEventListener("click", function(){
+        setLocalUsage();
+    });
+
     setTimeout(function(){
         document.getElementById("changelog").classList.remove("preload")
     },500);
@@ -145,9 +382,27 @@
     window.addEventListener("scroll", function(){
         window.scrollTo(0,0);
     });
+    
+    
+
+    // this is stuff to simulate loading until the actual loading is implemented
+    // var failedSignInToken = true
+    // var successfulSignIn = false
+
+    // if (failedSignInToken) {
+    //     setTimeout(function(){
+    //         failedSignIn()
+    //     }, 3000);
+    // }
+
+    // if (successfulSignIn) {
+    //     setTimeout(function(){
+    //         hideLoadingView();
+    //     }, 3000);
+    // }
 
 </script>
 </html>
 
-<!-- Webpage designed by aspeli, realized by ankleBowl & tyn -->
+<!-- Webpage designed by aspeli, realized by ankleBowl -->
 <!-- If anyone else comes along and adds to the page, add your name here -->

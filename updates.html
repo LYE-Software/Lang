@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lang</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="circular lang icon.png">
+    <script src="code.js"></script> 
+</head>
+<body onload = "checkSettings()" class="homepage">
+    <div class="samelineheader">
+        <img src="transparenticon.png" class="topleftlogoicon" style = 'height:10vh; width:auto; min-height:90px;' onclick="window.location.href='index.html'">
+        <h1 class="unlinkedHeader">How the Lang update system works</h1>
+    </div>
+    <div class="sameline">
+        <div style="align-items:center; text-align:center;">
+            <h2>What do updates usually contain?</h2>
+            <div style="border:5px solid #001945; border-radius:15px; margin:15px; height:auto; width:70vw;">
+                <p class="header">Lang updates are automatically pushed to the server and you should not notice any down time. Updates can contain anything from bug fixes to total UI overhauls. The most common form of update, the routine update, typically contains bugfixes and maybe small UI tweaks, often requested by users. These updates can come from week to week, and potentially day to day depending on how busy the devs are :). </p>
+            </div>
+        </div>
+        <div style="align-items:center; text-align:center;">
+            <h2>How are updates labeled?</h2>
+            <div style="border:5px solid #001945; border-radius:15px; margin:15px; height:auto; width:70vw;">
+                <p class="header">Lang updates are labeled specifically to make it easier for users and the Lang team to see what an update contains. There are 3 numbers in the label of a Lang update, as Lang uses the Major Minor Patch semantic versioning system. For example, we could say 3.4.2 is the semantic version number. The first number signifies the major version of Lang. We are currently on the 3rd major version of Lang (see below for previous versions). The differences between versions are huge and readily apparent. The second number (4, in our example) is the minor change, or for Lang, how many features were added from the start of the major version. The final number (2, in our example) is how many small bugfix/UI tweaks, or patches, were done since the start of a major version. You can view update descriptions in the Changelog or on GitHub. Only the major and some minor changes will show up in the Changelog, not the patches. The Changelog will always include a correct version label in the footer, however.</p>
+            </div>
+        </div>
+        <div style="align-items:center; text-align:center;">
+            <h2>Previous Major Versions</h2>
+            <div style="border:5px solid #001945; border-radius:15px; margin:15px; height:auto; width:70vw;">
+                <h2 class="unlinkedHeader">Lang 0.0.0+</h2>
+                <img src="lang precursor.jpg">
+                <br>
+                <h2 class="unlinkedHeader">Lang 1.0.0+</h2>
+                <img src="og lang.jpg" style="width:40vw;">
+                <br>
+                <h2 class="unlinkedHeader">Lang 2.0.0+</h2>
+                <img src="lang2.1.jpg" style="width:40vw;">
+                <img src="lang2.2.jpg" style="width:40vw;">
+                <p class="header">The home page for Lang 2.0.0+ had 2 pages, you had to scroll down.</p>
+                <br>
+                <h2 class="unlinkedHeader">Lang 3.0.0+</h2>
+                <img src="lang3.0.jpg" style="width:40vw;">
+                <br>
+                <br>
+
+            </div>
+        </div>
+        <div style="width:60vw;">
+            <br>
+            <br>
+        </div>
+        
+    </div>
+    <footer id = "feet" class="foot">
+        <div class="samelineheader">
+            <p  id = "copyright" class="copyrighttext">Copyright NWVBUG Development, 2022. <a href="https://github.com/nwvbug/Lang">GitHub Repo & Source</a></p>
+            <button id="return" class = "returnbutton" onclick="returnMain()">Exit</button>
+        </div>
+    </footer>
+</body>
+</html>
