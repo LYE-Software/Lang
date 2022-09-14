@@ -1030,6 +1030,7 @@ function onBtnPress(v) {
     
     if (window.localStorage.getItem("fullstudysheet")!="" && window.localStorage.getItem("fullstudysheet")!=null){
         customWords = window.localStorage.getItem("fullstudysheet")
+        document.title = window.localStorage.getItem("chosenSheet") + " - Lang"
         window.localStorage.setItem("fullstudysheet", "");
         window.localStorage.setItem("chosenSheet", "");
         console.log( customWords )
@@ -1083,6 +1084,7 @@ function onBtnPress(v) {
         var file = document.getElementById('file').files[0];
         var reader = new FileReader();
         reader.onload = function(e) {
+            document.title = "Lang - Studying Local File"
             var text = reader.result;
             
             customWords = text;
