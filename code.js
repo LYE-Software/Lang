@@ -418,7 +418,7 @@ async function generateLibraryList(){
 
 
 
-function getLibrary(){
+async function getLibrary(){
     // if (c==null){
     //     document.getElementById("library").innerHTML = "Something went wrong. Check your network connection and try again.";
     //     document.getElementById("top").innerHTML = "Lang Cloudsave requires an internet connection. You can still use locally saved Studysheets while offline. ";
@@ -428,10 +428,12 @@ function getLibrary(){
 
     // }
     sessionid = window.localStorage.getItem("usertoken");
-    library = httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/list")
-    username = httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/name")
-    customuser = httpGet("https://anklebowl.pythonanywhere.com/usernamefromtoken/"+sessionid)
+    library = await httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/list")
+    username = await httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/name")
+    customuser = await httpGet("https://anklebowl.pythonanywhere.com/usernamefromtoken/"+sessionid)
     console.log("custom user name: "+customuser)
+    document.getElementById("biguploadbutton").style.display="";
+    document.getElementById("noclickdiv").style.display="none";
     if(library == "[]"){
         document.getElementById("library").innerHTML = "You have no cloudsaved Lang Studysheets.";
 
@@ -527,12 +529,12 @@ function getLibrary(){
             libutton.setAttribute("studysheet", text)
             document.getElementById("libraryholder").appendChild(libutton)
             console.log(id)
-            document.getElementById(id).onclick = function(){
+            document.getElementById(id).onclick = async function(){
                 var element = document.getElementById(this.id);
                 console.log(element)
                 link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+ element.getAttribute("studysheet")+"/delete"
                 console.log("link is: "+link)
-                httpGet(link)
+                await httpGet(link)
                 window.location.reload()
             }
             
