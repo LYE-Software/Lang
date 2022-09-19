@@ -135,7 +135,7 @@ function uploadFiles(){
     uploadFile.id = 'file';
     uploadFile.name = 'file';
     uploadFile.accept = '.lang';
-    document.getElementById("libraryholder").appendChild(uploadFile)
+    document.getElementById("uploadholder").appendChild(uploadFile)
     var uploadButton = document.createElement('button');
     uploadButton.innerHTML = 'Upload';
     uploadButton.onclick = function() {
@@ -148,6 +148,7 @@ function uploadFiles(){
             text = text.replaceAll("\n", "sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
 
             var filename = file.name;
+            console.log("FILE NAME+ "+filename)
             var url = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/upload/"+filename;
 
             var xhr = new XMLHttpRequest();
@@ -174,7 +175,7 @@ function uploadFiles(){
         reader.readAsText(file);
 
     }
-    document.getElementById("libraryholder").appendChild(uploadButton)
+    document.getElementById("uploadholder").appendChild(uploadButton)
 }
 function httpGet(theUrl){
     //this needs to be async as we cannot set timeout for sync request and sync reqs halt all js for browser
@@ -327,7 +328,7 @@ async function generateLibraryList(){
         
             }
             else{
-                library = library.split(",")
+                library = library.split("-seperator-")
                 if (library==""){
                     document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
                 }
@@ -439,7 +440,7 @@ async function getLibrary(){
 
     }
     else{
-        library = library.split(",")
+        library = library.split("-seperator-")
         if (library==""){
             document.getElementById("library").innerHTML = "You have no cloudsaved Lang Studysheets.";
         }
@@ -494,7 +495,12 @@ async function getLibrary(){
             var usebutton = document.createElement('button')
             usebutton.className="deletebutton";
             text =library[i]
-            usebutton.innerHTML = "Study "+text
+            if(text.length>22){
+                usebutton.innerHTML = "Study "+text.substring(0,22)+"..."
+            } else{ 
+                usebutton.innerHTML = "Study "+text
+            }
+            
             link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+librarytext.innerHTML
             
             console.log(link)
@@ -518,8 +524,11 @@ async function getLibrary(){
             var libutton = document.createElement('button')
             libutton.className="deletebutton";
             text =library[i]
-            libutton.innerHTML = "Delete "+text
-            link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+text+"/delete"
+            if(text.length>22){
+                libutton.innerHTML = "Delete "+text.substring(0,22)+"..."
+            } else{ 
+                libutton.innerHTML = "Delete "+text
+            }            link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+text+"/delete"
             
             console.log(link)
             id = "library"+generateIdA
