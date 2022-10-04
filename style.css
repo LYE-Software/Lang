@@ -78,6 +78,11 @@
             align-items: center;
         }
 
+        .horizontalFlexWrap {
+          display: flex;
+          flex-direction: row;
+          flex:wrap;
+      }
         .centerFlex {
             justify-content: center;
             align-items: center;
