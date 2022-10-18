@@ -1244,7 +1244,7 @@ function toggleAudio(){
 
 ///function to make custom sheet UI & general loop
 function doSpeedTest(v){
-    
+    whichCustom = "speed";
     document.getElementById("crctst").innerHTML = "Correct: " + correctCounter
     document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectCounter
 
@@ -1271,7 +1271,7 @@ function doSpeedTest(v){
     document.getElementById("incorrect").style.fontSize = "15"
     document.getElementById("timerchange").style.display = "none";
 
-    whichCustom = v;
+    
     
     wordPair = getRandomQuestion(customWords);
     console.log("Got random question: " + wordPair)
@@ -1320,6 +1320,8 @@ function doCustomSheets(v){
         customAnswer = wordPair[1];
         customAnswer = customAnswer.toLowerCase();
 
+    } else if (v=="speed"){
+        doSpeedTest();
     }
     else{
         wordPair = getRandomMultiQ(customWords);
@@ -1743,6 +1745,8 @@ function checkCustom(v){
         }
         
         input.value = ""
+        timer("clear")
+
         afterCorrect("amogus", "custom")
     }
     else{
