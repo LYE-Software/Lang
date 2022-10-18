@@ -610,6 +610,7 @@ function execute(){
 
 function getOtherAnswers(textBlock){
     let arrayText = textBlock.split('\n')
+
     console.log("arr text fdaf "+arrayText) 
     let random_number = Math.floor(Math.random() *arrayText.length);
     console.log(random_number)
@@ -617,18 +618,28 @@ function getOtherAnswers(textBlock){
     console.log(random_question)
     var questionArray = JSON.parse(random_question)
     console.log(questionArray)
+
     let random_number2 = Math.floor(Math.random() *arrayText.length);
     console.log(random_number2)
+    while (random_number2==random_number){
+        random_number2 = Math.floor(Math.random() *arrayText.length);
+    }
     let random_question2 = arrayText[random_number2];
     console.log(random_question2)
     var questionArray2 = JSON.parse(random_question2)
     console.log(questionArray2)
+
     let random_number3 = Math.floor(Math.random() *arrayText.length);
     console.log(random_number3)
+    while (random_number3==random_number || random_number3==random_number2){
+        random_number3 = Math.floor(Math.random() *arrayText.length);
+    }
     let random_question3 = arrayText[random_number3];
     console.log(random_question3)
     var questionArray3 = JSON.parse(random_question3)
     console.log(questionArray3)
+
+
 
     fakeout = [questionArray[1], questionArray2[1], questionArray3[1]]
 
@@ -699,9 +710,23 @@ function doMultipleChoice(){
     } catch (error) {
         
     }
+    document.getElementById("multchoice").style.display="";
     question = getRandomQuestion(customWords);
     document.getElementById("questionheader").innerHTML = question[0];
     let random_number = Math.floor(Math.random() *4);
+    fakeout = getOtherAnswers(customWords)
+    keepchecking = true;
+    recursioncheck = 0;
+    while (keepchecking == true && recursioncheck <=1000){
+        for (i=0; i<question.length; i++){
+            if (fakeout[i] == question[1]){
+                fakeout = getOtherAnswers(customWords)
+                i=0;
+            }
+        }
+        keepchecking = false;
+        recursioncheck++;
+    }
     if (random_number == 0){
         let element = document.getElementById("a")
         element.id = "correct"
@@ -712,7 +737,7 @@ function doMultipleChoice(){
         }
         element.innerHTML = question[1];
 
-        fakeout = getOtherAnswers(customWords)
+        
         document.getElementById("b").innerHTML = fakeout[0]
         document.getElementById("b").onclick=function(){
             checkMulti("b")
@@ -736,7 +761,6 @@ function doMultipleChoice(){
             checkMulti(theid)
         }
         element.innerHTML = question[1];
-        fakeout = getOtherAnswers(customWords)
 
         document.getElementById("a").innerHTML = fakeout[0]
         document.getElementById("c").innerHTML = fakeout[1]
@@ -762,7 +786,6 @@ function doMultipleChoice(){
             theid = this.id
             checkMulti(theid)
         }
-        fakeout = getOtherAnswers(customWords)
 
         element.innerHTML = question[1];
         document.getElementById("b").innerHTML = fakeout[0]
@@ -789,7 +812,6 @@ function doMultipleChoice(){
             theid = this.id
             checkMulti(theid)
         }
-        fakeout = getOtherAnswers(customWords)
 
         element.innerHTML = question[1];
         document.getElementById("b").innerHTML = fakeout[0]
