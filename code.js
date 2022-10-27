@@ -119,6 +119,31 @@ function changelibrary(){
     }
 }
 
+async function getUsername(){
+    if (window.localStorage.getItem("usertoken")!=""&&window.localStorage.getItem("usertoken")!=null){
+        sessionid = window.localStorage.getItem("usertoken");
+        username = await httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/name")
+        link = "https://anklebowl.pythonanywhere.com/usernamefromtoken/"+sessionid
+        customuser = await httpGet(link);
+        console.log("Username = "+customuser)
+        if(username.startsWith("<!DOCTYPE HTML PUBLIC")){
+            window.localStorage.setItem("username", "Guest");
+            return "Guest";
+        } else{
+            window.localStorage.setItem("username", customuser);
+            return username;
+        }
+        
+    } else{
+        return "Guest";
+    }
+      
+}
+
+function applyUsername(){
+    getUsername();
+    document.getElementById("homeusername").innerHTML = window.localStorage.getItem("username");
+}
 
 function callmultiple(){
     getLibrary()
@@ -261,13 +286,20 @@ function submitNewUN(){
 }
 
 function changeToOffline(){
-    document.getElementById("yourstudysheets").innerHTML = "Your Lang client could not establish a connection to the server. Please check your connection and try again in a few minutes.";
-    document.getElementById("homeusername").innerHTML = "Offline";
-    document.getElementById("offlinetext").style.display = "";
-    offline = true;
+    try{
+        document.getElementById("yourstudysheets").innerHTML = "Your Lang client could not establish a connection to the server. Please check your connection and try again in a few minutes.";
+        document.getElementById("homeusername").innerHTML = "Offline";
+        document.getElementById("offlinetext").style.display = "";
+        offline = true;
+    } catch(error){
+
+    }
+    
 
 }
 async function generateLibraryList(){
+    customuser=window.localStorage.getItem("username");
+    document.getElementById("homeusername").innerHTML = "Hello, "+customuser;
     console.log("generating library list")
     if(offline == true){
         console.log("Lang is offline");
@@ -1194,6 +1226,7 @@ function signout(){
         window.localStorage.setItem("fullstudysheet", "");
         window.localStorage.setItem("chosenSheet", "");
         window.localStorage.setItem("usertoken", null);
+        window.localStorage.setItem("username", null);
         window.location.href="index.html"
       } else {
         
@@ -2105,26 +2138,32 @@ function makeInputs(version){
     inputMap.set("")
 
     if (version=="single"){
-        var br = document.createElement("br")
-        document.getElementById("minicreator").appendChild(br);
-        id1 = "verbInput"+generateIdV
-        id2 = "answerInput"+generateIdA
-        var verbInput = document.createElement('INPUT');
-        verbInput.setAttribute("type", "text");
-        verbInput.setAttribute("id",id1)
+        var br = document.createElement("div")
+        br.className = "termDefContainer";
+        document.getElementById("insideCreator").appendChild(br);
+        id1 = "input"+generateIdV
+        id2 = "input"+generateIdA
+
+        var verbInput = document.createElement('div');
+        verbInput.id=id1;
+        verbInput.className="term"
+        verbInput.setAttribute("data-text", "Term");
+        verbInput.contentEditable="true";
         generateIdV++
-        verbInput.placeholder="Put Term / Question Here";
-        document.getElementById("minicreator").appendChild(verbInput);
+            // verbInput.innerHTML="Put Term / Question Here";
+        br.appendChild(verbInput);
     
-        var answerInput = document.createElement("INPUT");
-        answerInput.setAttribute("type", "text");
-        verbInput.setAttribute("id",id2)
+        var answerInput = document.createElement("div");
+        answerInput.id=id2;
+        answerInput.setAttribute("id",id2)
+        answerInput.className="definition"
+        answerInput.contentEditable="true";
+        answerInput.setAttribute("data-text", "Answer");
         generateIdA++
-        answerInput.placeholder="Put Answer Here";
-        document.getElementById("minicreator").appendChild(answerInput);
+        // answerInput.innerHTML="Put Answer Here";
+        br.appendChild(answerInput);
     
-        var br = document.createElement("br")
-        document.getElementById("minicreator").appendChild(br);
+        
     }
     else{
         
@@ -2201,26 +2240,104 @@ function makeInputs(version){
     
 }
 
+function saveToCloud(){
+    document.getElementById("sendingLoader").style.display="";
+    if(document.getElementById("sstitle").innerHTML == ""){
+        document.getElementById("sstitle").innerHTML = "Lang Custom Studysheet";
+     }
+    
+    var downloadArray = ""
+    var childarray = []
+    var childrens = document.getElementById("insideCreator").children;
+    console.log(childrens);
+    for(var i=0; i<childrens.length; i++){
+        var childx = childrens[i];
+        // console.log(childx.id)
+        // if (childx.id.startsWith() == 'input'){
+        //     childarray.push(childx);
+        // }
+        console.log(childx);
+        console.log("hilarious right");
+        var underChildren = childx.children;
+        console.log(underChildren);
+        for (var n=0; n<2; n++){
+            childarray.push(underChildren[n])
+            
+        }
+
+    }
+
+    console.log(childarray);
+    for (var i=0; i<childarray.length; i+=2){
+        var child = childarray[i];
+        value1 = '["'+child.innerHTML+'"';
+        var child2 = childarray[i+1];
+        value2 = '"'+child2.innerHTML+'"]'+"\n";
+        toAdd = [value1, value2];
+        console.log(toAdd);
+        downloadArray = downloadArray + toAdd;
+        console.log(downloadArray);
+    }
+    downloadArray = downloadArray.slice(0,-1);
+    downloadArrayString = downloadArray+"";
+    downloadArrayString = downloadArrayString.replaceAll("\n", "sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
+
+    var filename = document.getElementById("sstitle").innerHTML;
+    console.log("FILE NAME+ "+filename)
+    var url = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/upload/"+filename;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url);
+
+    xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            console.log(xhr.status);
+            console.log(xhr.responseText);
+            window.location.reload();
+        }
+    };
+    var data = downloadArrayString;
+    console.log("sending " + data + " to " + url);
+    xhr.send(data);
+}
+
+
 //preps the user input custom sheet for downloading by putting all into one string
 
 function downloadVerbs(select){
+    if(document.getElementById("sstitle").innerHTML == ""){
+        document.getElementById("sstitle").innerHTML = "Lang Custom Studysheet";
+     }
     if(select == "s"){
         var downloadArray = ""
         var childarray = []
-        var children = minicreator.children;
-        for(var i=0; i<children.length; i++){
-            var childx = children[i];
-            if (childx.tagName.toLowerCase() === 'input'){
-                childarray.push(childx);
+        var childrens = document.getElementById("insideCreator").children;
+        console.log(childrens);
+        for(var i=0; i<childrens.length; i++){
+            var childx = childrens[i];
+            // console.log(childx.id)
+            // if (childx.id.startsWith() == 'input'){
+            //     childarray.push(childx);
+            // }
+            console.log(childx);
+            console.log("hilarious right");
+            var underChildren = childx.children;
+            console.log(underChildren);
+            for (var n=0; n<2; n++){
+                childarray.push(underChildren[n])
+              
             }
     
         }
+
         console.log(childarray);
         for (var i=0; i<childarray.length; i+=2){
             var child = childarray[i];
-            value1 = '["'+child.value+'"';
+            value1 = '["'+child.innerHTML+'"';
             var child2 = childarray[i+1];
-            value2 = '"'+child2.value+'"]'+"\n";
+            value2 = '"'+child2.innerHTML+'"]'+"\n";
             toAdd = [value1, value2];
             console.log(toAdd);
             downloadArray = downloadArray + toAdd;
@@ -2277,7 +2394,7 @@ function downloadVerbs(select){
 //actually downloads the string created above (this function ONLY runs after the previous one)
 
 function save(data) {
-    namefile = window.prompt("Enter the name for the study sheet","LangCustomVerbSheet");
+    namefile = document.getElementById("sstitle").innerHTML;
     filename = namefile+".lang";
     if (filename == null){
 

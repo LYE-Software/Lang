@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Rubik+Mono+One&display=swap');
+[contentEditable=true]:empty:not(:focus):before {
+    content: attr(data-text)
+  }
+.pfp {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.changelogshown {
+    transform: translate(-50%, -50%);
+    animation: showchangelog 0.5s ease-in-out;
+}
+
+.changeloghidden {
+    transform: translate(-50%, 60%);
+    animation: hidechangelog 0.5s ease-in-out;
+}
+
+@keyframes showchangelog {
+    0% {
+        transform: translate(-50%, 60%);
+    }
+    100% {
+        transform: translate(-50%, -50%);
+    }
+}
+
+@keyframes hidechangelog {
+    0% {
+        transform: translate(-50%, -50%);
+    }
+    100% {
+        transform: translate(-50%, 60%);
+    }
+}
+
+#changelog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 75vw; height: 75vh; background-color: wheat;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.headerContainer {
+    position: absolute;
+}
+
+.header {
+    height: 10vh;
+    background-color: wheat;
+    width: 100vw;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.horizontalFlex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.centerFlex {
+    justify-content: center;
+    align-items: center;
+}
+
+.flexSpacer {
+    flex: 1;
+}
+
+body {
+    margin: 0;
+    background-color: #001945;
+    /* font-family: 'Josefin Sans', sans-serif; */
+    font-family: 'Poppins', sans-serif;
+
+    overflow-y: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+.uploadConvertContainer {
+    background-color: rgb(47, 61, 115);
+    width: 100vw;
+    color: wheat;
+}
+
+.largeButton {
+    border-radius: 1000000px;
+    height: 5vh;
+    width: 35vw;
+    padding: 2.5vh;
+    background-color: #001945;
+    margin: 5vh;
+}
+
+.button {
+    border-radius: 1000000px;
+    height: 3vh;
+    width: 10vw;
+    padding: 1vh;
+    background-color: #001945;
+    margin: 2vh;
+}
+
+.centerText {
+    text-align: center;
+}
+
+.headerText {
+    /* font-weight: bold; */
+    color: wheat;
+    margin: 5vh;
+    font-size: 50px;
+
+    font-family: 'Rubik Mono One', sans-serif;
+}
+
+.studysetlist {
+    background-color: rgb(7, 15, 35);
+    margin-left: 10vw;
+    margin-right: 10vw;
+
+    max-height: 40vh;
+    overflow-y: scroll;
+}
+
+.studysetentry {
+    color: wheat; 
+    justify-content: center;
+    padding: 20px;
+}
+
+.debugArea {
+    background-color: wheat;
+    width: 100vw;
+    margin: 0;
+}
+
+.footer {
+    color: wheat;
+}
+
+.fadeIn {
+    transition: opacity 0.25s ease-in-out;
+    opacity: 1;
+}
+
+.fadeOut {
+    transition: opacity 0.25s ease-in-out;
+    opacity: 0;
+}
+
+/* https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-animation-from-running-on-page-load */
+.preload {
+animation-duration: 0s !important;
+-webkit-animation-duration: 0s !important;
+transition:background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;}
+
+
+/* https://cssloaders.github.io */
+.lds-ellipsis {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+.lds-ellipsis div {
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: wheat;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+    left: 8px;
+    animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+    left: 8px;
+    animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+    left: 32px;
+    animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+    left: 56px;
+    animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes lds-ellipsis3 {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+@keyframes lds-ellipsis2 {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(24px, 0);
+    }
+}     
+
+
+
+/* Lang creator page */
+
+.langCreatorContainer {
+    box-sizing: border-box;
+    padding: 50px;
+
+    width: 60vw;
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+    /* align-items: center; */
+
+    overflow-y: scroll;
+    max-height: 80vh;
+
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+}
+
+.langCreatorContainer::-webkit-scrollbar {
+    display: none;
+}
+  
+.creatorIcon {
+    width: 7.5vw;
+    height: 7.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.creatorIcon:first-child {
+    border-bottom: 1px solid #001945;
+}
+
+
+.termDefContainer {
+    background-color: wheat;
+    border-radius: 25px;
+    padding: 25px;
+    margin: 10px;
+
+    width: 50vw;
+
+    display: flex;
+    justify-content: center;
+}
+
+.term {
+    flex: 1;
+    border-bottom: #001945 1px solid;
+    margin-right: 25px;
+}
+
+.definition {
+    flex: 1;
+    border-bottom: #001945 1px solid;
+}

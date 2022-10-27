@@ -1,0 +1,77 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating a Studysheet on Lang</title>
+    <script src="code.js"></script>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" href="circular lang icon.png">
+</head>
+<body onload="applyUsername()">
+    <div id="failedSignIn" class="absolute" style="display:none; z-index: 100; height: 100vh; width: 100vw; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="horizontalFlex" style="align-items: center; justify-content: center; height: 100vh; width: 100vw;">
+            <div class="horizontalFlex centerText" style="border-radius: 15px; padding: 20px; align-items: center; justify-content: center; flex-direction: column; width: 25vw; height: 50vh; background-color: wheat;">
+                <img src="goodsizelye.png" style="height:10vh;">
+                <div style="margin-top: 30px;"></div>
+                <div style="margin-top: 30px;"></div>
+                <div>We did not find a Lye account associated with this computer.</div>
+                <div style="margin-top: 30px;"></div>
+                <div class="button" style="color: wheat;" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signin/www.langstudy.tech-index.html'">Log In</div>
+                <div class="button" style="color: wheat;" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signup'">Sign Up</div>
+                <div id="useAsGuest" style="font-size: 15px; text-decoration: underline;">Return to editing your Studysheet</div>
+            </div>
+        </div>
+    </div>
+    <div style="display:none; height:100vh; width:100vw; z-index: 100; position:absolute; background-color: rgba(0,0,0,0.75);" id="sendingLoader">
+        <div style="position:absolute; background-color: #001945; top:50%; left:50%; text-align: center; display:flex; flex-direction: column; align-items: center; transform: translate(-50%, -50%); border-radius:15px; padding:20px; box-sizing: border-box; text-align: center;">
+            <div class="lds-ellipsis" style="color:#001945; " id="studyloader" ><div></div><div></div><div></div><div></div></div>
+            <p style="color:wheat;">Syncing your Studysheet with our servers...</p>
+        </div>
+    </div>
+    <div class="absolute">
+        <div style="height: 10vh;"></div>
+        <div style="display: flex; align-items: center; justify-content: center; width: 100vw; height: 90vh;">
+            <div id="langCreatorContainer" class="langCreatorContainer">
+                <div style="height: 10vh;"></div>
+                <div class="termDefContainer">
+                    <div style="margin-right: 25px;">Title: </div>
+                    <div class="definition" id="sstitle" contenteditable></div>
+                </div>
+                <div id="insideCreator">
+
+                </div>
+                <div class="termDefContainer" onclick="makeInputs('single')">
+                    Add New
+                </div>
+            </div>
+    
+            <div style="background-color: wheat; height: 15vw; width: 7.5vw; border-radius: 25px;">
+                <div class="creatorIcon" onclick="downloadVerbs('s')">
+                    <img src="save.svg" style="height:5.5vw; color:#001945;">
+                </div>
+                <div class="creatorIcon" onclick="saveToCloud()">
+                    <img src="goodsizelye.png" style="height:4.5vw;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="header0" class="headerContainer" style="width: 100vw">
+        <div class="horizontalFlex header">
+            <div onclick="returnMain()" style="cursor:pointer;">
+                <img style="height: 10vh;" src="assets/logos/lang.png">
+            </div>
+            <div class="flexSpacer"></div>
+            <div style="font-family: 'Rubik Mono One', sans-serif; font-size:2vw;">Study Sheet Creator</div>
+            <div class="flexSpacer"></div>
+            <div id="homeusername">Getting your userinfo...</div>
+            <div>
+                <img class="pfp" style="height: 5vh;" src="settings.png" onclick="window.location.href='settings.html'">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
