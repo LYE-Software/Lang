@@ -299,7 +299,7 @@ function changeToOffline(){
 }
 async function generateLibraryList(){
     customuser=window.localStorage.getItem("username");
-    document.getElementById("homeusername").innerHTML = "Hello, "+customuser;
+    document.getElementById("homeusername").innerHTML = "Hello";
     console.log("generating library list")
     if(offline == true){
         console.log("Lang is offline");
