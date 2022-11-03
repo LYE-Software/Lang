@@ -6,31 +6,11 @@
     <link rel="icon" href="circular lang icon.png">
     <title>Lang</title>
     <script src="code.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stylesheet.css">
     <style>
         /* @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap'); */
         @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Rubik+Mono+One&display=swap');
-        
-        
-        .pfp {
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-
-        /* .heightShrink {
-            height: 0% !important;
-            animation: heightShrink 1s !important;
-        }
-
-        @keyframes heightShrink {
-            0% {
-                height: 100%;
-            }
-            100% {
-                height: 0%;
-            }
-        } */
         
         .changelogshown {
             transform: translate(-50%, -50%);
@@ -68,36 +48,6 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
         }
 
-        .headerContainer {
-            position: absolute;
-        }
-
-        .header {
-            height: 10vh;
-            background-color: wheat;
-            width: 100vw;
-        }
-
-        .absolute {
-            position: absolute;
-        }
-
-        .horizontalFlex {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .centerFlex {
-            justify-content: center;
-            align-items: center;
-        }
-
-        .flexSpacer {
-            flex: 1;
-        }
-
         body {
             margin: 0;
             background-color: #001945;
@@ -117,36 +67,6 @@
             color: wheat;
         }
 
-        .largeButton {
-            border-radius: 1000000px;
-            height: 5vh;
-            width: 35vw;
-            padding: 2.5vh;
-            background-color: #001945;
-            margin: 5vh;
-        }
-
-        .button {
-            border-radius: 1000000px;
-            height: 3vh;
-            width: 10vw;
-            padding: 1vh;
-            background-color: #001945;
-            margin: 2vh;
-        }
-
-        .centerText {
-            text-align: center;
-        }
-
-        .headerText {
-            /* font-weight: bold; */
-            color: wheat;
-            margin: 5vh;
-            font-size: 50px;
-
-            font-family: 'Rubik Mono One', sans-serif;
-        }
 
         .studysetlist {
             background-color: rgb(7, 15, 35);
@@ -162,33 +82,6 @@
             justify-content: center;
             padding: 20px;
         }
-
-        .debugArea {
-            background-color: wheat;
-            width: 100vw;
-            margin: 0;
-        }
-
-        .footer {
-            color: wheat;
-        }
-
-        .fadeIn {
-            transition: opacity 0.25s ease-in-out;
-            opacity: 1;
-        }
-
-        .fadeOut {
-            transition: opacity 0.25s ease-in-out;
-            opacity: 0;
-        }
-
-        /* https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-animation-from-running-on-page-load */
-        .preload {
-        animation-duration: 0s !important;
-        -webkit-animation-duration: 0s !important;
-        transition:background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;}
-
 
         /* https://cssloaders.github.io */
         .lds-ellipsis {
@@ -288,7 +181,7 @@
             </div>
         </div>
     </div>
-    <div id="header0" class="headerContainer" style="width: 100vw">
+    <div id="header0" class="absolute" style="width: 100vw">
         <div class="horizontalFlex header">
             <div>
                 <img style="height: 10vh;" src="assets/logos/lang.png">
@@ -301,7 +194,7 @@
             </div>
         </div>
     </div>
-    <div id="header1" class="headerContainer horizontalFlex centerText" style="pointer-events: none; height: 10vh; width: 100vw; justify-content: center;;">
+    <div id="header1" class="absolute horizontalFlex centerText" style="pointer-events: none; height: 10vh; width: 100vw; justify-content: center;;">
         <div class="horizontalFlex" style="width: 70vw;">
             <div class="flexSpacer button horizontalFlex" style="pointer-events: all; align-items: center; justify-content: center;" onclick="window.location.href='about-new.html'">
                 <div style="color: wheat;">What is Lang?</div>
@@ -349,8 +242,27 @@
             </div>
         </div>
     </div>
+
+    <div id="uploadStudySheet" class="absolute" style="display: none; height: 100vh; width: 100vw; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="horizontalFlex" style="align-items: center; justify-content: center; height: 100vh; width: 100vw;">
+            <div class="verticalFlex centerText" style="border-radius: 15px; padding: 20px; align-items: center; justify-content: center; flex-direction: column; width: 80vw; height: 80vh; background-color: wheat;">
+               <div style="margin-top: 0px; margin-bottom: 10px; color: #001945" class="headerText">Upload</div>
+               <label style="width: 80%; height: 80%;" class="custom-file-upload">
+                    <input type="file"/ style="display: none;">
+                    <div class="verticalFlex" style="align-items: center; justify-content: center; width: 100%; height: 90%; background-color: #001945; border-radius: 25px;">
+                        <div style="height: 20vh;"></div>
+                        <svg style="width: 5vw; fill: wheat;" enable-background="new 0 0 385.213 385.213" version="1.1" viewBox="0 0 385.21 385.21" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m183.47 3.543-179.78 179.78c-2.43 2.43-3.621 5.618-3.597 8.794 0 0.096-0.048 0.168-0.048 0.265v180.46c0 6.641 5.39 12.03 12.03 12.03 0.096 0 0.168-0.048 0.265-0.048 3.176 0.024 6.364-1.167 8.794-3.597l171.38-171.38 171.76 171.76c4.824 4.824 12.644 4.824 17.468 0 2.863-2.863 3.814-6.749 3.284-10.466v-176.99c0.529-3.717-0.421-7.603-3.284-10.466l-180.12-180.12c-2.502-2.502-5.799-3.645-9.083-3.549-3.273-0.097-6.569 1.046-9.071 3.537zm177.48 194.28v145.52l-159.33-159.33c-2.502-2.502-5.799-3.645-9.083-3.549-3.272-0.096-6.569 1.047-9.071 3.549l-159.37 159.35v-145.58l168.41-168.4 168.44 168.44z"/>
+                        </svg>
+                        <div style="height: 5vh;"></div>
+                        <div style="color: wheat;">Click here to upload a local .lang Studysheet!</div>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
     
-</body>
+</body> 
 <script>
     
     // Add an event listener to id changelog, when it is clicked toggle the class changeloghidden and changelogshown

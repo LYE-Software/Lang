@@ -8,7 +8,7 @@
     <link rel="icon" href="circular lang icon.png">
     <script src="code.js"></script> 
 </head>
-<body onload = "doPreviewAndLocal()" class="homepage">
+<body onload = "doPreviewAndLocal()" class="darkHomepage" style="overflow-x:hidden;">
     <div style="width:95vw; height:105vh; position:relative;">
         <div style="height:99vh; width:97vw; position:absolute;" id="noclickdiv">
             <div style="position:absolute; top:40%; left:45%; background-color: wheat; border-radius:15px; padding:20px; text-align: center;">
@@ -19,9 +19,18 @@
         
         
         <div>
-            <div class="samelineheader">
-                <img src="transparenticon.png" class="topleftlogoicon">
-                <h1 class="header" id="studysheetname">Loading...</h1>
+            <div class="samelineheader" style="display:inline-block; background-color:wheat; width:100vw;">
+                <div style="width:100%; display:flex; justify-content: space-between ; text-align: center;">
+                    
+                    <img src="transparenticon.png" class="topleftlogoicon" onclick="window.location.href='index.html'">
+                    <div style="display:flex; flex-direction: column; justify-content: space-evenly;">
+                        <div class="largeTitle" id="studysheetname"></div>
+                    </div>
+                    <div style="margin-right:15px; display:flex; flex-direction: column; justify-content: space-evenly;">
+                        <img class="pfp" style="height: 5vh;" src="settings.png" onclick="window.location.href='settings.html'">
+                    </div>
+                </div>
+                
             </div>
             
         
@@ -29,16 +38,15 @@
                 <div class="verticalbox">
                     <button class="dropbtn"style="margin:20px;" onclick="window.location.href='readCustom.html'">Mastery</button>
                     <button class="dropbtn"style="margin:20px;"onclick="window.location.href='flashcards.html'">Flashcards</button>
-                    <button class="dropbtn"style="margin:20px;"onclick="window.location.href='practest.html'">Practice Test (Single)</button>
-                    <button class="dropbtn"style="margin:20px;"onclick="window.location.href='other/notready.html'">Practice Test (Multi)</button>
+                    <button class="dropbtn"style="margin:20px;"onclick="window.location.href='practest.html'">Practice Test</button>
                     <button class="dropbtn"style="margin:20px;"onclick="window.location.href='speed.html'">Speed Review</button>
                     <button class="dropbtn"style="margin:20px;"onclick="window.location.href='multiplechoice.html'">Multiple Choice</button>
-        
+                    <button class="dropbtn"style="margin:20px;"onclick="window.location.href='other/notready.html'">Edit Studysheet</button>
         
         
                 </div>
-                <div style="flex:0.35; border-radius:15px; border:solid; border-color:#001945; padding:20px; overflow:scroll; max-height:70vh;">
-                    <h3 class="header" id="previewstudysheet"></h3>
+                <div style="flex:0.35; border-radius:15px; border:solid; border-color:wheat; padding:20px; overflow:scroll; max-height:70vh;">
+                    <h3 class="header" style="color:wheat;" id="previewstudysheet"></h3>
                     <div style="width: 100%; justify-content: center; align-items: center; text-align: center;">
                     </div>
         
@@ -53,11 +61,6 @@
         </div>
         
     </div>
-    <footer id = "feet" class="foot">
-        <div class="samelineheader">
-            <p  id = "copyright" class="copyrighttext">Copyright NWVBUG Development, 2022. <a href="https://github.com/nwvbug/Lang">GitHub Repo & Source</a></p>
-            <button id="return" class = "returnbutton" onclick="returnMain()">Exit</button>
-        </div>
-    </footer>
+    
 </body>
 </html>

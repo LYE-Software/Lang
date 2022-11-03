@@ -6,39 +6,13 @@
     <link rel="icon" href="circular lang icon.png">
     <title>Lang</title>
     <script src="code.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stylesheet.css">
     <style>
         /* @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap'); */
         @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Rubik+Mono+One&display=swap');
         @import url("https://use.typekit.net/zvx6ogf.css");
     
-
-        .header {
-            height: 10vh;
-            /* background-color: wheat; */
-            width: 100vw;
-        }
-
-        .absolute {
-            position: absolute;
-        }
-
-        .horizontalFlex {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .centerFlex {
-            justify-content: center;
-            align-items: center;
-        }
-
-        .flexSpacer {
-            flex: 1;
-        }
 
         body {
             margin: 0;
@@ -54,59 +28,15 @@
             user-select: none;
         }
 
-        .largeButton {
-            border-radius: 1000000px;
-            height: 5vh;
-            width: 35vw;
-            padding: 2.5vh;
-            background-color: #001945;
-            margin: 5vh;
-        }
-
-        .button {
-            border-radius: 1000000px;
-            height: 3vh;
-            width: 10vw;
-            padding: 1vh;
-            background-color: #001945;
-            margin: 2vh;
-        }
-
-        .centerText {
-            text-align: center;
-        }
-
-        .wheat {
-            color: wheat;
-        }
-
-        .headerText {
-            color: wheat;
-            font-size: 50px;
-
-            font-family: 'Rubik Mono One', sans-serif;
-        }
-
-        .invisible {
-            opacity: 0
-        }
-
         .fadeIn {
             transition: opacity 0.25s ease-in-out;
             opacity: 1;
         }
 
         .fadeOut {
-            transition: opacity 0.25s ease-in-out;
+            transition: opacity 0.25s ease-in-out;  
             opacity: 0;
         }
-
-        /* https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-animation-from-running-on-page-load */
-        .preload {
-        animation-duration: 0s !important;
-        -webkit-animation-duration: 0s !important;
-        transition:background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;}    
-
 
         .fullHeight {
             height: 100vh;
@@ -130,24 +60,17 @@
             background-size: cover;
         }
 
-        .hidden {
-            opacity: 0 !important;
-        }
-
         #textContainer {
             transition: all 0.25s ease-in-out;
         }
 
-        .spacer {
-            flex: 1;
-        }
     </style>
 </head>
 <body>
     <div class="absolute horizontalFlex fullHeight" style="height: 100vh; width: 100vw;">
         <div class="verticalFlex fullHeight" style="z-index: 100; padding-left: 50px; padding-right: 50px; flex: 1;  background-color: wheat; overflow-y: scroll">
-            <a href="index.html" class="spacer"><img style="color: #001945; height: 5vh; margin-top: 50px;" src="back-arrow.svg"></a>
-            <div class="spacer"></div>
+            <a href="index.html" class="flexSpacer"><img style="color: #001945; height: 5vh; margin-top: 50px;" src="back-arrow.svg"></a>
+            <div class="flexSpacer"></div>
             <div style="width: 100%; color: #001945; font-size: 50px; font-family: 'alfarn', sans-serif;">LANG</div>
             <div style="width: 100%; color: #001945; font-family: 'Rubik Mono One'">Study ideas, not terms</div>
             <br>
@@ -175,8 +98,8 @@
             <div id="downButton" class="horizontalFlex" style="color: #001945; justify-content: center; width: 100%;">
                 Continue
             </div>
-            <div class="spacer"></div>
-            <div class="spacer"></div>
+            <div class="flexSpacer"></div>
+            <div class="flexSpacer"></div>
         </div>
         <div class="fullHeight verticalFlex" style="align-items: center; justify-content: center; flex: 2; background-color:#001945;">
             <div style="color: wheat; font-family: 'Rubik Mono One'; font-size: 30px;">Our Team</div>

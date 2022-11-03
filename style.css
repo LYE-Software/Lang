@@ -8,6 +8,12 @@
     margin-top: -4%;
 }
 
+.darkHomepage{
+  background-color: #001945;
+  margin: 0;
+  
+}
+
 .homepage{
     background-color: #FFEFD1;
     margin: 0;
@@ -192,10 +198,14 @@ body{
 
 .samelineheader{
     display: flex;
+    flex-direction: horizontal;
     justify-content: space-between;
 }
 
-
+.largeTitle{
+  font-family: 'Rubik Mono One', sans-serif; 
+  font-size:2vw;
+}
 
 
 .bigselection:hover{
@@ -292,6 +302,25 @@ body{
     height:10vh;
     color: #FFEFD1;
     margin:50px;
+   
+  }
+
+  .dropbtn {
+    background-color: wheat;
+    color: white;
+    padding: 16px;
+    font-size: 2vh;
+    font-size-adjust:initial;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    min-width:200px;
+  
+    border:5px;
+    border-color: wheat;
+    border-radius: 15px;
+    width:10vw;
+    height:10vh;
+    color: #001945;
    
   }
 
@@ -392,11 +421,7 @@ body{
       border-bottom-right-radius: 0px;
     }
 
-    .dropbtn:hover {
-        background-color: #3e8e41;
-        transition: 2ms;
-        
-      }
+    
 
       .dropbtnmain:hover {
         background-color: #3e8e41;
@@ -689,12 +714,12 @@ body{
 }
 .foot{
     text-align: center;
-    padding-left: 20px;
+    padding-left: 35px;
     padding-right: 20px;
     box-sizing: border-box;
-    background-color: #3e8e41;
+    background-color: wheat;
     color: white;
-    width: 101%;
+    width: 102%;
     bottom: 0%;
     position: fixed;
     transform:translateX(-20px);
@@ -719,6 +744,7 @@ body{
 .topleftlogoicon{
     height:10vh;
     width:auto;
+    cursor:pointer;
     
 }
 
