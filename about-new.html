@@ -16,7 +16,7 @@
 
         body {
             margin: 0;
-            background-color: #001945;
+            background-color: var(--primary-dark);
             /* font-family: 'Josefin Sans', sans-serif; */
             font-family: 'Poppins', sans-serif;
 
@@ -68,13 +68,13 @@
 </head>
 <body>
     <div class="absolute horizontalFlex fullHeight" style="height: 100vh; width: 100vw;">
-        <div class="verticalFlex fullHeight" style="z-index: 100; padding-left: 50px; padding-right: 50px; flex: 1;  background-color: wheat; overflow-y: scroll">
-            <a href="index.html" class="flexSpacer"><img style="color: #001945; height: 5vh; margin-top: 50px;" src="back-arrow.svg"></a>
+        <div class="verticalFlex fullHeight" style="z-index: 100; padding-left: 50px; padding-right: 50px; flex: 1;  background-color: var(--primary-light); overflow-y: scroll">
+            <a href="index.html" class="flexSpacer"><img style="color: var(--primary-dark); height: 5vh; margin-top: 50px;" src="back-arrow.svg"></a>
             <div class="flexSpacer"></div>
-            <div style="width: 100%; color: #001945; font-size: 50px; font-family: 'alfarn', sans-serif;">LANG</div>
-            <div style="width: 100%; color: #001945; font-family: 'Rubik Mono One'">Study ideas, not terms</div>
+            <div style="width: 100%; color: var(--primary-dark); font-size: 50px; font-family: 'alfarn', sans-serif;">LANG</div>
+            <div style="width: 100%; color: var(--primary-dark); font-family: 'Rubik Mono One'">Study ideas, not terms</div>
             <br>
-            <div class="preload" id="textContainer" style="overflow: hidden; height: 0px; color:#001945">
+            <div class="preload" id="textContainer" style="overflow: hidden; height: 0px; color:var(--primary-dark)">
                 <div style="width: 100%;">
                     Our lead developer, Nate Vemuri, once found himself cramming for a French test with a popular online studying program. 
                     As the seconds turned to minutes, turned to hours, he realized something. It was just too complicated to help him learn.
@@ -95,19 +95,19 @@
                 </div>
             </div>
             <br>
-            <div id="downButton" class="horizontalFlex" style="color: #001945; justify-content: center; width: 100%;">
+            <div id="downButton" class="horizontalFlex" style="color: var(--primary-dark); justify-content: center; width: 100%;">
                 Continue
             </div>
             <div class="flexSpacer"></div>
             <div class="flexSpacer"></div>
         </div>
-        <div class="fullHeight verticalFlex" style="align-items: center; justify-content: center; flex: 2; background-color:#001945;">
-            <div style="color: wheat; font-family: 'Rubik Mono One'; font-size: 30px;">Our Team</div>
+        <div class="fullHeight verticalFlex" style="align-items: center; justify-content: center; flex: 2; background-color:var(--primary-dark);">
+            <div style="color: var(--primary-light); font-family: 'Rubik Mono One'; font-size: 30px;">Our Team</div>
             <div style="height: 400px"></div>
             <div id="tinderPanel" class="absolute">
 
             </div>
-            <div style="color: wheat;">Swipe or Click</div>
+            <div style="color: var(--primary-light);">Swipe or Click</div>
         </div>
     </div>
 </body>

@@ -38,12 +38,12 @@
         }
 
         .creatorIcon:first-child {
-            border-bottom: 1px solid #001945;
+            border-bottom: 1px solid var(--primary-dark);
         }
 
 
         .termDefContainer {
-            background-color: wheat;
+            background-color: var(--primary-light);
             border-radius: 25px;
             padding: 25px;
             margin: 10px;
@@ -56,35 +56,35 @@
 
         .term {
             flex: 1;
-            border-bottom: #001945 1px solid;
+            border-bottom: var(--primary-dark) 1px solid;
             margin-right: 25px;
         }
 
         .definition {
             flex: 1;
-            border-bottom: #001945 1px solid;
+            border-bottom: var(--primary-dark) 1px solid;
         }
     </style>
 </head>
 <body onload="applyUsername()">
     <div id="failedSignIn" class="absolute" style="display:none; z-index: 100; height: 100vh; width: 100vw; background-color: rgba(0, 0, 0, 0.5);">
         <div class="horizontalFlex" style="align-items: center; justify-content: center; height: 100vh; width: 100vw;">
-            <div class="horizontalFlex centerText" style="border-radius: 15px; padding: 20px; align-items: center; justify-content: center; flex-direction: column; width: 25vw; height: 50vh; background-color: wheat;">
+            <div class="horizontalFlex centerText" style="border-radius: 15px; padding: 20px; align-items: center; justify-content: center; flex-direction: column; width: 25vw; height: 50vh; background-color: var(--primary-light);">
                 <img src="goodsizelye.png" style="height:10vh;">
                 <div style="margin-top: 30px;"></div>
                 <div style="margin-top: 30px;"></div>
                 <div>We did not find a Lye account associated with this computer.</div>
                 <div style="margin-top: 30px;"></div>
-                <div class="button" style="color: wheat;" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signin/www.langstudy.tech-index.html'">Log In</div>
-                <div class="button" style="color: wheat;" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signup'">Sign Up</div>
+                <div class="button" style="color: var(--primary-light);" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signin/www.langstudy.tech-index.html'">Log In</div>
+                <div class="button" style="color: var(--primary-light);" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signup'">Sign Up</div>
                 <div id="useAsGuest" style="font-size: 15px; text-decoration: underline;">Return to editing your Studysheet</div>
             </div>
         </div>
     </div>
     <div style="display:none; height:100vh; width:100vw; z-index: 100; position:absolute; background-color: rgba(0,0,0,0.75);" id="sendingLoader">
-        <div style="position:absolute; background-color: #001945; top:50%; left:50%; text-align: center; display:flex; flex-direction: column; align-items: center; transform: translate(-50%, -50%); border-radius:15px; padding:20px; box-sizing: border-box; text-align: center;">
-            <div class="lds-ellipsis" style="color:#001945; " id="studyloader" ><div></div><div></div><div></div><div></div></div>
-            <p style="color:wheat;">Syncing your Studysheet with our servers...</p>
+        <div style="position:absolute; background-color: var(--primary-dark); top:50%; left:50%; text-align: center; display:flex; flex-direction: column; align-items: center; transform: translate(-50%, -50%); border-radius:15px; padding:20px; box-sizing: border-box; text-align: center;">
+            <div class="lds-ellipsis" style="color:var(--primary-dark); " id="studyloader" ><div></div><div></div><div></div><div></div></div>
+            <p style="color:var(--primary-light);">Syncing your Studysheet with our servers...</p>
         </div>
     </div>
     <div class="absolute">
@@ -104,9 +104,9 @@
                 </div>
             </div>
     
-            <div style="background-color: wheat; height: 15vw; width: 7.5vw; border-radius: 25px;">
+            <div style="background-color: var(--primary-light); height: 15vw; width: 7.5vw; border-radius: 25px;">
                 <div class="creatorIcon" onclick="downloadVerbs('s')">
-                    <img src="save.svg" style="height:5.5vw; color:#001945;">
+                    <img src="save.svg" style="height:5.5vw; color:var(--primary-dark);">
                 </div>
                 <div class="creatorIcon" onclick="saveToCloud()">
                     <img src="goodsizelye.png" style="height:4.5vw;">
