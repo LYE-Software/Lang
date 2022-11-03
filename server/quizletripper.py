@@ -28,4 +28,15 @@ def get_terms_definitions(page):
     
     return terms, definitions
 
-print(get_terms_definitions('https://quizlet.com/334794591/organelles-and-organelle-function-flash-cards/'))
+
+terms, definitions = get_terms_definitions("https://quizlet.com/334794591/organelles-and-organelle-function-flash-cards/")
+endReturn = ""
+for i in range(len(terms)):
+    iTerm = terms[i]
+    value1 = '["'+iTerm+'",'
+    iDef = definitions[i]
+    value2 = '"'+iDef+'"]'+"\n"
+    toAdd = value1+ value2
+    endReturn = endReturn + toAdd
+
+print(endReturn)
