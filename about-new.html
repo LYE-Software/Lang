@@ -146,12 +146,12 @@
 <body>
     <div class="absolute horizontalFlex fullHeight" style="height: 100vh; width: 100vw;">
         <div class="verticalFlex fullHeight" style="z-index: 100; padding-left: 50px; padding-right: 50px; flex: 1;  background-color: wheat; overflow-y: scroll">
-            <a href="homepage.html" class="spacer"><img style="color: #009145; height: 5vh; margin-top: 50px;" src="back-arrow.svg"></a>
+            <a href="homepage.html" class="spacer"><img style="color: #001945; height: 5vh; margin-top: 50px;" src="back-arrow.svg"></a>
             <div class="spacer"></div>
             <div style="width: 100%; color: #001945; font-size: 50px; font-family: 'alfarn', sans-serif;">LANG</div>
             <div style="width: 100%; color: #001945; font-family: 'Rubik Mono One'">Study ideas, not terms</div>
             <br>
-            <div class="preload" id="textContainer" style="overflow: hidden; height: 0px;">
+            <div class="preload" id="textContainer" style="overflow: hidden; height: 0px; color:#001945">
                 <div style="width: 100%;">
                     Our lead developer, Nate Vemuri, once found himself cramming for a French test with a popular online studying program. 
                     As the seconds turned to minutes, turned to hours, he realized something. It was just too complicated to help him learn.
@@ -172,16 +172,19 @@
                 </div>
             </div>
             <br>
-            <div id="downButton" class="horizontalFlex" style="justify-content: center; width: 100%;">
+            <div id="downButton" class="horizontalFlex" style="color: #001945; justify-content: center; width: 100%;">
                 Continue
             </div>
             <div class="spacer"></div>
             <div class="spacer"></div>
         </div>
-        <div class="fullHeight horizontalFlex" style="justify-content: center; flex: 2; background-color:#001945;">
+        <div class="fullHeight verticalFlex" style="align-items: center; justify-content: center; flex: 2; background-color:#001945;">
+            <div style="color: wheat; font-family: 'Rubik Mono One'; font-size: 30px;">Our Team</div>
+            <div style="height: 400px"></div>
             <div id="tinderPanel" class="absolute">
 
             </div>
+            <div style="color: wheat;">Swipe or Click</div>
         </div>
     </div>
 </body>
@@ -202,11 +205,11 @@
     var userIndex = 0;
 
     panelImageUrl = [
-        "https://images.unsplash.com/photo-1667345688374-156d1cc7690e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80",
-        "https://images.unsplash.com/photo-1667397310741-617fe2c8e2f5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1667256043063-0c29cc253b0e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
-        "https://images.unsplash.com/photo-1667405308124-2450680090b4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1036&q=80",
-        "https://images.unsplash.com/photo-1667312705216-759a6486dd21?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+        "assets/cards/nate.png",
+        "assets/cards/tg_ryan.png",
+        "assets/cards/alex.png",
+        "assets/cards/justin.png",
+        "assets/cards/jason.png"
     ]
 
     tinderPanel.style.backgroundImage = "url(" + panelImageUrl[userIndex] + ")";
