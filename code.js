@@ -872,7 +872,7 @@ function sleep(ms) {
 async function checkMulti(checkAgainst){
     console.log(checkAgainst)
     if (checkAgainst =="correct"){
-        document.getElementById("correct").style.backgroundColor = "green";
+        document.getElementById("correct").style.backgroundColor = "#3e8e41";
         await sleep(1000);
         document.getElementById("correct").style.backgroundColor = "#001945";
         document.getElementById("correct").id = whichId;
@@ -880,7 +880,7 @@ async function checkMulti(checkAgainst){
         
     }
     else{
-        document.getElementById("correct").style.backgroundColor = "green";
+        document.getElementById("correct").style.backgroundColor = "#3e8e41";
         document.getElementById(checkAgainst).style.backgroundColor = "red";
         await sleep(1000);
         document.getElementById("correct").style.backgroundColor = "#001945";
