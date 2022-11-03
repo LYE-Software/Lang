@@ -8,12 +8,17 @@
     <link rel="icon" href="circular lang icon.png">
     <script src="code.js"></script> 
 </head>
-<body onload = "checkSettings()" class="homepage">
-    <div class="samelineheader">
-        <img src="transparenticon.png" class="topleftlogoicon">
-        <div>
-            <h1 class="header" id="studysheetname">How do you want to study your local Studysheet?</h1>
-            
+<body onload = "checkSettings()" class="darkHomepage" style="overflow:hidden;">
+    <div class="samelineheader" style="display:inline-block; background-color:wheat; width:100vw;">
+        <div style="width:100%; display:flex; justify-content: space-between ; text-align: center;">
+                    
+            <img src="transparenticon.png" class="topleftlogoicon" onclick="window.location.href='index.html'">
+            <div style="display:flex; flex-direction: column; justify-content: space-evenly;">
+                <div class="largeTitle" id="studysheetname">Study From a Local File</div>
+            </div>
+            <div style="margin-right:15px; display:flex; flex-direction: column; justify-content: space-evenly;">
+                <img class="pfp" style="height: 5vh;" src="settings.png" onclick="window.location.href='settings.html'">
+            </div>
         </div>
         
     </div>
@@ -33,9 +38,9 @@
         
        
     </div>
-    <div style="margin-top:25vw; margin-bottom:60px;">
-        <h3 class="header">For the best Lang experience, we recommend that you use the cloud storage function built into your free Lye Account.</h3>
-        <h2 class="header"><a href="login.html">Sign Up Here</a></h2>
+    <div style="margin-top:22vw; margin-bottom:100px;">
+        <h3 class="header" style="color:wheat;">For the best Lang experience, we recommend that you use the cloud storage function built into your free Lye Account.</h3>
+        <button class="dropbtn" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signup'">Sign Up</button>
     </div>
     
 
@@ -48,4 +53,16 @@
         </div>
     </footer>
 </body>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Rubik+Mono+One&display=swap');
+    .button{
+        border-radius: 1000000px;
+        height: 3vh;
+        width: 10vw;
+        padding: 1vh;
+        background-color: wheat;
+        margin: 2vh;
+        font-family: 'Poppins', sans-serif;
+    }
+</style>
 </html>
