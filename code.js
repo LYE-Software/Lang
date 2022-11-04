@@ -230,7 +230,8 @@ function httpGet(theUrl){
     
     xmlHttp.ontimeout = () => {
         console.error(`The request for ${url} timed out.`);
-        alert('The request for '+theUrl+' timed out. Please check your connection or try again later.')
+        alert('The request for '+theUrl+' timed out. We will be reloading this page after the dialogue box is removed.')
+        window.location.reload();
         changeToOffline();
     };
     xmlHttp.onload = () => {
