@@ -9,8 +9,7 @@ def get_page(url):
     return page.text
 
 def get_terms_definitions(page):
-    terms = []
-    definitions = []
+    entries = []
 
     page = get_page(page)
     soup = BeautifulSoup(page, 'html.parser')
@@ -23,20 +22,16 @@ def get_terms_definitions(page):
         container = content.find('div').find('div').find('div').find('div')
         term = container.contents[0].text
         definition = container.contents[1].text
-        terms.append(term)
-        definitions.append(definition)
+        entries.append((term, definition))
     
-    return terms, definitions
+    return entries
 
 
-terms, definitions = get_terms_definitions("https://quizlet.com/334794591/organelles-and-organelle-function-flash-cards/")
-endReturn = ""
-for i in range(len(terms)):
-    iTerm = terms[i]
-    value1 = '["'+iTerm+'",'
-    iDef = definitions[i]
-    value2 = '"'+iDef+'"]'+"\n"
-    toAdd = value1+ value2
-    endReturn = endReturn + toAdd
+entries = get_terms_definitions("https://quizlet.com/334794591/organelles-and-organelle-function-flash-cards/")
 
-print(endReturn)
+output = ""
+for entry in entries:
+    output += "[\"" + entry[0] + "\",\"" + entry[1] + "\"]\n"
+output = output[:-1]
+
+print(output)
