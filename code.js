@@ -151,56 +151,76 @@ function callmultiple(){
     
 }
 
-function uploadFiles(){
-    if(document.getElementById("file")!=null){
-        return "brh";
+function prepForUpload(show){
+    if (show == "remove"){
+        document.getElementById("uploadStudySheet").style.display = "none";
+    } else {
+        document.getElementById("uploadStudySheet").style.display = "";
+        var fileInput = document.getElementById("file")
+        console.log("Into prep for upload")
+        fileInput.addEventListener("change", () => {
+            
+            console.log("into event change")
+            var file = document.getElementById('file').files[0];
+            var reader = new FileReader();
+            console.log(reader);
+            console.log(file);
+            console.log(reader.result);
+            reader.addEventListener("load", () => {            
+                console.log("reading lol")
+                var text = reader.result;
+                text = text.replaceAll("\n", "sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
+
+                var filename = file.name;
+                uploadFiles(text, filename);
+            
+            })
+            reader.readAsText(file);
+        })
     }
-    var uploadFile = document.createElement('input');
-    uploadFile.type = 'file';
-    uploadFile.id = 'file';
-    uploadFile.name = 'file';
-    uploadFile.accept = '.lang';
-    document.getElementById("uploadholder").appendChild(uploadFile)
-    var uploadButton = document.createElement('button');
-    uploadButton.innerHTML = 'Upload';
-    uploadButton.onclick = function() {
-        console.log("clicked lol")
-        var file = document.getElementById('file').files[0];
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            console.log("reading lol")
-            var text = reader.result;
-            text = text.replaceAll("\n", "sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
+    
+}
 
-            var filename = file.name;
-            console.log("FILE NAME+ "+filename)
-            var url = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/upload/"+filename;
+function uploadFiles(text, filename){
+    
+    // var uploadFile = document.createElement('input');
+    // uploadFile.type = 'file';
+    // uploadFile.id = 'file';
+    // uploadFile.name = 'file';
+    // uploadFile.accept = '.lang';
+    // document.getElementById("uploadholder").appendChild(uploadFile)
+    // var uploadButton = document.createElement('button');
+    // uploadButton.innerHTML = 'Upload';
+    // uploadButton.onclick = function() {
+        
+    console.log("FILE NAME+ "+filename)
+    var url = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/upload/"+filename;
 
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", url);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url);
 
-            xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+    xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
 
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    console.log(xhr.status);
-                    console.log(xhr.responseText);
-                    window.location.reload();
-                }
-            };
-            var data = text;
-            console.log("sending " + data + " to " + url);
-            xhr.send(data);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            console.log(xhr.status);
+            console.log(xhr.responseText);
+            window.location.reload();
+        }
+    };
+    var data = text;
+    console.log("sending " + data + " to " + url);
+    xhr.send(data);
 
             
             // var textArea = document.createElement('textarea');
             // textArea.value = text;
             // document.body.appendChild(textArea);
-        };
-        reader.readAsText(file);
+        
+        
 
-    }
-    document.getElementById("uploadholder").appendChild(uploadButton)
+    // }
+    // document.getElementById("uploadholder").appendChild(uploadButton)
 }
 function httpGet(theUrl){
     //this needs to be async as we cannot set timeout for sync request and sync reqs halt all js for browser
@@ -303,6 +323,7 @@ async function generateLibraryList(){
     console.log("generating library list")
     if(offline == true){
         console.log("Lang is offline");
+        alert("We had trouble reaching our servers.")
     }
     else{
         
@@ -408,14 +429,35 @@ async function generateLibraryList(){
                     let namediv = document.createElement("div")
                     namediv.innerHTML = library[i]
                     horizontalflexstudysetentry.append(namediv);
+
+
+
                     let spacer = document.createElement("div")
                     spacer.className = "flexSpacer"
                     horizontalflexstudysetentry.append(spacer);
                     let datediv = document.createElement("div")
                     horizontalflexstudysetentry.append(datediv);
+                    
+
+                    let del = document.createElement("div");
+                    del.setAttribute("studysheet", library[i])
+                    del.innerHTML = "Delete"
+                    del.id=library[i]
+                    horizontalflexstudysetentry.append(del);
+
                     let newspacer = document.createElement("div");
                     newspacer.style.width="10vw";
                     horizontalflexstudysetentry.append(newspacer);
+        
+                    del.onclick=async function(){
+                        var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
+                        link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+ studysheetname+"/delete"
+                        console.log("link is: "+link)
+                        await httpGet(link)
+                        window.location.reload()
+                        
+                    }
+
                     let view = document.createElement("div");
                     view.setAttribute("studysheet", library[i])
                     view.innerHTML = "View"
@@ -430,6 +472,8 @@ async function generateLibraryList(){
                         window.location.href="studysheetpage.html";
                         
                     }
+
+                    
         
         
         
