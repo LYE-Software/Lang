@@ -4,8 +4,10 @@ from bs4 import BeautifulSoup
 def get_page(url):
     # set the user agent to a browser
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15'}
+    # set the session cookie
+    cookies = {'sessionid_2': 'ENTER_SESSION_ID_HERE'}
     # get the page
-    page = requests.get(url, headers=headers)
+    page = requests.get(url, headers=headers, cookies=cookies)
     return page.text
 
 def get_terms_definitions(page):
@@ -13,21 +15,20 @@ def get_terms_definitions(page):
 
     page = get_page(page)
     soup = BeautifulSoup(page, 'html.parser')
-    contents = soup.find('div', {'class': 'SetPageTerms-termsList'})
+    contents = soup.find('div', {'class': 'things'})
 
     for content in contents:
-        # if its not a div with the class SetPageTerms-term, skip
-        if content.name != 'div' or 'SetPageTerms-term' not in content['class']:
+        # skip if it doesnt have the class "thing"
+        if not content.has_attr('class') or content['class'][0] != 'thing':
             continue
-        container = content.find('div').find('div').find('div').find('div')
-        term = container.contents[0].text
-        definition = container.contents[1].text
+        term = content.contents[2].text
+        definition = content.contents[3].text
         entries.append((term, definition))
     
     return entries
 
 
-entries = get_terms_definitions("https://quizlet.com/334794591/organelles-and-organelle-function-flash-cards/")
+entries = get_terms_definitions("https://app.memrise.com/course/5810583/daccord-3-l2p1-catastrophes-naturelles/")
 
 output = ""
 for entry in entries:
