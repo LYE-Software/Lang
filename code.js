@@ -453,6 +453,9 @@ async function generateLibraryList(){
                     horizontalflexstudysetentry.append(newspacer);
         
                     del.onclick=async function(){
+                        document.getElementById("loadingscreen").style.display = "";
+                        document.getElementById("loadingscreen").classList = "absolute";
+                        document.getElementById("studysetholder").style.display = "none";
                         var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
                         link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+ studysheetname+"/delete"
                         console.log("link is: "+link)
