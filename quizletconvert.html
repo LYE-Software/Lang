@@ -1,0 +1,273 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating a Studysheet on Lang</title>
+    <script src="code.js"></script>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" href="circular lang icon.png">
+    <style>
+        #studysetinput {
+            left: 0;
+            transition: opacity 0.05s ease-in-out;
+            width: 20px; 
+            background-color: var(--primary-light);
+        }
+
+        #submitbutton {
+            text-align: center;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0;
+        }
+
+        #overallContainer {
+            transition: all 0.5s ease-in;
+            overflow: hidden;
+            flex-direction: column; 
+            display: flex; 
+            height: 100vh;
+            width: 100vw;
+            align-items: center; 
+            justify-content: center;
+        }
+
+        body {
+            transition: all 0.5s ease-in;
+            background-color: var(--primary-dark);
+        }
+
+        /* https://cssloaders.github.io */
+        .lds-ellipsis {
+        /* transition: opacity 0.5s ease-in-out; */
+        opacity: 0;
+        display: inline-block;
+        position: relative;
+        width: 80px;
+        height: 80px;
+        }
+        .lds-ellipsis div {
+        position: absolute;
+        top: 33px;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        background: var(--primary-light);
+        animation-timing-function: cubic-bezier(0, 1, 1, 0);
+        }
+        .lds-ellipsis div:nth-child(1) {
+        left: 8px;
+        animation: lds-ellipsis1 0.6s infinite;
+        }
+        .lds-ellipsis div:nth-child(2) {
+        left: 8px;
+        animation: lds-ellipsis2 0.6s infinite;
+        }
+        .lds-ellipsis div:nth-child(3) {
+        left: 32px;
+        animation: lds-ellipsis2 0.6s infinite;
+        }
+        .lds-ellipsis div:nth-child(4) {
+        left: 56px;
+        animation: lds-ellipsis3 0.6s infinite;
+        }
+        @keyframes lds-ellipsis1 {
+        0% {
+            transform: scale(0);
+        }
+        100% {
+            transform: scale(1);
+        }
+        }
+        @keyframes lds-ellipsis3 {
+        0% {
+            transform: scale(1);
+        }
+        100% {
+            transform: scale(0);
+        }
+        }
+        @keyframes lds-ellipsis2 {
+        0% {
+            transform: translate(0, 0);
+        }
+        100% {
+            transform: translate(24px, 0);
+        }
+        }   
+    </style>
+</head>
+<body onload="applyUsername()">
+    <div id="overallContainer" style="">
+        <div id="horizontalContainer;" class="horizontalFlex" style="width: 100vw; justify-content: center; align-items: center;">
+            <div id="text" class="headerText"></div>
+            <input id="studysetinput" type="text" style="height: 50px;"">
+        </div>
+        <div id="submitbutton" class="button" style="background-color: var(--primary-light);">
+            Continue
+        </div>
+    </div>
+
+
+
+
+    <!-- <div id="header0" class="absolute" style="width: 100vw">
+        <div class="horizontalFlex header">
+            <div onclick="returnMain()" style="cursor:pointer;">
+                <img style="height: 10vh;" src="assets/logos/lang.png">
+            </div>
+            <div class="flexSpacer"></div> 
+            <div style="font-family: 'Rubik Mono One', sans-serif; font-size:2vw;">Study Sheet Creator</div>
+            <div class="flexSpacer"></div>
+            <div id="homeusername">Getting your userinfo...</div>
+            <div>
+                <img class="pfp" style="height: 5vh;" src="settings.png" onclick="window.location.href='settings.html'">
+            </div>
+        </div>
+    </div> -->
+</body>
+<script>
+    function animation_part_one() {
+        var element = document.getElementById("text")
+        var cursor = document.getElementById("studysetinput")
+
+
+        cursor.style.position = "absolute"
+        var text = "Just enter your studyset link"
+        var i = 0;
+
+        // set tex
+
+        var interval = setInterval(function() {
+            // get the position of the text
+            var pos = element.getBoundingClientRect()
+            var x = pos.x
+            var rightEdge = x + element.offsetWidth
+            cursor.style.left = (rightEdge + 50) + "px"
+
+
+
+            element.innerHTML = text.substring(0, i);
+            i++;
+            if (i > text.length) {
+                clearInterval(interval);
+                setTimeout(function() {
+                    animation_part_two()
+                }, 1500);
+            }
+        }, 50);
+    }
+
+    function animation_part_two() {
+        var element = document.getElementById("text")
+        var cursor = document.getElementById("studysetinput")
+        var text = "Just enter your studyset "
+        
+        element.innerHTML = text + "link";
+
+        var interval = setInterval(function() {
+            var pos = element.getBoundingClientRect()
+            var x = pos.x
+            var rightEdge = x + element.offsetWidth
+            cursor.style.left = (rightEdge - 200) + "px"
+
+            text = text.substring(0, text.length - 1);
+            element.innerHTML = text + "link"
+            if (text == "") {
+                clearInterval(interval);
+                cursor.style.position = "relative"
+                cursor.style.left = "0"
+                element.innerHTML = "link:"
+
+                setTimeout(function() {
+                    animation_part_three()
+                }, 500);
+                
+
+                
+
+                // setTimeout(function() {
+                //     animation_part_three()
+                // }, 1000);
+            }
+        }, 50);
+    }
+
+    function animation_part_three() {
+        var element = document.getElementById("text")
+        var cursor = document.getElementById("studysetinput")
+                
+        shouldBlinkCursor = false;
+        cursor.style.opacity = "1"
+        cursor.style.transition = "all 1s ease-in-out"
+        cursor.style.width = "50%"
+
+        setTimeout(function() {
+            var button = document.getElementById("submitbutton")
+            button.style.opacity = "1"
+            button.addEventListener("click", function() {
+                get_studysheet()
+            })
+        }, 500);
+    }
+
+    var shouldBlinkCursor = true;
+    function blink_cursor() {
+        var cursor = document.getElementById("studysetinput")
+        var on = false;
+        var interval = setInterval(function() {
+            if (!shouldBlinkCursor) {
+                clearInterval(interval);
+                return;
+            }
+            if (on) {
+                cursor.style.opacity = 0;
+            } else {
+                cursor.style.opacity = 1;
+            }
+            on = !on;
+        }, 200);
+    }
+
+    blink_cursor()
+
+    setTimeout(function() {
+        animation_part_one()
+    }, 1000);
+
+    function get_studysheet() {
+        var container = document.getElementById("overallContainer")
+        // container.style.transition = "width 0.5s ease-in-out"
+        container.style.width = "0";
+        container.style.opacity = "0";
+
+        document.body.style.backgroundColor = "black"
+
+        setTimeout(function() {
+            container.innerHTML = ""
+            container.style.transition = "opacity 1s ease-in-out"
+            container.style.width = "100vw"
+            container.style.opacity = "1"
+            container.innerHTML = '<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>'
+            container.children[0].classList.add("fadeIn")
+        }, 500);
+
+        setTimeout(function() {
+            finished()
+        }, 3000);
+    }
+
+    function finished() {
+        var container = document.getElementById("overallContainer")
+        container.style.opacity = "0"
+        setTimeout(function() {
+            container.innerHTML = '<div class="headerText">All done</div>'
+            container.style.opacity = "1"
+        }, 1000);
+
+        document.body.style.backgroundColor = "var(--primary-dark)"
+
+    }
+</script>
+
+</html>
