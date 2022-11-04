@@ -230,7 +230,8 @@ function httpGet(theUrl){
     
     xmlHttp.ontimeout = () => {
         console.error(`The request for ${url} timed out.`);
-        alert('The request for '+theUrl+' timed out. Please check your connection or try again later.')
+        alert('The request for '+theUrl+' timed out. We will be reloading this page after the dialogue box is removed.')
+        window.location.reload();
         changeToOffline();
     };
     xmlHttp.onload = () => {
@@ -304,6 +305,8 @@ function submitNewUN(){
     httpGet(tmpurl);
     window.location.href="library.html";
 }
+
+
 
 function changeToOffline(){
     try{
@@ -450,6 +453,9 @@ async function generateLibraryList(){
                     horizontalflexstudysetentry.append(newspacer);
         
                     del.onclick=async function(){
+                        document.getElementById("loadingscreen").style.display = "";
+                        document.getElementById("loadingscreen").classList = "absolute";
+                        document.getElementById("studysetholder").style.display = "none";
                         var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
                         link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+ studysheetname+"/delete"
                         console.log("link is: "+link)
