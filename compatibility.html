@@ -8,14 +8,14 @@
     <link rel="icon" href="circular lang icon.png">
     <script src="code.js"></script> 
 </head>
-<body onload = "checkSettings()" class="homepage">
+<body onload = "checkSettings()" class="homepage" style="background-color:#001459">
     <img src="quizlettolang.png" class="topleftlogoicon" style = 'height:10vh; width:auto; min-height:150px; border-radius:15px; border-style: solid; border-color:#001459;' onclick="window.location.href='index.html'">
     
 
-    <div class="flexbox">
+    <div class="flexbox" style="justify-content:center; align-items:center; text-align:center;">
 
 
-        <div id="creator" class="flexitem">
+        <!-- <div id="creator" class="flexitem">
             <h3 class="header">Online Converter</h3>
             <textarea class="largeinputbox" id="quizletinput"></textarea>
             <br>
@@ -32,17 +32,17 @@
             
 
 
-        </div>
+        </div> -->
 
         <div class="flexitem">
-            <h3 class="header">How To Convert Quizlet Study Set to Lang Study Sheet</h3>
-            <p class="header">Lang's online converter makes this simple.</p>
-            <p class="header">Go to your Quizlet Study Set of choice.</p>    
-            <p class="header">Click the 3 dots under the flashcard and then click export.</p>
+            <h3 class="header" style="color:wheat;">Unfortunately, Quizlet has removed their export features.</h3>
+            <p class="header" style="color:wheat;">The Lang Team is currently working on a system that allows you to simply put in a Quizlet URL and recieve a Lang Studysheet.</p>
+            <p class="header" style="color:wheat;">We appriciate your patience while this system is in development.</p>    
+            <!-- <p class="header">Click the 3 dots under the flashcard and then click export.</p>
             <p class="header">Make sure your export settings match these:</p>
             <img src="quizletscreenshot.jpg" style="border-radius:15px;">
             <p class="header">Now, simply copy and paste the text from Quizlet into the box on the left.</p>
-            <p class="header">After clicking save, your Quizlet Study Set will be downloaded as a Lang Studysheet <br> and can now be used on Lang. </p>
+            <p class="header">After clicking save, your Quizlet Study Set will be downloaded as a Lang Studysheet <br> and can now be used on Lang. </p> -->
             
             
         </div>
@@ -62,8 +62,8 @@
     <input id = "randomchoice" style="display:none;" type="checkbox">
     <footer id = "feet" class="foot">
         <div class="samelineheader">
-            <p  id = "copyright" class="copyrighttext">Copyright NWVBUG Development, 2022. <a href="https://github.com/nwvbug/Lang">GitHub Repo & Source</a></p>
-            <button class="returnbutton" onclick="reload()">Reset Page</button>
+            <p  id = "copyright" class="copyrighttext">Copyright Lye Software, 2022. <a href="https://github.com/nwvbug/Lang">GitHub Repo & Source</a></p>
+            
             <button id="return" class = "returnbutton" onclick="returnMain()">Exit</button>
         </div>
     </footer>
