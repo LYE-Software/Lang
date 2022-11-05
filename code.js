@@ -50,6 +50,7 @@ var sessionid = ""
 var helpsused = 0;
 var whichId= "";
 var offline = false;
+var override = false;
 
 async function doPreviewAndLocal(){
     console.log("in dopreview")
@@ -738,7 +739,7 @@ function getRandomQuestion(textBlock) {
     let arrayText = textBlock.split('\n')
     
     console.log("arr text fdaf "+arrayText)
-    if (doRandom == true){
+    if (doRandom == true && override != true){
         
         let random_number = Math.floor(Math.random() *arrayText.length);
         console.log(random_number)
@@ -2771,6 +2772,72 @@ function changeSpeed(){
         
     }
 
+}
+
+function grabQuizlet(link) {
+
+    console.log("link+ "+link)
+    var url = "https://lye.software/temp/quizlet/get";
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url);
+
+    xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            console.log(xhr.status);
+            console.log(xhr.responseText);
+            var newStudysheet = xhr.responseText;
+            window.localStorage.setItem("fullstudysheet", newStudysheet);
+            window.location.href="creator.html";
+        }
+    };
+    var data = link;
+    console.log("sending " + data + " to " + url);
+    xhr.send(data);
+}
+
+
+function creatorModeSelect(){
+    override = true;
+    if(window.localStorage.getItem("fullstudysheet")=="" || window.localStorage.getItem("fullstudysheet")==null){
+        console.log("Entering Standard Creator Mode")
+    } else {
+        console.log("Entering Quizlet Creator Mode")
+        customWords = window.localStorage.getItem("fullstudysheet")
+        let arrayText = customWords.split('\n')
+        window.localStorage.setItem("fullstudysheet", "");
+        document.getElementById("topheader").innerHTML = "Imported From Quizlet"
+        for (i = 0; i<arrayText.length; i++){
+            let wordPair = getRandomQuestion(customWords);
+            var br = document.createElement("div")
+            br.className = "termDefContainer";
+            document.getElementById("insideCreator").appendChild(br);
+            id1 = "input"+generateIdV
+            id2 = "input"+generateIdA
+
+            var verbInput = document.createElement('div');
+            verbInput.id=id1;
+            verbInput.className="term"
+            verbInput.setAttribute("data-text", "Term");
+            verbInput.contentEditable="true";
+            generateIdV++
+            verbInput.innerHTML=wordPair[0];
+            br.appendChild(verbInput);
+        
+            var answerInput = document.createElement("div");
+            answerInput.id=id2;
+            answerInput.setAttribute("id",id2)
+            answerInput.className="definition"
+            answerInput.contentEditable="true";
+            answerInput.innerHTML=wordPair[1];
+            answerInput.setAttribute("data-text", "Answer");
+            generateIdA++
+            // answerInput.innerHTML="Put Answer Here";
+            br.appendChild(answerInput);
+        }
+    }
 }
 
         
