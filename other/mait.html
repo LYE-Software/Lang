@@ -10,7 +10,7 @@
 </head>
 <body class="homepage" style="background-image:linear-gradient(to bottom right, wheat, #001945); display:flex; flex-direction: row; align-items: center; justify-content: center; text-align: center;">
     <div style="display:flex; justify-content: center; border-radius:15px; padding:10px; background-color: wheat; margin-top: 0vh;">
-        <div style="display:flex; flex-direction:column; background-color: wheat; padding:20px; width:45vw; height:80vh; align-items: center; text-align: center;">
+        <div style="display:flex; flex-direction:column; background-color: wheat; padding:20px; max-width: calc(25vw + 300px); width:90vw; height:80vh; align-items: center; text-align: center; overflow-y:scroll;">
             <img src="../redesLangTr.png" style="height:40vh; width:40vh;" >
             <h1 class="header">Lang is currently undergoing emergency maitenance. This means that a major function required to the usage of Lang has failed and the team is currently working to fix the issue.</h1>
             <h1 class="header">We appreciate your patience while we try to rectify the issue and we apologize for any inconvienience this may have caused.</h1>
@@ -25,4 +25,9 @@
     
     
 </body>
+<style>
+    ::-webkit-scrollbar {
+        display: none;
+    }
+</style>
 </html>
