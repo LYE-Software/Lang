@@ -1474,8 +1474,8 @@ function doPracticeTest(){
             verbInput.setAttribute("type", "text");
             verbInput.setAttribute("id",id)
             verbInput.setAttribute("autocorrect", "off")
-            input.setAttribute("autocomplete", "off")
-            input.setAttribute("spellcheck", "off")
+            verbInput.setAttribute("autocomplete", "off")
+            verbInput.setAttribute("spellcheck", "off")
             generateIdA++
             verbInput.placeholder="Answer";
             document.getElementById("minicreator").appendChild(questionText);
