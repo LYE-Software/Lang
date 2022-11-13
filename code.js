@@ -1368,6 +1368,9 @@ function doSpeedTest(v){
         
     input = document.getElementById("input")
     input.style.display = "flex";
+    input.setAttribute("autocorrect", "off")
+    input.setAttribute("autocomplete", "off")
+    input.setAttribute("spellcheck", "off")
     buttonStyling = document.getElementById("goButton")
     buttonStyling.style.display = "flex";
     buttonStyling.innerHTML = ">" + "\n" + "Go!"
@@ -1411,6 +1414,9 @@ function doCustomSheets(v){
     
         
     input = document.getElementById("input")
+    input.setAttribute("autocorrect", "off")
+    input.setAttribute("autocomplete", "off")
+    input.setAttribute("spellcheck", "off")
     input.style.display = "flex";
     buttonStyling = document.getElementById("goButton")
     buttonStyling.style.display = "flex";
@@ -1467,6 +1473,9 @@ function doPracticeTest(){
             verbInput.className="inputSeen"
             verbInput.setAttribute("type", "text");
             verbInput.setAttribute("id",id)
+            verbInput.setAttribute("autocorrect", "off")
+            input.setAttribute("autocomplete", "off")
+            input.setAttribute("spellcheck", "off")
             generateIdA++
             verbInput.placeholder="Answer";
             document.getElementById("minicreator").appendChild(questionText);
