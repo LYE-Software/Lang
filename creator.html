@@ -19,6 +19,7 @@
             /* align-items: center; */
 
             overflow-y: scroll;
+            overflow-x: hidden;
             max-height: 80vh;
 
             -ms-overflow-style: none;  /* IE and Edge */
@@ -64,6 +65,8 @@
             flex: 1;
             border-bottom: var(--primary-dark) 1px solid;
         }
+
+        
     </style>
 </head>
 <body onload="creatorOnload()">
@@ -71,13 +74,13 @@
         <div class="horizontalFlex" style="align-items: center; justify-content: center; height: 100vh; width: 100vw;">
             <div class="horizontalFlex centerText" style="border-radius: 15px; padding: 20px; align-items: center; justify-content: center; flex-direction: column; width: 25vw; height: 50vh; background-color: var(--primary-light);">
                 <img src="goodsizelye.png" style="height:10vh;">
-                <div style="margin-top: 30px;"></div>
-                <div style="margin-top: 30px;"></div>
-                <div>We did not find a Lye account associated with this computer.</div>
-                <div style="margin-top: 30px;"></div>
-                <div class="button" style="color: var(--primary-light);" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signin/www.langstudy.tech-index.html'">Log In</div>
+                <div style="margin-top: 10px;"></div>
+                <div>We did not find a Lye account saved on your computer.</div>
+                <div style="margin-top: 10px;"></div>
+                <div>Lang reccomends making an account, so you can save your studysheets online</div>
+                <div class="button" style="color: var(--primary-light); margin-bottom: 0;" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signin/www.langstudy.tech-index.html'">Log In</div>
                 <div class="button" style="color: var(--primary-light);" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signup'">Sign Up</div>
-                <div id="useAsGuest" style="font-size: 15px; text-decoration: underline;">Return to editing your Studysheet</div>
+                <div id="useAsGuest" style="font-size: 10px; text-decoration: underline;">No thanks, I'd like to use Lang as a guest</div>
             </div>
         </div>
     </div>
