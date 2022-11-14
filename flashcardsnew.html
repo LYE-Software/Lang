@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" href="circular lang icon.png">
+    <style>
+        .mainContainer {
+            height: 90vh;
+            width: 100vw;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .card {
+            height: 500px;
+            width: 700px;
+            margin: 10px;
+
+            display: inline-block;
+        }
+
+        .cardContainer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            height: 90vh;
+        }
+    </style>
+</head>
+<body>
+    <div id="header0" style="width: 100vw">
+        <div class="horizontalFlex header">
+            <div class="flexSpacer">
+                <img style="height: 8vh; margin-left:10px;" src="assets/logos/FullLangLogo.png">
+            </div>
+
+            <div class="flexSpacer" style="color: var(--primary-dark); text-align: center;">Flashcards</div>
+
+            <div class="horizontalFlex flexSpacer" style="justify-content: flex-end;">
+                <div id="homeusername">Loading</div>
+                <div>
+                    <img class="pfp" style="height: 5vh;" src="settings.png" onclick="window.location.href='settings.html'">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="horizontalFlex mainContainer" style="background-color: orange;">
+        <!-- <div class="absolute">
+            <div class="card" style="background-color: purple;"></div>
+        </div> -->
+
+        <div class="absolute cardContainer">
+            <div class="card" style="background-color: purple;"></div>
+            <div class="card" style="background-color: purple;"></div>
+            <div class="card" style="background-color: purple;"></div>
+        </div>
+    </div>
+
+</body>
+</html>
