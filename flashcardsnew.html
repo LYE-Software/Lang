@@ -24,12 +24,13 @@
         }
 
         .cardContainer {
+            transition: all 0.5s ease-in-out;
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            /* top: 50%; */
+            /* left: 50%; */
+            /* transform: translate(-50%, -50%); */
 
-            height: 90vh;
+            height: 80vh;
         }
     </style>
 </head>
@@ -52,16 +53,56 @@
     </div>
 
     <div class="horizontalFlex mainContainer" style="background-color: orange;">
-        <!-- <div class="absolute">
-            <div class="card" style="background-color: purple;"></div>
-        </div> -->
+        <div onclick="clickCard()" class="absolute" style="z-index: 100; opacity: 0;">
+            <div class="card" style="background-color: pink;"></div>
+        </div>
 
-        <div class="absolute cardContainer">
-            <div class="card" style="background-color: purple;"></div>
-            <div class="card" style="background-color: purple;"></div>
-            <div class="card" style="background-color: purple;"></div>
+        <div style="position: relative;">
+            <div id="cardContainer" class="absolute cardContainer">
+            
+            </div>
         </div>
     </div>
 
 </body>
+<script>
+    var cardContainer = document.getElementById("cardContainer");
+    var focusedCard = 0;
+    var totalCardCount = 10;
+
+    function createFlashcards(count) {
+        var cardWidth = 720;
+        var cardHeight = 500;
+
+        for (var i = 0; i < count; i++) {
+            cardContainer.innerHTML += "<div class=\"card\" style=\"background-color: purple;\">test" + i + "</div>"
+        }
+
+        cardContainer.style.width = cardWidth * count + "px";
+        cardContainer.style.left = -cardWidth / 2 + "px";
+        cardContainer.style.top = -cardHeight / 2 + "px";
+    }
+
+    function moveFlashcardsLeft() {
+        if (focusedCard + 1 >= totalCardCount) {
+            return;
+        }
+        focusedCard++;
+        cardContainer.style.left = parseInt(cardContainer.style.left) - 720 + "px";
+    }
+
+    function moveFlashcardsRight() {
+        if (focusedCard - 1 < 0) {
+            return;
+        }
+        focusedCard--;
+        cardContainer.style.left = parseInt(cardContainer.style.left) + 720 + "px";
+    }
+
+    function clickCard() {
+        console.log("Clicked!")
+    }
+
+    createFlashcards(totalCardCount)
+</script>
 </html>
