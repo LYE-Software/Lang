@@ -323,6 +323,7 @@ function changeToOffline(){
 }
 async function generateLibraryList(){
     customuser=window.localStorage.getItem("username");
+    window.localStorage.setItem('editSheet', "false");
     document.getElementById("homeusername").innerHTML = "Hello";
     console.log("generating library list")
     if(offline == true){
@@ -2344,7 +2345,12 @@ function saveToCloud(){
 
     var filename = document.getElementById("sstitle").innerHTML;
     console.log("FILE NAME+ "+filename)
-    var url = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/upload/"+filename;
+    if(window.localStorage.getItem('editSheet')=="true") {
+        var url = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/edit/"+filename;
+        window.localStorage.setItem('editSheet', "false");
+    } else {
+        var url = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/upload/"+filename;
+    }
 
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url);
@@ -2807,11 +2813,50 @@ function grabQuizlet(link) {
     xhr.send(data);
 }
 
+function initializeEdit(){
+    window.localStorage.setItem("editSheet", "true");
+    window.location.href='creator.html';
+}
 
 function creatorModeSelect(){
     override = true;
     if(window.localStorage.getItem("fullstudysheet")=="" || window.localStorage.getItem("fullstudysheet")==null){
         console.log("Entering Standard Creator Mode")
+    } else if(window.localStorage.getItem('editSheet')=="true") {
+        console.log("Entering edit mode")
+        customWords = window.localStorage.getItem("fullstudysheet")
+        let arrayText = customWords.split('\n')
+        window.localStorage.setItem("fullstudysheet", "");
+        document.getElementById("topheader").innerHTML = "Editing "+window.localStorage.getItem("chosenSheet");
+        document.getElementById("sstitle").innerHTML = window.localStorage.getItem("chosenSheet");
+        for (i = 0; i<arrayText.length; i++){
+            let wordPair = getRandomQuestion(customWords);
+            var br = document.createElement("div")
+            br.className = "termDefContainer";
+            document.getElementById("insideCreator").appendChild(br);
+            id1 = "input"+generateIdV
+            id2 = "input"+generateIdA
+
+            var verbInput = document.createElement('div');
+            verbInput.id=id1;
+            verbInput.className="term"
+            verbInput.setAttribute("data-text", "Term");
+            verbInput.contentEditable="true";
+            generateIdV++
+            verbInput.innerHTML=wordPair[0];
+            br.appendChild(verbInput);
+        
+            var answerInput = document.createElement("div");
+            answerInput.id=id2;
+            answerInput.setAttribute("id",id2)
+            answerInput.className="definition"
+            answerInput.contentEditable="true";
+            answerInput.innerHTML=wordPair[1];
+            answerInput.setAttribute("data-text", "Answer");
+            generateIdA++
+            // answerInput.innerHTML="Put Answer Here";
+            br.appendChild(answerInput);
+        }
     } else {
         console.log("Entering Quizlet Creator Mode")
         customWords = window.localStorage.getItem("fullstudysheet")
