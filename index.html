@@ -144,6 +144,10 @@
     transform: translate(24px, 0);
   }
 }      
+
+.largeButton {
+    font-size: 20px;
+}
     </style>
 </head>
 <body onload="generateLibraryList()">
@@ -162,7 +166,7 @@
                 </div>
                 <div class="flexSpacer"></div>
                 <div class="largeButton horizontalFlex" id="uploadmanagebutton">
-                    <div id="uploadmanage" onclick="prepForUpload()" style="width: 100%;" class="centerText">Upload New Lang Studysheets</div>
+                    <div id="uploadmanage" onclick="window.location.href = 'creator.html'" style="width: 100%;" class="centerText">Create a New Studysheet</div>
                 </div>
                 <div class="flexSpacer"></div>
             </div>    
@@ -193,28 +197,21 @@
             <div>
                 <img style="height: 8vh; margin-left:10px;" src="assets/logos/FullLangLogo.png">
             </div>
-            <div class="flexSpacer"></div>
-            <div class="flexSpacer"></div>
-            <div id="homeusername">Loading</div>
-            <div>
-                <img class="pfp" style="height: 5vh;" src="settings.png" onclick="window.location.href='settings.html'">
-            </div>
-        </div>
-    </div>
-    <div id="header1" class="absolute horizontalFlex centerText" style="pointer-events: none; height: 10vh; width: 100vw; justify-content: center;;">
-        <div class="horizontalFlex" style="width: 70vw;">
             <div class="flexSpacer button horizontalFlex" style="pointer-events: all; align-items: center; justify-content: center;" onclick="window.location.href='about-new.html'">
                 <div style="color: var(--primary-light);">What is Lang?</div>
             </div>
             <div class="flexSpacer button horizontalFlex" style="pointer-events: all; align-items: center; justify-content: center;" onclick="window.location.href='studyfromfiletemp.html'">
                 <div style="color: var(--primary-light);">Study From File</div>
             </div>
-            <div class="flexSpacer button horizontalFlex" style="pointer-events: all; align-items: center; justify-content: center;" onclick="window.location.href = 'creator.html'">
-                <div style="color: var(--primary-light);">Create</div>
+            <div class="flexSpacer button horizontalFlex" style="pointer-events: all; align-items: center; justify-content: center;" onclick="prepForUpload()">
+                <div style="color: var(--primary-light);">Upload Local Studysheet</div>
+            </div>
+            <div id="homeusername">Loading</div>
+            <div>
+                <img class="pfp" style="height: 5vh;" src="settings.png" onclick="window.location.href='settings.html'">
             </div>
         </div>
     </div>
-
     
     <div id="changelog" class="changeloghidden preload centerText">
         <div id="showchangelogtext" style="font-size: 3vh; margin-top: 1vh; font-family:'Rubik Mono One';">Click here to open the changelog!</div>
@@ -240,10 +237,11 @@
             <div class="horizontalFlex centerText" style="border-radius: 15px; padding: 20px; align-items: center; justify-content: center; flex-direction: column; width: 30vw; height: 40vh; background-color: var(--primary-light);">
                 <img src="goodsizelye.png" style="height:10vh;">
                 <div style="margin-top: 10px;"></div>
-                <div>We did not find a Lye account associated with this computer.</div>
+                <div>We did not find a Lye account saved on your computer.</div>
                 <div style="margin-top: 10px;"></div>
-                <div class="button" style="color: var(--primary-light); margin: 0;" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signin/www.langstudy.tech-index.html'">Log In</div>
-                <div class="button" style="color: var(--primary-light); margin: 10px" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signup'">Sign Up</div>
+                <div>Lang reccomends making an account, so you can save your studysheets online</div>
+                <div class="button" style="color: var(--primary-light); margin-bottom: 0;" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signin/www.langstudy.tech-index.html'">Log In</div>
+                <div class="button" style="color: var(--primary-light);" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signup'">Sign Up</div>
                 <div id="useAsGuest" style="font-size: 10px; text-decoration: underline;">No thanks, I'd like to use Lang as a guest</div>
             </div>
         </div>
