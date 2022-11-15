@@ -354,6 +354,8 @@ function changeToOffline(){
 
 async function getLibraryList(){
     customuser=window.localStorage.getItem("username");
+    window.localStorage.setItem("fullstudysheet", "");
+    window.localStorage.setItem("chosenSheet", "")
     window.localStorage.setItem('editSheet', "false");
     document.getElementById("homeusername").innerHTML = "Hello";
     console.log("generating library list")
@@ -1293,8 +1295,8 @@ function onBtnPress(v) {
     if (window.localStorage.getItem("fullstudysheet")!="" && window.localStorage.getItem("fullstudysheet")!=null){
         customWords = window.localStorage.getItem("fullstudysheet")
         document.title = window.localStorage.getItem("chosenSheet") + " - Lang"
-        window.localStorage.setItem("fullstudysheet", "");
-        window.localStorage.setItem("chosenSheet", "");
+        // window.localStorage.setItem("fullstudysheet", "");
+        // window.localStorage.setItem("chosenSheet", "");
         console.log( customWords )
         if(v=="f"){
             doFlashcards();
@@ -1414,8 +1416,8 @@ function onBtnPress(v) {
     
     }
 
-    window.localStorage.setItem("fullstudysheet", "");
-    window.localStorage.setItem("chosenSheet", "");
+    // window.localStorage.setItem("fullstudysheet", "");
+    // window.localStorage.setItem("chosenSheet", "");
 
 }
 
