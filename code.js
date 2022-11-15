@@ -389,7 +389,7 @@ async function getLibraryList(){
                 document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
             }
             else{
-                document.getElementById("homeusername").innerHTML = "Hello, "+customuser;
+                document.getElementById("homeusername").innerHTML = "Hello, "+username;
                 hideLoadingView();
                 for (i=0;i<library.length;i++){
                     console.log("inside for")          
