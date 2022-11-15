@@ -374,13 +374,14 @@ async function getLibraryList(){
     } else {
         console.log("inside the else")
         sessionid = window.localStorage.getItem("usertoken")
-        url = "https://anklebowl.pythonanywhere.com"+"/usernamefromtoken/"+sessionid;
-        username = await httpGet(url, true);
-        console.log(username);
-        if (username == "Invalid token"){
+        serverData = await httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/returnNameAndList", true);
+        if (serverData == "Failed"){
             failedSignIn();
         }
-        library = await httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/list")
+        var arrayOfData = serverData.split("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
+        username = arrayOfData[0];
+        library = arrayOfData[1];
+        console.log(username);
         if(library == "[]"){
             document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
     
