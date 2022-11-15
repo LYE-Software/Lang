@@ -13,7 +13,8 @@
             background-color: wheat;
             border-radius: 25px;
             padding: 25px;
-            margin: 10px;
+            margin-bottom: 20px;
+            /* margin: 10px; */
 
             width: 30vw;
             height:auto;
@@ -40,9 +41,28 @@
             border-bottom: var(--primary-dark) 1px solid;
             border-left: #001945 1px solid;
         }
+
+        .dropbtn {
+            margin-top: 0;
+            margin-bottom: 0;
+            margin: 0;
+        }
+
+        .verticalBox {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .medbox {
+            margin: 0;
+            padding: 0;
+        }
 </style>
 <body onload = "doPreviewAndLocal()" class="darkHomepage" style="overflow-x:hidden;">
-    <div style="width:95vw; height:105vh; position:relative;">
+    <div style="width:95vw; height:100vh; position:relative;">
         <div style="height:99vh; width:97vw; position:absolute;" id="noclickdiv">
             <div style="position:absolute; top:40%; left:45%; background-color: wheat; border-radius:15px; padding:20px; text-align: center;">
                 <div class="lds-ellipsisdark" id="studyloader" ><div></div><div></div><div></div><div></div></div>
@@ -69,12 +89,12 @@
         
             <div class="medbox" style="flex:wrap;">
                 <div class="verticalbox">
-                    <button class="dropbtn"style="margin:20px;" onclick="window.location.href='readCustom.html'">Mastery</button>
-                    <button class="dropbtn"style="margin:20px;"onclick="window.location.href='flashcards.html'">Flashcards</button>
-                    <button class="dropbtn"style="margin:20px;"onclick="window.location.href='practest.html'">Practice Test</button>
-                    <button class="dropbtn"style="margin:20px;"onclick="window.location.href='speed.html'">Speed Review</button>
-                    <button class="dropbtn"style="margin:20px;"onclick="window.location.href='multiplechoice.html'">Multiple Choice</button>
-                    <button class="dropbtn"style="margin:20px;"onclick="initializeEdit()">Edit Studysheet</button>
+                    <button class="dropbtn"style="margin:10px;" onclick="window.location.href='readCustom.html'">Mastery</button>
+                    <button class="dropbtn"style="margin:10px;"onclick="window.location.href='flashcards.html'">Flashcards</button>
+                    <button class="dropbtn"style="margin:10px;"onclick="window.location.href='practest.html'">Practice Test</button>
+                    <button class="dropbtn"style="margin:10px;"onclick="window.location.href='speed.html'">Speed Review</button>
+                    <button class="dropbtn"style="margin:10px;"onclick="window.location.href='multiplechoice.html'">Multiple Choice</button>
+                    <button class="dropbtn"style="margin:10px;"onclick="initializeEdit()">Edit Studysheet</button>
         
         
                 </div>
