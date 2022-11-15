@@ -148,7 +148,21 @@
 .largeButton {
     font-size: 20px;
 }
-    </style>
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.changelogScrollBar ::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.changelogScrollBar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+/* ::-webkit-scrollbar {
+    display: none;
+} */
+</style>
 </head>
 <body onload="getLibraryList()">
 <!-- <body onload="window.location.href='other/mait.html'"> -->
@@ -213,23 +227,26 @@
         </div>
     </div>
     
-    <div id="changelog" class="changeloghidden preload centerText">
-        <div id="showchangelogtext" style="font-size: 3vh; margin-top: 1vh; font-family:'Rubik Mono One';">Click here to open the changelog!</div>
-        <div class="headerText" style="color:var(--primary-dark)">Changelog</div>
-        <div style="margin:35px;" class="">Lang has been updated to 3.5.+. We have continued our effort to redesign Lang to our new modern standard, now with an updated Upload prompt and the 'Delete Studysheet' option is now on the homescreen. We have created a Quizlet converter that is even easier to use than last time- simply put in a link and you are ready to go.</div>
+    <div id="changelog" class="changeloghidden preload centerText changelogScrollBar">
+        <div style="height:100%; width:100%; overflow:scroll;">
+            <div id="showchangelogtext" style="font-size: 3vh; margin-top: 1vh; font-family:'Rubik Mono One';">Click here to open the changelog!</div>
+            <div class="headerText" style="color:var(--primary-dark)">Changelog</div>
+            <div style="margin:35px;" class="">Lang has been updated to 3.5.+. We have continued our effort to redesign Lang to our new modern standard, now with an updated Upload prompt and the 'Delete Studysheet' option is now on the homescreen. We have created a Quizlet converter that is even easier to use than last time- simply put in a link and you are ready to go.</div>
+            
+            <div style="margin:35px;" class="">Last update brought a redesign to the about page featuring responsive css animations, scaling, and more interactivity, as well as the creator page, featuring a new modern UI. We also added an "Upload with Lye" button that automatically uploads your studysheet to your Lye Account, instead of having to download it first. We are working on revamping other pages as well. Thank you for supporting Lang.</div>
+            
+            <div style="margin:35px;" class="">Make sure to follow <a href="https://github.com/nwvbug/Lang">This GitHub Repository</a> if you want to be notified as soon as Lang is updated.</div>
+            
+            <div style="margin:35px;" class=""><a href="updates.html">About the Lang update system</a></div>
+            
+            
+            <p  id = "copyright" class="copyrighttext2">Copyright Lye Software, 2022. </p>
+            <p class="copyrighttext2">Current Version: Lang 3.6.6</p>
+            <img src="goodsizelye.png" style="width:8vw;">
+            
+        </div>
         
-        <div style="margin:35px;" class="">Last update brought a redesign to the about page featuring responsive css animations, scaling, and more interactivity, as well as the creator page, featuring a new modern UI. We also added an "Upload with Lye" button that automatically uploads your studysheet to your Lye Account, instead of having to download it first. We are working on revamping other pages as well. Thank you for supporting Lang.</div>
         
-        <div style="margin:35px;" class="">Make sure to follow <a href="https://github.com/nwvbug/Lang">This GitHub Repository</a> if you want to be notified as soon as Lang is updated.</div>
-        
-        <div style="margin:35px;" class=""><a href="updates.html">About the Lang update system</a></div>
-        <footer id = "feet" class="foot2">
-            <div class="samelineheader">
-                <p  id = "copyright" class="copyrighttext2">Copyright Lye Software, 2022. </p>
-                <p class="copyrighttext2">Current Version: Lang 3.6.5</p>
-                <img src="goodsizelye.png" style="height:3vw;">
-            </div>
-        </footer>
     </div>
 
     <div id="failedSignIn" class="absolute" style="display: none; height: 100vh; width: 100vw; background-color: rgba(0, 0, 0, 0.5);">
@@ -323,6 +340,8 @@
 </script>
 </html>
 
-<!-- Webpage designed by aspeli, realized by ankleBowl and TYN -->
-<!-- Copyright NWVBUG Development, Lye Software. Lang is a product of Lye Software. -->
-<!-- If anyone else comes along and adds to the page, add your name here -->
+<!-- This page was created by Lye Software. -->
+<!-- Copyright Lye Software. Lang is a product of Lye Software. 
+    All Lang branding including logos and slogans are copyright of Lye Software. 
+    All Lye branding including logos and slogans are copyright of Lye Software. -->
+
