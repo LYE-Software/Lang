@@ -1614,6 +1614,7 @@ function doPracticeTest(){
         try {
             var questionText = document.createElement('h1')
             questionText.className="header";
+            questionText.style.color = "wheat"
             let random_question = arrayText[i];
             var questionArray = JSON.parse(random_question)
             questionText.innerHTML=questionArray[0];
@@ -1621,6 +1622,8 @@ function doPracticeTest(){
             id = "answerInput"+generateIdA
             var verbInput = document.createElement('INPUT');
             verbInput.className="inputSeen"
+            verbInput.style.backgroundColor = "rgb(47, 61, 115)"
+            verbInput.style.color = "wheat"
             verbInput.setAttribute("type", "text");
             verbInput.setAttribute("id",id)
             verbInput.setAttribute("autocorrect", "off")
@@ -1842,7 +1845,7 @@ function selectWord(language) {
 function prIncorrect() {
     console.log("3")
     buttonStyling.style.backgroundColor = "#ce1483"
-    setTimeout(function () { buttonStyling.style.backgroundColor = "grey" }, 1000)
+    setTimeout(function () { buttonStyling.style.backgroundColor = "wheat" }, 1000)
     input.value = ""
     incorrectCounter += 1
     document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectCounter
@@ -1962,7 +1965,7 @@ function getInput() {
             buttonStyling = document.getElementById("goButton")
 
             buttonStyling.style.backgroundColor = "#ce1483"
-            setTimeout(function () { buttonStyling.style.backgroundColor = "grey" }, 1000)
+            setTimeout(function () { buttonStyling.style.backgroundColor = "wheat" }, 1000)
             input.value = ""
             incorrectCounter += 1
             document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectCounter
@@ -1982,7 +1985,7 @@ function getInput() {
         else {
             console.log("3")
             buttonStyling.style.backgroundColor = "#ce1483"
-            setTimeout(function () { buttonStyling.style.backgroundColor = "grey" }, 1000)
+            setTimeout(function () { buttonStyling.style.backgroundColor = "wheat" }, 1000)
             input.value = ""
             incorrectCounter += 1
             document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectCounter
@@ -2001,7 +2004,8 @@ function checkCustom(v){
     usrInput = input.value.toLowerCase();
     if (usrInput == customAnswer){
         correctCounter += 1
-        buttonStyling.style.backgroundColor = "green"
+        buttonStyling.style.backgroundColor = "#3e8e41"
+        setTimeout(function () { buttonStyling.style.backgroundColor = "wheat" }, 1000)
         try {
             document.getElementById("helpbutton").style.display = "none";
             document.getElementById("howmanyhelps").innerHTML = ""
@@ -2016,7 +2020,7 @@ function checkCustom(v){
     }
     else{
         buttonStyling.style.backgroundColor = "#ce1483"
-        setTimeout(function () { buttonStyling.style.backgroundColor = "grey" }, 1000)
+        setTimeout(function () { buttonStyling.style.backgroundColor = "wheat" }, 1000)
         input.value = ""
         incorrectCounter += 1
         try {
@@ -2929,7 +2933,7 @@ function timer(ck){
 function incorrectSpeed(){
     timer("clear")
     buttonStyling.style.backgroundColor = "#ce1483"
-    setTimeout(function () { buttonStyling.style.backgroundColor = "grey" }, 1000)
+    setTimeout(function () { buttonStyling.style.backgroundColor = "wheat" }, 1000)
     input.value = ""
     incorrectCounter += 1
     document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectCounter

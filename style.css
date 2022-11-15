@@ -465,8 +465,9 @@ body{
   height: 150px;
   font-size: 500%;
   font-family: 'Poppins', sans-serif;
-  color: #001945;
+  color: wheat;
   display: none;
+  background-color: rgb(47, 61, 115);
 }
 
 .inputSeen {
@@ -499,7 +500,7 @@ body{
 
 .displayWord{
     font-family: 'Poppins', sans-serif;
-    color:#001945;
+    color:wheat;
 }
 
 .goButton {
@@ -516,6 +517,7 @@ body{
   color: #001945;
   display: none;
   margin-left: 15px;
+  background-color:wheat;
 }
 
 .showCorrect{
@@ -540,25 +542,25 @@ body{
 }
 
 .statsText{
-    color: #FFEFD1;
+    color: #001945;
     font-family: 'Poppins', sans-serif;
 
 }
 
 .statsTextPr{
-    color: #FFEFD1;
+    color: #001945;
     font-family: 'Poppins', sans-serif;
     font-size: 32px;
 }
 
 .statsTextPc{
-    color: #FFEFD1;
+    color: #001945;
     font-family: 'Poppins', sans-serif;
     font-size: 28px;
 }
 
 .statsTextCondt{
-    color: #FFEFD1;
+    color: #001945;
     font-family: 'Poppins', sans-serif;
     font-size: 36px;
 }
@@ -574,8 +576,8 @@ body{
     border:5px;
     border-color: #001945;
     border-radius: 15px;
-    background-color: #001945;
-    color: #FFEFD1;
+    background-color: wheat;
+    color: #001945;
 }
 
 .returnbutton{
@@ -742,6 +744,7 @@ body{
 }
 
 .topleftlogoicon{
+    margin:20px;
     height:10vh;
     width:auto;
     cursor:pointer;
@@ -861,14 +864,14 @@ body{
 
 /* Style the front side (fallback if image is missing) */
 .flip-card-front {
-  background-color: #001945;
-  color: #FFEFD1;
+  background-color: wheat;
+  color: #001945;
   border-radius: 15px;
 
 }
 
 .frontcardtext{
-  color:#FFEFD1;
+  color:#001945;
   font-family: 'Poppins', sans-serif;
 }
 
