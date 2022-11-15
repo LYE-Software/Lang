@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Test</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" href="circular lang icon.png">
+    <style>
+        .paperHeader {
+            border-bottom: 5px solid var(--primary-dark);
+            height: 70px
+        }
+
+        .paperHeader .paperLine {
+            border-bottom: 5px solid var(--primary-dark);
+            height: 70px
+        }
+
+        .pageContainer input {
+            height: 50px
+        }
+
+
+        .pageContainer {
+            width: 90vw;
+            max-width: 600px;
+
+
+            border-bottom: 2px solid var(--primary-dark);
+        }
+
+        .paperLine {
+            background-color: var(--primary-dark);
+            height: 100%;
+        }
+
+        input {
+            border: none;
+            outline: none;
+            background-color: transparent;
+            font-size: 17px;
+        }
+
+        body {
+            overflow-y: visible;
+        }
+    </style>
+</head>
+<body>
+    <div id="header0" style="width: 100vw">
+        <div class="horizontalFlex header">
+            <div class="flexSpacer">
+                <img style="height: 8vh; margin-left:10px;" src="assets/logos/lang-wheat.png">
+            </div>
+
+            <div class="flexSpacer" style="color: var(--primary-dark); text-align: center;">Practice Test</div>
+
+            <div class="horizontalFlex flexSpacer" style="justify-content: flex-end;">
+                <div id="homeusername">Loading</div>
+                <div>
+                    <img class="pfp" style="height: 5vh;" src="settings.png" onclick="window.location.href='settings.html'">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="horizontalFlex centerFlex" style="margin-top: 50px; width: 100vw;">
+        <div style="background-color: var(--primary-light); padding: 20px; padding-top: 60px; padding-bottom: 30px; margin-bottom: 100px;">
+            <div class="paperHeader horizontalFlex"">
+                <div style="height: 100%; width: 40px;"></div>
+                <div class="flexSpacer" style="margin-left: 8px; margin-right: 8px; height: 100%; border-left: 2px solid var(--primary-dark);"> <!-- page contents are here -->
+                    <div style="margin-left: 20px; font-size: 40px;">
+                        The quiz of all quizzes
+                    </div>
+                </div>
+            </div>
+
+            <div class="pageContainer horizontalFlex" style="height: auto">
+                <div style="height: 100%; width: 20px;"></div>
+                <div style="height: 100%; width: 20px;"> <!-- numbers go here -->
+                    1)
+                </div>
+                <div class="flexSpacer horizontalFlex centerFlex" style="margin-left: 8px; margin-right: 8px; height: 100%; border-left: 2px solid var(--primary-dark); padding-left: 5px; min-height: 50px;"> <!-- page contents are here -->
+                    What is your mom?
+                </div>
+                <div style="border-left: 2px solid var(--primary-dark); width: 10px;">&nbsp;</div>
+                <input class="flexSpacer" style="background-color: wheat;">
+                <div style="position: relative;">
+                    <div style="position: absolute; left: 30; top: -10; color: red;">
+                        Incorrect
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="centerText" style="margin-top: 40px; background-color: var(--primary-dark); width: 60px; padding: 20px; border-radius: 15px; color: wheat;">
+                Submit
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -108,6 +108,10 @@ body {
     user-select: none;
 }
 
+input {
+    font-family: 'Poppins', sans-serif;
+}
+
 .centerText {
     text-align: center;
 }
