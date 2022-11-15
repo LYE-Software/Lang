@@ -60,6 +60,9 @@
             margin: 0;
             padding: 0;
         }
+        ::-webkit-scrollbar {
+    display: none;
+}
 </style>
 <body onload = "doPreviewAndLocal()" class="darkHomepage" style="overflow-x:hidden;">
     <div style="width:95vw; height:100vh; position:relative;">
@@ -99,6 +102,10 @@
         
                 </div>
                 <div style="flex:0.45; padding:20px; overflow-y:scroll; max-height:70vh;">
+                    <div style="display:flex; justify-content:space-evenly; margin-left:-3vw;">
+                        <h1 class="header" style="color:wheat;">Term</h1>
+                        <h1 class="header" style="color:wheat;">Defintion</h1>
+                    </div>
                     <div id="previewstudysheet"></div>
                     <div style="width: 100%; justify-content: center; align-items: center; text-align: center;">
                     </div>
