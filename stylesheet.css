@@ -105,6 +105,7 @@ body {
     background-color: var(--primary-dark);
     margin: 2vh;
     cursor: pointer;
+    user-select: none;
 }
 
 .centerText {
