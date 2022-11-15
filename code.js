@@ -2331,9 +2331,18 @@ function saveToCloud(){
     console.log(childarray);
     for (var i=0; i<childarray.length; i+=2){
         var child = childarray[i];
-        value1 = '["'+child.innerHTML+'"';
         var child2 = childarray[i+1];
-        value2 = '"'+child2.innerHTML+'"]'+"\n";
+        var childContents = child.innerHTML.trim()
+        var child2Contents = child2.innerHTML.trim()
+        
+        childContents = childContents.replaceAll("&nbsp;", "")
+        child2Contents = child2Contents.replaceAll("&nbsp;", "")
+        if (child2Contents.includes("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823") || child2Contents.includes("&nbsp;")){
+            alert("One of the specified words is not avaliable for use due to the structure of the Lang Studysheet.")
+            window.location.reload();
+        }
+        value1 = '["'+childContents+'"';
+        value2 = '"'+child2Contents+'"]'+"\n";
         toAdd = [value1, value2];
         console.log(toAdd);
         downloadArray = downloadArray + toAdd;
@@ -2401,9 +2410,17 @@ function downloadVerbs(select){
         console.log(childarray);
         for (var i=0; i<childarray.length; i+=2){
             var child = childarray[i];
-            value1 = '["'+child.innerHTML+'"';
             var child2 = childarray[i+1];
-            value2 = '"'+child2.innerHTML+'"]'+"\n";
+            var childContents = child.innerHTML.trim()
+            var child2Contents = child2.innerHTML.trim()
+            childContents = childContents.replaceAll("&nbsp;", "")
+            child2Contents = child2Contents.replaceAll("&nbsp;", "")
+            if (child2Contents.includes("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823") || child2Contents.includes("&nbsp;")){
+                alert("One of the specified words is not avaliable for use due to the structure of the Lang Studysheet.")
+                window.location.reload();
+            }
+            value1 = '["'+childContents+'"';
+            value2 = '"'+child2Contents+'"]'+"\n";
             toAdd = [value1, value2];
             console.log(toAdd);
             downloadArray = downloadArray + toAdd;
