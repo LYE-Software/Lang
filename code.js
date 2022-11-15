@@ -125,16 +125,16 @@ function move() {
   }
 }
 
-var url_string = window.location.href; //window.location.href
-var url = new URL(url_string);
-var c = url.searchParams.get("token");
-console.log(c);
-if (c != null) {
-    window.localStorage.setItem("usertoken", c);
-}else{
+// var url_string = window.location.href; //window.location.href
+// var url = new URL(url_string);
+// var c = url.searchParams.get("token");
+// console.log(c);
+// if (c != null) {
+//     window.localStorage.setItem("usertoken", c);
+// }else{
 
-}
-sessionid = c;
+// }
+// sessionid = c;
 
 function changelibrary(){
     if (window.localStorage.getItem("usertoken") != null) {
@@ -350,6 +350,122 @@ function changeToOffline(){
     
 
 }
+
+
+async function getLibraryList(){
+    customuser=window.localStorage.getItem("username");
+    window.localStorage.setItem('editSheet', "false");
+    document.getElementById("homeusername").innerHTML = "Hello";
+    console.log("generating library list")
+    var url_string = window.location.href; //window.location.href
+    var url = new URL(url_string);
+    var c = url.searchParams.get("token");
+    console.log(c);
+    if (c != null) {
+        window.localStorage.setItem("usertoken", c);
+    }
+    sessionid = c;
+    //get user's username and test if expired
+    if (window.localStorage.getItem("usertoken") == null || window.localStorage.getItem("usertoken") == ""){
+        console.log("new user")
+        failedSignIn()
+    } else {
+        console.log("inside the else")
+        sessionid = window.localStorage.getItem("usertoken")
+        url = "https://anklebowl.pythonanywhere.com"+"/usernamefromtoken/"+sessionid;
+        username = await httpGet(url, true);
+        console.log(username);
+        if (username == "Invalid token"){
+            failedSignIn();
+        }
+        library = await httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/list")
+        if(library == "[]"){
+            document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
+    
+        }
+        else{
+            library = library.split("-seperator-")
+            if (library==""){
+                document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
+            }
+            else{
+                document.getElementById("homeusername").innerHTML = "Hello, "+customuser;
+                hideLoadingView();
+                for (i=0;i<library.length;i++){
+                    console.log("inside for")          
+                    let horizontalflexstudysetentry = document.createElement("div")
+                    horizontalflexstudysetentry.className = "horizontalFlex studysetentry"
+                    document.getElementById("studysetholder").append(horizontalflexstudysetentry);
+                    let namediv = document.createElement("div")
+                    namediv.innerHTML = library[i]
+                    horizontalflexstudysetentry.append(namediv);
+
+
+
+                    let spacer = document.createElement("div")
+                    spacer.className = "flexSpacer"
+                    horizontalflexstudysetentry.append(spacer);
+                    let datediv = document.createElement("div")
+                    horizontalflexstudysetentry.append(datediv);
+                    
+
+                    let del = document.createElement("div");
+                    del.setAttribute("studysheet", library[i])
+                    del.innerHTML = "Delete"
+                    del.id=library[i]
+                    horizontalflexstudysetentry.append(del);
+
+                    let newspacer = document.createElement("div");
+                    newspacer.style.width="10vw";
+                    horizontalflexstudysetentry.append(newspacer);
+        
+                    del.onclick=async function(){
+                        document.getElementById("loadingscreen").style.display = "";
+                        document.getElementById("loadingscreen").classList = "absolute";
+                        document.getElementById("studysetholder").style.display = "none";
+                        var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
+                        link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+ studysheetname+"/delete"
+                        console.log("link is: "+link)
+                        await httpGet(link)
+                        window.location.reload()
+                        
+                    }
+
+                    let view = document.createElement("div");
+                    view.setAttribute("studysheet", library[i])
+                    view.innerHTML = "View"
+                    view.id=library[i]
+                    horizontalflexstudysetentry.append(view);
+        
+        
+                    view.onclick=function(){
+                        var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
+        
+                        window.localStorage.setItem("chosenSheet", studysheetname)
+                        window.location.href="studysheetpage.html";
+                        
+                    }
+
+                    
+        
+        
+        
+        
+        
+        
+                    
+                }
+            }
+    }
+}
+}
+
+
+
+
+
+
+
 async function generateLibraryList(){
     customuser=window.localStorage.getItem("username");
     window.localStorage.setItem('editSheet', "false");
