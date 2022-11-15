@@ -8,6 +8,39 @@
     <link rel="icon" href="circular lang icon.png">
     <script src="code.js"></script> 
 </head>
+<style>
+    .termDefContainer {
+            background-color: wheat;
+            border-radius: 25px;
+            padding: 25px;
+            margin: 10px;
+
+            width: 30vw;
+            height:auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .term {
+            align-items: center;
+            text-align: center;
+            border-right: #001945 1px solid;
+
+            font-size: 1vw;
+            flex: 1;
+            border-bottom: var(--primary-dark) 1px solid;
+        }
+
+        .definition {
+            font-size: 1vw;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+            margin-right:1vw;
+            border-bottom: var(--primary-dark) 1px solid;
+            border-left: #001945 1px solid;
+        }
+</style>
 <body onload = "doPreviewAndLocal()" class="darkHomepage" style="overflow-x:hidden;">
     <div style="width:95vw; height:105vh; position:relative;">
         <div style="height:99vh; width:97vw; position:absolute;" id="noclickdiv">
@@ -45,8 +78,8 @@
         
         
                 </div>
-                <div style="flex:0.35; border-radius:15px; border:solid; border-color:wheat; padding:20px; overflow:scroll; max-height:70vh;">
-                    <h3 class="header" style="color:wheat;" id="previewstudysheet"></h3>
+                <div style="flex:0.45; padding:20px; overflow-y:scroll; max-height:70vh;">
+                    <div id="previewstudysheet"></div>
                     <div style="width: 100%; justify-content: center; align-items: center; text-align: center;">
                     </div>
         

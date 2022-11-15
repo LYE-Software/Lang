@@ -62,10 +62,39 @@ async function doPreviewAndLocal(){
     console.log("og sheet: "+sheet)
     sheet = sheet.replaceAll("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823", "\n")
     console.log(sheet)
-    document.getElementById("previewstudysheet").innerHTML = sheet;
     window.localStorage.setItem("fullstudysheet", sheet)
-    checkSettings()
+    
+    customWords = sheet
+    let arrayText = customWords.split('\n')
+    
+    for (i = 0; i<arrayText.length; i++){
+        let wordPair = getRandomQuestion(customWords);
+        var br = document.createElement("div")
+        br.className = "termDefContainer";
+        document.getElementById("previewstudysheet").appendChild(br);
+        id1 = "input"+generateIdV
+        id2 = "input"+generateIdA
 
+        var verbInput = document.createElement('div');
+        verbInput.id=id1;
+        verbInput.className="term"
+        verbInput.style.color="#001945"
+        verbInput.setAttribute("data-text", "Term");
+        generateIdV++
+        verbInput.innerHTML=wordPair[0];
+        br.appendChild(verbInput);
+    
+        var answerInput = document.createElement("div");
+        answerInput.id=id2;
+        answerInput.setAttribute("id",id2)
+        answerInput.className="definition"
+        answerInput.style.color="#001945"
+        answerInput.innerHTML=wordPair[1];
+        answerInput.setAttribute("data-text", "Answer");
+        generateIdA++
+        // answerInput.innerHTML="Put Answer Here";
+        br.appendChild(answerInput);
+    }
 
 }
 
