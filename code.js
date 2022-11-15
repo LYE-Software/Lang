@@ -387,6 +387,8 @@ async function getLibraryList(){
             library = library.split("-seperator-")
             if (library==""){
                 document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
+            } else if (library == "Invalid token"){
+                failedSignIn();
             }
             else{
                 document.getElementById("homeusername").innerHTML = "Hello, "+username;
