@@ -21,7 +21,7 @@
         }
 
         .card {
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            transition: opacity 0.5s ease-in-out;
             height: 400px;
             width: 600px;
             margin: 10px;
@@ -37,6 +37,18 @@
             text-align: center;
         }
 
+        @keyframes flipCard {
+            0% {
+                transform: rotateZ(0deg);
+            }
+            50% {
+                transform: rotateZ(90deg);
+            }
+            100% {
+                transform: rotateZ(0deg);
+            }
+        }
+
         .cardContainer {
             transition: all 0.5s ease-out;
             position: absolute;
@@ -48,7 +60,11 @@
         }
 
         .clicked {
-            transform: rotateX(180deg);
+
+        }
+
+        .flipAnimation {
+            animation: flipCard 0.5s ease-in-out;
         }
     </style>
 </head>
@@ -94,21 +110,35 @@
     var cardWidth = 620;
     var cardHeight = 400;
 
+    flashcardContentsArray = [
+        ["front0", "back0"],
+        ["front1", "back1"],
+        ["front2", "back2"],
+        ["front3", "back3"],
+        ["front4", "back4"],
+        ["front5", "back5"],
+        ["front6", "back6"],
+        ["front7", "back7"],
+        ["front8", "back8"],
+        ["front9", "back9"],
+    ]
+
     function createFlashcards(count) {
 
         for (var i = 0; i < count; i++) {
+            front = flashcardContentsArray[i][0];
             if (i == 0) {
                 cardContainer.innerHTML += 
                     `<div style="opacity: 01; position: relative;" onclick="clickCard()" class="card">
                         <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                            test
+                            ${front}
                         </div>
                     </div>`
             } else [
                cardContainer.innerHTML += 
                     `<div style="opacity: 0.5; position: relative;" onclick="clickCard()" class="card">
                         <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                            test
+                            ${front}
                         </div>
                     </div>`
             ]
@@ -131,7 +161,18 @@
         }
 
         cardContainer.children[focusedCard].style.opacity = 0.5;
+        if (cardContainer.children[focusedCard].classList.contains("clicked")) {
+            cardContainer.children[focusedCard].classList.add("flipAnimation");
+        }
         cardContainer.children[focusedCard].classList.remove("clicked");
+
+        const oldValue = focusedCard;
+        setTimeout(function() {
+            cardContainer.children[oldValue].children[0].innerHTML = flashcardContentsArray[oldValue][0];
+        }, 250)
+        setTimeout(function() {
+            cardContainer.children[oldValue].classList.remove("flipAnimation");
+        }, 500)
 
         focusedCard++;
         cardContainer.style.left = parseInt(cardContainer.style.left) - cardWidth + "px";
@@ -144,7 +185,18 @@
             return;
         }
         cardContainer.children[focusedCard].style.opacity = 0.5;
+        if (cardContainer.children[focusedCard].classList.contains("clicked")) {
+            cardContainer.children[focusedCard].classList.add("flipAnimation");
+        }
         cardContainer.children[focusedCard].classList.remove("clicked");
+
+        const oldValue = focusedCard;
+        setTimeout(function() {
+            cardContainer.children[oldValue].children[0].innerHTML = flashcardContentsArray[oldValue][0];
+        }, 250)
+        setTimeout(function() {
+            cardContainer.children[oldValue].classList.remove("flipAnimation");
+        }, 500)
 
         focusedCard--;
         cardContainer.style.left = parseInt(cardContainer.style.left) + cardWidth + "px";
@@ -153,13 +205,32 @@
 
     }
 
+    var locked = false;
+
     function clickCard() {
+        if (locked) {
+            return;
+        }
+        locked = true
         var clickedCard = document.getElementById("cardContainer").children[focusedCard];
-        clickedCard.classList.toggle("clicked");
+        var i = 0;
+        if (clickedCard.classList.contains("clicked")) {
+            clickedCard.classList.remove("clicked");
+            i = 0
+        } else {
+            clickedCard.classList.add("clicked");
+            i = 1
+        }
+        
+        clickedCard.classList.add("flipAnimation");
+        setTimeout(function() {
+            clickedCard.classList.remove("flipAnimation");
+            locked = false;
+        }, 500);
 
         setTimeout(function() {
-            // change the text in here 
-        }, 250);
+            clickedCard.children[0].innerHTML = flashcardContentsArray[focusedCard][i];
+        }, 250)
     }
 
     createFlashcards(totalCardCount)
