@@ -10,9 +10,9 @@
     <style>
         .langCreatorContainer {
             box-sizing: border-box;
-            padding: 50px;
+            /* padding: 50px; */
 
-            width: 60vw;
+            /* width: 60vw; */
             display: flex;
             /* justify-content: center; */
             flex-direction: column;
@@ -20,10 +20,21 @@
 
             overflow-y: scroll;
             overflow-x: hidden;
-            max-height: 80vh;
+            /* max-height: 80vh; */
 
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;
+
+            width: 90vw;
+            max-width: 700px;
+
+            max-height: 80%;
+
+            padding: 5px;
+            border-top: 5px solid var(--primary-light);
+            border-bottom: 5px solid var(--primary-light);
+            /* border-radius: 25px; */
+            margin-right: 10px;
         }
 
         .langCreatorContainer::-webkit-scrollbar {
@@ -31,8 +42,8 @@
         }
         
         .creatorIcon {
-            width: 7.5vw;
-            height: 7.5vw;
+            width: 100px;
+            height: 100px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -48,8 +59,6 @@
             border-radius: 25px;
             padding: 25px;
             margin: 10px;
-
-            width: 50vw;
 
             display: flex;
             justify-content: center;
@@ -90,47 +99,45 @@
             <p style="color:var(--primary-light);">Syncing your Studysheet with our servers...</p>
         </div>
     </div>
-    <div class="absolute">
-        <div style="height: 10vh;"></div>
-        <div style="display: flex; align-items: center; justify-content: center; width: 100vw; height: 90vh;">
-            <div id="langCreatorContainer" class="langCreatorContainer">
-                <div style="height: 10vh;"></div>
-                <div class="termDefContainer">
-                    <div style="margin-right: 25px;">Title: </div>
-                    <div class="definition" id="sstitle" contenteditable></div>
-                </div>
-                <div id="insideCreator">
-
-                </div>
-                <div class="termDefContainer" onclick="makeInputs('single')">
-                    Add New
-                </div>
-            </div>
-    
-            <div style="background-color: var(--primary-light); height: 15vw; width: 7.5vw; border-radius: 25px;">
-                <div class="creatorIcon" onclick="downloadVerbs('s')">
-                    <img src="save.svg" style="height:5.5vw; color:var(--primary-dark);">
-                </div>
-                <div class="creatorIcon" onclick="saveToCloud()">
-                    <img src="goodsizelye.png" style="height:4.5vw;">
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 
-    <div id="header0" class="absolute" style="width: 100vw">
+
+    <div id="header0" class="" style="width: 100vw">
         <div class="horizontalFlex header">
             <div onclick="returnMain()" style="cursor:pointer;">
                 <img style="height: 10vh;" src="assets/logos/lang.png">
             </div>
             <div class="flexSpacer"></div>
-            <div id="topheader" style="font-family: 'Rubik Mono One', sans-serif; font-size:2vw;">Study Sheet Creator</div>
+            <div id="topheader" style="font-family: 'Rubik Mono One', sans-serif; font-size:25px;">Study Sheet Creator</div>
             <div class="flexSpacer"></div>
             <div id="homeusername">Getting your userinfo...</div>
             <div>
                 <img class="pfp" style="height: 5vh;" src="settings.png" onclick="window.location.href='settings.html'">
+            </div>
+        </div>
+    </div>
+
+    <div class="horizontalFlex" style="justify-content: center; width: 100vw; height: 90vh;">
+        <div id="langCreatorContainer" class="langCreatorContainer">
+            <div class="termDefContainer">
+                <div style="margin-right: 25px;">Title: </div>
+                <div class="definition" id="sstitle" contenteditable></div>
+            </div>
+            <div id="insideCreator">
+
+            </div>
+            <div class="termDefContainer" onclick="makeInputs('single')" style="cursor:grab; user-select: none;">
+                Add New
+            </div>
+        </div>
+
+        <div style="background-color: var(--primary-light); height: 200px; width: 100px; border-radius: 25px;">
+            <div class="creatorIcon" onclick="downloadVerbs('s')">
+                <img src="save.svg" style="height:50px; color:var(--primary-dark);">
+            </div>
+            <div class="creatorIcon" onclick="saveToCloud()">
+                <img src="goodsizelye.png" style="height:50px;">
             </div>
         </div>
     </div>

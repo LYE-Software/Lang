@@ -368,7 +368,7 @@ async function getLibraryList(){
     }
     sessionid = c;
     //get user's username and test if expired
-    if (window.localStorage.getItem("usertoken") == null || window.localStorage.getItem("usertoken") == ""){
+    if (window.localStorage.getItem("usertoken") == null || window.localStorage.getItem("usertoken") == "") {
         console.log("new user")
         failedSignIn()
     } else {
@@ -384,7 +384,6 @@ async function getLibraryList(){
         console.log(username);
         if(library == "[]"){
             document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
-    
         }
         else{
             library = library.split("-seperator-")
@@ -405,15 +404,12 @@ async function getLibraryList(){
                     namediv.innerHTML = library[i]
                     horizontalflexstudysetentry.append(namediv);
 
-
-
                     let spacer = document.createElement("div")
                     spacer.className = "flexSpacer"
                     horizontalflexstudysetentry.append(spacer);
                     let datediv = document.createElement("div")
                     horizontalflexstudysetentry.append(datediv);
                     
-
                     let del = document.createElement("div");
                     del.setAttribute("studysheet", library[i])
                     del.innerHTML = "Delete"
@@ -443,28 +439,17 @@ async function getLibraryList(){
                     horizontalflexstudysetentry.append(view);
         
         
-                    view.onclick=function(){
+                    view.onclick = function(){
                         var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
         
                         window.localStorage.setItem("chosenSheet", studysheetname)
-                        window.location.href="studysheetpage.html";
-                        
+                        window.location.href="studysheetpage.html";       
                     }
-
-                    
-        
-        
-        
-        
-        
-        
-                    
                 }
             }
+        }
     }
 }
-}
-
 
 
 
@@ -2378,7 +2363,8 @@ function makeInputs(version){
         // answerInput.innerHTML="Put Answer Here";
         br.appendChild(answerInput);
     
-        
+        var overallContainer = document.getElementById("langCreatorContainer");
+        overallContainer.scrollTop = overallContainer.scrollHeight;
     }
     else{
         
