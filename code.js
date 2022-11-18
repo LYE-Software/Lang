@@ -396,6 +396,12 @@ async function getLibraryList(){
             else{
                 document.getElementById("homeusername").innerHTML = "Hello, "+username;
                 hideLoadingView();
+
+                if (library.length == 0) {
+                    noStudySheets()
+                    return;
+                }
+
                 for (i=0;i<library.length;i++){
                     console.log("inside for")          
                     let horizontalflexstudysetentry = document.createElement("div")
