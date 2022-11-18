@@ -370,7 +370,8 @@ async function getLibraryList(){
     //get user's username and test if expired
     if (window.localStorage.getItem("usertoken") == null || window.localStorage.getItem("usertoken") == "") {
         console.log("new user")
-        failedSignIn()
+        firstSignIn()
+        // failedSignIn()
     } else {
         console.log("inside the else")
         sessionid = window.localStorage.getItem("usertoken")
