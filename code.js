@@ -383,74 +383,74 @@ async function getLibraryList(){
         username = arrayOfData[0];
         library = arrayOfData[1];
         console.log(username);
-        // if(library == "[]"){
-        //     // document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
-        // }
-        // else{
-        library = library.split("-seperator-")
-        if (library==""){
-            // document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
-            noStudySheets()
-        } else if (library == "Invalid token"){
-            failedSignIn();
+        if(library == "[]"){
+             // document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
         }
         else{
-            document.getElementById("homeusername").innerHTML = "Hello, "+username;
-            hideLoadingView();
+            library = library.split("-seperator-")
+            if (library==""){
+                // document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
+                noStudySheets()
+            } else if (library == "Invalid token"){
+                failedSignIn();
+            }
+            else{
+                document.getElementById("homeusername").innerHTML = "Hello, "+username;
+                hideLoadingView();
 
-            for (i=0;i<library.length;i++){
-                console.log("inside for")          
-                let horizontalflexstudysetentry = document.createElement("div")
-                horizontalflexstudysetentry.className = "horizontalFlex studysetentry"
-                document.getElementById("studysetholder").append(horizontalflexstudysetentry);
-                let namediv = document.createElement("div")
-                namediv.innerHTML = library[i]
-                horizontalflexstudysetentry.append(namediv);
+                for (i=0;i<library.length;i++){
+                    console.log("inside for")          
+                    let horizontalflexstudysetentry = document.createElement("div")
+                    horizontalflexstudysetentry.className = "horizontalFlex studysetentry"
+                    document.getElementById("studysetholder").append(horizontalflexstudysetentry);
+                    let namediv = document.createElement("div")
+                    namediv.innerHTML = library[i]
+                    horizontalflexstudysetentry.append(namediv);
 
-                let spacer = document.createElement("div")
-                spacer.className = "flexSpacer"
-                horizontalflexstudysetentry.append(spacer);
-                let datediv = document.createElement("div")
-                horizontalflexstudysetentry.append(datediv);
-                
-                let del = document.createElement("div");
-                del.setAttribute("studysheet", library[i])
-                del.innerHTML = "Delete"
-                del.id=library[i]
-                horizontalflexstudysetentry.append(del);
-
-                let newspacer = document.createElement("div");
-                newspacer.style.width="10vw";
-                horizontalflexstudysetentry.append(newspacer);
-    
-                del.onclick=async function(){
-                    document.getElementById("loadingscreen").style.display = "";
-                    document.getElementById("loadingscreen").classList = "absolute";
-                    document.getElementById("studysetholder").style.display = "none";
-                    var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
-                    link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+ studysheetname+"/delete"
-                    console.log("link is: "+link)
-                    await httpGet(link)
-                    window.location.reload()
+                    let spacer = document.createElement("div")
+                    spacer.className = "flexSpacer"
+                    horizontalflexstudysetentry.append(spacer);
+                    let datediv = document.createElement("div")
+                    horizontalflexstudysetentry.append(datediv);
                     
-                }
+                    let del = document.createElement("div");
+                    del.setAttribute("studysheet", library[i])
+                    del.innerHTML = "Delete"
+                    del.id=library[i]
+                    horizontalflexstudysetentry.append(del);
 
-                let view = document.createElement("div");
-                view.setAttribute("studysheet", library[i])
-                view.innerHTML = "View"
-                view.id=library[i]
-                horizontalflexstudysetentry.append(view);
-    
-    
-                view.onclick = function(){
-                    var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
-    
-                    window.localStorage.setItem("chosenSheet", studysheetname)
-                    window.location.href="studysheetpage.html";       
+                    let newspacer = document.createElement("div");
+                    newspacer.style.width="10vw";
+                    horizontalflexstudysetentry.append(newspacer);
+        
+                    del.onclick=async function(){
+                        document.getElementById("loadingscreen").style.display = "";
+                        document.getElementById("loadingscreen").classList = "absolute";
+                        document.getElementById("studysetholder").style.display = "none";
+                        var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
+                        link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+ studysheetname+"/delete"
+                        console.log("link is: "+link)
+                        await httpGet(link)
+                        window.location.reload()
+                        
+                    }
+
+                    let view = document.createElement("div");
+                    view.setAttribute("studysheet", library[i])
+                    view.innerHTML = "View"
+                    view.id=library[i]
+                    horizontalflexstudysetentry.append(view);
+        
+        
+                    view.onclick = function(){
+                        var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
+        
+                        window.localStorage.setItem("chosenSheet", studysheetname)
+                        window.location.href="studysheetpage.html";       
+                    }
                 }
             }
         }
-        // }
     }
 }
 
