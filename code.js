@@ -2480,6 +2480,8 @@ function saveToCloud(){
         
         childContents = childContents.replaceAll("&nbsp;", "")
         child2Contents = child2Contents.replaceAll("&nbsp;", "")
+        childContents = childContents.replaceAll("<div><br></div>", "")
+        child2Contents = child2Contents.replaceAll("<div><br></div>", "")
         if (child2Contents.includes("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823") || child2Contents.includes("&nbsp;")){
             alert("One of the specified words is not avaliable for use due to the structure of the Lang Studysheet.")
             window.location.reload();
@@ -2558,6 +2560,8 @@ function downloadVerbs(select){
             var child2Contents = child2.innerHTML.trim()
             childContents = childContents.replaceAll("&nbsp;", "")
             child2Contents = child2Contents.replaceAll("&nbsp;", "")
+            childContents = childContents.replaceAll("<div><br></div>", "")
+            child2Contents = child2Contents.replaceAll("<div><br></div>", "")
             if (child2Contents.includes("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823") || child2Contents.includes("&nbsp;")){
                 alert("One of the specified words is not avaliable for use due to the structure of the Lang Studysheet.")
                 window.location.reload();
