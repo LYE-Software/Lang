@@ -5,7 +5,7 @@ def get_page(url):
     # set the user agent to a browser
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15'}
     # set the session cookie
-    cookies = {'sessionid_2': 'ENTER_SESSION_ID_HERE'}
+    cookies = {'sessionid_2': 'ozrbrtsr64378j7lhjfmu9qgrmb1tgzpo'}
     # get the page
     page = requests.get(url, headers=headers, cookies=cookies)
     return page.text
@@ -28,11 +28,11 @@ def get_terms_definitions(page):
     return entries
 
 
-entries = get_terms_definitions("https://app.memrise.com/course/5810583/daccord-3-l2p1-catastrophes-naturelles/")
+entries = get_terms_definitions("https://app.memrise.com/course/5826751/daccord-3-l2p2/")
 
 output = ""
 for entry in entries:
-    output += "[\"" + entry[0] + "\",\"" + entry[1] + "\"]\n"
+    output += "[\"" + entry[1] + "\",\"" + entry[0] + "\"]\n"
 output = output[:-1]
 
 print(output)

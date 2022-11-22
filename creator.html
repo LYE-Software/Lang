@@ -157,5 +157,23 @@
         makeInputs("single")
         document.getElementById("insideCreator").children[document.getElementById("insideCreator").children.length - 1].children[0].focus()
     })
+
+    function swapTermDef() {
+        var insideCreator = document.getElementById("insideCreator")
+        var termDefs = insideCreator.children
+        var terms = []
+        var defs = []
+
+        for (var i = 0; i < termDefs.length; i++) {
+            terms.push(termDefs[i].children[0].innerHTML)
+            defs.push(termDefs[i].children[1].innerHTML)
+        }
+
+        for (var i = 0; i < termDefs.length; i++) {
+            termDefs[i].children[0].innerHTML = defs[i]
+            termDefs[i].children[1].innerHTML = terms[i]
+        }
+    }
+    
 </script>
 </html>
