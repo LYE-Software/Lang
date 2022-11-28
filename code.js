@@ -385,6 +385,11 @@ async function getLibraryList(){
         console.log(username);
         if(library == "[]"){
              // document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
+        } if (library == ""){
+            failedSignIn()
+        } if (library == null){
+            failedSignIn() //commit please
+            console.log("lib = null")
         }
         else{
             library = library.split("-seperator-")
@@ -393,7 +398,7 @@ async function getLibraryList(){
                 noStudySheets()
             } else if (library == "Invalid token"){
                 failedSignIn();
-            }
+            } 
             else{
                 document.getElementById("homeusername").innerHTML = "Hello, "+username;
                 hideLoadingView();
