@@ -2480,8 +2480,8 @@ function saveToCloud(){
     for (var i=0; i<childarray.length; i+=2){
         var child = childarray[i];
         var child2 = childarray[i+1];
-        var childContents = child.innerHTML.trim()
-        var child2Contents = child2.innerHTML.trim()
+        var childContents = child.innerText.trim()
+        var child2Contents = child2.innerText.trim()
         
         childContents = childContents.replaceAll("&nbsp;", "")
         child2Contents = child2Contents.replaceAll("&nbsp;", "")
@@ -2502,7 +2502,7 @@ function saveToCloud(){
     downloadArrayString = downloadArray+"";
     downloadArrayString = downloadArrayString.replaceAll("\n", "sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
 
-    var filename = document.getElementById("sstitle").innerHTML;
+    var filename = document.getElementById("sstitle").innerText;
     console.log("FILE NAME+ "+filename)
     if(window.localStorage.getItem('editSheet')=="true") {
         var url = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/edit/"+filename;
@@ -2532,8 +2532,8 @@ function saveToCloud(){
 //preps the user input custom sheet for downloading by putting all into one string
 
 function downloadVerbs(select){
-    if(document.getElementById("sstitle").innerHTML == ""){
-        document.getElementById("sstitle").innerHTML = "Lang Custom Studysheet";
+    if(document.getElementById("sstitle").innerText == ""){
+        document.getElementById("sstitle").innerText = "Lang Custom Studysheet";
      }
     if(select == "s"){
         var downloadArray = ""
@@ -2561,8 +2561,8 @@ function downloadVerbs(select){
         for (var i=0; i<childarray.length; i+=2){
             var child = childarray[i];
             var child2 = childarray[i+1];
-            var childContents = child.innerHTML.trim()
-            var child2Contents = child2.innerHTML.trim()
+            var childContents = child.innerText.trim()
+            var child2Contents = child2.innerText.trim()
             childContents = childContents.replaceAll("&nbsp;", "")
             child2Contents = child2Contents.replaceAll("&nbsp;", "")
             childContents = childContents.replaceAll("<div><br></div>", "")
