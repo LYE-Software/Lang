@@ -895,8 +895,10 @@ function getRandomQuestion(textBlock) {
     }
     else{
         let random_question = arrayText[whatQuestion];
+        console.log(arrayText)
         console.log("what quest " + whatQuestion)
         console.log("array text length "+arrayText.length)
+        console.log(random_question);
         var questionArray = JSON.parse(random_question);
         whatQuestion++;
         if (whatQuestion >= arrayText.length){
@@ -1996,13 +1998,13 @@ function getInput() {
 
 function checkCustom(v){
     usrInput = input.value.toLowerCase();
+    document.getElementById("hintText").style.display = "none";
     if (usrInput == customAnswer){
         correctCounter += 1
         buttonStyling.style.backgroundColor = "#3e8e41"
         setTimeout(function () { buttonStyling.style.backgroundColor = "wheat" }, 1000)
         try {
             document.getElementById("helpbutton").style.display = "none";
-            document.getElementById("howmanyhelps").innerHTML = ""
         } catch (error) {
             
         }
@@ -2018,7 +2020,6 @@ function checkCustom(v){
         input.value = ""
         incorrectCounter += 1
         try {
-            document.getElementById("howmanyhelps").innerHTML = "You have used "+helpsused+" helps."
             document.getElementById("helpbutton").style.display = "flex";
         } catch (error) {
             
@@ -2035,9 +2036,10 @@ function checkCustom(v){
 
 
 function helpCustom(){
-    input.value = customAnswer;
-    helpsused++
-    document.getElementById("howmanyhelps").innerHTML = "You have used "+helpsused+" help(s)."
+    document.getElementById("hintText").innerHTML = customAnswer;
+    document.getElementById("hintText").style.display = "flex";
+    document.getElementById("helpbutton").style.display = "none";
+    
     
 }
 
@@ -2340,7 +2342,7 @@ function startCreator(version){
 
 
 //creates new input fields for multi & single creators + assigns them ids
-
+var currentId = "";
 function makeInputs(version){
     var inputMap = new Map();
     inputMap.set("")
@@ -2350,8 +2352,8 @@ function makeInputs(version){
         br.className = "termDefContainer";
         document.getElementById("insideCreator").appendChild(br);
         id1 = "input"+generateIdV
-        id2 = "input"+generateIdA
-
+        id2 = "ans"+generateIdA
+        id3 = "button"+generateIdYou
         var verbInput = document.createElement('div');
         verbInput.id=id1;
         verbInput.className="term"
@@ -2370,81 +2372,76 @@ function makeInputs(version){
         generateIdA++
         // answerInput.innerHTML="Put Answer Here";
         br.appendChild(answerInput);
+        // var brk = document.createElement("br");
+        // br.appendChild(brk);
+        // var brk = document.createElement("br");
+        // br.appendChild(brk);
+        var image = document.createElement("img");
+        image.src="../Lang/assets/icons/proto.nobg.arrow.svg";
+        image.className="arrowAlt";
+        image.id = id3;
+        generateIdYou++;
+        image.onclick = function(){
+            console.log(this)
+            currentId = this.id;
+            makeInputs("Multi");
+            
+        }
+        // br.appendChild(image);
     
         var overallContainer = document.getElementById("langCreatorContainer");
         overallContainer.scrollTop = overallContainer.scrollHeight;
     }
     else{
-        
-        id1 = "verbInput"+generateIdV
-        id2 = "jeinput"+generateIdI
-        id3 = "youinput"+generateIdYou
-        id4 = "heinput"+generateIdHe
-        id5 = "weinput"+generateIdWe
-        id6 = "vousinput"+generateIdVous
-        id7 = "theminput"+generateIdThem
+        console.log(currentId);
+        var outDiv = document.createElement("div");
+        outDiv.style.display = "flex";
+        document.getElementById("insideCreator").appendChild(outDiv);
+        var image = document.createElement("img");
+        image.src="../Lang/assets/icons/arrow 2.svg";
+        image.className="subArrow";
+        outDiv.appendChild(image);
+        var br = document.createElement("div")
+        br.className = "termDefContainer";
+        br.style.flex = "1";
+        outDiv.appendChild(br);
+        id1 = "input"+generateIdV
+        id2 = "input"+generateIdA
 
-        var br = document.createElement("br")
-        document.getElementById("multicreator").appendChild(br);
-
-        var verbInput = document.createElement('INPUT');
-        verbInput.setAttribute("type", "text");
-        verbInput.setAttribute("id",id1)
+        var verbInput = document.createElement('div');
+        verbInput.id=id1;
+        verbInput.className="term"
+        verbInput.setAttribute("data-text", "Alternate Term");
+        verbInput.contentEditable="true";
         generateIdV++
-        verbInput.placeholder="Put Infinitive Here";
-        document.getElementById("multicreator").appendChild(verbInput);
+            // verbInput.innerHTML="Put Term / Question Here";
+        br.appendChild(verbInput);
+        usableId = "ans"+currentId.slice(-1);
+        console.log(usableId)
+        var answerInput = document.createElement("div");
+        answerInput.innerHTML = document.getElementById(usableId).innerHTML;
+        document.getElementById(usableId).style.display = "none";
+        document.getElementById(usableId).innerHTML = "";
+        document.getElementById("input"+currentId.slice(-1)).style.textAlign = "center";
+        document.getElementById("input"+currentId.slice(-1)).style.fontWeight = "bolder"
+        document.getElementById("input"+currentId.slice(-1)).style.fontSize = "10vw;"
+        answerInput.id=id2;
+        answerInput.setAttribute("id",id2)
+        answerInput.className="definition"
+        answerInput.contentEditable="true";
+        answerInput.setAttribute("data-text", "Alternate Answer");
+        generateIdA++
+        // answerInput.innerHTML="Put Answer Here";
+        br.appendChild(answerInput);
+        // var brk = document.createElement("br");
+        // br.appendChild(brk);
+        // var brk = document.createElement("br");
+        // br.appendChild(brk);
+        
     
-       
-
-        var answerInput = document.createElement("INPUT");
-        answerInput.setAttribute("type", "text");
-        verbInput.setAttribute("id",id2)
-        generateIdI++
-        answerInput.placeholder="I/Je";
-        document.getElementById("multicreator").appendChild(answerInput);
-
-        var answerInput = document.createElement("INPUT");
-        answerInput.setAttribute("type", "text");
-        verbInput.setAttribute("id",id3)
-        generateIdYou++
-        answerInput.placeholder="You/Tu";
-        document.getElementById("multicreator").appendChild(answerInput);
-    
-
-        var answerInput = document.createElement("INPUT");
-        answerInput.setAttribute("type", "text");
-        verbInput.setAttribute("id",id4)
-        generateIdHe++
-        answerInput.placeholder="He(She)/Il(Elle)";
-        document.getElementById("multicreator").appendChild(answerInput);
-    
-
-        var answerInput = document.createElement("INPUT");
-        answerInput.setAttribute("type", "text");
-        verbInput.setAttribute("id",id5)
-        generateIdWe++
-        answerInput.placeholder="We/Nous";
-        document.getElementById("multicreator").appendChild(answerInput);
-    
-
-        var answerInput = document.createElement("INPUT");
-        answerInput.setAttribute("type", "text");
-        verbInput.setAttribute("id",id6)
-        generateIdVous++
-        answerInput.placeholder="Vous";
-        document.getElementById("multicreator").appendChild(answerInput);
-    
-
-
-        var answerInput = document.createElement("INPUT");
-        answerInput.setAttribute("type", "text");
-        verbInput.setAttribute("id",id7)
-        generateIdThem++
-        answerInput.placeholder="Them/Ils(Elles)";
-        document.getElementById("multicreator").appendChild(answerInput);
-    
-        var br = document.createElement("br")
-        document.getElementById("multicreator").appendChild(br);
+        var overallContainer = document.getElementById("langCreatorContainer");
+        overallContainer.scrollTop = overallContainer.scrollHeight;
+        
     }
     
 }
@@ -2453,7 +2450,9 @@ function saveToCloud(){
     document.getElementById("sendingLoader").style.display="";
     if(document.getElementById("sstitle").innerHTML == ""){
         document.getElementById("sstitle").innerHTML = "Lang Custom Studysheet";
-     }
+    } else if (document.getElementById("sstitle").innerHTML.includes("/")){
+        document.getElementById("sstitle").innerHTML = document.getElementById("sstitle").innerHTML.replace("/", "-");
+    }
     
     var downloadArray = ""
     var childarray = []
@@ -2487,6 +2486,10 @@ function saveToCloud(){
         child2Contents = child2Contents.replaceAll("&nbsp;", "")
         childContents = childContents.replaceAll("<div><br></div>", "")
         child2Contents = child2Contents.replaceAll("<div><br></div>", "")
+        child2Contents = child2Contents.replaceAll("\n", "_")
+        childContents = childContents.replaceAll("\n", "_")
+        child2Contents = child2Contents.replaceAll("\t", "   ")
+        childContents = childContents.replaceAll("\t", "   ")
         if (child2Contents.includes("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823") || child2Contents.includes("&nbsp;")){
             alert("One of the specified words is not avaliable for use due to the structure of the Lang Studysheet.")
             window.location.reload();
@@ -2567,6 +2570,10 @@ function downloadVerbs(select){
             child2Contents = child2Contents.replaceAll("&nbsp;", "")
             childContents = childContents.replaceAll("<div><br></div>", "")
             child2Contents = child2Contents.replaceAll("<div><br></div>", "")
+            child2Contents = child2Contents.replaceAll("\n", "   ")
+            childContents = childContents.replaceAll("\n", "   ")
+            child2Contents = child2Contents.replaceAll("\t", "   ")
+            childContents = childContents.replaceAll("\t", "   ")
             if (child2Contents.includes("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823") || child2Contents.includes("&nbsp;")){
                 alert("One of the specified words is not avaliable for use due to the structure of the Lang Studysheet.")
                 window.location.reload();
