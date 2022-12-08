@@ -2377,7 +2377,7 @@ function makeInputs(version){
         // var brk = document.createElement("br");
         // br.appendChild(brk);
         var image = document.createElement("img");
-        image.src="../Lang/assets/icons/proto.nobg.arrow.svg";
+        image.src="assets/icons/proto.nobg.arrow.svg";
         image.className="arrowAlt";
         image.id = id3;
         generateIdYou++;
@@ -2398,7 +2398,7 @@ function makeInputs(version){
         outDiv.style.display = "flex";
         document.getElementById("insideCreator").appendChild(outDiv);
         var image = document.createElement("img");
-        image.src="../Lang/assets/icons/arrow 2.svg";
+        image.src="assets/icons/Arrow 2.svg";
         image.className="subArrow";
         outDiv.appendChild(image);
         var br = document.createElement("div")
