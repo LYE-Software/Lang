@@ -227,7 +227,7 @@
         </div>
     </div>
     
-    <div id="changelog" class="changeloghidden preload centerText changelogScrollBar">
+    <!-- <div id="changelog" class="changeloghidden preload centerText changelogScrollBar">
         <div style="height:100%; width:100%; overflow:scroll;">
             <div id="showchangelogtext" style="font-size: 3vh; margin-top: 1vh; font-family:'Rubik Mono One';">Click here to open the changelog!</div>
             <div class="headerText" style="color:var(--primary-dark)">Changelog</div>
@@ -249,7 +249,7 @@
         </div>
         
         
-    </div>
+    </div> -->
 
     <div id="failedSignIn" class="absolute" style="display: none; height: 100vh; width: 100vw; background-color: rgba(0, 0, 0, 0.5);">
         <div class="horizontalFlex" style="align-items: center; justify-content: center; height: 100vh; width: 100vw;">
@@ -324,7 +324,7 @@
     function firstSignIn() {
         var loading = document.getElementById("loadingscreen");
         loading.style.opacity = "0";
-        document.getElementById("changelog").style.display = "none";
+        // document.getElementById("changelog").style.display = "none";
         var studySheetList = document.getElementById("hasAccountView").parentElement;
         studySheetList.innerHTML = `
         <div class="centerFlex verticalFlex" style="display: flex; flex-direction: column; width: 100vw; height: 100vh">
