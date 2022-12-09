@@ -26,12 +26,14 @@ def get_terms_definitions(page):
     
     return entries
 
+def get_study_sheet(url):
+    entries = get_terms_definitions(url)
 
-entries = get_terms_definitions("https://quizlet.com/334794591/organelles-and-organelle-function-flash-cards/")
+    output = ""
+    for entry in entries:
+        output += "[\"" + entry[0] + "\",\"" + entry[1] + "\"]\n"
+    output = output[:-1]
 
-output = ""
-for entry in entries:
-    output += "[\"" + entry[0] + "\",\"" + entry[1] + "\"]\n"
-output = output[:-1]
+    return output
 
-print(output)
+print(get_study_sheet("https://quizlet.com/334794591/organelles-and-organelle-function-flash-cards/"))
