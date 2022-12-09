@@ -6,9 +6,14 @@
     <title>Document</title>
     <script src="code.js"></script>
     <link rel="stylesheet" href="stylesheet.css">
+    <style>
+        body {
+            overflow-y: scroll;
+        }
+    </style>
 </head>
 <body style="background: linear-gradient(180deg, #001945 35.94%, #000011 100%);">
-    <div id="header0" class="absolute" style="width: 100vw ">
+    <div id="header0" style="width: 100vw ">
         <div class="horizontalFlex header" id="overallheader">
             
             <div>
@@ -20,23 +25,20 @@
 
     </div>
     <div>
-        <div style="justify-content:space-around; align-items: center; text-align:center; display:flex; height:100%; flex-wrap: wrap; flex:1;">
-            <div style="min-width:500px; background-color:#2F3D73; width:40vw; height:70vh; border-radius:50px; display:flex; flex-direction: column; text-align: center; align-items: center; justify-content: center;">
+        <div style="justify-content:space-around; align-items: center; text-align:center; display:flex; height:90vh; flex-wrap: wrap;">
+            <div style="min-width:500px; background-color:#2F3D73; width:40vw; border-radius:50px; display:flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box; padding: 25px;">
                 <h1 class="start">Start Studying</h1>
-                <p class="explText" style="color:wheat; max-width:600px; text-align: center;">Lang is an easy to use, ad free, and open source studying tool. To start, we recommend creating a free account to access your study sheets from any device.</p>
-                <div class="button centerText" style="margin-top: 50px; background-color: var(--primary-light); color: var(--primary-dark); margin-bottom: 0;" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signin/www.langstudy.tech-index.html'">Log In</div>
-                <div class="button centerText" style="margin-bottom: 50px; background-color: var(--primary-light); color: var(--primary-dark);" onclick="window.open('https://anklebowl.pythonanywhere.com/signup', '_blank')">Sign Up</div>
-                <div style="color: var(--primary-light); max-width: 500px; font-size:1vh;">
+                <p class="explText" style="color:wheat; text-align: center;">Lang is an easy to use, ad free, and open source studying tool. To start, we recommend creating a free account to access your study sheets from any device.</p>
+                <div class="button centerText" style="margin: 10px; background-color: var(--primary-light); color: var(--primary-dark);" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signin/www.langstudy.tech-index.html'">Log In</div>
+                <div class="button centerText" style="margin: 0px; background-color: var(--primary-light); color: var(--primary-dark);" onclick="window.open('https://anklebowl.pythonanywhere.com/signup', '_blank')">Sign Up</div>
+                <div style="color: var(--primary-light); font-size:10px; margin: 20px;">
                     Please remember that Lang is currently in beta. You may run into bugs or issues. If you do, please report them on GitHub.
                 </div>
-                <br>
-                <div style="color: var(--primary-light); max-width: 500px; font-size:1vh;">
+                <div style="color: var(--primary-light); font-size:10px;">
                     Lang and all Lang iconography are copyright and intellectual property of Lye Software.
                 </div>
-               
-
             </div>
-            <div style="flex:0.7; min-width:500px;">
+            <div style="max-width: 750px; min-width: 500px; flex:1; box-sizing: border-box; padding: 50px;">
                 <h1 class="explHeader">Study Smarter, not harder.</h1>
                 <p class="explText">Lang allows for a wide variety of studying methods.</p>
                 <br>
@@ -56,7 +58,7 @@
         font-style: normal;
         font-weight: 400;
         font-size: 40px;
-        line-height: 50px;
+        /* line-height: 50px; */
 
         color: #001945;
     }
@@ -65,10 +67,12 @@
         font-style: normal;
         font-weight: 400;
         font-size: 40px;
-        line-height: 50px;
-        text-align: center;
+        /* line-height: 50px; */
+        /* text-align: center; */
 
         color: #F5DEB3;
+
+        margin: 10px;
     }
     .explHeader{
         font-family: 'Rubik Mono One';
@@ -77,6 +81,8 @@
         font-size: 33px;
 
         color: #FFFFFF;
+        
+        margin: 0;
     }
     .explText{
         font-family: 'Poppins';
@@ -85,6 +91,8 @@
         font-size: 23px;
 
         color: #FFFFFF;
+
+        margin: 0;
     }
 </style>
 </html>
