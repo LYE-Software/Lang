@@ -145,6 +145,32 @@
   }
 }      
 
+.animatedLoader { 
+        animation: logoSpinning ease-in-out 2s infinite;
+        width: 100px;
+        height: 100px;
+    }
+
+
+    @keyframes logoSpinning {
+        0% {
+            transform: scale(0.8);
+            rotate: 0deg;
+        }
+        
+        50% {
+            transform: scale(1.2);
+            rotate: 180deg;
+        }
+
+        100% {
+            transform: scale(0.8);
+            rotate: 360deg;
+        } 
+    } 
+
+
+
 .largeButton {
     font-size: 20px;
 }
@@ -190,7 +216,8 @@
             <div class="absolute" id="loadingscreen" style="height: 100%; width: 100%; background-color: var(--primary-dark); overflow: hidden; pointer-events: none;">
                 <div class="horizontalFlex" style="height: 40vh; width: 100%; flex-direction: column; align-items: center; justify-content: center;">
                     <div>
-                        <div class="lds-ellipsis" id="studyloader"><div></div><div></div><div></div><div></div></div>
+                        <!-- <div class="lds-ellipsis" id="studyloader"><div></div><div></div><div></div><div></div></div> -->
+                        <img class="animatedLoader" src="assets/logos/lang-wheat.png" alt="Logo">
                     </div>
                 </div>
             </div>
