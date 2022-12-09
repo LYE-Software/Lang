@@ -2377,59 +2377,61 @@ function makeInputs(version){
     inputMap.set("")
 
     if (version=="single"){
-        var br = document.createElement("div")
-        br.className = "termDefContainer";
-        document.getElementById("insideCreator").appendChild(br);
-        id1 = "input"+generateIdV
-        id2 = "ans"+generateIdA
-        id3 = "button"+generateIdYou
-        var verbInput = document.createElement('div');
-        verbInput.id=id1;
-        verbInput.className="term"
-        verbInput.setAttribute("data-text", "Term");
-        verbInput.contentEditable="true";
-        generateIdV++
-            // verbInput.innerHTML="Put Term / Question Here";
-        br.appendChild(verbInput);
+        // var br = document.createElement("div")
+        // br.className = "termDefContainer";
+        // document.getElementById("insideCreator").appendChild(br);
+        // id1 = "input"+generateIdV
+        // id2 = "ans"+generateIdA
+        // id3 = "button"+generateIdYou
+        // var verbInput = document.createElement('div');
+        // verbInput.id=id1;
+        // verbInput.className="term"
+        // verbInput.setAttribute("data-text", "Term");
+        // verbInput.contentEditable="true";
+        // generateIdV++
+        //     // verbInput.innerHTML="Put Term / Question Here";
+        // br.appendChild(verbInput);
     
-        var answerInput = document.createElement("div");
-        answerInput.id=id2;
-        answerInput.setAttribute("id",id2)
-        answerInput.className="definition"
-        answerInput.contentEditable="true";
-        answerInput.setAttribute("data-text", "Answer");
-        generateIdA++
-        // answerInput.innerHTML="Put Answer Here";
-        br.appendChild(answerInput);
+        // var answerInput = document.createElement("div");
+        // answerInput.id=id2;
+        // answerInput.setAttribute("id",id2)
+        // answerInput.className="definition"
+        // answerInput.contentEditable="true";
+        // answerInput.setAttribute("data-text", "Answer");
+        // generateIdA++
+        // // answerInput.innerHTML="Put Answer Here";
+        // br.appendChild(answerInput);
 
-        var svg = document.createElement("div");
-        svg.innerHTML = trash_svg;
-        svg.className = "trash";
-        svg.onclick = function(){
-            console.log(this)
-            this.parentNode.remove();
-        }
-        br.appendChild(svg);
+        // var svg = document.createElement("div");
+        // svg.innerHTML = trash_svg;
+        // svg.className = "trash";
+        // svg.onclick = function(){
+        //     console.log(this)
+        //     this.parentNode.remove();
+        // }
+        // br.appendChild(svg);
 
-        // var brk = document.createElement("br");
-        // br.appendChild(brk);
-        // var brk = document.createElement("br");
-        // br.appendChild(brk);
-        var image = document.createElement("img");
-        image.src="assets/icons/proto.nobg.arrow.svg";
-        image.className="arrowAlt";
-        image.id = id3;
-        generateIdYou++;
-        image.onclick = function(){
-            console.log(this)
-            currentId = this.id;
-            makeInputs("Multi");
+        // // var brk = document.createElement("br");
+        // // br.appendChild(brk);
+        // // var brk = document.createElement("br");
+        // // br.appendChild(brk);
+        // var image = document.createElement("img");
+        // image.src="assets/icons/proto.nobg.arrow.svg";
+        // image.className="arrowAlt";
+        // image.id = id3;
+        // generateIdYou++;
+        // image.onclick = function(){
+        //     console.log(this)
+        //     currentId = this.id;
+        //     makeInputs("Multi");
             
-        }
-        // br.appendChild(image);
+        // }
+        // // br.appendChild(image);
     
-        var overallContainer = document.getElementById("langCreatorContainer");
-        overallContainer.scrollTop = overallContainer.scrollHeight;
+        // var overallContainer = document.getElementById("langCreatorContainer");
+        // overallContainer.scrollTop = overallContainer.scrollHeight;
+
+        createCreatorInput("", "")
     }
     else{
         console.log(currentId);
@@ -3046,31 +3048,32 @@ function creatorModeSelect(){
         document.getElementById("sstitle").innerHTML = window.localStorage.getItem("chosenSheet");
         for (i = 0; i<arrayText.length; i++){
             let wordPair = getRandomQuestion(customWords);
-            var br = document.createElement("div")
-            br.className = "termDefContainer";
-            document.getElementById("insideCreator").appendChild(br);
-            id1 = "input"+generateIdV
-            id2 = "input"+generateIdA
+            // var br = document.createElement("div")
+            // br.className = "termDefContainer";
+            // document.getElementById("insideCreator").appendChild(br);
+            // id1 = "input"+generateIdV
+            // id2 = "input"+generateIdA
 
-            var verbInput = document.createElement('div');
-            verbInput.id=id1;
-            verbInput.className="term"
-            verbInput.setAttribute("data-text", "Term");
-            verbInput.contentEditable="true";
-            generateIdV++
-            verbInput.innerHTML=wordPair[0];
-            br.appendChild(verbInput);
+            // var verbInput = document.createElement('div');
+            // verbInput.id=id1;
+            // verbInput.className="term"
+            // verbInput.setAttribute("data-text", "Term");
+            // verbInput.contentEditable="true";
+            // generateIdV++
+            // verbInput.innerHTML=wordPair[0];
+            // br.appendChild(verbInput);
         
-            var answerInput = document.createElement("div");
-            answerInput.id=id2;
-            answerInput.setAttribute("id",id2)
-            answerInput.className="definition"
-            answerInput.contentEditable="true";
-            answerInput.innerHTML=wordPair[1];
-            answerInput.setAttribute("data-text", "Answer");
-            generateIdA++
-            // answerInput.innerHTML="Put Answer Here";
-            br.appendChild(answerInput);
+            // var answerInput = document.createElement("div");
+            // answerInput.id=id2;
+            // answerInput.setAttribute("id",id2)
+            // answerInput.className="definition"
+            // answerInput.contentEditable="true";
+            // answerInput.innerHTML=wordPair[1];
+            // answerInput.setAttribute("data-text", "Answer");
+            // generateIdA++
+            // // answerInput.innerHTML="Put Answer Here";
+            // br.appendChild(answerInput);
+            createCreatorInput(wordPair[0], wordPair[1])
         }
     } else {
         console.log("Entering Quizlet Creator Mode")
@@ -3080,33 +3083,90 @@ function creatorModeSelect(){
         document.getElementById("topheader").innerHTML = "Imported From Quizlet"
         for (i = 0; i<arrayText.length; i++){
             let wordPair = getRandomQuestion(customWords);
-            var br = document.createElement("div")
-            br.className = "termDefContainer";
-            document.getElementById("insideCreator").appendChild(br);
-            id1 = "input"+generateIdV
-            id2 = "input"+generateIdA
+            // var br = document.createElement("div")
+            // br.className = "termDefContainer";
+            // document.getElementById("insideCreator").appendChild(br);
+            // id1 = "input"+generateIdV
+            // id2 = "input"+generateIdA
 
-            var verbInput = document.createElement('div');
-            verbInput.id=id1;
-            verbInput.className="term"
-            verbInput.setAttribute("data-text", "Term");
-            verbInput.contentEditable="true";
-            generateIdV++
-            verbInput.innerHTML=wordPair[0];
-            br.appendChild(verbInput);
+            // var verbInput = document.createElement('div');
+            // verbInput.id=id1;
+            // verbInput.className="term"
+            // verbInput.setAttribute("data-text", "Term");
+            // verbInput.contentEditable="true";
+            // generateIdV++
+            // verbInput.innerHTML=wordPair[0];
+            // br.appendChild(verbInput);
         
-            var answerInput = document.createElement("div");
-            answerInput.id=id2;
-            answerInput.setAttribute("id",id2)
-            answerInput.className="definition"
-            answerInput.contentEditable="true";
-            answerInput.innerHTML=wordPair[1];
-            answerInput.setAttribute("data-text", "Answer");
-            generateIdA++
-            // answerInput.innerHTML="Put Answer Here";
-            br.appendChild(answerInput);
+            // var answerInput = document.createElement("div");
+            // answerInput.id=id2;
+            // answerInput.setAttribute("id",id2)
+            // answerInput.className="definition"
+            // answerInput.contentEditable="true";
+            // answerInput.innerHTML=wordPair[1];
+            // answerInput.setAttribute("data-text", "Answer");
+            // generateIdA++
+            // // answerInput.innerHTML="Put Answer Here";
+            // br.appendChild(answerInput);
+            createCreatorInput(wordPair[0], wordPair[1])
         }
     }
 }
 
-        
+function createCreatorInput(term, definition) {
+    var br = document.createElement("div")
+        br.className = "termDefContainer";
+        document.getElementById("insideCreator").appendChild(br);
+        id1 = "input"+generateIdV
+        id2 = "ans"+generateIdA
+        id3 = "button"+generateIdYou
+        var verbInput = document.createElement('div');
+        verbInput.id=id1;
+        verbInput.className="term"
+        verbInput.innerHTML=term;
+        verbInput.setAttribute("data-text", "Term");
+        verbInput.contentEditable="true";
+        generateIdV++
+            // verbInput.innerHTML="Put Term / Question Here";
+        br.appendChild(verbInput);
+    
+        var answerInput = document.createElement("div");
+        answerInput.id=id2;
+        answerInput.setAttribute("id",id2)
+        answerInput.className="definition"
+        answerInput.contentEditable="true";
+        answerInput.innerHTML=definition;
+        answerInput.setAttribute("data-text", "Answer");
+        generateIdA++
+        // answerInput.innerHTML="Put Answer Here";
+        br.appendChild(answerInput);
+
+        var svg = document.createElement("div");
+        svg.innerHTML = trash_svg;
+        svg.className = "trash";
+        svg.onclick = function(){
+            console.log(this)
+            this.parentNode.remove();
+        }
+        br.appendChild(svg);
+
+        // var brk = document.createElement("br");
+        // br.appendChild(brk);
+        // var brk = document.createElement("br");
+        // br.appendChild(brk);
+        var image = document.createElement("img");
+        image.src="assets/icons/proto.nobg.arrow.svg";
+        image.className="arrowAlt";
+        image.id = id3;
+        generateIdYou++;
+        image.onclick = function(){
+            console.log(this)
+            currentId = this.id;
+            makeInputs("Multi");
+            
+        }
+        // br.appendChild(image);
+    
+        var overallContainer = document.getElementById("langCreatorContainer");
+        overallContainer.scrollTop = overallContainer.scrollHeight;
+}
