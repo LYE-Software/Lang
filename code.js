@@ -2352,9 +2352,23 @@ function startCreator(version){
 }
 
 
+var trash_svg = `
+<svg width="100%" height="100%" viewBox="0 0 400 400" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g>
+        <g transform="matrix(2.01195,0,0,2.01195,-311.048,-275.944)">
+            <circle cx="254.006" cy="236.558" r="99.406" style="fill:rgb(235,235,235);fill-opacity:0;"/>
+            <path d="M254.006,137.152C308.869,137.152 353.412,181.694 353.412,236.558C353.412,291.421 308.869,335.964 254.006,335.964C199.142,335.964 154.6,291.421 154.6,236.558C154.6,181.694 199.142,137.152 254.006,137.152ZM254.006,153.554C299.817,153.554 337.01,190.747 337.01,236.558C337.01,282.369 299.817,319.562 254.006,319.562C208.195,319.562 171.002,282.369 171.002,236.558C171.002,190.747 208.195,153.554 254.006,153.554Z"/>
+        </g>
+        <g transform="matrix(0.624979,0,0,0.624979,75.0042,75.0042)">
+            <path d="M100,100L300,300" style="fill:none;stroke-width:52.8px;"/>
+        </g>
+        <g transform="matrix(-0.624979,0,0,0.624979,324.996,75.0042)">
+            <path d="M100,100L300,300" style="fill:none;stroke-width:52.8px;"/>
+        </g>
+    </g>
+</svg>
 
-
-
+`
 
 //creates new input fields for multi & single creators + assigns them ids
 var currentId = "";
@@ -2363,49 +2377,61 @@ function makeInputs(version){
     inputMap.set("")
 
     if (version=="single"){
-        var br = document.createElement("div")
-        br.className = "termDefContainer";
-        document.getElementById("insideCreator").appendChild(br);
-        id1 = "input"+generateIdV
-        id2 = "ans"+generateIdA
-        id3 = "button"+generateIdYou
-        var verbInput = document.createElement('div');
-        verbInput.id=id1;
-        verbInput.className="term"
-        verbInput.setAttribute("data-text", "Term");
-        verbInput.contentEditable="true";
-        generateIdV++
-            // verbInput.innerHTML="Put Term / Question Here";
-        br.appendChild(verbInput);
+        // var br = document.createElement("div")
+        // br.className = "termDefContainer";
+        // document.getElementById("insideCreator").appendChild(br);
+        // id1 = "input"+generateIdV
+        // id2 = "ans"+generateIdA
+        // id3 = "button"+generateIdYou
+        // var verbInput = document.createElement('div');
+        // verbInput.id=id1;
+        // verbInput.className="term"
+        // verbInput.setAttribute("data-text", "Term");
+        // verbInput.contentEditable="true";
+        // generateIdV++
+        //     // verbInput.innerHTML="Put Term / Question Here";
+        // br.appendChild(verbInput);
     
-        var answerInput = document.createElement("div");
-        answerInput.id=id2;
-        answerInput.setAttribute("id",id2)
-        answerInput.className="definition"
-        answerInput.contentEditable="true";
-        answerInput.setAttribute("data-text", "Answer");
-        generateIdA++
-        // answerInput.innerHTML="Put Answer Here";
-        br.appendChild(answerInput);
-        // var brk = document.createElement("br");
-        // br.appendChild(brk);
-        // var brk = document.createElement("br");
-        // br.appendChild(brk);
-        var image = document.createElement("img");
-        image.src="assets/icons/proto.nobg.arrow.svg";
-        image.className="arrowAlt";
-        image.id = id3;
-        generateIdYou++;
-        image.onclick = function(){
-            console.log(this)
-            currentId = this.id;
-            makeInputs("Multi");
+        // var answerInput = document.createElement("div");
+        // answerInput.id=id2;
+        // answerInput.setAttribute("id",id2)
+        // answerInput.className="definition"
+        // answerInput.contentEditable="true";
+        // answerInput.setAttribute("data-text", "Answer");
+        // generateIdA++
+        // // answerInput.innerHTML="Put Answer Here";
+        // br.appendChild(answerInput);
+
+        // var svg = document.createElement("div");
+        // svg.innerHTML = trash_svg;
+        // svg.className = "trash";
+        // svg.onclick = function(){
+        //     console.log(this)
+        //     this.parentNode.remove();
+        // }
+        // br.appendChild(svg);
+
+        // // var brk = document.createElement("br");
+        // // br.appendChild(brk);
+        // // var brk = document.createElement("br");
+        // // br.appendChild(brk);
+        // var image = document.createElement("img");
+        // image.src="assets/icons/proto.nobg.arrow.svg";
+        // image.className="arrowAlt";
+        // image.id = id3;
+        // generateIdYou++;
+        // image.onclick = function(){
+        //     console.log(this)
+        //     currentId = this.id;
+        //     makeInputs("Multi");
             
-        }
-        // br.appendChild(image);
+        // }
+        // // br.appendChild(image);
     
-        var overallContainer = document.getElementById("langCreatorContainer");
-        overallContainer.scrollTop = overallContainer.scrollHeight;
+        // var overallContainer = document.getElementById("langCreatorContainer");
+        // overallContainer.scrollTop = overallContainer.scrollHeight;
+
+        createCreatorInput("", "")
     }
     else{
         console.log(currentId);
@@ -3022,31 +3048,32 @@ function creatorModeSelect(){
         document.getElementById("sstitle").innerHTML = window.localStorage.getItem("chosenSheet");
         for (i = 0; i<arrayText.length; i++){
             let wordPair = getRandomQuestion(customWords);
-            var br = document.createElement("div")
-            br.className = "termDefContainer";
-            document.getElementById("insideCreator").appendChild(br);
-            id1 = "input"+generateIdV
-            id2 = "input"+generateIdA
+            // var br = document.createElement("div")
+            // br.className = "termDefContainer";
+            // document.getElementById("insideCreator").appendChild(br);
+            // id1 = "input"+generateIdV
+            // id2 = "input"+generateIdA
 
-            var verbInput = document.createElement('div');
-            verbInput.id=id1;
-            verbInput.className="term"
-            verbInput.setAttribute("data-text", "Term");
-            verbInput.contentEditable="true";
-            generateIdV++
-            verbInput.innerHTML=wordPair[0];
-            br.appendChild(verbInput);
+            // var verbInput = document.createElement('div');
+            // verbInput.id=id1;
+            // verbInput.className="term"
+            // verbInput.setAttribute("data-text", "Term");
+            // verbInput.contentEditable="true";
+            // generateIdV++
+            // verbInput.innerHTML=wordPair[0];
+            // br.appendChild(verbInput);
         
-            var answerInput = document.createElement("div");
-            answerInput.id=id2;
-            answerInput.setAttribute("id",id2)
-            answerInput.className="definition"
-            answerInput.contentEditable="true";
-            answerInput.innerHTML=wordPair[1];
-            answerInput.setAttribute("data-text", "Answer");
-            generateIdA++
-            // answerInput.innerHTML="Put Answer Here";
-            br.appendChild(answerInput);
+            // var answerInput = document.createElement("div");
+            // answerInput.id=id2;
+            // answerInput.setAttribute("id",id2)
+            // answerInput.className="definition"
+            // answerInput.contentEditable="true";
+            // answerInput.innerHTML=wordPair[1];
+            // answerInput.setAttribute("data-text", "Answer");
+            // generateIdA++
+            // // answerInput.innerHTML="Put Answer Here";
+            // br.appendChild(answerInput);
+            createCreatorInput(wordPair[0], wordPair[1])
         }
     } else {
         console.log("Entering Quizlet Creator Mode")
@@ -3056,33 +3083,91 @@ function creatorModeSelect(){
         document.getElementById("topheader").innerHTML = "Imported From Quizlet"
         for (i = 0; i<arrayText.length; i++){
             let wordPair = getRandomQuestion(customWords);
-            var br = document.createElement("div")
-            br.className = "termDefContainer";
-            document.getElementById("insideCreator").appendChild(br);
-            id1 = "input"+generateIdV
-            id2 = "input"+generateIdA
+            // var br = document.createElement("div")
+            // br.className = "termDefContainer";
+            // document.getElementById("insideCreator").appendChild(br);
+            // id1 = "input"+generateIdV
+            // id2 = "input"+generateIdA
 
-            var verbInput = document.createElement('div');
-            verbInput.id=id1;
-            verbInput.className="term"
-            verbInput.setAttribute("data-text", "Term");
-            verbInput.contentEditable="true";
-            generateIdV++
-            verbInput.innerHTML=wordPair[0];
-            br.appendChild(verbInput);
+            // var verbInput = document.createElement('div');
+            // verbInput.id=id1;
+            // verbInput.className="term"
+            // verbInput.setAttribute("data-text", "Term");
+            // verbInput.contentEditable="true";
+            // generateIdV++
+            // verbInput.innerHTML=wordPair[0];
+            // br.appendChild(verbInput);
         
-            var answerInput = document.createElement("div");
-            answerInput.id=id2;
-            answerInput.setAttribute("id",id2)
-            answerInput.className="definition"
-            answerInput.contentEditable="true";
-            answerInput.innerHTML=wordPair[1];
-            answerInput.setAttribute("data-text", "Answer");
-            generateIdA++
-            // answerInput.innerHTML="Put Answer Here";
-            br.appendChild(answerInput);
+            // var answerInput = document.createElement("div");
+            // answerInput.id=id2;
+            // answerInput.setAttribute("id",id2)
+            // answerInput.className="definition"
+            // answerInput.contentEditable="true";
+            // answerInput.innerHTML=wordPair[1];
+            // answerInput.setAttribute("data-text", "Answer");
+            // generateIdA++
+            // // answerInput.innerHTML="Put Answer Here";
+            // br.appendChild(answerInput);
+            createCreatorInput(wordPair[0], wordPair[1])
         }
     }
 }
 
-        
+function createCreatorInput(term, definition) {
+    var br = document.createElement("div")
+        br.className = "termDefContainer";
+        document.getElementById("insideCreator").appendChild(br);
+        id1 = "input"+generateIdV
+        id2 = "ans"+generateIdA
+        id3 = "button"+generateIdYou
+
+        var svg = document.createElement("div");
+        svg.innerHTML = trash_svg;
+        svg.className = "trash";
+        svg.onclick = function(){
+            console.log(this)
+            this.parentNode.remove();
+        }
+        br.appendChild(svg);
+
+        var verbInput = document.createElement('div');
+        verbInput.id=id1;
+        verbInput.className="term"
+        verbInput.innerHTML=term;
+        verbInput.setAttribute("data-text", "Term");
+        verbInput.contentEditable="true";
+        generateIdV++
+            // verbInput.innerHTML="Put Term / Question Here";
+        br.appendChild(verbInput);
+    
+        var answerInput = document.createElement("div");
+        answerInput.id=id2;
+        answerInput.setAttribute("id",id2)
+        answerInput.className="definition"
+        answerInput.contentEditable="true";
+        answerInput.innerHTML=definition;
+        answerInput.setAttribute("data-text", "Answer");
+        generateIdA++
+        // answerInput.innerHTML="Put Answer Here";
+        br.appendChild(answerInput);
+
+        // var brk = document.createElement("br");
+        // br.appendChild(brk);
+        // var brk = document.createElement("br");
+        // br.appendChild(brk);
+        var image = document.createElement("img");
+        image.src="assets/icons/proto.nobg.arrow.svg";
+        image.className="arrowAlt";
+        image.id = id3;
+        generateIdYou++;
+        image.onclick = function(){
+            console.log(this)
+            currentId = this.id;
+            makeInputs("Multi");
+            
+        }
+        // br.appendChild(image);
+    
+        var overallContainer = document.getElementById("langCreatorContainer");
+        overallContainer.scrollTop = overallContainer.scrollHeight;
+}
