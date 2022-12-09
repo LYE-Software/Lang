@@ -3120,6 +3120,16 @@ function createCreatorInput(term, definition) {
         id1 = "input"+generateIdV
         id2 = "ans"+generateIdA
         id3 = "button"+generateIdYou
+
+        var svg = document.createElement("div");
+        svg.innerHTML = trash_svg;
+        svg.className = "trash";
+        svg.onclick = function(){
+            console.log(this)
+            this.parentNode.remove();
+        }
+        br.appendChild(svg);
+
         var verbInput = document.createElement('div');
         verbInput.id=id1;
         verbInput.className="term"
@@ -3140,15 +3150,6 @@ function createCreatorInput(term, definition) {
         generateIdA++
         // answerInput.innerHTML="Put Answer Here";
         br.appendChild(answerInput);
-
-        var svg = document.createElement("div");
-        svg.innerHTML = trash_svg;
-        svg.className = "trash";
-        svg.onclick = function(){
-            console.log(this)
-            this.parentNode.remove();
-        }
-        br.appendChild(svg);
 
         // var brk = document.createElement("br");
         // br.appendChild(brk);
