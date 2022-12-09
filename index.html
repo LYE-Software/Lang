@@ -398,6 +398,7 @@
     function noStudySheets() {
         var loading = document.getElementById("loadingscreen");
         loading.style.opacity = "0";
+        loading.style.display = "none";
 
         var studySheetList = document.getElementById("hasAccountView").parentElement;
         studySheetList.innerHTML = `
