@@ -320,29 +320,29 @@
 <script>
     
     // Add an event listener to id changelog, when it is clicked toggle the class changeloghidden and changelogshown
-    document.getElementById("changelog").addEventListener("click", function(){
-        if (document.getElementById("changelog").classList.contains("changeloghidden")){
-            document.getElementById("changelog").classList.remove("changeloghidden");
-            document.getElementById("changelog").classList.add("changelogshown");
+    // document.getElementById("changelog").addEventListener("click", function(){
+    //     if (document.getElementById("changelog").classList.contains("changeloghidden")){
+    //         document.getElementById("changelog").classList.remove("changeloghidden");
+    //         document.getElementById("changelog").classList.add("changelogshown");
 
-            document.getElementById("showchangelogtext").classList.remove("fadein");
-            document.getElementById("showchangelogtext").classList.add("fadeout");
-        } else {
-            document.getElementById("changelog").classList.remove("changelogshown");
-            document.getElementById("changelog").classList.add("changeloghidden");
+    //         document.getElementById("showchangelogtext").classList.remove("fadein");
+    //         document.getElementById("showchangelogtext").classList.add("fadeout");
+    //     } else {
+    //         document.getElementById("changelog").classList.remove("changelogshown");
+    //         document.getElementById("changelog").classList.add("changeloghidden");
 
-            document.getElementById("showchangelogtext").classList.remove("fadeout");
-            document.getElementById("showchangelogtext").classList.add("fadein");
-        }
-    });
+    //         document.getElementById("showchangelogtext").classList.remove("fadeout");
+    //         document.getElementById("showchangelogtext").classList.add("fadein");
+    //     }
+    // });
 
     document.getElementById("useAsGuest").addEventListener("click", function(){
         setLocalUsage();
     });
 
-    setTimeout(function(){
-        document.getElementById("changelog").classList.remove("preload")
-    },500);
+    // setTimeout(function(){
+    //     document.getElementById("changelog").classList.remove("preload")
+    // },500);
 
     // disbale scrolling
     window.addEventListener("scroll", function(){
