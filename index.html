@@ -234,21 +234,22 @@
         </div>
     </div>
     <div id="header0" class="absolute" style="width: 100vw">
-        <div class="horizontalFlex header">
+        <div class="horizontalFlex header" id="overallheader">
+            
             <div>
                 <img style="height: 10vh; margin-left:10px;" src="assets/logos/lang.png">
             </div>
-            <div class="flexSpacer button horizontalFlex" style="pointer-events: all; align-items: center; justify-content: center;" onclick="window.location.href='about-new.html'">
+            <div class="flexSpacer button horizontalFlex" id = "headercontents" style="pointer-events: all; align-items: center; justify-content: center;" onclick="window.location.href='about-new.html'">
                 <div style="color: var(--primary-light);">What is Lang?</div>
             </div>
-            <div class="flexSpacer button horizontalFlex" style="pointer-events: all; align-items: center; justify-content: center;" onclick="window.location.href='studyfromfiletemp.html'">
+            <div class="flexSpacer button horizontalFlex" id = "headercontents1" style="pointer-events: all; align-items: center; justify-content: center;" onclick="window.location.href='studyfromfiletemp.html'">
                 <div style="color: var(--primary-light);">Study From File</div>
             </div>
-            <div class="flexSpacer button horizontalFlex" style="pointer-events: all; align-items: center; justify-content: center;" onclick="prepForUpload()">
+            <div class="flexSpacer button horizontalFlex" id = "headercontents2" style="pointer-events: all; align-items: center; justify-content: center;" onclick="prepForUpload()">
                 <div style="color: var(--primary-light);">Upload Local Studysheet</div>
             </div>
             <div id="homeusername">Loading</div>
-            <div>
+            <div id = "headercontents3">
                 <img class="pfp" style="height: 5vh;" src="settings.png" onclick="window.location.href='settings.html'">
             </div>
         </div>
@@ -349,30 +350,49 @@
     });
 
     function firstSignIn() {
-        var loading = document.getElementById("loadingscreen");
-        loading.style.opacity = "0";
-        // document.getElementById("changelog").style.display = "none";
-        var studySheetList = document.getElementById("hasAccountView").parentElement;
-        studySheetList.innerHTML = `
-        <div class="centerFlex verticalFlex" style="display: flex; flex-direction: column; width: 100vw; height: 100vh">
-            <div class="horizontalFlex" style="justify-content: center;">
-                <div style="color: var(--primary-light); margin-right: 0;" class="centerText headerText">Welcome</div>
-                <div style="color: var(--primary-light); margin-left: 1vw; margin-right: 0;" class="centerText headerText">to</div>
-                <div style="color: var(--primary-light); margin-left: 1vw;" class="centerText headerText">Lang!</div>
-            </div>
+        window.location.href="onboarding.html";
+        // var loading = document.getElementById("loadingscreen");
+        // loading.style.opacity = "0";
+        // document.getElementById("headercontents").style.display = "none";
+        // document.getElementById("headercontents1").style.display = "none";
+        // document.getElementById("headercontents2").style.display = "none";
+        // document.getElementById("headercontents3").style.display = "none";
+        // document.getElementById("homeusername").style.display = "none";
+        // h1 = document.createElement("h1")
+        // document.getElementById("overallheader").append(h1)
+        // h1.innerHTML = "Welcome to Lang!"
+        // h1.className = "headerText"
+        // h1.style.color = "var(--primary-dark)"
+        // // document.getElementById("changelog").style.display = "none";
+        // var studySheetList = document.getElementById("hasAccountView").parentElement;
+        // studySheetList.innerHTML = `
+        // <div class="centerFlex verticalFlex" style="display: flex; flex-direction: column; width: 100vw; height: 100vh">
+        //     <div class="horizontalFlex" style="justify-content: center;">
+                
+        //     </div>
+        //     <div style="display:flex;">
+        //         <div style="color: var(--primary-light); width: 90vw; max-width: 900px; font-size:1.6vw; text-align:left; font-family:'Rubik Mono One'">
+        //             Break Free from the Shackles of Modern Standards.
+        //         </div>
+        //         <div class="centerFlex verticalFlex" style="justify-content: center; align-items:center; text-align:right; flex-direction:column;">
+                
+        //             <div style="color: var(--primary-light); width: 90vw; max-width: 900px; font-size:1vw; text-align:right;">
+        //                 Lang is an easy to use, ad free, and open source studying tool. To start, we recommend creating a free account to access your study sheets from any device.
+        //             </div>
 
-            <div style="color: var(--primary-light); width: 90vw; max-width: 500px;">
-                Lang is an easy to use, ad free, and open source studying tool. To start, we recommend creating a free account to access your study sheets from any device.
-            </div>
+        //             <div class="button centerText" style="margin-left:77%; margin-top: 50px; background-color: var(--primary-light); color: var(--primary-dark); margin-bottom: 0;" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signin/www.langstudy.tech-index.html'">Log In</div>
+        //             <div class="button centerText" style="margin-left:77% margin-bottom: 50px; background-color: var(--primary-light); color: var(--primary-dark);" onclick="window.open('https://anklebowl.pythonanywhere.com/signup', '_blank')">Sign Up</div>
+        //         </div>
+                
+        //     </div>
 
-            <div class="button centerText" style="margin-top: 50px; background-color: var(--primary-light); color: var(--primary-dark); margin-bottom: 0;" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signin/www.langstudy.tech-index.html'">Log In</div>
-            <div class="button centerText" style="margin-bottom: 50px; background-color: var(--primary-light); color: var(--primary-dark);" onclick="window.open('https://anklebowl.pythonanywhere.com/signup', '_blank')">Sign Up</div>
-
-            <div style="color: var(--primary-light); width: 90vw; max-width: 500px;">
-                Please remember that Lang is currently in beta. You may run into bugs or issues. If you do, please report them on GitHub.
-            </div>
-        </div>
-        `
+            
+            
+        //     <div style="color: var(--primary-light); width: 90vw; max-width: 500px;">
+        //         Please remember that Lang is currently in beta. You may run into bugs or issues. If you do, please report them on GitHub.
+        //     </div>
+        // </div>
+        // `
     }
 
     function noStudySheets() {
