@@ -414,9 +414,18 @@ async function getLibraryList(){
                     let horizontalflexstudysetentry = document.createElement("div")
                     horizontalflexstudysetentry.className = "horizontalFlex studysetentry"
                     document.getElementById("studysetholder").append(horizontalflexstudysetentry);
+
                     let namediv = document.createElement("div")
                     namediv.innerHTML = library[i]
                     horizontalflexstudysetentry.append(namediv);
+                    namediv.setAttribute("studysheet", library[i])
+                    namediv.id=library[i] + "title"
+                    namediv.onclick = function(){
+                        var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
+        
+                        window.localStorage.setItem("chosenSheet", studysheetname)
+                        window.location.href="studysheetpage.html";
+                    } 
 
                     let spacer = document.createElement("div")
                     spacer.className = "flexSpacer"
