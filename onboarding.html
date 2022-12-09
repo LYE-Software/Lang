@@ -10,9 +10,14 @@
         body {
             overflow-y: scroll;
         }
+        /* change */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        
     </style>
 </head>
-<body style="background: linear-gradient(180deg, #001945 35.94%, #000011 100%);">
+<body style="background: linear-gradient(180deg, #001945 35.94%, #000011 100%); overflow-x:hidden;">
     <div id="header0" style="width: 100vw ">
         <div class="horizontalFlex header" id="overallheader">
             
@@ -28,9 +33,12 @@
         <div style="justify-content:space-around; align-items: center; text-align:center; display:flex; height:90vh; flex-wrap: wrap;">
             <div style="min-width:500px; background-color:#2F3D73; width:40vw; border-radius:50px; display:flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box; padding: 25px;">
                 <h1 class="start">Start Studying</h1>
+                <br> <!-- change -->
                 <p class="explText" style="color:wheat; text-align: center;">Lang is an easy to use, ad free, and open source studying tool. To start, we recommend creating a free account to access your study sheets from any device.</p>
+                <br><!-- change -->
                 <div class="button centerText" style="margin: 10px; background-color: var(--primary-light); color: var(--primary-dark);" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signin/www.langstudy.tech-index.html'">Log In</div>
                 <div class="button centerText" style="margin: 0px; background-color: var(--primary-light); color: var(--primary-dark);" onclick="window.open('https://anklebowl.pythonanywhere.com/signup', '_blank')">Sign Up</div>
+                <br><!-- change -->
                 <div style="color: var(--primary-light); font-size:10px; margin: 20px;">
                     Please remember that Lang is currently in beta. You may run into bugs or issues. If you do, please report them on GitHub.
                 </div>
@@ -53,6 +61,16 @@
     
 </body>
 <style>
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    :body::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    body {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    }
     .welcome{
         font-family: 'Rubik Mono One';
         font-style: normal;
