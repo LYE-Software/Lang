@@ -370,6 +370,16 @@ function changeToOffline(){
 }
 
 
+async function getUsernameFromLye(){
+    sessionid = window.localStorage.getItem("usertoken")
+    tmpurl = "https://lye.software/usernamefromsession/"+sessionid;
+    console.log("getting username from lye")
+    customusername = await httpGet(tmpurl, true);
+    console.log("customusername: "+customusername)
+    document.getElementById("homeusername").innerHTML = customusername;
+}
+
+
 async function getLibraryList(){
     customuser=window.localStorage.getItem("username");
     window.localStorage.setItem("fullstudysheet", "");
