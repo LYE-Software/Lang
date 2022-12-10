@@ -1308,40 +1308,23 @@ function signout(){
 //main loop and code for flashcard functionality
 
 function doFlashcards(){
-    console.log("inside doFlashcards")
-    document.getElementById("stats").style.display = "none";
-    document.getElementById("myBtnBegin").style.display = "none";
-    document.getElementById("mainflipcard").style.display = "";
-    try {
-        document.getElementById("file").style.display = "none";
-
-    } catch (error) {
+    
+    flashcardContentsArray = []
+    console.log("inside doFlashcards")   
+    let arrayText = customWords.split('\n')
+    console.log("arrayText "+arrayText)
+    for (i = 0; i<arrayText.length; i++){
+        let question = arrayText[i];
+        console.log("question "+question)
+        flashcardContentsArray.push(question)
         
     }
-    buttonStyling = document.getElementById("goButton")
-    buttonStyling.style.display = "flex";
-    buttonStyling.innerHTML = ">" + "\n" + "Next";
-    wordPair = getRandomQuestion(customWords);
-    front = document.getElementById("frontcard title");
-    front.innerHTML = wordPair[0];
-    bTitle = document.getElementById("backcard title");
-    bdeets = document.getElementById("backcard details");
-    bTitle.innerHTML = wordPair[0];
-    console.log("wordpair length:  "+wordPair.length)
-    let newString = ""
-    if (wordPair.length >2){
-        for(i=0; i<7; i++){
-            if (i==0){}
-            else{
-                newString = newString+ " "+wordPair[i]
-            }
-        }
-        bdeets.innerHTML = newString;
-        console.log(newString)
-    }
-    else{
-        bdeets.innerHTML = wordPair[1];
-    }
+    console.log("flascardContentsArray "+flashcardContentsArray)
+    createFlashcards(arrayText.length)
+    
+    
+   
+    
 
     
 }

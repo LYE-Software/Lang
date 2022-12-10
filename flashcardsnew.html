@@ -6,6 +6,7 @@
     <title>Flashcards</title>
     <link rel="stylesheet" href="stylesheet.css">
     <link rel="icon" href="circular lang icon.png">
+    <script src="code.js"></script> 
     <style>
         .mainContainer {
             height: 90vh;
@@ -68,11 +69,11 @@
         }
     </style>
 </head>
-<body>
+<body onload="onBtnPress('f')">
     <div id="header0" style="width: 100vw">
         <div class="horizontalFlex header">
             <div class="flexSpacer">
-                <img style="height: 8vh; margin-left:10px;" src="assets/logos/lang-wheat.png">
+                <img style="height: 8vh; margin-left:10px;" src="assets/logos/lang-wheat.png" onclick="window.location.href='index.html'">
             </div>
 
             <div class="flexSpacer" style="color: var(--primary-dark); text-align: center;">Flashcards</div>
@@ -110,35 +111,25 @@
     var cardWidth = 620;
     var cardHeight = 400;
 
-    flashcardContentsArray = [
-        ["front0", "back0"],
-        ["front1", "back1"],
-        ["front2", "back2"],
-        ["front3", "back3"],
-        ["front4", "back4"],
-        ["front5", "back5"],
-        ["front6", "back6"],
-        ["front7", "back7"],
-        ["front8", "back8"],
-        ["front9", "back9"],
-    ]
+    var front;
 
     function createFlashcards(count) {
-
+        totalCardCount = count;
         for (var i = 0; i < count; i++) {
-            front = flashcardContentsArray[i][0];
+            front = flashcardContentsArray[i];
+            front = JSON.parse(front)
             if (i == 0) {
                 cardContainer.innerHTML += 
                     `<div style="opacity: 01; position: relative;" onclick="clickCard()" class="card">
                         <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                            ${front}
+                            ${front[0]}
                         </div>
                     </div>`
             } else [
                cardContainer.innerHTML += 
                     `<div style="opacity: 0.5; position: relative;" onclick="clickCard()" class="card">
                         <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                            ${front}
+                            ${front[0]}
                         </div>
                     </div>`
             ]
@@ -168,7 +159,7 @@
 
         const oldValue = focusedCard;
         setTimeout(function() {
-            cardContainer.children[oldValue].children[0].innerHTML = flashcardContentsArray[oldValue][0];
+            cardContainer.children[oldValue].children[0].innerHTML = JSON.parse(flashcardContentsArray[oldValue])[0];
         }, 250)
         setTimeout(function() {
             cardContainer.children[oldValue].classList.remove("flipAnimation");
@@ -192,10 +183,11 @@
 
         const oldValue = focusedCard;
         setTimeout(function() {
-            cardContainer.children[oldValue].children[0].innerHTML = flashcardContentsArray[oldValue][0];
+            cardContainer.children[oldValue].children[0].innerHTML = JSON.parse(flashcardContentsArray[oldValue])[0];
         }, 250)
         setTimeout(function() {
             cardContainer.children[oldValue].classList.remove("flipAnimation");
+            
         }, 500)
 
         focusedCard--;
@@ -217,6 +209,7 @@
         if (clickedCard.classList.contains("clicked")) {
             clickedCard.classList.remove("clicked");
             i = 0
+            
         } else {
             clickedCard.classList.add("clicked");
             i = 1
@@ -229,7 +222,9 @@
         }, 500);
 
         setTimeout(function() {
-            clickedCard.children[0].innerHTML = flashcardContentsArray[focusedCard][i];
+            front = flashcardContentsArray[focusedCard];
+            front = JSON.parse(front)
+            clickedCard.children[0].innerHTML = front[i];
         }, 250)
     }
 
