@@ -198,8 +198,8 @@
 } */
 </style>
 </head>
-<!-- <body onload="getLibraryList()"> -->
-<body onload="window.location.href='other/routine.html'">
+<body onload="getLibraryList()">
+<!-- <body onload="window.location.href='other/routine.html'"> -->
 
     <div class="absolute preload">
         <div style="height: 100vh;">
@@ -295,8 +295,8 @@
                 <div>We did not find a Lye account saved on your computer.</div>
                 <div style="margin-top: 10px;"></div>
                 <div>Lang reccommends making an account, so you can save your studysheets online.</div>
-                <div class="button" style="color: var(--primary-light); margin-bottom: 0;" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signin/www.langstudy.tech-index.html'">Log In</div>
-                <div class="button" style="color: var(--primary-light);" onclick="window.location.href='https://anklebowl.pythonanywhere.com/signup'">Sign Up</div>
+                <div class="button" style="color: var(--primary-light); margin-bottom: 0;" onclick="window.location.href='https://lye.software/signin/langstudy.tech-index.html'">Log In</div>
+                <div class="button" style="color: var(--primary-light);" onclick="window.location.href='https://lye.software/signup?forward=langstudy.tech-index.html'">Sign Up</div>
                 <div id="useAsGuest" style="font-size: 10px; text-decoration: underline;">No thanks, I'd like to use Lang as a guest</div>
             </div>
         </div>
@@ -404,9 +404,9 @@
     }
 
     function noStudySheets() {
-        var loading = document.getElementById("loadingscreen");
-        loading.style.opacity = "0";
-        loading.style.display = "none";
+        // var loading = document.getElementById("loadingscreen");
+        // loading.style.opacity = "0";
+        // loading.style.display = "none";
 
         var studySheetList = document.getElementById("hasAccountView").parentElement;
         studySheetList.innerHTML = `

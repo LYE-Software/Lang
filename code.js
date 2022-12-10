@@ -51,13 +51,14 @@ var helpsused = 0;
 var whichId= "";
 var offline = false;
 var override = false;
+var LyeServerIp = "https://lye.software";
 
 async function doPreviewAndLocal(){
     console.log("in dopreview")
     chosensheet = window.localStorage.getItem("chosenSheet")
     toek = window.localStorage.getItem("usertoken")
     document.getElementById("studysheetname").innerHTML = chosensheet
-    sheet = await httpGet("https://nwvbug.pythonanywhere.com/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
+    sheet = await httpGet("https://backend.langstudy.tech/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
     document.getElementById("noclickdiv").style.display = "none";
     console.log("og sheet: "+sheet)
     sheet = sheet.replaceAll("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823", "\n")
@@ -125,6 +126,15 @@ function move() {
   }
 }
 
+// async function makeLyeReq(theUrl)
+//         {
+//             var xmlHttp = new XMLHttpRequest();
+//             xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+//             xmlHttp.setRequestHeader("lye-origin", "langstudy.tech/index.html")
+//             xmlHttp.send( null );
+//             return xmlHttp.responseText;
+//         }
+
 // var url_string = window.location.href; //window.location.href
 // var url = new URL(url_string);
 // var c = url.searchParams.get("token");
@@ -149,26 +159,26 @@ function changelibrary(){
     }
 }
 
-async function getUsername(){
-    if (window.localStorage.getItem("usertoken")!=""&&window.localStorage.getItem("usertoken")!=null){
-        sessionid = window.localStorage.getItem("usertoken");
-        username = await httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/name")
-        link = "https://anklebowl.pythonanywhere.com/usernamefromtoken/"+sessionid
-        customuser = await httpGet(link);
-        console.log("Username = "+customuser)
-        if(username.startsWith("<!DOCTYPE HTML PUBLIC")){
-            window.localStorage.setItem("username", "Guest");
-            return "Guest";
-        } else{
-            window.localStorage.setItem("username", customuser);
-            return username;
-        }
+// async function getUsername(){
+//     if (window.localStorage.getItem("usertoken")!=""&&window.localStorage.getItem("usertoken")!=null){
+//         sessionid = window.localStorage.getItem("usertoken");
+//         username = await httpGet("https://backend.langstudy.tech/"+sessionid+"/name")
+//         link = LyeServerIp+"/usernamefromsession/"+sessionid
+//         customuser = await makeLyeReq(link);
+//         console.log("Username = "+customuser)
+//         if(username.startsWith("<!DOCTYPE HTML PUBLIC")){
+//             window.localStorage.setItem("username", "Guest");
+//             return "Guest";
+//         } else{
+//             window.localStorage.setItem("username", customuser);
+//             return username;
+//         }
         
-    } else{
-        return "Guest";
-    }
+//     } else{
+//         return "Guest";
+//     }
       
-}
+// }
 
 function applyUsername(){
     getUsername();
@@ -224,7 +234,7 @@ function uploadFiles(text, filename){
     // uploadButton.onclick = function() {
         
     console.log("FILE NAME+ "+filename)
-    var url = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/upload/"+filename;
+    var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/upload/"+filename;
 
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url);
@@ -252,7 +262,8 @@ function uploadFiles(text, filename){
     // }
     // document.getElementById("uploadholder").appendChild(uploadButton)
 }
-function httpGet(theUrl){
+function httpGet(theUrl, lye){
+    
     //this needs to be async as we cannot set timeout for sync request and sync reqs halt all js for browser
     var xmlHttp = new XMLHttpRequest();
     console.log("Opening Connection to "+theUrl)
@@ -275,6 +286,12 @@ function httpGet(theUrl){
         }
     };
     xmlHttp.open( "GET", theUrl, true ); // false for synchronous request
+
+    if (lye == true){
+        console.log("setting headers")
+        xmlHttp.setRequestHeader("lye-origin", "langstudy.tech/index.html");
+    }
+
     console.log(xmlHttp.status)
     try {
         xmlHttp.send( null );
@@ -330,12 +347,12 @@ function setLocalUsage() {
 
 
 
-function submitNewUN(){
-    sessionid = window.localStorage.getItem("usertoken")
-    tmpurl = "https://anklebowl.pythonanywhere.com/setusername/"+sessionid+"/"+document.getElementById("newusername").value
-    httpGet(tmpurl);
-    window.location.href="library.html";
-}
+// function submitNewUN(){
+//     sessionid = window.localStorage.getItem("usertoken")
+//     tmpurl = "https://anklebowl.pythonanywhere.com/setusername/"+sessionid+"/"+document.getElementById("newusername").value
+//     httpGet(tmpurl);
+//     window.location.href="library.html";
+// }
 
 
 
@@ -376,7 +393,9 @@ async function getLibraryList(){
     } else {
         console.log("inside the else")
         sessionid = window.localStorage.getItem("usertoken")
-        serverData = await httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/returnNameAndList", true);
+        console.log(sessionid);
+        serverData = await httpGet("https://backend.langstudy.tech/"+sessionid+"/returnNameAndList", false);
+        console.log("[TOTAL SERVER DATA] "+serverData)
         if (serverData == "Failed"){
             failedSignIn();
         }
@@ -384,6 +403,9 @@ async function getLibraryList(){
         username = arrayOfData[0];
         library = arrayOfData[1];
         console.log(username);
+        if(username == "invalidsession"){
+            failedSignIn();
+        }
         if(library == "[]"){
             console.log("1")
              // document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
@@ -401,7 +423,7 @@ async function getLibraryList(){
                 console.log("4")
                 // document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
                 noStudySheets()
-            } else if (library == "Invalid token"){
+            } else if (library == "invalidsession"){
                 console.log("5")
                 failedSignIn();
             } 
@@ -448,7 +470,7 @@ async function getLibraryList(){
                         document.getElementById("loadingscreen").classList = "absolute";
                         document.getElementById("studysetholder").style.display = "none";
                         var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
-                        link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+ studysheetname+"/delete"
+                        link = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/"+ studysheetname+"/delete"
                         console.log("link is: "+link)
                         await httpGet(link)
                         window.location.reload()
@@ -495,7 +517,7 @@ async function getLibraryList(){
     
 //         sessionid = window.localStorage.getItem("usertoken");
 //         try {
-//             username = await httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/name")
+//             username = await httpGet("https://backend.langstudy.tech/"+sessionid+"/name")
 //             console.log("Username = "+username)
 //         } catch (error) {
 //             document.getElementById("yourstudysheets").innerHTML = "Your Lang client could not establish a connection to the server. Please check your connection and try again in a few minutes.";
@@ -513,7 +535,7 @@ async function getLibraryList(){
 //             document.getElementById("studysetholder").append(loginbutton);
 //         }
 //         try {
-//             library = await httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/list")
+//             library = await httpGet("https://backend.langstudy.tech/"+sessionid+"/Studysheets/list")
 //             link = "https://anklebowl.pythonanywhere.com/usernamefromtoken/"+sessionid
 //             customuser = await httpGet(link)
 //         } catch (error) {
@@ -584,7 +606,7 @@ async function getLibraryList(){
         
 //             // toek = window.localStorage.getItem("usertoken")
 //             // document.getElementById("studysheetname").innerHTML = chosensheet
-//             // sheet = httpGet("https://nwvbug.pythonanywhere.com/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
+//             // sheet = httpGet("https://backend.langstudy.tech/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
                     
 //                     let horizontalflexstudysetentry = document.createElement("div")
 //                     horizontalflexstudysetentry.className = "horizontalFlex studysetentry"
@@ -617,7 +639,7 @@ async function getLibraryList(){
 //                         document.getElementById("loadingscreen").classList = "absolute";
 //                         document.getElementById("studysetholder").style.display = "none";
 //                         var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
-//                         link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+ studysheetname+"/delete"
+//                         link = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/"+ studysheetname+"/delete"
 //                         console.log("link is: "+link)
 //                         await httpGet(link)
 //                         window.location.reload()
@@ -661,179 +683,6 @@ async function getLibraryList(){
 
 
 
-async function getLibrary(){
-    // if (c==null){
-    //     document.getElementById("library").innerHTML = "Something went wrong. Check your network connection and try again.";
-    //     document.getElementById("top").innerHTML = "Lang Cloudsave requires an internet connection. You can still use locally saved Studysheets while offline. ";
-    //     document.getElementById("biguploadbutton").style.display = "none";
-
-
-
-    // }
-    sessionid = window.localStorage.getItem("usertoken");
-    library = await httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/list")
-    username = await httpGet("https://nwvbug.pythonanywhere.com/"+sessionid+"/name")
-    customuser = await httpGet("https://anklebowl.pythonanywhere.com/usernamefromtoken/"+sessionid)
-    console.log("custom user name: "+customuser)
-    document.getElementById("biguploadbutton").style.display="";
-    document.getElementById("noclickdiv").style.display="none";
-    if(library == "[]"){
-        document.getElementById("library").innerHTML = "You have no cloudsaved Lang Studysheets.";
-
-    }
-    else{
-        library = library.split("-seperator-")
-        if (library==""){
-            document.getElementById("library").innerHTML = "You have no cloudsaved Lang Studysheets.";
-        }
-        for (i=0;i<library.length;i++){
-            if (library[i]==""){
-                continue
-            }
-            var librarytext = document.createElement('h1')
-            librarytext.className="header";
-            text =library[i]
-            librarytext.innerHTML = text
-            link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+librarytext.innerHTML
-            
-            console.log(link)
-            id = "library"+generateIdA
-            generateIdA++
-            librarytext.id = id;
-            document.getElementById("libraryholder").appendChild(librarytext)
-            console.log(id)
-            // document.getElementById(id).onclick = function(){
-            //     kids = document.getElementById("libraryholder")
-            //     var element = document.getElementById(this.id);
-            //     console.log(element)
-            //     link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+element.innerHTML
-            //     console.log("link is: "+link)
-            //     window.location.href=link
-            // }
-
-            var downbutton = document.createElement('button')
-            downbutton.className="deletebutton";
-            text =library[i]
-            downbutton.innerHTML = "Download "+text
-            link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+librarytext.innerHTML
-            
-            console.log(link)
-            id = "library"+generateIdA
-            generateIdA++
-            downbutton.id = id;
-            // set the studysheet attribute to the name of the studysheet
-            downbutton.setAttribute("studysheet", text)
-            //document.getElementById("libraryholder").appendChild(downbutton)
-            console.log(id)
-            // document.getElementById(id).onclick = function(){
-            //     var element = document.getElementById(this.id);
-            //     console.log(element)
-            //     link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+ element.getAttribute("studysheet")
-            //     console.log("link is: "+link)
-            //     window.location.href=link;
-            // }
-
-
-            var usebutton = document.createElement('button')
-            usebutton.className="deletebutton";
-            text =library[i]
-            if(text.length>22){
-                usebutton.innerHTML = "Study "+text.substring(0,22)+"..."
-            } else{ 
-                usebutton.innerHTML = "Study "+text
-            }
-            
-            link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+librarytext.innerHTML
-            
-            console.log(link)
-            id = "study"+generateIdA
-            generateIdA++
-            usebutton.id = id;
-            // set the studysheet attribute to the name of the studysheet
-            usebutton.setAttribute("studysheet", text)
-            document.getElementById("libraryholder").appendChild(usebutton)
-            console.log(id)
-            document.getElementById(id).onclick = function(){
-                var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
-
-                window.localStorage.setItem("chosenSheet", studysheetname)
-                window.location.href="studysheetpage.html";
-
-            }
-
-
-
-            var libutton = document.createElement('button')
-            libutton.className="deletebutton";
-            text =library[i]
-            if(text.length>22){
-                libutton.innerHTML = "Delete "+text.substring(0,22)+"..."
-            } else{ 
-                libutton.innerHTML = "Delete "+text
-            }            link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+text+"/delete"
-            
-            console.log(link)
-            id = "library"+generateIdA
-            generateIdA++
-            libutton.id = id;
-            // set the studysheet attribute to the name of the studysheet
-            libutton.setAttribute("studysheet", text)
-            document.getElementById("libraryholder").appendChild(libutton)
-            console.log(id)
-            document.getElementById(id).onclick = async function(){
-                var element = document.getElementById(this.id);
-                console.log(element)
-                link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+ element.getAttribute("studysheet")+"/delete"
-                console.log("link is: "+link)
-                await httpGet(link)
-                window.location.reload()
-            }
-            
-        }
-
-        // kids = libraryholder.children
-        // for (i=0;i<kids.length;i++){
-        //     text = library[i]
-        //     link = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/"+text
-        //     kids[i].onclick=function(){window.location.href=link}
-        //     console.log(link)
-
-        // }
-    }
-    var usernametest = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
-                <title>500 Internal Server Error</title>
-                <h1>Internal Server Error</h1>
-                <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>`
-    console.log(username+"Username - username test "+usernametest)
-    if (document.getElementById("library0").innerHTML == "Invalid token"){
-        document.getElementById("top").innerHTML = "Uh oh. It seems like your login has expired. Please log in again.";
-        document.getElementById("top2").innerHTML = "Click here to sign in to your account.";
-        document.getElementById("top2").style.border = "1px solid black";
-        document.getElementById("top2").style.borderRadius = "15px";
-
-        document.getElementById("top2").onclick = function(){window.location.href="login.html"};
-        document.getElementById("library0").innerHTML = "Please log in again. Error code: HAX0R"
-        document.getElementById("library1").style.display="none"
-        document.getElementById("library3").style.display="none"
-        document.getElementById("library3").style.display="none"
-        document.getElementById("biguploadbutton").style.display="none"
-        document.getElementById("study2").style.display="none"
-        document.getElementById("library2").style.display="none"
-
-
-        
-    }else{
-        document.getElementById("top").innerHTML = "Here are your cloudsaved Lang Studysheets, "+customuser+". Click on the Studysheet you want to use.";
-        document.getElementById("top2").innerHTML = "Not "+customuser+"? Click here to sign in to your account.";
-        document.getElementById("top2").style.border = "1px solid black";
-        document.getElementById("top2").style.borderRadius = "15px";
-        document.getElementById("top2").onclick = function(){window.location.href="login.html"};
-    }
-    
-    
-    console.log(library);
-    
-}
 //onload multiple functions
 function execute(){
     //checks if user is on mobile
@@ -2549,10 +2398,10 @@ function saveToCloud(){
     var filename = document.getElementById("sstitle").innerText;
     console.log("FILE NAME+ "+filename)
     if(window.localStorage.getItem('editSheet')=="true") {
-        var url = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/edit/"+filename;
+        var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/edit/"+filename;
         window.localStorage.setItem('editSheet', "false");
     } else {
-        var url = "https://nwvbug.pythonanywhere.com/"+sessionid+"/Studysheets/upload/"+filename;
+        var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/upload/"+filename;
     }
 
     var xhr = new XMLHttpRequest();
@@ -3121,14 +2970,7 @@ function createCreatorInput(term, definition) {
         id2 = "ans"+generateIdA
         id3 = "button"+generateIdYou
 
-        var svg = document.createElement("div");
-        svg.innerHTML = trash_svg;
-        svg.className = "trash";
-        svg.onclick = function(){
-            console.log(this)
-            this.parentNode.remove();
-        }
-        br.appendChild(svg);
+        
 
         var verbInput = document.createElement('div');
         verbInput.id=id1;
@@ -3166,7 +3008,15 @@ function createCreatorInput(term, definition) {
             makeInputs("Multi");
             
         }
-        // br.appendChild(image);
+        //br.appendChild(image);
+        var svg = document.createElement("div");
+        svg.innerHTML = trash_svg;
+        svg.className = "trash";
+        svg.onclick = function(){
+            console.log(this)
+            this.parentNode.remove();
+        }
+        br.appendChild(svg);
     
         var overallContainer = document.getElementById("langCreatorContainer");
         overallContainer.scrollTop = overallContainer.scrollHeight;
