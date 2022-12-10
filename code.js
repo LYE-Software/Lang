@@ -378,9 +378,10 @@ async function getLibraryList(){
     document.getElementById("homeusername").innerHTML = "Hello";
     console.log("generating library list")
     var url_string = window.location.href; //window.location.href
+    console.log("url_string: "+url_string);
     var url = new URL(url_string);
-    var c = url.searchParams.get("token");
-    console.log(c);
+    var c = url.searchParams.get("session");
+    console.log("C vlaue "+c);
     if (c != null) {
         window.localStorage.setItem("usertoken", c);
     }
