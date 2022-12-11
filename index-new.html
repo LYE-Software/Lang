@@ -207,6 +207,13 @@
             width: 100%;
         }
 
+        .verticalFlex {
+            display: flex;
+            flex-direction: column;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
         .studysheetOption {
             width: 30%;
             background-color: var(--primary-light);
@@ -214,6 +221,10 @@
             box-sizing: border-box;
             padding: 10px;
             border-radius: 25px;;
+        }
+
+        #usernameText {
+            color: var(--primary-light);
         }
     </style>
 </head>
@@ -223,10 +234,7 @@
             <div style="cursor:pointer;">
                 <img style="height: 10vh;" src="assets/logos/FullLangLogo.png">
             </div>
-            <!-- <div id="">
-
-            </div> -->
-            <div class="button verticalFlex">Welcome ankleBowl!</div>
+            <div id="usernameText" class="button verticalFlex">Welcome ankleBowl!</div>
         </div>
         <div class="functionRow horizontalFlex" style="justify-content: start;">
             <div class="functionRowItem">
