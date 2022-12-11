@@ -52,6 +52,7 @@ var whichId= "";
 var offline = false;
 var override = false;
 var LyeServerIp = "https://lye.software";
+var newarr = []
 
 async function doPreviewAndLocal(){
     console.log("in dopreview")
@@ -319,10 +320,10 @@ function httpGet(theUrl, lye){
 }
 
 function hideLoadingView() {
-    document.getElementById("loadingscreen").classList.add("fadeOut");
+    document.getElementById("loadingscreen").style.opacity = "0";
     setTimeout(function(){
         document.getElementById("loadingscreen").style.display = "none";
-    }, 1000);
+    }, 250);
 }
 
 function failedSignIn() {
@@ -424,89 +425,149 @@ async function getLibraryList(){
             noStudySheets()
             console.log("2")
         } if (library == null){
-            noStudySheets() //commit please
+            failedSignIn() //commit please
             console.log("lib = null")
             console.log("3")
         }
         else{
-            library = library.split("-seperator-")
-            if (library==""){
+            arrayOfData = library.split("-rowseperator-");
+           
+            console.log("arrayofdata: "+arrayOfData)
+            for (i=0;i<arrayOfData.length;i++){
+                row = arrayOfData[i]
+                row = row.split("-seperator-")
+                console.log("row: "+row)
+                newarr.push(row[0])
+                
+            }
+            console.log("newarr: "+newarr)
+            if (newarr==""){
                 console.log("4")
                 // document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
                 noStudySheets()
-            } else if (library == "invalidsession"){
+            } else if (newarr == "invalidsession"){
                 console.log("5")
                 failedSignIn();
             } 
             else{
                 document.getElementById("homeusername").innerHTML = "Hello, "+username;
                 hideLoadingView();
-
-                for (i=0;i<library.length;i++){
+                
+                for (i=0;i<newarr.length;i++){
                     console.log("inside for")          
-                    let horizontalflexstudysetentry = document.createElement("div")
-                    horizontalflexstudysetentry.className = "horizontalFlex studysetentry"
-                    document.getElementById("studysetholder").append(horizontalflexstudysetentry);
+                    // var sheet = `
+                    // <div style="display: flex; align-items: center; background-color: var(--primary-dark);">
+                    //     <div class="studysheetName">${name}</div>
+                    // </div>
+                    // <div style="display: flex; align-items: center; justify-content: center; background-color: var(--primary-dark);" data-studysheet="${name}" onclick="viewStudysheet()">
+                    //      <svg class="studysheetEdit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488.728 488.728" xmlns:v="https://vecta.io/nano"><path d="M487.147 462.52l-36.4-167.6c0-4.2-2.1-7.3-5.2-10.4l-261.3-261.3c-20-22.9-74.3-38.1-112.4 0l-47.9 47.9c-31 31-31 81.4 0 112.4l261.3 261.3c2.1 2.1 5.2 4.2 9.4 5.2l168.6 38.5c10.1 1.5 29.1-4.9 23.9-26zm-434.1-308.1c-15.6-15.6-15.6-39.6 0-55.2l47.9-47.9c15.2-15.2 40-15.2 55.2 0l238.4 238.4h-27.1c-11.4 0-20.8 9.4-20.8 20.8v34.3h-34.3c-11.4 0-20.8 9.4-20.8 20.8v26.1l-238.5-237.3zm280 261.3v-29.2h34.3c18 1.7 20.8-16.5 20.8-20.8v-34.4h29.2l24 109.3-108.3-24.9z"/></svg>
+                    // </div>
+                    // <div style="display: flex; align-items: center; justify-content: center; background-color: var(--primary-dark); data-studysheet="${name}" onclick="deleteStudysheet()">
+                    //     <svg class="studysheetDelete" width="24px" height="24px" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg"><path d="M17 9L11 15M11.0002 9L17.0002 15M9 6H20C20.5523 6 21 6.44772 21 7V17C21 17.5523 20.5523 18 20 18H9L3 12L9 6Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    // </div>
+                    // `
+                    div1 = document.createElement("div");
+                    div1.style.display = "flex";
+                    div1.style.alignItems = "center";
+                    div1.style.backgroundColor = "var(--primary-dark)";
+                    div1.id = i;
+                    div1.onclick = function(){
+                        for (i=0;i<newarr.length;i++){
+                            document.getElementById(i).classList.remove("selected");
+                            document.getElementById("studysheet"+i).classList.remove("selected");
+                            document.getElementById("studysheetDel"+i).classList.remove("selected");
+                        }
+                        document.getElementById(this.id).classList.add("selected");
+                        
+                        document.getElementById("studysheet"+this.id).classList.add("selected");
+                        document.getElementById("studysheetDel"+this.id).classList.add("selected");
+                        tmp = arrayOfData[this.id]
+                        tmp = tmp.split("-seperator-")
+                        document.getElementById("termCount").innerHTML = tmp[3];
+                        document.getElementById("lastModified").innerHTML = tmp[2];
+                        document.getElementById("created").innerHTML = tmp[1];
+                        document.getElementById("createdBy").innerHTML = username;
 
-                    let namediv = document.createElement("div")
-                    namediv.innerHTML = library[i]
-                    horizontalflexstudysetentry.append(namediv);
-                    namediv.setAttribute("studysheet", library[i])
-                    namediv.id=library[i] + "title"
-                    namediv.onclick = function(){
-                        var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
-        
+                    }
+                    div2 = document.createElement("div");
+                    div2.className = "studysheetName";
+                    div2.style.color = "var(--primary-light)"
+                    div2.innerHTML = newarr[i];
+                    div1.append(div2);
+
+                    document.getElementById("studysheetGridContainer").append(div1);
+
+                    div3 = document.createElement("div");
+                    div3.style.justifyContent = "center";
+                    div3.style.display = "flex";
+                    div3.style.alignItems = "center";
+                    div3.style.backgroundColor = "var(--primary-dark)";
+                    div3.innerHTML=`<svg style="fill: var(--primary-light)" class="studysheetEdit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488.728 488.728" xmlns:v="https://vecta.io/nano"><path d="M487.147 462.52l-36.4-167.6c0-4.2-2.1-7.3-5.2-10.4l-261.3-261.3c-20-22.9-74.3-38.1-112.4 0l-47.9 47.9c-31 31-31 81.4 0 112.4l261.3 261.3c2.1 2.1 5.2 4.2 9.4 5.2l168.6 38.5c10.1 1.5 29.1-4.9 23.9-26zm-434.1-308.1c-15.6-15.6-15.6-39.6 0-55.2l47.9-47.9c15.2-15.2 40-15.2 55.2 0l238.4 238.4h-27.1c-11.4 0-20.8 9.4-20.8 20.8v34.3h-34.3c-11.4 0-20.8 9.4-20.8 20.8v26.1l-238.5-237.3zm280 261.3v-29.2h34.3c18 1.7 20.8-16.5 20.8-20.8v-34.4h29.2l24 109.3-108.3-24.9z"/></svg>`
+                    div3.style.stroke = "var(--primary-light)";
+                    div3.setAttribute("studysheet", newarr[i]);
+                    div3.id = "studysheet"+i;
+                    div3.onclick = function(){
+                        var studysheetname = document.getElementById(this.id).getAttribute("studysheet")       
                         window.localStorage.setItem("chosenSheet", studysheetname)
                         window.location.href="studysheetpage.html";
-                    } 
+                    }
+                    document.getElementById("studysheetGridContainer").append(div3);
 
-                    let spacer = document.createElement("div")
-                    spacer.className = "flexSpacer"
-                    horizontalflexstudysetentry.append(spacer);
-                    let datediv = document.createElement("div")
-                    horizontalflexstudysetentry.append(datediv);
-                    
-                    let del = document.createElement("div");
-                    del.setAttribute("studysheet", library[i])
-                    del.innerHTML = "Delete"
-                    del.id=library[i]
-                    horizontalflexstudysetentry.append(del);
 
-                    let newspacer = document.createElement("div");
-                    newspacer.style.width="10vw";
-                    horizontalflexstudysetentry.append(newspacer);
-        
-                    del.onclick=async function(){
-                        document.getElementById("loadingscreen").style.display = "";
+                    div5 = document.createElement("div");
+                    div5.style.display = "flex";
+                    div5.style.alignItems = "center";
+                    div5.style.justifyContent = "center";
+                    div5.style.backgroundColor = "var(--primary-dark)";
+                    div5.setAttribute("studysheet", newarr[i]);
+                    div5.id = "studysheetDel"+i;
+                    div5.onclick = async function(){
+                        document.getElementById("loadingscreen").style.opacity = "1";
                         document.getElementById("loadingscreen").classList = "absolute";
-                        document.getElementById("studysetholder").style.display = "none";
                         var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
                         link = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/"+ studysheetname+"/delete"
                         console.log("link is: "+link)
                         await httpGet(link)
                         window.location.reload()
-                        
                     }
-
-                    let view = document.createElement("div");
-                    view.setAttribute("studysheet", library[i])
-                    view.innerHTML = "View"
-                    view.id=library[i]
-                    horizontalflexstudysetentry.append(view);
-        
-        
-                    view.onclick = function(){
-                        var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
-        
-                        window.localStorage.setItem("chosenSheet", studysheetname)
-                        window.location.href="studysheetpage.html";       
-                    }
+                    div5.innerHTML=`<svg class="studysheetDelete" width="24px" height="24px" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg"><path d="M17 9L11 15M11.0002 9L17.0002 15M9 6H20C20.5523 6 21 6.44772 21 7V17C21 17.5523 20.5523 18 20 18H9L3 12L9 6Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+                    document.getElementById("studysheetGridContainer").append(div5);
                 }
+                tmp = arrayOfData[0]
+                tmp = tmp.split("-seperator-")
+                document.getElementById("termCount").innerHTML = tmp[3];
+                document.getElementById("lastModified").innerHTML = tmp[2];
+                document.getElementById("created").innerHTML = tmp[1];
+                document.getElementById("createdBy").innerHTML = username;
+                document.getElementById("0").classList.add("selected");
+                document.getElementById("studysheet0").classList.add("selected");
+                document.getElementById("studysheetDel0").classList.add("selected");
             }
         }
     }
 }
 
+
+function goToSSPage(){
+    index = document.getElementsByClassName("selected")[0].id;
+    console.log("index is: "+index)
+    console.log("newarr[index] is: "+newarr[index])
+    window.localStorage.setItem("chosenSheet", newarr[index])
+    window.location.href="studysheetpage.html";
+}
+
+async function deleteSS(){
+    index = document.getElementsByClassName("selected")[0].id;
+    console.log("index is: "+index)
+    console.log("newarr[index] is: "+newarr[index])
+    document.getElementById("loadingscreen").style.opacity = "1";
+    document.getElementById("loadingscreen").classList = "absolute";
+    link = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/"+ newarr[index]+"/delete"
+    console.log("link is: "+link)
+    await httpGet(link)
+    window.location.reload()
+
+}
 
 
 
@@ -3016,19 +3077,17 @@ function createCreatorInput(term, definition) {
         overallContainer.scrollTop = overallContainer.scrollHeight;
 }
 
-function addStudysheet(name) {
-    var sheet = `
-    <div class="studysheetGridContainer">
-        <div style="display: flex; align-items: center; background-color: var(--primary-dark);">
-            <div class="studysheetName">${name}</div>
-        </div>
-        <div style="display: flex; align-items: center; justify-content: center; background-color: var(--primary-dark);">
-            <svg class="studysheetEdit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488.728 488.728" xmlns:v="https://vecta.io/nano"><path d="M487.147 462.52l-36.4-167.6c0-4.2-2.1-7.3-5.2-10.4l-261.3-261.3c-20-22.9-74.3-38.1-112.4 0l-47.9 47.9c-31 31-31 81.4 0 112.4l261.3 261.3c2.1 2.1 5.2 4.2 9.4 5.2l168.6 38.5c10.1 1.5 29.1-4.9 23.9-26zm-434.1-308.1c-15.6-15.6-15.6-39.6 0-55.2l47.9-47.9c15.2-15.2 40-15.2 55.2 0l238.4 238.4h-27.1c-11.4 0-20.8 9.4-20.8 20.8v34.3h-34.3c-11.4 0-20.8 9.4-20.8 20.8v26.1l-238.5-237.3zm280 261.3v-29.2h34.3c18 1.7 20.8-16.5 20.8-20.8v-34.4h29.2l24 109.3-108.3-24.9z"/></svg>
-        </div>
-        <div style="display: flex; align-items: center; justify-content: center; background-color: var(--primary-dark);">
-            <svg class="studysheetDelete" width="24px" height="24px" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg"><path d="M17 9L11 15M11.0002 9L17.0002 15M9 6H20C20.5523 6 21 6.44772 21 7V17C21 17.5523 20.5523 18 20 18H9L3 12L9 6Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-    </div>
-    `
-    document.getElementById("studysheetGridContainer").innerHTML += sheet;
-}
+// function addStudysheet(name) {
+//     var sheet = `
+//     <div style="display: flex; align-items: center; background-color: var(--primary-dark);">
+//         <div class="studysheetName">${name}</div>
+//     </div>
+//     <div style="display: flex; align-items: center; justify-content: center; background-color: var(--primary-dark);" data-studysheet="${name}" onclick="viewStudysheet()">
+//         <svg class="studysheetEdit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488.728 488.728" xmlns:v="https://vecta.io/nano"><path d="M487.147 462.52l-36.4-167.6c0-4.2-2.1-7.3-5.2-10.4l-261.3-261.3c-20-22.9-74.3-38.1-112.4 0l-47.9 47.9c-31 31-31 81.4 0 112.4l261.3 261.3c2.1 2.1 5.2 4.2 9.4 5.2l168.6 38.5c10.1 1.5 29.1-4.9 23.9-26zm-434.1-308.1c-15.6-15.6-15.6-39.6 0-55.2l47.9-47.9c15.2-15.2 40-15.2 55.2 0l238.4 238.4h-27.1c-11.4 0-20.8 9.4-20.8 20.8v34.3h-34.3c-11.4 0-20.8 9.4-20.8 20.8v26.1l-238.5-237.3zm280 261.3v-29.2h34.3c18 1.7 20.8-16.5 20.8-20.8v-34.4h29.2l24 109.3-108.3-24.9z"/></svg>
+//     </div>
+//     <div style="display: flex; align-items: center; justify-content: center; background-color: var(--primary-dark); data-studysheet="${name}" onclick="deleteStudysheet()">
+//         <svg class="studysheetDelete" width="24px" height="24px" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg"><path d="M17 9L11 15M11.0002 9L17.0002 15M9 6H20C20.5523 6 21 6.44772 21 7V17C21 17.5523 20.5523 18 20 18H9L3 12L9 6Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+//     </div>
+//     `
+//     document.getElementById("studysheetGridContainer").innerHTML += sheet;
+// }

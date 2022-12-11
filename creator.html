@@ -99,7 +99,15 @@
 
             stroke: var(--primary-dark);
         }
-        
+        :body::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
     </style>
 </head>
 <body onload="creatorOnload()">
@@ -137,7 +145,7 @@
             <div class="flexSpacer"></div>
             <div id="homeusername">Getting your userinfo...</div>
             <div>
-                <img class="pfp" style="height: 5vh;" src="newsettings.svg" onclick="window.location.href='settings.html'">
+                <img class="pfp" style="height: 5vh;" src="assets/icons/newsettings.svg" onclick="window.location.href='settings.html'">
             </div>
         </div>
     </div>
