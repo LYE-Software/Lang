@@ -12,6 +12,15 @@
 
 
     <style>
+        .snowflakeContainer {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
         body {
             overflow-y: visible;
         }
@@ -345,10 +354,14 @@
         link.href = 'snow.css';
         document.getElementsByTagName('HEAD')[0].appendChild(link);
         
+        var container = document.createElement("div");
+        container.classList.add("snowflakeContainer");
+        document.body.appendChild(container);
+
         for (var i = 0; i < 50; i++) {
             var snowflake = document.createElement("div");
             snowflake.classList.add("snowflake");
-            document.body.appendChild(snowflake);
+            container.appendChild(snowflake);
         }
     }
 
