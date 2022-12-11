@@ -96,106 +96,45 @@
             padding: 20px;
         }
 
-        /* https://cssloaders.github.io */
-        .lds-ellipsis {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-}
-.lds-ellipsis div {
-  position: absolute;
-  top: 33px;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: var(--primary-light);
-  animation-timing-function: cubic-bezier(0, 1, 1, 0);
-}
-.lds-ellipsis div:nth-child(1) {
-  left: 8px;
-  animation: lds-ellipsis1 0.6s infinite;
-}
-.lds-ellipsis div:nth-child(2) {
-  left: 8px;
-  animation: lds-ellipsis2 0.6s infinite;
-}
-.lds-ellipsis div:nth-child(3) {
-  left: 32px;
-  animation: lds-ellipsis2 0.6s infinite;
-}
-.lds-ellipsis div:nth-child(4) {
-  left: 56px;
-  animation: lds-ellipsis3 0.6s infinite;
-}
-@keyframes lds-ellipsis1 {
-  0% {
-    transform: scale(0);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-@keyframes lds-ellipsis3 {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(0);
-  }
-}
-@keyframes lds-ellipsis2 {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(24px, 0);
-  }
-}      
 
-.animatedLoader { 
-        animation: logoSpinning ease-in-out 2s infinite;
-        width: 100px;
-        height: 100px;
-    }
-
-
-    @keyframes logoSpinning {
-        0% {
-            transform: scale(0.8);
-            rotate: 0deg;
-        }
-        
-        50% {
-            transform: scale(1.2);
-            rotate: 180deg;
+        .animatedLoader { 
+            animation: logoSpinning ease-in-out 2s infinite;
+            width: 100px;
+            height: 100px;
         }
 
-        100% {
-            transform: scale(0.8);
-            rotate: 360deg;
+
+        @keyframes logoSpinning {
+            0% {
+                transform: scale(0.8);
+                rotate: 0deg;
+            }
+            
+            50% {
+                transform: scale(1.2);
+                rotate: 180deg;
+            }
+
+            100% {
+                transform: scale(0.8);
+                rotate: 360deg;
+            } 
         } 
-    } 
 
+        .largeButton {
+            font-size: 20px;
+        }
 
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .changelogScrollBar ::-webkit-scrollbar {
+        display: none;
+        }
 
-.largeButton {
-    font-size: 20px;
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.changelogScrollBar ::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.changelogScrollBar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-/* ::-webkit-scrollbar {
-    display: none;
-} */
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .changelogScrollBar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+        }
 </style>
 </head>
 <body onload="getLibraryList()">
@@ -224,7 +163,6 @@
             <div class="absolute" id="loadingscreen" style="height: 100%; width: 100%; background-color: var(--primary-dark); overflow: hidden; pointer-events: none;">
                 <div class="horizontalFlex" style="height: 40vh; width: 100%; flex-direction: column; align-items: center; justify-content: center;">
                     <div>
-                        <!-- <div class="lds-ellipsis" id="studyloader"><div></div><div></div><div></div><div></div></div> -->
                         <img class="animatedLoader" src="assets/logos/lang-wheat.png" alt="Logo">
                     </div>
                 </div>
@@ -243,7 +181,6 @@
     </div>
     <div id="header0" class="absolute" style="width: 100vw">
         <div class="horizontalFlex header" id="overallheader">
-            
             <div>
                 <img style="height: 10vh; margin-left:10px;" src="assets/logos/lang.png">
             </div>
@@ -258,7 +195,7 @@
             </div>
             <div id="homeusername">Loading</div>
             <div id = "headercontents3">
-                <img class="pfp" style="height: 5vh;" src="newsettings.svg" onclick="window.location.href='settings.html'">
+                <img class="pfp" style="height: 5vh;" src="assets/icons/newsettings.svg" onclick="window.location.href='settings.html'">
             </div>
         </div>
     </div>
