@@ -2934,6 +2934,30 @@ function grabQuizlet(link) {
     xhr.send(data);
 }
 
+function grabMemrise(link) {
+
+    console.log("link+ "+link)
+    var url = "https://lye.software/temp/memrise/get";
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url);
+
+    xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            console.log(xhr.status);
+            console.log(xhr.responseText);
+            var newStudysheet = xhr.responseText;
+            window.localStorage.setItem("fullstudysheet", newStudysheet);
+            window.location.href="creator.html";
+        }
+    };
+    var data = link;
+    console.log("sending " + data + " to " + url);
+    xhr.send(data);
+}
+
 function initializeEdit(){
     window.localStorage.setItem("editSheet", "true");
     window.location.href='creator.html';
@@ -2984,7 +3008,7 @@ function creatorModeSelect(){
         customWords = window.localStorage.getItem("fullstudysheet")
         let arrayText = customWords.split('\n')
         window.localStorage.setItem("fullstudysheet", "");
-        document.getElementById("topheader").innerHTML = "Imported From Quizlet"
+        document.getElementById("topheader").innerHTML = "Imported From Outside Source"
         for (i = 0; i<arrayText.length; i++){
             let wordPair = getRandomQuestion(customWords);
             // var br = document.createElement("div")
