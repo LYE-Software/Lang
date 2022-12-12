@@ -61,7 +61,9 @@ async function doPreviewAndLocal(){
     toek = window.localStorage.getItem("usertoken")
     document.getElementById("studysheetname").innerHTML = chosensheet
     sheet = await httpGet("https://backend.langstudy.tech/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
-    document.getElementById("noclickdiv").style.display = "none";
+    // document.getElementById("noclickdiv").style.display = "none";
+    document.getElementById("noclickdiv").style.opacity = "0";
+    document.getElementById("noclickdiv").style.pointerEvents = "none";
     console.log("og sheet: "+sheet)
     sheet = sheet.replaceAll("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823", "\n")
     console.log(sheet)

@@ -4,23 +4,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lang</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stylesheet.css">
     <link rel="icon" href="circular lang icon.png">
     <script src="code.js"></script> 
 </head>
 <style>
-    .termDefContainer {
+        /* .termDefContainer {
             background-color: wheat;
             border-radius: 25px;
             padding: 25px;
             margin-bottom: 20px;
-            /* margin: 10px; */
+            margin: 10px;
 
             width: 30vw;
             height:auto;
             display: flex;
             justify-content: center;
+        } */
+
+        .termDefContainer {
+            background-color: var(--primary-light);
+            border-radius: 25px;
+            padding: 25px;
+            margin: 10px;
+
+            display: flex;
+            justify-content: center;
         }
+
+        .termDefContainer div {
+            border: none;
+        }
+
 
         .term {
             align-items: center;
@@ -43,10 +58,37 @@
         }
 
         .dropbtn {
-            margin-top: 0;
-            margin-bottom: 0;
-            margin: 0;
+            transition: all 0.1s ease-in-out;
+
+            margin: 10px;
+            border: 3px solid var(--primary-light);
+            padding: 0;
+
+            height: 10vh;
+            width: 15vw;
+            box-sizing: border-box;
+            border-radius: 25px;
+
+            background-color: var(--primary-light);
+            
+            -webkit-box-shadow:0px 0px 25px 0px var(--primary-light);
+            -moz-box-shadow: 0px 0px 25px 0px var(--primary-light);
+            box-shadow: 0px 0px 25px 0px var(--primary-light);
+
+
         }
+
+        .dropbtn:hover {
+            background-color: var(--primary-dark);
+            color: var(--primary-light);
+            border: 3px solid var(--primary-light);
+
+            -webkit-box-shadow:0px 0px 10px 0px var(--primary-light);
+            -moz-box-shadow: 0px 0px 10px 0px var(--primary-light);
+            box-shadow: 0px 0px 10px 0px var(--primary-light);
+        }
+
+
 
         .verticalBox {
             height: 100%;
@@ -61,20 +103,47 @@
             padding: 0;
         }
         ::-webkit-scrollbar {
-    display: none;
-}
+            display: none;
+        }
+
+        .termContainer {
+            flex: 100;
+            overflow-y: scroll; 
+            max-height: 70vh; 
+            margin-left: 100px; 
+            box-sizing: border-box; 
+            padding-left: 50px;
+            padding-right: 50px;
+            border-top: 5px solid var(--primary-light);
+            border-bottom: 5px solid var(--primary-light);
+            max-width: 500px;
+
+
+            position: relative;
+        }
+
+        .termContainer::after {
+            content: "";
+            display: block;
+            height: 15px;
+        }
 </style>
 <body onload = "doPreviewAndLocal()" class="darkHomepage" style="overflow-x:hidden;">
-    <div style="height:99vh; width:97vw; position:absolute;" id="noclickdiv">
-        <div style="position:absolute; top:40%; left:45%; background-color: wheat; border-radius:15px; padding:20px; text-align: center;">
-            <div class="lds-ellipsisdark" id="studyloader" ><div></div><div></div><div></div><div></div></div>
-            <p class="header">Loading your Studysheet</p>
+    
+    <div class="horizontalFlex" style="pointer-events: all; transition: all 0.15s ease-in-out; opacity: 1; z-index: 100; align-items: center; justify-content: center; top: 0; bottom: 0; left: 0; right: 0; position:absolute; background-color: var(--primary-dark)" id="noclickdiv">
+        <div class="lightGlow "style="width: 90vw; max-width: 500px; background-color: var(--primary-light); border-radius:15px; padding:20px; text-align: center;">
+            <div style="margin: 50px;">
+                <img class="animatedLoader" src="assets/logos/lang-wheat.png" alt="Logo">
+            </div>
+            Loading your Studysheet
+            <!-- <div class="lds-ellipsisdark" id="studyloader" ><div></div><div></div><div></div><div></div></div> -->
+            <!-- <p class="header"></p> -->
         </div>
     </div>
     
     
     <div>
-        <div class="samelineheader" style="display:inline-block; background-color:wheat; width:100vw;">
+        <!-- <div class="samelineheader" style="display:inline-block; background-color:wheat; width:100vw;">
             <div style="width:100%; display:flex; justify-content: space-between ; text-align: center;">
                 
                 <img src="transparenticon.png" class="topleftlogoicon" onclick="window.location.href='index.html'">
@@ -85,26 +154,42 @@
                     <img class="pfp" style="height: 5vh;" src="assets/icons/newsettings.svg" onclick="window.location.href='settings.html'">
                 </div>
             </div>
+        </div> -->
+
+        <div id="header0" class="lightGlow" style="width: 100vw">
+            <div class="horizontalFlex header">
+                <div onclick="returnMain()" style="cursor:pointer;">
+                    <img style="height: 10vh;" src="assets/logos/lang.png">
+                </div>
+                <div class="flexSpacer"></div>
+                <div id="studysheetname" style="font-family: 'Rubik Mono One', sans-serif; font-size:25px;">PLACEHOLDER</div>
+                <div class="flexSpacer"></div>
+                <!-- <div id="homeusername">Getting your userinfo...</div>
+                <div>
+                    <img class="pfp" style="height: 5vh;" src="assets/icons/newsettings.svg" onclick="window.location.href='settings.html'">
+                </div> -->
+            </div>
         </div>
         
-        <div class="medbox" style="flex:wrap; height: calc(90vh - 40px)">
-            <div class="verticalbox">
-                <button class="dropbtn"style="margin:10px;" onclick="window.location.href='readCustom.html'">Mastery</button>
-                <button class="dropbtn"style="margin:10px;"onclick="window.location.href='flashcardsnew.html'">Flashcards</button>
-                <button class="dropbtn"style="margin:10px;"onclick="window.location.href='practest.html'">Practice Test</button>
-                <button class="dropbtn"style="margin:10px;"onclick="window.location.href='speed.html'">Speed Review</button>
-                <button class="dropbtn"style="margin:10px;"onclick="window.location.href='multiplechoice.html'">Multiple Choice</button>
-                <button class="dropbtn"style="margin:10px;"onclick="initializeEdit()">Edit Studysheet</button>
+        <div class="horizontalFlex" style="flex:wrap; height: calc(90vh - 40px); box-sizing: border-box; padding: 100px; justify-content: space-evenly;">
+            <div class="dropbtncontainer" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <button class="dropbtn" onclick="window.location.href='readCustom.html'">Mastery</button>
+                <button class="dropbtn" onclick="window.location.href='flashcardsnew.html'">Flashcards</button>
+                <button class="dropbtn" onclick="window.location.href='practest.html'">Practice Test</button>
+                <button class="dropbtn" onclick="window.location.href='speed.html'">Speed Review</button>
+                <button class="dropbtn" onclick="window.location.href='multiplechoice.html'">Multiple Choice</button>
+                <button class="dropbtn" onclick="initializeEdit()">Edit Studysheet</button>
             </div>
-            <div style="flex:0.45; padding:20px; overflow-y:scroll; max-height:70vh;">
-                <div style="display:flex; justify-content:space-evenly; margin-left:-3vw;">
-                    <h1 class="header" style="color:wheat;">Term</h1>
-                    <h1 class="header" style="color:wheat;">Defintion</h1>
+            <div class="flexSpacer termContainer" style="min-width: 700px;">
+                <div style="margin: 20px; "class="horizontalFlex">
+                    <div class="flexSpacer"></div>
+                    <h1 style="color:wheat; font-size: 20px;">Term</h1>
+                    <div class="flexSpacer"></div>
+                    <div class="flexSpacer"></div>
+                    <h1 style="color:wheat; font-size: 20px;">Defintion</h1>
+                    <div class="flexSpacer"></div>
                 </div>
                 <div id="previewstudysheet"></div>
-                <div style="width: 100%; justify-content: center; align-items: center; text-align: center;">
-                </div>
-    
             </div>
         </div>      
     </div>    
