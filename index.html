@@ -329,8 +329,13 @@
                     <div onclick="window.location.href='settings.html'">Lang Settings</div>
                 </div>
             </div>
-            <div class="functionRowItem" onclick="window.location.href='about-new.html'">
+            <div class="functionRowItem">
                 About
+                <div class="functionRowItemContents">
+                    <div onclick="window.location.href='about-new.html'">About Lang</div>
+                    <div onclick="window.location.href='updates.html'">Updates</div>
+                    <div onclick="window.location.href='langlegal.html'">Legal & Credits</div>
+                </div>
             </div>
             <div class="functionRowItem">
                 Help
@@ -368,22 +373,22 @@
                 <div class="studysheetInfoContainer" style="background-color: var(--primary-dark)">
                     <div class="flexSpacer"></div>
                     <div class="verticalFlex">
-                        <div id="termCount">28</div>
+                        <div id="termCount">!</div>
                         <div style="margin-bottom: 10px;">Total Term and Definition Pairs</div>
                     </div>
                     <div class="flexSpacer"></div>
                     <div style="width: 100%;">
                         <div class="studysheetInfoPanel">
                             <div>Last Modified: </div>
-                            <div id="lastModified">2020-08-12 12:00:00</div>
+                            <div id="lastModified">Oops, we encountered a problem</div>
                         </div>
                         <div class="studysheetInfoPanel" style="border-top: none;">
                             <div>Created: </div>
-                            <div id="created">2020-08-12 12:00:00</div>
+                            <div id="created">Oops, we encountered a problem</div>
                         </div>
                         <div class="studysheetInfoPanel" style="border-top: none;">
                             <div>Created By: </div>
-                            <div id="createdBy">ankleBowl</div>
+                            <div id="createdBy">Oops, we encountered a problem</div>
                         </div>
                     </div>
                     <div class="flexSpacer"></div>
@@ -410,14 +415,15 @@
     <div id="failedSignIn" class="absolute" style="top:0; left:0; z-index:500; display: none; height: 100vh; width: 100vw; background-color: rgba(0, 0, 0, 0.5);">
         <div class="horizontalFlex" style="align-items: center; justify-content: center; height: 100vh; width: 100vw; z-index:500;">
             <div class="horizontalFlex centerText" style="z-index:500; border-radius: 15px; padding: 20px; align-items: center; justify-content: center; flex-direction: column; width: 30vw; height: 40vh; background-color: var(--primary-light);">
-                <!-- <img src="goodsizelye.png" style="height:10vh;"> -->
+                <img src="assets/logos/FullLangLogo.png" style="height:10vh;"> 
+                <br>
                 <div style="margin-top: 10px;"></div>
                 <div>We did not find an account saved on your computer.</div>
                 <div style="margin-top: 10px;"></div>
                 <div>Lang reccommends making an account, so you can save your studysheets online.</div>
                 <div class="button" style="width: 25%; color: var(--primary-light); margin-bottom: 0;" onclick="window.location.href='https://lye.software/signin/langstudy.tech-index.html'">Log In</div>
                 <div class="button" style="width: 25%; color: var(--primary-light);" onclick="window.location.href='https://lye.software/signup?forward=langstudy.tech-index.html'">Sign Up</div>
-                <!-- <div id="useAsGuest" style="font-size: 10px; text-decoration: underline;">No thanks, I'd like to use Lang as a guest</div> -->
+                <div style="font-size: 10px; text-decoration: underline;">By signing up for an account, you agree to the Lang Terms of Service, which can be found <a href='langlegal.html' style="color:#001945;">here</a></div>
             </div>
         </div>
     </div>
@@ -466,6 +472,9 @@
     }
 
     enableSnow();
+    // document.getElementById("useAsGuest").addEventListener("click", function(){
+    //     setLocalUsage();
+    // });
 </script>
 </html>
 

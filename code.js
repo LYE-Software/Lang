@@ -53,6 +53,7 @@ var offline = false;
 var override = false;
 var LyeServerIp = "https://lye.software";
 var newarr = []
+var customusername = ""
 
 async function doPreviewAndLocal(){
     console.log("in dopreview")
@@ -377,7 +378,13 @@ async function getUsernameFromLye(){
     console.log("getting username from lye")
     customusername = await httpGet(tmpurl, true);
     console.log("customusername: "+customusername)
-    document.getElementById("homeusername").innerHTML = customusername;
+    if (customusername == "invalidsession"){
+        document.getElementById("homeusername").innerHTML = "Guest";
+    } else{
+        document.getElementById("homeusername").innerHTML = customusername;
+
+    }
+    
 }
 
 
@@ -2399,81 +2406,88 @@ function saveToCloud(){
         document.getElementById("sstitle").innerHTML = document.getElementById("sstitle").innerHTML.replace("/", "-");
     }
     
-    var downloadArray = ""
-    var childarray = []
-    var childrens = document.getElementById("insideCreator").children;
-    console.log(childrens);
-    for(var i=0; i<childrens.length; i++){
-        var childx = childrens[i];
-        // console.log(childx.id)
-        // if (childx.id.startsWith() == 'input'){
-        //     childarray.push(childx);
-        // }
-        console.log(childx);
-        console.log("hilarious right");
-        var underChildren = childx.children;
-        console.log(underChildren);
-        for (var n=0; n<2; n++){
-            childarray.push(underChildren[n])
+    if (customusername == "invalidsession"){
+        document.getElementById("sendingLoader").style.display="none";
+        document.getElementById("failedSignIn").style.display="";
+    }
+    else{
+        var downloadArray = ""
+        var childarray = []
+        var childrens = document.getElementById("insideCreator").children;
+        console.log(childrens);
+        for(var i=0; i<childrens.length; i++){
+            var childx = childrens[i];
+            // console.log(childx.id)
+            // if (childx.id.startsWith() == 'input'){
+            //     childarray.push(childx);
+            // }
+            console.log(childx);
+            console.log("hilarious right");
+            var underChildren = childx.children;
+            console.log(underChildren);
+            for (var n=0; n<2; n++){
+                childarray.push(underChildren[n])
+                
+            }
+    
+        }
+    
+        console.log(childarray);
+        for (var i=0; i<childarray.length; i+=2){
+            var child = childarray[i];
+            var child2 = childarray[i+1];
+            var childContents = child.innerText.trim()
+            var child2Contents = child2.innerText.trim()
             
+            childContents = childContents.replaceAll("&nbsp;", "")
+            child2Contents = child2Contents.replaceAll("&nbsp;", "")
+            childContents = childContents.replaceAll("<div><br></div>", "")
+            child2Contents = child2Contents.replaceAll("<div><br></div>", "")
+            child2Contents = child2Contents.replaceAll("\n", "_")
+            childContents = childContents.replaceAll("\n", "_")
+            child2Contents = child2Contents.replaceAll("\t", "   ")
+            childContents = childContents.replaceAll("\t", "   ")
+            if (child2Contents.includes("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823") || child2Contents.includes("&nbsp;")){
+                alert("One of the specified words is not avaliable for use due to the structure of the Lang Studysheet.")
+                window.location.reload();
+            }
+            value1 = '["'+childContents+'"';
+            value2 = '"'+child2Contents+'"]'+"\n";
+            toAdd = [value1, value2];
+            console.log(toAdd);
+            downloadArray = downloadArray + toAdd;
+            console.log(downloadArray);
         }
-
-    }
-
-    console.log(childarray);
-    for (var i=0; i<childarray.length; i+=2){
-        var child = childarray[i];
-        var child2 = childarray[i+1];
-        var childContents = child.innerText.trim()
-        var child2Contents = child2.innerText.trim()
-        
-        childContents = childContents.replaceAll("&nbsp;", "")
-        child2Contents = child2Contents.replaceAll("&nbsp;", "")
-        childContents = childContents.replaceAll("<div><br></div>", "")
-        child2Contents = child2Contents.replaceAll("<div><br></div>", "")
-        child2Contents = child2Contents.replaceAll("\n", "_")
-        childContents = childContents.replaceAll("\n", "_")
-        child2Contents = child2Contents.replaceAll("\t", "   ")
-        childContents = childContents.replaceAll("\t", "   ")
-        if (child2Contents.includes("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823") || child2Contents.includes("&nbsp;")){
-            alert("One of the specified words is not avaliable for use due to the structure of the Lang Studysheet.")
-            window.location.reload();
+        downloadArray = downloadArray.slice(0,-1);
+        downloadArrayString = downloadArray+"";
+        downloadArrayString = downloadArrayString.replaceAll("\n", "sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
+    
+        var filename = document.getElementById("sstitle").innerText;
+        console.log("FILE NAME+ "+filename)
+        if(window.localStorage.getItem('editSheet')=="true") {
+            var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/edit/"+filename;
+            window.localStorage.setItem('editSheet', "false");
+        } else {
+            var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/upload/"+filename;
         }
-        value1 = '["'+childContents+'"';
-        value2 = '"'+child2Contents+'"]'+"\n";
-        toAdd = [value1, value2];
-        console.log(toAdd);
-        downloadArray = downloadArray + toAdd;
-        console.log(downloadArray);
+    
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url);
+    
+        xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+    
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                console.log(xhr.status);
+                console.log(xhr.responseText);
+                // window.location.reload();
+            }
+        };
+        var data = downloadArrayString;
+        console.log("sending " + data + " to " + url);
+        xhr.send(data);
     }
-    downloadArray = downloadArray.slice(0,-1);
-    downloadArrayString = downloadArray+"";
-    downloadArrayString = downloadArrayString.replaceAll("\n", "sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
-
-    var filename = document.getElementById("sstitle").innerText;
-    console.log("FILE NAME+ "+filename)
-    if(window.localStorage.getItem('editSheet')=="true") {
-        var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/edit/"+filename;
-        window.localStorage.setItem('editSheet', "false");
-    } else {
-        var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/upload/"+filename;
-    }
-
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", url);
-
-    xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
-
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            console.log(xhr.status);
-            console.log(xhr.responseText);
-            window.location.reload();
-        }
-    };
-    var data = downloadArrayString;
-    console.log("sending " + data + " to " + url);
-    xhr.send(data);
+    
 }
 
 
