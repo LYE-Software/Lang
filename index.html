@@ -234,13 +234,6 @@
             width: 100%;
         }
 
-        .verticalFlex {
-            display: flex;
-            flex-direction: column;
-            align-items: center !important;
-            justify-content: center !important;
-        }
-
         .studysheetOption {
             width: 30%;
             background-color: var(--primary-light);
@@ -389,19 +382,14 @@
         </div>
     </div>
 
-    <div id="failedSignIn" class="absolute" style="top:0; left:0; z-index:500; display: none; height: 100vh; width: 100vw; background-color: rgba(0, 0, 0, 0.5);">
-        <div class="horizontalFlex" style="align-items: center; justify-content: center; height: 100vh; width: 100vw; z-index:500;">
-            <div class="horizontalFlex centerText" style="z-index:500; border-radius: 15px; padding: 20px; align-items: center; justify-content: center; flex-direction: column; width: 30vw; height: 40vh; background-color: var(--primary-light);">
-                <img src="assets/logos/FullLangLogo.png" style="height:10vh;"> 
-                <br>
-                <div style="margin-top: 10px;"></div>
-                <div>We did not find an account saved on your computer.</div>
-                <div style="margin-top: 10px;"></div>
-                <div>Lang reccommends making an account, so you can save your studysheets online.</div>
-                <div class="button" style="width: 25%; color: var(--primary-light); margin-bottom: 0;" onclick="window.location.href='https://lye.software/signin/langstudy.tech-index.html'">Log In</div>
-                <div class="button" style="width: 25%; color: var(--primary-light);" onclick="window.location.href='https://lye.software/signup?forward=langstudy.tech-index.html'">Sign Up</div>
-                <div style="font-size: 10px; text-decoration: underline;">By signing up for an account, you agree to the Lang Terms of Service, which can be found <a href='langlegal.html' style="color:#001945;">here</a></div>
-            </div>
+    <div id="failedSignIn" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: var(--primary-light);">
+            <img src="assets/logos/FullLangLogo.png" style="height:10vh; margin: 10px;"> 
+            <div style="margin-top: 10px;">We did not find an account saved on your computer.</div>
+            <div style="margin-top: 10px;">Lang reccommends making an account, so you can save your studysheets online.</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0;" onclick="window.location.href='https://lye.software/signin/langstudy.tech-index.html'">Log In</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="window.location.href='https://lye.software/signup?forward=langstudy.tech-index.html'">Sign Up</div>
+            <div style="font-size: 10px;">By signing up for an account, you agree to the Lang Terms of Service, which can be found <a href='langlegal.html' style="color: var(--primary-dark)">here</a></div>
         </div>
     </div>
 
@@ -409,8 +397,8 @@
         <img src="assets/icons/Lang Edit Icon.svg" style="z-index: 1000; position:absolute; right:0; bottom:0; height:10vh; cursor: pointer;"></img>
     </div>
 
-    <div id="nostudysheets" class="absolute" style="pointer-events: none; transition: all 0.25s ease-in-out; opacity: 0; top: 0; left: 0; bottom: 0; right: 0; background-color: rgba(0, 0, 0, 0.75); z-index: 100;">
-        <div class="verticalFlex" style="box-sizing: border-box; padding: 10px; z-index: 1001; position:absolute; right:130px; bottom:30px; height:10vh; width: 20vw; cursor: pointer; background-color: wheat; border-radius: 15px;">
+    <div id="nostudysheets" class="absolute fullAbsolute" style="pointer-events: none; transition: all 0.25s ease-in-out; opacity: 0; background-color: rgba(0, 0, 0, 0.75); z-index: 100;">
+        <div class="verticalFlex absolute" style="box-sizing: border-box; padding: 10px; z-index: 1001; right:130px; bottom:30px; height:10vh; width: 20vw; cursor: pointer; background-color: wheat; border-radius: 15px;">
             Click here to create your first studysheet! ->
         </div>
     </div>

@@ -11,18 +11,14 @@
 </head>
 <body onload="settingsRun()">
     
-    <div id="failedSignIn" class="absolute" style="display:none; z-index: 100; height: 100vh; width: 100vw; background-color: rgba(0, 0, 0, 0.5);">
-        <div class="horizontalFlex" style="align-items: center; justify-content: center; height: 100vh; width: 100vw;">
-            <div class="horizontalFlex centerText" style="border-radius: 15px; padding: 20px; align-items: center; justify-content: center; flex-direction: column; width: 25vw; height: 50vh; background-color: var(--primary-light);">
-                <img src="goodsizelye.png" style="height:10vh;">
-                <div style="margin-top: 30px;"></div>
-                <div style="margin-top: 30px;"></div>
-                <div>We did not find a Lye account associated with this computer.</div>
-                <div style="margin-top: 30px;"></div>
-                <div class="button" style="color: var(--primary-light);" onclick="window.location.href='https://lye.software/signin/langstudy.tech-index.html'">Log In</div>
-                <div class="button" style="color: var(--primary-light);" onclick="window.location.href='https://lye.software/signup'">Sign Up</div>
-                <div id="useAsGuest" style="font-size: 15px; text-decoration: underline;">Later</div>
-            </div>
+    <div id="failedSignIn" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: var(--primary-light);">
+            <img src="assets/logos/FullLangLogo.png" style="height:10vh; margin: 10px;"> 
+            <div style="margin-top: 10px;">We did not find an account saved on your computer.</div>
+            <div style="margin-top: 10px;">Lang reccommends making an account, so you can save your studysheets online.</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0;" onclick="window.location.href='https://lye.software/signin/langstudy.tech-index.html'">Log In</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="window.location.href='https://lye.software/signup?forward=langstudy.tech-index.html'">Sign Up</div>
+            <div style="font-size: 10px;">By signing up for an account, you agree to the Lang Terms of Service, which can be found <a href='langlegal.html' style="color: var(--primary-dark)">here</a></div>
         </div>
     </div>
     

@@ -103,6 +103,16 @@ async function doPreviewAndLocal(){
 
 }
 
+function hideElement(element) {
+    element.style.pointerEvents = "none";
+    element.style.opacity = "0";
+}
+
+function showElement(element) {
+    element.style.pointerEvents = "auto";
+    element.style.opacity = "1";
+}
+
 
 
 function fakeload(){
@@ -330,7 +340,8 @@ function hideLoadingView() {
 }
 
 function failedSignIn() {
-    document.getElementById("failedSignIn").style.display = "flex";
+    // document.getElementById("failedSignIn").style.display = "flex";
+    showElement(document.getElementById("failedSignIn"))
     console.log("failedsignin")
 }
 

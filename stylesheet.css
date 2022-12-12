@@ -60,10 +60,24 @@
     position: absolute;
 }
 
+.fullAbsolute {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
 .horizontalFlex {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+}
+
+.verticalFlex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
@@ -80,6 +94,12 @@
     -webkit-box-shadow:0px 0px 50px 0px var(--primary-light);
     -moz-box-shadow: 0px 0px 50px 0px var(--primary-light);
     box-shadow: 0px 0px 50px 0px var(--primary-light);
+}
+
+.darkGlow {
+    -webkit-box-shadow:0px 0px 50px 0px var(--primary-dark);
+    -moz-box-shadow: 0px 0px 50px 0px var(--primary-dark);
+    box-shadow: 0px 0px 50px 0px var(--primary-dark);
 }
 
 body {
@@ -185,4 +205,28 @@ input {
         transform: scale(0.8);
         rotate: 360deg;
     } 
+}
+
+.buttonHover {
+    transition: all 0.25s ease-in-out;
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+    border: 3px solid var(--primary-light);
+}
+
+.buttonHover:hover {
+    background-color: var(--primary-dark);
+    color: var(--primary-light);
+}
+
+.buttonHoverDark {
+    transition: all 0.25s ease-in-out;
+    background-color: var(--primary-dark);
+    color: var(--primary-light);
+    border: 3px solid var(--primary-dark);
+}
+
+.buttonHoverDark:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
 }
