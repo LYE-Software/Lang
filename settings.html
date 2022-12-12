@@ -13,25 +13,20 @@
     
     <div id="failedSignIn" class="absolute" style="display:none; z-index: 100; height: 100vh; width: 100vw; background-color: rgba(0, 0, 0, 0.5);">
         <div class="horizontalFlex" style="align-items: center; justify-content: center; height: 100vh; width: 100vw;">
-            <div class="horizontalFlex centerText" style="border-radius: 15px; padding: 20px; align-items: center; justify-content: center; flex-direction: column; width: 25vw; height: 50vh; background-color: wheat;">
+            <div class="horizontalFlex centerText" style="border-radius: 15px; padding: 20px; align-items: center; justify-content: center; flex-direction: column; width: 25vw; height: 50vh; background-color: var(--primary-light);">
                 <img src="goodsizelye.png" style="height:10vh;">
                 <div style="margin-top: 30px;"></div>
                 <div style="margin-top: 30px;"></div>
                 <div>We did not find a Lye account associated with this computer.</div>
                 <div style="margin-top: 30px;"></div>
-                <div class="button" style="color: wheat;" onclick="window.location.href='https://lye.software/signin/langstudy.tech-index.html'">Log In</div>
-                <div class="button" style="color: wheat;" onclick="window.location.href='https://lye.software/signup'">Sign Up</div>
+                <div class="button" style="color: var(--primary-light);" onclick="window.location.href='https://lye.software/signin/langstudy.tech-index.html'">Log In</div>
+                <div class="button" style="color: var(--primary-light);" onclick="window.location.href='https://lye.software/signup'">Sign Up</div>
                 <div id="useAsGuest" style="font-size: 15px; text-decoration: underline;">Later</div>
             </div>
         </div>
     </div>
-    <div class="absolute">
-        
-        <div style="height: 10vh;"></div>
-        
-    </div>
     
-    <div id="header0" class="headerContainer" style="width: 100vw">
+    <div id="header0" class="lightGlow headerContainer" style="width: 100vw">
         <div class="horizontalFlex header">
             <div onclick="returnMain()" style="cursor:pointer;">
                 <img style="height: 10vh;" src="assets/logos/lang.png">
@@ -39,86 +34,39 @@
             <div class="flexSpacer"></div>
             <div style="font-family: 'Rubik Mono One', sans-serif; font-size:2vw;">Settings</div>
             <div class="flexSpacer"></div>
-            
-            
         </div>
     </div>
-    <div style="background: linear-gradient(180deg, #001945 35.94%, #000011 100%); width:100%">
-        
-        <div class="horizontalFlex" style="background-color:#001945; width:100%; height:100%;">
-            <!-- <div style="background-color:wheat; width:20vw; height:60vh; margin:20px; border:5px  solid rgb(47, 61, 115); border-radius:15px; padding:20px;">
-                <h1 style="font-family: 'Poppins', sans-serif; font-size:1.1vw;">Graphics & User Interface Settings</h1>
-                <label class="switch"> 
-                    <input id = "ankcheck" type="checkbox" onclick="anklebowlMode()">
-                    <span class="slider round"></span>
-                    <p class="slidertext">anklebowl mode</p>
-                </label>
-                <br>  
-                <br>
-                <label class="switch"> 
-                    <input id = "amongcheck" type="checkbox" onclick="amongusmode()">
-                    <span class="slider round"></span>
-                    <p class="slidertext">AMONG US MODE</p>
-                </label>
-                <br>
-                <br>
-                <label class="switch"> 
-                    <input id = "customcolors" type="checkbox" onclick="doCustomColors()">
-                    <span class="slider round"></span>
-                    <p class="slidertext">Use custom colors</p>
-                </label>
-                <h4 class="header" id="colorinst" style="display:none;">Choose color pallate</h4>
-                <label class="header"for="colorpicker" id="colorpickertext" style="display:none;">Color Picker- main color:</label>
-                <input type="color" id="colorpicker" style="display:none;" value="#001945">
-                <br>
-                <br>
-                <label class="header"for="colorpicker2" id="colorpickertext2" style="display:none;">Color Picker- accent color:</label>
-                <input type="color" id="colorpicker2" style="display:none;" value="#3e8e41">
-                <br>
-                <br>
-                <label class="header"for="colorpicker2" id="colorpickertext3" style="display:none;">Color Picker- background color:</label>
-                <input type="color" id="colorpicker3" style="display:none;" value="#f5deb3">
-                <br>
-                <br>
-                <button class="smallbutton" style="display:none;" id="confirmbutton" onclick="confirmColor()"></button>
-                <br>
-                <br>
-                <button class="smallbutton" style="display:none;" id="resettonormal" onclick="resetColors()"></button> -->
-            <!-- </div> -->
-            <div class="flexSpacer"></div>
-            <div style="background-color:wheat; width:20vw; height:60vh; margin:20px; border:5px  solid rgb(47, 61, 115); border-radius:15px; padding:20px;">
+    <div>
+        <div class="horizontalFlex" style="background: linear-gradient(180deg, #001945 35.94%, #000011 100%); width:100%; width:100%; height:100%; justify-content: space-evenly;">
+            <div class="lightGlow" style="display: flex; flex-direction: column; background-color:var(--primary-light); width:20vw; height:60vh; margin:20px; border-radius:15px; padding:20px;">
                 <h1 style="font-family: 'Poppins', sans-serif; font-size:1.1vw;">Study Settings</h1>
 
-                <label class="switch"> 
-                    <input id = "randomchoice" type="checkbox" onclick="makeRandom()">
-                    <span class="slider round"></span>
-                    <button style="background-color:#001945;color:wheat; margin-left:150%; "onclick="alert('This changes how the questions are chosen- by default, it is read down the list with no chance of repeating. This changes it to random, which switches the order but allows repeats.')">?</button>
-    
-                    <div class="samelineheader">
-                        <p class="slidertext">Turn on Random Selection</p>
-             
-                    </div>
-                    <div style="width:10vw; margin-bottom:20px; margin-top:35vh;">
-                        <p>Lang Version 4.0.0. <br><a href="updates.html">Learn More</a></p>
+                <div class="horizontalFlex">
+                    <label class="switch" style="display: inline-block"> 
+                        <input id = "randomchoice" type="checkbox" onclick="makeRandom()">
+                        <span class="slider round"></span>
+                    </label>
+                    <p style="display: inline-block; width: 50%;" class="">Turn on Random Selection</p>
+                    <button style="display: inline-block; background-color:#001945;color:var(--primary-light);"onclick="alert('This changes how the questions are chosen- by default, it is read down the list with no chance of repeating. This changes it to random, which switches the order but allows repeats.')">?</button>
+                </div>
 
-                    </div>
-
-                </label>
+                <div class="flexSpacer"></div>
+                <div style="width:10vw; margin-bottom:10px;">
+                    <p>Lang Version 4.0.0. <br><a href="updates.html">Learn More</a></p>
+                </div>
             </div>
-            <div class="flexSpacer"></div>
-            <div style="background-color:wheat; width:20vw; height:60vh; margin:20px; border:5px  solid rgb(47, 61, 115); border-radius:15px; padding:20px; display:flex; text-align:center; align-items: center; flex-direction:column;">
-                <h1 style="font-family: 'Poppins', sans-serif; font-size:1.1vw;">Account Settings</h1>
+            <div class="lightGlow" style="background-color:var(--primary-light); width:20vw; height:60vh; margin:20px; border-radius:15px; padding:20px; display:flex; text-align:left; align-items: center; flex-direction:column;">
+                <!-- <h1 style="font-family: 'Poppins', sans-serif; font-size:1.1vw;">Account Settings</h1> -->
                    
-                <img src="goodsizelye.png" style="height:6vw; width:12vw; ">         
-                <p class="welcometext">Manage Your Lye Account Here</p>
-                
+                <!-- <img src="goodsizelye.png" style="height:6vw; width:12vw; ">          -->
+                <!-- <p class="welcometext">Manage Your Lye Account Here</p> -->
+                <h1 style="font-family: 'Poppins', sans-serif; font-size:1.1vw;">Account Settings</h1>
+                <div class="flexSpacer"></div>
                 <button class="newbutton" style="font-size:1vw;" onclick="window.open('https://lye.software/manageuser', '_blank')">Manage Account</button>
-    
-                
                 <button class="newbutton" style="margin:25px;" onclick="window.location.href='https://lye.software/signin/langstudy.tech-index.html'">Log In</button>            
                 <button class="newbutton" onclick="signout()">Sign Out</button>
+                <div class="flexSpacer"></div>
             </div>
-            <div class="flexSpacer"></div>
         </div>
     </div>
     
