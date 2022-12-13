@@ -155,13 +155,7 @@
             </div>
         </div>
     </div>
-    <div style="display: flex; right:0; margin-top: 20px; margin-left: 20px;">
-        <label class="switch" style="display: inline-block; align-items: center; text-align: center; justify-content: center;"> 
-            <input id = "swapper" type="checkbox" onclick="changeTermDef()">
-            <span class="slider round"></span>
-        </label>
-        <p style="display: inline-block; width: 50%; margin-left:20px; color:wheat;" class="">Swap terms and definitons</p>
-    </div>
+    
     <div class="horizontalFlex" style="justify-content: center; width: 100vw; height: 90vh;">
         <div id="langCreatorContainer" class="langCreatorContainer innerLightGlow" style="">
             <div class="termDefContainer">
@@ -176,21 +170,37 @@
                 Add New
             </div>
         </div>
-
-        <div class="lightGlow" style="background-color: var(--primary-light); height: 100px; width: 100px; border-radius: 25px;">
-            <!-- <div class="creatorIcon" onclick="downloadVerbs('s')">
-                <img src="save.svg" style="height:50px; color:var(--primary-dark);">
-                <div class="tooltipText">
-                    Export
+        <div style="display:flex; flex-direction: column;">
+            <div class="lightGlow" style="background-color: var(--primary-light); height: 100px; width: 100px; border-radius: 25px;">
+                <!-- <div class="creatorIcon" onclick="downloadVerbs('s')">
+                    <img src="save.svg" style="height:50px; color:var(--primary-dark);">
+                    <div class="tooltipText">
+                        Export
+                    </div>
+                </div> -->
+                
+                <div class="creatorIcon" onclick="saveToCloud()">
+                    <img src="assets/icons/langsave.svg" style="height:75px;">
+                    <div class="tooltipText">
+                        Save
+                    </div>
                 </div>
-            </div> -->
-            <div class="creatorIcon" onclick="saveToCloud()">
-                <img src="assets/icons/langsave.svg" style="height:75px;">
-                <div class="tooltipText">
-                    Save
+                <div style="display: flex; ">
+                    <div class="creatorIcon">
+                        <label class="switch" style="display: inline-block; align-items: center; text-align: center; justify-content: center;"> 
+                            <input id = "swapper" type="checkbox" onclick="changeTermDef()">
+                            <label for="swapper"><img src="assets/icons/swap.svg" style="height:5vh;"></label>
+                        </label>
+                        <div class="tooltipText" style="height:100%; width:140%;">
+                            Swap Terms and Definitions
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
+            
         </div>
+        
     </div>
 </body>
 <style>
@@ -199,6 +209,8 @@
         opacity: 1;
         background-color: var(--primary-light);
     }
+
+    
 
     .tooltipText {
         transition: all 0.2s ease-in-out;
