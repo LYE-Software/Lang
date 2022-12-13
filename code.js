@@ -2412,7 +2412,8 @@ function makeInputs(version){
 }
 
 function saveToCloud(){
-    document.getElementById("sendingLoader").style.display="";
+    // document.getElementById("sendingLoader").style.display="";
+    showElement(document.getElementById("sendingLoader"));
     if(document.getElementById("sstitle").innerHTML == ""){
         document.getElementById("sstitle").innerHTML = "Lang Custom Studysheet";
     } else if (document.getElementById("sstitle").innerHTML.includes("/")){
@@ -2420,7 +2421,8 @@ function saveToCloud(){
     }
     
     if (customusername == "invalidsession"){
-        document.getElementById("sendingLoader").style.display="none";
+        // document.getElementById("sendingLoader").style.display="none";
+        hideElement(document.getElementById("sendingLoader"));
         document.getElementById("failedSignIn").style.display="";
     }
     else{

@@ -124,12 +124,18 @@
         </div>
     </div>
 
-    <div style="display:none; height:100vh; width:100vw; z-index: 100; position:absolute; background-color: rgba(0,0,0,0.75);" id="sendingLoader">
+    <div id="sendingLoader" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: var(--primary-light);">
+            <p style="color:var(--primary-dark);">Syncing your Studysheet with our servers...</p>
+        </div>
+    </div>
+
+    <!-- <div style="display:none; height:100vh; width:100vw; z-index: 100; position:absolute; background-color: rgba(0,0,0,0.75);" id="sendingLoader">
         <div style="position:absolute; background-color: var(--primary-dark); top:50%; left:50%; text-align: center; display:flex; flex-direction: column; align-items: center; transform: translate(-50%, -50%); border-radius:15px; padding:20px; box-sizing: border-box; text-align: center;">
             <div class="lds-ellipsis" style="color:var(--primary-dark); " id="studyloader" ><div></div><div></div><div></div><div></div></div>
             <p style="color:var(--primary-light);">Syncing your Studysheet with our servers...</p>
         </div>
-    </div>
+    </div> -->
 
 
 
@@ -172,7 +178,7 @@
                 </div>
             </div> -->
             <div class="creatorIcon" onclick="saveToCloud()">
-                <img src="assets/icons/langsave.svg" style="height:75px;"">
+                <img src="assets/icons/langsave.svg" style="height:75px;">
                 <div class="tooltipText">
                     Save
                 </div>
