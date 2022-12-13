@@ -137,6 +137,7 @@
         </div>
     </div> -->
 
+    
 
 
 
@@ -154,7 +155,13 @@
             </div>
         </div>
     </div>
-
+    <div style="display: flex; right:0; margin-top: 20px; margin-left: 20px;">
+        <label class="switch" style="display: inline-block; align-items: center; text-align: center; justify-content: center;"> 
+            <input id = "swapper" type="checkbox" onclick="changeTermDef()">
+            <span class="slider round"></span>
+        </label>
+        <p style="display: inline-block; width: 50%; margin-left:20px; color:wheat;" class="">Swap terms and definitons</p>
+    </div>
     <div class="horizontalFlex" style="justify-content: center; width: 100vw; height: 90vh;">
         <div id="langCreatorContainer" class="langCreatorContainer innerLightGlow" style="">
             <div class="termDefContainer">
@@ -226,41 +233,43 @@
         document.getElementById("insideCreator").children[document.getElementById("insideCreator").children.length - 1].children[0].focus()
     })
 
-    function swapTermDef() {
-        var insideCreator = document.getElementById("insideCreator")
-        var termDefs = insideCreator.children
-        var terms = []
-        var defs = []
+        
+    function changeTermDef(){
+        if (document.getElementById('swapper').checked == true){
+            var insideCreator = document.getElementById("insideCreator")
+            var termDefs = insideCreator.children
+            var terms = []
+            var defs = []
 
-        for (var i = 0; i < termDefs.length; i++) {
-            terms.push(termDefs[i].children[0].innerHTML)
-            defs.push(termDefs[i].children[1].innerHTML)
+            for (var i = 0; i < termDefs.length; i++) {
+                terms.push(termDefs[i].children[0].innerHTML)
+                defs.push(termDefs[i].children[1].innerHTML)
+            }
+
+            for (var i = 0; i < termDefs.length; i++) {
+                termDefs[i].children[0].innerHTML = defs[i]
+                termDefs[i].children[1].innerHTML = terms[i]
+            }
         }
+        // document.getElementById("useAsGuest").addEventListener("click", function(){
+        //     setLocalUsage();
+        // });
+        else{
+            var insideCreator = document.getElementById("insideCreator")
+            var termDefs = insideCreator.children
+            var terms = []
+            var defs = []
 
-        for (var i = 0; i < termDefs.length; i++) {
-            termDefs[i].children[0].innerHTML = defs[i]
-            termDefs[i].children[1].innerHTML = terms[i]
+            for (var i = 0; i < termDefs.length; i++) {
+                terms.push(termDefs[i].children[0].innerHTML)
+                defs.push(termDefs[i].children[1].innerHTML)
+            }
+
+            for (var i = 0; i < termDefs.length; i++) {
+                termDefs[i].children[0].innerHTML = defs[i]
+                termDefs[i].children[1].innerHTML = terms[i]
+            }   
         }
-    }
-    // document.getElementById("useAsGuest").addEventListener("click", function(){
-    //     setLocalUsage();
-    // });
-
-    function flipTermsDefinitions() {
-        var insideCreator = document.getElementById("insideCreator")
-        var termDefs = insideCreator.children
-        var terms = []
-        var defs = []
-
-        for (var i = 0; i < termDefs.length; i++) {
-            terms.push(termDefs[i].children[0].innerHTML)
-            defs.push(termDefs[i].children[1].innerHTML)
-        }
-
-        for (var i = 0; i < termDefs.length; i++) {
-            termDefs[i].children[0].innerHTML = defs[i]
-            termDefs[i].children[1].innerHTML = terms[i]
-        }   
     }
 </script>
 </html>
