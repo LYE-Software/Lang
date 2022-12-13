@@ -71,7 +71,7 @@
 </head>
 <body onload="onBtnPress('f')">
     <div id="header0" style="width: 100vw">
-        <div class="horizontalFlex header">
+        <div class="lightGlow horizontalFlex header">
             <div class="flexSpacer">
                 <img style="height: 8vh; margin-left:10px;" src="assets/logos/lang-wheat.png" onclick="window.location.href='index.html'">
             </div>
@@ -92,10 +92,10 @@
             <div id="cardContainer" class="absolute cardContainer"></div>
 
             <div class="horizontalFlex" style="margin-top: 450px; align-items: center; justify-content: center;">
-                <div onclick="moveFlashcardsRight()" class="button centerText" style="background-color: var(--primary-light); color: var(--primary-dark)">
+                <div onclick="moveFlashcardsRight()" class="lightGlow button centerText" style="background-color: var(--primary-light); color: var(--primary-dark)">
                     Previous
                 </div>
-                <div onclick="moveFlashcardsLeft()" class="button centerText" style="background-color: var(--primary-light); color: var(--primary-dark)">
+                <div onclick="moveFlashcardsLeft()" class="lightGlow button centerText" style="background-color: var(--primary-light); color: var(--primary-dark)">
                     Next
                 </div>
             </div>
@@ -120,7 +120,7 @@
             front = JSON.parse(front)
             if (i == 0) {
                 cardContainer.innerHTML += 
-                    `<div style="opacity: 01; position: relative;" onclick="clickCard()" class="card">
+                    `<div style="opacity: 01; position: relative;" onclick="clickCard()" class="card lightGlow">
                         <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
                             ${front[0]}
                         </div>
@@ -142,12 +142,8 @@
 
     function moveFlashcardsLeft() {
         if (focusedCard + 1 >= totalCardCount) {
-            cardContainer.children[focusedCard].style.opacity = 0.5;
-            cardContainer.children[focusedCard].classList.remove("clicked");
-
             cardContainer.style.left = -cardWidth / 2 + "px";
             focusedCard = 0;
-            cardContainer.children[focusedCard].style.opacity = 1;
             return;
         }
 
@@ -156,6 +152,8 @@
             cardContainer.children[focusedCard].classList.add("flipAnimation");
         }
         cardContainer.children[focusedCard].classList.remove("clicked");
+        cardContainer.children[focusedCard].classList.remove("lightGlow");
+        cardContainer.children[focusedCard].style.zIndex = 0;
 
         const oldValue = focusedCard;
         setTimeout(function() {
@@ -169,6 +167,8 @@
         cardContainer.style.left = parseInt(cardContainer.style.left) - cardWidth + "px";
 
         cardContainer.children[focusedCard].style.opacity = 1;
+        cardContainer.children[focusedCard].classList.add("lightGlow");
+        cardContainer.children[focusedCard].style.zIndex = 100;
     }
 
     function moveFlashcardsRight() {
@@ -180,6 +180,8 @@
             cardContainer.children[focusedCard].classList.add("flipAnimation");
         }
         cardContainer.children[focusedCard].classList.remove("clicked");
+        cardContainer.children[focusedCard].classList.remove("lightGlow");
+        cardContainer.children[focusedCard].style.zIndex = 10;
 
         const oldValue = focusedCard;
         setTimeout(function() {
@@ -194,7 +196,8 @@
         cardContainer.style.left = parseInt(cardContainer.style.left) + cardWidth + "px";
 
         cardContainer.children[focusedCard].style.opacity = 1;
-
+        cardContainer.children[focusedCard].classList.add("lightGlow");
+        cardContainer.children[focusedCard].style.zIndex = 100;
     }
 
     var locked = false;
