@@ -103,7 +103,7 @@
             color: var(--primary-dark);
             height: 6vh;
             padding: 0 10px 0 10px;
-
+            z-index:500;
             display: flex;
             align-items: center;
             white-space: nowrap;
@@ -112,6 +112,7 @@
         .functionRowItemContents div:hover {
             background-color: var(--primary-dark);
             color: var(--primary-light);
+            z-index:500;
         }
 
         .button {
@@ -286,7 +287,7 @@
         <div class="functionRow horizontalFlex" style="justify-content: start;">
             <div class="functionRowItem">
                 Create
-                <div class="functionRowItemContents">
+                <div class="functionRowItemContents" style="z-index:500;">
                     <div onclick="window.location.href='creator.html'">New...</div>
                     <div onclick="window.location.href='quizletconvert.html'">From Quizlet</div>
                     <div onclick="window.location.href='memriseconvert.html'">From Memrise</div>
@@ -294,14 +295,14 @@
             </div>
             <div class="functionRowItem">
                 Settings
-                <div class="functionRowItemContents">
+                <div class="functionRowItemContents" style="z-index:500;">
                     <div onclick="window.location.href='https://lye.software/manageuser'">Account Settings</div>
                     <div onclick="window.location.href='settings.html'">Lang Settings</div>
                 </div>
             </div>
             <div class="functionRowItem">
                 About
-                <div class="functionRowItemContents">
+                <div class="functionRowItemContents" style="z-index:500;">
                     <div onclick="window.location.href='about-new.html'">About Lang</div>
                     <div onclick="window.location.href='updates.html'">Updates</div>
                     <div onclick="window.location.href='langlegal.html'">Legal & Credits</div>
@@ -309,7 +310,7 @@
             </div>
             <div class="functionRowItem">
                 Help
-                <div class="functionRowItemContents">
+                <div class="functionRowItemContents" style="z-index:500;">
                     <div onclick="window.location.href='https://github.com/LYE-software/Lang/issues'">Send Feedback</div>
                 </div>
             </div>
