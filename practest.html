@@ -28,4 +28,19 @@
 
     
 </body>
+<script>
+    // on tab click, get the focused element and scroll to it
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+            var focused = document.activeElement;
+            var top = focused.offsetTop;
+            window.scroll({
+                top: top,
+                left: 0,
+                behavior: 'smooth'
+            });
+        }
+    });
+</script>
+
 </html>
