@@ -1937,8 +1937,12 @@ function getInput() {
 
 function checkCustom(v){
     usrInput = input.value.toLowerCase();
+    usrInput = usrInput.trim();
     document.getElementById("hintText").style.display = "none";
-    if (usrInput == customAnswer){
+    if (usrInput == ""){
+        document.getElementById("hintText").style.display = "none";
+    }
+    else if (usrInput == customAnswer){
         correctCounter += 1
         buttonStyling.style.backgroundColor = "#3e8e41"
         setTimeout(function () { buttonStyling.style.backgroundColor = "wheat" }, 1000)
