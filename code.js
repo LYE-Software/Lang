@@ -2469,6 +2469,7 @@ function saveToCloud(){
             if (child2Contents.includes("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823") || child2Contents.includes("&nbsp;")){
                 alert("One of the specified words is not avaliable for use due to the structure of the Lang Studysheet.")
                 window.location.reload();
+                
             }
             value1 = '["'+childContents+'"';
             value2 = '"'+child2Contents+'"]'+"\n";
@@ -2499,7 +2500,7 @@ function saveToCloud(){
             if (xhr.readyState === 4) {
                 console.log(xhr.status);
                 console.log(xhr.responseText);
-                window.location.reload();
+                window.location.href="index.html";
             }
         };
         var data = downloadArrayString;
