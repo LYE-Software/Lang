@@ -213,6 +213,11 @@
             button.addEventListener("click", function() {
                 get_studysheet()
             })
+            document.addEventListener("keydown", function(e) {
+                if (e.key == "Enter") {
+                    get_studysheet()
+                }
+            })
         }, 500);
     }
 
