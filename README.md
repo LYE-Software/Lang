@@ -1,6 +1,7 @@
 # https://langstudy.tech
 
-<img src="https://github.com/nwvbug/nwvbug-logos/blob/main/lye%20logo/lyeiconwbg.png" width="300" height="300"> <img src="https://github.com/nwvbug/nwvbug-logos/blob/main/Lang%20Logos/RedesLangwBg.png" width="300" height="300">
+<img src="https://github.com/nwvbug/nwvbug-logos/blob/main/lye%20logo/lyelogo.png?raw=true" height="200px" width="auto">
+ <img src="https://github.com/nwvbug/nwvbug-logos/blob/main/Lang%20Logos/RedesLangwBg.png" width="300" height="300">
 
 # Welcome to the GitHub repository for Lye Software's Lang!
 
