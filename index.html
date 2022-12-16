@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Lang Study is a customizable studying program from Lye Software that prioritizes your privacy and is completely free.">
-    <meta name="keywords" content="Lang, Study, Lang Study, language, quizlet, memrise, flashcard, flashcards, quiz, test">
+    <meta name="keywords" content="Lang, Study, Lang Study, langstudy, langstudy tech, lang study tech, langstudy.tech, lang, language, lye software, Lye Software, quizlet, memrise, flashcard, flashcards, quiz, test, convert from quizlet, export from quizlet">
     <meta name="author" content="Lye Software">
     <link rel="icon" href="assets/logos/lang-wheat.png">
     <title>Lang</title>
@@ -277,10 +277,11 @@
     </style>
 </head>
 <body onload="getLibraryList()">
+    <h1 style="display:none;">Welcome to Lang Study! Lang Study is a customizable studying program from Lye Software that prioritizes your privacy and is completely free.</h1>
     <div class="content">
         <div id="header" class="header horizontalFlex">
             <div style="cursor:pointer;">
-                <img style="height: 10vh;" src="assets/logos/FullLangLogo.png">
+                <img style="height: 10vh;" src="assets/logos/FullLangLogo.png" alt='Lang Logo'>
             </div>
             <div id="homeusername" class="button verticalFlex" style="cursor: pointer" onclick="window.location.href='settings.html'">Loading your name...</div>
         </div>
@@ -327,7 +328,7 @@
             <div id="contentContainer" style="position: relative; display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
                 <div id="loadingscreen" class="verticalFlex" style="transition: all 0.25s ease-in-out; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--primary-dark); z-index: 250; border: 1px solid var(--primary-light)">
                     <div>
-                        <img class="animatedLoader" src="assets/logos/lang-wheat.png" alt="Logo">
+                        <img class="animatedLoader" src="assets/logos/lang-wheat.png" alt="Loading">
                     </div>
                 </div>
                 <div id="studysheetGridContainer" class="studysheetGridContainer">
@@ -385,7 +386,7 @@
 
     <div id="failedSignIn" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
         <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: var(--primary-light);">
-            <img src="assets/logos/FullLangLogo.png" style="height:10vh; margin: 10px;"> 
+            <img src="assets/logos/FullLangLogo.png" style="height:10vh; margin: 10px;" alt='Lang Logo'> 
             <div style="margin-top: 10px;">We did not find an account saved on your computer.</div>
             <div style="margin-top: 10px;">Lang reccommends making an account, so you can save your studysheets online.</div>
             <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0;" onclick="window.location.href='https://lye.software/signin?forward=langstudy.tech-index.html'">Log In</div>
@@ -395,7 +396,7 @@
     </div>
 
     <div class="createStudysheetOverlay absolute" onclick="window.location.href='creator.html'">
-        <img src="assets/icons/Lang Edit Icon.svg" style="z-index: 1000; position:absolute; right:0; bottom:0; height:10vh; cursor: pointer;"></img>
+        <img src="assets/icons/Lang Edit Icon.svg" style="z-index: 1000; position:absolute; right:0; bottom:0; height:10vh; cursor: pointer;" alt='Edit'></img>
     </div>
 
     <div id="nostudysheets" class="absolute fullAbsolute" style="pointer-events: none; transition: all 0.25s ease-in-out; opacity: 0; background-color: rgba(0, 0, 0, 0.75); z-index: 100;">
