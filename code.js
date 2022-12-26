@@ -428,23 +428,30 @@ async function getLibraryList(){
         console.log(sessionid);
         serverData = await httpGet("https://backend.langstudy.tech/"+sessionid+"/returnNameAndList", false);
         console.log("[TOTAL SERVER DATA] "+serverData)
-        if (serverData == "Failed"){
-            failedSignIn();
-        }
         var arrayOfData = serverData.split("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
         username = arrayOfData[0];
         library = arrayOfData[1];
         console.log(username);
-        if(username == "invalidsession"){
+        if (serverData == "Failed"){
             failedSignIn();
         }
-        if(library == "[]"){
+        else if (serverData == null){
+            failedServerConnectionOnStart();
+        }
+        else if (serverData == ""){
+            failedServerConnectionOnStart();
+        }
+        
+        else if(username == "invalidsession"){
+            failedSignIn();
+        }
+        else if(library == "[]"){
             console.log("1")
              // document.getElementById("yourstudysheets").innerHTML = "Start by uploading a studysheet!";
-        } if (library == ""){
+        } else if (library == ""){
             noStudySheets()
             console.log("2")
-        } if (library == null){
+        } else if (library == null){
             failedSignIn() //commit please
             console.log("lib = null")
             console.log("3")
@@ -567,6 +574,10 @@ async function getLibraryList(){
     }
 }
 
+function failedServerConnectionOnStart(){
+    showElement(document.getElementById("failedServerConnection"))
+    console.log("failed server connection")
+}
 
 function goToSSPage(){
     index = document.getElementsByClassName("selected")[0].id;
@@ -891,11 +902,12 @@ function makeRandom(){
 function doMultipleChoice(){
     try {
         document.getElementById("file").style.display="none";
-
+        
     } catch (error) {
         
     }
     document.getElementById("multchoice").style.display="";
+    document.getElementById("myBtnBegin").style.display = "none";
     question = getRandomQuestion(customWords);
     document.getElementById("questionheader").innerHTML = question[0];
     let random_number = Math.floor(Math.random() *4);
@@ -911,6 +923,14 @@ function doMultipleChoice(){
         }
         keepchecking = false;
         recursioncheck++;
+    }
+    for (i=0; i<fakeout.length; i++){
+        for (j=0; j<fakeout.length; j++){
+            if (fakeout[i] == fakeout[j] && i!=j){
+                fakeout = getOtherAnswers(customWords)
+                i=0;
+            }
+        }
     }
     if (random_number == 0){
         let element = document.getElementById("a")
@@ -1027,7 +1047,7 @@ async function checkMulti(checkAgainst){
     if (checkAgainst =="correct"){
         document.getElementById("correct").style.backgroundColor = "#3e8e41";
         await sleep(1000);
-        document.getElementById("correct").style.backgroundColor = "#001945";
+        document.getElementById("correct").style.backgroundColor = "wheat";
         document.getElementById("correct").id = whichId;
         whichId = ""
         
@@ -1036,8 +1056,8 @@ async function checkMulti(checkAgainst){
         document.getElementById("correct").style.backgroundColor = "#3e8e41";
         document.getElementById(checkAgainst).style.backgroundColor = "red";
         await sleep(1000);
-        document.getElementById("correct").style.backgroundColor = "#001945";
-        document.getElementById(checkAgainst).style.backgroundColor = "#001945";
+        document.getElementById("correct").style.backgroundColor = "wheat";
+        document.getElementById(checkAgainst).style.backgroundColor = "wheat";
 
         document.getElementById("correct").id = whichId;
         whichId = ""
