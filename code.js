@@ -54,6 +54,7 @@ var override = false;
 var LyeServerIp = "https://lye.software";
 var newarr = []
 var customusername = ""
+var train = false;
 
 async function doPreviewAndLocal(){
     console.log("in dopreview")
@@ -1050,6 +1051,12 @@ async function checkMulti(checkAgainst){
         document.getElementById("correct").style.backgroundColor = "wheat";
         document.getElementById("correct").id = whichId;
         whichId = ""
+        try{
+            dict[t] = dict[t] + 1;
+            t++;
+        } catch(error){
+
+        }
         
     }
     else{
@@ -1058,11 +1065,16 @@ async function checkMulti(checkAgainst){
         await sleep(1000);
         document.getElementById("correct").style.backgroundColor = "wheat";
         document.getElementById(checkAgainst).style.backgroundColor = "wheat";
-
+        
         document.getElementById("correct").id = whichId;
         whichId = ""
     }
-    doMultipleChoice()
+    if (train == false){
+        doMultipleChoice()
+    } else {
+        gameLoop()
+    }
+    
 }
 
 
@@ -1266,7 +1278,7 @@ function onBtnPress(v) {
     
     if (window.localStorage.getItem("fullstudysheet")!="" && window.localStorage.getItem("fullstudysheet")!=null){
         customWords = window.localStorage.getItem("fullstudysheet")
-        document.title = window.localStorage.getItem("chosenSheet") + " - Lang"
+        document.title = window.localStorage.getItem("chosenSheet") + " | Lang"
         // window.localStorage.setItem("fullstudysheet", "");
         // window.localStorage.setItem("chosenSheet", "");
         console.log( customWords )
@@ -1290,6 +1302,8 @@ function onBtnPress(v) {
             
             
             doMultipleChoice()
+        } else if( v=="t"){
+            doTrain();
         }
         else{
             var wage = document.getElementById("input");
@@ -1320,7 +1334,7 @@ function onBtnPress(v) {
         var file = document.getElementById('file').files[0];
         var reader = new FileReader();
         reader.onload = function(e) {
-            document.title = "Lang - Studying Local File"
+            document.title = "Lang | Studying Local File"
             var text = reader.result;
             
             customWords = text;
@@ -1347,6 +1361,8 @@ function onBtnPress(v) {
                 
                 
                 doMultipleChoice()
+            }else if( v=="t"){
+                doTrain();
             }
             else{
                 var wage = document.getElementById("input");
@@ -1429,6 +1445,299 @@ function doFlashcards(){
 
     
 }
+
+var group = [];
+var groups = [];
+var dict = {
+    0:5,
+    1:5,
+    2:5,
+    3:5,
+    4:5
+
+};
+var dictVal = 0;
+function doTrain(){
+    train = true;
+    //train is supposed to do the following:
+    //Group studysheet into groups of 5 words
+    //go through the following with each group
+    //Display the term and answer of each word
+    //Do multiple choice for each word (2x each)
+    //do write for each word (2x each)
+    //move to next group
+    //allow 1 in 6 chance of a word being repeated to check for review
+    document.getElementById("informationAbt").style.display = "none";
+    document.getElementById("myBtnBegin").style.display = "none";
+    try {
+        document.getElementById("file").style.display = "none";
+
+    } catch (error) {
+        
+    }
+    console.log(customWords)
+    let arrayText = customWords.split('\n')
+    let groups = []
+    for (i = 0; i<arrayText.length; i+=5){
+        const group = arrayText.slice(i, i+5);
+        groups.push(group);
+    }
+    console.log(groups)
+    
+    for (i = 0; i<groups.length; i++){
+        group = groups[i];
+        console.log(group)
+        for (j = 0; j<group.length; j++){
+            dict[j] = 0;
+        }
+        // index in group should co relate to index in dict
+        
+    }
+    group = groups[0]
+    gameLoop()
+    
+     
+
+
+    
+
+}
+
+var t = 0
+function gameLoop(){
+    // potential issue with the going down
+    // still needs to go on to next group
+    document.getElementById("TermAndDef").style.display = "none";
+    document.getElementById("multchoice").style.display="none";
+    console.log("game loop")
+    console.log(JSON.stringify(dict))
+    question = group[t];
+    questionArray = JSON.parse(question)
+    console.log(questionArray)
+    term = questionArray[0];
+    definition = questionArray[1];
+    mode = dict[t]
+    if (mode == 0){
+        readTermDef(term, definition)
+        document.getElementById("wherearewe").innerHTML = "Learning for the first time"
+        dict[t] = dict[t] + 1;
+        t++;
+    } else if (mode == 1){
+        doTrainMulti(term, definition)
+        document.getElementById("wherearewe").innerHTML = "multi 1"
+    } else if (mode == 2){
+        doTrainMulti(term, definition)
+        document.getElementById("wherearewe").innerHTML = "multi 2"
+    } else if (mode == 3){
+        doWriteTrain(term, definition)
+        document.getElementById("wherearewe").innerHTML = "Write 1"
+    } else if (mode == 4){
+        doWriteTrain(term, definition)
+        document.getElementById("wherearewe").innerHTML = "write 2"
+    } else if (mode == 5){
+        console.log("review")
+    }
+    
+    
+    
+    if (t == group.length){
+        t = 0;
+    }
+    
+
+}
+
+function readTermDef(term, def){
+    console.log("learning for the first time")
+    document.getElementById("TermAndDef").style.display = "";
+    document.getElementById("term").innerHTML = term;
+    document.getElementById("def").innerHTML = def;
+}
+
+
+
+function doWriteTrain(term, def){
+    var wage = document.getElementById("input");
+    wage.addEventListener("keydown", function (e) {
+        if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+            checkTrain()
+        }
+    });
+    wage.innerHTML = ""
+     
+    input = document.getElementById("input")
+    input.setAttribute("autocorrect", "off")
+    input.setAttribute("autocomplete", "off")
+    input.setAttribute("spellcheck", "off")
+    input.style.display = "flex";
+    buttonStyling = document.getElementById("goButton")
+    buttonStyling.style.display = "flex";
+    buttonStyling.innerHTML = ">" + "\n" + "Go!"
+    
+    
+    wordPair = [term, def];
+    console.log("WRD PAOR" +wordPair)
+    document.getElementById("displayWord").innerHTML = wordPair[0];
+    customAnswer = wordPair[1];
+    customAnswer = customAnswer.toLowerCase();
+
+     
+}
+    
+function checkTrain(){
+    usrInput = input.value.toLowerCase();
+    usrInput = usrInput.trim();
+    
+    if (usrInput == customAnswer){
+        dict[t] = dict[t] + 1;
+        t++;
+        buttonStyling.style.backgroundColor = "#3e8e41"
+        setTimeout(function () { buttonStyling.style.backgroundColor = "wheat" }, 1000)
+        gameLoop()
+        
+        
+    }
+    else{
+        buttonStyling.style.backgroundColor = "#ce1483"
+        document.getElementById("wherearewe").innerHTML = "Correct answer was: "+customAnswer
+        setTimeout(function () { buttonStyling.style.backgroundColor = "wheat" }, 1000)
+        gameLoop()
+    }
+}
+
+function doTrainMulti(term, def ){
+    document.getElementById("multchoice").style.display="";
+    
+    question = [term, def];
+    document.getElementById("questionheader").innerHTML = question[0];
+    let random_number = Math.floor(Math.random() *4);
+    fakeout = getOtherAnswers(customWords)
+    keepchecking = true;
+    recursioncheck = 0;
+    while (keepchecking == true && recursioncheck <=1000){
+        for (i=0; i<question.length; i++){
+            if (fakeout[i] == question[1]){
+                fakeout = getOtherAnswers(customWords)
+                i=0;
+            }
+        }
+        keepchecking = false;
+        recursioncheck++;
+    }
+    for (i=0; i<fakeout.length; i++){
+        for (j=0; j<fakeout.length; j++){
+            if (fakeout[i] == fakeout[j] && i!=j){
+                fakeout = getOtherAnswers(customWords)
+                i=0;
+            }
+        }
+    }
+    if (random_number == 0){
+        let element = document.getElementById("a")
+        element.id = "correct"
+        console.log("correct: "+element)
+        element.onclick = function(){
+            theid = this.id
+            checkMulti(theid)
+        }
+        element.innerHTML = question[1];
+
+        
+        document.getElementById("b").innerHTML = fakeout[0]
+        document.getElementById("b").onclick=function(){
+            checkMulti("b")
+        }
+        document.getElementById("c").onclick=function(){
+            checkMulti("c")
+        }
+        document.getElementById("d").onclick=function(){
+            checkMulti("d")
+        }
+        document.getElementById("c").innerHTML = fakeout[1]
+        document.getElementById("d").innerHTML = fakeout[2]
+        whichId = "a";
+    } 
+    else if (random_number == 1){
+        let element = document.getElementById("b")
+        element.id = "correct"
+        console.log("correct: "+element)
+        element.onclick = function(){
+            theid = this.id
+            checkMulti(theid)
+        }
+        element.innerHTML = question[1];
+
+        document.getElementById("a").innerHTML = fakeout[0]
+        document.getElementById("c").innerHTML = fakeout[1]
+        document.getElementById("d").innerHTML = fakeout[2]
+        document.getElementById("a").onclick=function(){
+            checkMulti("a")
+        }
+        document.getElementById("d").onclick=function(){
+            checkMulti("d")
+        }
+        document.getElementById("c").onclick=function(){
+            checkMulti("c")
+        }
+        whichId = "b";
+
+
+    } 
+    else if (random_number == 2){
+        let element = document.getElementById("c")
+        element.id = "correct"
+        console.log("correct: "+element)
+        element.onclick = function(){
+            theid = this.id
+            checkMulti(theid)
+        }
+
+        element.innerHTML = question[1];
+        document.getElementById("b").innerHTML = fakeout[0]
+        document.getElementById("a").innerHTML = fakeout[1]
+        document.getElementById("d").innerHTML = fakeout[2]
+        document.getElementById("b").onclick=function(){
+            checkMulti("b")
+        }
+        document.getElementById("a").onclick=function(){
+            checkMulti("a")
+        }
+        document.getElementById("d").onclick=function(){
+            checkMulti("d")
+        }
+        whichId = "c";
+
+
+    } 
+    else if (random_number == 3){
+        let element = document.getElementById("d")
+        element.id = "correct"
+        console.log("correct: "+element)
+        element.onclick = function(){
+            theid = this.id
+            checkMulti(theid)
+        }
+
+        element.innerHTML = question[1];
+        document.getElementById("b").innerHTML = fakeout[0]
+        document.getElementById("b").onclick=function(){
+            checkMulti("b")
+        }
+        document.getElementById("c").innerHTML = fakeout[1]
+        document.getElementById("c").onclick=function(){
+            checkMulti("c")
+        }
+        document.getElementById("a").innerHTML = fakeout[2]
+        document.getElementById("a").onclick=function(){
+            checkMulti("a")
+        }
+        whichId = "d";
+
+
+    } 
+}
+
+
 
 
 function toggleAudio(){
