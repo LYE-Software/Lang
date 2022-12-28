@@ -1561,21 +1561,16 @@ function gameLoop(){
         mode = dict[t]
         if (mode == 0){
             readTermDef(term, definition)
-            document.getElementById("wherearewe").innerHTML = "Learning for the first time"
             dict[t] = dict[t] + 1;
             t++;
         } else if (mode == 1){
             doTrainMulti(term, definition)
-            document.getElementById("wherearewe").innerHTML = "multi 1"
         } else if (mode == 2){
             doTrainMulti(term, definition)
-            document.getElementById("wherearewe").innerHTML = "multi 2"
         } else if (mode == 3){
             doWriteTrain(term, definition)
-            document.getElementById("wherearewe").innerHTML = "Write 1"
         } else if (mode == 4){
             doWriteTrain(term, definition)
-            document.getElementById("wherearewe").innerHTML = "write 2"
         } else if (mode == 5){
             console.log("review")
             t++
@@ -1648,9 +1643,9 @@ function checkTrain(){
         console.log("Answer determined to be incorrect")
         t++
         buttonStyling.style.backgroundColor = "#ce1483"
-        
+        document.getElementById("wherearewe").innerHTML = "Correct answer was: "+customAnswer
         setTimeout(function () { buttonStyling.style.backgroundColor = "wheat" }, 1000)
-        setTimeout(function () { document.getElementById("wherearewe").innerHTML = "Correct answer was: "+customAnswer }, 1000)
+        setTimeout(function () { document.getElementById("wherearewe").innerHTML = "" }, 1000)
         gameLoop()
     }
 }
