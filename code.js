@@ -925,14 +925,27 @@ function doMultipleChoice(){
         keepchecking = false;
         recursioncheck++;
     }
-    for (i=0; i<fakeout.length; i++){
-        for (j=0; j<fakeout.length; j++){
-            if (fakeout[i] == fakeout[j] && i!=j){
-                fakeout = getOtherAnswers(customWords)
-                i=0;
+    recursioncheck = 0;
+    checker = 0;
+    while (checker < 16 && recursioncheck < 3000){
+        checker = 0;
+        for (i=0; i<fakeout.length; i++){
+            for (j=0; j<fakeout.length; j++){
+                if (fakeout[i] == fakeout[j] && i!=j){
+                    fakeout = getOtherAnswers(customWords)
+                    i=0;
+                }
+                else if (fakeout[i] != fakeout[j]) {
+                    checker++;
+                }
+                if (fakeout[j] == question[1]){
+                    fakeout = getOtherAnswers(customWords)
+                    i=0;
+                }
             }
         }
-    }
+        recursioncheck++;
+    }    
     if (random_number == 0){
         let element = document.getElementById("a")
         element.id = "correct"
@@ -1052,8 +1065,9 @@ async function checkMulti(checkAgainst){
         document.getElementById("correct").id = whichId;
         whichId = ""
         try{
+            console.log("Advancing T "+t+"which would be "+group[t])
             dict[t] = dict[t] + 1;
-            t++;
+            
         } catch(error){
 
         }
@@ -1072,6 +1086,7 @@ async function checkMulti(checkAgainst){
     if (train == false){
         doMultipleChoice()
     } else {
+        t++;
         gameLoop()
     }
     
@@ -1457,6 +1472,7 @@ var dict = {
 
 };
 var dictVal = 0;
+var whichGroup = 0;
 function doTrain(){
     train = true;
     //train is supposed to do the following:
@@ -1484,16 +1500,14 @@ function doTrain(){
     }
     console.log(groups)
     
-    for (i = 0; i<groups.length; i++){
-        group = groups[i];
-        console.log(group)
-        for (j = 0; j<group.length; j++){
-            dict[j] = 0;
-        }
+    group = groups[whichGroup]
+
+    for (j = 0; j<group.length; j++){
+        dict[j] = 0;
+    }
         // index in group should co relate to index in dict
         
-    }
-    group = groups[0]
+    t = 0;
     gameLoop()
     
      
@@ -1505,46 +1519,76 @@ function doTrain(){
 
 var t = 0
 function gameLoop(){
-    // potential issue with the going down
-    // still needs to go on to next group
-    document.getElementById("TermAndDef").style.display = "none";
-    document.getElementById("multchoice").style.display="none";
-    console.log("game loop")
-    console.log(JSON.stringify(dict))
-    question = group[t];
-    questionArray = JSON.parse(question)
-    console.log(questionArray)
-    term = questionArray[0];
-    definition = questionArray[1];
-    mode = dict[t]
-    if (mode == 0){
-        readTermDef(term, definition)
-        document.getElementById("wherearewe").innerHTML = "Learning for the first time"
-        dict[t] = dict[t] + 1;
-        t++;
-    } else if (mode == 1){
-        doTrainMulti(term, definition)
-        document.getElementById("wherearewe").innerHTML = "multi 1"
-    } else if (mode == 2){
-        doTrainMulti(term, definition)
-        document.getElementById("wherearewe").innerHTML = "multi 2"
-    } else if (mode == 3){
-        doWriteTrain(term, definition)
-        document.getElementById("wherearewe").innerHTML = "Write 1"
-    } else if (mode == 4){
-        doWriteTrain(term, definition)
-        document.getElementById("wherearewe").innerHTML = "write 2"
-    } else if (mode == 5){
-        console.log("review")
-    }
-    
-    
-    
     if (t == group.length){
         t = 0;
     }
-    
 
+    if (dict[0] >= 5 && dict[1] >= 5 && dict[2] >=5 && dict[3] >= 5 && dict[4] >= 5){
+        console.log("ready to go to next group")
+        whichGroup++;
+        t = 0;
+        doTrain();
+    }
+    // potential issue with the going down
+    // still needs to go on to next group
+    console.log("Running game loop. T = "+t)
+    document.getElementById("TermAndDef").style.display = "none";
+    document.getElementById("multchoice").style.display="none";
+    console.log("game loop")
+    reviewValue = -1;
+    if (whichGroup > 0){
+        reviewValue = Math.floor(Math.random() * 7)
+    }
+    //REMOVE NEXT LINE BEFORE TESTING!! THIS IS WHEN REVIEW WAS NOT READY
+    reviewValue = 0
+    if (reviewValue == 4){
+        // group = groups[whichGroup - 1]
+        // reviewValue = Math.floor(Math.random() * group.length)
+        // questionArray = JSON.parse(group[reviewValue])
+        // term = questionArray[0]
+        // definition = questionArray[1]
+        // doWriteTrain(term, definition)
+        // group = groups[whichGroup]
+    }
+    else {
+        console.log(JSON.stringify(dict))
+        question = group[t];
+        console.log("The question is "+question+" and T is "+t)
+        questionArray = JSON.parse(question)
+        console.log(questionArray)
+        term = questionArray[0];
+        definition = questionArray[1];
+        mode = dict[t]
+        if (mode == 0){
+            readTermDef(term, definition)
+            document.getElementById("wherearewe").innerHTML = "Learning for the first time"
+            dict[t] = dict[t] + 1;
+            t++;
+        } else if (mode == 1){
+            doTrainMulti(term, definition)
+            document.getElementById("wherearewe").innerHTML = "multi 1"
+        } else if (mode == 2){
+            doTrainMulti(term, definition)
+            document.getElementById("wherearewe").innerHTML = "multi 2"
+        } else if (mode == 3){
+            doWriteTrain(term, definition)
+            document.getElementById("wherearewe").innerHTML = "Write 1"
+        } else if (mode == 4){
+            doWriteTrain(term, definition)
+            document.getElementById("wherearewe").innerHTML = "write 2"
+        } else if (mode == 5){
+            console.log("review")
+            t++
+    
+        }
+        
+        
+        if (t == group.length){
+            t = 0;
+        }
+   
+    }
+    
 }
 
 function readTermDef(term, def){
@@ -1558,12 +1602,14 @@ function readTermDef(term, def){
 
 function doWriteTrain(term, def){
     var wage = document.getElementById("input");
-    wage.addEventListener("keydown", function (e) {
-        if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
-            checkTrain()
-        }
-    });
+    // wage.addEventListener("keydown", function (e) {
+    //     if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+    //         console.log("ENTER PRESS: t = "+t+" customAnswer = "+customAnswer+"")
+    //         checkTrain()
+    //     }
+    // });
     wage.innerHTML = ""
+    wage.value = ""
      
     input = document.getElementById("input")
     input.setAttribute("autocorrect", "off")
@@ -1575,10 +1621,9 @@ function doWriteTrain(term, def){
     buttonStyling.innerHTML = ">" + "\n" + "Go!"
     
     
-    wordPair = [term, def];
-    console.log("WRD PAOR" +wordPair)
-    document.getElementById("displayWord").innerHTML = wordPair[0];
-    customAnswer = wordPair[1];
+    console.log("Inside of new setup for write, term = "+term+" and def = "+def)
+    document.getElementById("displayWord").innerHTML = term;
+    customAnswer = def;
     customAnswer = customAnswer.toLowerCase();
 
      
@@ -1587,8 +1632,10 @@ function doWriteTrain(term, def){
 function checkTrain(){
     usrInput = input.value.toLowerCase();
     usrInput = usrInput.trim();
-    
+    console.log("Checking answer by comparing "+usrInput+" to "+customAnswer)
     if (usrInput == customAnswer){
+        console.log("Answer determined to be correct")
+        // console.log("Advancing T "+t+"which would be "+group[t])
         dict[t] = dict[t] + 1;
         t++;
         buttonStyling.style.backgroundColor = "#3e8e41"
@@ -1598,9 +1645,12 @@ function checkTrain(){
         
     }
     else{
+        console.log("Answer determined to be incorrect")
+        t++
         buttonStyling.style.backgroundColor = "#ce1483"
-        document.getElementById("wherearewe").innerHTML = "Correct answer was: "+customAnswer
+        
         setTimeout(function () { buttonStyling.style.backgroundColor = "wheat" }, 1000)
+        setTimeout(function () { document.getElementById("wherearewe").innerHTML = "Correct answer was: "+customAnswer }, 1000)
         gameLoop()
     }
 }
@@ -1624,14 +1674,27 @@ function doTrainMulti(term, def ){
         keepchecking = false;
         recursioncheck++;
     }
-    for (i=0; i<fakeout.length; i++){
-        for (j=0; j<fakeout.length; j++){
-            if (fakeout[i] == fakeout[j] && i!=j){
-                fakeout = getOtherAnswers(customWords)
-                i=0;
+    recursioncheck = 0;
+    checker = 0;
+    while (checker < 16 && recursioncheck < 3000){
+        checker = 0;
+        for (i=0; i<fakeout.length; i++){
+            for (j=0; j<fakeout.length; j++){
+                if (fakeout[i] == fakeout[j] && i!=j){
+                    fakeout = getOtherAnswers(customWords)
+                    i=0;
+                }
+                else if (fakeout[i] != fakeout[j]) {
+                    checker++;
+                }
+                if (fakeout[j] == question[1]){
+                    fakeout = getOtherAnswers(customWords)
+                    i=0;
+                }
             }
         }
-    }
+        recursioncheck++;
+    }    
     if (random_number == 0){
         let element = document.getElementById("a")
         element.id = "correct"
