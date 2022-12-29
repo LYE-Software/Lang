@@ -1527,13 +1527,30 @@ function gameLoop(){
         console.log("ready to go to next group")
         whichGroup++;
         t = 0;
-        doTrain();
+        let arrayText = customWords.split('\n')
+        let groups = []
+        for (i = 0; i<arrayText.length; i+=5){
+            const group = arrayText.slice(i, i+5);
+            groups.push(group);
+        }
+        console.log(groups)
+        
+        group = groups[whichGroup]
+
+        for (j = 0; j<group.length; j++){
+            dict[j] = 0;
+        }
+            // index in group should co relate to index in dict
+            
+        t = 0;
     }
     // potential issue with the going down
     // still needs to go on to next group
     console.log("Running game loop. T = "+t)
     document.getElementById("TermAndDef").style.display = "none";
     document.getElementById("multchoice").style.display="none";
+    document.getElementById("inputdiv").style.display="none";
+
     console.log("game loop")
     reviewValue = -1;
     if (whichGroup > 0){
