@@ -551,7 +551,8 @@ async function getLibraryList(){
                     div5.id = "studysheetDel"+i;
                     div5.onclick = async function(){
                         document.getElementById("loadingscreen").style.opacity = "1";
-                        document.getElementById("loadingscreen").classList = "absolute";
+                        document.getElementById("loadingscreen").classList = "verticalFlex";
+                        document.getElementById("loadingscreen").style.display = "flex"
                         var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
                         link = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/"+ studysheetname+"/delete"
                         console.log("link is: "+link)
@@ -593,7 +594,8 @@ async function deleteSS(){
     console.log("index is: "+index)
     console.log("newarr[index] is: "+newarr[index])
     document.getElementById("loadingscreen").style.opacity = "1";
-    document.getElementById("loadingscreen").classList = "absolute";
+    document.getElementById("loadingscreen").classList = "verticalFlex";
+    document.getElementById("loadingscreen").style.display = "flex"
     link = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/"+ newarr[index]+"/delete"
     console.log("link is: "+link)
     await httpGet(link)
