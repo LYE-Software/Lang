@@ -1551,7 +1551,14 @@ function gameLoop(){
     console.log("Running game loop. T = "+t)
     document.getElementById("TermAndDef").style.display = "none";
     document.getElementById("multchoice").style.display="none";
-    document.getElementById("inputdiv").style.display="none";
+    var inputs = document.getElementsByClassName("inputdiv");
+
+    for (i = 0; i<inputs.length; i++){
+        element = inputs[i]
+        if (element != null){
+            element.style.display = "none";
+        }
+    }
 
     console.log("game loop")
     reviewValue = -1;
