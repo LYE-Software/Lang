@@ -1463,6 +1463,33 @@ function doFlashcards(){
     
 }
 
+
+function sendFeedback(){
+    let sessionid = window.localStorage.getItem("usertoken")
+    let feedback = document.getElementById("feedbackInput").value;
+    if (feedback == "" || feedback == null){
+        alert("The feedback message cannot be nothing.")
+    } else {
+        url = "https://backend.langstudy.tech/feedback/"+sessionid;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url);
+    
+        xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+    
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                console.log(xhr.status);
+                console.log(xhr.responseText);
+                // window.location.href="index.html";
+            }
+        };
+        var data = feedback;
+        console.log("sending " + data + " to " + url);
+        xhr.send(data);
+    }
+}
+
+
 var group = [];
 var groups = [];
 var dict = {
@@ -1631,7 +1658,14 @@ function doWriteTrain(term, def){
     // });
     wage.innerHTML = ""
     wage.value = ""
-     
+    var inputs = document.getElementsByClassName("inputdiv");
+
+    for (i = 0; i<inputs.length; i++){
+        element = inputs[i]
+        if (element != null){
+            element.style.display = "flex";
+        }
+    }
     input = document.getElementById("input")
     input.setAttribute("autocorrect", "off")
     input.setAttribute("autocomplete", "off")
@@ -3502,7 +3536,7 @@ function createCreatorInput(term, definition) {
         verbInput.id=id1;
         verbInput.className="term"
         verbInput.innerHTML=term;
-        verbInput.setAttribute("data-text", "Term");
+        verbInput.setAttribute("data-text", "Question");
         verbInput.contentEditable="true";
         generateIdV++
             // verbInput.innerHTML="Put Term / Question Here";
