@@ -121,12 +121,11 @@
 
             max-width: 700px;
             width: 90vw;
-            min-width: 400px;
-
+            min-width: 300px;
             margin: 25px;
-
-
-            position: relative;
+            /* position: relative; */
+            margin-top: 25px;
+            margin-bottom: 25px;
         }
 
         .termContainer::after {
@@ -206,6 +205,12 @@
         </div>     
 
     </div>  
-    <img src="assets/icons/langshare.png" style="position:absolute; bottom:0; height:11vh; width:auto; margin:50px;">   
+    <img src="assets/icons/langshare.png" class="noverticalshow" style="position:absolute; bottom:0; height:11vh; width:auto; margin:50px;">   
 </body>
+<script>
+    window.onscroll = function() {
+        console.log(window.pageYOffset)
+        document.body.style.backgroundPositionY = (window.pageYOffset + 0) + "px";
+    }
+</script>
 </html>
