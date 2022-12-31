@@ -57,6 +57,10 @@ var customusername = ""
 var train = false;
 
 window.addEventListener("resize", (event) => {
+    updateScaling();
+})
+
+function updateScaling() {
     if (window.innerHeight > window.innerWidth) {
         // hide elements with noverticalshow clas
         var noverticalshow = document.getElementsByClassName("noverticalshow");
@@ -69,7 +73,7 @@ window.addEventListener("resize", (event) => {
             noverticalshow[i].style.display = "";
         }
     }
-})
+}
 
 async function shareLink(){
     console.log("insharelink")
@@ -79,19 +83,22 @@ async function shareLink(){
     console.log(lyeUrl)
     tempTok = await httpGet(lyeUrl, true)
     sheetName = window.localStorage.getItem("chosenSheet").replaceAll(" ", "%20");
-    url = "https://langstudy.tech/studysheetpage.html?sessionid="+tempTok+"&sheetName="+sheetName;
+    url = "https://langstudy.tech/studysheetpage.html?userid="+tempTok+"&sheetName="+sheetName;
     document.getElementById("linkholder").innerHTML = url;
     console.log(url)
 }
+
+updateScaling();
 
 async function doPreviewAndLocal(){
     console.log("in dopreview")
     var url_string = window.location.href; //window.location.href
     var url = new URL(url_string);
-    if(url.searchParams.get("sessionid")!= null){
-        sessionid = url.searchParams.get("sessionid")
+    if(url.searchParams.get("userid")!= null){
+        sessionid = url.searchParams.get("userid")
         chosensheet = url.searchParams.get("sheetName")
         sheet = await httpGet("https://backend.langstudy.tech/id/"+sessionid+"/Studysheets/"+chosensheet)
+        document.getElementById("studysheetname").innerHTML = chosensheet
     } else{
         chosensheet = window.localStorage.getItem("chosenSheet")
         toek = window.localStorage.getItem("usertoken")
