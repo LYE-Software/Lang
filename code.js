@@ -1514,6 +1514,7 @@ function sendFeedback(){
     if (feedback == "" || feedback == null){
         alert("The feedback message cannot be nothing.")
     } else {
+        document.getElementById("feedbackUIInputContainer").innerHTML = "Thank you for your feedback!"
         url = "https://backend.langstudy.tech/feedback/"+sessionid;
         var xhr = new XMLHttpRequest();
         xhr.open("POST", url);
