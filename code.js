@@ -56,12 +56,36 @@ var newarr = []
 var customusername = ""
 var train = false;
 
+window.addEventListener("resize", (event) => {
+    if (window.innerHeight > window.innerWidth) {
+        // hide elements with noverticalshow clas
+        var noverticalshow = document.getElementsByClassName("noverticalshow");
+        for (var i = 0; i < noverticalshow.length; i++) {
+            noverticalshow[i].style.display = "none";
+        }
+    } else {
+        var noverticalshow = document.getElementsByClassName("noverticalshow");
+        for (var i = 0; i < noverticalshow.length; i++) {
+            noverticalshow[i].style.display = "";
+        }
+    }
+})
+
+
 async function doPreviewAndLocal(){
     console.log("in dopreview")
-    chosensheet = window.localStorage.getItem("chosenSheet")
-    toek = window.localStorage.getItem("usertoken")
-    document.getElementById("studysheetname").innerHTML = chosensheet
-    sheet = await httpGet("https://backend.langstudy.tech/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
+    var url_string = window.location.href; //window.location.href
+    var url = new URL(url_string);
+    if(url.searchParams.get("sessionid")!= null){
+        sessionid = url.searchParams.get("sessionid")
+        chosensheet = url.searchParams.get("sheetName")
+        sheet = await httpGet("https://backend.langstudy.tech/id/"+sessionid+"/Studysheets/"+chosensheet)
+    } else{
+        chosensheet = window.localStorage.getItem("chosenSheet")
+        toek = window.localStorage.getItem("usertoken")
+        document.getElementById("studysheetname").innerHTML = chosensheet
+        sheet = await httpGet("https://backend.langstudy.tech/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
+    }
     // document.getElementById("noclickdiv").style.display = "none";
     document.getElementById("noclickdiv").style.opacity = "0";
     document.getElementById("noclickdiv").style.pointerEvents = "none";
