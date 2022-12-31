@@ -191,6 +191,18 @@
             <!-- <p class="header"></p> -->
         </div>
     </div>
+
+    <div class="horizontalFlex" style="pointer-events: none; transition: all 0.15s ease-in-out; opacity: 0; z-index: 100; align-items: center; justify-content: center; top: 0; bottom: 0; left: 0; right: 0; position:absolute; background-color: var(--primary-dark)" id="unableToFind">
+        <div class="lightGlow "style="width: 90vw; max-width: 500px; background-color: var(--primary-light); border-radius:15px; padding:20px; text-align: center;">
+            <div style="margin: 50px;">
+                <img style="height:10vh;" src="assets/icons/langerror.png" alt="error">
+            </div>
+            We were unable to locate your Studysheet. Please try selecting it again from the main menu.
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 50%; left:0.5; align-items:center; text-align: center; margin-left:21%;" onclick="window.location.href='index.html'">Home</div>
+            <!-- <div class="lds-ellipsisdark" id="studyloader" ><div></div><div></div><div></div><div></div></div> -->
+            <!-- <p class="header"></p> -->
+        </div>
+    </div>
     
     
     <div>
@@ -251,9 +263,9 @@
 
     </div>  
     <div id="sharinglink" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);" onclick="hideElement(document.getElementById('sharinglink'))">
-        <div class="linkContainer verticalFlex centerFlex lightGlow centerText" style="z-index:500;">
-            <div style="margin-top: 20px;">Send this Lang Studysheet link to your friends!</div>
-            <div id="linkholder">Generating your sharable link...</div>
+        <div class="linkContainer verticalFlex centerFlex lightGlow centerText" onclick=null style="z-index:500;">
+            <div style="margin-top: 20px;" onclick="">Send this Lang Studysheet link to your friends!</div>
+            <div id="linkholder" onclick="">Generating your sharable link...</div>
             <div class="socialIcons horizontalFlex">
                 <img src="assets/icons/facebook.png" class="socialIcon" onclick="shareFacebook()">
                 <img src="assets/icons/twitter.png" class="socialIcon" onclick="shareTwitter()">

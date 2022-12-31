@@ -102,10 +102,22 @@ async function doPreviewAndLocal(){
         document.getElementById("studysheetname").innerHTML = chosensheet
     } else{
         chosensheet = window.localStorage.getItem("chosenSheet")
+
+        if(chosensheet == null || chosensheet == ""){
+            document.getElementById("unableToFind").style.opacity = "1";
+            document.getElementById("unableToFind").style.pointerEvents = "all"; 
+        }
+
         toek = window.localStorage.getItem("usertoken")
         document.getElementById("studysheetname").innerHTML = chosensheet
         sheet = await httpGet("https://backend.langstudy.tech/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
     }
+
+    if (sheet == "" || sheet == null){
+        document.getElementById("unableToFind").style.opacity = "1";
+        document.getElementById("unableToFind").style.pointerEvents = "all"; 
+    }
+
     // document.getElementById("noclickdiv").style.display = "none";
     document.getElementById("noclickdiv").style.opacity = "0";
     document.getElementById("noclickdiv").style.pointerEvents = "none";
@@ -447,6 +459,15 @@ async function getUsernameFromLye(){
 
 
 async function getLibraryList(){
+
+    // check for local studying
+    if (window.localStorage.getItem("doLocal")=="true"){
+        document.getElementById("localAdvanced").style.display = "";
+    } else {
+        console.log("Local Studying is disabled.")
+    }
+
+
     customuser=window.localStorage.getItem("username");
     window.localStorage.setItem("fullstudysheet", "");
     window.localStorage.setItem("chosenSheet", "")
@@ -2554,6 +2575,35 @@ function anklebowlMode(){
     
 }
 
+function showLocalPrompt(){
+    console.log("show local")
+    document.getElementById("localPrompt").style.opacity = "1";
+    document.getElementById("localPrompt").style.pointerEvents = "all";
+}
+
+function hideLocalPrompt(){
+    console.log("hide local")
+    document.getElementById("localPrompt").style.opacity = "0";
+    document.getElementById("localPrompt").style.pointerEvents = "none";
+    window.localStorage.setItem("doLocal", "false")
+    document.getElementById("localchoice").checked = false
+}
+
+function hideAndKeepOn(){
+    document.getElementById("localPrompt").style.opacity = "0";
+    document.getElementById("localPrompt").style.pointerEvents = "none";
+
+}
+
+function localAdvanced(){
+    console.log("Local Advanced")
+    if (document.getElementById("localchoice").checked == true){
+        showLocalPrompt()
+        window.localStorage.setItem("doLocal", "true")
+    } else {
+        window.localStorage.setItem("doLocal", "false")
+    }
+}
 
 //curretly non functional dark mode 
 //Local Storage edited here
@@ -2597,72 +2647,9 @@ function darkMode(){
 //Local Storage read here
 
 function checkSettings(){
-    let dropbutton = document.getElementsByClassName("dropbtn");
-    let ank = window.localStorage.getItem("anklebowl");
-    let among = window.localStorage.getItem("among");
-    console.log(ank);
-    if (ank=="true"){
-        document.getElementById("ankcheck").checked = true;
-        feet.style.backgroundColor = "#001945";
-        copyright.style.color="#FFEFD1";
-        console.log("ank true")
-        
-    }
-    else{
-        console.log("ank untue")
-    }
-
-    if(among =="true"){
-        document.body.style.backgroundImage = 'url("amongus.jpg")'
-        document.getElementById("amongcheck").checked = true;
-
-    }
-    else{
-
-    }
-
-    let backgroundthing = window.localStorage.getItem("dobackground");
-    let backgroundcolor = window.localStorage.getItem("background");
-    if(backgroundthing == "true"){
-        try{
-            document.getElementById("customcolors").checked = true;
-            var childarray = [];
-            var children = document.getElementsByClassName("homepage");
-            for(var i=0; i<children.length; i++){
-                var childx = children[i];          
-                childarray.push(childx);
-            }
-            for (var i=0; i<childarray.length; i++){
-                var obj = childarray[i];
-                obj.style.backgroundColor = backgroundcolor
-            }
-            customcolor = false;
-        }catch(error){
-            var childarray = [];
-            var children = document.getElementsByClassName("homepage");
-            for(var i=0; i<children.length; i++){
-                var childx = children[i];          
-                childarray.push(childx);
-            }
-            for (var i=0; i<childarray.length; i++){
-                var obj = childarray[i];
-                obj.style.backgroundColor = backgroundcolor
-            }
-            customcolor = false;
-        }
-        
-        
     
-    }
-
-    let domainswitch = window.localStorage.getItem("domainswitch");
-    let maincolor = window.localStorage.getItem("maincolor");
-    let auxcolor = window.localStorage.getItem("auxcolor");
-    colorItems = grabAllClasses()
-    if(domainswitch == "true"){
-        console.log("inside check settings: maincoloritems = " +mainColorItems)
-        mainColorSwitch(colorItems, maincolor, auxcolor);
-    }
+    
+   
     let randomthing = window.localStorage.getItem("random");
     if (randomthing == "true"){
         doRandom = true;
@@ -2677,6 +2664,12 @@ function checkSettings(){
             
         }
 
+    }
+
+    if (window.localStorage.getItem("doLocal") == "true"){
+        document.getElementById("localchoice").checked = true    
+    } else{
+        document.getElementById("localchoice").checked = false
     }
         
 

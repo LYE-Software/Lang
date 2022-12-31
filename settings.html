@@ -15,13 +15,23 @@
         <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: var(--primary-light);">
             <img src="assets/logos/FullLangLogo.png" style="height:10vh; margin: 10px;"> 
             <div style="margin-top: 10px;">We did not find an account saved on your computer.</div>
-            <div style="margin-top: 10px;">Lang reccommends making an account, so you can save your studysheets online.</div>
+            <div style="margin-top: 10px;">Lang recommends making an account, so you can save your studysheets online.</div>
             <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0;" onclick="window.location.href='https://lye.software/signin?forward=langstudy.tech-index.html'">Log In</div>
             <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="window.location.href='https://lye.software/signup?forward=langstudy.tech-index.html'">Sign Up</div>
             <div style="font-size: 10px;">By signing up for an account, you agree to the Lang Terms of Service, which can be found <a href='langlegal.html' style="color: var(--primary-dark)">here</a></div>
         </div>
     </div>
     
+    <div id="localPrompt" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: var(--primary-light);">
+            <div style="margin-top: 10px; color:red; ">Are you sure you want to enable Local Studying?</div>
+            <div style="margin-top: 10px;">This will allow you to upload local files to study, but it does not always work and can be unstable. <strong>Proceed at your own risk.</strong></div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0; background-color: red; border:none;" onclick="hideAndKeepOn()">Enable</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideLocalPrompt()">Cancel</div>
+        </div>
+    </div>
+    
+
     <div id="header0" class="lightGlow headerContainer" style="width: 100vw">
         <div class="horizontalFlex header">
             <div onclick="returnMain()" style="cursor:pointer;">
@@ -46,9 +56,17 @@
                     <button style="display: inline-block; background-color:#001945;color:var(--primary-light);"onclick="alert('This changes how the questions are chosen- by default, it is read down the list with no chance of repeating. This changes it to random, which switches the order but allows repeats.')">?</button>
                 </div>
 
+                <div class="horizontalFlex">
+                    <label class="switch" style="display: inline-block"> 
+                        <input id = "localchoice" type="checkbox" onclick="localAdvanced()">
+                        <span class="slider round"></span>
+                    </label>
+                    <p style="display: inline-block; width: 69%;" class="">Enable Local Studying</p>
+                </div>
+
                 <div class="flexSpacer"></div>
                 <div style="width:10vw; margin-bottom:10px;">
-                    <p>Lang Version 4.1.4. <br><a href="updates.html">Learn More</a></p>
+                    <p>Lang Version 4.2.1. <br><a href="updates.html">Learn More</a></p>
                 </div>
             </div>
             <div class="lightGlow" style="box-sizing: border-box; background-color:var(--primary-light); width: 350px; height:60vh; margin:20px; border-radius:15px; padding:20px; display:flex; text-align:left; align-items: center; flex-direction:column;">
@@ -73,7 +91,6 @@
 <script>
     function settingsRun(){
         checkSettings()
-        applyUsername()
     }
 </script>
 </html>
