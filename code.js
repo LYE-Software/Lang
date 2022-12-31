@@ -57,6 +57,10 @@ var customusername = ""
 var train = false;
 
 window.addEventListener("resize", (event) => {
+    updateScaling();
+})
+
+function updateScaling() {
     if (window.innerHeight > window.innerWidth) {
         // hide elements with noverticalshow clas
         var noverticalshow = document.getElementsByClassName("noverticalshow");
@@ -69,8 +73,9 @@ window.addEventListener("resize", (event) => {
             noverticalshow[i].style.display = "";
         }
     }
-})
+}
 
+updateScaling();
 
 async function doPreviewAndLocal(){
     console.log("in dopreview")

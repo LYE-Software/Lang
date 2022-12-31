@@ -303,7 +303,7 @@
             <div style="cursor:pointer;">
                 <img style="height: 10vh;" src="assets/logos/FullLangLogo.png" alt='Lang Logo'>
             </div>
-            <div id="homeusername" class="button verticalFlex" style="cursor: pointer" onclick="window.location.href='settings.html'">Loading your name...</div>
+            <div id="homeusername" class="noverticalshow button verticalFlex" style="cursor: pointer" onclick="window.location.href='settings.html'">Loading your name...</div>
         </div>
         <div class="functionRow horizontalFlex" style="justify-content: start;">
             <div class="functionRowItem">
@@ -341,7 +341,7 @@
             </div>
         </div>
         <div id="bodyContent" class="body centerFlex verticalFlex" style="justify-content: center; margin-top: 50px;">
-            <div id="welcomeText" class="horizontalFlex" style="justify-content: center; max-width: 100vw; flex-wrap: wrap;">
+            <div id="welcomeText" class="horizontalFlex noverticalshow" style="justify-content: center; max-width: 100vw; flex-wrap: wrap;">
                 <div style="color: var(--primary-light); margin: 0; margin-right: 0;" class="centerText headerText">Your</div>
                 <div style="color: var(--primary-light); margin: 0; margin-left: 1vw;" class="centerText headerText">Studysheets</div>
             </div>
@@ -425,11 +425,11 @@
         </div>
     </div>
 
-    <div class="createStudysheetOverlay absolute" onclick="window.location.href='creator.html'">
+    <div class="createStudysheetOverlay absolute noverticalshow" onclick="window.location.href='creator.html'">
         <img src="assets/icons/Lang Edit Icon.svg" style="z-index: 1000; position:absolute; right:0; bottom:0; height:10vh; cursor: pointer;" alt='Edit'></img>
     </div>
 
-    <div id="feedbackUI" class="absolute" style="bottom:0; left:0; z-index: 1000;">
+    <div id="feedbackUI" class="absolute noverticalshow" style="bottom:0; left:0; z-index: 1000;">
         <div class="lightGlow verticalFlex responseContainer" style="background-color: var(--primary-light); width: 350px; margin: 20px; margin-bottom: 0px; z-index: 1000; border-radius: 25px; padding: 15px; box-sizing: border-box">
             <div style="background-color: var(--primary-dark); color: var(--primary-light); float: right; text-align: left; padding: 10px; border-radius: 20px;">Have an issue? Send us a message here!</div>
             <div class="horizontalFlex">
@@ -484,9 +484,6 @@
     }
 
     enableSnow();
-    // document.getElementById("useAsGuest").addEventListener("click", function(){
-    //     setLocalUsage();
-    // });
 </script>
 </html>
 
