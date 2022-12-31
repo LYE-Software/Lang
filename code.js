@@ -1631,7 +1631,14 @@ function doWriteTrain(term, def){
     // });
     wage.innerHTML = ""
     wage.value = ""
-     
+    var inputs = document.getElementsByClassName("inputdiv");
+
+    for (i = 0; i<inputs.length; i++){
+        element = inputs[i]
+        if (element != null){
+            element.style.display = "flex";
+        }
+    }
     input = document.getElementById("input")
     input.setAttribute("autocorrect", "off")
     input.setAttribute("autocomplete", "off")
