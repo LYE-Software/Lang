@@ -134,6 +134,50 @@
             display: block;
             height: 15px;
         }
+
+        #linkholder {
+            max-width: 450px;
+            width: 80vw;
+
+            margin-top: 30px; 
+            background-color: var(--primary-dark); 
+            color:var(--primary-light); 
+            font-size:15px; 
+            border-radius: 10px; 
+            padding:20px; 
+            overflow-x:scroll; 
+            z-index: 500;
+
+            white-space: nowrap;
+
+            /* text-align: left; */
+        }
+
+        .linkContainer {
+            border-radius: 15px; 
+            padding: 20px; 
+
+            max-width: 500px;
+            width: 90vw;
+
+            background-color: var(--primary-light);
+        }
+
+        .socialIcon {
+            width: 75px;
+            height: 75px;
+            margin: 10px;
+        }
+        
+        .socialIcons {
+            overflow-x: scroll;
+            max-width: 500px;
+            width: 90vw;
+
+            justify-content: start;
+
+            margin-top: 20px;
+        }
 </style>
 <body onload = "doPreviewAndLocal()" class="darkHomepage" style="overflow-x:hidden;">
     
@@ -206,11 +250,19 @@
         </div>     
 
     </div>  
-    <div id="sharinglink" class="z-index:500; absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
-        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 40vw; background-color: var(--primary-light);">
-            <div style="margin-top: 40px;">Here is the sharable link for your Lang Studysheet. Send it to your friends!</div>
-            <div id="linkholder" style="width: 30vw; margin-top: 40px; background-color: #001945; color:wheat; font-size:15px; border-radius: 10px; padding:20px; overflow:scroll; z-index: 500;">Generating your sharable link...</div>
-            
+    <div id="sharinglink" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="linkContainer verticalFlex centerFlex lightGlow centerText" style="z-index:500;">
+            <div style="margin-top: 20px;">Send this Lang Studysheet link to your friends!</div>
+            <div id="linkholder">Generating your sharable link...</div>
+            <div class="socialIcons horizontalFlex">
+                <img src="assets/icons/facebook.png" class="socialIcon" onclick="shareFacebook()">
+                <img src="assets/icons/twitter.png" class="socialIcon" onclick="shareTwitter()">
+                <img src="assets/icons/whatsapp.png" class="socialIcon" onclick="shareWhatsapp()">
+                <img src="assets/icons/linkedin.png" class="socialIcon" onclick="shareLinkedin()">
+                <img src="assets/icons/email.png" class="socialIcon" onclick="shareEmail()">
+                <img src="assets/icons/linkedin.png" class="socialIcon" onclick="shareLinkedin()">
+                <img src="assets/icons/email.png" class="socialIcon" onclick="shareEmail()">
+            </div>
         </div>
     </div>
     <img src="assets/icons/langshare.png" class="noverticalshow" style="position:absolute; bottom:0; height:11vh; width:auto; margin:50px;" onclick="shareLink()">

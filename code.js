@@ -79,6 +79,7 @@ async function shareLink(){
     console.log("insharelink")
     document.getElementById("sharinglink").style.display = ""
     document.getElementById("sharinglink").style.opacity = 1;
+    document.getElementById("sharinglink").style.pointerEvents = "all";
     lyeUrl = "https://lye.software/idfromsession/"+window.localStorage.getItem("usertoken")
     console.log(lyeUrl)
     tempTok = await httpGet(lyeUrl, true)
