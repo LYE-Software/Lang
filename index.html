@@ -178,8 +178,9 @@
             border: 1px solid var(--primary-light);
         }
 
+
         #studysheetGridContainer div {
-            /* transition: all 0.25s ease-in-out; */
+            max-width: calc(90vw - 120px);
         }
 
         #studysheetGridContainer div div {
@@ -451,7 +452,6 @@
     </div>
 </body> 
 <script>
-    // on scroll, set the background y position to the scroll position
     window.onscroll = function() {
         console.log(window.pageYOffset)
         document.body.style.backgroundPositionY = (window.pageYOffset + 0) + "px";
