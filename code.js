@@ -71,6 +71,18 @@ window.addEventListener("resize", (event) => {
     }
 })
 
+async function shareLink(){
+    console.log("insharelink")
+    document.getElementById("sharinglink").style.display = ""
+    document.getElementById("sharinglink").style.opacity = 1;
+    lyeUrl = "https://lye.software/idfromsession/"+window.localStorage.getItem("usertoken")
+    console.log(lyeUrl)
+    tempTok = await httpGet(lyeUrl, true)
+    sheetName = window.localStorage.getItem("chosenSheet").replaceAll(" ", "%20");
+    url = "https://langstudy.tech/studysheetpage.html?sessionid="+tempTok+"&sheetName="+sheetName;
+    document.getElementById("linkholder").innerHTML = url;
+    console.log(url)
+}
 
 async function doPreviewAndLocal(){
     console.log("in dopreview")

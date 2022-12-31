@@ -206,6 +206,13 @@
         </div>     
 
     </div>  
-    <img src="assets/icons/langshare.png" style="position:absolute; bottom:0; height:11vh; width:auto; margin:50px;">   
+    <div id="sharinglink" class="z-index:500; absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 40vw; background-color: var(--primary-light);">
+            <div style="margin-top: 40px;">Here is the sharable link for your Lang Studysheet. Send it to your friends!</div>
+            <div id="linkholder" style="width: 30vw; margin-top: 40px; background-color: #001945; color:wheat; font-size:15px; border-radius: 10px; padding:20px; overflow:scroll; z-index: 600;">Generating your sharable link...</div>
+            
+        </div>
+    </div>
+    <img src="assets/icons/langshare.png" style="position:absolute; bottom:0; height:11vh; width:auto; margin:50px;" onclick="shareLink()">   
 </body>
 </html>
