@@ -6,6 +6,7 @@
     <title>Practice Test</title>
     <link rel="stylesheet" href="stylesheet.css">
     <link rel="icon" href="circular lang icon.png">
+    <script src="code.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Rubik+Mono+One&display=swap');
         .rubik{
@@ -52,17 +53,16 @@
         }
     </style>
 </head>
-<body>
+<body onload="onBtnPress('prac')">
     <div id="header0" style="width: 100vw">
         <div class="horizontalFlex header">
             <div class="flexSpacer">
-                <img style="height: 8vh; margin-left:10px;" src="assets/logos/lang-wheat.png">
+                <img style="height: 8vh; margin-left:10px;" src="assets/logos/lang-wheat.png" onclick="window.location.href='index.html'">
             </div>
 
             <div class="flexSpacer rubik" style="color: var(--primary-dark); text-align: center;">Practice Test</div>
 
             <div class="horizontalFlex flexSpacer" style="justify-content: flex-end;">
-                <div id="homeusername">Loading</div>
                 <div>
                     <img class="pfp" style="height: 5vh;" src="assets/icons/newsettings.svg" onclick="window.location.href='settings.html'">
                 </div>
@@ -73,37 +73,45 @@
     <div class="horizontalFlex centerFlex" style="margin-top: 50px; width: 100vw;">
         <div style="background-color: var(--primary-light); padding: 20px; padding-top: 60px; padding-bottom: 30px; margin-bottom: 100px;">
             <div class="paperHeader horizontalFlex"">
-                <div style="height: 100%; width: 40px;"></div>
+                <div style="height: 100%; width: 40px; font-size:1.2vw; text-align:center;" id="percentCorrect"></div>
                 <div class="flexSpacer" style="margin-left: 8px; margin-right: 8px; height: 100%; border-left: 2px solid var(--primary-dark);"> <!-- page contents are here -->
-                    <div style="margin-left: 20px; font-size: 40px;">
-                        The quiz of all quizzes
+                    <div style="margin-left: 20px; font-size: 40px;" id="testName">
+                        !
                     </div>
                 </div>
             </div>
-
-            <div class="pageContainer horizontalFlex" style="height: auto">
-                <div style="height: 100%; width: 20px;"></div>
-                <div style="height: 100%; width: 20px;"> <!-- numbers go here -->
-                    1)
-                </div>
-                <div class="flexSpacer horizontalFlex centerFlex" style="margin-left: 8px; margin-right: 8px; height: 100%; border-left: 2px solid var(--primary-dark); padding-left: 5px; min-height: 50px;"> <!-- page contents are here -->
-                    What is your mom?
-                </div>
-                <div style="border-left: 2px solid var(--primary-dark); width: 10px;">&nbsp;</div>
-                <input class="flexSpacer" style="background-color: wheat;">
-                <div style="position: relative;">
-                    <div style="position: absolute; left: 30; top: -10; color: red;">
-                        Incorrect
+            <div id="questionHolder">
+                <!-- <div class="pageContainer horizontalFlex" style="height: auto">
+                    <div style="height: 100%; width: 20px;"></div>
+                    <div style="height: 100%; width: 20px;"> 
+                        1)
                     </div>
-                </div>
+                    <div class="flexSpacer horizontalFlex centerFlex" style="margin-left: 8px; margin-right: 8px; height: 100%; border-left: 2px solid var(--primary-dark); padding-left: 5px; min-height: 50px;"> 
+                        What is your mom?
+                    </div>
+                    <div style="border-left: 2px solid var(--primary-dark); width: 10px;">&nbsp;</div>
+                    <input class="flexSpacer" style="background-color: wheat;">
+                    <div style="position: relative;">
+                        <div style="position: absolute; left: 30; top: -10; color: red;">
+                            Incorrect
+                        </div>
+                    </div>
+                </div> -->
+                
             </div>
             
+            
 
-            <div class="centerText" style="margin-top: 40px; background-color: var(--primary-dark); width: 60px; padding: 20px; border-radius: 15px; color: wheat;">
+            <div class="centerText" style="margin-top: 40px; background-color: var(--primary-dark); width: 60px; padding: 20px; border-radius: 15px; color: wheat;" onclick="checkTest()">
                 Submit
             </div>
 
         </div>
+    </div>
+    <div class="samelineheader" style="bottom:0;">
+        <a href="studysheetpage.html" style="left:0; bottom:0;">
+            <img src="assets/icons/back.svg" style="left:0; bottom:0; position: fixed;">
+        </a>
     </div>
 </body>
 </html>

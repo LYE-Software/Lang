@@ -2045,7 +2045,12 @@ function doCustomSheets(v){
     
 
 function doPracticeTest(){
-    document.getElementById("myBtnBegin").style.display = "none";
+    chosensheet = window.localStorage.getItem("chosenSheet")
+    if (chosensheet == "" || chosensheet == null){
+        document.getElementById("testName").innerHTML = "Local Studysheet"
+    } else {
+        document.getElementById("testName").innerHTML = chosensheet;
+    }
     try {
         document.getElementById("file").style.display = "none";
 
@@ -2059,99 +2064,70 @@ function doPracticeTest(){
     var button = document.createElement("BUTTON")
     testLength = arrayText.length;
     for(i=0; i<=arrayText.length; i++){
-        try {
-            var questionText = document.createElement('h1')
-            questionText.className="header";
-            questionText.style.color = "wheat"
-            let random_question = arrayText[i];
-            var questionArray = JSON.parse(random_question)
-            questionText.innerHTML=questionArray[0];
-
-            id = "answerInput"+generateIdA
-            var verbInput = document.createElement('INPUT');
-            verbInput.className="inputSeen"
-            verbInput.style.backgroundColor = "rgb(47, 61, 115)"
-            verbInput.style.color = "wheat"
-            verbInput.setAttribute("type", "text");
-            verbInput.setAttribute("id",id)
-            verbInput.setAttribute("autocorrect", "off")
-            verbInput.setAttribute("autocomplete", "off")
-            verbInput.setAttribute("spellcheck", "off")
-            generateIdA++
-            verbInput.placeholder="Answer";
-            document.getElementById("minicreator").appendChild(questionText);
-            document.getElementById("minicreator").appendChild(verbInput);
-        } catch (error) {
-            console.log(error)
-            break;
-        }
+        question = arrayText[i]
+        arrQuestion = JSON.parse(question)
+        makeTestInputs(i+1, arrQuestion[0], i, "response"+i, arrQuestion[1].trim())
     }
-    var br = document.createElement("br")
-    document.getElementById("minicreator").appendChild(br);
-    var br = document.createElement("br")
-    document.getElementById("minicreator").appendChild(br);
-    button.className = "dropbtn"
-    button.innerHTML= "Submit"
-    button.onclick = function(){
-        let arrayText = customWords.split("\n")
-        for(i=0; i<testLength;i++){
-            let random_question = arrayText[i];
-            var questionArray = JSON.parse(random_question)
-            theanswer = questionArray[1].toLowerCase();
-            let id = "answerInput"+i
-            let userInputAnswer = document.getElementById(id).value.toLowerCase();
-            if (userInputAnswer == theanswer){
-                document.getElementById(id).style.backgroundColor="green";
-            }else{
-                tempinpt = document.getElementById(id).value
-                document.getElementById(id).style.backgroundColor="red";
-                document.getElementById(id).value = "Your Answer: "+tempinpt+" Correct Answer: "+theanswer;
-            }
-    
-        }
-        sussy = document.createElement("button")
-        sussy.onclick = function(){
-            if (confirm("Any data you entered may not be saved. Press 'OK' to continue or 'Cancel' to go back.") == true){
-                window.location.reload();
-            }
-            else{
-                
-            }
-        }
-        var br = document.createElement("br")
-        document.getElementById("minicreator").appendChild(br);
-        var br = document.createElement("br")
-        document.getElementById("minicreator").appendChild(br);
-        sussy.innerHTML = "Reset"
-        sussy.className="dropbtn2"
-        document.getElementById("minicreator").appendChild(sussy);
-    }
-    
-    document.getElementById("minicreator").appendChild(button);
-    
-    
-
-
-
-    // console.log("arrtext= "+arrayText)
-    
-        
-    // let random_number = Math.floor(Math.random() *arrayText.length);
-    // console.log(random_number)
-    // let random_question = arrayText[random_number];
-    // console.log(random_question)
-    // var questionArray = JSON.parse(random_question)
-    // console.log(questionArray)
-    // return questionArray
     
 }
 
 //this is a monument to blindey
 
 function checkTest(){
-    
+    let listToCheck = document.getElementsByClassName("practestInput")
+    let counter = 0;
+    for (i=0; i<listToCheck.length; i++){
+        input = listToCheck[i]
+        console.log("input is: "+input)
+        idnum = input.id;
+        responseIdTmp = "response"+idnum;
+        responseText = document.getElementById(responseIdTmp)
+        if (input.value == input.getAttribute("data-correct")){
+            counter++;
+            responseText.innerHTML = "Correct!";
+            responseText.style.color = "#3e8e41";
+        } else {
+            responseText.innerHTML = "Incorrect. The correct answer was: "+input.getAttribute("data-correct");
+            responseText.style.color = "red";
+
+        }
+    }
+    document.getElementById("percentCorrect").innerHTML = counter+"/"+listToCheck.length;
+    counter = counter+0;
+    listLength = listToCheck.length + 0;
+    console.log("percentage: "+(counter/listLength))
+    if (counter/listLength >= 0.75){
+        document.getElementById("percentCorrect").style.color = "green";
+
+    } else {
+        document.getElementById("percentCorrect").style.color = "red";
+    }
 
     
+}
+
+
+function makeTestInputs(num, question, answerId, responseId, correctAnswer){
+    var newQuestion = `
+    <div class="pageContainer horizontalFlex" style="height: auto">
+    <div style="height: 100%; width: 20px;"></div>
+    <div style="height: 100%; width: 20px;"> <!-- numbers go here -->
+        ${num}
+    </div>
+    <div class="flexSpacer horizontalFlex centerFlex" style="margin-left: 8px; margin-right: 8px; height: 100%; border-left: 2px solid var(--primary-dark); padding-left: 5px; min-height: 50px;"> <!-- page contents are here -->
+        ${question}
+    </div>
+    <div style="border-left: 2px solid var(--primary-dark); width: 10px;">&nbsp;</div>
+    <input class="flexSpacer practestInput" id="${answerId}" style="background-color: wheat;" data-correct="${correctAnswer}">
+    <div style="position: relative;">
+        <div style="position: absolute; left: 30; top: -10; color: red; width:600px;" id = "${responseId}">
+            
+        </div>
+    </div>
+    </div>
+    
+    `
+    document.getElementById("questionHolder").innerHTML+=newQuestion;
 }
 
 
