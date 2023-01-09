@@ -399,7 +399,7 @@ async function httpGet(theUrl, lye){
             console.log("HTTPGET STATUS: "+xmlHttp.status)
             if(xmlHttp.status == 0){
                 offline = true;
-                changeToOffline()
+                console.error("GET Request Failed.")
             }
             console.log("XMLHTTP RESPONSE BEGIN")
             console.log(xmlHttp.responseText)
