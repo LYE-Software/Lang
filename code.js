@@ -126,6 +126,7 @@ async function doPreviewAndLocal(){
         toek = window.localStorage.getItem("usertoken")
         document.getElementById("studysheetname").innerHTML = chosensheet
         sheet = await httpGet("https://backend.langstudy.tech/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
+        // console.warn("inside the second go")
     }
 
     if (sheet == "" || sheet == null || sheet == broken || sheet == "invalidsession"){
@@ -134,6 +135,7 @@ async function doPreviewAndLocal(){
     }
 
     // document.getElementById("noclickdiv").style.display = "none";
+    // console.warn("testing bruh why is it doing this")
     document.getElementById("noclickdiv").style.opacity = "0";
     document.getElementById("noclickdiv").style.pointerEvents = "none";
     console.log("og sheet: "+sheet)
@@ -351,19 +353,19 @@ function uploadFiles(text, filename){
     // }
     // document.getElementById("uploadholder").appendChild(uploadButton)
 }
-function httpGet(theUrl, lye){
+async function httpGet(theUrl, lye){
     
     //this needs to be async as we cannot set timeout for sync request and sync reqs halt all js for browser
     var xmlHttp = new XMLHttpRequest();
     console.log("Opening Connection to "+theUrl)
-    xmlHttp.timeout = 5000;
+    // xmlHttp.timeout = 5000;
     
-    xmlHttp.ontimeout = () => {
-        console.error(`The request for ${url} timed out.`);
-        alert('The request for '+theUrl+' timed out. We will be reloading this page after the dialogue box is removed.')
-        window.location.reload();
-        changeToOffline();
-    };
+    // xmlHttp.ontimeout = () => {
+    //     console.error(`The request for ${url} timed out.`);
+    //     alert('The request for '+theUrl+' timed out. We will be reloading this page after the dialogue box is removed.')
+    //     window.location.reload();
+    //     changeToOffline();
+    // };
     xmlHttp.onload = () => {
         if (xmlHttp.readyState === 4) {
         if (xmlHttp.status === 200) {
@@ -374,7 +376,7 @@ function httpGet(theUrl, lye){
         }
         }
     };
-    xmlHttp.open( "GET", theUrl, true ); // false for synchronous request
+    await xmlHttp.open( "GET", theUrl, true ); // false for synchronous request
 
     if (lye == true){
         console.log("setting headers")
@@ -537,7 +539,7 @@ async function getLibraryList(){
         }
         
         
-        else if(username == "invalidsession"){
+        if(username == "invalidsession"){
             failedSignIn();
         }
         else if(library == "[]"){
