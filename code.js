@@ -90,6 +90,21 @@ async function shareLink(){
     lyeUrl = "https://lye.software/idfromsession/"+window.localStorage.getItem("usertoken")
     console.log(lyeUrl)
     tempTok = await httpGet(lyeUrl, true)
+    // fetch(lyeUrl, {
+	// 	method: 'GET',
+	// 	headers: {
+	// 		"lye-origin": "langstudy.tech/index.html"
+	// 	},
+	// })
+    // .then(
+    // response  => {
+    //     console.log(response);
+    //     tempTok = response;
+    // },
+    // rejection => {
+    //     console.error(rejection.message);
+    // }
+    // );
     sheetName = window.localStorage.getItem("chosenSheet").replaceAll(" ", "%20");
     url = "https://langstudy.tech/studysheetpage.html?userid="+tempTok+"&sheetName="+sheetName;
     document.getElementById("linkholder").innerHTML = url;
@@ -399,7 +414,7 @@ async function httpGet(theUrl, lye){
             console.log("HTTPGET STATUS: "+xmlHttp.status)
             if(xmlHttp.status == 0){
                 offline = true;
-                console.error("GET Request Failed.")
+                console.error("GET Request status = 0.")
             }
             console.log("XMLHTTP RESPONSE BEGIN")
             console.log(xmlHttp.responseText)
@@ -512,7 +527,11 @@ async function getLibraryList(){
         console.log("inside the else")
         sessionid = window.localStorage.getItem("usertoken")
         console.log(sessionid);
-        serverData = await httpGet("https://backend.langstudy.tech/"+sessionid+"/returnNameAndList", false);
+        await fetch('https://backend.langstudy.tech/"+sessionid+"/returnNameAndList').then(function(response) {
+            return response.blob();
+        }).then(function(response) {
+            serverData = response.text();
+        });        
         console.log("[TOTAL SERVER DATA] "+serverData)
         var arrayOfData = serverData.split("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
         username = arrayOfData[0];
@@ -523,7 +542,14 @@ async function getLibraryList(){
         }
         else if (serverData == null || serverData == ""){
             console.warn("Server Connection Failed! Trying Again...")
-            serverData = await httpGet("https://backend.langstudy.tech/"+sessionid+"/returnNameAndList", false);
+            // serverData = await fetch("https://backend.langstudy.tech/"+sessionid+"/returnNameAndList");
+
+            await fetch('https://backend.langstudy.tech/"+sessionid+"/returnNameAndList').then(function(response) {
+                return response.blob();
+            }).then(function(response) {
+                serverData = response.text();
+            });
+
             console.log("[TOTAL SERVER DATA: SECOND TRY] "+serverData)
             var arrayOfData = serverData.split("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
             username = arrayOfData[0];
