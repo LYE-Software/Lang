@@ -501,12 +501,23 @@ async function getLibraryList(){
         if (serverData == "Failed"){
             failedSignIn();
         }
-        else if (serverData == null){
-            failedServerConnectionOnStart();
+        else if (serverData == null || serverData == ""){
+            console.warn("Server Connection Failed! Trying Again...")
+            serverData = await httpGet("https://backend.langstudy.tech/"+sessionid+"/returnNameAndList", false);
+            console.log("[TOTAL SERVER DATA: SECOND TRY] "+serverData)
+            var arrayOfData = serverData.split("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
+            username = arrayOfData[0];
+            library = arrayOfData[1];
+            console.log(username);
+            if (serverData == "Failed"){
+                failedSignIn();
+            }
+            else if (serverData == null || serverData == ""){
+                console.error("Server Connection Failed upon second try. Aborting.")
+                failedServerConnectionOnStart();
+            }
         }
-        else if (serverData == ""){
-            failedServerConnectionOnStart();
-        }
+        
         
         else if(username == "invalidsession"){
             failedSignIn();
