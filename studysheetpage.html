@@ -262,11 +262,15 @@
         </div>     
 
     </div>  
-    <div id="sharinglink" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);" onclick="hideElement(document.getElementById('sharinglink'))">
-        <div class="linkContainer verticalFlex centerFlex lightGlow centerText" onclick=null style="z-index:500;">
-            <div style="margin-top: 20px;" onclick="">Send this Lang Studysheet link to your friends!</div>
-            <div id="linkholder" onclick="">Generating your sharable link...</div>
-            <div class="socialIcons horizontalFlex">
+    <div id="sharinglink" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+        <div id="thething" class="linkContainer verticalFlex centerFlex lightGlow centerText" onclick=null style="z-index:500;">
+            <div class="horizontalFlex" style="justify-content: space-between; max-width: 450px; width: 80vw; align-items: center; margin-top: 10px; ">
+                <div onclick="">Send this Lang Studysheet link to your friends!</div>
+                <img style="height: 30px; width: 30px;" src="assets/icons/closeCircle.svg" class="closeIcon" onclick="hideElement(document.getElementById('sharinglink'))">
+            </div>
+
+            <div id="linkholder" style="margin: none;" onclick="">Generating your sharable link...</div>
+            <!-- <div class="socialIcons horizontalFlex">
                 <img src="assets/icons/facebook.png" class="socialIcon" onclick="shareFacebook()">
                 <img src="assets/icons/twitter.png" class="socialIcon" onclick="shareTwitter()">
                 <img src="assets/icons/whatsapp.png" class="socialIcon" onclick="shareWhatsapp()">
@@ -274,7 +278,7 @@
                 <img src="assets/icons/email.png" class="socialIcon" onclick="shareEmail()">
                 <img src="assets/icons/linkedin.png" class="socialIcon" onclick="shareLinkedin()">
                 <img src="assets/icons/email.png" class="socialIcon" onclick="shareEmail()">
-            </div>
+            </div> -->
         </div>
     </div>
     <img src="assets/icons/langshare.png" class="noverticalshow" style="position:absolute; bottom:0; height:11vh; width:auto; margin:50px;" onclick="shareLink()">
