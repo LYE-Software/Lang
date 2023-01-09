@@ -128,7 +128,7 @@ async function doPreviewAndLocal(){
         sheet = await httpGet("https://backend.langstudy.tech/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
     }
 
-    if (sheet == "" || sheet == null || sheet == broken){
+    if (sheet == "" || sheet == null || sheet == broken || sheet == "invalidsession"){
         document.getElementById("unableToFind").style.opacity = "1";
         document.getElementById("unableToFind").style.pointerEvents = "all"; 
     }
