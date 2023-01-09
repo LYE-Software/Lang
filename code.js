@@ -527,11 +527,12 @@ async function getLibraryList(){
         console.log("inside the else")
         sessionid = window.localStorage.getItem("usertoken")
         console.log(sessionid);
-        await fetch('https://backend.langstudy.tech/"+sessionid+"/returnNameAndList').then(function(response) {
-            return response.blob();
-        }).then(function(response) {
-            serverData = response.text();
-        });        
+        serverData = await httpGet("https://backend.langstudy.tech/"+sessionid+"/returnNameAndList", false)
+        // await fetch('https://backend.langstudy.tech/"+sessionid+"/returnNameAndList').then(function(response) {
+        //     return response.blob();
+        // }).then(function(response) {
+        //     serverData = response.text();
+        // });        
         console.log("[TOTAL SERVER DATA] "+serverData)
         var arrayOfData = serverData.split("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
         username = arrayOfData[0];
@@ -542,13 +543,13 @@ async function getLibraryList(){
         }
         else if (serverData == null || serverData == ""){
             console.warn("Server Connection Failed! Trying Again...")
-            // serverData = await fetch("https://backend.langstudy.tech/"+sessionid+"/returnNameAndList");
+            serverData = await httpGet("https://backend.langstudy.tech/"+sessionid+"/returnNameAndList", false)
 
-            await fetch('https://backend.langstudy.tech/"+sessionid+"/returnNameAndList').then(function(response) {
-                return response.blob();
-            }).then(function(response) {
-                serverData = response.text();
-            });
+            // await fetch('https://backend.langstudy.tech/"+sessionid+"/returnNameAndList').then(function(response) {
+            //     return response.blob();
+            // }).then(function(response) {
+            //     serverData = response.text();
+            // });
 
             console.log("[TOTAL SERVER DATA: SECOND TRY] "+serverData)
             var arrayOfData = serverData.split("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
