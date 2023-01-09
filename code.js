@@ -113,7 +113,7 @@ async function doPreviewAndLocal(){
     if(url.searchParams.get("userid")!= null){
         sessionid = url.searchParams.get("userid")
         chosensheet = url.searchParams.get("sheetName")
-        sheet = await httpGet("https://backend.langstudy.tech/id/"+sessionid+"/Studysheets/"+chosensheet)
+        sheet = httpGet("https://backend.langstudy.tech/id/"+sessionid+"/Studysheets/"+chosensheet)
         document.getElementById("studysheetname").innerHTML = chosensheet
     } else{
         chosensheet = window.localStorage.getItem("chosenSheet")
