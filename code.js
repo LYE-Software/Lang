@@ -76,6 +76,13 @@ function updateScaling() {
 }
 
 async function shareLink(){
+    var url_string = window.location.href; //window.location.href
+    var url = new URL(url_string);
+    if(url.searchParams.get("userid")!= null){
+        sessionid = url.searchParams.get("userid")
+        chosensheet = url.searchParams.get("sheetName")
+        document.getElementById("linkholder").innerHTML = "https://langstudy.tech/studysheetpage.html?userid="+sessionid+"&sheetName="+chosensheet;
+    }
     console.log("insharelink")
     document.getElementById("sharinglink").style.display = ""
     document.getElementById("sharinglink").style.opacity = 1;
@@ -88,6 +95,14 @@ async function shareLink(){
     document.getElementById("linkholder").innerHTML = url;
     console.log(url)
 }
+
+var broken = `<!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>`
+
+
 
 updateScaling();
 
@@ -113,7 +128,7 @@ async function doPreviewAndLocal(){
         sheet = await httpGet("https://backend.langstudy.tech/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
     }
 
-    if (sheet == "" || sheet == null){
+    if (sheet == "" || sheet == null || sheet == broken){
         document.getElementById("unableToFind").style.opacity = "1";
         document.getElementById("unableToFind").style.pointerEvents = "all"; 
     }
@@ -128,7 +143,10 @@ async function doPreviewAndLocal(){
     
     customWords = sheet
     let arrayText = customWords.split('\n')
-    
+    if (arrayText[0] == "<!doctype html>"){
+        document.getElementById("unableToFind").style.opacity = "1";
+        document.getElementById("unableToFind").style.pointerEvents = "all"; 
+    }
     for (i = 0; i<arrayText.length; i++){
         let wordPair = getRandomQuestion(customWords);
         var br = document.createElement("div")
@@ -2938,7 +2956,7 @@ function saveToCloud(){
             childContents = childContents.replaceAll("\n", "_")
             child2Contents = child2Contents.replaceAll("\t", "   ")
             childContents = childContents.replaceAll("\t", "   ")
-            if (child2Contents.includes("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823") || child2Contents.includes("&nbsp;")){
+            if (child2Contents.includes("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823") || child2Contents.includes("&nbsp;") || child2Contents.includes("<!doctype html>")){
                 alert("One of the specified words is not avaliable for use due to the structure of the Lang Studysheet.")
                 window.location.reload();
                 
