@@ -32,12 +32,13 @@
             <div style="min-width: 300px; flex: 0.8;">
                 <div class="largeText">Start Studying!</div>
                 <div>Create your free Lye Account to access your Lang account and studysheets from anywhere</div>
+                <div style="font-size: 10px; margin-top:7px;">By signing up for an account, you agree to the Lang Terms of Service, which can be found <a href='langlegal.html' style="color: var(--primary-dark)">here</a></div>
             </div>
             <div class="horizontalFlex" style="flex: 0.2;">
-                <div class="signInButton" style="margin-right: 20px;">
-                    Sign In
+                <div id="login" class="signInButton " style="margin-right: 20px;" onclick="window.location.href='https://lye.software/signin?forward=langstudy.tech-index.html'">
+                    Log In
                 </div>
-                <div class="signInButton">
+                <div class="signInButton buttonHoverDark" onclick="window.location.href='https://lye.software/signup?forward=langstudy.tech-index.html'">
                     Sign Up
                 </div>
             </div>
@@ -46,15 +47,22 @@
         <div class="panelcontainer">
             <div class="panel lightGlow largeText" style="font-size: 25px;">
                 Study Smarter, not harder.
+                <br>
+                <br>
                 <div class="smallText" style="font-size: 15px;">
                     Lang allows for a wide variety of studying methods.
+                </div>
+                <div class="smallText" style="font-size: 15px;">
+                    Use a rich collection of review methods to ensure memorization of content. Lang also commits to regular feature updates, including AI functionality, so that you always know you are using the best studying tool.
                 </div>
 
             </div>
             <div class="panel lightGlow largeText" style="font-size: 25px;"> 
                 Break Free from the Shackles of modern standards.
+                <br>
+                <br>
                 <div class="smallText" style="font-size: 15px;">
-                    We believe you should own the software you use, and Lang uses absolutely no tracking or analytics.
+                    We believe you should own the software you use, and Lang is completely free for everyone to use. No features are hidden behind a paywall. Similarly, we believe in privacy for all users, and Lang is not only open source and ad-free, but we use no trackers.
                 </div>
             </div>
         </div>
@@ -101,6 +109,18 @@
         padding: 10px;
     }
 
+    #login{
+        background-color: var(--primary-light);
+        color: var(--primary-dark);
+        transition: all 0.25s ease-in-out;
+        border: 3px solid var(--primary-dark);
+
+    }
+    #login:hover{
+        background-color: var(--primary-dark);
+        color: var(--primary-light);
+    }
+    
     .largeText {
         font-family: 'Rubik Mono One';
         font-style: normal;
@@ -158,8 +178,8 @@
     .welcome::before {
         width: 100%;
         height: 100%;
-        backdrop-filter: brightness(50%);
-        -webkit-backdrop-filter: brightness(50%);
+        backdrop-filter: brightness(40%);
+        -webkit-backdrop-filter: brightness(40%);
 
         top: 0;
         left: 0;
