@@ -49,7 +49,7 @@
         }
 
         .creatorIcon:first-child {
-            border-bottom: 1px solid var(--primary-dark);
+            /* border-bottom: 1px solid var(--primary-dark); */
         }
 
 
@@ -171,13 +171,13 @@
             </div>
         </div>
         <div style="display:flex; flex-direction: column;">
-            <div class="lightGlow" style="background-color: var(--primary-light); height: 100px; width: 100px; border-radius: 25px;">
-                <!-- <div class="creatorIcon" onclick="downloadVerbs('s')">
+            <div class="lightGlow" style="background-color: var(--primary-light); width: 100px; border-radius: 25px;">
+                <div class="creatorIcon" onclick="downloadVerbs('s')">
                     <img src="save.svg" style="height:50px; color:var(--primary-dark);">
                     <div class="tooltipText">
                         Export
                     </div>
-                </div> -->
+                </div>
                 
                 <div class="creatorIcon" onclick="saveToCloud()">
                     <img src="assets/icons/langsave.svg" style="height:75px;">
@@ -185,18 +185,27 @@
                         Save
                     </div>
                 </div>
-                <div style="display: flex; ">
+
+                <div class="creatorIcon" onclick="changeTermDef()">
+                    <img src="assets/icons/swap.svg" style="height:40px;">
+                    <div class="tooltipText">
+                        Swap
+                    </div>
+                </div>
+
+
+                <!-- <div style="display: flex; ">
                     <div class="creatorIcon">
                         <label class="switch" style="display: inline-block; align-items: center; text-align: center; justify-content: center;"> 
                             <input id = "swapper" type="checkbox" onclick="changeTermDef()">
                             <label for="swapper"><img src="assets/icons/swap.svg" style="height:5vh;"></label>
                         </label>
-                        <div class="tooltipText" style="height:100%; width:140%;">
-                            Swap Terms and Definitions
+                        <div class="tooltipText">
+                            Swap Terms
                         </div>
                     </div>
                     
-                </div>
+                </div> -->
             </div>
             
         </div>
@@ -247,26 +256,26 @@
 
         
     function changeTermDef(){
-        if (document.getElementById('swapper').checked == true){
-            var insideCreator = document.getElementById("insideCreator")
-            var termDefs = insideCreator.children
-            var terms = []
-            var defs = []
+        // if (document.getElementById('swapper').checked == true){
+        //     var insideCreator = document.getElementById("insideCreator")
+        //     var termDefs = insideCreator.children
+        //     var terms = []
+        //     var defs = []
 
-            for (var i = 0; i < termDefs.length; i++) {
-                terms.push(termDefs[i].children[0].innerHTML)
-                defs.push(termDefs[i].children[1].innerHTML)
-            }
+        //     for (var i = 0; i < termDefs.length; i++) {
+        //         terms.push(termDefs[i].children[0].innerHTML)
+        //         defs.push(termDefs[i].children[1].innerHTML)
+        //     }
 
-            for (var i = 0; i < termDefs.length; i++) {
-                termDefs[i].children[0].innerHTML = defs[i]
-                termDefs[i].children[1].innerHTML = terms[i]
-            }
-        }
-        // document.getElementById("useAsGuest").addEventListener("click", function(){
-        //     setLocalUsage();
-        // });
-        else{
+        //     for (var i = 0; i < termDefs.length; i++) {
+        //         termDefs[i].children[0].innerHTML = defs[i]
+        //         termDefs[i].children[1].innerHTML = terms[i]
+        //     }
+        // }
+        // // document.getElementById("useAsGuest").addEventListener("click", function(){
+        // //     setLocalUsage();
+        // // });
+        // else{
             var insideCreator = document.getElementById("insideCreator")
             var termDefs = insideCreator.children
             var terms = []
@@ -281,7 +290,7 @@
                 termDefs[i].children[0].innerHTML = defs[i]
                 termDefs[i].children[1].innerHTML = terms[i]
             }   
-        }
+        // }
     }
 </script>
 </html>
