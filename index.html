@@ -479,7 +479,8 @@
         var link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = 'snow.css';
+        // link.href = 'snow.css';
+        link.href = 'backgrounds/fireflies.css';
         document.getElementsByTagName('HEAD')[0].appendChild(link);
         
         var container = document.createElement("div");
@@ -488,7 +489,8 @@
 
         for (var i = 0; i < 50; i++) {
             var snowflake = document.createElement("div");
-            snowflake.classList.add("snowflake");
+            // snowflake.classList.add("snowflake");
+            snowflake.classList.add("firefly");
             container.appendChild(snowflake);
         }
     }
