@@ -9,9 +9,6 @@
     <link rel="stylesheet" href="stylesheet.css">
     <link rel="icon" href="circular lang icon.png">
     <style>
-        body {
-            overflow-y: scroll;
-        }
         /* change */
         ::-webkit-scrollbar {
             display: none;
@@ -22,26 +19,65 @@
 <body style="background: linear-gradient(180deg, #001945 35.94%, #000011 100%); overflow-x:hidden;">
     <div id="header0" style="width: 100vw ">
         <div class="horizontalFlex header" id="overallheader">
-            
-            <div>
-                <img style="height: 10vh; margin-left:10px;" src="assets/logos/lang.png">
-            </div>
-            <h1 class="welcome">Welcome to Lang!</h1>
+            <img style="height: 10vh;" src="assets/logos/lang.png">
         </div>
     </div>
-
-    </div>
     <div>
-        <div style="justify-content:space-around; align-items: center; text-align:center; display:flex; height:90vh; flex-wrap: wrap;">
-            <div style="min-width:500px; background-color:#2F3D73; width:40vw; border-radius:50px; display:flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box; padding: 25px;">
+        <div class="welcome" id="welcome">
+            Welcome to Lang!
+            <p class="smallText" style="text-align: center;">Free, fast, and focused studying by Lye Software</p>
+        </div>
+
+        <div class="signup">
+            <div style="min-width: 300px; flex: 0.8;">
+                <div class="largeText">Start Studying!</div>
+                <div>Create your free Lye Account to access your Lang account and studysheets from anywhere</div>
+                <div style="font-size: 10px; margin-top:7px;">By signing up for an account, you agree to the Lang Terms of Service, which can be found <a href='langlegal.html' style="color: var(--primary-dark)">here</a></div>
+            </div>
+            <div class="horizontalFlex" style="flex: 0.2;">
+                <div id="login" class="signInButton " style="margin-right: 20px;" onclick="window.location.href='https://lye.software/signin?forward=langstudy.tech-index.html'">
+                    Log In
+                </div>
+                <div class="signInButton buttonHoverDark" onclick="window.location.href='https://lye.software/signup?forward=langstudy.tech-index.html'">
+                    Sign Up
+                </div>
+            </div>
+        </div>
+
+        <div class="panelcontainer">
+            <div class="panel lightGlow largeText" style="font-size: 25px;">
+                Study Smarter, not harder.
+                <br>
+                <br>
+                <div class="smallText" style="font-size: 15px;">
+                    Lang allows for a wide variety of studying methods.
+                </div>
+                <div class="smallText" style="font-size: 15px;">
+                    Use a rich collection of review methods to ensure memorization of content. Lang also commits to regular feature updates, including AI functionality, so that you always know you are using the best studying tool.
+                </div>
+
+            </div>
+            <div class="panel lightGlow largeText" style="font-size: 25px;"> 
+                Break Free from the Shackles of modern standards.
+                <br>
+                <br>
+                <div class="smallText" style="font-size: 15px;">
+                    We believe you should own the software you use, and Lang is completely free for everyone to use. No features are hidden behind a paywall. Similarly, we believe in privacy for all users, and Lang is not only open source and ad-free, but we use no trackers.
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+
+
+        <!-- <div style="justify-content:space-around; align-items: center; text-align:center; display:flex; height:90vh; flex-wrap: wrap;">
+            <div style="min-width:500px; background-color:#2F3D73; width:40vw; border-radius:50px; display:flex; flex-direction: column; align-items: center; justify-content: center;">
                 <h1 class="start">Start Studying</h1>
-                <br> <!-- change -->
                 <p class="explText" style="color:wheat; text-align: center;">Lang is an easy to use, ad free, and open source studying tool. To start, we recommend creating a free account to access your study sheets from any device.</p>
-                <br><!-- change -->
-                <div class="button centerText" style="margin: 10px; background-color: var(--primary-light); color: var(--primary-dark);" onclick="window.location.href='https://lye.software/signin?forward=langstudy.tech-index.html'">Log In</div>
-                <div class="button centerText" style="margin: 0px; background-color: var(--primary-light); color: var(--primary-dark);" onclick="window.open('https://lye.software/signup?forward=langstudy.tech-index.html')">Sign Up</div>
-                <br><!-- change -->
-                <div style="color: var(--primary-light); font-size:10px; margin: 20px;">
+                <div class="button centerText" style="background-color: var(--primary-light); color: var(--primary-dark);" onclick="window.location.href='https://lye.software/signin?forward=langstudy.tech-index.html'">Log In</div>
+                <div class="button centerText" style="background-color: var(--primary-light); color: var(--primary-dark);" onclick="window.open('https://lye.software/signup?forward=langstudy.tech-index.html')">Sign Up</div>
+                <div style="color: var(--primary-light); font-size:10px;">
                     Please remember that Lang is currently in beta. You may run into bugs or issues. If you do, please report them on GitHub.
                 </div>
                 
@@ -49,7 +85,7 @@
                     By signing up for an account, you agree to the Lang Terms of Service, which can be found <a href='langlegal.html' style="color:wheat;">here</a>.
                 </div>
             </div>
-            <div style="max-width: 750px; min-width: 500px; flex:1; box-sizing: border-box; padding: 50px;">
+            <div style="max-width: 750px; min-width: 500px; flex:1;">
                 <h1 class="explHeader">Study Smarter, not harder.</h1>
                 <p class="explText">Lang allows for a wide variety of studying methods.</p>
                 <br>
@@ -59,61 +95,165 @@
             </div>
         </div>
         <div>
-        </div>
+        </div> -->
     </div>
     
 </body>
 <style>
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    :body::-webkit-scrollbar {
-        display: none;
+    .signInButton {
+        width: 100px;
+        background-color: var(--primary-dark);
+        color: var(--primary-light);
+        border-radius: 25px;
+        text-align: center;
+        padding: 10px;
     }
 
-    /* Hide scrollbar for IE, Edge and Firefox */
-    body {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-    }
-    .welcome{
-        font-family: 'Rubik Mono One';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 40px;
-        /* line-height: 50px; */
+    #login{
+        background-color: var(--primary-light);
+        color: var(--primary-dark);
+        transition: all 0.25s ease-in-out;
+        border: 3px solid var(--primary-dark);
 
-        color: #001945;
     }
-    .start{
-        font-family: 'Rubik Mono One';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 40px;
-        /* line-height: 50px; */
-        /* text-align: center; */
-
-        color: #F5DEB3;
-
-        margin: 10px;
+    #login:hover{
+        background-color: var(--primary-dark);
+        color: var(--primary-light);
     }
-    .explHeader{
+    
+    .largeText {
         font-family: 'Rubik Mono One';
         font-style: normal;
         font-weight: 400;
         font-size: 33px;
-
-        color: #FFFFFF;
-        
-        margin: 0;
     }
-    .explText{
+
+    .signup {
+        max-height: 200px;
+        height: 20vh;
+        min-height: 200px;
+
+        background-color: var(--primary-light);
+        color: var(--primary-dark);
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 50px;
+
+        flex-wrap: wrap;        
+    }
+    
+    .welcome{
+        position: relative; 
+        font-family: 'Rubik Mono One';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 40px;
+
+        color: var(--primary-light);
+
+        left: 0;
+        right: 0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        padding: 0 10vw;
+
+        height: 70vh;
+
+        margin: 0;
+
+        /* background-color: orange; */
+
+        text-align: center;
+
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(5px);
+    }
+
+    .welcome::before {
+        width: 100%;
+        height: 100%;
+        backdrop-filter: brightness(40%);
+        -webkit-backdrop-filter: brightness(40%);
+
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        content: "";
+        z-index: -1;
+    }
+
+    .welcome::after {
+        background-image: url('assets/icons/onboardingBackground.png');
+        background-size: 300px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        content: "";
+
+        z-index: -2;
+    }
+
+    .smallText {
         font-family: 'Poppins';
         font-style: normal;
         font-weight: 700;
         font-size: 23px;
+    }
 
-        color: #FFFFFF;
+    .panelcontainer {
+        left: 0;
+        right: 0;
 
-        margin: 0;
+        min-height: 50vh;
+
+        margin: 50px 100px;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    .panel {
+        background-color: var(--primary-dark);
+
+        flex: 1;
+        min-width: 300px;
+        height: 400px;
+        max-width: 500px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        text-align: center;
+        padding: 15px;
+
+        border: 1px solid var(--primary-light);
+
+        color: var(--primary-light);
     }
 </style>
+<style id="sussyJavaScript">
+
+</style>
+<script>
+    window.onscroll = function() {
+        var scroll = window.scrollY;
+        // get sussyJavaScript style element
+        var sussyJavaScript = document.getElementById("sussyJavaScript");
+        // set the innerHTML to be #welcome::after { }
+        sussyJavaScript.innerHTML = "#welcome::after { background-position: 0 " + scroll + "px; }";
+    };
+</script>
 </html>

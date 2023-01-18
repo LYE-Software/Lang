@@ -84,13 +84,44 @@
         </div>
     </div>
     
-    
 
 
 </body>
+<style>
+
+</style>
 <script>
+
+
+    cssToTempAdd = `
+    
+    .slider {
+        transition: 0s !important;
+        -webkit-transition: 0s !important;
+    }
+
+    .slider:before {
+        transition: 0s !important;
+        -webkit-transition: 0s !important;
+    }
+    `
+
     function settingsRun(){
         checkSettings()
     }
+
+    function preload() {
+        var head = document.getElementsByTagName('HEAD')[0];
+        var style = document.createElement('style');
+        style.type = 'text/css';
+        style.innerHTML = cssToTempAdd;
+        head.appendChild(style);
+
+        setTimeout(function(){
+            head.removeChild(style);
+        }, 401);
+    }
+
+    preload();
 </script>
 </html>
