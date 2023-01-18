@@ -1748,9 +1748,9 @@ function gameLoop(){
             doWriteTrain(term, definition)
         } else if (mode == 4){
             doWriteTrain(term, definition)
-        } else if (mode == 5){
-            console.log("review")
-            t++
+        } else if (mode == 5){            
+            isFinished()
+            
     
         }
         
@@ -1761,6 +1761,13 @@ function gameLoop(){
    
     }
     
+}
+
+function isFinished(){
+    console.log("review")
+    console.log("Finished T = "+t);
+    t++
+    gameLoop()
 }
 
 function readTermDef(term, def){
