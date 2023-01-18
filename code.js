@@ -78,37 +78,40 @@ function updateScaling() {
 async function shareLink(){
     var url_string = window.location.href; //window.location.href
     var url = new URL(url_string);
-    if(url.searchParams.get("userid")!= null){
+    if(url.searchParams.get("userid") != null){
         sessionid = url.searchParams.get("userid")
         chosensheet = url.searchParams.get("sheetName")
-        document.getElementById("linkholder").innerHTML = "https://langstudy.tech/studysheetpage.html?userid="+sessionid+"&sheetName="+chosensheet;
+        document.getElementById("linkholder").innerHTML = url;
     }
-    console.log("insharelink")
+    else{
+        console.log("insharelink")
+        
+        lyeUrl = "https://lye.software/idfromsession/"+window.localStorage.getItem("usertoken")
+        console.log(lyeUrl)
+        tempTok = await httpGet(lyeUrl, true)
+        // fetch(lyeUrl, {
+        // 	method: 'GET',
+        // 	headers: {
+        // 		"lye-origin": "langstudy.tech/index.html"
+        // 	},
+        // })
+        // .then(
+        // response  => {
+        //     console.log(response);
+        //     tempTok = response;
+        // },
+        // rejection => {
+        //     console.error(rejection.message);
+        // }
+        // );
+        sheetName = window.localStorage.getItem("chosenSheet").replaceAll(" ", "%20");
+        url = "https://langstudy.tech/studysheetpage.html?userid="+tempTok+"&sheetName="+sheetName;
+        document.getElementById("linkholder").innerHTML = url;
+        console.log(url)
+    }
     document.getElementById("sharinglink").style.display = ""
     document.getElementById("sharinglink").style.opacity = 1;
     document.getElementById("sharinglink").style.pointerEvents = "all";
-    lyeUrl = "https://lye.software/idfromsession/"+window.localStorage.getItem("usertoken")
-    console.log(lyeUrl)
-    tempTok = await httpGet(lyeUrl, true)
-    // fetch(lyeUrl, {
-	// 	method: 'GET',
-	// 	headers: {
-	// 		"lye-origin": "langstudy.tech/index.html"
-	// 	},
-	// })
-    // .then(
-    // response  => {
-    //     console.log(response);
-    //     tempTok = response;
-    // },
-    // rejection => {
-    //     console.error(rejection.message);
-    // }
-    // );
-    sheetName = window.localStorage.getItem("chosenSheet").replaceAll(" ", "%20");
-    url = "https://langstudy.tech/studysheetpage.html?userid="+tempTok+"&sheetName="+sheetName;
-    document.getElementById("linkholder").innerHTML = url;
-    console.log(url)
 }
 
 var broken = `<!doctype html>
@@ -1773,12 +1776,12 @@ function readTermDef(term, def){
 
 function doWriteTrain(term, def){
     var wage = document.getElementById("input");
-    // wage.addEventListener("keydown", function (e) {
-    //     if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
-    //         console.log("ENTER PRESS: t = "+t+" customAnswer = "+customAnswer+"")
-    //         checkTrain()
-    //     }
-    // });
+     wage.addEventListener("keydown", function (e) {
+         if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+             console.log("ENTER PRESS: t = "+t+" customAnswer = "+customAnswer+"")
+             document.getElementById("goButton").click;
+         }
+    });
     wage.innerHTML = ""
     wage.value = ""
     var inputs = document.getElementsByClassName("inputdiv");
