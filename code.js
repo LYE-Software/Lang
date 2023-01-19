@@ -76,6 +76,9 @@ function updateScaling() {
 }
 
 async function shareLink(){
+    document.getElementById("sharinglink").style.display = ""
+    document.getElementById("sharinglink").style.opacity = 1;
+    document.getElementById("sharinglink").style.pointerEvents = "all";
     var url_string = window.location.href; //window.location.href
     var url = new URL(url_string);
     if(url.searchParams.get("userid") != null){
@@ -109,9 +112,7 @@ async function shareLink(){
         document.getElementById("linkholder").innerHTML = url;
         console.log(url)
     }
-    document.getElementById("sharinglink").style.display = ""
-    document.getElementById("sharinglink").style.opacity = 1;
-    document.getElementById("sharinglink").style.pointerEvents = "all";
+    
 }
 
 var broken = `<!doctype html>
