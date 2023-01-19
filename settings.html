@@ -44,16 +44,15 @@
     </div>
     <div>
         <div class="horizontalFlex" style="background: linear-gradient(180deg, #001945 35.94%, #000011 100%); width:100%; width:100%; height:100%; justify-content: space-evenly; flex-wrap: wrap; overflow-y: visible">
-            <div class="lightGlow" style="box-sizing: border-box; display: flex; flex-direction: column; background-color:var(--primary-light); max-width: 350px; height:60vh; margin:20px; border-radius:15px; padding:20px;">
-                <h1 style="font-family: 'Poppins', sans-serif; font-size: 20px">Study Settings</h1>
+            <div class="lightGlow" style="box-sizing: border-box; display: flex; flex-direction: column; background-color:var(--primary-light); width: 350px; height:60vh; margin:20px; border-radius:15px; padding:20px;">
+                <h1 style="font-family: 'Poppins', sans-serif; font-size: 20px">Application Settings</h1>
 
                 <div class="horizontalFlex">
                     <label class="switch" style="display: inline-block"> 
                         <input id = "randomchoice" type="checkbox" onclick="makeRandom()">
                         <span class="slider round"></span>
                     </label>
-                    <p style="display: inline-block; width: 50%;" class="">Turn on Random Selection</p>
-                    <button style="display: inline-block; background-color:#001945;color:var(--primary-light);"onclick="alert('This changes how the questions are chosen- by default, it is read down the list with no chance of repeating. This changes it to random, which switches the order but allows repeats.')">?</button>
+                    <p style="display: inline-block; width: 69%;" class="">Random Selection</p>
                 </div>
 
                 <div class="horizontalFlex">
@@ -63,10 +62,16 @@
                     </label>
                     <p style="display: inline-block; width: 69%;" class="">Enable Local Studying</p>
                 </div>
-
+                <div class="horizontalFlex">
+                    <label class="switch" style="display: inline-block"> 
+                        <input id = "firefliesChoice" type="checkbox" onclick="doFireflies()">
+                        <span class="slider round"></span>
+                    </label>
+                    <p style="display: inline-block; width: 69%;" class="">Disable Fireflies</p>
+                </div>
                 <div class="flexSpacer"></div>
                 <div style="width:10vw; margin-bottom:10px;">
-                    <p>Lang Version 4.3.0. <br><a href="updates.html">Learn More</a></p>
+                    <p>Lang Version 4.3.1. <br><a href="updates.html">Learn More</a></p>
                 </div>
             </div>
             <div class="lightGlow" style="box-sizing: border-box; background-color:var(--primary-light); width: 350px; height:60vh; margin:20px; border-radius:15px; padding:20px; display:flex; text-align:left; align-items: center; flex-direction:column;">

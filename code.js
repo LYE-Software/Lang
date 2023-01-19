@@ -506,6 +506,17 @@ async function getLibraryList(){
         console.log("Local Studying is disabled.")
     }
 
+    // check for library list
+
+    if (window.localStorage.getItem("doFireflies") != null){
+        if (window.localStorage.getItem("doFireflies") == "true"){
+            enableSnow();
+        } else{
+            console.log("Fireflies are disabled.")
+        }
+    } else {
+        enableSnow();
+    }
 
     customuser=window.localStorage.getItem("username");
     window.localStorage.setItem("fullstudysheet", "");
@@ -1008,6 +1019,25 @@ function getRandomQuestion(textBlock) {
     
     // document.getElementById('file').innerText = this.result; // places text into webpage
 }
+
+
+function doFireflies(){
+    if (document.getElementById("firefliesChoice").checked == true){
+        console.log("fireflies toggled off");
+        window.localStorage.setItem("doFireflies", "false");
+        
+        
+
+        
+
+    }
+    else{
+        console.log("fireflies toggled on");
+        window.localStorage.setItem("doFireflies", "true");
+        
+    }
+}
+
 
 function makeRandom(){
     if (document.getElementById("randomchoice").checked == true){
@@ -2715,6 +2745,12 @@ function checkSettings(){
         document.getElementById("localchoice").checked = true    
     } else{
         document.getElementById("localchoice").checked = false
+    }
+
+    if (window.localStorage.getItem("doFireflies") == "false"){
+        document.getElementById("firefliesChoice").checked = true    
+    } else{
+        document.getElementById("firefliesChoice").checked = false
     }
         
 
