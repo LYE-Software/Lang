@@ -76,39 +76,43 @@ function updateScaling() {
 }
 
 async function shareLink(){
-    var url_string = window.location.href; //window.location.href
-    var url = new URL(url_string);
-    if(url.searchParams.get("userid")!= null){
-        sessionid = url.searchParams.get("userid")
-        chosensheet = url.searchParams.get("sheetName")
-        document.getElementById("linkholder").innerHTML = "https://langstudy.tech/studysheetpage.html?userid="+sessionid+"&sheetName="+chosensheet;
-    }
-    console.log("insharelink")
     document.getElementById("sharinglink").style.display = ""
     document.getElementById("sharinglink").style.opacity = 1;
     document.getElementById("sharinglink").style.pointerEvents = "all";
-    lyeUrl = "https://lye.software/idfromsession/"+window.localStorage.getItem("usertoken")
-    console.log(lyeUrl)
-    tempTok = await httpGet(lyeUrl, true)
-    // fetch(lyeUrl, {
-	// 	method: 'GET',
-	// 	headers: {
-	// 		"lye-origin": "langstudy.tech/index.html"
-	// 	},
-	// })
-    // .then(
-    // response  => {
-    //     console.log(response);
-    //     tempTok = response;
-    // },
-    // rejection => {
-    //     console.error(rejection.message);
-    // }
-    // );
-    sheetName = window.localStorage.getItem("chosenSheet").replaceAll(" ", "%20");
-    url = "https://langstudy.tech/studysheetpage.html?userid="+tempTok+"&sheetName="+sheetName;
-    document.getElementById("linkholder").innerHTML = url;
-    console.log(url)
+    var url_string = window.location.href; //window.location.href
+    var url = new URL(url_string);
+    if(url.searchParams.get("userid") != null){
+        sessionid = url.searchParams.get("userid")
+        chosensheet = url.searchParams.get("sheetName")
+        document.getElementById("linkholder").innerHTML = url;
+    }
+    else{
+        console.log("insharelink")
+        
+        lyeUrl = "https://lye.software/idfromsession/"+window.localStorage.getItem("usertoken")
+        console.log(lyeUrl)
+        tempTok = await httpGet(lyeUrl, true)
+        // fetch(lyeUrl, {
+        // 	method: 'GET',
+        // 	headers: {
+        // 		"lye-origin": "langstudy.tech/index.html"
+        // 	},
+        // })
+        // .then(
+        // response  => {
+        //     console.log(response);
+        //     tempTok = response;
+        // },
+        // rejection => {
+        //     console.error(rejection.message);
+        // }
+        // );
+        sheetName = window.localStorage.getItem("chosenSheet").replaceAll(" ", "%20");
+        url = "https://langstudy.tech/studysheetpage.html?userid="+tempTok+"&sheetName="+sheetName;
+        document.getElementById("linkholder").innerHTML = url;
+        console.log(url)
+    }
+    
 }
 
 var broken = `<!doctype html>
@@ -502,6 +506,17 @@ async function getLibraryList(){
         console.log("Local Studying is disabled.")
     }
 
+    // check for library list
+
+    if (window.localStorage.getItem("doFireflies") != null){
+        if (window.localStorage.getItem("doFireflies") == "true"){
+            enableSnow();
+        } else{
+            console.log("Fireflies are disabled.")
+        }
+    } else {
+        enableSnow();
+    }
 
     customuser=window.localStorage.getItem("username");
     window.localStorage.setItem("fullstudysheet", "");
@@ -1004,6 +1019,25 @@ function getRandomQuestion(textBlock) {
     
     // document.getElementById('file').innerText = this.result; // places text into webpage
 }
+
+
+function doFireflies(){
+    if (document.getElementById("firefliesChoice").checked == true){
+        console.log("fireflies toggled off");
+        window.localStorage.setItem("doFireflies", "false");
+        
+        
+
+        
+
+    }
+    else{
+        console.log("fireflies toggled on");
+        window.localStorage.setItem("doFireflies", "true");
+        
+    }
+}
+
 
 function makeRandom(){
     if (document.getElementById("randomchoice").checked == true){
@@ -1748,9 +1782,9 @@ function gameLoop(){
             doWriteTrain(term, definition)
         } else if (mode == 4){
             doWriteTrain(term, definition)
-        } else if (mode == 5){
-            console.log("review")
-            t++
+        } else if (mode == 5){            
+            isFinished()
+            
     
         }
         
@@ -1761,6 +1795,13 @@ function gameLoop(){
    
     }
     
+}
+
+function isFinished(){
+    console.log("review")
+    console.log("Finished T = "+t);
+    t++
+    gameLoop()
 }
 
 function readTermDef(term, def){
@@ -1774,12 +1815,12 @@ function readTermDef(term, def){
 
 function doWriteTrain(term, def){
     var wage = document.getElementById("input");
-    // wage.addEventListener("keydown", function (e) {
-    //     if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
-    //         console.log("ENTER PRESS: t = "+t+" customAnswer = "+customAnswer+"")
-    //         checkTrain()
-    //     }
-    // });
+     wage.addEventListener("keydown", function (e) {
+         if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+             console.log("ENTER PRESS: t = "+t+" customAnswer = "+customAnswer+"")
+             document.getElementById("goButton").click;
+         }
+    });
     wage.innerHTML = ""
     wage.value = ""
     var inputs = document.getElementsByClassName("inputdiv");
@@ -2705,6 +2746,12 @@ function checkSettings(){
     } else{
         document.getElementById("localchoice").checked = false
     }
+
+    if (window.localStorage.getItem("doFireflies") == "false"){
+        document.getElementById("firefliesChoice").checked = true    
+    } else{
+        document.getElementById("firefliesChoice").checked = false
+    }
         
 
 
@@ -3005,7 +3052,6 @@ function saveToCloud(){
         console.log("FILE NAME+ "+filename)
         if(window.localStorage.getItem('editSheet')=="true") {
             var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/edit/"+filename;
-            window.localStorage.setItem('editSheet', "false");
         } else {
             var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/upload/"+filename;
         }
