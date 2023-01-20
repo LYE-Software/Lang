@@ -3052,7 +3052,6 @@ function saveToCloud(){
         console.log("FILE NAME+ "+filename)
         if(window.localStorage.getItem('editSheet')=="true") {
             var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/edit/"+filename;
-            window.localStorage.setItem('editSheet', "false");
         } else {
             var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/upload/"+filename;
         }
