@@ -1887,7 +1887,7 @@ function checkTrain(){
         buttonStyling.style.backgroundColor = "#ce1483"
         document.getElementById("wherearewe").innerHTML = "Correct answer was: "+customAnswer
         setTimeout(function () { buttonStyling.style.backgroundColor = "wheat" }, 1000)
-        setTimeout(function () { document.getElementById("wherearewe").innerHTML = "" }, 1000)
+        setTimeout(function () { document.getElementById("wherearewe").innerHTML = "" }, 4000)
         gameLoop()
     }
 }
