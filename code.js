@@ -1448,6 +1448,8 @@ async function getTheFile() {
 
 //function called when button to begin custom verb read is called- creates inputs & calls other functions to get questions
 
+var isTrainWrite = false;
+
 function onBtnPress(v) {
     
     if (window.localStorage.getItem("fullstudysheet")!="" && window.localStorage.getItem("fullstudysheet")!=null){
@@ -1477,6 +1479,15 @@ function onBtnPress(v) {
             
             doMultipleChoice()
         } else if( v=="t"){
+            var wage = document.getElementById("input");
+                wage.addEventListener("keydown", function (e) {
+                    if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+                        console.log("ENTER PRESS: t = "+t+" customAnswer = "+customAnswer+"")
+                        if (isTrainWrite == true){
+                            checkTrain()
+                        }
+                    }
+                });
             doTrain();
         }
         else{
@@ -1536,6 +1547,15 @@ function onBtnPress(v) {
                 
                 doMultipleChoice()
             }else if( v=="t"){
+                var wage = document.getElementById("input");
+                wage.addEventListener("keydown", function (e) {
+                    if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+                        console.log("ENTER PRESS: t = "+t+" customAnswer = "+customAnswer+"")
+                        if (isTrainWrite == true){
+                            checkTrain()
+                        }
+                    }
+                });
                 doTrain();
             }
             else{
@@ -1706,6 +1726,7 @@ function doTrain(){
 
 var t = 0
 function gameLoop(){
+    isTrainWrite = false;
     if (t == group.length){
         t = 0;
     }
@@ -1779,8 +1800,10 @@ function gameLoop(){
         } else if (mode == 2){
             doTrainMulti(term, definition)
         } else if (mode == 3){
+            isTrainWrite = true;
             doWriteTrain(term, definition)
         } else if (mode == 4){
+            isTrainWrite = true;
             doWriteTrain(term, definition)
         } else if (mode == 5){            
             isFinished()
@@ -1815,12 +1838,6 @@ function readTermDef(term, def){
 
 function doWriteTrain(term, def){
     var wage = document.getElementById("input");
-     wage.addEventListener("keydown", function (e) {
-         if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
-             console.log("ENTER PRESS: t = "+t+" customAnswer = "+customAnswer+"")
-             document.getElementById("goButton").click;
-         }
-    });
     wage.innerHTML = ""
     wage.value = ""
     var inputs = document.getElementsByClassName("inputdiv");
