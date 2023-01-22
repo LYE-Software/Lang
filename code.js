@@ -196,6 +196,15 @@ async function doPreviewAndLocal(){
         // answerInput.innerHTML="Put Answer Here";
         br.appendChild(answerInput);
     }
+    if (arrayText.length<4){
+        document.getElementById("trainbutton").style.backgroundColor = "#a0a0a0";
+        document.getElementById("multiplechoicebutton").style.backgroundColor = "#a0a0a0";
+        document.getElementById("trainbutton").onclick = function(){alert("You need at least 4 terms to do Train.")}
+        document.getElementById("multiplechoicebutton").onclick = function(){alert("You need at least 4 terms to do Multiple Choice.")}
+        document.getElementById("trainbutton").style.borderColor = "#a0a0a0"
+        document.getElementById("multiplechoicebutton").style.borderColor = "#a0a0a0"
+
+    }
 
 }
 
@@ -1700,6 +1709,7 @@ function doTrain(){
     }
     console.log(customWords)
     let arrayText = customWords.split('\n')
+    
     let groups = []
     for (i = 0; i<arrayText.length; i+=5){
         const group = arrayText.slice(i, i+5);
@@ -1742,9 +1752,12 @@ function gameLoop(){
             groups.push(group);
         }
         console.log(groups)
-        
+        if (whichGroup > groups.length-1){
+            document.getElementById("completedTrain").style.opacity = '1';
+            document.getElementById("completedTrain").style.pointerEvents = 'all';
+        }
         group = groups[whichGroup]
-
+        
         for (j = 0; j<group.length; j++){
             dict[j] = 0;
         }

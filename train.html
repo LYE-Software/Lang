@@ -8,7 +8,88 @@
     <script src="code.js"></script>
     <link rel="icon" href="circular lang icon.png">
 </head>
+<style>
+    :root {
+    --primary-dark: #001945;
+    --primary-light: wheat;
+}
+    .absolute {
+        position: absolute;
+    }
+    .horizontalFlex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+    
+.fullAbsolute {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.verticalFlex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.centerFlex {
+    justify-content: center;
+    align-items: center;
+}
+
+.flexSpacer {
+    flex: 1;
+}
+
+.lightGlow {
+    -webkit-box-shadow:0px 0px 50px 0px var(--primary-light);
+    -moz-box-shadow: 0px 0px 50px 0px var(--primary-light);
+    box-shadow: 0px 0px 50px 0px var(--primary-light);
+}
+.centerText {
+    text-align: center;
+}
+
+.buttonHoverDark {
+    transition: all 0.25s ease-in-out;
+    background-color: var(--primary-dark);
+    color: var(--primary-light);
+    border: 3px solid var(--primary-dark);
+}
+
+.buttonHoverDark:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+}
+
+
+.button {
+    border-radius: 1000000px;
+    height: 3vh;
+    width: 10vw;
+    padding: 1vh;
+    background-color: var(--primary-dark);
+    margin: 2vh;
+    cursor: pointer;
+    user-select: none;
+}
+
+
+</style>
 <body class="darkHomepage">
+    <div id="completedTrain" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat;">
+            <div style="margin-top: 10px; color:#001945; ">Congratulations! You have completed Train for this Studysheet.</div>
+            <div style="margin-top: 10px;">You can return to the Homepage or you can go back to the Study options.</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0; " onclick="window.location.href='index.html'">Home</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="window.location.href='studysheetpage.html'">Study Options</div>
+        </div>
+    </div>
     <div class="samelineheader">
         <a href="studysheetpage.html">
             <img src="assets/icons/back.svg" style="left:0; top:0;">
@@ -88,5 +169,7 @@
     </div>
 
     <div style="color:wheat; font-family: Poppins; text-align: center; font-size: 2.2vw;" id="wherearewe"></div>
+
+    
 </body>
 </html>
