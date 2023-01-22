@@ -199,8 +199,14 @@ async function doPreviewAndLocal(){
     if (arrayText.length<4){
         document.getElementById("trainbutton").style.backgroundColor = "#a0a0a0";
         document.getElementById("multiplechoicebutton").style.backgroundColor = "#a0a0a0";
-        document.getElementById("trainbutton").onclick = function(){alert("You need at least 4 terms to do Train.")}
-        document.getElementById("multiplechoicebutton").onclick = function(){alert("You need at least 4 terms to do Multiple Choice.")}
+        document.getElementById("trainbutton").onclick = function(){
+            document.getElementById('tooFewTerms').style.pointerEvents = "all";
+            document.getElementById('tooFewTerms').style.opacity = 1;
+        }
+        document.getElementById("multiplechoicebutton").onclick = function(){
+            document.getElementById('tooFewTerms').style.pointerEvents = "all";
+            document.getElementById('tooFewTerms').style.opacity = 1;
+        }
         document.getElementById("trainbutton").style.borderColor = "#a0a0a0"
         document.getElementById("multiplechoicebutton").style.borderColor = "#a0a0a0"
 
