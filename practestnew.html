@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="stylesheet.css">
     <link rel="icon" href="circular lang icon.png">
     <script src="code.js"></script>
+    <style id="sussyJavaScript"></style>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Rubik+Mono+One&display=swap');
         .rubik{
@@ -114,4 +115,30 @@
         </a>
     </div>
 </body>
+
+<script>
+    window.onscroll = function() {
+        var scroll = window.scrollY;
+        // get sussyJavaScript style element
+        var sussyJavaScript = document.getElementById("sussyJavaScript");
+        // set the innerHTML to be #welcome::after { }
+        sussyJavaScript.innerHTML = "body { background-position: 0 " + scroll + "px; }";
+    };
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+            var focused = document.activeElement;
+            var top = focused.offsetTop;
+            top -= 200;
+            if (top < 0) {
+                top = 0;
+            }
+            window.scroll({
+                top: top,
+                left: 0,
+                behavior: 'smooth'
+            });
+        }
+    });
+</script>
 </html>
