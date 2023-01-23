@@ -2229,7 +2229,10 @@ function checkTest(){
         idnum = input.id;
         responseIdTmp = "response"+idnum;
         responseText = document.getElementById(responseIdTmp)
-        if (input.value == input.getAttribute("data-correct")){
+        correctAnswer = input.getAttribute("data-correct");
+        correctAnswer = correctAnswer.trim();
+        correctAnswer = correctAnswer.toLowerCase(); 
+        if (input.value.trim() == correctAnswer){
             counter++;
             responseText.innerHTML = "Correct!";
             responseText.style.color = "#3e8e41";
