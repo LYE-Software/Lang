@@ -1722,7 +1722,10 @@ function doTrain(){
         groups.push(group);
     }
     console.log(groups)
-    
+    document.getElementById("whatGroup").innerHTML = "Group "+(whichGroup+1)+" of "+groups.length;
+    document.getElementById("whatGroup").style.display = "";
+    document.getElementById("whatPercent").style.display = "";
+
     group = groups[whichGroup]
 
     for (j = 0; j<group.length; j++){
@@ -1762,8 +1765,9 @@ function gameLoop(){
             document.getElementById("completedTrain").style.opacity = '1';
             document.getElementById("completedTrain").style.pointerEvents = 'all';
         }
+        document.getElementById("whatGroup").innerHTML = "Group "+(whichGroup+1)+" of "+groups.length;
         group = groups[whichGroup]
-        
+        document.getElementById("whatGroup").style.display = "";
         for (j = 0; j<group.length; j++){
             dict[j] = 0;
         }
@@ -1771,6 +1775,14 @@ function gameLoop(){
             
         t = 0;
     }
+
+    totalForDisplaying = 0;
+    for (j = 0; j<group.length; j++){
+        totalForDisplaying += dict[j];
+    }
+    percentVal = totalForDisplaying/(group.length*5)*100;
+    document.getElementById("whatPercent").innerHTML = "Percent Completion of This Group: "+percentVal.toFixed(2)+"%";
+
     // potential issue with the going down
     // still needs to go on to next group
     console.log("Running game loop. T = "+t)
