@@ -1781,7 +1781,7 @@ function gameLoop(){
         totalForDisplaying += dict[j];
     }
     percentVal = totalForDisplaying/(group.length*5)*100;
-    document.getElementById("whatPercent").innerHTML = "Percent Completion of This Group: "+percentVal.toFixed(2)+"%";
+    document.getElementById("whatPercent").innerHTML = "Percent Completion of This Group: "+percentVal.toFixed(0)+"%";
 
     // potential issue with the going down
     // still needs to go on to next group
