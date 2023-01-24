@@ -2794,14 +2794,15 @@ function checkSettings(){
             document.getElementById("randomchoice").checked = false;
 
         } catch (error) {
-            
+            console.log("not on settings.html")
+
         }
 
     }
 
     if (window.localStorage.getItem("doLocal") == "true"){
         try{
-        document.getElementById("localchoice").checked = true    
+            document.getElementById("localchoice").checked = true    
         } catch (error){
             console.log("not on settings.html")
         }
