@@ -2145,8 +2145,9 @@ function doCustomSheets(v){
     });
     document.getElementById("crctst").innerHTML = "Correct: " + correctCounter
     document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectCounter
+    document.getElementById("hint").classList.remove("showHint");
 
-    document.getElementById("myBtnBegin").style.display = "none";
+    
     try {
         document.getElementById("file").style.display = "none";
 
@@ -2164,10 +2165,8 @@ function doCustomSheets(v){
     input.setAttribute("spellcheck", "off")
     input.style.display = "flex";
     buttonStyling = document.getElementById("goButton")
-    buttonStyling.style.display = "flex";
-    buttonStyling.innerHTML = ">" + "\n" + "Go!"
-    document.getElementById("stats").style.width = "15vw"
-    document.getElementById("stats").style.height = "110"
+    
+    
     document.getElementById("crctst").style.fontSize = "15"
     document.getElementById("incorrect").style.fontSize = "15"
     whichCustom = v;
@@ -2577,9 +2576,11 @@ function getInput() {
 function checkCustom(v){
     usrInput = input.value.toLowerCase();
     usrInput = usrInput.trim();
-    document.getElementById("hintText").style.display = "none";
+    //document.getElementById("hintText").style.display = "none";
+    document.getElementById("hintText").innerHTML = "";
+    document.getElementById("hint").classList.remove("showHint");
     if (usrInput == ""){
-        document.getElementById("hintText").style.display = "none";
+        //document.getElementById("hintText").style.display = "none";
     }
     else if (usrInput == customAnswer){
         correctCounter += 1
@@ -2602,7 +2603,7 @@ function checkCustom(v){
         input.value = ""
         incorrectCounter += 1
         try {
-            document.getElementById("helpbutton").style.display = "flex";
+            //document.getElementById("helpbutton").style.display = "flex";
         } catch (error) {
             
         }
@@ -2618,9 +2619,10 @@ function checkCustom(v){
 
 
 function helpCustom(){
+    
+    document.getElementById("hint").classList.add("showHint");
+    
     document.getElementById("hintText").innerHTML = customAnswer;
-    document.getElementById("hintText").style.display = "flex";
-    document.getElementById("helpbutton").style.display = "none";
     
     
 }
@@ -2793,15 +2795,36 @@ function checkSettings(){
     }
 
     if (window.localStorage.getItem("doLocal") == "true"){
+        try{
         document.getElementById("localchoice").checked = true    
+        } catch (error){
+            console.log("not on settings.html")
+        }
     } else{
-        document.getElementById("localchoice").checked = false
+        try{
+            document.getElementById("localchoice").checked = false
+        } catch (error){
+            console.log("not on settings.html")
+        }
+        
     }
 
     if (window.localStorage.getItem("doFireflies") == "false"){
+        try{
+            document.getElementById("firefliesChoice").checked = true 
         document.getElementById("firefliesChoice").checked = true    
+            document.getElementById("firefliesChoice").checked = true 
+        } catch (error){
+            console.log("not on settings.html")
+        }
+           
     } else{
-        document.getElementById("firefliesChoice").checked = false
+        try{
+            document.getElementById("firefliesChoice").checked = false
+        } catch (error){
+            console.log("not on settings.html")
+        }
+        
     }
         
 
