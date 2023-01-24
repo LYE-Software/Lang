@@ -2781,7 +2781,11 @@ function checkSettings(){
     let randomthing = window.localStorage.getItem("random");
     if (randomthing == "true"){
         doRandom = true;
-        document.getElementById("randomchoice").checked = true;
+        try{
+            document.getElementById("randomchoice").checked = true;
+        } catch(error){
+            console.log("not on settings.html")
+        }
 
     }
     else{
