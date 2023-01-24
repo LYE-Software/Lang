@@ -2231,7 +2231,8 @@ function checkTest(){
         correctAnswer = input.getAttribute("data-correct");
         correctAnswer = correctAnswer.trim();
         correctAnswer = correctAnswer.toLowerCase(); 
-        if (input.value.trim() == correctAnswer){
+        userValue = input.value.trim()
+        if (userValue.toLowerCase()== correctAnswer){
             counter++;
             responseText.innerHTML = "Correct!";
             responseText.style.color = "#3e8e41";
