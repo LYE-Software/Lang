@@ -3,8 +3,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link rel="stylesheet" href="stylesheet.css">
+    <title>Lang: Studying</title>
+    <link rel="icon" href="circular lang icon.png">
 
     <style>
         .panelContainer {
@@ -127,13 +128,15 @@
 <body>
     <a href="studysheetpage.html">
         <img src="assets/icons/back.svg" style="left:0; top:0; position: absolute; width: 150px; height: auto;">
+        <img src="assets/logos/lang-wheat.png"  style="position:absolute; width:100px; right:0; top:0; margin:20px;" onclick="window.location.href='index.html'">
+
     </a>
 
     <div class="panelContainer">
         <div class="horizontalFlex centerFlex">
             <div class="noverticalshow correctIncorrect lightGlow" style="height: 0;"></div>
-            <div class="answerContainer horizontalFlex centerFlex" style="color: wheat; font-size: 40px; margin-bottom: 20px;">
-                Hello
+            <div class="answerContainer horizontalFlex centerFlex" style="color: wheat; font-size: 40px; margin-bottom: 20px;" id="displayWord">
+                No Studysheet Detected.
             </div>
         </div>
         <div class="horizontalFlex centerFlex">
@@ -141,34 +144,35 @@
             <div class="answerContainer">
                 <div class="popupArea">
                     <div class="hintContainer">
-                        <div class="lightGlow" id="hint" style="background-color:var(--primary-dark);"></div>
+                        <div class="lightGlow horizontalFlex centerFlex" id="hint" style="background-color:var(--primary-dark);">
+                            <h1 id="hintText" style="color:wheat;"></h1>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="horizontalFlex centerFlex">
             <div class="noverticalshow correctIncorrect lightGlow">
-                <div>Correct</div>
-                <div>Incorrect</div>
+                <div id="crctst">Correct</div>
+                <div id="incorrect">Incorrect</div>
             </div>
             <div class="answerContainer">
-                <input class="inputArea lightGlow">
+                <input class="inputArea lightGlow" id="input">
             </div>
         </div>
         <div class="horizontalFlex centerFlex">
             <div class="noverticalshow correctIncorrect lightGlow" style="height: 0;"></div>
             <div class="answerContainer horizontalFlex centerFlex">
-                <div style="border-radius: 25px; flex: 2" class="horizontalFlex centerFlex buttonHover submitButton lightGlow">Submit</div>
+                <div style="border-radius: 25px; flex: 2" class="horizontalFlex centerFlex buttonHover submitButton lightGlow" id="goButton" onclick="checkCustom()">> Go!</div>
                 <div style="height: 10px; width: 10px;"></div>
-                <div style="border-radius: 25px;" class="horizontalFlex centerFlex buttonHover submitButton lightGlow">Hint</div>
+                <div style="border-radius: 25px;" class="horizontalFlex centerFlex buttonHover submitButton lightGlow" onclick="helpCustom()">Hint</div>
             </div>
         </div>
     </div>
 </body>
 <script src="code.js"></script>
 <script>
-        setTimeout(() => {
-            document.getElementById("hint").classList.add("showHint");
-        }, 1000);
+    checkSettings();
+    onBtnPress("s");
 </script>
 </html>
