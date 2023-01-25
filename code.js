@@ -416,7 +416,7 @@ async function httpGet(theUrl, lye){
         console.log("setting headers")
         xmlHttp.setRequestHeader("lye-origin", "langstudy.tech/index.html");
     }
-
+    xmlHttp.setRequestHeader("Keep-Alive", "timeout=10, max=5");
     console.log(xmlHttp.status)
     try {
         xmlHttp.send( null );
@@ -3206,6 +3206,7 @@ function saveToCloud(){
 
 function showPopup(textToShow){
     showElement(document.getElementById("popup"));
+    hideElement(document.getElementById("savePopup"))
     document.getElementById("popupText").innerHTML = textToShow;
 }
 

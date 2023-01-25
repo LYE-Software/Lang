@@ -124,7 +124,7 @@
         </div>
     </div>
 
-    <div id="popup" class="popupContainer">
+    <div id="popup" class="popupContainer" style="z-index:2000;">
         <div class="popup centerFlex verticalFlex">
             <div style="margin: 50px;">
                 <img style="height:10vh;" src="assets/icons/langerror.png" alt="error">
@@ -151,7 +151,7 @@
 
             <div style="margin-bottom: 30px; font-size: 15px;" id="amountOfTerms">Ready to save?</div>
             <div class="horizontalFlex">
-                <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 125px;" onclick="saveToCloud()">Yes, do it!</div>
+                <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 125px;" onclick="startSave()">Yes, do it!</div>
                 <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 125px;" onclick="hideElement(document.getElementById('savePopup'))">No, go back!</div>
             </div>
             
@@ -159,7 +159,7 @@
         </div>
     </div>
 
-    <div id="sendingLoader" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+    <div id="sendingLoader" class="absolute horizontalFlex centerFlex fullAbsolute" style="z-index:2000; transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
         <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: var(--primary-light);">
             <p style="color:var(--primary-dark);">Syncing your Studysheet with our servers...</p>
         </div>
@@ -195,7 +195,7 @@
         <div style="cursor:pointer;" onclick="window.location.href='index.html'">
             <img style="height: 10vh;" src="assets/logos/lang-wheat.png" alt='Lang Logo'>
         </div>
-        <div id="homeusername" class="noverticalshow button verticalFlex" style="cursor: pointer" onclick="window.location.href='settings.html'">Loading your name...</div>
+        <div id="homeusername" class="noverticalshow button verticalFlex" style="cursor: pointer; color:wheat;" onclick="window.location.href='settings.html'">Loading your name...</div>
     </div>
     <div class="functionRow horizontalFlex" style="justify-content: start;">
         <div class="functionRowItem">
@@ -328,6 +328,14 @@
     }
 </style>
 <script>
+
+    function startSave(){
+        overrider = true;
+        hideElement(document.getElementById("savePopup"))
+        saveToCloud()
+    }
+
+    var overrider = false;
     function creatorOnload(){
         document.getElementById("homeusername").innerHTML = localStorage.getItem("customusername");
         creatorModeSelect();
@@ -377,5 +385,16 @@
             }   
         // }
     }
+
+    window.addEventListener("beforeunload", function (e) {
+        if (overrider == true){
+            return;
+        }
+        var confirmationMessage = "Are you sure you want to leave without saving?";
+
+        (e || window.event).returnValue = confirmationMessage; // Gecko + IE
+        return confirmationMessage; // Webkit, Safari, Chrome etc.
+    });
+
 </script>
 </html>
