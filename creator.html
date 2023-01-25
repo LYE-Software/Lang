@@ -116,11 +116,22 @@
     <div id="failedSignIn" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
         <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: var(--primary-light);">
             <img src="assets/logos/FullLangLogo.png" style="height:10vh; margin: 10px;"> 
-            <div style="margin-top: 10px;">We did not find an account saved on your computer.</div>
-            <div style="margin-top: 10px;">Lang reccommends making an account, so you can save your studysheets online.</div>
+            <div style="margin-top: 10px;">Oops, we could not find an account saved on your computer.</div>
+            <div style="margin-top: 10px;">Please sign in again, or create an account if you do not have one.</div>
             <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0;" onclick="window.location.href='https://lye.software/signin?forward=langstudy.tech-index.html'">Log In</div>
             <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="window.location.href='https://lye.software/signup?forward=langstudy.tech-index.html'">Sign Up</div>
             <div style="font-size: 10px;">By signing up for an account, you agree to the Lang Terms of Service, which can be found <a href='langlegal.html' style="color: var(--primary-dark)">here</a></div>
+        </div>
+    </div>
+
+    <div id="popup" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: var(--primary-light);">
+            <div style="margin: 50px;">
+                <img style="height:10vh;" src="assets/icons/langerror.png" alt="error">
+            </div>
+            <div style="margin-bottom: 30px;" id="popupText">Uh oh! This prompt does not seem to be working properly. Please dismiss it and if you see it again, contact the developers.</div>
+            
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(document.getElementById('popup'))">Ok</div>
         </div>
     </div>
 

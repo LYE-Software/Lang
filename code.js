@@ -3054,12 +3054,14 @@ function makeInputs(version){
     }
     
 }
-
 function saveToCloud(){
+    var okToUpload = true;
     // document.getElementById("sendingLoader").style.display="";
     showElement(document.getElementById("sendingLoader"));
     if(document.getElementById("sstitle").innerHTML == ""){
-        document.getElementById("sstitle").innerHTML = "Lang Custom Studysheet";
+        showPopup("You forgot to name your Studysheet!")
+        hideElement(document.getElementById("sendingLoader"));
+        okToUpload = false;
     } else if (document.getElementById("sstitle").innerHTML.includes("/")){
         document.getElementById("sstitle").innerHTML = document.getElementById("sstitle").innerHTML.replace("/", "-");
     }
@@ -3106,10 +3108,18 @@ function saveToCloud(){
             childContents = childContents.replaceAll("\n", "_")
             child2Contents = child2Contents.replaceAll("\t", "   ")
             childContents = childContents.replaceAll("\t", "   ")
-            if (child2Contents.includes("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823") || child2Contents.includes("&nbsp;") || child2Contents.includes("<!doctype html>")){
-                alert("One of the specified words is not avaliable for use due to the structure of the Lang Studysheet.")
-                window.location.reload();
+            if (child2Contents.includes("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823") || child2Contents.includes("&nbsp;") || child2Contents.includes("<!doctype html>") || childContents.includes("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823") || childContents.includes("&nbsp;") || childContents.includes("<!doctype html>")){
+                //alert("One of the specified words is not avaliable for use due to the structure of the Lang Studysheet.")
+                showPopup("One of the specified words is not avaliable for use due to the structure of the Lang Studysheet.")
+                hideElement(document.getElementById("sendingLoader"));
+                okToUpload = false;
+                break;
                 
+            }
+            if (child2Contents == "" || childContents == ""){
+                showPopup("You have an empty term or answer. Please fill in all terms and answers, or delete them from the Studysheet.");
+                hideElement(document.getElementById("sendingLoader"));
+                okToUpload = false;
             }
             value1 = '["'+childContents+'"';
             value2 = '"'+child2Contents+'"]'+"\n";
@@ -3118,37 +3128,52 @@ function saveToCloud(){
             downloadArray = downloadArray + toAdd;
             console.log(downloadArray);
         }
-        downloadArray = downloadArray.slice(0,-1);
-        downloadArrayString = downloadArray+"";
-        downloadArrayString = downloadArrayString.replaceAll("\n", "sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
-    
-        var filename = document.getElementById("sstitle").innerText;
-        console.log("FILE NAME+ "+filename)
-        if(window.localStorage.getItem('editSheet')=="true") {
-            var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/edit/"+filename;
-        } else {
-            var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/upload/"+filename;
-        }
-    
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", url);
-    
-        xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
-    
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                console.log(xhr.status);
-                console.log(xhr.responseText);
-                window.location.href="index.html";
+        if (okToUpload == true){
+            downloadArray = downloadArray.slice(0,-1);
+            downloadArrayString = downloadArray+"";
+            downloadArrayString = downloadArrayString.replaceAll("\n", "sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
+            console.log(downloadArrayString);
+            if (downloadArrayString == ""){
+                showPopup("You cannot upload an empty Studysheet.");
+                hideElement(document.getElementById("sendingLoader"));
+                okToUpload = false;
             }
-        };
-        var data = downloadArrayString;
-        console.log("sending " + data + " to " + url);
-        xhr.send(data);
+            var filename = document.getElementById("sstitle").innerText;
+            console.log("FILE NAME+ "+filename)
+            if(window.localStorage.getItem('editSheet')=="true") {
+                var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/edit/"+filename;
+            } else {
+                var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/upload/"+filename;
+            }
+            if(okToUpload == true){
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", url);
+            
+                xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+            
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        console.log(xhr.status);
+                        console.log(xhr.responseText);
+                        window.location.href="index.html";
+                    }
+                };
+                var data = downloadArrayString;
+                console.log("sending " + data + " to " + url);
+                xhr.send(data);
+            }
+            
+        }
     }
+        
     
 }
 
+
+function showPopup(textToShow){
+    showElement(document.getElementById("popup"));
+    document.getElementById("popupText").innerHTML = textToShow;
+}
 
 //preps the user input custom sheet for downloading by putting all into one string
 
