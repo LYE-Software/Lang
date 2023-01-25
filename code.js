@@ -18,7 +18,6 @@ var passe = false
 var correct = 0
 var incorrect = 0
 var lclCrct = 0
-var storeWrd = ""
 var word = ""
 var pro = ""
 var wchoice = 0
