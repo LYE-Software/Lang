@@ -181,6 +181,21 @@
 
             margin-top: 20px;
         }
+
+
+
+        .buttonHoverDark {
+            transition: all 0.25s ease-in-out;
+            background-color: var(--primary-dark);
+            color: var(--primary-light);
+            border: 3px solid var(--primary-dark);
+        }
+
+        .buttonHoverDark:hover {
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+        }
+
 </style>
 <body onload = "doPreviewAndLocal()" class="darkHomepage" style="overflow-x:hidden;">
     <div id="tooFewTerms" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
@@ -249,14 +264,14 @@
                 <button id="trainbutton" class="dropbtn" onclick="window.location.href='train.html'">Train</button>
                 <button class="dropbtn" onclick="window.location.href='mastery-alt.html'">Mastery</button>
                 <button class="dropbtn" onclick="window.location.href='flashcardsnew.html'">Flashcards</button>
-                <button class="dropbtn" onclick="shareLink()">Share</button>
+                <button class="buttonHoverDark dropbtn" onclick="shareLink()">Share</button>
                 
             </div>
             <div class="dropbtncontainer" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
                 <button class="dropbtn" onclick="window.location.href='practestnew.html'">Practice Test</button>
                 <button class="dropbtn" onclick="window.location.href='speed.html'">Speed Review</button>
                 <button id="multiplechoicebutton" class="dropbtn" onclick="window.location.href='multiplechoice.html'">Multiple Choice</button>
-                <button class="dropbtn" onclick="initializeEdit()">Edit Studysheet</button>
+                <button class="buttonHoverDark dropbtn" onclick="initializeEdit()">Edit Studysheet</button>
             </div>
             <div class="flexSpacer termContainer">
                 <div style="margin: 20px; "class="horizontalFlex">
