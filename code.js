@@ -1011,28 +1011,35 @@ function getRandomQuestion(textBlock) {
     console.log("arr text fdaf "+arrayText)
     if (doRandom == true && override != true){
         
-        let random_number = Math.floor(Math.random() *arrayText.length);
-        console.log(random_number)
-        let random_question = arrayText[random_number];
-        console.log(random_question)
-        var questionArray = JSON.parse(random_question)
-        console.log(questionArray)
-        return questionArray
-    }
-    else{
-        let random_question = arrayText[whatQuestion];
-        console.log(arrayText)
-        console.log("what quest " + whatQuestion)
-        console.log("array text length "+arrayText.length)
-        console.log(random_question);
-        var questionArray = JSON.parse(random_question);
-        whatQuestion++;
-        if (whatQuestion >= arrayText.length){
-            whatQuestion=0;
-            console.log("whatquestion reset")
+        for (let i = arrayText.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            const temp = arrayText[i];
+            arrayText[i] = arrayText[j];
+            arrayText[j] = temp;
         }
-        return questionArray
     }
+    
+    let random_question = arrayText[whatQuestion];
+    console.log(arrayText)
+    console.log("what quest " + whatQuestion)
+    console.log("array text length "+arrayText.length)
+    console.log(random_question);
+    var questionArray = JSON.parse(random_question);
+    whatQuestion++;
+    if (whatQuestion >= arrayText.length){
+        whatQuestion=0;
+        if (doRandom == true && override != true){
+            for (let i = arrayText.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                const temp = arrayText[i];
+                arrayText[i] = arrayText[j];
+                arrayText[j] = temp;
+            }
+        }
+        console.log("whatquestion reset")
+    }
+    return questionArray
+    
     
     
     // document.getElementById('file').innerText = this.result; // places text into webpage
