@@ -319,7 +319,7 @@
                 Local
                 <div class="functionRowItemContents" style="z-index:500;">
                     <div onclick="window.location.href='train.html'">Train</div>
-                    <div onclick="window.location.href='singleRead.html'">Mastery</div>
+                    <div onclick="window.location.href='mastery-alt.html'">Mastery</div>
                     <div onclick="window.location.href='multiplechoice.html'">Multiple Choice</div>
                     <div onclick="window.location.href='flashcardsnewtml'">Flashcards</div>
                     <div onclick="window.location.href='practestnew.html'">Practice Test</div>
@@ -469,6 +469,7 @@
 
     function noStudySheets() {
         document.getElementById("nostudysheets").style.opacity = 1;
+        document.getElementById("nostudysheets").style.pointerEvents = "all"
     }
 
     function firstSignIn() {

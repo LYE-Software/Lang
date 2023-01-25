@@ -2231,7 +2231,8 @@ function checkTest(){
         correctAnswer = input.getAttribute("data-correct");
         correctAnswer = correctAnswer.trim();
         correctAnswer = correctAnswer.toLowerCase(); 
-        if (input.value.trim() == correctAnswer){
+        userValue = input.value.trim()
+        if (userValue.toLowerCase()== correctAnswer){
             counter++;
             responseText.innerHTML = "Correct!";
             responseText.style.color = "#3e8e41";
@@ -2781,7 +2782,11 @@ function checkSettings(){
     let randomthing = window.localStorage.getItem("random");
     if (randomthing == "true"){
         doRandom = true;
-        document.getElementById("randomchoice").checked = true;
+        try{
+            document.getElementById("randomchoice").checked = true;
+        } catch(error){
+            console.log("not on settings.html")
+        }
 
     }
     else{
@@ -2789,14 +2794,15 @@ function checkSettings(){
             document.getElementById("randomchoice").checked = false;
 
         } catch (error) {
-            
+            console.log("not on settings.html")
+
         }
 
     }
 
     if (window.localStorage.getItem("doLocal") == "true"){
         try{
-        document.getElementById("localchoice").checked = true    
+            document.getElementById("localchoice").checked = true    
         } catch (error){
             console.log("not on settings.html")
         }

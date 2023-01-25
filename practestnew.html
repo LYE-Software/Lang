@@ -52,9 +52,17 @@
         body {
             overflow-y: visible;
         }
+
+        #blockingScreen {
+            background-color: var(--primary-dark); top: 0; bottom: 0; left: 0; right: 0; position: fixed; z-index: 1000; transition: all 0.15s ease-in-out; opacity: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body onload="onBtnPress('prac')">
+
+    <div id="blockingScreen" style=""></div>
+
     <div id="header0" style="width: 100vw">
         <div class="horizontalFlex header">
             <div class="flexSpacer">
@@ -103,7 +111,7 @@
             
             
 
-            <div class="centerText" style="margin-top: 40px; background-color: var(--primary-dark); width: 60px; padding: 20px; border-radius: 15px; color: wheat;" onclick="checkTest()">
+            <div class="centerText" style="margin-top: 40px; background-color: var(--primary-dark); width: 60px; padding: 20px; border-radius: 15px; color: wheat;" onclick="grade()">
                 Submit
             </div>
 
@@ -140,5 +148,18 @@
             });
         }
     });
+
+    function grade() {
+        document.getElementById("blockingScreen").style.opacity = 1;
+        setTimeout(function() {
+            checkTest()
+            window.scroll({
+                top: 0,
+                left: 0,
+                behavior: 'instant'
+            });
+            document.getElementById("blockingScreen").style.opacity = 0;
+        }, 150);
+    }
 </script>
 </html>
