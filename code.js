@@ -3184,7 +3184,7 @@ function saveToCloud(){
                     if (xhr.readyState === 4) {
                         console.log(xhr.status);
                         console.log(xhr.responseText);
-                        //window.location.href="index.html";
+                        window.location.href="index.html";
                     }
                 };
                 var data = downloadArrayString;
