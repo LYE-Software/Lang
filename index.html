@@ -32,88 +32,6 @@
         body {
             overflow-y: visible;
         }
-        
-        .header {
-            border-bottom: 2px solid var(--primary-dark);
-            width: calc(100vw - 20px);
-            padding: 10px;   
-        }
-
-
-        .functionRow {
-            background-color: var(--primary-light);
-            height: 6vh;
-            width: 100vw;
-
-            -webkit-box-shadow:0px 0px 50px 0px var(--primary-light);
-            -moz-box-shadow: 0px 0px 50px 0px var(--primary-light);
-            box-shadow: 0px 0px 50px 0px var(--primary-light);
-
-        }
-
-        .functionRowItem {
-            transition: all 0.25s ease-in-out;
-
-            /* border-right: 1px solid var(--primary-dark); */
-            padding: 0 10px 0 10px;
-            height: 100%;
-            cursor: pointer;
-            position: relative;
-
-            display: flex;
-            align-items: center;
-        }
-
-        .functionRowItem:first-child {
-            /* border-left: 1px solid var(--primary-dark); */
-            margin-left: 10px;
-        }
-
-        .functionRowItem:last-child {
-            /* border-left: 1px solid var(--primary-dark); */
-            margin-right: 10px;
-        }
-
-        .functionRowItem:hover {
-            background-color: var(--primary-dark);
-            color: var(--primary-light);
-        }
-
-        .functionRowItem:hover .functionRowItemContents {
-            display: block;
-        }
-
-        .functionRowItemContents {
-            display: none;
-            position: absolute;
-            top: 6vh;
-            left: 0;
-            z-index: 1;
-
-            min-width: 100%;
-            max-width: 500%;
-
-            border: 1px solid var(--primary-dark);
-        }
-
-        .functionRowItemContents div {
-            transition: all 0.25s ease-in-out;
-
-            background-color: var(--primary-light);
-            color: var(--primary-dark);
-            height: 6vh;
-            padding: 0 10px 0 10px;
-            z-index:500;
-            display: flex;
-            align-items: center;
-            white-space: nowrap;
-        }
-
-        .functionRowItemContents div:hover {
-            background-color: var(--primary-dark);
-            color: var(--primary-light);
-            z-index:500;
-        }
 
         .button {
             width: auto;
@@ -298,6 +216,7 @@
 </head>
 <body onload="getLibraryList()"> 
 
+    
     <h1 style="display:none;">Welcome to Lang Study! Lang Study is a customizable studying program from Lye Software that prioritizes your privacy and is completely free.</h1>
     <div class="content">
         <div id="header" class="header horizontalFlex">
@@ -348,8 +267,8 @@
                 </div>
             </div>
             <notdiv class="flexSpacer"></notdiv>
-            
         </div>
+
         <div id="bodyContent" class="body centerFlex verticalFlex" style="justify-content: center; margin-top: 50px;">
             <div id="welcomeText" class="horizontalFlex noverticalshow" style="justify-content: center; max-width: 100vw; flex-wrap: wrap;">
                 <div style="color: var(--primary-light); margin: 0; margin-right: 0;" class="centerText headerText">Your</div>
