@@ -127,6 +127,8 @@ updateScaling();
 
 async function doPreviewAndLocal(){
     console.log("in dopreview")
+    document.getElementById("homeusername").innerHTML = localStorage.getItem("customusername");
+
     var url_string = window.location.href; //window.location.href
     var url = new URL(url_string);
     if(url.searchParams.get("userid")!= null){
@@ -632,6 +634,7 @@ async function getLibraryList(){
             } 
             else{
                 document.getElementById("homeusername").innerHTML = "Hello, "+username;
+                window.localStorage.setItem("customusername", username);
                 hideLoadingView();
                 
                 for (i=0;i<newarr.length;i++){
@@ -3060,6 +3063,25 @@ function makeInputs(version){
     }
     
 }
+
+function showSavePopup(){
+    customusername = localStorage.getItem("customusername");
+
+    if(document.getElementById("sstitle").innerHTML == ""){
+        showPopup("You forgot to name your Studysheet!")
+        hideElement(document.getElementById("sendingLoader"));
+        okToUpload = false;
+    }
+    else {
+        document.getElementById("studysheetTitlePreview").innerHTML = document.getElementById("sstitle").innerHTML;
+        document.getElementById("amountOfTerms").innerHTML = document.getElementById("insideCreator").childElementCount+" Terms";
+        document.getElementById("authorName").innerHTML = "By "+customusername;
+        showElement(document.getElementById('savePopup'))
+    }
+    
+}
+
+
 function saveToCloud(){
     var okToUpload = true;
     // document.getElementById("sendingLoader").style.display="";
@@ -3071,7 +3093,7 @@ function saveToCloud(){
     } else if (document.getElementById("sstitle").innerHTML.includes("/")){
         document.getElementById("sstitle").innerHTML = document.getElementById("sstitle").innerHTML.replace("/", "-");
     }
-    
+    customusername = localStorage.getItem("customusername");
     if (customusername == "invalidsession"){
         // document.getElementById("sendingLoader").style.display="none";
         hideElement(document.getElementById("sendingLoader"));
