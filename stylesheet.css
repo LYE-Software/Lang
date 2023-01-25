@@ -8,39 +8,9 @@
 
 [contentEditable=true]:empty:not(:focus):before {
     content: attr(data-text)
-  }
-.pfp {
-    margin-left: 10px;
-    margin-right: 10px;
 }
 
-.changelogshown {
-    transform: translate(-50%, -50%);
-    animation: showchangelog 0.5s ease-in-out;
-}
 
-.changeloghidden {
-    transform: translate(-50%, 60%);
-    animation: hidechangelog 0.5s ease-in-out;
-}
-
-@keyframes showchangelog {
-    0% {
-        transform: translate(-50%, 60%);
-    }
-    100% {
-        transform: translate(-50%, -50%);
-    }
-}
-
-@keyframes hidechangelog {
-    0% {
-        transform: translate(-50%, -50%);
-    }
-    100% {
-        transform: translate(-50%, 60%);
-    }
-}
 
 #changelog {
     position: absolute;
@@ -230,6 +200,34 @@ input {
     background-color: var(--primary-light);
     color: var(--primary-dark);
 }
+
+
+.popupContainer {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.15s ease-in-out;
+    opacity: 0; 
+    pointer-events: none;
+}
+
+.popup {
+    z-index: 1001; 
+    border-radius: 15px; 
+    padding: 20px; 
+    max-width: 400px; 
+    width: 90vw; 
+    background-color: var(--primary-light);
+}
+
 
 
 
