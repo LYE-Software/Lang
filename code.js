@@ -75,6 +75,8 @@ function updateScaling() {
     }
 }
 
+setTimeout(updateScaling, 500);
+
 async function shareLink(){
     document.getElementById("sharinglink").style.display = ""
     document.getElementById("sharinglink").style.opacity = 1;
@@ -121,9 +123,6 @@ var broken = `<!doctype html>
 <h1>Internal Server Error</h1>
 <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>`
 
-
-
-updateScaling();
 
 async function doPreviewAndLocal(){
     console.log("in dopreview")
