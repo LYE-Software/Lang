@@ -27,8 +27,8 @@
             max-height: 80%;
 
             padding: 5px;
-            border-top: 5px solid var(--primary-light);
-            border-bottom: 5px solid var(--primary-light);
+            /* border-top: 5px solid var(--primary-light);
+            border-bottom: 5px solid var(--primary-light); */
             margin-right: 10px;
         }
 
@@ -176,7 +176,7 @@
 
 
 
-    <div id="header0" class="lightGlow" style="width: 100vw">
+    <!-- <div id="header0" class="lightGlow" style="width: 100vw">
         <div class="horizontalFlex header">
             <div onclick="returnMain()" style="cursor:pointer;">
                 <img style="height: 10vh;" src="assets/logos/lang.png">
@@ -189,9 +189,59 @@
                 <img class="pfp" style="height: 5vh;" src="assets/icons/newsettings.svg" onclick="window.location.href='settings.html'">
             </div>
         </div>
+    </div> -->
+
+    <div id="header" class="header horizontalFlex">
+        <div style="cursor:pointer;" onclick="window.location.href='index.html'">
+            <img style="height: 10vh;" src="assets/logos/lang-wheat.png" alt='Lang Logo'>
+        </div>
+        <div id="homeusername" class="noverticalshow button verticalFlex" style="cursor: pointer" onclick="window.location.href='settings.html'">Loading your name...</div>
+    </div>
+    <div class="functionRow horizontalFlex" style="justify-content: start;">
+        <div class="functionRowItem">
+            Create
+            <div class="functionRowItemContents" style="z-index:500;">
+                <div onclick="window.location.href='creator.html'">New...</div>
+                <div onclick="window.location.href='quizletconvert.html'">From Quizlet</div>
+                <div onclick="window.location.href='memriseconvert.html'">From Memrise</div>
+            </div>
+        </div>
+        <div class="functionRowItem" style="display:none;" id="localAdvanced">
+            Local
+            <div class="functionRowItemContents" style="z-index:500;">
+                <div onclick="window.location.href='train.html'">Train</div>
+                <div onclick="window.location.href='mastery-alt.html'">Mastery</div>
+                <div onclick="window.location.href='multiplechoice.html'">Multiple Choice</div>
+                <div onclick="window.location.href='flashcardsnewtml'">Flashcards</div>
+                <div onclick="window.location.href='practestnew.html'">Practice Test</div>
+                <div onclick="window.location.href='speed.html'">Speed Review</div>
+            </div>
+        </div>
+        <div class="functionRowItem">
+            Settings
+            <div class="functionRowItemContents" style="z-index:500;">
+                <div onclick="window.open('https://lye.software/manageuser')">Account Settings</div>
+                <div onclick="window.location.href='settings.html'">Lang Settings</div>
+            </div>
+        </div>
+        <div class="functionRowItem">
+            About
+            <div class="functionRowItemContents" style="z-index:500;">
+                <div onclick="window.location.href='about-new.html'">About Lang</div>
+                <div onclick="window.location.href='updates.html'">Updates</div>
+                <div onclick="window.location.href='langlegal.html'">Legal & Credits</div>
+            </div>
+        </div>
+        <div class="functionRowItem">
+            Help
+            <div class="functionRowItemContents" style="z-index:500;">
+                <div onclick="window.location.href='https://github.com/LYE-software/Lang/issues'">GitHub Issues</div>
+            </div>
+        </div>
+        <notdiv class="flexSpacer"></notdiv>
     </div>
     
-    <div class="horizontalFlex" style="justify-content: center; width: 100vw; height: 90vh;">
+    <div class="horizontalFlex" style="justify-content: center; width: 100vw; height: calc(84vh - 22px);">
         <div id="langCreatorContainer" class="langCreatorContainer innerLightGlow" style="">
             <div class="termDefContainer">
                 <div style="margin-right: 25px;">Title: </div>
