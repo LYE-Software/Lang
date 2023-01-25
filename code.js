@@ -3083,6 +3083,7 @@ function showSavePopup(){
 
 
 function saveToCloud(){
+    sessionid = localStorage.getItem("usertoken");
     var okToUpload = true;
     // document.getElementById("sendingLoader").style.display="";
     showElement(document.getElementById("sendingLoader"));
