@@ -3083,6 +3083,7 @@ function showSavePopup(){
 
 
 function saveToCloud(){
+    sessionid = localStorage.getItem("usertoken");
     var okToUpload = true;
     // document.getElementById("sendingLoader").style.display="";
     showElement(document.getElementById("sendingLoader"));
@@ -3183,7 +3184,7 @@ function saveToCloud(){
                     if (xhr.readyState === 4) {
                         console.log(xhr.status);
                         console.log(xhr.responseText);
-                        window.location.href="index.html";
+                        //window.location.href="index.html";
                     }
                 };
                 var data = downloadArrayString;
