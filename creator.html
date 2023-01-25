@@ -135,9 +135,9 @@
         </div>
     </div>
 
-    <div id="savePopup" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
-        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: var(--primary-light);">
-            <div style="margin: 50px;">
+    <div id="savePopup" class="popupContainer">
+        <div class="verticalFlex centerFlex popup">
+            <div style="margin: 25px;">
                 <img style="height:10vh;" src="assets/icons/langsave.svg" alt="error">
             </div>
             <div style="margin-bottom: 30px; font-size: 40px;" id="studysheetTitlePreview">!</div>
@@ -151,8 +151,8 @@
 
             <div style="margin-bottom: 30px; font-size: 15px;" id="amountOfTerms">Ready to save?</div>
             <div class="horizontalFlex">
-                <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 100%;" onclick="saveToCloud()">Yes, do it!</div>
-                <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 100%;" onclick="hideElement(document.getElementById('savePopup'))">No, go back!</div>
+                <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 125px;" onclick="saveToCloud()">Yes, do it!</div>
+                <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 125px;" onclick="hideElement(document.getElementById('savePopup'))">No, go back!</div>
             </div>
             
 
