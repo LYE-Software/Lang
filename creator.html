@@ -27,8 +27,8 @@
             max-height: 80%;
 
             padding: 5px;
-            border-top: 5px solid var(--primary-light);
-            border-bottom: 5px solid var(--primary-light);
+            /* border-top: 5px solid var(--primary-light);
+            border-bottom: 5px solid var(--primary-light); */
             margin-right: 10px;
         }
 
@@ -124,7 +124,7 @@
         </div>
     </div>
 
-    <div id="popup" class="popupContainer">
+    <div id="popup" class="popupContainer" style="z-index:2000;">
         <div class="popup centerFlex verticalFlex">
             <div style="margin: 50px;">
                 <img style="height:10vh;" src="assets/icons/langerror.png" alt="error">
@@ -151,7 +151,7 @@
 
             <div style="margin-bottom: 30px; font-size: 15px;" id="amountOfTerms">Ready to save?</div>
             <div class="horizontalFlex">
-                <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 125px;" onclick="saveToCloud()">Yes, do it!</div>
+                <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 125px;" onclick="startSave()">Yes, do it!</div>
                 <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 125px;" onclick="hideElement(document.getElementById('savePopup'))">No, go back!</div>
             </div>
             
@@ -159,7 +159,7 @@
         </div>
     </div>
 
-    <div id="sendingLoader" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+    <div id="sendingLoader" class="absolute horizontalFlex centerFlex fullAbsolute" style="z-index:2000; transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
         <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: var(--primary-light);">
             <p style="color:var(--primary-dark);">Syncing your Studysheet with our servers...</p>
         </div>
@@ -176,7 +176,7 @@
 
 
 
-    <div id="header0" class="lightGlow" style="width: 100vw">
+    <!-- <div id="header0" class="lightGlow" style="width: 100vw">
         <div class="horizontalFlex header">
             <div onclick="returnMain()" style="cursor:pointer;">
                 <img style="height: 10vh;" src="assets/logos/lang.png">
@@ -189,9 +189,59 @@
                 <img class="pfp" style="height: 5vh;" src="assets/icons/newsettings.svg" onclick="window.location.href='settings.html'">
             </div>
         </div>
+    </div> -->
+
+    <div id="header" class="header horizontalFlex">
+        <div style="cursor:pointer;" onclick="window.location.href='index.html'">
+            <img style="height: 10vh;" src="assets/logos/lang-wheat.png" alt='Lang Logo'>
+        </div>
+        <div id="homeusername" class="noverticalshow button verticalFlex" style="cursor: pointer; color:wheat;" onclick="window.location.href='settings.html'">Loading your name...</div>
+    </div>
+    <div class="functionRow horizontalFlex" style="justify-content: start;">
+        <div class="functionRowItem">
+            Create
+            <div class="functionRowItemContents" style="z-index:500;">
+                <div onclick="window.location.href='creator.html'">New...</div>
+                <div onclick="window.location.href='quizletconvert.html'">From Quizlet</div>
+                <div onclick="window.location.href='memriseconvert.html'">From Memrise</div>
+            </div>
+        </div>
+        <div class="functionRowItem" style="display:none;" id="localAdvanced">
+            Local
+            <div class="functionRowItemContents" style="z-index:500;">
+                <div onclick="window.location.href='train.html'">Train</div>
+                <div onclick="window.location.href='mastery-alt.html'">Mastery</div>
+                <div onclick="window.location.href='multiplechoice.html'">Multiple Choice</div>
+                <div onclick="window.location.href='flashcardsnewtml'">Flashcards</div>
+                <div onclick="window.location.href='practestnew.html'">Practice Test</div>
+                <div onclick="window.location.href='speed.html'">Speed Review</div>
+            </div>
+        </div>
+        <div class="functionRowItem">
+            Settings
+            <div class="functionRowItemContents" style="z-index:500;">
+                <div onclick="window.open('https://lye.software/manageuser')">Account Settings</div>
+                <div onclick="window.location.href='settings.html'">Lang Settings</div>
+            </div>
+        </div>
+        <div class="functionRowItem">
+            About
+            <div class="functionRowItemContents" style="z-index:500;">
+                <div onclick="window.location.href='about-new.html'">About Lang</div>
+                <div onclick="window.location.href='updates.html'">Updates</div>
+                <div onclick="window.location.href='langlegal.html'">Legal & Credits</div>
+            </div>
+        </div>
+        <div class="functionRowItem">
+            Help
+            <div class="functionRowItemContents" style="z-index:500;">
+                <div onclick="window.location.href='https://github.com/LYE-software/Lang/issues'">GitHub Issues</div>
+            </div>
+        </div>
+        <notdiv class="flexSpacer"></notdiv>
     </div>
     
-    <div class="horizontalFlex" style="justify-content: center; width: 100vw; height: 90vh;">
+    <div class="horizontalFlex" style="justify-content: center; width: 100vw; height: calc(84vh - 22px);">
         <div id="langCreatorContainer" class="langCreatorContainer innerLightGlow" style="">
             <div class="termDefContainer">
                 <div style="margin-right: 25px;">Title: </div>
@@ -278,6 +328,14 @@
     }
 </style>
 <script>
+
+    function startSave(){
+        overrider = true;
+        hideElement(document.getElementById("savePopup"))
+        saveToCloud()
+    }
+
+    var overrider = false;
     function creatorOnload(){
         document.getElementById("homeusername").innerHTML = localStorage.getItem("customusername");
         creatorModeSelect();
@@ -327,5 +385,16 @@
             }   
         // }
     }
+
+    window.addEventListener("beforeunload", function (e) {
+        if (overrider == true){
+            return;
+        }
+        var confirmationMessage = "Are you sure you want to leave without saving?";
+
+        (e || window.event).returnValue = confirmationMessage; // Gecko + IE
+        return confirmationMessage; // Webkit, Safari, Chrome etc.
+    });
+
 </script>
 </html>
