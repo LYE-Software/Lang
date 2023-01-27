@@ -18,7 +18,6 @@ var passe = false
 var correct = 0
 var incorrect = 0
 var lclCrct = 0
-var storeWrd = ""
 var word = ""
 var pro = ""
 var wchoice = 0
@@ -75,6 +74,8 @@ function updateScaling() {
     }
 }
 
+setTimeout(updateScaling, 500);
+
 async function shareLink(){
     document.getElementById("sharinglink").style.display = ""
     document.getElementById("sharinglink").style.opacity = 1;
@@ -122,11 +123,10 @@ var broken = `<!doctype html>
 <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>`
 
 
-
-updateScaling();
-
 async function doPreviewAndLocal(){
     console.log("in dopreview")
+    document.getElementById("homeusername").innerHTML = localStorage.getItem("customusername");
+
     var url_string = window.location.href; //window.location.href
     var url = new URL(url_string);
     if(url.searchParams.get("userid")!= null){
@@ -416,7 +416,7 @@ async function httpGet(theUrl, lye){
         console.log("setting headers")
         xmlHttp.setRequestHeader("lye-origin", "langstudy.tech/index.html");
     }
-
+    xmlHttp.setRequestHeader("Keep-Alive", "timeout=10, max=5");
     console.log(xmlHttp.status)
     try {
         xmlHttp.send( null );
@@ -632,6 +632,7 @@ async function getLibraryList(){
             } 
             else{
                 document.getElementById("homeusername").innerHTML = "Hello, "+username;
+                window.localStorage.setItem("customusername", username);
                 hideLoadingView();
                 
                 for (i=0;i<newarr.length;i++){
@@ -1008,28 +1009,35 @@ function getRandomQuestion(textBlock) {
     console.log("arr text fdaf "+arrayText)
     if (doRandom == true && override != true){
         
-        let random_number = Math.floor(Math.random() *arrayText.length);
-        console.log(random_number)
-        let random_question = arrayText[random_number];
-        console.log(random_question)
-        var questionArray = JSON.parse(random_question)
-        console.log(questionArray)
-        return questionArray
-    }
-    else{
-        let random_question = arrayText[whatQuestion];
-        console.log(arrayText)
-        console.log("what quest " + whatQuestion)
-        console.log("array text length "+arrayText.length)
-        console.log(random_question);
-        var questionArray = JSON.parse(random_question);
-        whatQuestion++;
-        if (whatQuestion >= arrayText.length){
-            whatQuestion=0;
-            console.log("whatquestion reset")
+        for (let i = arrayText.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            const temp = arrayText[i];
+            arrayText[i] = arrayText[j];
+            arrayText[j] = temp;
         }
-        return questionArray
     }
+    
+    let random_question = arrayText[whatQuestion];
+    console.log(arrayText)
+    console.log("what quest " + whatQuestion)
+    console.log("array text length "+arrayText.length)
+    console.log(random_question);
+    var questionArray = JSON.parse(random_question);
+    whatQuestion++;
+    if (whatQuestion >= arrayText.length){
+        whatQuestion=0;
+        if (doRandom == true && override != true){
+            for (let i = arrayText.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                const temp = arrayText[i];
+                arrayText[i] = arrayText[j];
+                arrayText[j] = temp;
+            }
+        }
+        console.log("whatquestion reset")
+    }
+    return questionArray
+    
     
     
     // document.getElementById('file').innerText = this.result; // places text into webpage
@@ -2145,8 +2153,9 @@ function doCustomSheets(v){
     });
     document.getElementById("crctst").innerHTML = "Correct: " + correctCounter
     document.getElementById("incorrect").innerHTML = "Incorrect: " + incorrectCounter
+    document.getElementById("hint").classList.remove("showHint");
 
-    document.getElementById("myBtnBegin").style.display = "none";
+    
     try {
         document.getElementById("file").style.display = "none";
 
@@ -2164,10 +2173,8 @@ function doCustomSheets(v){
     input.setAttribute("spellcheck", "off")
     input.style.display = "flex";
     buttonStyling = document.getElementById("goButton")
-    buttonStyling.style.display = "flex";
-    buttonStyling.innerHTML = ">" + "\n" + "Go!"
-    document.getElementById("stats").style.width = "15vw"
-    document.getElementById("stats").style.height = "110"
+    
+    
     document.getElementById("crctst").style.fontSize = "15"
     document.getElementById("incorrect").style.fontSize = "15"
     whichCustom = v;
@@ -2232,7 +2239,8 @@ function checkTest(){
         correctAnswer = input.getAttribute("data-correct");
         correctAnswer = correctAnswer.trim();
         correctAnswer = correctAnswer.toLowerCase(); 
-        if (input.value.trim() == correctAnswer){
+        userValue = input.value.trim()
+        if (userValue.toLowerCase()== correctAnswer){
             counter++;
             responseText.innerHTML = "Correct!";
             responseText.style.color = "#3e8e41";
@@ -2577,9 +2585,11 @@ function getInput() {
 function checkCustom(v){
     usrInput = input.value.toLowerCase();
     usrInput = usrInput.trim();
-    document.getElementById("hintText").style.display = "none";
+    //document.getElementById("hintText").style.display = "none";
+    document.getElementById("hintText").innerHTML = "";
+    document.getElementById("hint").classList.remove("showHint");
     if (usrInput == ""){
-        document.getElementById("hintText").style.display = "none";
+        //document.getElementById("hintText").style.display = "none";
     }
     else if (usrInput == customAnswer){
         correctCounter += 1
@@ -2602,7 +2612,7 @@ function checkCustom(v){
         input.value = ""
         incorrectCounter += 1
         try {
-            document.getElementById("helpbutton").style.display = "flex";
+            //document.getElementById("helpbutton").style.display = "flex";
         } catch (error) {
             
         }
@@ -2618,9 +2628,10 @@ function checkCustom(v){
 
 
 function helpCustom(){
+    
+    document.getElementById("hint").classList.add("showHint");
+    
     document.getElementById("hintText").innerHTML = customAnswer;
-    document.getElementById("hintText").style.display = "flex";
-    document.getElementById("helpbutton").style.display = "none";
     
     
 }
@@ -2779,7 +2790,11 @@ function checkSettings(){
     let randomthing = window.localStorage.getItem("random");
     if (randomthing == "true"){
         doRandom = true;
-        document.getElementById("randomchoice").checked = true;
+        try{
+            document.getElementById("randomchoice").checked = true;
+        } catch(error){
+            console.log("not on settings.html")
+        }
 
     }
     else{
@@ -2787,21 +2802,43 @@ function checkSettings(){
             document.getElementById("randomchoice").checked = false;
 
         } catch (error) {
-            
+            console.log("not on settings.html")
+
         }
 
     }
 
     if (window.localStorage.getItem("doLocal") == "true"){
-        document.getElementById("localchoice").checked = true    
+        try{
+            document.getElementById("localchoice").checked = true    
+        } catch (error){
+            console.log("not on settings.html")
+        }
     } else{
-        document.getElementById("localchoice").checked = false
+        try{
+            document.getElementById("localchoice").checked = false
+        } catch (error){
+            console.log("not on settings.html")
+        }
+        
     }
 
     if (window.localStorage.getItem("doFireflies") == "false"){
+        try{
+            document.getElementById("firefliesChoice").checked = true 
         document.getElementById("firefliesChoice").checked = true    
+            document.getElementById("firefliesChoice").checked = true 
+        } catch (error){
+            console.log("not on settings.html")
+        }
+           
     } else{
-        document.getElementById("firefliesChoice").checked = false
+        try{
+            document.getElementById("firefliesChoice").checked = false
+        } catch (error){
+            console.log("not on settings.html")
+        }
+        
     }
         
 
@@ -3032,15 +3069,37 @@ function makeInputs(version){
     
 }
 
+function showSavePopup(){
+    customusername = localStorage.getItem("customusername");
+
+    if(document.getElementById("sstitle").innerHTML == ""){
+        showPopup("You forgot to name your Studysheet!")
+        hideElement(document.getElementById("sendingLoader"));
+        okToUpload = false;
+    }
+    else {
+        document.getElementById("studysheetTitlePreview").innerHTML = document.getElementById("sstitle").innerHTML;
+        document.getElementById("amountOfTerms").innerHTML = document.getElementById("insideCreator").childElementCount+" Terms";
+        document.getElementById("authorName").innerHTML = "By "+customusername;
+        showElement(document.getElementById('savePopup'))
+    }
+    
+}
+
+
 function saveToCloud(){
+    sessionid = localStorage.getItem("usertoken");
+    var okToUpload = true;
     // document.getElementById("sendingLoader").style.display="";
     showElement(document.getElementById("sendingLoader"));
     if(document.getElementById("sstitle").innerHTML == ""){
-        document.getElementById("sstitle").innerHTML = "Lang Custom Studysheet";
+        showPopup("You forgot to name your Studysheet!")
+        hideElement(document.getElementById("sendingLoader"));
+        okToUpload = false;
     } else if (document.getElementById("sstitle").innerHTML.includes("/")){
         document.getElementById("sstitle").innerHTML = document.getElementById("sstitle").innerHTML.replace("/", "-");
     }
-    
+    customusername = localStorage.getItem("customusername");
     if (customusername == "invalidsession"){
         // document.getElementById("sendingLoader").style.display="none";
         hideElement(document.getElementById("sendingLoader"));
@@ -3083,10 +3142,18 @@ function saveToCloud(){
             childContents = childContents.replaceAll("\n", "_")
             child2Contents = child2Contents.replaceAll("\t", "   ")
             childContents = childContents.replaceAll("\t", "   ")
-            if (child2Contents.includes("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823") || child2Contents.includes("&nbsp;") || child2Contents.includes("<!doctype html>")){
-                alert("One of the specified words is not avaliable for use due to the structure of the Lang Studysheet.")
-                window.location.reload();
+            if (child2Contents.includes("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823") || child2Contents.includes("&nbsp;") || child2Contents.includes("<!doctype html>") || childContents.includes("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823") || childContents.includes("&nbsp;") || childContents.includes("<!doctype html>")){
+                //alert("One of the specified words is not avaliable for use due to the structure of the Lang Studysheet.")
+                showPopup("One of the specified words is not avaliable for use due to the structure of the Lang Studysheet.")
+                hideElement(document.getElementById("sendingLoader"));
+                okToUpload = false;
+                break;
                 
+            }
+            if (child2Contents == "" || childContents == ""){
+                showPopup("You have an empty term or answer. Please fill in all terms and answers, or delete them from the Studysheet.");
+                hideElement(document.getElementById("sendingLoader"));
+                okToUpload = false;
             }
             value1 = '["'+childContents+'"';
             value2 = '"'+child2Contents+'"]'+"\n";
@@ -3095,37 +3162,53 @@ function saveToCloud(){
             downloadArray = downloadArray + toAdd;
             console.log(downloadArray);
         }
-        downloadArray = downloadArray.slice(0,-1);
-        downloadArrayString = downloadArray+"";
-        downloadArrayString = downloadArrayString.replaceAll("\n", "sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
-    
-        var filename = document.getElementById("sstitle").innerText;
-        console.log("FILE NAME+ "+filename)
-        if(window.localStorage.getItem('editSheet')=="true") {
-            var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/edit/"+filename;
-        } else {
-            var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/upload/"+filename;
-        }
-    
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", url);
-    
-        xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
-    
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                console.log(xhr.status);
-                console.log(xhr.responseText);
-                window.location.href="index.html";
+        if (okToUpload == true){
+            downloadArray = downloadArray.slice(0,-1);
+            downloadArrayString = downloadArray+"";
+            downloadArrayString = downloadArrayString.replaceAll("\n", "sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
+            console.log(downloadArrayString);
+            if (downloadArrayString == ""){
+                showPopup("You cannot upload an empty Studysheet.");
+                hideElement(document.getElementById("sendingLoader"));
+                okToUpload = false;
             }
-        };
-        var data = downloadArrayString;
-        console.log("sending " + data + " to " + url);
-        xhr.send(data);
+            var filename = document.getElementById("sstitle").innerText;
+            console.log("FILE NAME+ "+filename)
+            if(window.localStorage.getItem('editSheet')=="true") {
+                var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/edit/"+filename;
+            } else {
+                var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/upload/"+filename;
+            }
+            if(okToUpload == true){
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", url);
+            
+                xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+            
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        console.log(xhr.status);
+                        console.log(xhr.responseText);
+                        window.location.href="index.html";
+                    }
+                };
+                var data = downloadArrayString;
+                console.log("sending " + data + " to " + url);
+                xhr.send(data);
+            }
+            
+        }
     }
+        
     
 }
 
+
+function showPopup(textToShow){
+    showElement(document.getElementById("popup"));
+    hideElement(document.getElementById("savePopup"))
+    document.getElementById("popupText").innerHTML = textToShow;
+}
 
 //preps the user input custom sheet for downloading by putting all into one string
 

@@ -27,8 +27,8 @@
             max-height: 80%;
 
             padding: 5px;
-            border-top: 5px solid var(--primary-light);
-            border-bottom: 5px solid var(--primary-light);
+            /* border-top: 5px solid var(--primary-light);
+            border-bottom: 5px solid var(--primary-light); */
             margin-right: 10px;
         }
 
@@ -113,18 +113,53 @@
 </head>
 <body onload="creatorOnload()">
 
-    <div id="failedSignIn" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
-        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: var(--primary-light);">
+    <div id="failedSignIn" class="popupContainer">
+        <div class="popup">
             <img src="assets/logos/FullLangLogo.png" style="height:10vh; margin: 10px;"> 
-            <div style="margin-top: 10px;">We did not find an account saved on your computer.</div>
-            <div style="margin-top: 10px;">Lang reccommends making an account, so you can save your studysheets online.</div>
+            <div style="margin-top: 10px;">Oops, we could not find an account saved on your computer.</div>
+            <div style="margin-top: 10px;">Please sign in again, or create an account if you do not have one.</div>
             <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0;" onclick="window.location.href='https://lye.software/signin?forward=langstudy.tech-index.html'">Log In</div>
             <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="window.location.href='https://lye.software/signup?forward=langstudy.tech-index.html'">Sign Up</div>
             <div style="font-size: 10px;">By signing up for an account, you agree to the Lang Terms of Service, which can be found <a href='langlegal.html' style="color: var(--primary-dark)">here</a></div>
         </div>
     </div>
 
-    <div id="sendingLoader" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+    <div id="popup" class="popupContainer" style="z-index:2000;">
+        <div class="popup centerFlex verticalFlex">
+            <div style="margin: 50px;">
+                <img style="height:10vh;" src="assets/icons/langerror.png" alt="error">
+            </div>
+            <div style="margin-bottom: 30px;" id="popupText">Uh oh! This prompt does not seem to be working properly. Please dismiss it and if you see it again, contact the developers.</div>
+            
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(document.getElementById('popup'))">Ok</div>
+        </div>
+    </div>
+
+    <div id="savePopup" class="popupContainer">
+        <div class="verticalFlex centerFlex popup">
+            <div style="margin: 25px;">
+                <img style="height:10vh;" src="assets/icons/langsave.svg" alt="error">
+            </div>
+            <div style="margin-bottom: 30px; font-size: 40px;" id="studysheetTitlePreview">!</div>
+            <div class="horizontalFlex" style="width:100%">
+                <div style="margin-bottom: 30px; font-size: 20px; flex: 1; text-align: right;" id="amountOfTerms">! Terms</div>
+                <div style="margin: 30px; margin-top:0; font-size: 20px;" id="amountOfTerms">|</div>
+                <div style="margin-bottom: 30px; font-size: 20px; flex: 1; text-align: left;" id="authorName">By !</div>
+                
+                
+            </div>
+
+            <div style="margin-bottom: 30px; font-size: 15px;" id="amountOfTerms">Ready to save?</div>
+            <div class="horizontalFlex">
+                <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 125px;" onclick="startSave()">Yes, do it!</div>
+                <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 125px;" onclick="hideElement(document.getElementById('savePopup'))">No, go back!</div>
+            </div>
+            
+
+        </div>
+    </div>
+
+    <div id="sendingLoader" class="absolute horizontalFlex centerFlex fullAbsolute" style="z-index:2000; transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
         <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: var(--primary-light);">
             <p style="color:var(--primary-dark);">Syncing your Studysheet with our servers...</p>
         </div>
@@ -141,7 +176,7 @@
 
 
 
-    <div id="header0" class="lightGlow" style="width: 100vw">
+    <!-- <div id="header0" class="lightGlow" style="width: 100vw">
         <div class="horizontalFlex header">
             <div onclick="returnMain()" style="cursor:pointer;">
                 <img style="height: 10vh;" src="assets/logos/lang.png">
@@ -154,9 +189,65 @@
                 <img class="pfp" style="height: 5vh;" src="assets/icons/newsettings.svg" onclick="window.location.href='settings.html'">
             </div>
         </div>
+    </div> -->
+
+    <div id="header" class="header horizontalFlex">
+        <div style="cursor:pointer;" onclick="window.location.href='index.html'">
+            <img style="height: 10vh;" src="assets/logos/lang-wheat.png" alt='Lang Logo'>
+        </div>
+        <div id="homeusername" class="noverticalshow button verticalFlex" style="cursor: pointer; color:wheat;" onclick="window.location.href='settings.html'">Loading your name...</div>
+    </div>
+    <div class="functionRow horizontalFlex" style="justify-content: start;">
+        <div class="functionRowItem">
+            Create
+            <div class="functionRowItemContents" style="z-index:500;">
+                <div onclick="window.location.href='creator.html'">New...</div>
+                <div onclick="window.location.href='quizletconvert.html'">From Quizlet</div>
+                <div onclick="window.location.href='memriseconvert.html'">From Memrise</div>
+            </div>
+        </div>
+        <div class="functionRowItem" style="display:none;" id="localAdvanced">
+            Local
+            <div class="functionRowItemContents" style="z-index:500;">
+                <div onclick="window.location.href='train.html'">Train</div>
+                <div onclick="window.location.href='mastery-alt.html'">Mastery</div>
+                <div onclick="window.location.href='multiplechoice.html'">Multiple Choice</div>
+                <div onclick="window.location.href='flashcardsnewtml'">Flashcards</div>
+                <div onclick="window.location.href='practestnew.html'">Practice Test</div>
+                <div onclick="window.location.href='speed.html'">Speed Review</div>
+            </div>
+        </div>
+        <div class="functionRowItem">
+            Settings
+            <div class="functionRowItemContents" style="z-index:500;">
+                <div onclick="window.open('https://lye.software/manageuser')">Account Settings</div>
+                <div onclick="window.location.href='settings.html'">Lang Settings</div>
+            </div>
+        </div>
+        <div class="functionRowItem">
+            About
+            <div class="functionRowItemContents" style="z-index:500;">
+                <div onclick="window.location.href='about-new.html'">About Lang</div>
+                <div onclick="window.location.href='updates.html'">Updates</div>
+                <div onclick="window.location.href='langlegal.html'">Legal & Credits</div>
+            </div>
+        </div>
+        <div class="functionRowItem">
+            Help
+            <div class="functionRowItemContents" style="z-index:500;">
+                <div onclick="window.location.href='https://github.com/LYE-software/Lang/issues'">GitHub Issues</div>
+            </div>
+        </div>
+        <notdiv class="flexSpacer"></notdiv>
     </div>
     
-    <div class="horizontalFlex" style="justify-content: center; width: 100vw; height: 90vh;">
+    <div class="verticalFlex centerFlex noverticalshow" style="align-items:center; text-align: center; position: absolute; top:0; width:100%; height:11.9vh; pointer-events:none;">
+        <div class="horizontalFlex" style="">
+            <div id="topheader" style="color:#001945; font-size:30px; font-family:Rubik Mono One; top:50%;">Creating a new Studysheet</div>
+        </div>
+    </div>
+
+    <div class="horizontalFlex" style="justify-content: center; width: 100vw; height: calc(84vh - 22px);">
         <div id="langCreatorContainer" class="langCreatorContainer innerLightGlow" style="">
             <div class="termDefContainer">
                 <div style="margin-right: 25px;">Title: </div>
@@ -179,7 +270,7 @@
                     </div>
                 </div>
                 
-                <div class="creatorIcon" onclick="saveToCloud()">
+                <div class="creatorIcon" onclick="showSavePopup()">
                     <img src="assets/icons/langsave.svg" style="height:75px;">
                     <div class="tooltipText">
                         Save
@@ -243,8 +334,16 @@
     }
 </style>
 <script>
+
+    function startSave(){
+        overrider = true;
+        hideElement(document.getElementById("savePopup"))
+        saveToCloud()
+    }
+
+    var overrider = false;
     function creatorOnload(){
-        getUsernameFromLye();
+        document.getElementById("homeusername").innerHTML = localStorage.getItem("customusername");
         creatorModeSelect();
     }
 
@@ -292,5 +391,16 @@
             }   
         // }
     }
+
+    window.addEventListener("beforeunload", function (e) {
+        if (overrider == true){
+            return;
+        }
+        var confirmationMessage = "Are you sure you want to leave without saving?";
+
+        (e || window.event).returnValue = confirmationMessage; // Gecko + IE
+        return confirmationMessage; // Webkit, Safari, Chrome etc.
+    });
+
 </script>
 </html>

@@ -32,88 +32,6 @@
         body {
             overflow-y: visible;
         }
-        
-        .header {
-            border-bottom: 2px solid var(--primary-dark);
-            width: calc(100vw - 20px);
-            padding: 10px;   
-        }
-
-
-        .functionRow {
-            background-color: var(--primary-light);
-            height: 6vh;
-            width: 100vw;
-
-            -webkit-box-shadow:0px 0px 50px 0px var(--primary-light);
-            -moz-box-shadow: 0px 0px 50px 0px var(--primary-light);
-            box-shadow: 0px 0px 50px 0px var(--primary-light);
-
-        }
-
-        .functionRowItem {
-            transition: all 0.25s ease-in-out;
-
-            /* border-right: 1px solid var(--primary-dark); */
-            padding: 0 10px 0 10px;
-            height: 100%;
-            cursor: pointer;
-            position: relative;
-
-            display: flex;
-            align-items: center;
-        }
-
-        .functionRowItem:first-child {
-            /* border-left: 1px solid var(--primary-dark); */
-            margin-left: 10px;
-        }
-
-        .functionRowItem:last-child {
-            /* border-left: 1px solid var(--primary-dark); */
-            margin-right: 10px;
-        }
-
-        .functionRowItem:hover {
-            background-color: var(--primary-dark);
-            color: var(--primary-light);
-        }
-
-        .functionRowItem:hover .functionRowItemContents {
-            display: block;
-        }
-
-        .functionRowItemContents {
-            display: none;
-            position: absolute;
-            top: 6vh;
-            left: 0;
-            z-index: 1;
-
-            min-width: 100%;
-            max-width: 500%;
-
-            border: 1px solid var(--primary-dark);
-        }
-
-        .functionRowItemContents div {
-            transition: all 0.25s ease-in-out;
-
-            background-color: var(--primary-light);
-            color: var(--primary-dark);
-            height: 6vh;
-            padding: 0 10px 0 10px;
-            z-index:500;
-            display: flex;
-            align-items: center;
-            white-space: nowrap;
-        }
-
-        .functionRowItemContents div:hover {
-            background-color: var(--primary-dark);
-            color: var(--primary-light);
-            z-index:500;
-        }
 
         .button {
             width: auto;
@@ -298,6 +216,7 @@
 </head>
 <body onload="getLibraryList()"> 
 
+    
     <h1 style="display:none;">Welcome to Lang Study! Lang Study is a customizable studying program from Lye Software that prioritizes your privacy and is completely free.</h1>
     <div class="content">
         <div id="header" class="header horizontalFlex">
@@ -319,7 +238,7 @@
                 Local
                 <div class="functionRowItemContents" style="z-index:500;">
                     <div onclick="window.location.href='train.html'">Train</div>
-                    <div onclick="window.location.href='singleRead.html'">Mastery</div>
+                    <div onclick="window.location.href='mastery-alt.html'">Mastery</div>
                     <div onclick="window.location.href='multiplechoice.html'">Multiple Choice</div>
                     <div onclick="window.location.href='flashcardsnewtml'">Flashcards</div>
                     <div onclick="window.location.href='practestnew.html'">Practice Test</div>
@@ -348,8 +267,8 @@
                 </div>
             </div>
             <notdiv class="flexSpacer"></notdiv>
-            
         </div>
+
         <div id="bodyContent" class="body centerFlex verticalFlex" style="justify-content: center; margin-top: 50px;">
             <div id="welcomeText" class="horizontalFlex noverticalshow" style="justify-content: center; max-width: 100vw; flex-wrap: wrap;">
                 <div style="color: var(--primary-light); margin: 0; margin-right: 0;" class="centerText headerText">Your</div>
@@ -372,7 +291,7 @@
                         <svg class="studysheetDelete" width="24px" height="24px" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg"><path d="M17 9L11 15M11.0002 9L17.0002 15M9 6H20C20.5523 6 21 6.44772 21 7V17C21 17.5523 20.5523 18 20 18H9L3 12L9 6Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </div> -->
                 </div>
-                <div class="studysheetInfoContainer" style="background-color: var(--primary-dark)">
+                <div class="studysheetInfoContainer noverticalshow" style="background-color: var(--primary-dark)">
                     <div class="flexSpacer"></div>
                     <div class="verticalFlex">
                         <div id="termCount">!</div>
@@ -396,14 +315,14 @@
                     <div class="flexSpacer"></div>
                     <div class="horizontalFlex" style="width: 100%;">
                         <div class="flexSpacer"></div>
-                        <div class="studysheetOption verticalFlex" onclick="goToSSPage()">
+                        <div class="studysheetOption verticalFlex" style="cursor:pointer;" onclick="goToSSPage()">
                             Study
                         </div>
                         <!-- <div class="studysheetOption verticalFlex">
                             Edit
                         </div> -->
                         <div class="flexSpacer"></div>
-                        <div class="studysheetOption verticalFlex" onclick="deleteSS()">
+                        <div class="studysheetOption verticalFlex" style="cursor:pointer;" onclick="deleteSS()">
                             Delete
                         </div>
                         <div class="flexSpacer"></div>
@@ -414,8 +333,8 @@
         </div>
     </div>
 
-    <div id="failedSignIn" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
-        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: var(--primary-light);">
+    <div id="failedSignIn" class="popupContainer">
+        <div class="verticalFlex centerFlex lightGlow centerText popup">
             <img src="assets/logos/FullLangLogo.png" style="height:10vh; margin: 10px;" alt='Lang Logo'> 
             <div style="margin-top: 10px;">You have been signed out of Lang.</div>
             <div style="margin-top: 10px;">Please <strong>log in</strong> or <strong>create a new account</strong> below to continue using Lang.</div>
@@ -424,8 +343,8 @@
             <div style="font-size: 10px;">By signing up for an account, you agree to the Lang Terms of Service, which can be found <a href='langlegal.html' style="color: var(--primary-dark)">here</a></div>
         </div>
     </div>
-    <div id="failedServerConnection" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
-        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: var(--primary-light);">
+    <div id="failedServerConnection" class="popupContainer">
+        <div class="verticalFlex centerFlex lightGlow centerText popup">
             <img src="assets/logos/FullLangLogo.png" style="height:10vh; margin: 10px;" alt='Lang Logo'> 
             <div style="margin-top: 40px;">Unfortunately, we were unable to establish a connection to the Lang servers. Please try again later.</div>
             <div style="margin-top: 40px;">We apologize for any inconvience this may have caused.</div>
@@ -469,6 +388,7 @@
 
     function noStudySheets() {
         document.getElementById("nostudysheets").style.opacity = 1;
+        document.getElementById("nostudysheets").style.pointerEvents = "all"
     }
 
     function firstSignIn() {
