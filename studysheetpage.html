@@ -207,6 +207,14 @@
             <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(document.getElementById('tooFewTerms'))">OK</div>
         </div>
     </div>
+
+    <div id="notOwned" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat;">
+            <div style="margin-top: 10px; color:red; ">You do not own this Studysheet.</div>
+            <div style="margin-top: 10px;">You cannot edit a Studysheet you do not own.</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(document.getElementById('notOwned'))">OK</div>
+        </div>
+    </div>
     
     <div class="horizontalFlex" style="height: calc(84vh - 22px); pointer-events: all; transition: all 0.15s ease-in-out; opacity: 1; z-index: 100; align-items: center; justify-content: center; bottom: 0; left: 0; right: 0; position:absolute; background-color: var(--primary-dark)" id="noclickdiv">
         <div class="lightGlow "style="width: 90vw; max-width: 500px; background-color: var(--primary-light); border-radius:15px; padding:20px; text-align: center;">
@@ -318,7 +326,7 @@
                 </div>
                 <div class="horizontalFlex">  
                     <button class="buttonHoverDark dropbtn" onclick="shareLink()">Share</button>
-                    <button class="buttonHoverDark dropbtn" onclick="initializeEdit()">Edit Studysheet</button>
+                    <button class="buttonHoverDark dropbtn" onclick="initializeEdit()" id="editbutton">Edit Studysheet</button>
                 </div>
             </div>
             <div class="flexSpacer termContainer">

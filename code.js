@@ -134,6 +134,13 @@ async function doPreviewAndLocal(){
         chosensheet = url.searchParams.get("sheetName")
         sheet = await httpGet("https://backend.langstudy.tech/id/"+sessionid+"/Studysheets/"+chosensheet)
         document.getElementById("studysheetname").innerHTML = chosensheet
+        document.getElementById("editbutton").style.borderColor = "#a0a0a0"
+        document.getElementById("editbutton").style.backgroundColor = "#a0a0a0"
+
+        document.getElementById("editbutton").onclick = function(){
+            document.getElementById('notOwned').style.pointerEvents = "all";
+            document.getElementById('notOwned').style.opacity = 1;
+        }
     } else{
         chosensheet = window.localStorage.getItem("chosenSheet")
 
