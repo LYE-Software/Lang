@@ -351,7 +351,6 @@
             <div style="margin-top: 40px;">Thank you for using Lang.</div>
             <div style="font-size: 10px; margin-top:40px;">Due to Lang still being in Beta, outages like this may happen. Learn more at <a href='https://github.com/LYE-software/lang' style="color: var(--primary-dark)">our GitHub.</a></div>
             <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="window.location.reload()">Retry</div>
-
         </div>
     </div>
 
@@ -373,10 +372,13 @@
     </div> 
 
     
-
-    <div id="nostudysheets" class="absolute fullAbsolute" style="pointer-events: none; transition: all 0.25s ease-in-out; opacity: 0; background-color: rgba(0, 0, 0, 0.75); z-index: 100;">
-        <div class="verticalFlex absolute" style="box-sizing: border-box; padding: 10px; z-index: 1001; right:130px; bottom:30px; height:10vh; width: 20vw; cursor: pointer; background-color: wheat; border-radius: 15px;">
-            Click here to create your first studysheet! ->
+    <div id="nostudysheets" class="popupContainer" style="pointer-events: none; transition: all 0.25s; opacity: 0;">
+        <div class="verticalFlex centerFlex lightGlow centerText popup">
+            <img src="assets/logos/FullLangLogo.png" style="height:10vh; margin: 10px;" alt='Lang Logo'> 
+            <div style="margin-top: 10px;">Welcome to Lang!</div>
+            <div style="margin-top: 10px;">To study, you need to create a studysheet. A studysheet is just a collection of flashcards</div>
+            <div style="margin-top: 10px;">Click below to create a new studysheet</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="window.location.href = 'creator.html'">Create</div>
         </div>
     </div>
 </body> 
