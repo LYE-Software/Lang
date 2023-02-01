@@ -109,6 +109,8 @@ async function shareLink(){
         // }
         // );
         sheetName = window.localStorage.getItem("chosenSheet").replaceAll(" ", "%20");
+        sheetName = sheetName.replaceAll("&", "%26")
+        console.log("Replaced forbidden characters")
         url = "https://langstudy.tech/studysheetpage.html?userid="+tempTok+"&sheetName="+sheetName;
         document.getElementById("linkholder").innerHTML = url;
         console.log(url)
@@ -130,8 +132,11 @@ async function doPreviewAndLocal(){
     var url_string = window.location.href; //window.location.href
     var url = new URL(url_string);
     if(url.searchParams.get("userid")!= null){
+        console.log("inside shareEvent")
         sessionid = url.searchParams.get("userid")
         chosensheet = url.searchParams.get("sheetName")
+        console.log(chosensheet)
+        chosensheet = chosensheet.replace(" ", "%20")
         sheet = await httpGet("https://backend.langstudy.tech/id/"+sessionid+"/Studysheets/"+chosensheet)
         document.getElementById("studysheetname").innerHTML = chosensheet
         document.getElementById("editbutton").style.borderColor = "#a0a0a0"
