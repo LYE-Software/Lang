@@ -136,7 +136,6 @@ async function doPreviewAndLocal(){
         sessionid = url.searchParams.get("userid")
         chosensheet = url.searchParams.get("sheetName")
         console.log(chosensheet)
-        chosensheet = chosensheet.replace(" ", "%20")
         sheet = await httpGet("https://backend.langstudy.tech/id/"+sessionid+"/Studysheets/"+chosensheet)
         document.getElementById("studysheetname").innerHTML = chosensheet
         document.getElementById("editbutton").style.borderColor = "#a0a0a0"
