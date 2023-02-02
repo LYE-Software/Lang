@@ -434,6 +434,8 @@ async function httpGet(theUrl, lye){
     } catch (error) {
         console.log(error)
         alert("error line 205 alt ")
+        failedServerConnectionOnStart();
+
         //put a splash screen error here
     }
     
@@ -604,9 +606,14 @@ async function getLibraryList(){
                 console.error("Server Connection Failed upon second try. Aborting.")
                 failedServerConnectionOnStart();
             }
+            
+
         }
         
-        
+        // else if (serverData.contains("<!doctype html>")){
+        //     failedServerConnectionOnStart();
+        // }
+        // console.log("bruh "+broken);
         if(username == "invalidsession"){
             failedSignIn();
         }
