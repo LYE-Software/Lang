@@ -3116,6 +3116,9 @@ function saveToCloud(){
         okToUpload = false;
     } else if (document.getElementById("sstitle").innerHTML.includes("/")){
         document.getElementById("sstitle").innerHTML = document.getElementById("sstitle").innerHTML.replace("/", "-");
+    } 
+    else if (document.getElementById("sstitle").innerHTML.includes("'")){
+        document.getElementById("sstitle").innerHTML = document.getElementById("sstitle").innerHTML.replace("'", "\u2019");
     }
     customusername = localStorage.getItem("customusername");
     if (customusername == "invalidsession"){
