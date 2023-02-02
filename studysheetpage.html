@@ -266,9 +266,9 @@
             <div class="functionRowItem">
                 Create
                 <div class="functionRowItemContents" style="z-index:500;">
-                    <div onclick="window.location.href='creator.html'">New...</div>
-                    <div onclick="window.location.href='quizletconvert.html'">From Quizlet</div>
-                    <div onclick="window.location.href='memriseconvert.html'">From Memrise</div>
+                    <div onclick="sendToCreator('n')">New...</div>
+                    <div onclick="sendToCreator('q')">From Quizlet</div>
+                    <div onclick="sendToCreator('m')">From Memrise</div>
                 </div>
             </div>
             <div class="functionRowItem" style="display:none;" id="localAdvanced">
@@ -373,5 +373,20 @@
         console.log(window.pageYOffset)
         document.body.style.backgroundPositionY = (window.pageYOffset + 0) + "px";
     }
+
+    function sendToCreator(s){
+        window.localStorage.removeItem("chosenSheet")
+        window.localStorage.removeItem("fullstudysheet")
+        if (s == "n"){
+            window.location.href= 'creator.html';
+        } else if (s=="q"){
+            window.location.href='quizletconvert.html'
+        } else if (s=="m"){
+            window.location.href='memriseconvert.html'
+        } else {
+            console.error("UNKNOWN: Creator Forward Page undefined")
+        }
+    }
+
 </script>
 </html>
