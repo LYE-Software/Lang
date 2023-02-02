@@ -3716,6 +3716,14 @@ function initializeEdit(){
 
 function creatorModeSelect(){
     override = true;
+
+    if (window.localStorage.getItem("doLocal")=="true"){
+        document.getElementById("localAdvanced").style.display = "";
+        document.getElementById("exporter").style.display = "";
+    } else {
+        console.log("Local Studying is disabled.")
+    }
+
     if(window.localStorage.getItem("fullstudysheet")=="" || window.localStorage.getItem("fullstudysheet")==null){
         console.log("Entering Standard Creator Mode")
     } else if(window.localStorage.getItem('editSheet')=="true") {
