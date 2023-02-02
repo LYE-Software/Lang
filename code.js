@@ -1019,20 +1019,21 @@ function getOtherAnswers(textBlock){
 
 
 //used to acquire random question & answer pair (single verbs)
-
+var randomized = false;
 function getRandomQuestion(textBlock) {
     console.log("random question ran")
     let arrayText = textBlock.split('\n')
     
     console.log("arr text fdaf "+arrayText)
-    if (doRandom == true && override != true){
-        
+    if (doRandom == true && override != true && randomized == false){
+        console.warn("RUNNING RANDOM - THIS SHOULD ONLY APPEAR ONCE")
         for (let i = arrayText.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             const temp = arrayText[i];
             arrayText[i] = arrayText[j];
             arrayText[j] = temp;
         }
+        randomized = true;
     }
     
     let random_question = arrayText[whatQuestion];
