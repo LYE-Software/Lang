@@ -1020,9 +1020,23 @@ function getOtherAnswers(textBlock){
 
 //used to acquire random question & answer pair (single verbs)
 var randomized = false;
+var setup = true;
+var continued = false;
 function getRandomQuestion(textBlock) {
     console.log("random question ran")
-    let arrayText = textBlock.split('\n')
+    if(setup == false && whatQuestion == 0 && continued == false){
+        try{
+            showElement(document.getElementById("completedMode"))
+
+        } catch (error){
+
+        }
+        continued = true;
+    }
+    if (setup == true){
+        arrayText = textBlock.split('\n')
+        setup = false;
+    }
     
     console.log("arr text fdaf "+arrayText)
     if (doRandom == true && override != true && randomized == false){
