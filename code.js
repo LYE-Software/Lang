@@ -135,6 +135,8 @@ async function doPreviewAndLocal(){
         console.log("inside shareEvent")
         sessionid = url.searchParams.get("userid")
         chosensheet = url.searchParams.get("sheetName")
+        window.localStorage.setItem("sharedID", sessionid);
+        window.localStorage.setItem("sharedSheet", chosensheet);
         console.log(chosensheet)
         sheet = await httpGet("https://backend.langstudy.tech/id/"+sessionid+"/Studysheets/"+chosensheet)
         document.getElementById("studysheetname").innerHTML = chosensheet
@@ -145,7 +147,27 @@ async function doPreviewAndLocal(){
             document.getElementById('notOwned').style.pointerEvents = "all";
             document.getElementById('notOwned').style.opacity = 1;
         }
-    } else{
+    
+    } 
+    else if(window.localStorage.getItem("sharedID") != "" &&  window.localStorage.getItem("sharedID") != null){
+        console.log("Shared back")
+        console.log("inside localstorage")
+        chosensheet = window.localStorage.getItem("sharedSheet").replaceAll(" ", "%20");
+        chosensheet = chosensheet.replaceAll("&", "%26")
+        sheet = await httpGet("https://backend.langstudy.tech/id/"+window.localStorage.getItem("sharedID")+"/Studysheets/"+chosensheet)
+        chosensheet = chosensheet.replaceAll("%26", "&")
+        chosensheet = chosensheet.replaceAll("%20", " ");
+
+        document.getElementById("studysheetname").innerHTML = chosensheet
+        document.getElementById("editbutton").style.borderColor = "#a0a0a0"
+        document.getElementById("editbutton").style.backgroundColor = "#a0a0a0"
+
+        document.getElementById("editbutton").onclick = function(){
+            document.getElementById('notOwned').style.pointerEvents = "all";
+            document.getElementById('notOwned').style.opacity = 1;
+        }
+    }
+    else{
         chosensheet = window.localStorage.getItem("chosenSheet")
 
         if(chosensheet == null || chosensheet == ""){
@@ -545,7 +567,8 @@ async function getLibraryList(){
     } else {
         enableSnow();
     }
-
+    window.localStorage.removeItem("sharedID");
+    window.localStorage.removeItem("sharedSheet");
     customuser=window.localStorage.getItem("username");
     window.localStorage.setItem("fullstudysheet", "");
     window.localStorage.setItem("chosenSheet", "")

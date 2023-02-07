@@ -377,6 +377,8 @@
     function sendToCreator(s){
         window.localStorage.removeItem("chosenSheet")
         window.localStorage.removeItem("fullstudysheet")
+        window.localStorage.removeItem("sharedID")
+        window.localStorage.removeItem("sharedSheet")
         if (s == "n"){
             window.location.href= 'creator.html';
         } else if (s=="q"){
