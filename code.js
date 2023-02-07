@@ -132,6 +132,13 @@ async function doPreviewAndLocal(){
     var url_string = window.location.href; //window.location.href
     var url = new URL(url_string);
     if(url.searchParams.get("userid")!= null){
+        if (window.localStorage.getItem("savedShare")){
+            document.getElementById("saveBtn").innerHTML = "Saved!";
+            document.getElementById("saveBtn").onclick = function(){
+                showPopup("You already saved this Studysheet!")
+            };
+        }
+        document.getElementById("saveBtnHolder").style.display = "";
         console.log("inside shareEvent")
         sessionid = url.searchParams.get("userid")
         chosensheet = url.searchParams.get("sheetName")
@@ -150,7 +157,14 @@ async function doPreviewAndLocal(){
     
     } 
     else if(window.localStorage.getItem("sharedID") != "" &&  window.localStorage.getItem("sharedID") != null){
+        if (window.localStorage.getItem("savedShare")){
+            document.getElementById("saveBtn").innerHTML = "Saved!";
+            document.getElementById("saveBtn").onclick = function(){
+                showPopup("You already saved this Studysheet!")
+            };
+        }
         console.log("Shared back")
+        document.getElementById("saveBtnHolder").style.display = "";
         console.log("inside localstorage")
         chosensheet = window.localStorage.getItem("sharedSheet").replaceAll(" ", "%20");
         chosensheet = chosensheet.replaceAll("&", "%26")
@@ -567,6 +581,7 @@ async function getLibraryList(){
     } else {
         enableSnow();
     }
+    window.localStorage.removeItem("savedShare")
     window.localStorage.removeItem("sharedID");
     window.localStorage.removeItem("sharedSheet");
     customuser=window.localStorage.getItem("username");
@@ -3142,6 +3157,37 @@ function showSavePopup(){
     
 }
 
+function saveShared(){
+    if (window.localStorage.getItem("savedShare")){
+        showPopup("You already saved this Studysheet!")
+        return;
+    } else{
+        window.localStorage.setItem("savedShare", "true")
+        document.getElementById("saveBtn").innerHTML = "Saved!";
+        document.getElementById("saveBtn").onclick = function(){
+            showPopup("You already saved this Studysheet!")
+        };	
+    
+        filename = window.localStorage.getItem("sharedSheet");
+        var url = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/Studysheets/upload/"+filename;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url);
+    
+        xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+    
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                console.log(xhr.status);
+                console.log(xhr.responseText);
+                document.getElementById("saveBtn").innerHTML = "Saved!";
+            }
+        };
+        var data = "pointer-seperator-"+window.localStorage.getItem("sharedID")+"-seperator-"+filename;
+        console.log("sending " + data + " to " + url);
+        xhr.send(data);
+    }
+    
+}
 
 function saveToCloud(){
     sessionid = localStorage.getItem("usertoken");
@@ -3265,7 +3311,11 @@ function saveToCloud(){
 
 function showPopup(textToShow){
     showElement(document.getElementById("popup"));
-    hideElement(document.getElementById("savePopup"))
+    try{
+        hideElement(document.getElementById("savePopup"))
+    } catch (error){
+        console.log("not on creator")
+    }
     document.getElementById("popupText").innerHTML = textToShow;
 }
 
