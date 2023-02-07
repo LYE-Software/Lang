@@ -3161,7 +3161,12 @@ function saveShared(){
     if (window.localStorage.getItem("savedShare")){
         showPopup("You already saved this Studysheet!")
         return;
-    } else{
+    } 
+    else if (window.localStorage.getItem("usertoken") == null || window.localStorage.getItem("usertoken") == null){
+        showPopup("You need to be logged in to save Studysheets!")
+        return;
+    }
+    else{
         window.localStorage.setItem("savedShare", "true")
         document.getElementById("saveBtn").innerHTML = "Saved!";
         document.getElementById("saveBtn").onclick = function(){
