@@ -3275,6 +3275,12 @@ function saveToCloud(){
             // if (childx.id.startsWith() == 'input'){
             //     childarray.push(childx);
             // }
+
+            //there will be 2 divs within insidecreator
+            //if the first div has an image that is not display:none;, add the src to the studysheet
+                //else skip
+            //go into second div, proceed as normal
+
             console.log(childx);
             console.log("hilarious right");
             var underChildren = childx.children;
@@ -3947,14 +3953,24 @@ function creatorModeSelect(){
 
 function createCreatorInput(term, definition) {
     var br = document.createElement("div")
-        br.className = "termDefContainer";
         br.dataset.image = "false";
+        br.className = "overallContainer"
         document.getElementById("insideCreator").appendChild(br);
         id1 = "input"+generateIdV
         id2 = "ans"+generateIdA
         id3 = "button"+generateIdYou
 
         
+        var imageHolder = document.createElement("div");
+        br.append(imageHolder);
+
+        var stuffHolder = document.createElement("div");
+        stuffHolder.className = "termDefContainer";
+        br.append(stuffHolder)
+
+
+        var blankImage = document.createElement("img");
+        imageHolder.append(blankImage);
 
         var verbInput = document.createElement('div');
         verbInput.id=id1;
@@ -3964,7 +3980,7 @@ function createCreatorInput(term, definition) {
         verbInput.contentEditable="true";
         generateIdV++
             // verbInput.innerHTML="Put Term / Question Here";
-        br.appendChild(verbInput);
+        stuffHolder.appendChild(verbInput);
     
         var answerInput = document.createElement("div");
         answerInput.id=id2;
@@ -3975,7 +3991,7 @@ function createCreatorInput(term, definition) {
         answerInput.setAttribute("data-text", "Answer");
         generateIdA++
         // answerInput.innerHTML="Put Answer Here";
-        br.appendChild(answerInput);
+        stuffHolder.appendChild(answerInput);
 
         // var brk = document.createElement("br");
         // br.appendChild(brk);
@@ -3992,7 +4008,7 @@ function createCreatorInput(term, definition) {
             makeInputs("Multi");
             
         }
-        //br.appendChild(image);
+        //stuffHolder.appendChild(image);
         var svg = document.createElement("div");
         svg.innerHTML = trash_svg;
         svg.className = "trash";
@@ -4000,18 +4016,19 @@ function createCreatorInput(term, definition) {
             console.log(this)
             this.parentNode.remove();
         }
-        br.appendChild(svg);
+        stuffHolder.appendChild(svg);
 
         var svg2 = document.createElement("div");
         svg2.innerHTML = image_svg;
         svg2.className = "trash";
         svg2.onclick = function(){
-            parent = this.parentNode           
-            parent.dataset.image = "true";
+            parent = this.parentNode  
+            grandparent = parent.parentNode         
+            grandparent.dataset.image = "true";
             console.log("images go here")
             invokeFilereader()
         }
-        //br.appendChild(svg2);
+        stuffHolder.appendChild(svg2);
     
         var overallContainer = document.getElementById("langCreatorContainer");
         overallContainer.scrollTop = overallContainer.scrollHeight;

@@ -338,7 +338,7 @@
 <script>
 
     
-
+    var imgUrl;
     var endData;
     //Trigger now when you have selected any file 
     function invokeFilereader() {
@@ -348,7 +348,7 @@
         input.type = 'file';
         input.accept = "image/*"
         input.click();
-        var imgUrl;
+        
         input.onchange = e => { 
             var file = e.target.files[0]; 
             showElement(document.getElementById("sendingLoader"))
@@ -376,31 +376,37 @@
                         console.log(xhr.status);
                         console.log(xhr.responseText);
                         imgUrl = xhr.responseText;
+                        console.log("IMAGE URL IS "+imgUrl)
                         leaveFileUpload()
                     }
                 };
                 
                 console.log("sending " + data + " to " + url);
                 xhr.send(data);
+
+                
             };
             reader.readAsDataURL(file); 
         }
 
-        var img = document.createElement("image");
-        img.src = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/image/get"+imgUrl;
-        var parents = document.getElementsByClassName("termDefContainer")
-        for (var i = 0; i < parents.length; i++) {
-            if (parents[i].dataset.image == "true"){
-                parents[i].appendChild(img)
-            }
-        }
+        
+       
+
 
         
         
     };
 
     function leaveFileUpload(){
-        
+        var source = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/image/get/"+imgUrl.split("=")[1];
+        var parents = document.getElementsByClassName("overallContainer")
+        for (var i = 0; i < parents.length; i++) {
+            console.log(parents[i].dataset.image);
+            if (parents[i].dataset.image == "true"){
+                console.log("setting image element to "+source);
+                parents[i].children[0].children[0].src = source;
+            }
+        }
         document.getElementById("sendingLoader").innerHTML = "Syncing your Studysheet with our servers..."
         hideElement(document.getElementById("sendingLoader"))
 
