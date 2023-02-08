@@ -135,7 +135,7 @@
             <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(document.getElementById('popup'))">Ok</div>
         </div>
     </div>
-
+    
     <div id="savePopup" class="popupContainer">
         <div class="verticalFlex centerFlex popup">
             <div style="margin: 25px;">
@@ -160,7 +160,7 @@
         </div>
     </div>
 
-    <div id="sendingLoader" class="absolute horizontalFlex centerFlex fullAbsolute" style="z-index:2000; transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+    <div id="sendingLoader" class="absolute horizontalFlex centerFlex fullAbsolute" style="z-index:2000; transition: all 0.15s ease-in-out; z-index:10000; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
         <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: var(--primary-light);">
             <p style="color:var(--primary-dark);">Syncing your Studysheet with our servers...</p>
         </div>
@@ -241,7 +241,8 @@
         </div>
         <notdiv class="flexSpacer"></notdiv>
     </div>
-    
+    <img id='output' style="height:100px; width:100px; display:none;">
+
     <div class="verticalFlex centerFlex noverticalshow" style="align-items:center; text-align: center; position: absolute; top:0; width:100%; height:11.9vh; pointer-events:none;">
         <div class="horizontalFlex" style="">
             <div id="topheader" style="color:#001945; font-size:30px; font-family:Rubik Mono One; top:50%;">Creating a new Studysheet</div>
@@ -335,6 +336,75 @@
     }
 </style>
 <script>
+
+    
+
+    var endData;
+    //Trigger now when you have selected any file 
+    function invokeFilereader() {
+
+
+        var input = document.createElement('input');
+        input.type = 'file';
+        input.accept = "image/*"
+        input.click();
+        var imgUrl;
+        input.onchange = e => { 
+            var file = e.target.files[0]; 
+            showElement(document.getElementById("sendingLoader"))
+            document.getElementById("sendingLoader").innerHTML = "Uploading Image..."
+            
+            var reader = new FileReader();
+            reader.onload = function(){
+                var dataURL = reader.result;
+                var output = document.getElementById('output');
+                output.src = dataURL;
+                console.log(dataURL)
+                endData = dataURL.split(',')[1];
+                console.log(endData)
+                
+                console.log("Beginning Image Upload to Backend")
+                url = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/image/upload";
+                var data = endData;
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", url);
+            
+                xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+            
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        console.log(xhr.status);
+                        console.log(xhr.responseText);
+                        imgUrl = xhr.responseText;
+                        leaveFileUpload()
+                    }
+                };
+                
+                console.log("sending " + data + " to " + url);
+                xhr.send(data);
+            };
+            reader.readAsDataURL(file); 
+        }
+
+        var img = document.createElement("image");
+        img.src = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/image/get"+imgUrl;
+        var parents = document.getElementsByClassName("termDefContainer")
+        for (var i = 0; i < parents.length; i++) {
+            if (parents[i].dataset.image == "true"){
+                parents[i].appendChild(img)
+            }
+        }
+
+        
+        
+    };
+
+    function leaveFileUpload(){
+        
+        document.getElementById("sendingLoader").innerHTML = "Syncing your Studysheet with our servers..."
+        hideElement(document.getElementById("sendingLoader"))
+
+    }
 
     function startSave(){
         overrider = true;
