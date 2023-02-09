@@ -202,8 +202,7 @@ async function doPreviewAndLocal(){
 
     // document.getElementById("noclickdiv").style.display = "none";
     // console.warn("testing bruh why is it doing this")
-    document.getElementById("noclickdiv").style.opacity = "0";
-    document.getElementById("noclickdiv").style.pointerEvents = "none";
+    
     console.log("og sheet: "+sheet)
     sheet = sheet.replaceAll("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823", "\n")
     console.log(sheet)
@@ -217,11 +216,34 @@ async function doPreviewAndLocal(){
     }
     for (i = 0; i<arrayText.length; i++){
         let wordPair = getRandomQuestion(customWords);
+
+        var overallDiv = document.createElement("div");
+        document.getElementById("previewstudysheet").appendChild(overallDiv);
+
+
+        var imageHolder = document.createElement("div");
+        overallDiv.append(imageHolder);
+
+        var blankImage = document.createElement("img");
+        blankImage.className = "defaultImageHolder";
+        imageHolder.append(blankImage);
+
+        if (wordPair.length > 2){
+            console.log("Has image");
+            blankImage.src = wordPair[2];
+            blankImage.className = "showImageHolder"
+        }
+
         var br = document.createElement("div")
         br.className = "termDefContainer";
-        document.getElementById("previewstudysheet").appendChild(br);
         id1 = "input"+generateIdV
         id2 = "input"+generateIdA
+        overallDiv.appendChild(br);
+        
+
+        
+
+        
 
         var verbInput = document.createElement('div');
         verbInput.id=id1;
@@ -258,6 +280,10 @@ async function doPreviewAndLocal(){
         document.getElementById("multiplechoicebutton").style.borderColor = "#a0a0a0"
 
     }
+
+
+    document.getElementById("noclickdiv").style.opacity = "0";
+    document.getElementById("noclickdiv").style.pointerEvents = "none";
 
 }
 
@@ -1107,6 +1133,18 @@ function getRandomQuestion(textBlock) {
         }
         console.log("whatquestion reset")
     }
+
+    if (questionArray[0].includes("--image(")){
+        let splitter = questionArray[0].split("--image(")
+        let image = splitter[1]
+        image = image.substring(0, 64);
+        let urlForImage = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/image/get/"+image;
+        questionArray.push(urlForImage);
+        questionArray[0] = splitter[0] + image.substring(64, image.length);
+        
+        
+    }
+
     return questionArray
     
     
@@ -3024,48 +3062,54 @@ var trash_svg = `
 `
 
 var image_svg = `
-<svg width="2vw" height="100%" version="1.1" viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
- <defs>
-  
- </defs>
- <g>
-  <path d="m434.21 180.38c14.195 0 27.098 5.7773 36.488 15.172 9.3594 9.3906 15.137 22.262 15.137 36.457 0 14.215-5.7969 27.117-15.152 36.473-9.3086 9.3594-22.211 15.152-36.473 15.152-14.246 0-27.164-5.7773-36.488-15.121-9.3398-9.3398-15.121-22.242-15.121-36.488s5.7773-27.164 15.121-36.488l0.73828-0.6875c9.3086-8.9375 21.906-14.449 35.75-14.449zm20.227 31.398c-5.1562-5.1562-12.297-8.3516-20.227-8.3516-7.6602 0-14.598 2.9922-19.691 7.8125l-0.50391 0.55469c-5.1562 5.1562-8.3672 12.316-8.3672 20.211 0 7.8789 3.207 15.035 8.3672 20.211 5.1562 5.1562 12.316 8.3672 20.211 8.3672 7.8945 0 15.035-3.207 20.211-8.3672 5.1914-5.1406 8.3672-12.281 8.3672-20.211 0-7.9297-3.1914-15.07-8.3516-20.227zm-299.83 121.4 127.83-109.89c4.3867-3.7617 10.801-3.6289 15.035 0.066407l139.26 119.72 108.66-93.41v-104.97h-390.79zm390.79-53.188-101.1 86.906c-4.2344 3.6953-10.633 3.832-15.035 0.066406l-139.34-119.8-135.31 116.32v51.828h390.79v-135.32zm-402.3-158.32h413.82c6.3672 0 11.523 5.1562 11.523 11.523v293.65c0 6.3672-5.1562 11.523-11.523 11.523h-413.82c-6.3672 0-11.523-5.1562-11.523-11.523v-293.65c0-6.3672 5.1562-11.523 11.523-11.523zm424.05-33.566h-434.29c-9.3242 0-17.84 3.6953-24.109 9.7109l-0.50391 0.53906c-6.3164 6.3164-10.25 15.035-10.25 24.613v314.08c0 9.5938 3.9297 18.328 10.23 24.645 6.3164 6.3008 15.055 10.23 24.629 10.23h434.29c9.5742 0 18.297-3.9297 24.613-10.25 6.3164-6.3008 10.25-15.02 10.25-24.613v-314.08c0-9.5742-3.9297-18.297-10.25-24.613-6.3164-6.3164-15.035-10.25-24.613-10.25z"/>
-  <use x="70" y="585.199219" xlink:href="#t"/>
-  <use x="76.164062" y="585.199219" xlink:href="#c"/>
-  <use x="80.308594" y="585.199219" xlink:href="#b"/>
-  <use x="86.003906" y="585.199219" xlink:href="#d"/>
-  <use x="91.671875" y="585.199219" xlink:href="#a"/>
-  <use x="95.6875" y="585.199219" xlink:href="#b"/>
-  <use x="101.386719" y="585.199219" xlink:href="#i"/>
-  <use x="110.324219" y="585.199219" xlink:href="#h"/>
-  <use x="116.335938" y="585.199219" xlink:href="#g"/>
-  <use x="124.734375" y="585.199219" xlink:href="#f"/>
-  <use x="133.488281" y="585.199219" xlink:href="#d"/>
-  <use x="139.15625" y="585.199219" xlink:href="#c"/>
-  <use x="143.300781" y="585.199219" xlink:href="#s"/>
-  <use x="151.058594" y="585.199219" xlink:href="#d"/>
-  <use x="156.726562" y="585.199219" xlink:href="#a"/>
-  <use x="160.742188" y="585.199219" xlink:href="#r"/>
-  <use x="70" y="593.601562" xlink:href="#q"/>
-  <use x="73.65625" y="593.601562" xlink:href="#c"/>
-  <use x="77.796875" y="593.601562" xlink:href="#e"/>
-  <use x="83.566406" y="593.601562" xlink:href="#f"/>
-  <use x="95.246094" y="593.601562" xlink:href="#a"/>
-  <use x="99.261719" y="593.601562" xlink:href="#p"/>
-  <use x="105.242188" y="593.601562" xlink:href="#b"/>
-  <use x="113.863281" y="593.601562" xlink:href="#o"/>
-  <use x="120.894531" y="593.601562" xlink:href="#e"/>
-  <use x="126.664062" y="593.601562" xlink:href="#n"/>
-  <use x="132.644531" y="593.601562" xlink:href="#m"/>
-  <use x="141.546875" y="593.601562" xlink:href="#l"/>
-  <use x="147.703125" y="593.601562" xlink:href="#c"/>
-  <use x="151.847656" y="593.601562" xlink:href="#e"/>
-  <use x="157.617187" y="593.601562" xlink:href="#k"/>
-  <use x="160.496094" y="593.601562" xlink:href="#b"/>
-  <use x="166.195312" y="593.601562" xlink:href="#j"/>
-  <use x="171.175781" y="593.601562" xlink:href="#a"/>
- </g>
+<svg width="100% height="100%" version="1.1" viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+        
+    <g>
+    <path d="m375.2 242.48-23.52 22.961c-3.9219 3.9219-10.078 3.3594-13.441-1.1211l-58.238-77.84c-3.9219-5.0391-11.199-4.4805-14.559 0.55859l-95.203 150.64c-3.9219 6.1602 0.55859 14 7.8398 14h216.72c7.8398-19.602 20.16-36.398 35.281-49.281l-41.441-58.238c-3.3594-5.0391-9.5195-5.6016-13.441-1.6797z"/>
+    <path d="m435.12 171.36c0 18.25-14.793 33.039-33.043 33.039-18.246 0-33.039-14.789-33.039-33.039 0-18.246 14.793-33.039 33.039-33.039 18.25 0 33.043 14.793 33.043 33.039"/>
+    <path d="m543.76 302.4v-229.04c0-7.8398-6.1602-14.559-14.559-14.559h-430.64c-7.8398 0-14.559 6.1602-14.559 14.559v339.92c0 7.8398 6.1602 14.559 14.559 14.559h319.2c12.32 42 50.961 72.801 96.879 72.801 56 0 101.36-45.359 101.36-101.36 0.003906-45.359-30.797-84.562-72.234-96.883zm-129.92 96.883h-301.28v-311.36h402.08v210.56c-55.438 0-100.8 45.359-100.8 100.8zm136.08-7.2812c-2.2383 3.9219-6.1602 6.7188-10.641 6.7188h-11.762v45.359c0 7.2812-5.6016 12.879-12.879 12.879-7.2812 0-12.879-5.6016-12.879-12.879v-45.359h-11.762c-4.4805 0-8.3984-2.2383-10.641-6.7188-2.2383-3.9219-1.6797-8.9609 1.1211-12.32l24.641-33.039c2.2383-2.8008 5.6016-4.4805 9.5195-4.4805 3.9219 0 7.2812 1.6797 9.5195 4.4805l24.641 33.039c2.8008 3.3594 3.3594 8.3984 1.1211 12.32z"/>
+    <use x="70" y="644" xlink:href="#x"/>
+    <use x="90.550781" y="644" xlink:href="#c"/>
+    <use x="104.359375" y="644" xlink:href="#a"/>
+    <use x="123.347656" y="644" xlink:href="#l"/>
+    <use x="142.242188" y="644" xlink:href="#b"/>
+    <use x="155.628906" y="644" xlink:href="#a"/>
+    <use x="174.617188" y="644" xlink:href="#k"/>
+    <use x="204.410156" y="644" xlink:href="#j"/>
+    <use x="224.453125" y="644" xlink:href="#i"/>
+    <use x="252.453125" y="644" xlink:href="#h"/>
+    <use x="274.121094" y="644" xlink:href="#w"/>
+    <use x="283.71875" y="644" xlink:href="#g"/>
+    <use x="293.316406" y="644" xlink:href="#f"/>
+    <use x="309.914062" y="644" xlink:href="#a"/>
+    <use x="338.652344" y="644" xlink:href="#v"/>
+    <use x="361.894531" y="644" xlink:href="#a"/>
+    <use x="380.882812" y="644" xlink:href="#u"/>
+    <use x="397.550781" y="644" xlink:href="#g"/>
+    <use x="407.148438" y="644" xlink:href="#t"/>
+    <use x="427.191406" y="644" xlink:href="#e"/>
+    <use x="70" y="672" xlink:href="#s"/>
+    <use x="82.183594" y="672" xlink:href="#c"/>
+    <use x="95.992188" y="672" xlink:href="#d"/>
+    <use x="115.226562" y="672" xlink:href="#r"/>
+    <use x="154.152344" y="672" xlink:href="#b"/>
+    <use x="167.535156" y="672" xlink:href="#q"/>
+    <use x="187.46875" y="672" xlink:href="#a"/>
+    <use x="216.207031" y="672" xlink:href="#p"/>
+    <use x="239.640625" y="672" xlink:href="#d"/>
+    <use x="258.878906" y="672" xlink:href="#o"/>
+    <use x="278.8125" y="672" xlink:href="#e"/>
+    <use x="308.492188" y="672" xlink:href="#n"/>
+    <use x="329.015625" y="672" xlink:href="#c"/>
+    <use x="342.820312" y="672" xlink:href="#d"/>
+    <use x="362.058594" y="672" xlink:href="#m"/>
+    <use x="371.65625" y="672" xlink:href="#a"/>
+    <use x="390.648438" y="672" xlink:href="#f"/>
+    <use x="407.242188" y="672" xlink:href="#b"/>
+    </g>
 </svg>
+
 
 `
 
@@ -3269,23 +3313,37 @@ function saveToCloud(){
         var childarray = []
         var childrens = document.getElementById("insideCreator").children;
         console.log(childrens);
+        var hasImage = false;
         for(var i=0; i<childrens.length; i++){
+            hasImage = false;
             var childx = childrens[i];
-            // console.log(childx.id)
-            // if (childx.id.startsWith() == 'input'){
-            //     childarray.push(childx);
-            // }
+            console.log("child x is: (next line)")
+            console.log(childx);
+            var imageUrl;
+            if (childx.children[0].children[0].className == "showImageHolder"){
+                hasImage = true;
+                console.log("Image inside of T#"+i);
+                imageUrl = childx.children[0].children[0].src;
+                imageUrl = imageUrl.split("/")
+                imageUrl = imageUrl[imageUrl.length-1];
+                console.log("Image #"+i+" has ID of "+imageUrl);
+            }
 
             //there will be 2 divs within insidecreator
             //if the first div has an image that is not display:none;, add the src to the studysheet
                 //else skip
             //go into second div, proceed as normal
-
-            console.log(childx);
+            var childStuff = childx.children[1];
+            console.log(childStuff);
             console.log("hilarious right");
-            var underChildren = childx.children;
+            var underChildren = childStuff.children;
             console.log(underChildren);
+            underChildren[0].innerHTML.replaceAll("--image(", "-image")
+            if (hasImage == true){
+                underChildren[0].innerHTML += "--image("+imageUrl+")";
+            }
             for (var n=0; n<2; n++){
+                
                 childarray.push(underChildren[n])
                 
             }
@@ -3354,7 +3412,7 @@ function saveToCloud(){
                     if (xhr.readyState === 4) {
                         console.log(xhr.status);
                         console.log(xhr.responseText);
-                        window.location.href="index.html";
+                        //window.location.href="index.html";
                     }
                 };
                 var data = downloadArrayString;
@@ -3970,6 +4028,7 @@ function createCreatorInput(term, definition) {
 
 
         var blankImage = document.createElement("img");
+        blankImage.className = "defaultImageHolder";
         imageHolder.append(blankImage);
 
         var verbInput = document.createElement('div');
@@ -4014,7 +4073,7 @@ function createCreatorInput(term, definition) {
         svg.className = "trash";
         svg.onclick = function(){
             console.log(this)
-            this.parentNode.remove();
+            this.parentNode.parentNode.remove();
         }
         stuffHolder.appendChild(svg);
 
@@ -4024,11 +4083,11 @@ function createCreatorInput(term, definition) {
         svg2.onclick = function(){
             parent = this.parentNode  
             grandparent = parent.parentNode         
-            grandparent.dataset.image = "true";
+            toPass = grandparent;
             console.log("images go here")
-            invokeFilereader()
+            invokeFilereader(toPass)
         }
-        //stuffHolder.appendChild(svg2);
+        stuffHolder.appendChild(svg2);
     
         var overallContainer = document.getElementById("langCreatorContainer");
         overallContainer.scrollTop = overallContainer.scrollHeight;

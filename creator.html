@@ -334,6 +334,19 @@
         justify-content: center;
         align-items: center;
     }
+
+    .defaultImageHolder{
+        display:none;
+        max-height: 100px;
+        width:auto;
+    }
+
+    .showImageHolder{
+        display:block;
+        max-height: 100px;
+        width:auto;
+    }
+
 </style>
 <script>
 
@@ -341,7 +354,7 @@
     var imgUrl;
     var endData;
     //Trigger now when you have selected any file 
-    function invokeFilereader() {
+    function invokeFilereader(grandparent) {
 
 
         var input = document.createElement('input');
@@ -350,6 +363,7 @@
         input.click();
         
         input.onchange = e => { 
+            grandparent.dataset.image = "true";
             var file = e.target.files[0]; 
             showElement(document.getElementById("sendingLoader"))
             document.getElementById("sendingLoader").innerHTML = "Uploading Image..."
@@ -405,6 +419,8 @@
             if (parents[i].dataset.image == "true"){
                 console.log("setting image element to "+source);
                 parents[i].children[0].children[0].src = source;
+                parents[i].children[0].children[0].className = "showImageHolder";
+                parents[i].dataset.image = "false";
             }
         }
         document.getElementById("sendingLoader").innerHTML = "Syncing your Studysheet with our servers..."
