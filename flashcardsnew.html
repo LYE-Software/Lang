@@ -117,11 +117,23 @@
 
     var front;
 
+    var flashCards = [
+        
+    ]
+
     function createFlashcards(count) {
         totalCardCount = count;
         for (var i = 0; i < count; i++) {
+            // STUB TO CHECK IF IT HAS AN IMAGE, THIS IS THE JOB OF TYN
+            
             front = flashcardContentsArray[i];
             front = JSON.parse(front)
+
+            image_url = "output.png"
+            if (image_url != null) {
+                front[0] = `<div id="term_image"><img src="${image_url}" alt="Image Preview" style="width: auto; height: 250px; border-radius: 25px;"></div>` + front[0];
+            }
+
             if (i == 0) {
                 cardContainer.innerHTML += 
                     `<div style="opacity: 01; position: relative;" onclick="clickCard()" class="card lightGlow">
@@ -137,6 +149,8 @@
                         </div>
                     </div>`
             ]
+
+            flashCards.push([ front[0], front[1] ])
         }
 
         cardContainer.style.width = cardWidth * count + "px";
@@ -161,7 +175,7 @@
 
         const oldValue = focusedCard;
         setTimeout(function() {
-            cardContainer.children[oldValue].children[0].innerHTML = JSON.parse(flashcardContentsArray[oldValue])[0];
+            cardContainer.children[oldValue].children[0].innerHTML = flashCards[oldValue][0];
         }, 250)
         setTimeout(function() {
             cardContainer.children[oldValue].classList.remove("flipAnimation");
@@ -189,11 +203,10 @@
 
         const oldValue = focusedCard;
         setTimeout(function() {
-            cardContainer.children[oldValue].children[0].innerHTML = JSON.parse(flashcardContentsArray[oldValue])[0];
+            cardContainer.children[oldValue].children[0].innerHTML = flashCards[oldValue][0];
         }, 250)
         setTimeout(function() {
             cardContainer.children[oldValue].classList.remove("flipAnimation");
-            
         }, 500)
 
         focusedCard--;
@@ -229,8 +242,7 @@
         }, 500);
 
         setTimeout(function() {
-            front = flashcardContentsArray[focusedCard];
-            front = JSON.parse(front)
+            front = flashCards[focusedCard];
             clickedCard.children[0].innerHTML = front[i];
         }, 250)
     }

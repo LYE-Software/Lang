@@ -129,7 +129,6 @@
     <a href="studysheetpage.html">
         <img src="assets/icons/back.svg" style="left:0; top:0; position: absolute; width: 150px; height: auto;">
         <img src="assets/logos/lang-wheat.png"  style="position:absolute; width:100px; right:0; top:0; margin:20px;" onclick="window.location.href='index.html'">
-
     </a>
     <div id="completedMode" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
         <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat;">
@@ -141,10 +140,13 @@
     </div>
     <div class="panelContainer">
         <div class="horizontalFlex centerFlex">
-            <div class="noverticalshow correctIncorrect lightGlow" style="height: 0;"></div>
-            <div class="answerContainer horizontalFlex centerFlex" style="color: wheat; font-size: 40px; margin-bottom: 20px;" id="displayWord">
+            <!-- <div class="noverticalshow correctIncorrect lightGlow" style="height: 0;"></div> -->
+            <div class="answerContainer horizontalFlex centerFlex" style="color: wheat; font-size: 40px; margin-bottom: 20px; text-align: center;" id="displayWord">
                 No Studysheet Detected.
             </div>
+        </div>
+        <div id="term_image">
+            <img src="output.png" alt="Image Preview" style="width: auto; height: 250px; border-radius: 25px;">
         </div>
         <div class="horizontalFlex centerFlex">
             <div class="noverticalshow correctIncorrect lightGlow" style="height: 0;"></div>
@@ -159,6 +161,7 @@
             </div>
         </div>
         <div class="horizontalFlex centerFlex">
+
             <div class="noverticalshow correctIncorrect lightGlow">
                 <div id="crctst">Correct</div>
                 <div id="incorrect">Incorrect</div>

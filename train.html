@@ -79,6 +79,78 @@
     user-select: none;
 }
 
+.multiplechoicefooter button {
+    width: 40vw;
+    max-width: 300px;
+
+    height: 30vh;
+    max-height: 150px;
+
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+    font-size: 15px;
+    font-family: Poppins;
+    margin: 5px;
+    border-radius: 15px;
+    border: none;
+}
+
+#multchoice {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+.panelContainer {
+    width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.answerContainer {
+    max-width: 800px;
+    width: 85vw;
+    /* height: 250px; */
+}
+
+.submitButton {
+    /* max-width: 400px; */
+    flex: 1;
+    height: 75px;
+    
+    margin-top: 10px;
+}
+
+#term {
+flex: 1;
+height: 75px;
+
+
+border-top-right-radius: 25px;
+border-top-left-radius: 25px;
+}
+
+.inputArea {
+height: 175px;
+width: 100%;
+font-size: 2em;
+text-align: left;
+padding: 10px;
+
+border-radius: 25px; 
+transition: all 0.35s ease-in-out;
+
+border: 1px solid var(--primary-light);
+background-color: rgb(47, 61, 115);
+color: var(--primary-light);
+
+}
 
 </style>
 <body class="darkHomepage">
@@ -90,7 +162,7 @@
             <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="window.location.href='studysheetpage.html'">Study Options</div>
         </div>
     </div>
-    <div class="samelineheader">
+    <!-- <div class="horizontalFlex centerFlex" style="justify-content: space-between">
         <a href="studysheetpage.html">
             <img src="assets/icons/back.svg" style="left:0; top:0;">
         </a>
@@ -98,34 +170,44 @@
             <h1 id="whatGroup" style="font-family:Poppins; color:wheat; "></h1>
             <h1 id="whatPercent" style="font-family:Poppins; color:wheat;"></h1>
         </div>
-        <div style="font-family:Poppins; justify-content: center; text-align: center; color:wheat;" id = "informationAbt">
-        
-       
-            <div style="width:50vw; height:10vh; display:flex; justify-content: center; align-items: center;">
-                <h1 id="whatGroup" style="font-family:Poppins; color:wheat;">Train</h1>
-            </div>
-            <div style="width:50vw; height:10vh; display:flex; justify-content: center; align-items: center;">
-                <p style="font-family:Poppins; color:wheat;">Train allows you to dynamically learn your Studysheet.</p>
-            </div>
-            <div style="width:50vw; height:10vh; display:flex; justify-content: center; align-items: center;">
-                <p>Train utilizes a method of grouping words and ramping up the review methods until they are in Long Term Memory.</p>
-            </div>
-            <div style="width:50vw; height:10vh; display:flex; justify-content: center; align-items: center;">
-                <p>Train works well with larger Studysheets.</p>
-            </div>
-            <div style="width:50vw; height:10vh; display:flex; justify-content: center; align-items: center;">
-                <p>Press "Begin" to get started!</p>
-            </div>
-            <div style="width:50vw; height:20vh; display:flex; justify-content: center; align-items: center;">
-                <button class="dropbtn" id="myBtnBegin" style="margin:20px;" onclick="onBtnPress('t')">Begin</button>
-            </div>
-        </div>
         <img src="assets/logos/lang-wheat.png" class="topleftlogoicon" onclick="window.location.href='index.html'" style="margin-right:40px; margin-top:40px;">
+    </div> -->
 
+    <div>
+        <a href="studysheetpage.html"><img src="assets/icons/back.svg" style="left:0; top:0; position: absolute; width: 150px; height: auto; z-index: 100"></a>
+        <div class="centerText">
+            <h1 id="whatGroup" style="font-family:Poppins; color:wheat; "></h1>
+            <h1 id="whatPercent" style="font-family:Poppins; color:wheat;"></h1>
+        </div>
+        <a href="studysheetpage.html"><img src="assets/logos/lang-wheat.png"  style="position:absolute; width:100px; right:0; top:0; margin:20px; z-index: 100" onclick="window.location.href='index.html'"></a>
     </div>
+
+    <div class="horizontalFlex" style="flex-direction: column; font-family:Poppins; justify-content: center; text-align: center; color:wheat;" id="informationAbt">
+        <div style="width:50vw; height:10vh; display:flex; justify-content: center; align-items: center;">
+            <h1 id="whatGroup" style="font-family:Poppins; color:wheat;">Train</h1>
+        </div>
+        <div style="width:50vw; height:10vh; display:flex; justify-content: center; align-items: center;">
+            <p style="font-family:Poppins; color:wheat;">Train allows you to dynamically learn your Studysheet.</p>
+        </div>
+        <div style="width:50vw; height:10vh; display:flex; justify-content: center; align-items: center;">
+            <p>Train utilizes a method of grouping words and ramping up the review methods until they are in Long Term Memory.</p>
+        </div>
+        <div style="width:50vw; height:10vh; display:flex; justify-content: center; align-items: center;">
+            <p>Train works well with larger Studysheets.</p>
+        </div>
+        <div style="width:50vw; height:10vh; display:flex; justify-content: center; align-items: center;">
+            <p>Press "Begin" to get started!</p>
+        </div>
+        <div style="width:50vw; height:20vh; display:flex; justify-content: center; align-items: center;">
+            <button class="dropbtn" id="myBtnBegin" style="margin:20px;" onclick="onBtnPress('t')">Begin</button>
+        </div>
+    </div>
+
     <div style="width:100vw; height:80vh; align-items: center; text-align: center; color:#001945; align-items: center; display:none;" id="TermAndDef">
-        <div style="text-align:left; border: 2px solid #001945; background-color: wheat; border-radius: 20px; width: 50vw; margin: auto; margin-bottom:0px; height:50vh;">
-            
+        <div class="lightGlow" style="text-align:center; background-color: wheat; border-radius: 20px; width: 50vw; margin: auto; margin-bottom:0px; height:50vh;">
+            <div id="term_image_learn">
+                <img src="output.png" alt="Image Preview" style="margin-top: 10px; width: auto; height: 250px; border-radius: 25px;">
+            </div>
             <h1 style="font-size: 2.5vw; margin: 20px; margin-bottom: 0px;" id="term">
                 Term
             </h1>
@@ -135,15 +217,14 @@
                     Definition of the term
                 </h3>
             </div>
-            
-            
         </div>
-        <br>
-        <Br>
-        <button class="dropbtn" onclick="gameLoop()">Continue</button>
+        <button class="dropbtn lightGlow" style="margin-top: 20px" onclick="gameLoop()">Continue</button>
     </div>   
+
+
+
     <div class="multiplechoice" style = "display:none;" id="multchoice">
-        <h1 id="questionheader" class="header" style="color:wheat;">Multiple Choice</h1>
+        <!-- <h1 id="questionheader" class="header" style="color:wheat;">Multiple Choice</h1>
         
         <br>
         <br>
@@ -157,9 +238,55 @@
                 <button style="width:20vw; height:20vh; background-color: wheat; color:#001945; font-size: 2vh; font-family: Poppins; margin:5px; border-radius: 15px;" id = "d">D</button>
             </div>
                 
+        </div> -->
+
+        <div class="horizontalFlex centerFlex" style="flex-direction: column; ">
+            <div id="term_image_mcq">
+                <img src="output.png" alt="Image Preview" style="width: auto; height: 250px; border-radius: 25px;">
+            </div>
+
+            <h1 id="questionheader" class="centerText" style="color: var(--primary-light);">Multiple Choice</h1>
+            <div class="multiplechoicefooter">
+                <div>
+                    <button id = "a" class="lightGlow">A</button>
+                    <button id = "b" class="lightGlow">B</button>
+                </div>
+                <div>
+                    <button id = "c" class="lightGlow">C</button>
+                    <button id = "d" class="lightGlow">D</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="inputdiv panelContainer" style="display: none;">
+        <div class="panelContainer">
+            <div class="horizontalFlex centerFlex">
+                <!-- <div class="noverticalshow correctIncorrect lightGlow" style="height: 0;"></div> -->
+                <div class="answerContainer horizontalFlex centerFlex" style="color: wheat; font-size: 40px; margin-bottom: 20px; text-align: center;" id="displayWord">
+                    No Studysheet Detected.
+                </div>
+            </div>
+            <div id="term_image" style="margin-bottom: 10px">
+                <img src="output.png" alt="Image Preview" style="width: auto; height: 250px; border-radius: 25px;">
+            </div>
+            <div class="horizontalFlex centerFlex">
+                <div class="answerContainer">
+                    <input class="inputArea lightGlow" id="input">
+                </div>
+            </div>
+            <div class="horizontalFlex centerFlex">
+                <div class="answerContainer horizontalFlex centerFlex">
+                    <div style="border-radius: 25px; flex: 2; background-color: wheat;" class="horizontalFlex centerFlex buttonHover submitButton lightGlow" id="goButton" onclick="checkTrain()">> Go!</div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="inputdiv">
+
+    <!-- <div class="inputdiv">
         <h1 class="displayWord" id="displayWord" style="margin:40px;"></h1>
     </div>
     <div class="inputdiv">
@@ -170,7 +297,7 @@
         </div>
         
         <button class="goButton" id="goButton" onclick="checkTrain()"></button>
-    </div>
+    </div> -->
 
     <div style="color:wheat; font-family: Poppins; text-align: center; font-size: 2.2vw;" id="wherearewe"></div>
 
