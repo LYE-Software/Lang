@@ -232,6 +232,7 @@ async function doPreviewAndLocal(){
             console.log("Has image");
             blankImage.src = wordPair[2];
             blankImage.className = "showImageHolder"
+            removeMultChoice();
         }
 
         var br = document.createElement("div")
@@ -285,6 +286,14 @@ async function doPreviewAndLocal(){
     document.getElementById("noclickdiv").style.opacity = "0";
     document.getElementById("noclickdiv").style.pointerEvents = "none";
 
+}
+
+function removeMultChoice(){
+    document.getElementById("multiplechoicebutton").style.backgroundColor = "#a0a0a0";
+    document.getElementById("multiplechoicebutton").onclick = function(){
+        showPopup("Multiple Choice currently does not work for Studysheets with images. We are working to fix this, so thank you for your patience.")
+    }
+    document.getElementById("multiplechoicebutton").style.borderColor = "#a0a0a0"
 }
 
 function hideElement(element) {
@@ -1192,6 +1201,7 @@ function makeRandom(){
 }
 
 function doMultipleChoice(){
+    
     try {
         document.getElementById("file").style.display="none";
         
@@ -1201,6 +1211,14 @@ function doMultipleChoice(){
     document.getElementById("multchoice").style.display="";
     document.getElementById("myBtnBegin").style.display = "none";
     question = getRandomQuestion(customWords);
+    // if (question.length > 2){
+    //     document.getElementById("term_image").children[0].src = question.pop();
+        
+
+    // }else {
+    //     document.getElementById("term_image").children[0].src = "";
+    // }
+    
     document.getElementById("questionheader").innerHTML = question[0];
     let random_number = Math.floor(Math.random() *4);
     fakeout = getOtherAnswers(customWords)
@@ -1861,7 +1879,9 @@ function doTrain(){
 }
 
 var t = 0
+var imageSource;
 function gameLoop(){
+    document.getElementById("term_image_learn").style.display = "none";
     isTrainWrite = false;
     if (t == group.length){
         t = 0;
@@ -1936,8 +1956,20 @@ function gameLoop(){
         console.log("The question is "+question+" and T is "+t)
         questionArray = JSON.parse(question)
         console.log(questionArray)
+        if (questionArray[0].includes("--image(")){
+            let splitter = questionArray[0].split("--image(")
+            let image = splitter[1]
+            image = image.substring(0, 64);
+            let urlForImage = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/image/get/"+image;
+            questionArray.push(urlForImage);
+            questionArray[0] = splitter[0] + image.substring(64, image.length);
+            imageSource = questionArray[2];
+            
+            
+        }
         term = questionArray[0];
         definition = questionArray[1];
+        
         mode = dict[t]
         if (mode == 0){
             readTermDef(term, definition)
@@ -1980,6 +2012,10 @@ function readTermDef(term, def){
     document.getElementById("TermAndDef").style.display = "";
     document.getElementById("term").innerHTML = term;
     document.getElementById("def").innerHTML = def;
+    if (imageSource != null){
+        document.getElementById("term_image_learn").children[0].src = imageSource;
+        document.getElementById("term_image_learn").style.display = "";
+    }
 }
 
 
@@ -2005,7 +2041,10 @@ function doWriteTrain(term, def){
     buttonStyling.style.display = "flex";
     buttonStyling.innerHTML = ">" + "\n" + "Go!"
     
-    
+    if (imageSource != null){
+        document.getElementById("term_image").children[0].src = imageSource;
+        document.getElementById("term_image").style.display = "";
+    }
     console.log("Inside of new setup for write, term = "+term+" and def = "+def)
     document.getElementById("displayWord").innerHTML = term;
     customAnswer = def;
@@ -2042,7 +2081,10 @@ function checkTrain(){
 
 function doTrainMulti(term, def ){
     document.getElementById("multchoice").style.display="";
-    
+    if (imageSource != null){
+        document.getElementById("term_image_mcq").children[0].src = imageSource;
+        document.getElementById("term_image_mcq").style.display = "";
+    }
     question = [term, def];
     document.getElementById("questionheader").innerHTML = question[0];
     let random_number = Math.floor(Math.random() *4);
@@ -2254,6 +2296,7 @@ function doSpeedTest(v){
     }
 
 function doCustomSheets(v){
+    document.getElementById("term_image").style.display = "none";
     var wage = document.getElementById("input");
     wage.addEventListener("keydown", function (e) {
         if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
@@ -2289,6 +2332,10 @@ function doCustomSheets(v){
     whichCustom = v;
     if (v=="s"){
         wordPair = getRandomQuestion(customWords);
+        if (wordPair.length >2){
+            document.getElementById("term_image").children[0].src = wordPair[2];
+            document.getElementById("term_image").style.display = "";
+        }
         document.getElementById("displayWord").innerHTML = wordPair[0];
         customAnswer = wordPair[1];
         customAnswer = customAnswer.toLowerCase();
