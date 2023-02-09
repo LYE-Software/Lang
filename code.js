@@ -4028,7 +4028,7 @@ function createCreatorInput(term, definition) {
             console.log("images go here")
             invokeFilereader()
         }
-        stuffHolder.appendChild(svg2);
+        //stuffHolder.appendChild(svg2);
     
         var overallContainer = document.getElementById("langCreatorContainer");
         overallContainer.scrollTop = overallContainer.scrollHeight;
