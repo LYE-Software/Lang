@@ -795,14 +795,10 @@ async function getLibraryList(){
                     div5.setAttribute("studysheet", newarr[i]);
                     div5.id = "studysheetDel"+i;
                     div5.onclick = async function(){
-                        document.getElementById("loadingscreen").style.opacity = "1";
-                        document.getElementById("loadingscreen").classList = "verticalFlex";
-                        document.getElementById("loadingscreen").style.display = "flex"
-                        var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
-                        link = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/"+ studysheetname+"/delete"
-                        console.log("link is: "+link)
-                        await httpGet(link)
-                        window.location.reload()
+
+                        showElement(document.getElementById("deleteConfirmation"))
+
+                        
                     }
                     div5.innerHTML=`<svg class="studysheetDelete" width="24px" height="24px" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg"><path d="M17 9L11 15M11.0002 9L17.0002 15M9 6H20C20.5523 6 21 6.44772 21 7V17C21 17.5523 20.5523 18 20 18H9L3 12L9 6Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
                     document.getElementById("studysheetGridContainer").append(div5);
@@ -841,14 +837,21 @@ async function deleteSS(){
     document.getElementById("loadingscreen").style.opacity = "1";
     document.getElementById("loadingscreen").classList = "verticalFlex";
     document.getElementById("loadingscreen").style.display = "flex"
+    hideElement(document.getElementById("deleteConfirmation"))
     link = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/"+ newarr[index]+"/delete"
     console.log("link is: "+link)
     await httpGet(link)
     window.location.reload()
 
+
+   
+
 }
 
+function processDelete(){
+    showElement(document.getElementById("deleteConfirmation"))
 
+}
 
 
 
