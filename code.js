@@ -233,7 +233,7 @@ async function doPreviewAndLocal(){
             console.log("Has image");
             blankImage.src = wordPair[2];
             blankImage.className = "showImageHolder"
-            removeMultChoice();
+            
         }
 
         var br = document.createElement("div")
@@ -1205,7 +1205,7 @@ function makeRandom(){
 }
 
 function doMultipleChoice(){
-    
+    document.getElementById("term_image").style.display = "none";
     try {
         document.getElementById("file").style.display="none";
         
@@ -1215,13 +1215,13 @@ function doMultipleChoice(){
     document.getElementById("multchoice").style.display="";
     document.getElementById("myBtnBegin").style.display = "none";
     question = getRandomQuestion(customWords);
-    // if (question.length > 2){
-    //     document.getElementById("term_image").children[0].src = question.pop();
-        
+    if (question.length > 2){
+        document.getElementById("term_image").children[0].src = question.pop();
+        document.getElementById("term_image").style.display = "";
 
-    // }else {
-    //     document.getElementById("term_image").children[0].src = "";
-    // }
+    }else {
+        document.getElementById("term_image").children[0].src = "";
+    }
     
     document.getElementById("questionheader").innerHTML = question[0];
     let random_number = Math.floor(Math.random() *4);
