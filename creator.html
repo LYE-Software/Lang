@@ -475,13 +475,15 @@
             var defs = []
 
             for (var i = 0; i < termDefs.length; i++) {
-                terms.push(termDefs[i].children[0].innerHTML)
-                defs.push(termDefs[i].children[1].innerHTML)
+                insideChildren = termDefs[i].children[1]
+                terms.push(insideChildren.children[0].innerHTML)
+                defs.push(insideChildren.children[1].innerHTML)
             }
 
             for (var i = 0; i < termDefs.length; i++) {
-                termDefs[i].children[0].innerHTML = defs[i]
-                termDefs[i].children[1].innerHTML = terms[i]
+                insideChildren = termDefs[i].children[1]
+                insideChildren.children[0].innerHTML = defs[i]
+                insideChildren.children[1].innerHTML = terms[i]
             }   
         // }
     }
