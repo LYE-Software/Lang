@@ -128,8 +128,23 @@
             
             front = flashcardContentsArray[i];
             front = JSON.parse(front)
-
-            image_url = "output.png"
+            if (front[0].includes("--image(")){
+                let splitter = front[0].split("--image(")
+                let image = splitter[1]
+                image = image.substring(0, 64);
+                let urlForImage = "https://backend.langstudy.tech:444/"+window.localStorage.getItem("usertoken")+"/image/get/"+image;
+                front.push(urlForImage);
+                front[0] = splitter[0] + image.substring(64, image.length);
+        
+        
+            }
+            if (front.length > 2){
+                image_url = front[2];
+                
+            } else{
+                image_url = null;
+            }
+            
             if (image_url != null) {
                 front[0] = `<div id="term_image"><img src="${image_url}" alt="Image Preview" style="width: auto; height: 250px; border-radius: 25px;"></div>` + front[0];
             }
