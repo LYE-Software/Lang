@@ -104,11 +104,66 @@
             scrollbar-width: none;  /* Firefox */
         }
 
-        .innerLightGlow {
-            /* -webkit-box-shadow: inset 0px 0px 15px var(--primary-light), 0px 0px 15px var(--primary-light); */
-            /* -moz-box-shadow: inset 0px 0px 15px var(--primary-light), 0px 0px 15px var(--primary-light); */
-            /* box-shadow: inset 0px 0px 15px var(--primary-light), 0px 0px 15px var(--primary-light); */
-            /* box shadow only on bottom */
+        #talkToLucy:hover > div {
+            display: flex !important;
+        }
+
+        #talkToLucy > div {
+            display: none;
+            position: absolute;
+            right: 0px;
+            bottom: 0px;
+            width: 500px;
+            height: 400px;
+        }
+
+        #talkToLucy > div > div {
+            position: absolute;
+            right: 125px;
+            left: 0;
+            bottom: 0;
+            top: 0;
+
+            border-radius: 25px;
+            /* background-color: var(--primary-light); */
+        }
+
+        .bubbleContainer {
+            width: 100%;
+            display: flex;
+            margin-top: 20px;
+            /* margin-bottom: 10px; */
+        }
+
+        .bubbleContainer:has(.blueBubble) {
+            justify-content: flex-end;
+        }
+
+        .bubbleContainer:has(.whiteBubble) {
+            justify-content: flex-start;
+        }
+
+        .blueBubble {
+            background-color: var(--primary-light);
+
+            -webkit-box-shadow:0px 0px 25px 0px var(--primary-dark);
+            -moz-box-shadow: 0px 0px 25px 0px var(--primary-dark);
+            box-shadow: 0px 0px 25px 0px var(--primary-dark);
+        }
+
+        .whiteBubble {
+            background-color: var(--primary-dark);
+            color: var(--primary-light); 
+
+            -webkit-box-shadow:0px 0px 25px 0px var(--primary-light);
+            -moz-box-shadow: 0px 0px 25px 0px var(--primary-light);
+            box-shadow: 0px 0px 25px 0px var(--primary-light);
+        }
+
+        .bubble {
+            max-width: 80%;
+            border-radius: 25px;
+            padding: 10px;
         }
     </style>
 </head>
@@ -250,7 +305,7 @@
     </div>
 
     <div class="horizontalFlex" style="justify-content: center; width: 100vw; height: calc(84vh - 22px);">
-        <div id="langCreatorContainer" class="langCreatorContainer innerLightGlow" style="">
+        <div id="langCreatorContainer" class="langCreatorContainer innerLightGlow">
             <div class="termDefContainer">
                 <div style="margin-right: 25px;">Title: </div>
                 <div class="definition" id="sstitle" contenteditable></div>
@@ -263,7 +318,7 @@
                 Add New
             </div>
         </div>
-        <div style="display:flex; flex-direction: column;">
+        <div style="display:flex; flex-direction: column; margin-right: 20px; justify-content: space-between; height: 80%;">
             <div class="lightGlow" style="background-color: var(--primary-light); width: 100px; border-radius: 25px;">
                  <div class="creatorIcon" onclick="downloadVerbs('s')" id="exporter" style="display:none;">
                     <img src="save.svg" style="height:50px; color:var(--primary-dark);">
@@ -271,7 +326,6 @@
                         Export
                     </div>
                 </div> 
-                
                 <div class="creatorIcon" onclick="showSavePopup()">
                     <img src="assets/icons/langsave.svg" style="height:75px;">
                     <div class="tooltipText">
@@ -285,21 +339,32 @@
                         Swap
                     </div>
                 </div>
+            </div>  
 
+            <!-- <div id="talkToLucy" class="creatorIcon lightGlow" style="border-radius: 500px;">
+                Talk To Lucy
 
-                <!-- <div style="display: flex; ">
-                    <div class="creatorIcon">
-                        <label class="switch" style="display: inline-block; align-items: center; text-align: center; justify-content: center;"> 
-                            <input id = "swapper" type="checkbox" onclick="changeTermDef()">
-                            <label for="swapper"><img src="assets/icons/swap.svg" style="height:5vh;"></label>
-                        </label>
-                        <div class="tooltipText">
-                            Swap Terms
+                <div style="display: none;">
+                    <div style="display: flex; flex-direction: column;" class="">
+                        <div class="flexSpacer" style="overflow-y: scroll; padding: 25px; margin-bottom: 0; display: flex; flex-direction: column-reverse">
+                            <div class="bubbleContainer">
+                                <div class="blueBubble bubble">Make a studysheet of states and capitals</div>
+                            </div>
+                            <div class="bubbleContainer">
+                                <div class="whiteBubble bubble">Hi. I'm Lang! Talk to me natrually and I'll try my best to make changes to the studysheet. Need some help? Click here</div>
+                            </div>
+                        </div>
+                        <div>
+
+                        <div style="margin-left: 25px; margin-right: 25px; display: flex; justify-content: space-between;">
+                            <input style="background-color: var(--primary-light); border: none; border-radius: 25px; height: 50px; font-size: 15px; width: calc(100% - 60px);">
+                            <div style="width: 50px; height: 50px; background-color: var(--primary-light); border-radius: 25px;">
+                                SEND IMAGE HERE
+                            </div>
                         </div>
                     </div>
-                    
-                </div> -->
-            </div>
+                </div>
+            </div> -->
             
         </div>
         
