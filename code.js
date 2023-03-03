@@ -1101,6 +1101,7 @@ var setup = true;
 var continued = false;
 function getRandomQuestion(textBlock) {
     console.log("random question ran")
+    console.log("The stuff going into random q is: "+textBlock)
     if(setup == false && whatQuestion == 0 && continued == false){
         try{
             showElement(document.getElementById("completedMode"))
@@ -3338,6 +3339,190 @@ function saveShared(){
     
 }
 
+function sendLucyMessage(){
+    var message = document.getElementById("lucyMessage").value;
+    document.getElementById("lucyMessage").value = "";
+    if (message == "" || message == " " || message == null){
+        showPopup("You cannot send an empty message.")
+    }
+    else{
+        createUserBubble(message);
+        var okToUpload = true;
+        customusername = localStorage.getItem("customusername");
+        if (customusername == "invalidsession"){
+            // document.getElementById("sendingLoader").style.display="none";
+            hideElement(document.getElementById("sendingLoader"));
+            document.getElementById("failedSignIn").style.display="";
+        }
+        var downloadArray = ""
+        var childarray = []
+        var childrens = document.getElementById("insideCreator").children;
+        console.log(childrens);
+        var hasImage = false;
+        for(var i=0; i<childrens.length; i++){
+            hasImage = false;
+            var childx = childrens[i];
+            console.log("child x is: (next line)")
+            console.log(childx);
+            var imageUrl;
+            if (childx.children[0].children[0].className == "showImageHolder"){
+                hasImage = true;
+                console.log("Image inside of T#"+i);
+                imageUrl = childx.children[0].children[0].src;
+                imageUrl = imageUrl.split("/")
+                imageUrl = imageUrl[imageUrl.length-1];
+                console.log("Image #"+i+" has ID of "+imageUrl);
+            }
+
+            //there will be 2 divs within insidecreator
+            //if the first div has an image that is not display:none;, add the src to the studysheet
+                //else skip
+            //go into second div, proceed as normal
+            var childStuff = childx.children[1];
+            console.log(childStuff);
+            console.log("hilarious right");
+            var underChildren = childStuff.children;
+            console.log(underChildren);
+            underChildren[0].innerHTML.replaceAll("--image(", "-image")
+            if (hasImage == true){
+                underChildren[0].innerHTML += "--image("+imageUrl+")";
+            }
+            for (var n=0; n<2; n++){
+                
+                childarray.push(underChildren[n])
+                
+            }
+    
+        }
+    
+        console.log(childarray);
+        for (var i=0; i<childarray.length; i+=2){
+            var child = childarray[i];
+            var child2 = childarray[i+1];
+            var childContents = child.innerText.trim()
+            var child2Contents = child2.innerText.trim()
+            
+            childContents = childContents.replaceAll("&nbsp;", "")
+            child2Contents = child2Contents.replaceAll("&nbsp;", "")
+            childContents = childContents.replaceAll("<div><br></div>", "")
+            child2Contents = child2Contents.replaceAll("<div><br></div>", "")
+            child2Contents = child2Contents.replaceAll("\n", "_")
+            childContents = childContents.replaceAll("\n", "_")
+            child2Contents = child2Contents.replaceAll("\t", "   ")
+            childContents = childContents.replaceAll("\t", "   ")
+            if (child2Contents.includes("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823") || child2Contents.includes("&nbsp;") || child2Contents.includes("<!doctype html>") || childContents.includes("sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823") || childContents.includes("&nbsp;") || childContents.includes("<!doctype html>")){
+                //alert("One of the specified words is not avaliable for use due to the structure of the Lang Studysheet.")
+                showPopup("One of the specified words is not avaliable for use due to the structure of the Lang Studysheet.")
+                hideElement(document.getElementById("sendingLoader"));
+                okToUpload = false;
+                break;
+                
+            }
+            // if (child2Contents == "" || childContents == ""){
+            //     showPopup("You have an empty term or answer. Please fill in all terms and answers, or delete them from the Studysheet.");
+            //     hideElement(document.getElementById("sendingLoader"));
+            //     okToUpload = false;
+            // }
+            value1 = '["'+childContents+'"';
+            value2 = '"'+child2Contents+'"]'+"\n";
+            toAdd = [value1, value2];
+            console.log(toAdd);
+            downloadArray = downloadArray + toAdd;
+            console.log(downloadArray);
+        }
+        if (okToUpload == true){
+            downloadArray = downloadArray.slice(0,-1);
+            downloadArrayString = downloadArray+"";
+            // downloadArrayString = downloadArrayString.replaceAll("\n", "sussyamogusnobodywoulddarewritethisintheirstudysheet758429574823");
+            console.log(downloadArrayString);
+            // if (downloadArrayString == ""){
+            //     showPopup("You cannot upload an empty Studysheet.");
+            //     hideElement(document.getElementById("sendingLoader"));
+            //     okToUpload = false;
+            // }
+            var filename = "User's Studysheet";
+            var url = "https://backend.langstudy.tech:444/ai_studysheet/"+window.localStorage.getItem("usertoken");
+            
+            if(okToUpload == true){
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", url);
+            
+                xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+            
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        console.log(xhr.status);
+                        console.log(xhr.responseText);
+                        addResponse(xhr.responseText);
+                    }
+                };
+                var data = downloadArrayString+"-seperator-"+message;
+                console.log("sending " + data + " to " + url);
+                xhr.send(data);
+            }
+            
+        }
+    
+    }
+}
+
+
+function addResponse(studysheetReturned){
+    setup = true;
+    console.warn("THE RESPONSE IS: "+studysheetReturned)
+    var sendNormalResponse = true;
+    var responses = [
+        "Alright, here is what I got.",
+        "Here's your Studysheet.",
+        "Done! Do you have any other changes you would like to make?",
+        "Finished! What else can I do to help improve your Studysheet?",
+        "I'm done. Is there anything else you would like me to do?",
+        "Is there anything else I can do to help you with this Studysheet?",
+        "All done. Would you like me to make any other changes?",
+        "Would you like me to change any of the terms in your Studysheet?",
+        "Let me know if there's anything else I can do for you."
+    ]
+    document.getElementById("insideCreator").innerHTML = "";
+    
+    response = responses[Math.floor(Math.random() * (responses.length))];
+    parsedSheet = studysheetReturned.split("\n");
+    for (i = 0; i<parsedSheet.length; i++){
+        try{
+            wordPair = getRandomQuestion(studysheetReturned);
+        } catch(error){
+            sendNormalResponse = false;
+        }
+        
+        createCreatorInput(wordPair[0], wordPair[1])
+    }
+    if (sendNormalResponse == true){
+        createBubble(response)
+    } else{
+        createBubble("Sorry, we encountered an error. Please try again later.")
+    }
+}
+
+function createBubble(msg){
+    var genericBubble = `
+    <div class="bubbleContainer">
+        <div class="whiteBubble bubble">${msg}</div>
+    </div>
+    `
+    document.getElementById("messageCont").innerHTML = genericBubble + document.getElementById("messageCont").innerHTML;
+    
+    
+}
+
+function createUserBubble(msg){
+    var genericBubble = `
+    <div class="bubbleContainer">
+        <div class="blueBubble bubble">${msg}</div>
+    </div>
+    `
+    document.getElementById("messageCont").innerHTML = genericBubble + document.getElementById("messageCont").innerHTML;
+}
+
+
 function saveToCloud(){
     sessionid = localStorage.getItem("usertoken");
     var okToUpload = true;
@@ -3381,7 +3566,7 @@ function saveToCloud(){
             }
 
             //there will be 2 divs within insidecreator
-            //if the first div has an image that is not display:none;, add the src to the studysheet
+            //if the first div has an image that is not display:none;, add the src to the Studysheet
                 //else skip
             //go into second div, proceed as normal
             var childStuff = childx.children[1];
