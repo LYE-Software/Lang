@@ -3341,6 +3341,7 @@ function saveShared(){
 
 function sendLucyMessage(){
     var message = document.getElementById("lucyMessage").value;
+    document.getElementById("lucyLoader").style.display = "flex";
     document.getElementById("lucyMessage").value = "";
     if (message == "" || message == " " || message == null){
         showPopup("You cannot send an empty message.")
@@ -3497,8 +3498,11 @@ function addResponse(studysheetReturned){
     }
     if (sendNormalResponse == true){
         createBubble(response)
+        document.getElementById("lucyLoader").style.display = "none";
     } else{
         createBubble("Sorry, we encountered an error. Please try again later.")
+        document.getElementById("lucyLoader").style.display = "none";
+
     }
 }
 
