@@ -3453,6 +3453,12 @@ function sendLucyMessage(){
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4) {
                         console.log(xhr.status);
+                        if (xhr.status == 500){
+                            console.error("Langbot internal server error")
+                            createBubble("Sorry, we encountered an error. You can try again, or edit your query.")
+                            document.getElementById("lucyLoader").style.display = "none";
+
+                        }
                         console.log(xhr.responseText);
                         addResponse(xhr.responseText);
                     }
