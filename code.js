@@ -3502,14 +3502,10 @@ function addResponse(studysheetReturned){
         
         createCreatorInput(wordPair[0], wordPair[1])
     }
-    if (sendNormalResponse == true){
-        createBubble(response)
-        document.getElementById("lucyLoader").style.display = "none";
-    } else{
-        createBubble("Sorry, we encountered an error. Please try again later.")
-        document.getElementById("lucyLoader").style.display = "none";
-
-    }
+    
+    createBubble(response)
+    document.getElementById("lucyLoader").style.display = "none";
+    
 }
 
 function createBubble(msg){
