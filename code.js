@@ -3459,8 +3459,10 @@ function sendLucyMessage(){
                             document.getElementById("lucyLoader").style.display = "none";
 
                         }
+                        else{
+                            addResponse(xhr.responseText);
+                        }
                         console.log(xhr.responseText);
-                        addResponse(xhr.responseText);
                     }
                 };
                 var data = downloadArrayString+"-seperator-"+message;
