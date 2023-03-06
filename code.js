@@ -3345,6 +3345,7 @@ function sendLucyMessage(){
     document.getElementById("lucyMessage").value = "";
     if (message == "" || message == " " || message == null){
         showPopup("You cannot send an empty message.")
+        document.getElementById("lucyLoader").style.display = "none";
     }
     else{
         createUserBubble(message);
