@@ -1826,6 +1826,7 @@ function sendFeedback(){
 
 
 var group = [];
+var previousGroup = [];
 var groups = [];
 var dict = {
     0:5,
@@ -1869,6 +1870,9 @@ function doTrain(){
     document.getElementById("whatPercent").style.display = "";
 
     group = groups[whichGroup]
+    // if (whichGroup>0){
+    //     previousGroup = groups[whichGroup-1]
+    // }
 
     for (j = 0; j<group.length; j++){
         dict[j] = 0;
@@ -1887,7 +1891,12 @@ function doTrain(){
 
 var t = 0
 var imageSource;
+var reviewsDone;
 function gameLoop(){
+    // if (whichGroup > 0){
+    //      console.log("deciding to review")
+        
+    // }
     document.getElementById("term_image_learn").style.display = "none";
     isTrainWrite = false;
     if (t == group.length){
@@ -1942,68 +1951,54 @@ function gameLoop(){
     }
 
     console.log("game loop")
-    reviewValue = -1;
-    if (whichGroup > 0){
-        reviewValue = Math.floor(Math.random() * 7)
-    }
-    //REMOVE NEXT LINE BEFORE TESTING!! THIS IS WHEN REVIEW WAS NOT READY
-    reviewValue = 0
-    if (reviewValue == 4){
-        // group = groups[whichGroup - 1]
-        // reviewValue = Math.floor(Math.random() * group.length)
-        // questionArray = JSON.parse(group[reviewValue])
-        // term = questionArray[0]
-        // definition = questionArray[1]
-        // doWriteTrain(term, definition)
-        // group = groups[whichGroup]
-    }
-    else {
-        console.log(JSON.stringify(dict))
-        question = group[t];
-        console.log("The question is "+question+" and T is "+t)
-        questionArray = JSON.parse(question)
-        console.log(questionArray)
-        if (questionArray[0].includes("--image(")){
-            let splitter = questionArray[0].split("--image(")
-            let image = splitter[1]
-            image = image.substring(0, 64);
-            let urlForImage = "https://backend.langstudy.tech:444/"+window.localStorage.getItem("usertoken")+"/image/get/"+image;
-            questionArray.push(urlForImage);
-            questionArray[0] = splitter[0] + image.substring(64, image.length);
-            imageSource = questionArray[2];
-            
-            
-        }
-        term = questionArray[0];
-        definition = questionArray[1];
-        
-        mode = dict[t]
-        if (mode == 0){
-            readTermDef(term, definition)
-            dict[t] = dict[t] + 1;
-            t++;
-        } else if (mode == 1){
-            doTrainMulti(term, definition)
-        } else if (mode == 2){
-            doTrainMulti(term, definition)
-        } else if (mode == 3){
-            isTrainWrite = true;
-            doWriteTrain(term, definition)
-        } else if (mode == 4){
-            isTrainWrite = true;
-            doWriteTrain(term, definition)
-        } else if (mode == 5){            
-            isFinished()
-            
     
-        }
+    
+    console.log(JSON.stringify(dict))
+    question = group[t];
+    console.log("The question is "+question+" and T is "+t)
+    questionArray = JSON.parse(question)
+    console.log(questionArray)
+    if (questionArray[0].includes("--image(")){
+        let splitter = questionArray[0].split("--image(")
+        let image = splitter[1]
+        image = image.substring(0, 64);
+        let urlForImage = "https://backend.langstudy.tech:444/"+window.localStorage.getItem("usertoken")+"/image/get/"+image;
+        questionArray.push(urlForImage);
+        questionArray[0] = splitter[0] + image.substring(64, image.length);
+        imageSource = questionArray[2];
         
         
-        if (t == group.length){
-            t = 0;
-        }
-   
     }
+    term = questionArray[0];
+    definition = questionArray[1];
+    
+    mode = dict[t]
+    if (mode == 0){
+        readTermDef(term, definition)
+        dict[t] = dict[t] + 1;
+        t++;
+    } else if (mode == 1){
+        doTrainMulti(term, definition)
+    } else if (mode == 2){
+        doTrainMulti(term, definition)
+    } else if (mode == 3){
+        isTrainWrite = true;
+        doWriteTrain(term, definition)
+    } else if (mode == 4){
+        isTrainWrite = true;
+        doWriteTrain(term, definition)
+    } else if (mode == 5){            
+        isFinished()
+        
+
+    }
+    
+    
+    if (t == group.length){
+        t = 0;
+    }
+   
+    
     
 }
 

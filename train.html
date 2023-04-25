@@ -183,24 +183,29 @@ color: var(--primary-light);
     </div>
 
     <div class="horizontalFlex" style="flex-direction: column; font-family:Poppins; justify-content: center; text-align: center; color:wheat;" id="informationAbt">
-        <div style="width:50vw; height:10vh; display:flex; justify-content: center; align-items: center;">
-            <h1 id="whatGroup" style="font-family:Poppins; color:wheat;">Train</h1>
-        </div>
-        <div style="width:50vw; height:10vh; display:flex; justify-content: center; align-items: center;">
-            <p style="font-family:Poppins; color:wheat;">Train allows you to dynamically learn your Studysheet.</p>
-        </div>
-        <div style="width:50vw; height:10vh; display:flex; justify-content: center; align-items: center;">
-            <p>Train utilizes a method of grouping words and ramping up the review methods until they are in Long Term Memory.</p>
-        </div>
-        <div style="width:50vw; height:10vh; display:flex; justify-content: center; align-items: center;">
-            <p>Train works well with larger Studysheets.</p>
-        </div>
-        <div style="width:50vw; height:10vh; display:flex; justify-content: center; align-items: center;">
-            <p>Press "Begin" to get started!</p>
-        </div>
         <div style="width:50vw; height:20vh; display:flex; justify-content: center; align-items: center;">
-            <button class="dropbtn" id="myBtnBegin" style="margin:20px;" onclick="onBtnPress('t')">Begin</button>
         </div>
+        
+        
+        
+        <div style="display:flex; flex-direction: row; justify-content: space-between;">
+            
+            <div class="lightGlow" style="width:40vw; display:flex; flex-direction: column; justify-content: center; align-items: center; background-color: wheat; border-radius: 20px;">
+                <p style="font-family:Poppins; color:#001945; font-size: 2vw; font-weight:bold;">Train</p>
+                <!-- <div>
+                    <div style="font-family:Poppins; color:#001945; font-size: 1vw; font-weight:bold;">Terms per Round</div>
+                    <input placeholder = "5" type = "number" id="termsperround" style="background-color: #001945; color: wheat; width:20vw; height:7vh; border-radius: 20px; text-align: center; display:flex; flex-direction: column; justify-content: center;" contenteditable>
+
+                </div> -->
+                <button class="dropbtn" id="myBtnBegin" style="margin:20px; background-color: #001945; color: wheat;" onclick="onBtnPress('t')">Begin</button>
+            </div>
+            <div style="width:10vw; display:flex; justify-content: center; align-items: center;  border-radius: 20px;"></div>
+            <div class="lightGlow" style="width:40vw; height:60vh; display:flex; justify-content: center; align-items: center; background-color: wheat; border-radius: 20px; padding: 20px;">
+                <p style="font-family:Poppins; color:#001945; font-size: 2vw; font-weight:bold;">Train allows you to dynamically learn your Studysheet. Cycle through rounds of learning, multiple choice, and write-in to gain long-term memory.</p>
+            </div>
+        </div>
+        
+
     </div>
 
     <div style="width:100vw; height:80vh; align-items: center; text-align: center; color:#001945; align-items: center; display:none;" id="TermAndDef">
@@ -304,3 +309,8 @@ color: var(--primary-light);
     
 </body>
 </html>
+<script>
+    $("#termsperround").keypress(function(e) {
+    if (isNaN(String.fromCharCode(e.which))) e.preventDefault();
+});
+</script>
