@@ -346,7 +346,7 @@
             <div style="font-size: 10px;">By signing up for an account, you agree to the Lang Terms of Service, which can be found <a href='langlegal.html' style="color: var(--primary-dark)">here</a></div>
         </div>
     </div>
-    <div id="failedServerConnection" class="popupContainer">
+    <div id="failedServerConnection" class="popupContainer" style="z-index:1000;">
         <div class="verticalFlex centerFlex lightGlow centerText popup">
             <img src="assets/logos/FullLangLogo.png" style="height:10vh; margin: 10px;" alt='Lang Logo'> 
             <div style="margin-top: 40px;">Unfortunately, we were unable to establish a connection to the Lang servers. Please try again later.</div>
@@ -365,11 +365,11 @@
 
         </div>
     </div>
-    <div class="createStudysheetOverlay absolute noverticalshow" onclick="window.location.href='creator.html'">
-        <img src="assets/icons/Lang Edit Icon.svg" style="z-index: 1000; position:absolute; right:0; bottom:0; height:10vh; cursor: pointer;" alt='Edit'></img>
+    <div class="createStudysheetOverlay absolute noverticalshow" onclick="window.location.href='creator.html'" style="z-index: 900;">
+        <img src="assets/icons/Lang Edit Icon.svg" style="z-index: 900; position:absolute; right:0; bottom:0; height:10vh; cursor: pointer;" alt='Edit'></img>
     </div>
 
-    <div id="feedbackUI" class="absolute noverticalshow" style="bottom:0; left:0; z-index: 1000;">
+    <div id="feedbackUI" class="absolute noverticalshow" style="bottom:0; left:0; z-index: 900;">
         <div id="feedbackUIInputContainer" class="lightGlow verticalFlex" style="background-color: var(--primary-light); width: 350px; margin: 20px; margin-bottom: 0px; z-index: 1000; border-radius: 25px; padding: 15px; box-sizing: border-box">
             <div style="background-color: var(--primary-dark); color: var(--primary-light); float: right; text-align: left; padding: 10px; border-radius: 20px;">Have any feedback or suggestions for Lang? Send us a message here!</div>
             <div class="horizontalFlex" style="width:100%;">
