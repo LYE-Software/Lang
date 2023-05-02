@@ -97,7 +97,7 @@
         }   
     </style>
 </head>
-<body onload="window.location.href='other/featuredown.html'"> 
+<!-- <body onload="window.location.href='other/featuredown.html'">  -->
 <body> 
     <div id="overallContainer" >
         <a href="index.html">
@@ -109,7 +109,7 @@
             <input id="studysetinput" type="text" style="height: 50px;"">
         </div>
         <div id="submitbutton" class="button" style="background-color: var(--primary-light);">
-            Continue
+            Continue.t
         </div>
     </div>
 
@@ -276,7 +276,7 @@
         var container = document.getElementById("overallContainer")
         container.style.opacity = "0"
         setTimeout(function() {
-            container.innerHTML = '<div class="headerText">All done</div>'
+            container.innerHTML = '<div class="headerText">Lang is retrieving your Quizlet.</div><br><div style="color:wheat; font-weight:bold; font-size:25px;">Thank you for your patience- the trip to the Quizlet servers is a long one.</div>'
             container.style.opacity = "1"
         }, 1000);
 
