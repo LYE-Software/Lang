@@ -1,0 +1,349 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lang Study</title>
+    <link rel="icon" href="circular lang icon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+        body {
+            margin: 0;
+            /* background: linear-gradient(180deg, rgba(217, 217, 217, 0) 0%, #EBDCC0 12.06%, #F5DEB3 86.2%, #001945 100%); */
+            background-image: url("https://github.com/nwvbug/nwvbug-logos/blob/main/Lang%20Logos/lang%20asset/icon%20w%20bg.png?raw=true");
+            background-repeat: repeat;
+
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .welcomeContainer {
+            width: 100%;
+            min-height: 475px;
+            padding-top: 70px;
+            padding-bottom: 50px;
+            /* background-color: orange; */
+            background-image: linear-gradient(to bottom, transparent 30%, wheat 100%);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .whiteBlur{
+            background-color: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(2px);
+            border-radius: 50px;
+        }
+
+        .site {
+            width: 100vw;
+        }
+
+        .welcome {
+            position: relative;
+
+            max-width: 600px;
+            width: 90vw;
+
+            padding-top: 50px;
+            padding-left: 10px;
+            padding-right: 10px;
+
+            background-color: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(2px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+
+            border-radius: 50px;
+        }
+
+        .welcome > img {
+            position: absolute;
+            top: -75px;
+
+            width: 115px;
+            height: auto;
+
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 1000px;
+        }
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-style: normal;
+            font-weight: 800;
+            font-size: 35px;
+
+            margin: 0;
+            margin-bottom: 0;
+
+            width: 75%;
+        }
+
+        p {
+            font-family: 'Poppins', sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .welcome > div {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            max-width: 500px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        button {
+            height: 60px;
+            /* max-width: 200px; */
+            flex-basis: 200px;
+            min-width: 125px;
+            margin-bottom: 20px;
+            color:wheat;
+            border: none;
+            background-color: #001945;
+            border-radius: 35px;
+            font-family: 'Poppins', sans-serif;
+            font-size:20px;
+            font-weight:600;
+            box-shadow: 0 7px 10px 1px rgba(0, 0, 0, 0.5);
+        }
+
+
+        /* THE SITE */
+        .section {
+            background-color: wheat;
+            text-align: center;
+            width: 100%;
+            padding: 25px;
+            padding-top: 0;
+            box-sizing: border-box;
+        }
+        
+        .section > h1 {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .panelContainer {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+
+            /* background-color: green; */
+            width: 100%;
+        }
+
+        .panelContainer > div {
+            flex: 1;
+            /* flex-basis: 450px;
+            flex-grow: 0; */
+            flex-grow: 0;
+
+            margin: 20px;
+        }
+
+        .langtrainmobile {
+            display: none;
+        }
+
+        /* LANG TRAIN */
+        .trainGrid {
+            display: grid;
+            grid-template-columns: 450px 150px 1fr;
+            grid-template-rows: repeat(3, 1fr);
+            row-gap: 20px;
+            column-gap: 50px;
+
+            max-width: 1000px;
+        }
+
+        .col1 {
+            /* background-color: pink; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            max-width: 450px;
+        }
+
+        .col2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            /* background-color: aliceblue; */
+        }
+
+        .col3 {
+            /* background-color: aqua; */
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 1100px) {
+            .col2 {
+                display: none;
+            }
+
+            .trainGrid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .col3 {
+                display: none;
+            }
+
+            .trainGrid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+
+            .langtrainmobile {
+                display: block;
+            }
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            background-image: linear-gradient(to bottom, wheat 0%, transparent 70%);
+            padding: 20px;
+        }
+
+        footer > h1 {
+            width: 100%;
+        }
+
+        footer > div {
+            padding: 30px;
+            box-sizing: border-box;
+
+        }
+
+        .horizFlex {
+            display: flex;
+        }
+
+        h2 {
+            margin-top: 10px !important;
+            margin: 0;
+        }
+
+        @media (max-width: 700px) {
+            .or {
+                display: none;
+            }
+
+            .horizFlex > button {
+                margin: 10px;
+            }
+
+            .socials {
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="welcomeContainer">
+        <div class="welcome">
+            <img src="assets/logos/lang-wheat.png">
+            <h1 style="font-family: 'Rubik Mono One', sans-serif;">STUDY SMARTER NOT HARDER</h1>
+            <p>Lang allows you to start studying faster and memorize quicker, giving you more time for what you enjoy.</p>
+            <div>
+                <button style="background-color: wheat; color:#001945;">Log In</button>
+                <button>Sign Up</button>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <h1>Make your class notes into a study guide, instantly.</h1>
+        <div class="panelContainer">
+            <div style="flex-basis: 400px; ">
+                <img style="width: 100%; max-width: 400px;" src="assets/onboarding_pics/Langbot_Screenshot.png">
+            </div>
+            <div style="flex-basis: 400px; ">
+                <img style="width: 100%; max-width: 400px;" src="assets/onboarding_pics/note_apps.png">
+                <p>Lang assistant lets you generate a studysheet from anything- a PDF, class notes, or even just an idea.</p>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <h1>Become the hero of your class, with Lang Share.</h1>
+        <div class="panelContainer">
+            <div style="flex-basis: 400px">
+                <p>Lang creates a unique link to every Studysheet, allowing you to give you friends access to study guides you made. </p>
+            </div>
+            <div style="flex-basis: 400px;">
+                <img style="width: 100%; max-width: 400px;" src="assets/onboarding_pics/Lang_Share.png">
+            </div>
+        </div>
+    </div>
+    <div class="section" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <h1>Go from knowing nothing to knowing it all, with Lang Train.</h1>
+        <div class="trainGrid">
+            <div class="col1 grid-item">
+                <img style="width: 100%; max-width: 350px;" src="assets/onboarding_pics/train_images/flashcard-train.png">
+            </div>
+            <div class="col2 grid-item">
+                <img style="width: 100px; height: 100px;" src="assets/onboarding_pics/train_images/flashcardtrainVector.png">
+            </div>
+            <div class="col3 grid-item"></div>
+            <div class="col1 grid-item">
+                <img style="width: 100%; max-width: 400px;" src="assets/onboarding_pics/train_images/mult-train.png">
+            </div>
+            <div class="col2 grid-item">
+                <img style="width: 100px; height: 100px;" src="assets/onboarding_pics/train_images/multtrainVector.png">
+            </div>
+            <p class="col3 grid-item">Lang Train allows you to advance through different modes: flashcards, multiple choice, and write-in, building long-term memory.</p>
+            <div class="col1 grid-item">
+                <img style="width: 100%; max-width: 450px;" src="assets/onboarding_pics/train_images/write-train.png">
+            </div>
+            <div class="col2 grid-item">
+                <img style="width: 100px; height: 100px;" src="assets/onboarding_pics/train_images/writetrainVector.png">
+            </div>
+            <div class="col3 grid-item"></div>
+        </div>
+        <p class="langtrainmobile">Lang Train allows you to advance through different modes: flashcards, multiple choice, and write-in, building long-term memory.</p>
+    </div>
+    <footer>
+        <h1>Want to know more?</h1>
+        <div class="whiteBlur">
+            <div class="horizFlex" style="justify-content: center; align-items: center; flex-wrap: wrap;">
+                <img style="height: 100px" src="assets/logos/FullLangLogo.png">
+                <div style="flex: 1;"></div>
+                <div class="horizFlex" style="align-items: center;">
+                    <button style="background-color: wheat; color:#001945;">Log in</button>
+                    <h2 class="or" style="margin: 20px;"> Or </h2>
+                    <button>Sign up</button>
+                </div>
+            </div>
+            <div class="horizFlex" style="align-items: flex-end; flex-wrap: wrap; justify-content: center;">
+                <div style="flex: 1; text-align: left; flex-basis: 400px;">
+                    <h2><a>Legal & Copyright</a></h2>
+                    <h2><a>Lang Backstory</a></h2>
+                    <h2>Email us <a>here</a></h2>
+                    <h2>Copyright © 2023 Lye Software™. All rights reserved. Lang™ is intellectual property of Nate Vemuri.</h2>
+                </div>
+                <div class="horizFlex socials">
+                    <img style="height: 75px; margin-right: 15px;" src="assets/onboarding_pics/socials/image_11.png">
+                    <img style="height: 75px;" src="assets/onboarding_pics/socials/image_12.png">
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
