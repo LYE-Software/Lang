@@ -97,7 +97,7 @@ async function shareLink(){
         // fetch(lyeUrl, {
         // 	method: 'GET',
         // 	headers: {
-        // 		"lye-origin": "langstudy.tech/index.html"
+        // 		"lye-origin": "langstudy.tech/homepage.html"
         // 	},
         // })
         // .then(
@@ -338,7 +338,7 @@ function move() {
 //         {
 //             var xmlHttp = new XMLHttpRequest();
 //             xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-//             xmlHttp.setRequestHeader("lye-origin", "langstudy.tech/index.html")
+//             xmlHttp.setRequestHeader("lye-origin", "langstudy.tech/homepage.html")
 //             xmlHttp.send( null );
 //             return xmlHttp.responseText;
 //         }
@@ -497,7 +497,7 @@ async function httpGet(theUrl, lye){
 
     if (lye == true){
         console.log("setting headers")
-        xmlHttp.setRequestHeader("lye-origin", "langstudy.tech/index.html");
+        xmlHttp.setRequestHeader("lye-origin", "langstudy.tech/homepage.html");
     }
     xmlHttp.setRequestHeader("Keep-Alive", "timeout=10, max=5");
     console.log(xmlHttp.status)
@@ -1767,7 +1767,7 @@ function signout(){
         window.localStorage.setItem("chosenSheet", "");
         window.localStorage.setItem("usertoken", null);
         window.localStorage.setItem("username", null);
-        window.location.href="index.html"
+        window.location.href="homepage.html"
       } else {
         
       }
@@ -1815,7 +1815,7 @@ function sendFeedback(){
             if (xhr.readyState === 4) {
                 console.log(xhr.status);
                 console.log(xhr.responseText);
-                // window.location.href="index.html";
+                // window.location.href="homepage.html";
             }
         };
         var data = feedback;
@@ -2492,7 +2492,7 @@ function showVerbs(language) {
 
 
 function returnMain() {
-    location.href = "index.html";
+    location.href = "homepage.html";
 }
 
 
@@ -3654,7 +3654,7 @@ function saveToCloud(){
                     if (xhr.readyState === 4) {
                         console.log(xhr.status);
                         console.log(xhr.responseText);
-                        window.location.href="index.html";
+                        window.location.href="homepage.html";
                     }
                 };
                 var data = downloadArrayString;
