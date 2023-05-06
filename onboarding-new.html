@@ -77,6 +77,8 @@
 
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             border-radius: 1000px;
+
+            animation: spinAndFade 2s ease-out;
         }
 
         h1 {
@@ -121,6 +123,7 @@
             font-size:20px;
             font-weight:600;
             box-shadow: 0 7px 10px 1px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
         }
 
 
@@ -261,24 +264,78 @@
                 margin: 20px;
             }
         }
+
+        /* ANIMATIONS */
+        @keyframes spinAndFade {
+            0% {
+                transform: rotate(-90deg);
+                opacity: 0;
+            }
+
+            100% {
+                transform: rotate(360deg);
+                opacity: 1;
+            }
+        }
+
+        .fade {
+            animation: fade 1s ease-in-out;
+            animation-fill-mode: forwards;
+            opacity: 0;
+        }
+
+        @keyframes fade {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .topButtons > button {
+            animation: buttonPopIn 0.75s ease-out;
+            animation-fill-mode: forwards;
+            opacity: 0;
+            animation-delay: 2s;
+        }
+
+        @keyframes buttonPopIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            65% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .fadeInScroll {
+            opacity: 0;
+        }
     </style>
 </head>
 <body>
     <div class="welcomeContainer">
         <div class="welcome">
             <img src="assets/logos/lang-wheat.png">
-            <h1 style="font-family: 'Rubik Mono One', sans-serif;">STUDY SMARTER NOT HARDER</h1>
-            <p>Lang allows you to start studying faster and memorize quicker, giving you more time for what you enjoy.</p>
-            <div>
-                <button style="background-color: wheat; color:#001945; cursor:pointer;" onclick="window.location.href='https://lye.software/signin?forward=langstudy.tech-homepage.html'">Log In</button>
-                <button style="cursor:pointer;" onclick="window.location.href='https://lye.software/signup?forward=langstudy.tech-homepage.html'">Sign Up</button>
+            <h1 style="font-family: 'Rubik Mono One', sans-serif; animation-delay: 1s" class="fade">STUDY SMARTER NOT HARDER</h1>
+            <p style="animation-delay: 1.5s" class="fade">Lang allows you to start studying faster and memorize quicker, giving you more time for what you enjoy.</p>
+            <div class="topButtons">
+                <button style="background-color: wheat; color:#001945; " onclick="window.location.href='https://lye.software/signin?forward=langstudy.tech-homepage.html'">Log In</button>
+                <button style="animation-delay: 2.25s;" onclick="window.location.href='https://lye.software/signup?forward=langstudy.tech-homepage.html'">Sign Up</button>
             </div>
         </div>
     </div>
     <div class="section">
-        <h1>Make your class notes into a study guide, instantly.</h1>
-        <div class="panelContainer">
-            <div style="flex-basis: 400px; ">
+        <h1 class="fade" style="animation-delay: 2.5s;">Make your class notes into a study guide, instantly.</h1>
+        <div class="panelContainer fade" style="animation-delay: 2.75s;">
+            <div style="flex-basis: 400px;">
                 <img style="width: 100%; max-width: 400px;" src="assets/onboarding_pics/Langbot_Screenshot.png">
             </div>
             <div style="flex-basis: 400px; ">
@@ -288,8 +345,8 @@
         </div>
     </div>
     <div class="section">
-        <h1>Become the hero of your class, with Lang Share.</h1>
-        <div class="panelContainer">
+        <h1 class="fadeInScroll">Become the hero of your class, with Lang Share.</h1>
+        <div class="panelContainer fadeInScroll">
             <div style="flex-basis: 400px">
                 <p>Lang creates a unique link to every Studysheet, allowing you to give you friends access to study guides you made. </p>
             </div>
@@ -299,42 +356,42 @@
         </div>
     </div>
     <div class="section" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <h1>Go from knowing nothing to knowing it all, with Lang Train.</h1>
+        <h1 class="fadeInScroll">Go from knowing nothing to knowing it all, with Lang Train.</h1>
         <div class="trainGrid">
-            <div class="col1 grid-item">
+            <div class="col1 grid-item fadeInScroll">
                 <img style="width: 100%; max-width: 350px;" src="assets/onboarding_pics/train_images/flashcard-train.png">
             </div>
-            <div class="col2 grid-item">
+            <div class="col2 grid-item fadeInScroll">
                 <img style="width: 100px; height: 100px;" src="assets/onboarding_pics/train_images/flashcardtrainVector.png">
             </div>
-            <div class="col3 grid-item"></div>
-            <div class="col1 grid-item">
+            <div class="col3 grid-item fadeInScroll"></div>
+            <div class="col1 grid-item fadeInScroll">
                 <img style="width: 100%; max-width: 400px;" src="assets/onboarding_pics/train_images/mult-train.png">
             </div>
-            <div class="col2 grid-item">
+            <div class="col2 grid-item fadeInScroll">
                 <img style="width: 100px; height: 100px;" src="assets/onboarding_pics/train_images/multtrainVector.png">
             </div>
-            <p class="col3 grid-item">Lang Train allows you to advance through different modes: flashcards, multiple choice, and write-in, building long-term memory.</p>
-            <div class="col1 grid-item">
+            <p class="col3 grid-item fadeInScroll">Lang Train allows you to advance through different modes: flashcards, multiple choice, and write-in, building long-term memory.</p>
+            <div class="col1 grid-item fadeInScroll">
                 <img style="width: 100%; max-width: 450px;" src="assets/onboarding_pics/train_images/write-train.png">
             </div>
-            <div class="col2 grid-item">
+            <div class="col2 grid-item fadeInScroll">
                 <img style="width: 100px; height: 100px;" src="assets/onboarding_pics/train_images/writetrainVector.png">
             </div>
-            <div class="col3 grid-item"></div>
+            <div class="col3 grid-item fadeInScroll"></div>
         </div>
         <p class="langtrainmobile">Lang Train allows you to advance through different modes: flashcards, multiple choice, and write-in, building long-term memory.</p>
     </div>
     <footer>
-        <h1>Want to know more?</h1>
-        <div class="whiteBlur">
+        <h1 class="fadeInScroll">Want to know more?</h1>
+        <div class="whiteBlur fadeInScroll">
             <div class="horizFlex" style="justify-content: center; align-items: center; flex-wrap: wrap;">
                 <img style="height: 100px" src="assets/logos/FullLangLogo.png">
                 <div style="flex: 1;"></div>
                 <div class="horizFlex" style="align-items: center;">
-                    <button style="background-color: wheat; color:#001945; cursor:pointer;" onclick="window.location.href='https://lye.software/signin?forward=langstudy.tech-homepage.html'">Log in</button>
+                    <button style="background-color: wheat; color:#001945; " onclick="window.location.href='https://lye.software/signin?forward=langstudy.tech-homepage.html'">Log in</button>
                     <h2 class="or" style="margin: 20px;"> Or </h2>
-                    <button style="cursor:pointer;" onclick="window.location.href='https://lye.software/signup?forward=langstudy.tech-homepage.html'">Sign up</button>
+                    <button style="" onclick="window.location.href='https://lye.software/signup?forward=langstudy.tech-homepage.html'">Sign up</button>
                 </div>
             </div>
             <div class="horizFlex" style="align-items: flex-end; flex-wrap: wrap; justify-content: center;">
@@ -352,4 +409,14 @@
         </div>
     </footer>
 </body>
+<script>
+    const scrollElements = document.querySelectorAll(".fadeInScroll");
+    window.onscroll = () => {
+        scrollElements.forEach((element) => {
+            if (element.getBoundingClientRect().top < window.innerHeight) {
+                element.classList.add("fade");
+            }
+        });
+    };
+</script>
 </html>
