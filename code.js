@@ -97,7 +97,7 @@ async function shareLink(){
         // fetch(lyeUrl, {
         // 	method: 'GET',
         // 	headers: {
-        // 		"lye-origin": "langstudy.tech/index.html"
+        // 		"lye-origin": "langstudy.tech/homepage.html"
         // 	},
         // })
         // .then(
@@ -338,7 +338,7 @@ function move() {
 //         {
 //             var xmlHttp = new XMLHttpRequest();
 //             xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-//             xmlHttp.setRequestHeader("lye-origin", "langstudy.tech/index.html")
+//             xmlHttp.setRequestHeader("lye-origin", "langstudy.tech/homepage.html")
 //             xmlHttp.send( null );
 //             return xmlHttp.responseText;
 //         }
@@ -497,7 +497,7 @@ async function httpGet(theUrl, lye){
 
     if (lye == true){
         console.log("setting headers")
-        xmlHttp.setRequestHeader("lye-origin", "langstudy.tech/index.html");
+        xmlHttp.setRequestHeader("lye-origin", "langstudy.tech/homepage.html");
     }
     xmlHttp.setRequestHeader("Keep-Alive", "timeout=10, max=5");
     console.log(xmlHttp.status)
@@ -785,7 +785,6 @@ async function getLibraryList(){
                         window.localStorage.setItem("chosenSheet", studysheetname)
                         window.location.href="studysheetpage.html";
                     }
-                    document.getElementById("studysheetGridContainer").append(div3);
 
 
                     div5 = document.createElement("div");
@@ -797,12 +796,15 @@ async function getLibraryList(){
                     div5.id = "studysheetDel"+i;
                     div5.onclick = async function(){
 
-                        showElement(document.getElementById("deleteConfirmation"))
+                        //showElement(document.getElementById("deleteConfirmation"))
 
                         
                     }
-                    div5.innerHTML=`<svg class="studysheetDelete" width="24px" height="24px" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg"><path d="M17 9L11 15M11.0002 9L17.0002 15M9 6H20C20.5523 6 21 6.44772 21 7V17C21 17.5523 20.5523 18 20 18H9L3 12L9 6Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+                    //div5.innerHTML=`<svg class="studysheetDelete" width="24px" height="24px" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg"><path d="M17 9L11 15M11.0002 9L17.0002 15M9 6H20C20.5523 6 21 6.44772 21 7V17C21 17.5523 20.5523 18 20 18H9L3 12L9 6Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
                     document.getElementById("studysheetGridContainer").append(div5);
+
+                    document.getElementById("studysheetGridContainer").append(div3);
+
                 }
                 tmp = arrayOfData[0]
                 tmp = tmp.split("-seperator-")
@@ -1765,7 +1767,7 @@ function signout(){
         window.localStorage.setItem("chosenSheet", "");
         window.localStorage.setItem("usertoken", null);
         window.localStorage.setItem("username", null);
-        window.location.href="index.html"
+        window.location.href="homepage.html"
       } else {
         
       }
@@ -1813,7 +1815,7 @@ function sendFeedback(){
             if (xhr.readyState === 4) {
                 console.log(xhr.status);
                 console.log(xhr.responseText);
-                // window.location.href="index.html";
+                // window.location.href="homepage.html";
             }
         };
         var data = feedback;
@@ -1824,6 +1826,7 @@ function sendFeedback(){
 
 
 var group = [];
+var previousGroup = [];
 var groups = [];
 var dict = {
     0:5,
@@ -1867,6 +1870,9 @@ function doTrain(){
     document.getElementById("whatPercent").style.display = "";
 
     group = groups[whichGroup]
+    // if (whichGroup>0){
+    //     previousGroup = groups[whichGroup-1]
+    // }
 
     for (j = 0; j<group.length; j++){
         dict[j] = 0;
@@ -1885,7 +1891,12 @@ function doTrain(){
 
 var t = 0
 var imageSource;
+var reviewsDone;
 function gameLoop(){
+    // if (whichGroup > 0){
+    //      console.log("deciding to review")
+        
+    // }
     document.getElementById("term_image_learn").style.display = "none";
     isTrainWrite = false;
     if (t == group.length){
@@ -1940,68 +1951,54 @@ function gameLoop(){
     }
 
     console.log("game loop")
-    reviewValue = -1;
-    if (whichGroup > 0){
-        reviewValue = Math.floor(Math.random() * 7)
-    }
-    //REMOVE NEXT LINE BEFORE TESTING!! THIS IS WHEN REVIEW WAS NOT READY
-    reviewValue = 0
-    if (reviewValue == 4){
-        // group = groups[whichGroup - 1]
-        // reviewValue = Math.floor(Math.random() * group.length)
-        // questionArray = JSON.parse(group[reviewValue])
-        // term = questionArray[0]
-        // definition = questionArray[1]
-        // doWriteTrain(term, definition)
-        // group = groups[whichGroup]
-    }
-    else {
-        console.log(JSON.stringify(dict))
-        question = group[t];
-        console.log("The question is "+question+" and T is "+t)
-        questionArray = JSON.parse(question)
-        console.log(questionArray)
-        if (questionArray[0].includes("--image(")){
-            let splitter = questionArray[0].split("--image(")
-            let image = splitter[1]
-            image = image.substring(0, 64);
-            let urlForImage = "https://backend.langstudy.tech:444/"+window.localStorage.getItem("usertoken")+"/image/get/"+image;
-            questionArray.push(urlForImage);
-            questionArray[0] = splitter[0] + image.substring(64, image.length);
-            imageSource = questionArray[2];
-            
-            
-        }
-        term = questionArray[0];
-        definition = questionArray[1];
-        
-        mode = dict[t]
-        if (mode == 0){
-            readTermDef(term, definition)
-            dict[t] = dict[t] + 1;
-            t++;
-        } else if (mode == 1){
-            doTrainMulti(term, definition)
-        } else if (mode == 2){
-            doTrainMulti(term, definition)
-        } else if (mode == 3){
-            isTrainWrite = true;
-            doWriteTrain(term, definition)
-        } else if (mode == 4){
-            isTrainWrite = true;
-            doWriteTrain(term, definition)
-        } else if (mode == 5){            
-            isFinished()
-            
     
-        }
+    
+    console.log(JSON.stringify(dict))
+    question = group[t];
+    console.log("The question is "+question+" and T is "+t)
+    questionArray = JSON.parse(question)
+    console.log(questionArray)
+    if (questionArray[0].includes("--image(")){
+        let splitter = questionArray[0].split("--image(")
+        let image = splitter[1]
+        image = image.substring(0, 64);
+        let urlForImage = "https://backend.langstudy.tech:444/"+window.localStorage.getItem("usertoken")+"/image/get/"+image;
+        questionArray.push(urlForImage);
+        questionArray[0] = splitter[0] + image.substring(64, image.length);
+        imageSource = questionArray[2];
         
         
-        if (t == group.length){
-            t = 0;
-        }
-   
     }
+    term = questionArray[0];
+    definition = questionArray[1];
+    
+    mode = dict[t]
+    if (mode == 0){
+        readTermDef(term, definition)
+        dict[t] = dict[t] + 1;
+        t++;
+    } else if (mode == 1){
+        doTrainMulti(term, definition)
+    } else if (mode == 2){
+        doTrainMulti(term, definition)
+    } else if (mode == 3){
+        isTrainWrite = true;
+        doWriteTrain(term, definition)
+    } else if (mode == 4){
+        isTrainWrite = true;
+        doWriteTrain(term, definition)
+    } else if (mode == 5){            
+        isFinished()
+        
+
+    }
+    
+    
+    if (t == group.length){
+        t = 0;
+    }
+   
+    
     
 }
 
@@ -2495,7 +2492,7 @@ function showVerbs(language) {
 
 
 function returnMain() {
-    location.href = "index.html";
+    location.href = "homepage.html";
 }
 
 
@@ -3657,7 +3654,7 @@ function saveToCloud(){
                     if (xhr.readyState === 4) {
                         console.log(xhr.status);
                         console.log(xhr.responseText);
-                        window.location.href="index.html";
+                        window.location.href="homepage.html";
                     }
                 };
                 var data = downloadArrayString;
