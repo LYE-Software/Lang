@@ -51,7 +51,7 @@ var whichId= "";
 var offline = false;
 var override = false;
 var LyeServerIp = "https://lye.software";
-var backendServerIp = "https://backend.langstudy.tech:444"
+var backendServerIp = "https://backend.langstudy.tech";
 var newarr = []
 var customusername = ""
 var train = false;
@@ -146,7 +146,7 @@ async function doPreviewAndLocal(){
         window.localStorage.setItem("sharedID", sessionid);
         window.localStorage.setItem("sharedSheet", chosensheet);
         console.log(chosensheet)
-        sheet = await httpGet("https://backend.langstudy.tech:444/id/"+sessionid+"/Studysheets/"+chosensheet)
+        sheet = await httpGet(backendServerIp + "/id/"+sessionid+"/Studysheets/"+chosensheet)
         document.getElementById("studysheetname").innerHTML = chosensheet
         document.getElementById("editbutton").style.borderColor = "#a0a0a0"
         document.getElementById("editbutton").style.backgroundColor = "#a0a0a0"
@@ -169,7 +169,7 @@ async function doPreviewAndLocal(){
         console.log("inside localstorage")
         chosensheet = window.localStorage.getItem("sharedSheet").replaceAll(" ", "%20");
         chosensheet = chosensheet.replaceAll("&", "%26")
-        sheet = await httpGet("https://backend.langstudy.tech:444/id/"+window.localStorage.getItem("sharedID")+"/Studysheets/"+chosensheet)
+        sheet = await httpGet(backendServerIp + "/id/"+window.localStorage.getItem("sharedID")+"/Studysheets/"+chosensheet)
         chosensheet = chosensheet.replaceAll("%26", "&")
         chosensheet = chosensheet.replaceAll("%20", " ");
 
@@ -192,7 +192,7 @@ async function doPreviewAndLocal(){
 
         toek = window.localStorage.getItem("usertoken")
         document.getElementById("studysheetname").innerHTML = chosensheet
-        sheet = await httpGet("https://backend.langstudy.tech:444/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
+        sheet = await httpGet(backendServerIp + "/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
         // console.warn("inside the second go")
     }
 
@@ -370,7 +370,7 @@ function changelibrary(){
 // async function getUsername(){
 //     if (window.localStorage.getItem("usertoken")!=""&&window.localStorage.getItem("usertoken")!=null){
 //         sessionid = window.localStorage.getItem("usertoken");
-//         username = await httpGet("https://backend.langstudy.tech:444/"+sessionid+"/name")
+//         username = await httpGet(backendServerIp + "/"+sessionid+"/name")
 //         link = LyeServerIp+"/usernamefromsession/"+sessionid
 //         customuser = await makeLyeReq(link);
 //         console.log("Username = "+customuser)
@@ -442,7 +442,7 @@ function uploadFiles(text, filename){
     // uploadButton.onclick = function() {
         
     console.log("FILE NAME+ "+filename)
-    var url = "https://backend.langstudy.tech:444/"+sessionid+"/Studysheets/upload/"+filename;
+    var url = backendServerIp + "/"+sessionid+"/Studysheets/upload/"+filename;
 
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url);
@@ -644,7 +644,7 @@ async function getLibraryList(){
         console.log("inside the else")
         sessionid = window.localStorage.getItem("usertoken")
         console.log(sessionid);
-        serverData = await httpGet("https://backend.langstudy.tech:444/"+sessionid+"/returnNameAndList", false)
+        serverData = await httpGet(backendServerIp + "/"+sessionid+"/returnNameAndList", false)
         // await fetch('https://backend.langstudy.tech:444/"+sessionid+"/returnNameAndList').then(function(response) {
         //     return response.blob();
         // }).then(function(response) {
@@ -660,7 +660,7 @@ async function getLibraryList(){
         }
         else if (serverData == null || serverData == ""){
             console.warn("Server Connection Failed! Trying Again...")
-            serverData = await httpGet("https://backend.langstudy.tech:444/"+sessionid+"/returnNameAndList", false)
+            serverData = await httpGet(backendServerIp + "/"+sessionid+"/returnNameAndList", false)
 
             // await fetch('https://backend.langstudy.tech:444/"+sessionid+"/returnNameAndList').then(function(response) {
             //     return response.blob();
@@ -841,7 +841,7 @@ async function deleteSS(){
     document.getElementById("loadingscreen").classList = "verticalFlex";
     document.getElementById("loadingscreen").style.display = "flex"
     hideElement(document.getElementById("deleteConfirmation"))
-    link = "https://backend.langstudy.tech:444/"+sessionid+"/Studysheets/"+ newarr[index]+"/delete"
+    link = backendServerIp + "/"+sessionid+"/Studysheets/"+ newarr[index]+"/delete"
     console.log("link is: "+link)
     await httpGet(link)
     window.location.reload()
@@ -874,7 +874,7 @@ function processDelete(){
     
 //         sessionid = window.localStorage.getItem("usertoken");
 //         try {
-//             username = await httpGet("https://backend.langstudy.tech:444/"+sessionid+"/name")
+//             username = await httpGet(backendServerIp + "/"+sessionid+"/name")
 //             console.log("Username = "+username)
 //         } catch (error) {
 //             document.getElementById("yourstudysheets").innerHTML = "Your Lang client could not establish a connection to the server. Please check your connection and try again in a few minutes.";
@@ -892,7 +892,7 @@ function processDelete(){
 //             document.getElementById("studysetholder").append(loginbutton);
 //         }
 //         try {
-//             library = await httpGet("https://backend.langstudy.tech:444/"+sessionid+"/Studysheets/list")
+//             library = await httpGet(backendServerIp + "/"+sessionid+"/Studysheets/list")
 //             link = "https://anklebowl.pythonanywhere.com/usernamefromtoken/"+sessionid
 //             customuser = await httpGet(link)
 //         } catch (error) {
@@ -963,7 +963,7 @@ function processDelete(){
         
 //             // toek = window.localStorage.getItem("usertoken")
 //             // document.getElementById("studysheetname").innerHTML = chosensheet
-//             // sheet = httpGet("https://backend.langstudy.tech:444/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
+//             // sheet = httpGet(backendServerIp + "/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
                     
 //                     let horizontalflexstudysetentry = document.createElement("div")
 //                     horizontalflexstudysetentry.className = "horizontalFlex studysetentry"
@@ -996,7 +996,7 @@ function processDelete(){
 //                         document.getElementById("loadingscreen").classList = "absolute";
 //                         document.getElementById("studysetholder").style.display = "none";
 //                         var studysheetname = document.getElementById(this.id).getAttribute("studysheet")
-//                         link = "https://backend.langstudy.tech:444/"+sessionid+"/Studysheets/"+ studysheetname+"/delete"
+//                         link = backendServerIp + "/"+sessionid+"/Studysheets/"+ studysheetname+"/delete"
 //                         console.log("link is: "+link)
 //                         await httpGet(link)
 //                         window.location.reload()
@@ -1154,7 +1154,7 @@ function getRandomQuestion(textBlock) {
         let splitter = questionArray[0].split("--image(")
         let image = splitter[1]
         image = image.substring(0, 64);
-        let urlForImage = "https://backend.langstudy.tech:444/"+window.localStorage.getItem("usertoken")+"/image/get/"+image;
+        let urlForImage = backendServerIp + "/"+window.localStorage.getItem("usertoken")+"/image/get/"+image;
         questionArray.push(urlForImage);
         questionArray[0] = splitter[0] + image.substring(64, image.length);
         
@@ -1805,7 +1805,7 @@ function sendFeedback(){
         alert("The feedback message cannot be nothing.")
     } else {
         document.getElementById("feedbackUIInputContainer").innerHTML = "Thank you for your feedback!"
-        url = "https://backend.langstudy.tech:444/feedback/"+sessionid;
+        url = backendServerIp + "/feedback/"+sessionid;
         var xhr = new XMLHttpRequest();
         xhr.open("POST", url);
     
@@ -1962,7 +1962,7 @@ function gameLoop(){
         let splitter = questionArray[0].split("--image(")
         let image = splitter[1]
         image = image.substring(0, 64);
-        let urlForImage = "https://backend.langstudy.tech:444/"+window.localStorage.getItem("usertoken")+"/image/get/"+image;
+        let urlForImage = backendServerIp + "/"+window.localStorage.getItem("usertoken")+"/image/get/"+image;
         questionArray.push(urlForImage);
         questionArray[0] = splitter[0] + image.substring(64, image.length);
         imageSource = questionArray[2];
@@ -3316,7 +3316,7 @@ function saveShared(){
         };	
     
         filename = window.localStorage.getItem("sharedSheet");
-        var url = "https://backend.langstudy.tech:444/"+window.localStorage.getItem("usertoken")+"/Studysheets/upload/"+filename;
+        var url = backendServerIp + "/"+window.localStorage.getItem("usertoken")+"/Studysheets/upload/"+filename;
         var xhr = new XMLHttpRequest();
         xhr.open("POST", url);
     
@@ -3440,7 +3440,7 @@ function sendLucyMessage(){
             //     okToUpload = false;
             // }
             var filename = "User's Studysheet";
-            var url = "https://backend.langstudy.tech:444/ai_studysheet/"+window.localStorage.getItem("usertoken");
+            var url = backendServerIp + "/ai_studysheet/"+window.localStorage.getItem("usertoken");
             
             if(okToUpload == true){
                 var xhr = new XMLHttpRequest();
@@ -3640,9 +3640,9 @@ function saveToCloud(){
             var filename = document.getElementById("sstitle").innerText;
             console.log("FILE NAME+ "+filename)
             if(window.localStorage.getItem('editSheet')=="true") {
-                var url = "https://backend.langstudy.tech:444/"+sessionid+"/Studysheets/edit/"+filename;
+                var url = backendServerIp + "/"+sessionid+"/Studysheets/edit/"+filename;
             } else {
-                var url = "https://backend.langstudy.tech:444/"+sessionid+"/Studysheets/upload/"+filename;
+                var url = backendServerIp + "/"+sessionid+"/Studysheets/upload/"+filename;
             }
             if(okToUpload == true){
                 var xhr = new XMLHttpRequest();
