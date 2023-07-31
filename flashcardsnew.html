@@ -132,7 +132,7 @@
                 let splitter = front[0].split("--image(")
                 let image = splitter[1]
                 image = image.substring(0, 64);
-                let urlForImage = "https://backend.langstudy.tech:444/"+window.localStorage.getItem("usertoken")+"/image/get/"+image;
+                let urlForImage = backendServerIp + "/"+window.localStorage.getItem("usertoken")+"/image/get/"+image;
                 front.push(urlForImage);
                 front[0] = splitter[0] + image.substring(64, image.length);
         
