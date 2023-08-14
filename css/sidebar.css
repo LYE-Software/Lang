@@ -1,0 +1,53 @@
+
+.rightSidebarContainer {
+    position: fixed;
+    left: 20px;
+    top: 0px;
+    margin-right: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rightSidebarContainer > div {
+    width: 100%;
+    z-index: 2000;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    border-radius: 35px;
+}
+
+.rightSidebarContainer > div > button {
+    width: 75px;
+    height: 75px;
+}
+
+.rightSidebarContainer > div > button > img {
+    height: 35px;
+}
+
+.newbutton {
+    background-color: white;
+    padding: 10px;
+    border-radius: 1000px;
+    border: 2px solid var(--primary-light);
+    cursor:pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    margin: 5px;
+
+    transition: all 0.25s ease-in-out;
+    box-sizing: border-box;
+
+}
+
+.newbutton:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+    border: 2px solid var(--primary-dark);
+}

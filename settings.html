@@ -4,134 +4,294 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings | Lang</title>
-    <script src="code.js"></script>
-    <link rel="stylesheet" href="stylesheet.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="circular lang icon.png">
+    <link rel="icon" href="assets/logos/circular lang icon.png">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <script src="javascript/settings.js"></script>
+    <script src="javascript/utils.js"></script>
 </head>
-<body onload="settingsRun()" style="overflow-y: visible">
+<style>
+    .tiledBg{
+        background-image: url("assets/icons/onboardingBackground.png");
+        background-size: 175px;
+        filter: saturate(0%);
+        filter: contrast(170%);
+        filter: brightness(40%);
+    }
+    .topLayer{
+       font-weight: bold; 
+       display:flex; 
+       flex-direction: column;
+       justify-content: center;
+       text-align: center;
+    }
+    .option{
+        width:15vw; 
+        height:7vh; 
+        background-color: white; 
+        border-bottom: 3px solid black;
+        cursor:pointer;
+    }
+    .button {
+        border-radius: 1000000px;
+        height: 5vh;
+        width: 15vw;
+        padding: 1vh;
+        background-color: #001945;
+        color:white;
+        font-family: 'Poppins', sans-serif;
+        font-weight:bold;
+        margin: 2vh;
+        cursor: pointer;
+        user-select: none;
+    }
 
-    
-    <div id="failedSignIn" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
-        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: var(--primary-light);">
-            <img src="assets/logos/FullLangLogo.png" style="height:10vh; margin: 10px;"> 
-            <div style="margin-top: 10px;">We did not find an account saved on your computer.</div>
-            <div style="margin-top: 10px;">Lang recommends making an account, so you can save your studysheets online.</div>
-            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0;" onclick="window.location.href='https://lye.software/signin?forward=langstudy.tech-homepage.html'">Log In</div>
-            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="window.location.href='https://lye.software/signup?forward=langstudy.tech-homepage.html'">Sign Up</div>
-            <div style="font-size: 10px;">By signing up for an account, you agree to the Lang Terms of Service, which can be found <a href='langlegal.html' style="color: var(--primary-dark)">here</a></div>
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  .OPslider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f5deb3;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #001945;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #3e8e41;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #3e8e41;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+
+  .slidertext{
+    font-family: 'Poppins', sans-serif;
+    color:#001945;
+    margin-left: 150%;
+    margin-top: 0%;
+    width: 200%;
+  }
+
+
+
+  .OPslider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #001945;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .OPslider {
+    background-color: #3e8e41;
+  }
+  
+  input:focus + .OPslider {
+    box-shadow: 0 0 1px #3e8e41;
+  }
+  
+  input:checked + .OPslider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded OPsliders */
+  .OPslider.round {
+    border-radius: 34px;
+  }
+  
+  .OPslider.round:before {
+    border-radius: 50%;
+  }
+
+
+  .OPslidertext{
+    font-family: 'Poppins', sans-serif;
+    color:#001945;
+    margin-left: 150%;
+    margin-top: 0%;
+    width: 200%;
+  }
+
+
+</style>
+<body style="margin:0px;" onload="getname()">
+    <div class="content">
+        <div id="header" class="header horizontalFlex">
+            <div style="cursor:pointer;" onclick="window.location.href='homepage.html'">
+                <img style="height: 10vh;" src="assets/logos/FullLangLogo.png" alt='Lang Logo'>
+            </div>
+            <div id="homeusername" class="noverticalshow button verticalFlex" style="cursor: pointer; color:wheat; height:3vh; width:10vw; padding:1vh; font-weight:normal;" onclick="window.location.href='settings.html'">User</div>
+        </div>
+        <div class="functionRow horizontalFlex" style="justify-content: start;">
+            <div class="functionRowItem">
+                Create
+                <div class="functionRowItemContents" style="z-index:500;"> 
+                    <div onclick="window.location.href='creator.html'">New...</div>
+                    <!-- <div onclick="window.location.href='quizletconvert.html'">From Quizlet</div> -->
+                    <div onclick="window.location.href='memriseconvert.html'">From Memrise</div>
+                </div>
+            </div>
+            <div class="functionRowItem" style="display:none;" id="localAdvanced">
+                Local
+                <div class="functionRowItemContents" style="z-index:500;">
+                    <div onclick="window.location.href='train.html'">Train</div>
+                    <div onclick="window.location.href='mastery.html'">Mastery</div>
+                    <div onclick="window.location.href='multiplechoice.html'">Multiple Choice</div>
+                    <div onclick="window.location.href='flashcardsnewtml'">Flashcards</div>
+                    <div onclick="window.location.href='practestnew.html'">Practice Test</div>
+                </div>
+            </div>
+            <div class="functionRowItem">
+                Settings
+                <div class="functionRowItemContents" style="z-index:500;">
+                    <div onclick="window.open('https://lye.software/manageuser')">Account Settings</div>
+                    <div onclick="window.location.href='settings.html'">Lang Settings</div>
+                </div>
+            </div>
+            <div class="functionRowItem">
+                About
+                <div class="functionRowItemContents" style="z-index:500;">
+                    <div onclick="window.location.href='about-new.html'">About Lang</div>
+                    <div onclick="window.location.href='langlegal.html'">Legal & Credits</div>
+                    <div onclick="window.location.href='langAssistantFAQ.html'">About Lang Assistant</div>
+                </div>
+            </div>
+            <div class="functionRowItem">
+                Help
+                <div class="functionRowItemContents" style="z-index:500;">
+                    <div onclick="window.location.href='https://github.com/LYE-software/Lang/issues'">GitHub Issues</div>
+                    <div><a href="mailto:customersupport@langstudy.tech">Email Us</a></div>
+                </div>
+            </div>
+            <notdiv class="flexSpacer"></notdiv>
         </div>
     </div>
-    
+
+
+    <div style="height:80vh; display:flex; flex-direction: column; justify-content: center;"> <!--surrounds whole page to center vertically-->
+
+        <div style=" width:100vw; display:flex; flex-direction: row; justify-content: center;"> <!--surrounds whole page to make horizontal layout-->
+            <div style="width:15vw; height:60vh; border-radius: 20px 0px 0px 20px; position:relative; overflow-y: scroll; overflow-x: hidden;"> <!--Box for switcher-->
+                <div class="tiledBg" style="position: absolute; top:0; left: 0; right: 0; bottom: 0; width:15vw; height:70vh; z-index:-1; border-radius: 20px 0px 0px 20px;">
+
+                </div>
+                <div class="topLayer" style="width:15vw; height:10vh; "> <!--entry--> 
+                    <div style="display:flex; flex-direction: row; justify-content: center; width:100%;">
+                        <img src="assets/icons/person.png" style="height:7vh; width:7vh;">
+                    </div>
+                </div>
+                <div class="topLayer option" id="stats" onclick="stats(document.getElementById('stats'))"> <!--entry-->
+                    Your Stats
+                </div>
+                <div class="topLayer option" id="manage" onclick="manage(document.getElementById('manage'))"> <!--entry-->
+                    Manage Lye Account               
+                </div>
+                <div class="topLayer option" id="switch" onclick="switchAcc(document.getElementById('switch'))"> <!--entry-->
+                    Switch User               
+                </div>
+                <div class="topLayer" style="width:15vw; height:10vh; "> <!--entry--> 
+                    <div style="display:flex; flex-direction: row; justify-content: center; width:100%;">
+                        <img src="assets/logos/allWhiteLang.png" style="height:7vh; width:7vh;">
+                    </div>
+                </div>
+                <div class="topLayer option" id="display" onclick="display(document.getElementById('display'))"> <!--entry-->
+                    Display
+                </div>
+                <div class="topLayer option" id="conn" onclick="connect(document.getElementById('conn'))"> <!--entry-->
+                    Connectivity               
+                </div>
+                <div class="topLayer option" id="adv" onclick="adv(document.getElementById('adv'))"> <!--entry-->
+                    Advanced               
+                </div>
+                <div class="topLayer" style="width:15vw; height:4vh; "></div> <!--entry--> 
+
+                <div class="topLayer option" onclick="build(this)"> <!--entry-->
+                    Version 5.0.0               
+                </div>
+            </div>
+            <div style="background-color: wheat; width:50vw;height:60vh; border-radius: 0px 20px 20px 0px; overflow-y:scroll;"> <!--box for settings-->
+                <div id="contentdiv" style="display:flex; flex-direction: column; align-items: center; text-align: center; padding:20px;">
+                    <h1 id="name"></h1>
+                    <p>Edit your Lye Account and Lang Study application settings here.</p>
+                    <p>Select a category on the left.</p>
+                </div>
+            </div>
+        </div>
+
+    </div> 
+
     <div id="localPrompt" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
         <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: var(--primary-light);">
-            <div style="margin-top: 10px; color:red; font-size:20px;"><strong>Are you sure you want to enable Local Studying?</strong></div>
-            <div style="margin-top: 10px;">This will allow you to upload local files to study, but it does not always work and can be unstable. <strong>Proceed at your own risk.</strong></div>
-            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0; background-color: red; border:none;" onclick="hideAndKeepOn()">Enable</div>
-            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideLocalPrompt()">Cancel</div>
+            <div style="margin-top: 10px; color:red; font-size:20px;"><strong>Are you sure you want to enable Debug Mode?</strong></div>
+            <div style="margin-top: 10px;">This will allow you to download Studysheets and use local files to study, if you know how. <strong>Proceed at your own risk.</strong></div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0; background-color: red; border:none;" onclick="hideAndKeepOn(this.parentNode.parentNode)">Enable</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideDebug(this.parentNode.parentNode)">Cancel</div>
         </div>
     </div>
-    
-
-    <div id="header0" class="lightGlow headerContainer" style="width: 100vw">
-        <div class="horizontalFlex header">
-            <div onclick="returnMain()" style="cursor:pointer;">
-                <img style="height: 10vh;" src="assets/logos/lang.png">
-            </div>
-            <div class="flexSpacer"></div>
-            <div style="font-family: 'Rubik Mono One', sans-serif; font-size:2vw;">Settings</div>
-            <div class="flexSpacer"></div>
-        </div>
-    </div>
-    <div>
-        <div class="horizontalFlex" style="background: linear-gradient(180deg, #001945 35.94%, #000011 100%); width:100%; width:100%; height:100%; justify-content: space-evenly; flex-wrap: wrap; overflow-y: visible">
-            <div class="lightGlow" style="box-sizing: border-box; display: flex; flex-direction: column; background-color:var(--primary-light); width: 350px; height:60vh; margin:20px; border-radius:15px; padding:20px;">
-                <h1 style="font-family: 'Poppins', sans-serif; font-size: 20px">Application Settings</h1>
-
-                <div class="horizontalFlex">
-                    <label class="switch" style="display: inline-block"> 
-                        <input id = "randomchoice" type="checkbox" onclick="makeRandom()">
-                        <span class="slider round"></span>
-                    </label>
-                    <p style="display: inline-block; width: 69%;" class="">Random Selection</p>
-                </div>
-
-                <div class="horizontalFlex">
-                    <label class="switch" style="display: inline-block"> 
-                        <input id = "localchoice" type="checkbox" onclick="localAdvanced()">
-                        <span class="slider round"></span>
-                    </label>
-                    <p style="display: inline-block; width: 69%;" class="">Enable Local Studying</p>
-                </div>
-                <div class="horizontalFlex">
-                    <label class="switch" style="display: inline-block"> 
-                        <input id = "firefliesChoice" type="checkbox" onclick="doFireflies()">
-                        <span class="slider round"></span>
-                    </label>
-                    <p style="display: inline-block; width: 69%;" class="">Disable Fireflies</p>
-                </div>
-                
-                <div class="flexSpacer"></div>
-                <div style="width:10vw; margin-bottom:10px;">
-                    <p>Lang Version 4.9.0. <br><a href="updates.html">Learn More</a></p>
-                </div>
-                <div style="width:10vw; margin-bottom:10px;">
-                    <p>Want to try Lang 5? <br><a href="https://beta.langstudy.tech">Join the Beta Here!</a></p>
-                </div>
-            </div>
-            <div class="lightGlow" style="box-sizing: border-box; background-color:var(--primary-light); width: 350px; height:60vh; margin:20px; border-radius:15px; padding:20px; display:flex; text-align:left; align-items: center; flex-direction:column;">
-                <!-- <h1 style="font-family: 'Poppins', sans-serif; font-size:1.1vw;">Account Settings</h1> -->
-                   
-                <!-- <img src="goodsizelye.png" style="height:6vw; width:12vw; ">          -->
-                <!-- <p class="welcometext">Manage Your Lye Account Here</p> -->
-                <h1 style="font-family: 'Poppins', sans-serif; font-size:20px;">Account Settings</h1>
-                <div class="flexSpacer"></div>
-                <div class="buttonHoverDark button verticalFlex centerFlex" style="width: 75%;" onclick="window.open('https://lye.software/manageuser', '_blank')">Manage Account</div>
-                <div class="buttonHoverDark button verticalFlex centerFlex" style="width: 75%;" onclick="window.location.href='https://lye.software/signin?forward=langstudy.tech-homepage.html'">Log In</div>            
-                <div class="buttonHoverDark button verticalFlex centerFlex" style="width: 75%;" onclick="signout()">Sign Out</div>
-                <div class="flexSpacer"></div>
-            </div>
-        </div>
-    </div>
-    
 
 
 </body>
-<style>
-
-</style>
-<script>
-
-
-    cssToTempAdd = `
-    
-    .slider {
-        transition: 0s !important;
-        -webkit-transition: 0s !important;
-    }
-
-    .slider:before {
-        transition: 0s !important;
-        -webkit-transition: 0s !important;
-    }
-    `
-
-    function settingsRun(){
-        checkSettings()
-    }
-
-    function preload() {
-        var head = document.getElementsByTagName('HEAD')[0];
-        var style = document.createElement('style');
-        style.type = 'text/css';
-        style.innerHTML = cssToTempAdd;
-        head.appendChild(style);
-
-        setTimeout(function(){
-            head.removeChild(style);
-        }, 401);
-    }
-
-    preload();
-</script>
 </html>

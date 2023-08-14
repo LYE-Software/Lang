@@ -1,0 +1,501 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Rubik+Mono+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap');
+
+:root {
+    --primary-dark: #001945;
+    --primary-light: wheat;
+}
+
+[contentEditable=true]:empty:not(:focus):before {
+    content: attr(data-text)
+}
+
+
+
+#changelog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 75vw; height: 75vh; background-color: var(--primary-light);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.header {
+    height: 10vh;
+    background-color: var(--primary-light);
+    width: 100vw;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.fullAbsolute {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.horizontalFlex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.verticalFlex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.centerFlex {
+    justify-content: center;
+    align-items: center;
+}
+
+.flexSpacer {
+    flex: 1;
+}
+
+.lightGlow {
+    -webkit-box-shadow:0px 0px 50px 0px var(--primary-light);
+    -moz-box-shadow: 0px 0px 50px 0px var(--primary-light);
+    box-shadow: 0px 0px 50px 0px var(--primary-light);
+}
+
+.darkGlow {
+    -webkit-box-shadow:0px 0px 50px 0px var(--primary-dark);
+    -moz-box-shadow: 0px 0px 50px 0px var(--primary-dark);
+    box-shadow: 0px 0px 50px 0px var(--primary-dark);
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(180deg, #001945 35.94%, #000011 100%);
+    background-attachment: fixed;
+
+
+    /* font-family: 'Josefin Sans', sans-serif; */
+    font-family: 'Poppins', sans-serif;
+
+    /* overflow-y: hidden; */
+    height: 100vh;
+    width: 100vw;
+    background-repeat: no-repeat;
+}
+
+.largeButton {
+    border-radius: 1000000px;
+    height: 5vh;
+    width: 35vw;
+    padding: 2.5vh;
+    background-color: var(--primary-dark);
+    margin: 5vh;
+    cursor: pointer;
+}
+
+.button {
+    border-radius: 1000000px;
+    height: 3vh;
+    width: 10vw;
+    padding: 1vh;
+    background-color: var(--primary-dark);
+    margin: 2vh;
+    cursor: pointer;
+    user-select: none;
+}
+
+input {
+    font-family: 'Poppins', sans-serif;
+}
+
+.centerText {
+    text-align: center;
+}
+
+.headerText {
+    /* font-weight: bold; */
+    color: var(--primary-light);
+    margin: 5vh;
+    font-size: 50px;
+
+    font-family: 'Rubik Mono One', sans-serif;
+}
+
+
+.hidden {
+    opacity: 0 !important;
+}
+
+
+
+.debugArea {
+    background-color: var(--primary-light);
+    width: 100vw;
+    margin: 0;
+}
+
+.fadeIn {
+    transition: opacity 0.25s ease-in-out !important;
+    opacity: 1 !important;
+}
+
+.fadeOut {
+    transition: opacity 0.25s ease-in-out;
+    opacity: 0;
+}
+
+/* https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-animation-from-running-on-page-load */
+.preload {
+    animation-duration: 0s !important;
+    -webkit-animation-duration: 0s !important;
+    transition:background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;
+}
+
+.animatedLoader { 
+    animation: logoSpinning ease-in-out 2s infinite;
+    width: 100px;
+    height: 100px;
+}
+
+
+@keyframes logoSpinning {
+    0% {
+        transform: scale(0.8);
+        rotate: 0deg;
+    }
+    
+    50% {
+        transform: scale(1.2);
+        rotate: 180deg;
+    }
+
+    100% {
+        transform: scale(0.8);
+        rotate: 360deg;
+    } 
+}
+
+.buttonHover {
+    transition: all 0.25s ease-in-out;
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+    border: 3px solid var(--primary-light);
+}
+
+.buttonHover:hover {
+    background-color: var(--primary-dark);
+    color: var(--primary-light);
+}
+
+.buttonHoverDark {
+    transition: all 0.25s ease-in-out;
+    background-color: var(--primary-dark);
+    color: var(--primary-light);
+    border: 3px solid var(--primary-dark);
+}
+
+.buttonHoverDark:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+}
+
+
+.popupContainer {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.15s ease-in-out;
+    opacity: 0; 
+    pointer-events: none;
+}
+
+.popup {
+    z-index: 1001; 
+    border-radius: 15px; 
+    padding: 20px; 
+    max-width: 400px; 
+    width: 90vw; 
+    /* background-color: var(--primary-light); */
+
+    background-color: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+
+
+
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  .OPslider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f5deb3;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #001945;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #3e8e41;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #3e8e41;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+
+  .slidertext{
+    font-family: 'Poppins', sans-serif;
+    color:#001945;
+    margin-left: 150%;
+    margin-top: 0%;
+    width: 200%;
+  }
+
+
+
+  .OPslider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #001945;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .OPslider {
+    background-color: #3e8e41;
+  }
+  
+  input:focus + .OPslider {
+    box-shadow: 0 0 1px #3e8e41;
+  }
+  
+  input:checked + .OPslider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded OPsliders */
+  .OPslider.round {
+    border-radius: 34px;
+  }
+  
+  .OPslider.round:before {
+    border-radius: 50%;
+  }
+
+
+  .OPslidertext{
+    font-family: 'Poppins', sans-serif;
+    color:#001945;
+    margin-left: 150%;
+    margin-top: 0%;
+    width: 200%;
+  }
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  .header {
+    border-bottom: 2px solid var(--primary-dark);
+    width: calc(100vw - 20px);
+    padding: 10px;   
+}
+
+
+.functionRow {
+    background-color: var(--primary-light);
+    height: 6vh;
+    width: 100vw;
+
+    -webkit-box-shadow:0px 0px 20px 0px var(--primary-light);
+    -moz-box-shadow: 0px 0px 20px 0px var(--primary-light);
+    box-shadow: 0px 0px 20px 0px var(--primary-light);
+
+}
+
+.functionRowItem {
+    transition: all 0.25s ease-in-out;
+
+    /* border-right: 1px solid var(--primary-dark); */
+    padding: 0 10px 0 10px;
+    height: 100%;
+    cursor: pointer;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+}
+
+.functionRowItem:first-child {
+    /* border-left: 1px solid var(--primary-dark); */
+    margin-left: 10px;
+}
+
+.functionRowItem:last-child {
+    /* border-left: 1px solid var(--primary-dark); */
+    margin-right: 10px;
+}
+
+.functionRowItem:hover {
+    background-color: var(--primary-dark);
+    color: var(--primary-light);
+}
+
+.functionRowItem:hover .functionRowItemContents {
+    display: block;
+}
+
+.functionRowItemContents {
+    display: none;
+    position: absolute;
+    top: 6vh;
+    left: 0;
+    z-index: 1;
+
+    min-width: 100%;
+    max-width: 500%;
+
+    border: 1px solid var(--primary-dark);
+}
+
+.functionRowItemContents div {
+    transition: all 0.25s ease-in-out;
+
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+    height: 6vh;
+    padding: 0 10px 0 10px;
+    z-index:500;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.functionRowItemContents div:hover {
+    background-color: var(--primary-dark);
+    color: var(--primary-light);
+    z-index:500;
+}
+
+
+
+
+
+
+
+
+.whiteBackdrop {
+    background-color: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    pointer-events: all;
+}
+
+.newbutton {
+    background-color: white;
+    padding: 10px;
+    border-radius: 1000px;
+    border: 2px solid var(--primary-light);
+    cursor:pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    margin: 5px;
+
+    transition: all 0.25s ease-in-out;
+    box-sizing: border-box;
+
+}
+
+.newbutton:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+    border: 2px solid var(--primary-dark);
+}

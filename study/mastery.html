@@ -1,0 +1,293 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastery | Lang</title>
+    <link rel="icon" href="../assets/logos/circular lang icon.png">
+
+    <link rel="stylesheet" href="../css/stylesheet.css">
+
+    <script src="../javascript/mastery.js"></script>
+    <script src="../javascript/Studysheet.js"></script>
+    <script src="../javascript/utils.js"></script>
+
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Rubik+Mono+One&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap');
+    :root {
+    --primary-dark: #001945;
+    --primary-light: wheat;
+    }
+    body{
+        margin: 0;
+        background-color: var(--primary-dark);
+        background: linear-gradient(180deg, #001945 35.94%, #000011 100%);
+
+        /* font-family: 'Josefin Sans', sans-serif; */
+        font-family: 'Poppins', sans-serif;
+
+        /* overflow-y: hidden; */
+        height: 100vh;
+        width: 100vw;
+    }
+
+    .horizontalFlex {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .verticalFlex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .centerFlex {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .bar{
+        width: 0vw;
+        height:2vh;
+        transition: 0.5s;
+    }
+    .redGlow {
+        -webkit-box-shadow:0px 0px 50px 0px rgb(143, 10, 10);
+        -moz-box-shadow: 0px 0px 50px 0px rgb(143, 10, 10);
+        box-shadow: 0px 0px 50px 0px rgb(143, 10, 10);
+    }
+
+    .lightGlow {
+        -webkit-box-shadow:0px 0px 50px 0px var(--primary-light);
+        -moz-box-shadow: 0px 0px 50px 0px var(--primary-light);
+        box-shadow: 0px 0px 50px 0px var(--primary-light);
+    }
+
+    .darkGlow {
+        -webkit-box-shadow:0px 0px 50px 0px var(--primary-dark);
+        -moz-box-shadow: 0px 0px 50px 0px var(--primary-dark);
+        box-shadow: 0px 0px 50px 0px var(--primary-dark);
+    }
+
+    .rightSidebarContainer {
+        position: fixed;
+        left: 20px;
+        bottom: 0px;
+        height: 100vh;
+        margin-right: 10px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .rightSidebarContainer > div {
+        width: 100%;
+        z-index: 2000;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+        border-radius: 35px;
+    }
+
+    .rightSidebarContainer > div > button {
+        width: 75px;
+        height: 75px;
+    }
+
+    .rightSidebarContainer > div > button > img {
+        height: 35px;
+    }
+
+    .answerContainer {
+        max-width: 800px;
+        width: 85vw;
+        /* height: 250px; */
+    }
+
+    .submitButton {
+        /* max-width: 400px; */
+        flex: 1;
+        height: 75px;
+        
+        margin-top: 10px;
+    }
+
+    .inputArea {
+        height: 175px;
+        width: 100%;
+        font-size: 2em;
+        text-align: left;
+        padding: 10px;
+
+        border-radius: 25px; 
+        transition: all 0.35s ease-in-out;
+
+        border: 1px solid var(--primary-light);
+        background-color: rgb(47, 61, 115);
+        color: var(--primary-light);
+        font-family: 'Poppins', sans-serif;
+
+    }
+    .resize{
+        transition: all 0.35s ease-in-out;
+    }
+    
+.absolute {
+    position: absolute;
+}
+
+.fullAbsolute {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.button {
+    border-radius: 1000000px;
+    height: 3vh;
+    width: 10vw;
+    padding: 1vh;
+    background-color: var(--primary-dark);
+    margin: 2vh;
+    cursor: pointer;
+    user-select: none;
+}
+.buttonHoverDark {
+    transition: all 0.25s ease-in-out;
+    background-color: var(--primary-dark);
+    color: var(--primary-light);
+    border: 3px solid var(--primary-dark);
+}
+
+.buttonHoverDark:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+}
+</style>
+<body onload="startMastery()">
+    <div class="bar lightGlow" style="background-color: wheat; position:absolute;" id="progBar"></div>
+    <div style="width:100vw; text-align: center; color:white; margin-top:10px; position:absolute; font-size:20px; opacity:0; pointer-events: none;" id="endless"><Strong>Endless Mode</Strong></div>
+    <div class="horizontalFlex" style="height:90vh;">
+        <div class="rightSidebarContainer verticalFlex" style="z-index:1100;" id="shelf">
+            
+            <img src="../assets/logos/lang-wheat.png" style="height:10vh; position:fixed; top:3.5vh; cursor:pointer;" onclick="window.location.href='../homepage.html'">
+
+            <div class="whiteBackdrop">
+                <button class="lightGlow newbutton" onclick="window.location.href='../studysheetpage.html'" ><img src="../assets/icons/blackBackButton.png"></button>
+                <button class="lightGlow newbutton" onclick="showElement(document.getElementById('shuffling'))" ><img src="../assets/icons/shuffle.png"></button>
+                <button class="lightGlow newbutton" onclick="showElement(document.getElementById('timerPopup'))"><img src="../assets/icons/timer.png"></button>
+                <button class="lightGlow newbutton" style="cursor:pointer;" onclick="stats()" ><img src="../assets/icons/stats.png"></button>
+                <button class="lightGlow newbutton" onclick="showElement(document.getElementById('restarting'))"><img src="../assets/icons/reset.png"></button>
+
+            </div>
+        </div>
+        <div class="verticalFlex centerFlex" style="width:100vw;position:fixed;">
+            <div style="max-width:800px; flex:1; width:100%;" id="container">
+                <div id="term_image" class="horizontalFlex centerFlex" style="margin-bottom:20px;">
+                    <img src="../output.png" alt="Image Preview" style="width: auto; height: 250px; border-radius: 25px;">
+                </div>
+                <div class=" horizontalFlex centerFlex" style="color: #ffffff; font-size: 35px; font-weight:bolder; margin-bottom: 20px; text-align: center; " id="multiQ">
+                    Multi Overall Question
+                </div>
+                <div class=" horizontalFlex centerFlex" style="color: #ffffff; font-size: 40px; margin-bottom: 30px; text-align: center;" id="displayWord">
+                    Single / Alt
+                </div>
+                
+                <input class="inputArea" id="input" style="width:100%;">
+                <div class = "horizontalFlex centerFlex resize" style=" width:100%; height:10vh; justify-content: space-between; margin-top:10px;">
+                    <div class="centerFlex horizontalFlex" style="width:60%; height:7vh; background-color: wheat; border-radius:20px; font-weight:bolder; font-size:30px; cursor:pointer;" id="goButton" onclick="checkSheet()">
+                        > Go!
+                    </div>
+                    <div class="centerFlex horizontalFlex" style="width:35%; height:7vh; background-color: wheat; border-radius:20px; font-weight:bolder; font-size:30px; cursor:pointer;" id="hint" onclick="doHints()">
+                        Hint
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- </input> -->
+
+
+
+
+        </div>
+
+
+    </div>
+
+    <div class="bar redGlow" style="background-color: rgb(143, 10, 10); bottom:0; position:absolute;" id="timerBar"></div>
+    <div id="completedMode" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; z-index:2001; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat;">
+            <div style="margin-top: 10px; color:#001945; font-size:20px; text-align:center;"><strong>Congratulations! You have completed Mastery for this Studysheet.</strong></div>
+            <div style="margin-top: 10px;">View your statistics from this session below.</div>
+            <div id="doneStatsHolder" style="margin-top:10px; margin-bottom:10px; border: 2px solid #001945; border-radius:15px; padding:5px;">
+
+            </div>
+            <div style="margin-top: 10px; text-align: center;">You can continue studying in Endless Mode or you can go back to the Study options.</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0; " onclick="hideElement(document.getElementById('completedMode'))" id="cont">Continue</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="window.location.href='../studysheetpage.html'">Exit</div>
+        </div>
+    </div>
+
+    <div id="timerPopup" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; opacity: 0; pointer-events:none; z-index:1500; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat; text-align: center;">
+            
+            <img src="../assets/icons/timer.png" style="height:40px;">           
+            <div style="margin-top: 10px; color:#001945; font-size:20px;"><strong>Timer Settings</strong></div>
+            
+            
+            <div style="margin-top: 10px;">Set a time limit for how long you have to answer a question.</div>
+
+            <div style="margin-top: 10px; color:red;"><em>Warning: Progress is reset when enabling timer in the middle of studying.</em></div>
+            <div style="margin-top: 10px;" id="instructions">Time Per Question (seconds):</div>
+            <input type="number" min="1" style="background-color: rgb(47, 61, 115); border-radius: 15px; border: 2px solid #001945; height:5vh; width: 35%;color:wheat; font-family: Poppins; font-size:20px;" placeholder="7" id = "timeAmt"></input>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0; " onclick="startTimer(document.getElementById('timeAmt').value)">Enable</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(this.parentNode.parentNode)">Cancel</div>
+        </div>
+    </div>
+
+    <div id="timerCountdown" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; opacity: 0; pointer-events:none; z-index:1500; background-color: rgba(0, 0, 0, 0.5);">
+        <div id="timerCountdownText" style="font-size:70px; color:white;"><strong>Starting In: 3</strong></div>
+    </div>
+    <div id="restarting" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; z-index:2001; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat;">
+            <div style="margin-top: 10px; color:#001945; font-size:20px; text-align:center;"><strong>Are you sure you want to reset your progress on this Studysheet?</strong></div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0;" onclick="window.location.reload()">Yes</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(document.getElementById('restarting'))"">Cancel</div>
+        </div>
+    </div>
+    <div id="shuffling" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; z-index:2001; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat;">
+            <div style="margin-top: 10px; color:#001945; font-size:20px; text-align:center;"><strong>Are you sure you want to shuffle the questions in this Studysheet?</strong></div>
+            <div style="margin-top: 10px; color: red;">This will reset any progress you currently have in Mastery on this sheet.</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0;" onclick="shuffleSheet()">Yes</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(document.getElementById('shuffling'))"">Cancel</div>
+        </div>
+    </div>
+
+
+    <div id="stats" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; opacity: 0; pointer-events:none; z-index:1500; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat; text-align: center;">
+            
+            <img src="../assets/icons/stats.png" style="height:40px;">           
+            <div style="margin-top: 10px; color:#001945; font-size:20px;"><strong>Statistics</strong></div>
+            <div id="statsHolder">
+                
+            </div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(this.parentNode.parentNode)">Ok</div>
+        </div>
+    </div>
+</body>
+</html>

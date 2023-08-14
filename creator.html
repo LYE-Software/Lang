@@ -6,16 +6,179 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creating a Studysheet on Lang</title>
-    <script src="code.js"></script>
-    <link rel="stylesheet" href="stylesheet.css">
-    <link rel="icon" href="circular lang icon.png">
+    <script src="javascript/utils.js"></script>
+    <script src="javascript/creator.js"></script>
+    <script src="javascript/Studysheet.js"></script>
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="icon" href="assets/logos/circular lang icon.png">
     <style>
+
+        @media (min-width: 1000px) {
+            #langBotContainer {
+                position: relative !important;
+                top: 0 !important;
+            }
+        }
+
+        #langBotContainer {
+            position: fixed;
+            right: 10px;
+            width: 400px;
+            height: 500px;
+
+
+            border-radius: 25px;
+            box-sizing: border-box;
+
+            transition: all 0.25s ease-out;
+        }
+
+        #langBotContainer > div {
+            transition: opacity 0.1s;
+
+            padding: 10px;
+        }
+
+        
+
+        .message {
+            display: flex;
+            transition: transform 0.25s;
+        }
+
+        .message:hover {
+            display: flex;
+            transform: scale(1.02);
+        }
+
+        .message > div {
+            word-wrap: anywhere;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 15px;
+        }
+
+        .userSentMessage {
+            justify-content: flex-end;
+            margin-left: 50px;
+        }
+
+        .userSentMessage > div {
+            background-color: var(--primary-light);
+            color: black;
+        }
+
+        .botSentMessage {
+            margin-right: 50px;
+        }
+        
+        .botSentMessage > div {
+            background-color: var(--primary-dark);
+            color: var(--primary-light)
+        }
+
+        .messageInput {
+            position: relative;
+
+            padding: 5px;
+            margin-bottom: 20px;
+
+            box-sizing: border-box;
+
+            width: 100%;
+
+            transition: transform 0.25s;
+        }
+
+        .messageInput:hover {
+            transform: scale(1.02);
+        }
+
+        .messageInput > input {
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+
+            width: 100%;
+
+            height: 50px;
+            padding: 10px;
+            padding-right: 60px;
+
+            background-color: var(--primary-light);
+            border-radius: 25px;
+
+            border: 2px solid var(--primary-dark);
+        }
+
+        .messageInput > button {
+            position: absolute;
+            right: 0;
+
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+
+            border: none;
+
+            border: 2px solid var(--primary-dark);
+        }
+
+        .hiddenTypingIndicators {
+            height: 0 !important;
+            opacity: 0;
+            margin: 0 !important;
+        }
+
+        #typingIndicators {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            width: 75px;
+            height: 30px;
+            margin: 10px;
+            margin-left: 0px;
+            padding: 10px;
+            padding-left: 7px;
+            box-sizing: border-box;
+
+            transition: all 0.25s ease-out;
+        }
+
+        #typingIndicators > div {
+            transform: translateY(-3px);
+
+            background-color: var(--primary-dark);
+            border-radius: 50px;
+            width: 15px;
+            height: 15px;
+
+            animation: typingIndicators;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes typingIndicators {
+            0% {
+                opacity: 1;
+                transform: translateY(-3px);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: translateY(3px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(-3px);
+            }
+        }
+
+
         .langCreatorContainer {
             position: relative;
             box-sizing: border-box;
-
-            display: flex;
-            flex-direction: column;
 
             overflow-y: scroll;
             overflow-x: hidden;
@@ -25,8 +188,6 @@
 
             width: 90vw;
             max-width: 700px;
-
-            max-height: 80%;
 
             padding: 5px;
             /* border-top: 5px solid var(--primary-light);
@@ -63,6 +224,12 @@
 
             display: flex;
             justify-content: center;
+
+            transition: transform 0.25s;
+        }
+
+        .termDefContainer:hover {
+            transform: scaleX(1.02)
         }
 
         .term {
@@ -103,6 +270,7 @@
         body {
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */
+            overflow-x: hidden;
         }
 
         #talkToLucy:hover > div {
@@ -268,6 +436,18 @@
             <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(document.getElementById('popup'))">Ok</div>
         </div>
     </div>
+
+    <div id="assistantThinking" class="popupContainer" style="z-index:2000;">
+        <div class="popup centerFlex verticalFlex">
+            <div style="margin: 50px;">
+                <img style="height:10vh;" src="assets/logos/Lang Assistant by Lang Study.png" alt="Assistant">
+            </div>
+            <div style="margin-bottom: 15px;">The Lang Assistant is processing your query...</div>
+            <div style="width:100%; display:flex; justify-content: center;" id="assistantThinkingLoader">
+                <div class="lds-ellipsis" style="color:var(--primary-dark); " ><div></div><div></div><div></div><div></div></div>
+            </div>
+        </div>
+    </div>
     
     <div id="savePopup" class="popupContainer">
         <div class="verticalFlex centerFlex popup">
@@ -336,19 +516,18 @@
             Create
             <div class="functionRowItemContents" style="z-index:500;">
                 <div onclick="window.location.href='creator.html'">New...</div>
-                <div onclick="window.location.href='quizletconvert.html'">From Quizlet</div>
-                <div onclick="window.location.href='memriseconvert.html'">From Memrise</div>
+                <!-- <div onclick="window.location.href='quizletconvert.html'">From Quizlet</div> -->
             </div>
         </div>
         <div class="functionRowItem" style="display:none;" id="localAdvanced">
             Local
             <div class="functionRowItemContents" style="z-index:500;">
-                <div onclick="window.location.href='train.html'">Train</div>
-                <div onclick="window.location.href='mastery-alt.html'">Mastery</div>
+                <div>Not Available Currently</div>
+                <!-- <div onclick="window.location.href='train.html'">Train</div>
+                <div onclick="window.location.href='mastery.html'">Mastery</div>
                 <div onclick="window.location.href='multiplechoice.html'">Multiple Choice</div>
                 <div onclick="window.location.href='flashcardsnewtml'">Flashcards</div>
-                <div onclick="window.location.href='practestnew.html'">Practice Test</div>
-                <div onclick="window.location.href='speed.html'">Speed Review</div>
+                <div onclick="window.location.href='practestnew.html'">Practice Test</div> -->
             </div>
         </div>
         <div class="functionRowItem">
@@ -361,15 +540,16 @@
         <div class="functionRowItem">
             About
             <div class="functionRowItemContents" style="z-index:500;">
-                <div onclick="window.location.href='about-new.html'">About Lang</div>
-                <div onclick="window.location.href='updates.html'">Updates</div>
+                <div onclick="window.location.href='about.html'">About Lang</div>
                 <div onclick="window.location.href='langlegal.html'">Legal & Credits</div>
+                <div onclick="window.location.href='langAssistantFAQ.html'">About Lang Assistant</div>
             </div>
         </div>
         <div class="functionRowItem">
             Help
             <div class="functionRowItemContents" style="z-index:500;">
                 <div onclick="window.location.href='https://github.com/LYE-software/Lang/issues'">GitHub Issues</div>
+                <div><a href="mailto:customersupport@langstudy.tech">Email Us</a></div>
             </div>
         </div>
         <notdiv class="flexSpacer"></notdiv>
@@ -382,7 +562,7 @@
         </div>
     </div>
 
-    <div class="horizontalFlex" style="justify-content: center; width: 100vw; height: calc(84vh - 22px);">
+    <div class="horizontalFlex" style="padding-top: 100px; padding-bottom: 200px; width: 100vw; justify-content: center; align-items: flex-start;">
         <div id="langCreatorContainer" class="langCreatorContainer innerLightGlow">
             <div class="termDefContainer">
                 <div style="margin-right: 25px;">Title: </div>
@@ -392,13 +572,40 @@
 
             </div>
             <input id="hiddeninput" style="height: 0; margin: 0; padding: 0; border: 0;"></input>
-            <div class="termDefContainer" onclick="makeInputs('single')" style="cursor:grab; user-select: none;">
+            <div class="termDefContainer" onclick="makeInputs('single')" style="cursor:grab; user-select: none; margin-top: 0;">
                 Add New
             </div>
         </div>
-        <div style="display:flex; flex-direction: column; margin-right: 20px; justify-content: space-between; height: 60%;">
+
+        <div id="langBotContainer" class="whiteBackdrop fixedSidebar">
+            <div class="verticalFlex" style="height: 100%;">
+                <div style="flex: 1; overflow:scroll;" id="messageCont">
+                    <div class="message botSentMessage">
+                        <div>
+                            Hi. I'm Lang Assistant! <strong>Ask me to create a new Studysheet or make changes to an existing one</strong>. Click <a href='langAssistantFAQ.html' style="color:wheat;">here</a> to learn about me.
+                        </div>
+                    </div>
+                    <div class="message botSentMessage">
+                        <div>
+                            I can't gurantee the integrity of information I write. You should always double check my answers.
+                        </div>
+                    </div>
+                    <div id="typingIndicators" class="hiddenTypingIndicators">
+                        <div style="animation-delay: 0"></div>
+                        <div style="animation-delay: 0.15s"></div>
+                        <div style="animation-delay: 0.3s"></div>
+                    </div>
+                </div>
+                <div class="messageInput">
+                    <input class="lightGlow" placeholder="Ask Lang Assistant" id="LAquery">
+                    <button class="newbutton" style="margin:0;" onclick="sendLucyMessage()"></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div style="display:flex; flex-direction: column; margin-right: 20px; justify-content: space-between; height: 60%;">
             <div class="lightGlow" style="background-color: var(--primary-light); width: 100px; border-radius: 25px;">
-                 <div class="creatorIcon" onclick="downloadVerbs('s')" id="exporter" style="display:none;">
+                 <div class="creatorIcon" onclick="saveToCloud(false, true)" id="exporter" style="display:none;">
                     <img src="save.svg" style="height:50px; color:var(--primary-dark);">
                     <div class="tooltipText">
                         Export
@@ -424,11 +631,6 @@
                     <div style="display: none;">
                         <div style="display: flex; flex-direction: column; padding:10px;" class="ttL">
                             <div class="flexSpacer" style="overflow-y: scroll; padding: 25px; margin-bottom: 0; display: flex; flex-direction: column-reverse" id="messageCont">
-                                
-                                <!-- <div class="bubbleContainer">
-                                    <div class="blueBubble bubble">Make a studysheet of states and capitals</div>
-                                    
-                                </div> -->
                                 <div class="bubbleContainer">
                                     <div class="whiteBubble bubble">Lang makes no assurance about the accuracy of this information. Make sure to verify everything that I generate.</div>
                                 </div>
@@ -452,10 +654,22 @@
                     </div>
                 </div> 
             </div>
-           
-            
+        </div> -->
+    </div>
+
+
+    <div id="rightSidebarContainer" class="rightSidebarContainer">
+        <div class="whitebackdrop">
+            <button class="newbutton" id="exporter" style="display: none;">
+                <img src="assets/icons/save.svg" style="height:50px; color:var(--primary-dark);">
+            </button>
+            <button class="newbutton" onclick="showSavePopup()">
+                <img src="assets/icons/langsave.svg" style="height:50px;">
+            </button>
+            <button class="newbutton" onclick="toggleLangBot()">
+                <img src="assets/icons/Lang Tutor.svg" style="height:50px;">
+            </button>
         </div>
-        
     </div>
 </body>
 <style>
@@ -503,12 +717,59 @@
 </style>
 <script>
 
-    var wage = document.getElementById("lucyMessage");
-    wage.addEventListener("keydown", function (e) {
-        if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
-            sendLucyMessage()
+    var typingIndicators = document.getElementById("typingIndicators")
+
+    function showTypingIndicators() {
+        typingIndicators.classList.add("hiddenTypingIndicators")
+    }
+
+    function hideTypingIndicators() {
+        typingIndicators.classList.remove("hiddenTypingIndicators")
+    }
+
+    var langBotContainer = document.getElementById("langBotContainer");
+    var visible = true
+    function toggleLangBot() {
+        if (!visible) {
+            langBotContainer.style.width = 400
+            //langBotContainer.style.opacity = 1
+
+            setTimeout(function () {
+                langBotContainer.children[0].style.opacity = 1
+                langBotContainer.children[0].style.display = "flex"
+            }, 150);
+        } else {
+            langBotContainer.style.width = 0
+            //langBotContainer.style.opacity = 0
+            langBotContainer.children[0].style.opacity = 0
+            setTimeout(function () {
+                langBotContainer.children[0].style.display = "none"
+            }, 100);
         }
-    });
+        visible = !visible
+    }
+
+    var rightSidebarContainer = document.getElementById("rightSidebarContainer")
+    var langbotTopOffset = langBotContainer.getBoundingClientRect().top
+    document.addEventListener("scroll", function () {
+        if (document.body.getBoundingClientRect().width > 1000) {
+            var scrollPos = window.scrollY;
+            var fixedCenter = parseInt(rightSidebarContainer.style.top) + (rightSidebarContainer.getBoundingClientRect().height / 2)
+            var newPos = fixedCenter - langbotTopOffset + scrollPos - (langBotContainer.getBoundingClientRect().height / 2)
+            langBotContainer.style.transform = "translateY(" + newPos + "px)"
+        } else {
+            langBotContainer.style.transform = ""
+        }
+        
+        
+    })
+
+    //var wage = document.getElementById("lucyMessage");
+    //wage.addEventListener("keydown", function (e) {
+    //    if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+    //        sendLucyMessage()
+    //    }
+    //});
     var imgUrl;
     var endData;
     //Trigger now when you have selected any file 
@@ -536,7 +797,7 @@
                 console.log(endData)
                 
                 console.log("Beginning Image Upload to Backend")
-                url = backendServerIp + "/"+window.localStorage.getItem("usertoken")+"/image/upload";
+                url = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/image/upload";
                 var data = endData;
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", url);
@@ -570,7 +831,7 @@
     };
 
     function leaveFileUpload(){
-        var source = backendServerIp + "/"+window.localStorage.getItem("usertoken")+"/image/get/"+imgUrl.split("=")[1];
+        var source = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/image/get/"+imgUrl.split("=")[1];
         var parents = document.getElementsByClassName("overallContainer")
         for (var i = 0; i < parents.length; i++) {
             console.log(parents[i].dataset.image);
@@ -655,6 +916,12 @@
         (e || window.event).returnValue = confirmationMessage; // Gecko + IE
         return confirmationMessage; // Webkit, Safari, Chrome etc.
     });
-
+    var wage = document.getElementById("LAquery");
+wage.addEventListener("keydown", function (e) {
+    if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+        sendLucyMessage()
+    }
+});
 </script>
+<script src="javascript/sidebar.js"></script>
 </html>

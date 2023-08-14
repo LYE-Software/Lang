@@ -1,3 +1,0 @@
-["faire", "fer"]
-["être", "ser"]
-["avoir", "aur"]

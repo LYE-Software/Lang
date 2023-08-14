@@ -1,0 +1,147 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lang</title>
+    <link rel="stylesheet" href="../css/stylesheet.css">
+    <link rel = "stylesheet" href="../css/sidebar.css">
+    <link rel="icon" href="../assets/logos/circular lang icon.png">
+    <script src="../javascript/multiplechoice.js"></script>
+    <script src="../javascript/utils.js"></script>
+    <script src="../javascript/Studysheet.js"></script>
+    <style>
+        .multiplechoicefooter button {
+            width: 40vw;
+            max-width: 300px;
+
+            height: 30vh;
+            max-height: 150px;
+
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+            font-size: 15px;
+            font-family: Poppins;
+            margin: 5px;
+            border-radius: 15px;
+            border: none;
+        }
+        .bar{
+        width: 0vw;
+        height:2vh;
+        transition: 0.5s;
+    }
+    .redGlow {
+        -webkit-box-shadow:0px 0px 50px 0px rgb(143, 10, 10);
+        -moz-box-shadow: 0px 0px 50px 0px rgb(143, 10, 10);
+        box-shadow: 0px 0px 50px 0px rgb(143, 10, 10);
+    }
+
+    .lightGlow {
+        -webkit-box-shadow:0px 0px 50px 0px var(--primary-light);
+        -moz-box-shadow: 0px 0px 50px 0px var(--primary-light);
+        box-shadow: 0px 0px 50px 0px var(--primary-light);
+    }
+    </style>
+</head>
+<body onload = "starter()" class="">
+    <div class="bar lightGlow" style="background-color: wheat; position:absolute; width:0%;" id="progBar"></div>
+    <div class="bar redGlow" style="background-color: rgb(143, 10, 10); bottom:0; position:absolute; " id="timerBar"></div>
+
+    <div class="rightSidebarContainer verticalFlex" style="z-index:1100;" id="shelf">
+            
+        <img src="../assets/logos/lang-wheat.png" style="height:10vh; position:fixed; top:3.5vh; cursor:pointer;" onclick="window.location.href='../homepage.html'">
+
+        <div class="whiteBackdrop">
+            <button class="lightGlow newbutton" onclick="window.location.href='../studysheetpage.html'" ><img src="../assets/icons/blackBackButton.png"></button>
+            <button class="lightGlow newbutton" onclick="showElement(document.getElementById('shuffling'))" ><img src="../assets/icons/shuffle.png"></button>
+            <button class="lightGlow newbutton" onclick="showElement(document.getElementById('timerPopup'))"><img src="../assets/icons/timer.png"></button>
+            <button class="lightGlow newbutton" style="cursor:pointer;" onclick="stats()" ><img src="../assets/icons/stats.png"></button>
+            <button class="lightGlow newbutton" onclick="showElement(document.getElementById('restarting'))"><img src="../assets/icons/reset.png"></button>
+
+        </div>
+    </div>
+    <div style="display:flex; flex-direction: column; justify-content: center; height:100vh;">
+        <div class="horizontalFlex centerFlex" style="flex-direction: column; ">
+            <div id="term_image" style="display:none;">
+                <img src="../output.png" alt="Image Preview" style="width: auto; height: 250px; border-radius: 25px;">
+            </div>
+    
+            <h1 id="multiheader" class="centerText" style="color: white;">Multiple Choice</h1>
+            <h1 id="singleheader" class="centerText" style="color: white;">Multiple Choice</h1>
+            <div class="multiplechoicefooter" style="background-color: #ffffff44; padding:15px; border-radius:20px;">
+                <div>
+                    <button id = "a" class="" onclick="checkMulti(this)">A</button>
+                    <button id = "b" class="" onclick="checkMulti(this)">B</button>
+                </div>
+                <div>
+                    <button id = "c" class="" onclick="checkMulti(this)">C</button>
+                    <button id = "d" class="" onclick="checkMulti(this)">D</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="timerCountdown" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; opacity: 0; pointer-events:none; z-index:1500; background-color: rgba(0, 0, 0, 0.5);">
+        <div id="timerCountdownText" style="font-size:70px; color:white;"><strong>Starting In: 3</strong></div>
+    </div>
+    <div id="completedMode" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat;">
+            <div style="margin-top: 10px; color:#001945; font-size:20px;"><strong>Congratulations! You have completed Multiple Choice for this Studysheet.</strong></div>
+            <div style="margin-top: 10px;">You can continue studying or you can go back to the Study options.</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0; " onclick="hideElement(document.getElementById('completedMode'))">Continue</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="window.location.href='studysheetpage.html'">Study Options</div>
+        </div>
+    </div>
+    <div id="timerPopup" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; opacity: 0; pointer-events:none; z-index:1500; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat; text-align: center;">
+            
+            <img src="../assets/icons/timer.png" style="height:40px;">           
+            <div style="margin-top: 10px; color:#001945; font-size:20px;"><strong>Timer Settings</strong></div>
+            
+            
+            <div style="margin-top: 10px;">Set a time limit for how long you have to answer a question.</div>
+
+            <div style="margin-top: 10px; color:red;"><em>Warning: Progress is reset when enabling timer in the middle of studying.</em></div>
+            <div style="margin-top: 10px;" id="instructions">Time Per Question (seconds):</div>
+            <input type="number" min="1" style="background-color: rgb(47, 61, 115); border-radius: 15px; border: 2px solid #001945; height:5vh; width: 35%;color:wheat; font-family: Poppins; font-size:20px;" placeholder="7" id = "timeAmt"></input>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0; " onclick="startTimer(document.getElementById('timeAmt').value)">Enable</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(this.parentNode.parentNode)">Cancel</div>
+        </div>
+    </div>
+
+    <div id="timerCountdown" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; opacity: 0; pointer-events:none; z-index:1500; background-color: rgba(0, 0, 0, 0.5);">
+        <div id="timerCountdownText" style="font-size:70px; color:white;"><strong>Starting In: 3</strong></div>
+    </div>
+    <div id="restarting" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; z-index:2001; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat;">
+            <div style="margin-top: 10px; color:#001945; font-size:20px; text-align:center;"><strong>Are you sure you want to reset your progress on this Studysheet?</strong></div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0;" onclick="window.location.reload()">Yes</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(document.getElementById('restarting'))"">Cancel</div>
+        </div>
+    </div>
+    <div id="shuffling" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; z-index:2001; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat;">
+            <div style="margin-top: 10px; color:#001945; font-size:20px; text-align:center;"><strong>Are you sure you want to shuffle the questions in this Studysheet?</strong></div>
+            <div style="margin-top: 10px; color: red;">This will reset any progress you currently have in Multiple Choice on this sheet.</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0;" onclick="shuffleSheet()">Yes</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(document.getElementById('shuffling'))"">Cancel</div>
+        </div>
+    </div>
+
+
+    <div id="stats" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; opacity: 0; pointer-events:none; z-index:1500; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat; text-align: center;">
+            
+            <img src="../assets/icons/stats.png" style="height:40px;">           
+            <div style="margin-top: 10px; color:#001945; font-size:20px;"><strong>Statistics</strong></div>
+            <div id="statsHolder">
+                
+            </div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(this.parentNode.parentNode)">Ok</div>
+        </div>
+    </div>
+    <div style="display:none; "id="timerelem"></div>
+</body>
+<script src="../javascript/sidebar.js"></script>
+
+</html>

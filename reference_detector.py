@@ -35,4 +35,9 @@ for f in files_and_contents:
 
 files_and_contents.sort(key=lambda x: len(x[2]), reverse=True)
 for f in files_and_contents:
-    print(f[0], f[2])
+    # dont delete snow.css, reference_detector.py, CNAME, 
+    if f[0] in ["snow.css", "reference_detector.py", "CNAME"]:
+        continue
+    if len(f[2]) == 0:
+        print(f[0])
+        os.remove(f[0])
