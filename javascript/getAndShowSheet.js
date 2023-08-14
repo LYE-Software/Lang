@@ -106,7 +106,8 @@ async function doPreviewAndLocal(){
         } else {
             document.getElementById("studysheetname").innerHTML = chosensheet
         }
-        sheet = await httpGet("https://backend.langstudy.tech/"+toek+"/Studysheets/"+chosensheet+"/RequestPreview")
+        sheet = await httpGet("https://backend.langstudy.tech/v2/studysheet/get?studysheet_id="+chosensheet, false, window.localStorage.getItem("usertoken"))
+
         // console.warn("inside the second go")
     }
 
