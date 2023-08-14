@@ -576,6 +576,7 @@ async function sendLucyMessage(){
                     var typingIndicators = document.getElementById("typingIndicators")
                     typingIndicators.classList.add("hiddenTypingIndicators")
                     showPopup("Lang Assistant encountered an error. You can try again, or edit your query.")
+                    hideElement(document.getElementById("assistantThinking"))
                 }
                 else if (xhr.status == 200){
                     addResponse(xhr.responseText);
@@ -585,6 +586,7 @@ async function sendLucyMessage(){
                     var typingIndicators = document.getElementById("typingIndicators")
                     typingIndicators.classList.add("hiddenTypingIndicators")
                     showPopup("Lang Assistant encountered an error. You can try again, or edit your query.")
+                    hideElement(document.getElementById("assistantThinking"))
                 }
                 console.log(xhr.responseText);
             }

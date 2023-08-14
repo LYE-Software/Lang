@@ -122,6 +122,10 @@ async function doPreviewAndLocal(){
     
     console.log("og sheet: "+sheet)
     var newSheet = parseFromJSON(sheet);
+    if (sheet.error == "studysheet_not_found"){
+        document.getElementById("unableToFind").style.opacity = "1";
+        document.getElementById("unableToFind").style.pointerEvents = "all"; 
+    }
     if (newSheet.type == "pointer"){
         console.log("redirecting pointers")
         sheet = await httpGet("https://backend.langstudy.tech/id/"+newSheet.user_id+"/Studysheets/"+chosensheet)
