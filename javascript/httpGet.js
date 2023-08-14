@@ -30,6 +30,7 @@ async function httpGet(theUrl, lye, sessionid){
     
         xmlHttp.onerror = (e) => {
             console.error(xmlHttp.statusText)
+            failedServerConnectionOnStart()
         }
     
         xmlHttp.send( null );
