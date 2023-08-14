@@ -192,21 +192,21 @@ async function getLibraryList(){
                     }
 
 
-                    div5 = document.createElement("div");
-                    div5.style.display = "flex";
-                    div5.style.alignItems = "center";
-                    div5.style.justifyContent = "center";
-                    // div5.style.backgroundColor = "var(--primary-dark)";
-                    div5.setAttribute("studysheet", library[i].name);
-                    div5.id = "studysheetDel"+i;
-                    div5.onclick = async function(){
+                    // div5 = document.createElement("div");
+                    // div5.style.display = "flex";
+                    // div5.style.alignItems = "center";
+                    // div5.style.justifyContent = "center";
+                    // // div5.style.backgroundColor = "var(--primary-dark)";
+                    // div5.setAttribute("studysheet", library[i].name);
+                    // div5.id = "studysheetDel"+i;
+                    // div5.onclick = async function(){
 
-                        //showElement(document.getElementById("deleteConfirmation"))
+                    //     //showElement(document.getElementById("deleteConfirmation"))
 
                         
-                    }
+                    // }
                     //div5.innerHTML=`<svg class="studysheetDelete" width="24px" height="24px" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg"><path d="M17 9L11 15M11.0002 9L17.0002 15M9 6H20C20.5523 6 21 6.44772 21 7V17C21 17.5523 20.5523 18 20 18H9L3 12L9 6Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
-                    document.getElementById("studysheetGridContainer").append(div5);
+                    //document.getElementById("studysheetGridContainer").append(div5);
 
                     document.getElementById("studysheetGridContainer").append(div3);
 
