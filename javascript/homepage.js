@@ -155,12 +155,12 @@ async function getLibraryList(){
                         for (i=0;i<library.length;i++){
                             document.getElementById(i).classList.remove("selected");
                             document.getElementById("studysheet"+i).classList.remove("selected");
-                            document.getElementById("studysheetDel"+i).classList.remove("selected");
+                            //document.getElementById("studysheetDel"+i).classList.remove("selected");
                         }
                         document.getElementById(this.id).classList.add("selected");
                         
                         document.getElementById("studysheet"+this.id).classList.add("selected");
-                        document.getElementById("studysheetDel"+this.id).classList.add("selected");
+                        //document.getElementById("studysheetDel"+this.id).classList.add("selected");
                         tmp = library[this.id]
                         document.getElementById("termCount").innerHTML = tmp.length;
                         document.getElementById("lastModified").innerHTML = tmp.date_modified;
@@ -219,7 +219,7 @@ async function getLibraryList(){
                 document.getElementById("createdBy").innerHTML = username;
                 document.getElementById("0").classList.add("selected");
                 document.getElementById("studysheet0").classList.add("selected");
-                document.getElementById("studysheetDel0").classList.add("selected");
+                //document.getElementById("studysheetDel0").classList.add("selected");
             }
         }
     }
