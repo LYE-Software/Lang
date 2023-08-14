@@ -210,7 +210,6 @@
             max-width: 500px;
             width: 90vw;
 
-            background-color: var(--primary-light);
         }
 
         /* Hide scrollbar for Chrome, Safari and Opera */
@@ -487,7 +486,7 @@
         </div>
     </div>
     <div id="sharinglink" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:1000; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
-        <div id="thething" class="linkContainer verticalFlex centerFlex lightGlow centerText" onclick=null style="z-index:500;">
+        <div id="thething" class="linkContainer verticalFlex centerFlex centerText whiteBackdrop onclick=null" style="z-index:500;">
             <div class="horizontalFlex" style="justify-content: space-between; max-width: 450px; width: 80vw; align-items: center; margin-top: 10px; ">
                 <div onclick="">Send this Lang Studysheet link to your friends!</div>
                 <img style="height: 30px; width: 30px;" src="assets/icons/closeCircle.svg" class="closeIcon" onclick="hideElement(document.getElementById('sharinglink'))">

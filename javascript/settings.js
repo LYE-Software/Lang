@@ -46,7 +46,7 @@ function switchAcc(elem){
     var data = `
     <p>Sign out of Lang Study here, or switch to a different user account.</p>
     <button class="button" onclick="signout()">Sign Out</button>
-    <button class="button" onclick="window.location.href='https://lye.software/signin?forward=langstudy.tech-homepage.html'">Switch Users</button>
+    <button class="button" onclick="swap()">Switch Users</button>
     `
     append(data)
 }
@@ -180,4 +180,10 @@ function doFireflies(){
         window.localStorage.setItem("doFireflies", "true");
         
     }
+}
+
+function swap(){
+    window.localStorage.setItem("usertoken", "signedout")
+    window.localStorage.removeItem("customusername")
+    window.location.href='https://lye.software/signin?forward=langstudy.tech-homepage.html'
 }
