@@ -102,7 +102,7 @@
             <div class="flexSpacer"></div>
         </div>
         <div class="fullHeight verticalFlex" style="align-items: center; justify-content: center; flex: 2; background-color:var(--primary-dark);">
-            <div style="color: var(--primary-light); font-family: 'Rubik Mono One'; font-size: 30px;">Our Team</div>
+            <div style="color: var(--primary-light); font-family: 'Rubik Mono One'; font-size: 30px;">Who makes Lang possible?</div>
             <div style="height: 400px"></div>
             <div id="tinderPanel" class="absolute">
 
@@ -128,13 +128,10 @@
     var userIndex = 0;
 
     panelImageUrl = [
-        "assets/cards/nate.png",
-        "assets/cards/tg_ryan.png",
-        "assets/cards/alex.png",
-        "assets/cards/jason.png",
-        "assets/cards/henri.png",
-        "assets/cards/justin.png"
-        
+        "assets/cards/Leads.png",
+        "assets/cards/Beta.png",
+        "assets/cards/Volunteer.png",
+        "assets/cards/you.png"
     ]
 
     tinderPanel.style.backgroundImage = "url(" + panelImageUrl[userIndex] + ")";
@@ -182,6 +179,7 @@
                 if (userIndex >= panelImageUrl.length) {
                     userIndex = 0;
                 }
+                console.log("current: "+panelImageUrl[userIndex])
                 tinderPanel.style.backgroundImage = "url(" + panelImageUrl[userIndex] + ")";
             }, 250);
         }
@@ -250,7 +248,3 @@
 
 </script>
 </html>
-
-<!-- Webpage designed and realized by ankleBowl -->
-<!-- Copyright NWVBUG Development, Lye Software. Lang is a product of Lye Software. -->
-<!-- If anyone else comes along and adds to the page, add your name here -->
