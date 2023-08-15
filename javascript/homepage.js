@@ -1,4 +1,8 @@
 var library = [];
+if (window.localStorage.getItem("serverStatus") == null){
+    console.log("first time server init")
+    window.localStorage.setItem("serverStatus", "no-issues")
+}
 async function getLibraryList(){
     
     // check for local studying
