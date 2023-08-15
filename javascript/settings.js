@@ -72,7 +72,7 @@ function display(elem){
     }
 }
 
-function connect(elem){
+function connectivity(elem){
     clearAll()
     elem.style.backgroundColor = "#f5deb3"
     svr = window.localStorage.getItem("currentServer")
