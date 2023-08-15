@@ -1,5 +1,5 @@
 const SERVER_LIST = [
-    "https://relay.langstudy.tech:855",
+    "https://relay.langstudy.tech:853",
     "https://backend.langstudy.tech"
 ]
 
