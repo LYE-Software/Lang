@@ -14,6 +14,7 @@
     <script src="javascript/Studysheet.js"></script>
     <script src="javascript/utils.js"></script>
     <script src="javascript/httpGet.js"></script>
+    <script src="javascript/loadBalancer.js"></script>
     <style>
 
         #studysheetGridContainer::-webkit-scrollbar {
@@ -418,7 +419,8 @@
     <div id="failedServerConnection" class="popupContainer" style="z-index:1000;">
         <div class="verticalFlex centerFlex lightGlow centerText popup">
             <img src="assets/logos/FullLangLogo.png" style="height:10vh; margin: 10px;" alt='Lang Logo'> 
-            <div style="margin-top: 40px;">Unfortunately, we were unable to establish a connection to the Lang servers. Please try again later.</div>
+            <div style="margin-top: 40px;">Unfortunately, we were unable to establish a connection to the Lang servers. <strong>This error has been logged and your Lang client will attempt to divert to a different server.</strong></div>
+            <div style="margin-top: 40px;">If you are seeing this message multiple times, it may be an issue with your network connection.</div>
             <div style="margin-top: 40px;">We apologize for any inconvience this may have caused.</div>
             <div style="margin-top: 40px;">Thank you for using Lang.</div>
             <div style="font-size: 10px; margin-top:40px;">Keep track of outages and learn more at <a href='https://github.com/LYE-software/lang' style="color: var(--primary-dark)">our GitHub.</a></div>

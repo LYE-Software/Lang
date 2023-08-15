@@ -129,7 +129,7 @@ function runSheet(){
         }
 
         if (term.hasImage){
-            let urlForImage = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/image/get/"+term.imageSrc;
+            let urlForImage = connect()+"/"+window.localStorage.getItem("usertoken")+"/image/get/"+term.imageSrc;
             document.getElementById("term_image").children[0].src = urlForImage;
             document.getElementById("term_image").style.display = "";
         }

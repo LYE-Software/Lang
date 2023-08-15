@@ -31,7 +31,7 @@ function makeCards(){
         if (newSheet.getNthTerm(i).hasImage){
             console.log("term: "+newSheet.getNthTerm(i)+" has an image")
             image = "flex";
-            imgsrc = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/image/get/"+newSheet.getNthTerm(i).imageSrc
+            imgsrc = connect()+"/"+window.localStorage.getItem("usertoken")+"/image/get/"+newSheet.getNthTerm(i).imageSrc
         }
         let basic = `
         <div class="flashcard">
@@ -71,7 +71,7 @@ function flipCard(card){
             if (newSheet.getNthTerm(card.getAttribute("data-term")).hasImage){
                 console.log("term: "+newSheet.getNthTerm(card.getAttribute("data-term"))+" has an image")
                 image = "flex";
-                imgsrc = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/image/get/"+newSheet.getNthTerm(card.getAttribute("data-term")).imageSrc
+                imgsrc = connect()+"/"+window.localStorage.getItem("usertoken")+"/image/get/"+newSheet.getNthTerm(card.getAttribute("data-term")).imageSrc
             }
             card.innerHTML = `
             <div style="width:100%; height:100px; display:${image}; justify-content:center; align-items:center;">
@@ -101,7 +101,7 @@ function nextCard(card){
         if (newSheet.getNthTerm(card.getAttribute("data-term")).hasImage){
             console.log("term: "+newSheet.getNthTerm(card.getAttribute("data-term"))+" has an image")
             image = "flex";
-            imgsrc = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/image/get/"+newSheet.getNthTerm(card.getAttribute("data-term")).imageSrc
+            imgsrc = connect()+"/"+window.localStorage.getItem("usertoken")+"/image/get/"+newSheet.getNthTerm(card.getAttribute("data-term")).imageSrc
         }
         card.innerHTML = `
         <div style="width:100%; height:100px; display:${image}; justify-content:center; align-items:center;">
@@ -131,7 +131,7 @@ function previousCard(card){
         if (newSheet.getNthTerm(card.getAttribute("data-term")).hasImage){
             console.log("term: "+newSheet.getNthTerm(card.getAttribute("data-term"))+" has an image")
             image = "flex";
-            imgsrc = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/image/get/"+newSheet.getNthTerm(card.getAttribute("data-term")).imageSrc
+            imgsrc = connect()+"/"+window.localStorage.getItem("usertoken")+"/image/get/"+newSheet.getNthTerm(card.getAttribute("data-term")).imageSrc
         }
         card.innerHTML = `
         <div style="width:100%; height:100px; display:${image}; justify-content:center; align-items:center;">

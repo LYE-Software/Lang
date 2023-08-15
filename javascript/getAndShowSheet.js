@@ -46,7 +46,7 @@ async function doPreviewAndLocal(){
         window.localStorage.setItem("ssID", chosensheet)
         window.localStorage.setItem("lastsheet", chosensheet)
         console.log(chosensheet)
-        sheet = await httpGet("https://backend.langstudy.tech/id/"+sessionid+"/Studysheets/"+chosensheet)
+        sheet = await httpGet(connect()+"/id/"+sessionid+"/Studysheets/"+chosensheet)
         document.getElementById("studysheetname").innerHTML = chosensheet.slice(0,15)+"..."
         document.getElementById("editbutton").style.borderColor = "#a0a0a0"
         document.getElementById("editbutton").style.backgroundColor = "#a0a0a0"
@@ -74,7 +74,7 @@ async function doPreviewAndLocal(){
         chosensheet = window.localStorage.getItem("sharedSheet").replaceAll(" ", "%20");
         chosensheet = chosensheet.replaceAll("&", "%26")
         window.localStorage.setItem("lastsheet", chosensheet)
-        sheet = await httpGet("https://backend.langstudy.tech/id/"+window.localStorage.getItem("sharedID")+"/Studysheets/"+chosensheet)
+        sheet = await httpGet(connect()+"/id/"+window.localStorage.getItem("sharedID")+"/Studysheets/"+chosensheet)
         chosensheet = chosensheet.replaceAll("%26", "&")
         chosensheet = chosensheet.replaceAll("%20", " ");
 
@@ -106,7 +106,7 @@ async function doPreviewAndLocal(){
         } else {
             document.getElementById("studysheetname").innerHTML = chosensheet
         }
-        sheet = await httpGet("https://backend.langstudy.tech/v2/studysheet/get?studysheet_id="+chosensheet, false, window.localStorage.getItem("usertoken"))
+        sheet = await httpGet(connect()+"/v2/studysheet/get?studysheet_id="+chosensheet, false, window.localStorage.getItem("usertoken"))
 
         // console.warn("inside the second go")
     }
@@ -128,7 +128,7 @@ async function doPreviewAndLocal(){
     }
     if (newSheet.type == "pointer"){
         console.log("redirecting pointers")
-        sheet = await httpGet("https://backend.langstudy.tech/id/"+newSheet.user_id+"/Studysheets/"+chosensheet)
+        sheet = await httpGet(connect()+"/id/"+newSheet.user_id+"/Studysheets/"+chosensheet)
         if (sheet == "" || sheet == null || sheet == "invalidsession"){
             console.log("could not find")
             document.getElementById("unableToFind").style.opacity = "1";
@@ -168,14 +168,14 @@ function displaySheet(newSheet){
     for (var i = 0; i<newSheet.length; i++){
         if (newSheet.getNthTerm(i).isMulti){
             if (newSheet.getNthTerm(i).hasImage){
-                src = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/image/get/"+newSheet.getNthTerm(i).imageSrc;
+                src = connect()+"/"+window.localStorage.getItem("usertoken")+"/image/get/"+newSheet.getNthTerm(i).imageSrc;
             } else {
                 src = null;
             }
             makeMulti(newSheet.getNthTerm(i), i, src);
         } else{
             if (newSheet.getNthTerm(i).hasImage){
-                src = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/image/get/"+newSheet.getNthTerm(i).imageSrc;
+                src = connect()+"/"+window.localStorage.getItem("usertoken")+"/image/get/"+newSheet.getNthTerm(i).imageSrc;
             } else {
                 src = null;
             }
@@ -281,7 +281,7 @@ function saveToLib(){
         };	
     
         filename = window.localStorage.getItem("sharedSheet");
-        var url = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/Studysheets/upload/"+filename;
+        var url = connect()+"/"+window.localStorage.getItem("usertoken")+"/Studysheets/upload/"+filename;
         var xhr = new XMLHttpRequest();
         xhr.open("POST", url);
     

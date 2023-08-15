@@ -8,6 +8,18 @@ async function getLibraryList(){
         console.log("Local Studying is disabled.")
     }
 
+    var serverStatusHandling = window.localStorage.getItem("serverStatus");
+    if (serverStatusHandling != "no-issues"){
+   
+        var json_svr = JSON.parse(serverStatusHandling);
+        if (Math.floor(((json_svr.date - Date.now()) / 1000)) > 86400){
+            console.log("Issue timed out, resetting")
+            window.localStorage.setItem("serverStatus", "no-issues")
+        }     
+    }
+    
+    
+
     // check for library list
 
     if (window.localStorage.getItem("doFireflies") != null){
@@ -51,8 +63,8 @@ async function getLibraryList(){
         console.log("inside the else")
         sessionid = window.localStorage.getItem("usertoken")
         console.log(sessionid);
-        serverData = await httpGet("https://backend.langstudy.tech/v2/home", false, sessionid)
-        // await fetch('https://backend.langstudy.tech/"+sessionid+"/returnNameAndList').then(function(response) {
+        serverData = await httpGet(connect()+"/v2/home", false, sessionid)
+        // await fetch('https://relay.langstudy.tech:853/"+sessionid+"/returnNameAndList').then(function(response) {
         //     return response.blob();
         // }).then(function(response) {
         //     serverData = response.text();
@@ -68,28 +80,7 @@ async function getLibraryList(){
         if (json.error == "session_invalid"){
             failedSignIn();
         }
-        else if (json == null || json == ""){
-            console.warn("Server Connection Failed! Trying Again...")
-            serverData = await httpGet("https://backend.langstudy.tech/"+sessionid+"/returnNameAndList", false)
-            json = JSON.parse(serverData)
-            // await fetch('https://backend.langstudy.tech/"+sessionid+"/returnNameAndList').then(function(response) {
-            //     return response.blob();
-            // }).then(function(response) {
-            //     serverData = response.text();
-            // });
-
-            console.log("[TOTAL SERVER DATA: SECOND TRY] "+serverData)
-            
-            if (json.error == "session_invalid"){
-                failedSignIn();
-            }
-            else if (json == null || json == ""){
-                console.error("Server Connection Failed upon second try. Aborting.")
-                failedServerConnectionOnStart();
-            }
-            
-
-        }
+        
         
         // else if (serverData.contains("<!doctype html>")){
         //     failedServerConnectionOnStart();
@@ -246,7 +237,7 @@ async function deleteSS(){
     document.getElementById("loadingscreen").classList = "verticalFlex";
     document.getElementById("loadingscreen").style.display = "flex"
     hideElement(document.getElementById("deleteConfirmation"))
-    link = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/"+ library[index].name+"/delete"
+    link = connect()+"/"+sessionid+"/Studysheets/"+ library[index].name+"/delete"
     console.log("link is: "+link)
     await httpGet(link)
     window.location.reload()
@@ -254,9 +245,16 @@ async function deleteSS(){
 
 }
 
-
+var reloads = 0;
 function failedServerConnectionOnStart(){
-    showElement(document.getElementById("failedServerConnection"))
+    
+    if (reloads < 2){
+        getLibraryList()
+        reloads++;
+    } else {
+        showElement(document.getElementById("failedServerConnection"))
+    }
+
     console.log("failed server connection")
 }
 
@@ -276,7 +274,7 @@ function sendFeedback(){
         alert("The feedback message cannot be nothing.")
     } else {
         document.getElementById("feedbackUIInputContainer").innerHTML = "Thank you for your feedback!"
-        url = "https://backend.langstudy.tech/feedback/"+sessionid;
+        url = connect()+"/feedback/"+sessionid;
         var xhr = new XMLHttpRequest();
         xhr.open("POST", url);
     

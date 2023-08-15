@@ -133,9 +133,9 @@ function saveToCloud(lucy, dl){
             // console.log("ABOVE")
 
             if(window.localStorage.getItem('editSheet')=="true") {
-                var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/edit/"+filename;
+                var url = connect()+"/"+sessionid+"/Studysheets/edit/"+filename;
             } else {
-                var url = "https://backend.langstudy.tech/"+sessionid+"/Studysheets/upload/"+filename;
+                var url = connect()+"/"+sessionid+"/Studysheets/upload/"+filename;
             }
             if(okToUpload == true && !lucy){
                 var xhr = new XMLHttpRequest();
@@ -339,7 +339,7 @@ function createCreatorInput(term, definition, imageSrc) {
 
         var blankImage = document.createElement("img");
         if (imageSrc!= null){
-            blankImage.src = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/image/get/"+imageSrc;
+            blankImage.src = connect()+"/"+window.localStorage.getItem("usertoken")+"/image/get/"+imageSrc;
             blankImage.className = "showImageHolder";
         } else {
             blankImage.className = "defaultImageHolder";
@@ -529,7 +529,7 @@ function getRandomQuestion(textBlock) {
         let splitter = questionArray[0].split("--image(")
         let image = splitter[1]
         image = image.substring(0, 64);
-        let urlForImage = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/image/get/"+image;
+        let urlForImage = connect()+"/"+window.localStorage.getItem("usertoken")+"/image/get/"+image;
         questionArray.push(urlForImage);
         questionArray[0] = splitter[0] + image.substring(64, image.length);
         
@@ -545,7 +545,7 @@ function getRandomQuestion(textBlock) {
 
 
 async function sendLucyMessage(){
-    var url = "https://backend.langstudy.tech/v2/langbot/chat";
+    var url = connect()+"/v2/langbot/chat";
     var message = document.getElementById("LAquery").value;
     var typingIndicators = document.getElementById("typingIndicators")
     typingIndicators.classList.remove("hiddenTypingIndicators")

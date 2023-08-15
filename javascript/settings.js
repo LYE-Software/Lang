@@ -75,8 +75,9 @@ function display(elem){
 function connect(elem){
     clearAll()
     elem.style.backgroundColor = "#f5deb3"
+    svr = window.localStorage.getItem("currentServer")
     data = `
-    <p>You are connected to <strong>LS-1-APPL</strong>.</p>
+    <p>You are connected to <strong>${svr}</strong>.</p>
     <p>To report a connection issue with this server, please use the feedback option on the homepage.</p>
     <p>Server connections are made automatically, and you may be connected to multiple different Lang Servers during use. If you experience a connection issue, please report the <strong>server name</strong> and the <strong>issue you encountered.</strong></p>
     `

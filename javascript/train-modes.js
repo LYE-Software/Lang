@@ -16,7 +16,7 @@ function write(term_, reviewing){
     term = term_;
     
     if (term.hasImage){
-        let urlForImage = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/image/get/"+term.imageSrc;
+        let urlForImage = connect()+"/"+window.localStorage.getItem("usertoken")+"/image/get/"+term.imageSrc;
         document.getElementById("term_image").children[0].src = urlForImage;
         document.getElementById("term_image").style.display = "";
     }
@@ -71,7 +71,7 @@ function multipleChoice(term_, arr){
     console.log("[MULT] arr: "+arr)
     var fakes = getMultiFakes(term_, arr)
     if (term.hasImage){
-        let urlForImage = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/image/get/"+term.imageSrc;
+        let urlForImage = connect()+"/"+window.localStorage.getItem("usertoken")+"/image/get/"+term.imageSrc;
         document.getElementById("term_image_mcq").children[0].src = urlForImage;
         document.getElementById("term_image_mcq").style.display = "";
     }
@@ -139,7 +139,7 @@ function learn(term_){
     document.getElementById("term_image_learn").style.display = "none";
     term = term_;
     if (term.hasImage){
-        let urlForImage = "https://backend.langstudy.tech/"+window.localStorage.getItem("usertoken")+"/image/get/"+term.imageSrc;
+        let urlForImage = connect()+"/"+window.localStorage.getItem("usertoken")+"/image/get/"+term.imageSrc;
         document.getElementById("term_image_learn").children[0].src = urlForImage;
         document.getElementById("term_image_learn").style.display = "";
     }

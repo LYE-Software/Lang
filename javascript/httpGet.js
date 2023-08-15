@@ -29,7 +29,8 @@ async function httpGet(theUrl, lye, sessionid){
         }
     
         xmlHttp.onerror = (e) => {
-            console.error(xmlHttp.statusText)
+            window.localStorage.setItem("serverStatus", `{"error": "Server Not Working", "server":"${window.localStorage.getItem("currentServer")}", "date":"${Date.now()}"}`)
+            console.log("Logged server outage")
             failedServerConnectionOnStart()
         }
     
