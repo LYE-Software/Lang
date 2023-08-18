@@ -464,7 +464,24 @@ input {
     z-index:500;
 }
 
+.functionRowItemContents a:hover {
+    background-color: var(--primary-dark);
+    color: var(--primary-light);
+    z-index:500;
+}
 
+.functionRowItemContents a {
+    transition: all 0.25s ease-in-out;
+
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+    height: 6vh;
+    padding: 0 10px 0 10px;
+    z-index:500;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
 
 
 
