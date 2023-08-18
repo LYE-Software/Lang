@@ -46,7 +46,7 @@ async function doPreviewAndLocal(){
         window.localStorage.setItem("ssID", chosensheet)
         window.localStorage.setItem("lastsheet", chosensheet)
         console.log(chosensheet)
-        sheet = await httpGet(connect()+"/id/"+sessionid+"/Studysheets/"+chosensheet)
+        sheet = await httpGet(connect()+"/v2/studysheet/get?user_id="+sessionid+"&studysheet_id="+chosensheet, false, window.localStorage.getItem("usertoken"))
         document.getElementById("studysheetname").innerHTML = chosensheet.slice(0,15)+"..."
         document.getElementById("editbutton").style.borderColor = "#a0a0a0"
         document.getElementById("editbutton").style.backgroundColor = "#a0a0a0"
@@ -69,12 +69,12 @@ async function doPreviewAndLocal(){
         };	
         }
         console.log("Shared back")
-        document.getElementById("saveBtnHolder").style.display = "";
+        document.getElementById("saveBtn").style.display = "";
         console.log("inside localstorage")
         chosensheet = window.localStorage.getItem("sharedSheet").replaceAll(" ", "%20");
         chosensheet = chosensheet.replaceAll("&", "%26")
         window.localStorage.setItem("lastsheet", chosensheet)
-        sheet = await httpGet(connect()+"/id/"+window.localStorage.getItem("sharedID")+"/Studysheets/"+chosensheet)
+        sheet = await httpGet(connect()+"/v2/studysheet/get?user_id="+window.localStorage.getItem('sharedID')+"&studysheet_id="+chosensheet, false, window.localStorage.getItem("usertoken"))
         chosensheet = chosensheet.replaceAll("%26", "&")
         chosensheet = chosensheet.replaceAll("%20", " ");
 
@@ -87,7 +87,6 @@ async function doPreviewAndLocal(){
             document.getElementById('notOwned').style.opacity = 1;
         }
         document.getElementById("shareDisclaimer").style.display = "flex"
-        document.getElementById("shareBtn").style.display = ""
     }
     //NORMAL
     else{
@@ -128,7 +127,7 @@ async function doPreviewAndLocal(){
     }
     if (newSheet.type == "pointer"){
         console.log("redirecting pointers")
-        sheet = await httpGet(connect()+"/id/"+newSheet.user_id+"/Studysheets/"+chosensheet)
+        sheet = await httpGet(connect()+"/v2/studysheets/get?user_id"+newSheet.user_id+"&studysheet_id="+chosensheet)
         if (sheet == "" || sheet == null || sheet == "invalidsession"){
             console.log("could not find")
             document.getElementById("unableToFind").style.opacity = "1";

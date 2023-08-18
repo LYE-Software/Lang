@@ -3,6 +3,11 @@ if (window.localStorage.getItem("serverStatus") == null){
     console.log("first time server init")
     window.localStorage.setItem("serverStatus", "no-issues")
 }
+
+var switchServerTimeout = setTimeout(function(){
+    console.warn("its been 10 seconds, asking switch")
+}, 10000)
+
 async function getLibraryList(){
     
     // check for local studying
@@ -76,9 +81,12 @@ async function getLibraryList(){
         console.log("[TOTAL SERVER DATA] "+serverData)
         try {
              json = JSON.parse(serverData)
+             clearTimeout(switchServerTimeout)
+            console.log("cleared switch timeout")
         } catch(error){
             console.error("IMPROPER JSON")
             json = null;
+            failedServerConnectionOnStart()
         }
 
         if (json.error == "session_invalid"){
@@ -92,6 +100,7 @@ async function getLibraryList(){
         // console.log("bruh "+broken);
         
         library = json.studysheets
+        
         if (window.localStorage.getItem("customusername")!= "" && window.localStorage.getItem("customusername")!= null && window.localStorage.getItem("customusername")!= "undefined" && window.localStorage.getItem("customusername")!= "signedout"){
             username=window.localStorage.getItem("customusername");
         } else {

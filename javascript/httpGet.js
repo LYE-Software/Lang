@@ -1,8 +1,8 @@
-
+var xmlHttp;
 async function httpGet(theUrl, lye, sessionid){
  
     return new Promise((resolve, reject) => {
-        var xmlHttp = new XMLHttpRequest();
+        xmlHttp = new XMLHttpRequest();
         console.log("Opening Connection to "+theUrl)
         
         xmlHttp.onload = () => {
@@ -24,6 +24,7 @@ async function httpGet(theUrl, lye, sessionid){
             console.log("sessionidHeader")
             xmlHttp.setRequestHeader("lye-session", sessionid)
         }
+
         if (lye == true){
             console.log("setting headers")
             xmlHttp.setRequestHeader("lye-origin", "langstudy.tech/homepage.html");
@@ -40,4 +41,9 @@ async function httpGet(theUrl, lye, sessionid){
 
     })
 
+}
+
+
+function cancel(){
+    xmlHttp.abort();
 }
