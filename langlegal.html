@@ -323,5 +323,13 @@
     if (window.innerHeight > window.innerWidth){
         document.getElementById("contents").style.display = "none"
     }
+
+    onresize = (event) => {
+        if (window.innerHeight > window.innerWidth){
+            document.getElementById("contents").style.display = "none"
+        } else if (window.innerHeight < window.innerWidth){
+            document.getElementById("contents").style.display = ""
+        }
+    };
 </script>
 </html>
