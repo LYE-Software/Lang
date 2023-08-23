@@ -12,7 +12,7 @@
 
 </head>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
     .boxshadow{
         -webkit-box-shadow:0px 0px 50px 0px var(--primary-dark);
         -moz-box-shadow: 0px 0px 50px 0px var(--primary-dark);
@@ -21,18 +21,24 @@
     .tac{
         font-family: Poppins;
     }
+    .toScroll{
+        font-family:Poppins;
+        color:white;
+        font-weight:bold;
+        cursor:pointer;
+    }
 </style>
 <body class="homepage" style="background-image:linear-gradient(to bottom right, wheat, #001945); display:flex; flex-direction: row; align-items: center; justify-content: center; text-align: center;">
     <a href="index.html">
         <svg style="height: 5vw; width: 5vw; position: absolute; top: 20px; left: 20px; display:inline-block; fill: #001945; " enable-background="new 0 0 26.676 26.676" version="1.1" viewBox="0 0 26.676 26.676" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"><path d="m26.105 21.891c-0.229 0-0.439-0.131-0.529-0.346-0.066-0.156-1.716-3.857-7.885-4.59-1.285-0.156-2.824-0.236-4.693-0.25v4.613c0 0.213-0.115 0.406-0.304 0.508-0.188 0.098-0.413 0.084-0.588-0.033l-11.852-7.978c-0.16-0.107-0.254-0.287-0.254-0.476 0-0.191 0.094-0.365 0.254-0.477l11.857-7.979c0.175-0.121 0.398-0.129 0.588-0.029 0.19 0.102 0.303 0.295 0.303 0.502v4.293c2.578 0.336 13.674 2.33 13.674 11.674 0 0.271-0.191 0.508-0.459 0.562-0.037 6e-3 -0.076 6e-3 -0.112 6e-3z"/></svg>
     </a>
-    <div style="display:flex; justify-content: center; border-radius:15px; padding:10px; background-color: wheat; margin-top: 0vh;">
-        <div class="boxshadow" style="display:flex; flex-direction:column; background-color: wheat; padding:20px; max-width: calc(25vw + 300px); width:90vw; height:80vh; align-items: center; text-align: center; overflow-y:scroll;">
+    <div style="display:flex; justify-content: space-evenly; border-radius:15px; padding:10px; margin-top: 0vh; width:100%; flex-wrap:wrap;">
+        <div class="boxshadow" style="display:flex; flex-direction:column; background-color: wheat; padding:20px; max-width: calc(25vw + 300px); width:90vw; height:80vh; align-items: center; text-align: center; overflow-y:scroll; border-radius:20px; min-width:400;">
             <img src="assets/logos/redesLangTr.png" style="height:40vh; width:40vh;" >
             <div class="tac">
                 <h3 class="tac">This page contains the Lang Study Terms of Service and Privacy Policy, as well as information about Lang's Copyright status and Ownership, as well as Image Credits.</h3>
-
-                <h1>Service Provider</h1>
+                <h4 class="tac">Scroll to read the Lang Terms of Service and Privacy Policy, or use the section headers (desktop users only)</h4>
+                <h1 id="1">Service Provider</h1>
                 <p>
                     Lye Software services, such as Lang Study, are provided by: <br><br>
                     
@@ -44,7 +50,7 @@
                     USA</p>
             </div>
             <div class="tac">
-                <h1 class="tac">Lang Study Copyright & Ownership</h1>
+                <h1 class="tac" id="2">Lang Study Copyright & Ownership</h1>
                 <p>Copyright © 2023 Lye Software, Inc. All rights reserved. Lang Study is intellectual property of Lye Software LLC.</p>
                 <p>The Lang and Lang Study names are copyrights and unregistered trademarks of Lye Software LLC. Lye Software LLC has a royalty-free license to the Lang book logo.</p>
                 <p>Lye, Lye Software, and all Lye Software, Inc. iconography are copyrights of Lye Software LLC.</p>               
@@ -54,9 +60,9 @@
             
             <div class="tac">
                 <h1>Terms and Conditions</h1>
-                <p>Last updated: March 2nd, 2023</p>
+                <p>Last updated: August 22nd, 2023</p>
                 <p>Please read these terms and conditions carefully before using Our Service.</p>
-                <h1>Interpretation and Definitions</h1>
+                <h1 id="3">Interpretation and Definitions</h1>
                 <h2>Interpretation</h2>
                 <p>The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
                 <h2>Definitions</h2>
@@ -90,28 +96,28 @@
                 <p><strong>You</strong> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</p>
                 </li>
                 </ul>
-                <h1>Acknowledgment</h1>
+                <h1 id="4">Acknowledgment</h1>
                 <p>These are the Terms and Conditions governing the use of this Service and the agreement that operates between You and the Company. These Terms and Conditions set out the rights and obligations of all users regarding the use of the Service.</p>
                 <p>Your access to and use of the Service is conditioned on Your acceptance of and compliance with these Terms and Conditions. These Terms and Conditions apply to all visitors, users and others who access or use the Service.</p>
                 <p>By accessing or using the Service You agree to be bound by these Terms and Conditions. If You disagree with any part of these Terms and Conditions then You may not access the Service.</p>
                 <p>You represent that you are over the age of 13. The Company does not permit those under 13 to use the Service.</p>
                 <p>Your access to and use of the Service is also conditioned on Your acceptance of and compliance with the Privacy Policy of the Company. Our Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your personal information when You use the Application or the Website and tells You about Your privacy rights and how the law protects You. Please read Our Privacy Policy carefully before using Our Service.</p>
-                <h1>Links to Other Websites</h1>
+                <h1 id="5">Links to Other Websites</h1>
                 <p>Our Service may contain links to third-party web sites or services that are not owned or controlled by the Company.</p>
                 <p>The Company has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that the Company shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any such content, goods or services available on or through any such web sites or services.</p>
                 <p>We strongly advise You to read the terms and conditions and privacy policies of any third-party web sites or services that You visit.</p>
-                <h1>Termination</h1>
+                <h1 id="6">Termination</h1>
                 <p>We may terminate or suspend Your access immediately, without prior notice or liability, for any reason whatsoever, including without limitation if You breach these Terms and Conditions.</p>
                 <p>Upon termination, Your right to use the Service will cease immediately.</p>
-                <h1>No Liability For Damages</h1>
+                <h1 id="7">No Liability For Damages</h1>
                 <p>In no event shall the Company nor the creators(s) of this Service be liable for any special, consequential, incidental, or indirect damages whatsoever (including, without limitation, damages for loss of business profits, business interruption, loss of business information, or any other pecuniary loss) arising out of the use of or inability to use the Service, even if the Company of creator(s) of the Service are aware of the possibility of such damages and known defects.</p>
                 <p>To the maximum extent permitted by applicable law, in no event shall the Company or its suppliers be liable for any special, incidental, indirect, or consequential damages whatsoever (including, but not limited to, damages for loss of profits, loss of data or other information, for business interruption, for personal injury, loss of privacy arising out of or in any way related to the use of or inability to use the Service, third-party software and/or third-party hardware used with the Service, or otherwise in connection with any provision of this Terms), even if the Company or any supplier has been advised of the possibility of such damages and even if the remedy fails of its essential purpose.</p>
                 <p>Some states do not allow the exclusion of implied warranties or limitation of liability for incidental or consequential damages, which means that some of the above limitations may not apply. In these states, each party's liability will be limited to the greatest extent permitted by law.</p>
-                <h1>&quot;AS IS&quot; and &quot;AS AVAILABLE&quot; Disclaimer</h1>
+                <h1 id="8">&quot;AS IS&quot; and &quot;AS AVAILABLE&quot; Disclaimer</h1>
                 <p>The Service is provided to You &quot;AS IS&quot; and &quot;AS AVAILABLE&quot; and with all faults and defects without warranty of any kind. To the maximum extent permitted under applicable law, the Company, on its own behalf and on behalf of its Affiliates and its and their respective licensors and service providers, expressly disclaims all warranties, whether express, implied, statutory or otherwise, with respect to the Service, including all implied warranties of merchantability, fitness for a particular purpose, title and non-infringement, and warranties that may arise out of course of dealing, course of performance, usage or trade practice. Without limitation to the foregoing, the Company provides no warranty or undertaking, and makes no representation of any kind that the Service will meet Your requirements, achieve any intended results, be compatible or work with any other software, applications, systems or services, operate without interruption, meet any performance or reliability standards or be error free or that any errors or defects can or will be corrected.</p>
                 <p>Without limiting the foregoing, neither the Company nor any of the company's provider makes any representation or warranty of any kind, express or implied: (i) as to the operation or availability of the Service, or the information, content, and materials or products included thereon; (ii) that the Service will be uninterrupted or error-free; (iii) as to the accuracy, reliability, or currency of any information or content provided through the Service; or (iv) that the Service, its servers, the content, or e-mails sent from or on behalf of the Company are free of viruses, scripts, trojan horses, worms, malware, timebombs or other harmful components.</p>
                 <p>Some jurisdictions do not allow the exclusion of certain types of warranties or limitations on applicable statutory rights of a consumer, so some or all of the above exclusions and limitations may not apply to You. But in such a case the exclusions and limitations set forth in this section shall be applied to the greatest extent enforceable under applicable law.</p>
-                <h1>Terms and Conditions Related to Lang Assistant</h1>
+                <h1 id="9">Terms and Conditions Related to Lang Assistant</h1>
                 
                 <p>Lye Software LLC does not assert ownership of the ChatGPT model that is used in Lang Assistant. OpenAI is the owner of the ChatGPT model. The Lye Software LLC technology used in Lang Assistant are the prompt and the parsing methods used to read the Studysheet.</p>
                 <h2>Can I trust Lang Assistant to tell me the truth?</h2>
@@ -120,31 +126,48 @@
                 <p> Due to the nature of machine learning, Output may not be unique across users and the Services may generate the same or similar output for Lye Software, OpenAI or a third party. For example, you may provide input to a model such as “What color is the sky?” and receive output such as “The sky is blue.” Other users may also ask similar questions and receive the same response. Responses that are requested by and generated for other users are not considered your Content.</p>
                 <h2>Lang Assistant Data Collection</h2>
                 <p>Lye Software collects any data sent to Lang Assistant. This data is used to improve Lang Assistant's responses and is never used for advertising.</p>
-                <h1>Governing Law</h1>
+                <h1 id="10">Governing Law</h1>
                 <p>The laws of the Country, excluding its conflicts of law rules, shall govern this Terms and Your use of the Service. Your use of the Application may also be subject to other local, state, national, or international laws.</p>
-                <h1>Disputes Resolution</h1>
+                <h1 id="11">DMCA & Copyright</h1>
+                <p>Lang is owned and operated by Lye Software LLC. Lang Study iconography and names are copyrights of Lye Software LLC. All Rights Reserved.</p>
+                <p>If you believe that any work or property on our Website is the copyright of You or an entity that You represent, please send an email to <strong>legal@lye.software</strong>.</p>
+                <p>This email should include the following:</p>
+                <ul style="text-align:left;">
+                    <li><p>Identification of the copyrighted work or other intellectual property that You claim has been infringed upon</p></li>
+                    <li><p>An identifier of the location at which the material can be found upon the Website <br> Notice: If this material is within a Lang Studysheet, the username and email address of the Studysheet owner as well as the name of the Studysheet must be provided. If this information is not provided, Lye Software LLC may not be able to remove the infringing material.</p></li>
+                    <li><p>A statement by You that You have a good-faith belief that the disputed use is not authorized by the copyright owner, its agent, or the law.</p></li>
+                    <li><p>A statement by You declaring under penalty of perjury that both: the above information in Your notice is accurate, and that You are the owner, or are authorized to represent the owner, of the copyrighted material.</p></li>
+                    <li><p>Your contact information, including address, telephone number, and email address</p></li>
+                    <li><p>Your physical or electronic signature.</p></li>
+                </ul>
+                
+
+
+                <h1 id="12">Disputes Resolution</h1>
                 <p>If You have any concern or dispute about the Service, You agree to first try to resolve the dispute informally by contacting the Company.</p>
-                <h1>For European Union (EU) Users</h1>
+                <p>To contact specifically Lang Study, email <strong>customersupport@langstudy.tech</strong></p>
+                <p>To contact Lye Software LLC about a legal dispute, email <strong>legal@lye.software</strong></p>
+                <h1 id="13">For European Union (EU) Users</h1>
                 <p>If You are a European Union consumer, you will benefit from any mandatory provisions of the law of the country in which you are resident in.</p>
-                <h1>United States Legal Compliance</h1>
+                <h1 id="14">United States Legal Compliance</h1>
                 <p>You represent and warrant that (i) You are not located in a country that is subject to the United States government embargo, or that has been designated by the United States government as a &quot;terrorist supporting&quot; country, and (ii) You are not listed on any United States government list of prohibited or restricted parties.</p>
-                <h1>Severability and Waiver</h1>
+                <h1 id="15">Severability and Waiver</h1>
                 <h2>Severability</h2>
                 <p>If any provision of these Terms is held to be unenforceable or invalid, such provision will be changed and interpreted to accomplish the objectives of such provision to the greatest extent possible under applicable law and the remaining provisions will continue in full force and effect.</p>
                 <h2>Waiver</h2>
                 <p>Except as provided herein, the failure to exercise a right or to require performance of an obligation under these Terms shall not effect a party's ability to exercise such right or require such performance at any time thereafter nor shall the waiver of a breach constitute a waiver of any subsequent breach.</p>
-                <h1>Translation Interpretation</h1>
+                <h1 id="16">Translation Interpretation</h1>
                 <p>These Terms and Conditions may have been translated if We have made them available to You on our Service.
                 You agree that the original English text shall prevail in the case of a dispute.</p>
-                <h1>Changes to These Terms and Conditions</h1>
+                <h1 id="17">Changes to These Terms and Conditions</h1>
                 <p>We reserve the right, at Our sole discretion, to modify or replace these Terms at any time. If a revision is material We will make reasonable efforts to provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at Our sole discretion.</p>
                 <p>By continuing to access or use Our Service after those revisions become effective, You agree to be bound by the revised terms. If You do not agree to the new terms, in whole or in part, please stop using the website and the Service.</p>
-                <h1>Contact Us</h1>
+                <h1 id="18">Contact Us</h1>
                 <p>If you have any questions about these Terms and Conditions, You can contact us:</p>
                 <ul style="text-align:left;">
                 <li>By email: customersupport@langstudy.tech</li>
                 </ul>
-                <h1>Privacy Policy for Lang Study</h1>
+                <h1 id="19">Privacy Policy for Lang Study</h1>
 
                 <p>At Lang Study, accessible from https://langstudy.tech and https://beta.langstudy.tech one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Lang and how we use it.</p>
 
@@ -152,11 +175,11 @@
 
                 <p>This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in Lang. This policy is not applicable to any information collected offline or via channels other than this website. Our Privacy Policy was created with the help of the <a href="https://www.privacypolicygenerator.info/">Free Privacy Policy Generator</a>.</p>
 
-                <h2>Consent</h2>
+                <h2 id="20">Consent</h2>
 
                 <p>By using our website, you hereby consent to our Privacy Policy and agree to its terms.</p>
 
-                <h2>Information we collect</h2>
+                <h2 id="21">Information we collect</h2>
                 <ul style="text-align:left;">
                     <li>Email & Username, if you so choose to specify</li>
                     <li>Date certain pages are viewed</li>
@@ -168,7 +191,7 @@
                 <p>If you contact us directly, we may receive additional information about you such as your name, email address, phone number, the contents of the message and/or attachments you may send us, and any other information you may choose to provide.</p>
                 <p>When you register for an Account, we may ask for your contact information, specifically your email address.</p>
 
-                <h2>How we use your information</h2>
+                <h2 id="22">How we use your information</h2>
 
                 <p>We use the information we collect in various ways, including to:</p>
 
@@ -182,24 +205,24 @@
                 <li>Find and prevent fraud</li>
                 </ul>
 
-                <h2>Log Files</h2>
+                <h2 id="23">Log Files</h2>
 
                 <p>Lang follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this and a part of hosting services' analytics. The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the site, tracking users' movement on the website, and gathering demographic information.</p>
 
 
 
-                <h2>Advertising Partners Privacy Policies</h2>
+                <h2 id="24">Advertising Partners Privacy Policies</h2>
 
                 <P>Lang has no advertising partners as we value your privacy.</p>
 
 
-                <h2>Third Party Privacy Policies</h2>
+                <h2 id="25">Third Party Privacy Policies</h2>
 
                 <p>Lang's Privacy Policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information. It may include their practices and instructions about how to opt-out of certain options. </p>
 
                 <p>You can choose to disable cookies through your individual browser options. To know more detailed information about cookie management with specific web browsers, it can be found at the browsers' respective websites.</p>
 
-                <h2>CCPA Privacy Rights (Do Not Sell My Personal Information)</h2>
+                <h2 id="26">CCPA Privacy Rights (Do Not Sell My Personal Information)</h2>
 
                 <p>Under the CCPA, among other rights, California consumers have the right to:</p>
                 <p>Request that a business that collects a consumer's personal data disclose the categories and specific pieces of personal data that a business has collected about consumers.</p>
@@ -207,7 +230,7 @@
                 <p>Request that a business that sells a consumer's personal data, not sell the consumer's personal data.</p>
                 <p>If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.</p>
 
-                <h2>GDPR Data Protection Rights</h2>
+                <h2 id="27">GDPR Data Protection Rights</h2>
 
                 <p>We would like to make sure you are fully aware of all of your data protection rights. Every user is entitled to the following:</p>
                 <p>The right to access – You have the right to request copies of your personal data. We may charge you a small fee for this service.</p>
@@ -218,14 +241,14 @@
                 <p>The right to data portability – You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.</p>
                 <p>If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.</p>
 
-                <h2>Children's Information</h2>
+                <h2 id="28">Children's Information</h2>
 
                 <p>Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity.</p>
 
                 <p>Lang does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.</p>
             </div>
             <div class="tac">
-                <h1>Icon / Image Credits</h1>
+                <h1 id="29">Icon / Image Credits</h1>
             
                 <p>floppy disc by Studio Paw from <a href="https://thenounproject.com/browse/icons/term/floppy-disc/" target="_blank" title="floppy disc Icons">Noun Project</a></p>
                 <p>Pencil Edit Button SVG Vector from <a href="https://www.svgrepo.com/svg/42233/pencil-edit-button">SVG Repo</a></p>
@@ -251,6 +274,41 @@
             
             
         </div>
+        <div style="background-color: #001945; width:30vw; border-radius:20px; min-width:200px; height: 80vh; overflow: scroll; padding:20px;" id="contents">
+            <h1 class="toScroll" style="cursor:auto;">Contents</h1>
+            <p class="toScroll" style="cursor:auto;">Notice: You can click on a section header to read it, but Lang Study requires you to agree to the entirety of the Terms & Conditions as well as the Privacy Policy before use.</p>
+            <br>
+            <p class="toScroll" onclick="document.getElementById('1').scrollIntoView()">[INFO] Service Provider [1/29]</p>
+            <p class="toScroll" onclick="document.getElementById('2').scrollIntoView()">[INFO] Copyright & Ownership [2/29]</p>
+            <p class="toScroll" onclick="document.getElementById('3').scrollIntoView()">[T&C] Interpretation & Definitions [3/29]</p>
+            <p class="toScroll" onclick="document.getElementById('4').scrollIntoView()">[T&C] Acknowledgment [4/29]</p>
+            <p class="toScroll" onclick="document.getElementById('5').scrollIntoView()">[T&C] Links to other Websites [5/29]</p>
+            <p class="toScroll" onclick="document.getElementById('6').scrollIntoView()">[T&C] Termination [6/29]</p>
+            <p class="toScroll" onclick="document.getElementById('7').scrollIntoView()">[T&C] No Liability For Damages [7/29]</p>
+            <p class="toScroll" onclick="document.getElementById('8').scrollIntoView()">[T&C] AS IS / AS AVAILABLE Disclaimer [8/29]</p>
+            <p class="toScroll" onclick="document.getElementById('9').scrollIntoView()">[T&C] Lang Assistant Info [9/29]</p>
+            <p class="toScroll" onclick="document.getElementById('10').scrollIntoView()">[T&C] Governing Law [10/29]</p>
+            <p class="toScroll" onclick="document.getElementById('11').scrollIntoView()">[T&C] DMCA & Copyright [11/29]</p>
+            <p class="toScroll" onclick="document.getElementById('12').scrollIntoView()">[T&C] Disputes Resolution [12/29]</p>
+            <p class="toScroll" onclick="document.getElementById('13').scrollIntoView()">[T&C] For EU Users [13/29]</p>
+            <p class="toScroll" onclick="document.getElementById('14').scrollIntoView()">[T&C] US Legal Compliance [14/29]</p>
+            <p class="toScroll" onclick="document.getElementById('15').scrollIntoView()">[T&C] Severability and Waiver [15/29]</p>
+            <p class="toScroll" onclick="document.getElementById('16').scrollIntoView()">[T&C] Translation Interpretation [16/29]</p>
+            <p class="toScroll" onclick="document.getElementById('17').scrollIntoView()">[T&C] Changes to the T&C [17/29]</p>
+            <p class="toScroll" onclick="document.getElementById('18').scrollIntoView()">[T&C] How to Contact Us [18/29]</p>
+            <p class="toScroll" onclick="document.getElementById('18').scrollIntoView()">[PRIVACY] Introduction [19/29]</p>
+            <p class="toScroll" onclick="document.getElementById('20').scrollIntoView()">[PRIVACY] Consent [20/29]</p>
+            <p class="toScroll" onclick="document.getElementById('21').scrollIntoView()">[PRIVACY] What We Collect [21/29]</p>
+            <p class="toScroll" onclick="document.getElementById('22').scrollIntoView()">[PRIVACY] How We Use Your Info [22/29]</p>
+            <p class="toScroll" onclick="document.getElementById('23').scrollIntoView()">[PRIVACY] Log Files [23/29]</p>
+            <p class="toScroll" onclick="document.getElementById('24').scrollIntoView()">[PRIVACY] No Advertising [24/29]</p>
+            <p class="toScroll" onclick="document.getElementById('25').scrollIntoView()">[PRIVACY] Third Party Privacy Policies [25/29]</p>
+            <p class="toScroll" onclick="document.getElementById('26').scrollIntoView()">[PRIVACY] CCPA Rights [26/29]</p>
+            <p class="toScroll" onclick="document.getElementById('27').scrollIntoView()">[PRIVACY] GDPR Rights [27/29]</p>
+            <p class="toScroll" onclick="document.getElementById('28').scrollIntoView()">[PRIVACY] COPPA & Children's Information [28/29]</p>
+            <p class="toScroll" onclick="document.getElementById('29').scrollIntoView()">[CREDITS] Icon & Image Credits [29/29]</p>
+
+        </div>
         
     </div>
     
@@ -261,4 +319,9 @@
         display: none;
     }
 </style>
+<script>
+    if (window.innerHeight > window.innerWidth){
+        document.getElementById("contents").style.display = "none"
+    }
+</script>
 </html>
