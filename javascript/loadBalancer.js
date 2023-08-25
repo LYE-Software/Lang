@@ -10,7 +10,7 @@ function connect(){
     console.log(random)
     if (override == "LS-2-ASUS"){
         console.log("OVERRIDDEN, GOING TO LS-2-ASUS")
-        return SERVER_LIST[0]
+        return SERVER_LIST[1]
     } else if (override == "LS-1-APPL"){
         console.log("OVERRIDDEN, GOING TO LS-1-APPL")
         return SERVER_LIST[1]
@@ -20,7 +20,7 @@ function connect(){
             console.log("no issues")
             if (random == 0){
                 window.localStorage.setItem("currentServer", "LS-2-ASUS")
-                return SERVER_LIST[0]
+                return SERVER_LIST[1]
             } else {
                 window.localStorage.setItem("currentServer", "LS-1-APPL")
                 return SERVER_LIST[1]
@@ -30,7 +30,7 @@ function connect(){
             var json_svr = JSON.parse(serverStatusHandling);
             console.log("issue with "+json_svr.server+", avoiding")
             if (json_svr.server == "LS-1-APPL"){
-                return SERVER_LIST[0]
+                return SERVER_LIST[1]
             } else {
                 return SERVER_LIST[1]
             }
