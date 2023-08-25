@@ -94,6 +94,13 @@ class Studysheet {
         return tmpTerms;
     }
 
+    swapTD(){
+        for (var i = 0; i<this.terms.length; i++){
+            let currentTerm = this.terms[i];
+            currentTerm.swap();
+        }
+    }
+
 }
 
 class Term {
@@ -127,7 +134,11 @@ class Term {
         this.imageSrc = src;
     }
 
-    
+    swap(){
+        let tmp = this.answer;
+        this.answer = this.term;
+        this.term = tmp;
+    }
 }
 
 class MultiTerm extends Term{
@@ -157,7 +168,13 @@ class MultiTerm extends Term{
         return false
     }
 
-
+    swap(){
+        for (var i = 0; i<this.terms.length; i++){
+            let tmp = this.terms[i];
+            this.terms[i] = this.answers[i];
+            this.answers[i] = tmp;
+        }
+    }
 
 }
 

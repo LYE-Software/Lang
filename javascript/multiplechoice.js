@@ -295,3 +295,19 @@ function timer(){
         
     
 }
+
+function swap(){
+    sheet.swapTD();
+    num = 0;
+    mnum = 0;
+    checkAsMulti = false;
+    theTerm = null;
+    buttonArr = null;
+    haveDone = 0;
+    total;
+    correct = 0;
+    incorrect = 0;
+    randomized = true;
+    hideElement(document.getElementById("swapping"))
+    runMultipleChoice()
+}

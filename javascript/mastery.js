@@ -361,3 +361,19 @@ function stats(done){
     
 }
 
+
+function swap(){
+    console.log("swapping")
+    sheet.swapTD();
+    console.log(sheet)
+    qNum = 0;
+    multiNum = 0;
+    haveDone= 0;
+    correctCounter = 0
+    incorrectCounter = 0
+    totalAmountSubmitted = 0;
+    term = null;
+    randomized = true; 
+    hideElement(document.getElementById("swapping"))
+    runSheet();
+}

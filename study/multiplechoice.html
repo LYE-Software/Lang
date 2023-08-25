@@ -56,6 +56,7 @@
         <div class="whiteBackdrop">
             <button class="lightGlow newbutton" onclick="window.location.href='../studysheetpage.html'" ><img src="../assets/icons/blackBackButton.png"></button>
             <button class="lightGlow newbutton" onclick="showElement(document.getElementById('shuffling'))" ><img src="../assets/icons/shuffle.png"></button>
+            <button class="lightGlow newbutton" onclick="showElement(document.getElementById('swapping'))"><img src="../assets/icons/swapTD.png"></button>
             <button class="lightGlow newbutton" onclick="showElement(document.getElementById('timerPopup'))"><img src="../assets/icons/timer.png"></button>
             <button class="lightGlow newbutton" style="cursor:pointer;" onclick="stats()" ><img src="../assets/icons/stats.png"></button>
             <button class="lightGlow newbutton" onclick="showElement(document.getElementById('restarting'))"><img src="../assets/icons/reset.png"></button>
@@ -129,7 +130,14 @@
         </div>
     </div>
 
-
+    <div id="swapping" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; z-index:2001; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat;">
+            <div style="margin-top: 10px; color:#001945; font-size:20px; text-align:center;"><strong>Are you sure you want to swap the terms and definitons in this Studysheet?</strong><br> You will now answer with the opposite word as you did previously.</div>
+            <div style="margin-top: 10px; color: red;">This will reset any progress you currently have in Multiple Choice on this sheet.</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0;" onclick="swap()">Yes</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(document.getElementById('swapping'))"">Cancel</div>
+        </div>
+    </div>
     <div id="stats" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; opacity: 0; pointer-events:none; z-index:1500; background-color: rgba(0, 0, 0, 0.5);">
         <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat; text-align: center;">
             
