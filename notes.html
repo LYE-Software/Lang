@@ -5,9 +5,206 @@
     <title>Lang | Upload Notes</title>
     <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
     <script src="javascript/notes.js"></script>
+    <link rel="stylesheet" href="css/stylesheet.css">
+
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #notesOutput {
+            width: 100vw;
+
+            position: relative;
+
+            padding-bottom: 200px;
+        }
+
+        .note {
+            position: absolute;
+            top: 0;
+
+            transition: all 0.5s;
+            text-align: center;
+
+            width: 100vw;
+
+            padding-left: 100px;
+            padding-right: 100px;
+            box-sizing: border-box;
+
+            animation: noteAppear 0.5s ease-in-out;
+
+            color: var(--primary-light);
+
+            margin: 0;
+        }
+
+        @keyframes noteAppear {
+            0% {
+                opacity: 0;
+                transform: scale(1);
+            }
+
+            1% {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            75% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        #container {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .intro {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .intro > textarea {
+            width: 90vw;
+            max-width: 800px;
+            height: 60vh;
+
+            background-color: var(--primary-light);
+            border: none;
+            border-radius: 25px;
+
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+
+            z-index: 1;
+        }
+
+        .newbutton {
+            margin-top: 20px;
+            padding: 10px 20px;
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(0px);
+            }
+
+            100% {
+                transform: translateY(-200px);
+            }
+        }
+
+        @keyframes slideDown {
+            0% {
+                transform: translateY(0px);
+            }
+
+            100% {
+                transform: translateY(200px);
+            }
+        }
+
+        @keyframes slideOutRight {
+            0% {
+                transform: translateX(0px);
+            }
+
+            100% {
+                transform: translateX(100vw);
+            }
+        }
+    </style>
 </head>
 <body>
-    <textarea id="thearea"></textarea>
-    <button id="send" onclick="sendMessage()">Send</button>
+    <div id="container">
+        <div class="intro">
+            <h1 id="header" style="color: var(--primary-light);">Paste in your notes below</h1>
+            <textarea class="lightglow" id="thearea"></textarea>
+            <button class="newbutton whitebackdrop" id="send" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <div id="container" style="pointer-events: none;">
+        <div id="notesOutput">
+            
+        </div>
+    </div>
 </body>
+<script>
+    function startAnimation() {
+        document.getElementById("header").style.animation = "slideDown 0.5s ease-in-out";
+        document.getElementById("send").style.animation = "slideUp 0.5s ease-in-out";
+
+        setTimeout(() => {
+            document.getElementById("header").style.display = "none";
+            document.getElementById("send").style.display = "none";
+
+            document.getElementById("thearea").style.animation = "slideOutRight 0.5s ease-in-out";
+        }, 250);
+
+        setTimeout(() => {
+            document.getElementById("thearea").style.display = "none";
+            addNoteQueue("LangBot is grabbing a pencil...");
+        }, 750);
+        
+    }
+
+    notes_queue = []
+
+    setInterval(() => {
+        if (notes_queue.length > 0) {
+            addNoteQueue(notes_queue[0]);
+            notes_queue.shift();
+        }
+    }, 250);
+
+    function addNote(note) {
+        notes_queue.push(note);
+    }
+
+    function addNoteQueue(note) {
+        var newNote = document.createElement("h1");
+        newNote.classList.add("note");
+        newNote.style.top = "0px";
+        newNote.innerHTML = note;
+        // remove the aniamtion when the event is over
+        newNote.addEventListener("animationend", () => {
+            newNote.style.animation = "none";
+        });
+        document.getElementById("notesOutput").insertBefore(newNote, document.getElementById("notesOutput").firstChild);
+    
+        // get all elements of type note and move them down 100px
+        var notes = document.getElementById("notesOutput").children
+        var height = 0
+        for (var i = 0; i < notes.length; i++) {
+            var rectHeight = notes[i].getBoundingClientRect().height
+            notes[i].style.top = height + "px";
+            notes[i].style.opacity = (100 - ((top + 75) / 3)) / 100
+
+            height += rectHeight + 50
+        }
+    }
+</script>
 </html>
