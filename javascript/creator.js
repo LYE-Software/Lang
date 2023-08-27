@@ -227,10 +227,11 @@ function creatorModeSelect(){
         customWords = window.localStorage.getItem("fullstudysheet")
         
         tmpss = parseFromJSON(customWords)
+        console.log(tmpss)
         document.getElementById("topheader").innerHTML = "Imported From Outside Source"
-        window.localStorage.setItem("fullstudysheet", "");
+        
         if (tmpss.length == 0){
-            showPopup("We had an issue reaching Quizlet.")
+            showPopup("We had an issue with your Studysheet.")
         }
         for (i = 0; i<tmpss.length; i++){
             var term = tmpss.getNthTerm(i);
@@ -266,6 +267,7 @@ function creatorModeSelect(){
                 makeInputs("single", i, term.term, term.answer, imageSrc)
             }
         }
+        window.localStorage.setItem("fullstudysheet", "");
     }
 }
 
@@ -583,7 +585,8 @@ async function sendLucyMessage(){
     var message = document.getElementById("LAquery").value;
     var typingIndicators = document.getElementById("typingIndicators")
     typingIndicators.classList.remove("hiddenTypingIndicators")
-    showElement(document.getElementById("assistantThinking"))
+    // showElement(document.getElementById("assistantThinking"))
+    greyOut()
     document.getElementById("LAquery").value = "";
     if (message == "" || message == " " || message == null){
         showPopup("You cannot send an empty message.")
@@ -610,17 +613,35 @@ async function sendLucyMessage(){
                     var typingIndicators = document.getElementById("typingIndicators")
                     typingIndicators.classList.add("hiddenTypingIndicators")
                     showPopup("Lang Assistant encountered an error. You can try again, or edit your query.")
-                    hideElement(document.getElementById("assistantThinking"))
+                    // hideElement(document.getElementById("assistantThinking"))
+                    bringBack()
                 }
                 else if (xhr.status == 200){
-                    addResponse(xhr.responseText);
+                    var response = JSON.parse(xhr.responseText)
+                    if (response.error == "ratelimit_exceeded"){
+                        showElement(document.getElementById("ratelimit"))
+                        //createBubble("You have reached your rate limit.");
+                        var typingIndicators = document.getElementById("typingIndicators")
+                        typingIndicators.classList.add("hiddenTypingIndicators")
+                        var d = document.createElement("DIV");
+                        d.style.color = "grey";
+                        d.style.fontSize = "10px";
+                        d.innerHTML = "Read by Lang Assistant";
+                        d.style.textAlign = "right";
+                        d.style.marginRight = "4px";
+                        document.getElementById("messageCont").insertBefore(d, document.getElementById("typingIndicators"))
+                        bringBack()
+                    } else {
+                        addResponse(xhr.responseText);
+                    }
                 } else{
                     console.error("Langbot internal server error")
                     createBubble("Sorry, we encountered an error. You can try again, or edit your query.")
                     var typingIndicators = document.getElementById("typingIndicators")
                     typingIndicators.classList.add("hiddenTypingIndicators")
                     showPopup("Lang Assistant encountered an error. You can try again, or edit your query.")
-                    hideElement(document.getElementById("assistantThinking"))
+                    // hideElement(document.getElementById("assistantThinking"))
+                    bringBack()
                 }
                 console.log(xhr.responseText);
             }
@@ -644,10 +665,45 @@ async function sendLucyMessage(){
     }
 }
 
+function greyOut(){
+    var elem = document.getElementById("insideCreator")
+    elem.style.opacity = 0.5; 
+    elem.style.pointerEvents = "none";
+    var all = document.querySelector(".term")
+    console.log(all)
+    if (all == null){
+        return;
+    }
+    for (var i = 0; i<all.length; i++){
+        all[i].style.opacity = 0;
+    }
+    var all = document.querySelector(".definition")
+    for (var i = 0; i<all.length; i++){
+        all[i].style.opacity = 0;    }
+}
+
+function bringBack(){
+    var elem = document.getElementById("insideCreator")
+    elem.style.opacity = 1; 
+    elem.style.pointerEvents = "all";
+    var all = document.querySelector(".term")
+    if (all == null){
+        return;
+    }
+    for (var i = 0; i<all.length; i++){
+        all[i].style.opacity = 1;    
+    }
+    var all = document.querySelector(".definition")
+    for (var i = 0; i<all.length; i++){
+        all[i].style.opacity = 1;    
+    }
+}
+
 function addResponse(studysheetReturned){
     setup = true;
     console.warn("THE RESPONSE IS: "+studysheetReturned)
-    hideElement(document.getElementById("assistantThinking"))
+    // hideElement(document.getElementById("assistantThinking"))
+    bringBack()
     document.getElementById("insideCreator").innerHTML = ""
     parsed = JSON.parse(studysheetReturned);
     console.log(parsed)

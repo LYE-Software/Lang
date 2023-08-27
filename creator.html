@@ -438,18 +438,37 @@
         </div>
     </div>
 
-    <div id="assistantThinking" class="popupContainer" style="z-index:2000;">
+    <div id="ratelimit" class="popupContainer" style="z-index:2000;">
         <div class="popup centerFlex verticalFlex">
             <div style="margin: 50px;">
                 <img style="height:10vh;" src="assets/logos/Lang Assistant by Lang Study.png" alt="Assistant">
             </div>
-            <div style="margin-bottom: 15px;">The Lang Assistant is processing your query...</div>
-            <div style="width:100%; display:flex; justify-content: center;" id="assistantThinkingLoader">
-                <div class="lds-ellipsis" style="color:var(--primary-dark); " ><div></div><div></div><div></div><div></div></div>
+            <div style="margin-bottom: 15px; text-align: center;">You have exceeded your quota of Lang Assistant requests. (11/11)</div>
+            <div style="margin-bottom: 15px;"><strong>Come back tomorrow for more requests.</strong></div>
+            <div style="margin-bottom: 15px; cursor:pointer;" onclick="showElement(document.getElementById('explain'))">Click to see why we have a rate limit.</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(document.getElementById('ratelimit'))">Ok</div>
+        </div>
+    </div> 
+    
+
+    <div id="explain" class="popupContainer" style="z-index:3000;">
+        <div class="verticalFlex centerFlex popup">
+            <div style="margin: 25px;">
+                <img style="height:10vh;" src="assets/logos/Lang Assistant by Lang Study.png" alt="Assistant">
             </div>
+            <div style="font-size: 25px;" id="studysheetTitlePreview"><strong>Why we have a rate limit:</strong></div>
+            <div  style="width:100%; text-align:center;">
+                <div style="margin: 30px; font-size: 15px;">Lang Study is an independent service ran by a small team. Unfortunately, we don't have the resources to give every user unlimited access to Lang Assistant.</div>
+                <div style="margin: 30px; margin-top:0; font-size: 15px;">We try to keep Lang free for everyone by instituting a rate limit for Lang Assistant.</div>
+                <div style="margin: 30px; margin-top:0; font-size: 15px;">Thank you for understanding.</div>
+                
+                
+            </div>            
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 125px;" onclick="hideElement(document.getElementById('explain'))">Ok</div>
+            
         </div>
     </div>
-    
+
     <div id="savePopup" class="popupContainer">
         <div class="verticalFlex centerFlex popup">
             <div style="margin: 25px;">
@@ -516,8 +535,9 @@
         <div class="functionRowItem">
             Create
             <div class="functionRowItemContents" style="z-index:500;">
-                <div onclick="window.location.href='creator.html'">New...</div>
-                <!-- <div onclick="window.location.href='quizletconvert.html'">From Quizlet</div> -->
+                <div onclick="window.location.href='creator.html'">New Studysheet</div>
+                <div onclick="window.location.href='notes.html'">From Notes</div>
+                <div onclick="window.location.href='quizletconvert.html'">From Quizlet</div>
             </div>
         </div>
         <div class="functionRowItem" style="display:none;" id="localAdvanced">

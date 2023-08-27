@@ -36,7 +36,6 @@ socket.on('langbot_notes_done', (message) => {
     var p = document.createElement("p");
     //set the innerHTML to the message
     p.innerHTML = message;
-    p.style.color = "green";
-    //append the p element to the chatbox div
-    document.body.appendChild(p);
+    window.localStorage.setItem("fullstudysheet", message);
+    window.location.href="creator.html";
 });
