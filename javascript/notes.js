@@ -36,6 +36,17 @@ socket.on('langbot_notes_done', (message) => {
     var p = document.createElement("p");
     //set the innerHTML to the message
     p.innerHTML = message;
-    window.localStorage.setItem("fullstudysheet", message);
-    window.location.href="creator.html";
+    var parsedMessage = JSON.parse(message)
+    console.log(parsedMessage)
+    if (parsedMessage.error == "session_invalid" || parsedMessage.error == "ratelimit_exceeded"){
+        console.log("ratelimited")
+        setTimeout(function(){
+            addNote("You have exceeded your allotted Lang Assistant quota for today (11/11 requests). Check back tomorrow.")
+        }, 1250)
+    } else{
+        console.log("success")
+        window.localStorage.setItem("fullstudysheet", message);
+        //window.location.href="creator.html";
+    }
+    
 });
