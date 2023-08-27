@@ -4115,13 +4115,13 @@ function changeSpeed(){
 function grabQuizlet(link) {
 
     console.log("link+ "+link)
-    var url = "https://lye.software/temp/quizlet/get";
+    var url = "https://backend.langstudy.tech/v2/quizlet";
 
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url);
 
     xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
-
+    xhr.setRequestHeader("lye-session", window.localStorage.getItem('usertoken'));
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             console.log(xhr.status);
