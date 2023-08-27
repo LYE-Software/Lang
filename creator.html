@@ -832,8 +832,15 @@
                         console.log(xhr.status);
                         console.log(xhr.responseText);
                         imgUrl = xhr.responseText;
-                        console.log("IMAGE URL IS "+imgUrl)
-                        leaveFileUpload()
+                        if (imgUrl == "toomanyimages"){
+                            hideElement(document.getElementById("sendingLoader"))
+                            showPopup("You have too many images")
+                            return;
+                        } else{
+                            console.log("IMAGE URL IS "+imgUrl)
+                            leaveFileUpload()
+                        }
+                        
                     }
                 };
                 
