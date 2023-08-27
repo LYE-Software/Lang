@@ -9,6 +9,7 @@ socket.on('connect', () => {
 
 
 function sendMessage() {
+    startAnimation()
     //get the message from the input field
     var text = document.getElementById("thearea").value;
     // json = `{"session":"${window.localStorage.getItem("usertoken")}", "data":"${text}"}`;
@@ -25,12 +26,7 @@ function sendMessage() {
 //listen for langbot_notes event
 socket.on('langbot_notes', (message) => {
     console.log(message);
-    //create a new p element
-    var p = document.createElement("p");
-    //set the innerHTML to the message
-    p.innerHTML = message;
-    //append the p element to the chatbox div
-    document.body.appendChild(p);
+    addNote(message)
 });
 
 
