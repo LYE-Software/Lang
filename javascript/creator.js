@@ -229,6 +229,9 @@ function creatorModeSelect(){
         tmpss = parseFromJSON(customWords)
         document.getElementById("topheader").innerHTML = "Imported From Outside Source"
         window.localStorage.setItem("fullstudysheet", "");
+        if (tmpss.length == 0){
+            showPopup("We had an issue reaching Quizlet.")
+        }
         for (i = 0; i<tmpss.length; i++){
             var term = tmpss.getNthTerm(i);
             if (term.isMulti){
