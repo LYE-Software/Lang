@@ -187,7 +187,7 @@ function shuffleSheet(){
     mnum = 0;
     checkAsMulti = false;
     theTerm = null;
-    buttonArr = null;
+    
     haveDone = 0;
     total;
     correct = 0;
@@ -302,7 +302,7 @@ function swap(){
     mnum = 0;
     checkAsMulti = false;
     theTerm = null;
-    buttonArr = null;
+    
     haveDone = 0;
     total;
     correct = 0;

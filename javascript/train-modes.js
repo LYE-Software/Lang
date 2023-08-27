@@ -39,30 +39,43 @@ function checkWrite(){
             setTimeout(function () { document.getElementById("goButton").style.backgroundColor = "wheat" }, 1000)
             
             advance(term)
-            
+            if (!review){
+                postModeChecks()
+            } else if (review) {
+                groupLoc()
+                plusCorrect()
+                logic()
+            }
         }
         else{
             console.log("[WRITE]Answer determined to be incorrect")
             
             document.getElementById("goButton").style.backgroundColor = "#ce1483"
-            document.getElementById("wherearewe").innerHTML = "Correct answer was: "+term.answer
+            var toappend = `You wrote <strong>${usrInput}</strong><br>The correct answer was <strong>${term.answer}</strong>`
+            document.getElementById("correctedHolder").innerHTML = toappend;
+            showElement(document.getElementById("wrongWrite"))
             setTimeout(function () { document.getElementById("goButton").style.backgroundColor = "wheat" }, 1000)
-            setTimeout(function () { document.getElementById("wherearewe").innerHTML = "" }, 4000)
+
         }
-        if (!review){
-            postModeChecks()
-        } else {
-            groupLoc()
-            plusCorrect()
-            logic()
-        }
+        
+        
         input.value = "";
     }
     
     
 }
 
-
+function continueWrite(){
+    hideElement(document.getElementById("wrongWrite"))
+    if (!review){
+        postModeChecks()
+    }
+    else {
+        groupLoc()
+        plusCorrect()
+        logic()
+    }
+}
 function multipleChoice(term_, arr){
     document.getElementById("term_image_mcq").style.display = "none";
     document.getElementById("multchoice").style.display="flex"

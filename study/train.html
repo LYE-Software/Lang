@@ -288,6 +288,17 @@ color: var(--primary-light);
         </div>
     </div>
 
+    <div id="wrongWrite" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; opacity: 0; pointer-events:none; z-index:1500; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat; text-align: center;">
+            
+            <div style="margin-top: 10px; color:#001945; font-size:20px; margin-bottom:10px;"><strong>Incorrect</strong></div>
+            <div id="correctedHolder">
+                
+            </div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="continueWrite()">Continue</div>
+        </div>
+    </div>
+
     <div class="multiplechoice" style = "height:100%; display:none; flex-direction: column; justify-content: center;" id="multchoice">
         <!-- <h1 id="questionheader" class="header" style="color:wheat;">Multiple Choice</h1>
         
@@ -312,11 +323,11 @@ color: var(--primary-light);
 
             <h1 id="questionheader" class="centerText" style="color: var(--primary-light);">Multiple Choice</h1>
             <div class="multiplechoicefooter" style="background-color: #ffffff44; padding:15px; border-radius:20px;">
-                <div>
+                <div style="display:flex; flex-direction:row; align-items:center;">
                     <button id = "a" class="" onclick="checkMulti('a')">A</button>
                     <button id = "b" class="" onclick="checkMulti('b')">B</button>
                 </div>
-                <div>
+                <div style="display:flex; flex-direction:row; align-items:center;">
                     <button id = "c" class="" onclick="checkMulti('c')">C</button>
                     <button id = "d" class="" onclick="checkMulti('d')">D</button>
                 </div>
@@ -348,6 +359,7 @@ color: var(--primary-light);
                     <div style="border-radius: 25px; flex: 2; background-color: wheat;" class="horizontalFlex centerFlex buttonHover submitButton lightGlow" id="goButton" onclick="checkWrite()">> Go!</div>
                 </div>
             </div>
+            <!-- <div style="color:wheat; font-family: Poppins; text-align: center; font-size: 2.2vw; bottom:4vh; position:absolute; font-weight:bold; width:100%;" id="wherearewe">correct answer: sussy</div> -->
         </div>
     </div>
 
@@ -364,7 +376,6 @@ color: var(--primary-light);
         <button class="goButton" id="goButton" onclick="checkTrain()"></button>
     </div> -->
 
-    <div style="color:wheat; font-family: Poppins; text-align: center; font-size: 2.2vw;" id="wherearewe"></div>
     <div id="explainer" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; opacity: 0; pointer-events:none; z-index:1500; background-color: rgba(0, 0, 0, 0.5);">
         <div class="" style="z-index:500; border-radius: 15px; padding: 30px; width: 40vw; height:80vh; background-color: wheat; text-align: center; overflow-y: scroll;">
             <div style="width:100%; align-items: right; justify-content: right; display:flex;">

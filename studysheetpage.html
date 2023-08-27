@@ -468,12 +468,12 @@
             <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(document.getElementById('popup'))">Ok</div>
         </div>
     </div>
-    <div id="notOwned" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
-        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat;">
+    <div id="notOwned" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:1100; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:1100; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat;">
             <div style="margin-top: 10px; color:red; font-size:20px;"><strong>This Studysheet has been shared.</strong></div>
             <div style="margin-top: 10px;"><strong>You cannot edit a Studysheet that has been shared with you.</strong> </div>
             <div style="margin-top: 10px;">If you are the original creator of this Studysheet, please select it from the Homepage to edit it.</div>
-            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(document.getElementById('notOwned'))">OK</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; z-index:1001;" onclick="hideElement(document.getElementById('notOwned'))">OK</div>
         </div>
     </div>
     <div class="horizontalFlex" style="pointer-events: none; transition: all 0.15s ease-in-out; opacity: 0; z-index: 1001; align-items: center; justify-content: center; top: 0; bottom: 0; left: 0; right: 0; position:absolute; background-color: var(--primary-dark)" id="unableToFind">
