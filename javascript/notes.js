@@ -46,7 +46,7 @@ socket.on('langbot_notes_done', (message) => {
     } else{
         console.log("success")
         window.localStorage.setItem("fullstudysheet", message);
-        //window.location.href="creator.html";
+        window.location.href="creator.html";
     }
     
 });
