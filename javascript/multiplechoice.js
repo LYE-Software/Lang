@@ -97,6 +97,13 @@ async function checkMulti(element) {
             await sleep(1000);
             element.style.backgroundColor = "wheat";
             correct++;
+            if (timing){
+                counter = stableCount;
+                document.getElementById("timerBar").style.width = "0%";
+                width = 0;
+                interval = setInterval(timer, 1000)
+            }
+            runMultipleChoice();
         } else {
             var correctElem;
             for (var i = 0; i<buttonArr.length; i++){
@@ -111,6 +118,7 @@ async function checkMulti(element) {
             correctElem.style.backgroundColor = "wheat";
             element.style.backgroundColor = "wheat";
             incorrect++;
+            doIncorrect(element.innerHTML);
         }
         if (mnum<theTerm.length-1){
             console.log("the term len: "+theTerm.length+" mnum: "+mnum)
@@ -125,6 +133,13 @@ async function checkMulti(element) {
             await sleep(1000);
             element.style.backgroundColor = "wheat";
             correct++;
+            if (timing){
+                counter = stableCount;
+                document.getElementById("timerBar").style.width = "0%";
+                width = 0;
+                interval = setInterval(timer, 1000)
+            }
+            runMultipleChoice();
         } else {
             var correctElem;
             for (var i = 0; i<buttonArr.length; i++){
@@ -139,18 +154,32 @@ async function checkMulti(element) {
             correctElem.style.backgroundColor = "wheat";
             element.style.backgroundColor = "wheat";   
             incorrect++;
+            doIncorrect(element.innerHTML);
         }
         num++;
     }
+    
+}
+
+function continueMulti(){
+
     if (timing){
         counter = stableCount;
         document.getElementById("timerBar").style.width = "0%";
         width = 0;
         interval = setInterval(timer, 1000)
     }
+    hideElement(document.getElementById("incorrect"));
     runMultipleChoice();
+
 }
 
+function doIncorrect(clicked){
+
+    var toShow = `You chose <strong>${clicked}</strong><br>The correct answer was <strong>${theTerm.answer}</strong>`
+    document.getElementById("correctedHolder").innerHTML = toShow;
+    showElement(document.getElementById("incorrect"))
+}
 
 function getFake(n) {
     const tempSheet = Object.assign(new Studysheet, structuredClone(sheet))
