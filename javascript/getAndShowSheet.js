@@ -162,7 +162,7 @@ async function doPreviewAndLocal(){
 }
 
 
-
+var allhtml = "";
 function displaySheet(newSheet){
     for (var i = 0; i<newSheet.length; i++){
         if (newSheet.getNthTerm(i).isMulti){
@@ -181,6 +181,8 @@ function displaySheet(newSheet){
             makeSingle(newSheet.getNthTerm(i).term, newSheet.getNthTerm(i).answer, src);
         }
     }
+    console.warn("ADDING ALLHTML: "+allhtml)
+    document.getElementById("termsContainer").innerHTML += allhtml;
 }
 
 
@@ -201,7 +203,7 @@ function makeSingle(term, def, imgsrc){
         </div>
     </div>
     `
-    document.getElementById("termsContainer").innerHTML+=single;
+    allhtml+=single;
 }
 
 function makeMulti(multi, i, imgsrc){
@@ -210,15 +212,7 @@ function makeMulti(multi, i, imgsrc){
     } else {
         doImage = "none"
     }
-    var multiTemplate = `
-    <div style="width:100%; height:100px; display:${doImage}; justify-content:center; align-items:center;">
-        <img src="${imgsrc}" style="max-height:100px;">
-    </div>
-    <div class="multiTermDef" id="${"multi"+i}">
-        <div>${multi.question}</div>
-        
-    </div>`
-    document.getElementById("termsContainer").innerHTML+=multiTemplate;
+    var allmulti = "";
     for (var j = 0; j<multi.length; j++){
         var altTemplate = `
         <div class="multiEntry">
@@ -226,8 +220,18 @@ function makeMulti(multi, i, imgsrc){
             <div>${multi.terms[j]}</div>
             <div>${multi.answers[j]}</div>
         </div>`
-        document.getElementById("multi"+i).innerHTML+=altTemplate;
+        allmulti+=altTemplate;
     }
+    var multiTemplate = `
+    <div style="width:100%; height:100px; display:${doImage}; justify-content:center; align-items:center;">
+        <img src="${imgsrc}" style="max-height:100px;">
+    </div>
+    <div class="multiTermDef" id="${"multi"+i}">
+        <div>${multi.question}</div>
+        ${allmulti}
+    </div>`
+    allhtml+=multiTemplate;
+
 }
     
 

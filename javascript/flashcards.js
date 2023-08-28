@@ -24,7 +24,7 @@ function makeCards(){
     console.log("sheet: "+sheet)
     newSheet = parseFromJSON(sheet)
     newSheet = arrayToSheet(newSheet.convertToSingle(), "sheet")
-    var appendTo = document.getElementById("flashcardBox")
+    var appendTo = "";
     for (let i = 0; i<newSheet.length; i++){
         image = "none";
         imgsrc = "noimage";
@@ -43,11 +43,14 @@ function makeCards(){
             </div>
         </div>
         `
-        appendTo.innerHTML += basic
+        appendTo += basic
         image = "none"
         imgsrc = "noimage"
     }
-    appendTo.children[0].children[0].onclick=function(){flipCard(this)}
+    console.warn("FLASHCARDS STRING: "+appendTo)
+    document.getElementById("flashcardBox").innerHTML += appendTo;
+    document.getElementById("flashcardBox").children[0].children[0].onclick=function(){flipCard(this)}
+    
 }
 
 function flipCard(card){
