@@ -527,6 +527,7 @@ function showSavePopup(){
         okToUpload = false;
     }
     else {
+        console.log("sstitle: "+document.getElementById("sstitle").innerHTML)
         document.getElementById("studysheetTitlePreview").innerHTML = document.getElementById("sstitle").innerHTML;
         document.getElementById("amountOfTerms").innerHTML = document.getElementById("insideCreator").childElementCount+" Terms";
         document.getElementById("authorName").innerHTML = "By "+customusername;
