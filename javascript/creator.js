@@ -705,23 +705,61 @@ function addResponse(studysheetReturned){
     // hideElement(document.getElementById("assistantThinking"))
     bringBack()
     document.getElementById("insideCreator").innerHTML = ""
-    parsed = JSON.parse(studysheetReturned);
+    var parsed;
+    var worked = true;
+    var parsedSheet;
+    var response;
+    try {
+        parsed = JSON.parse(studysheetReturned);
+        parsedSheet = parseFromJSON(parsed.studysheet);
+        response = parsed.langbot_response;
+    } catch (error) {
+        worked = false;
+        createBubble("I had trouble with that request. Please try rephrasing your query.")
+    }
+   
     console.log(parsed)
     
-    parsedSheet = parseFromJSON(parsed.studysheet);
-    response = parsed.langbot_response;
-    for (i = 0; i<parsedSheet.length; i++){
-        var term = parsedSheet.getNthTerm(i)
-        if (term.isMulti){
-
-        } else {
-            createCreatorInput(term.term, term.answer)
+    try{
+        for (i = 0; i<parsedSheet.length; i++){
+            var term = parsedSheet.getNthTerm(i)
+            if (term.isMulti){
+                console.log("ITS MULTI")
+                imageSrc = null;
+                if (term.hasImage){
+                    imageSrc = term.imageSrc
+                }
+                createCreatorInput(term.question, i, imageSrc)
+                document.getElementById("tdc"+i).children[1].children[2].click();
+                //document.getElementById("tdc"+i).children[1].children[1].innerHTML = term.question;
+                console.log("WHAT IS THE TERM QUESTION:: "+term.question)
+                var firstTwo = document.getElementById("tdc"+i).children[2].children[1].querySelectorAll("div[data-input]");
+                firstTwo[0].innerHTML = term.terms[0];
+                firstTwo[1].innerHTML = term.answers[0];
+                var x = 3;
+                for (var j =1; j<term.length; j++){
+                    //continue making & filling after 1st alt
+                    document.getElementById("tdc"+i).children[1].children[2].click();
+                    var next = document.getElementById("tdc"+i).children[x].children[1].querySelectorAll("div[data-input]");
+                    next[0].innerHTML = term.terms[j]
+                    next[1].innerHTML = term.answers[j]
+                    x++;
+                }
+            } else {
+                createCreatorInput(term.term, term.answer)
+            }
         }
+    } catch (error){
+        worked = false;
+        createBubble("I had trouble with that request. Please try rephrasing your query.")
     }
     
-    createBubble(response)
+    if (worked == true){
+        createBubble(response)   
+    }
     var typingIndicators = document.getElementById("typingIndicators")
     typingIndicators.classList.add("hiddenTypingIndicators")
+    
 }
 
 function createBubble(msg){
