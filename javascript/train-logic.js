@@ -12,10 +12,25 @@ var totalNeededToFinish;
 var totalCorrect;
 var ttlForGp;
 var crForGp;
+var swap = false;
 function overrideServer(json){
     window.localStorage.setItem("fullstudysheet", json)
 }
 
+function swapper(elem, that){
+    if (elem.id == "termSwap"){
+        console.log("term");
+        swap = false;
+        elem.className = "selected";
+        that.className = "deselected";
+    }
+    else{
+        console.log("def");
+        swap = true;
+        elem.className = "selected";
+        that.className = "deselected";
+    }
+}
 
 function doTrain(){
     var wage = document.getElementById("input");
@@ -85,6 +100,9 @@ function doTrain(){
     
 
     //setting up game...
+    if (swap == true){
+        sheet.swapTD();
+    }
     subLocation = 0;
     t = 0;
     groupPosition = 1;

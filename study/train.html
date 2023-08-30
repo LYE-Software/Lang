@@ -169,6 +169,30 @@ color: var(--primary-light);
         transition: 0.5s;
     }
 
+    .selected{
+        background-color: #001945; 
+        color:wheat;
+        padding:20px;
+        border-radius: 10px;
+        font-family:Poppins; 
+        font-size: 1vw;
+        cursor:pointer;
+        width:5vw;
+        text-align: center;
+    }
+    .deselected{
+        background-color: wheat; 
+        color:#001945;
+        padding:20px;
+        border-radius: 10px;
+        font-family:Poppins; 
+        font-size: 1vw;
+        cursor:pointer;
+        border:2px solid #001945;
+        width:5vw;
+        text-align: center;
+    }
+
 </style>
 <body class="darkHomepage">
     <div class="bar lightGlow" style="background-color: wheat; position:absolute;" id="progBar"></div>
@@ -189,7 +213,8 @@ color: var(--primary-light);
         <div class="whiteBackdrop">
             <button class="lightGlow newbutton" onclick="window.location.href='../studysheetpage.html'" ><img src="../assets/icons/blackBackButton.png"></button>
             <button class="lightGlow newbutton" style="cursor:pointer;" onclick="stats()" ><img src="../assets/icons/stats.png"></button>
-            
+            <button class="lightGlow newbutton" onclick="showElement(document.getElementById('swapping'))"><img src="../assets/icons/swapTD.png"></button> 
+
             <button class="lightGlow newbutton" onclick="showElement(document.getElementById('restarting'))"><img src="../assets/icons/reset.png"></button>
             <button class="lightGlow newbutton" onclick="showElement(document.getElementById('explainer'))"><img src="../assets/icons/help.png"></button>
         </div>
@@ -235,9 +260,15 @@ color: var(--primary-light);
             <div class="lightGlow" style="width:40vw; display:flex; flex-direction: column; justify-content: center; align-items: center; background-color: wheat; border-radius: 20px;">
                 <p style="font-family:Poppins; color:#001945; font-size: 2vw; font-weight:bold;">Train</p>
                 <div>
-                    <div style="font-family:Poppins; color:#001945; font-size: 1vw; font-weight:bold;">Terms per Round</div>
+                    <div style="font-family:Poppins; color:#001945; font-size: 1.25vw; font-weight:bold;">Terms per Round</div>
                     <input placeholder = "5" type = "number" min="3" id="termsperround" style="background-color: #001945; color: wheat; width:20vw; height:7vh; border-radius: 20px; text-align: center; display:flex; flex-direction: column; justify-content: center;" contenteditable>
-
+                    <br>
+                    <div style="font-family:Poppins; color:#001945; font-size: 1.25vw; font-weight:bold; margin-bottom:5px;">Answer With:</div>
+                    <div style="display: flex; justify-content: space-around;">
+                        <div class = "selected" id="termSwap" onclick="swapper(this, document.getElementById('defSwap'))">Term</div>
+                        <div class="deselected" id="defSwap" onclick="swapper(this, document.getElementById('termSwap'))">Definition</div>
+                    </div>
+                    <br>
                 </div> 
                 <button class="dropbtn" id="myBtnBegin" style="margin:20px; background-color: #001945; color: wheat; cursor: pointer;" onclick="doTrain()">Begin</button>
             </div>
@@ -298,7 +329,14 @@ color: var(--primary-light);
             <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="continueWrite()">Continue</div>
         </div>
     </div>
-
+    <div id="swapping" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; z-index:2001; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat;">
+            <div style="margin-top: 10px; color:#001945; font-size:20px; text-align:center;"><strong>To swap whether you answer with Term or Definition in this Studysheet, you will have to restart Train.</strong><br><br> Swapping Term and Definition can only be done from the Train setup menu.</div>
+            <div style="margin-top: 10px; color: red;">This will reset any progress you currently have in Train on this sheet.</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0;" onclick="window.location.reload()">Reset</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(document.getElementById('swapping'))"">Cancel</div>
+        </div>
+    </div>
     <div class="multiplechoice" style = "height:100%; display:none; flex-direction: column; justify-content: center;" id="multchoice">
         <!-- <h1 id="questionheader" class="header" style="color:wheat;">Multiple Choice</h1>
         

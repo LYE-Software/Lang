@@ -373,7 +373,7 @@ function swap(){
     incorrectCounter = 0
     totalAmountSubmitted = 0;
     term = null;
-    randomized = true; 
+    
     hideElement(document.getElementById("swapping"))
     runSheet();
 }
