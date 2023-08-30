@@ -338,7 +338,22 @@
         /* .termList {
             display: none;
         }         */
-        
+        .bobbing{
+            animation: bob 1.5s infinite ease-in-out;
+        }
+
+
+        @keyframes bob{
+            0%{
+                transform: scale(1);
+            }
+            50%{
+                transform: scale(1.3);
+            }
+            110%{
+                transform: scale(1);
+            }
+        }
     </style>
 </head>
 <body onload="doPreviewAndLocal()">
@@ -417,8 +432,8 @@
                 <div><button class="lightGlow newbutton" onclick="window.location.href='study/practicetest.html'">Practice Test</button></div>
                 <div><button class="lightGlow newbutton" id="multiplechoicebutton" onclick="window.location.href='study/multiplechoice.html'">Multiple Choice</button></div>
             </div>
-            <div class="leftSidebarPreview"> 
-                <img src="assets/icons/Studying Icon.png">
+            <div class="leftSidebarPreview"  id="bobberContainer"> 
+                <img class="bobbing" id="bobber" src="assets/icons/Studying Icon.png">
             </div>
         </div>
     </div>
@@ -515,6 +530,10 @@
     </div>
 </body>
 <script>
+
+    document.getElementById("bobberContainer").onmouseover = function(){
+        document.getElementById("bobber").className = "";
+    }
 
     function initializeEdit(){
         window.localStorage.setItem("editSheet", "true");
