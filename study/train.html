@@ -172,25 +172,55 @@ color: var(--primary-light);
     .selected{
         background-color: #001945; 
         color:wheat;
-        padding:20px;
+        border:2px solid #001945;
+        margin:20px;
         border-radius: 10px;
         font-family:Poppins; 
         font-size: 1vw;
         cursor:pointer;
         width:5vw;
+        height:1.5vw;
         text-align: center;
+        margin-top:0px; margin-bottom:0px;
+        padding:20px;
+        transition:0.5ms;
     }
     .deselected{
         background-color: wheat; 
         color:#001945;
-        padding:20px;
+        margin:20px;
         border-radius: 10px;
         font-family:Poppins; 
         font-size: 1vw;
         cursor:pointer;
         border:2px solid #001945;
         width:5vw;
+        height:1.5vw;
         text-align: center;
+        margin-top:0px; margin-bottom:0px;
+        padding:20px;
+        transition:0.5s;
+    }
+
+    .greyHover:hover {
+        transform: scale(1.05);
+
+    }
+
+    .deselected:hover{
+        opacity: 0.7;    
+        background-color: #001945;
+        color:#f5deb3;
+        transform: scale(1.05);
+
+    }
+
+    .multipleChoiceButton:hover{
+        transform: scale(1.03);
+    }
+
+    .multipleChoiceButton{
+        transition:0.5s;
     }
 
 </style>
@@ -252,25 +282,29 @@ color: var(--primary-light);
                 <div>
                     <p style="font-family:Poppins; color:white; font-size: 2vw; font-weight:bold;">Train allows you to dynamically learn your Studysheet. </p>
                     <p style="font-family:Poppins; color:white; font-size: 2vw; font-weight:lighter;">Cycle through rounds of learning, multiple choice, and write-in to gain long-term memory.</p>
-                    <button class="dropbtn" id="myBtnBegin" style="margin:20px; background-color: white; color: #001945; font-weight: bold; cursor:pointer;" onclick="showElement(document.getElementById('explainer'))">How does it work?</button>
+                    <button class="dropbtn greyHover" id="myBtnBegin" style="margin:20px; background-color: white; color: #001945; font-weight: bold; cursor:pointer;" onclick="showElement(document.getElementById('explainer'))">How does it work?</button>
                 </div>
                 
             </div>
             <div style="width:10vw; display:flex; justify-content: center; align-items: center;  border-radius: 20px;"></div>
             <div class="lightGlow" style="width:40vw; display:flex; flex-direction: column; justify-content: center; align-items: center; background-color: wheat; border-radius: 20px;">
                 <p style="font-family:Poppins; color:#001945; font-size: 2vw; font-weight:bold;">Train</p>
-                <div>
+                <div style="display:flex; flex-direction: column; align-items:center;">
                     <div style="font-family:Poppins; color:#001945; font-size: 1.25vw; font-weight:bold;">Terms per Round</div>
                     <input placeholder = "5" type = "number" min="3" id="termsperround" style="background-color: #001945; color: wheat; width:20vw; height:7vh; border-radius: 20px; text-align: center; display:flex; flex-direction: column; justify-content: center;" contenteditable>
+                    <div style="font-size:0.75vw; color:#001945;"><em>Lang recommends 4-7 terms per round for the bext experience.</em></div>
                     <br>
                     <div style="font-family:Poppins; color:#001945; font-size: 1.25vw; font-weight:bold; margin-bottom:5px;">Answer With:</div>
-                    <div style="display: flex; justify-content: space-around;">
-                        <div class = "selected" id="termSwap" onclick="swapper(this, document.getElementById('defSwap'))">Term</div>
+                    <div style="display: flex; justify-content: center;">
+                        <div>
+                            <div class = "selected" id="termSwap" onclick="swapper(this, document.getElementById('defSwap'))">Term</div>
+                            <div style="font-size:0.75vw; color:#001945;"><em>Default</em></div>
+                        </div>
                         <div class="deselected" id="defSwap" onclick="swapper(this, document.getElementById('termSwap'))">Definition</div>
                     </div>
                     <br>
                 </div> 
-                <button class="dropbtn" id="myBtnBegin" style="margin:20px; background-color: #001945; color: wheat; cursor: pointer;" onclick="doTrain()">Begin</button>
+                <button class="dropbtn greyHover" id="myBtnBegin" style="margin:20px; background-color: #001945; color: wheat; cursor: pointer;" onclick="doTrain()">Begin</button>
             </div>
         </div>
         
@@ -304,7 +338,7 @@ color: var(--primary-light);
             </div>
             
         </div>
-        <button class="dropbtn lightGlow" style="margin-top: 20px" onclick="completeLearn()">Continue</button>
+        <button class="dropbtn greyHover" style="margin-top: 20px; background-color:white; opacity:0.75;" onclick="completeLearn()">Continue</button>
     </div>   
 
     <div id="stats" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; opacity: 0; pointer-events:none; z-index:1500; background-color: rgba(0, 0, 0, 0.5);">
@@ -362,19 +396,28 @@ color: var(--primary-light);
             <h1 id="questionheader" class="centerText" style="color: var(--primary-light);">Multiple Choice</h1>
             <div class="multiplechoicefooter" style="background-color: #ffffff44; padding:15px; border-radius:20px;">
                 <div style="display:flex; flex-direction:row; align-items:center;">
-                    <button id = "a" class="" onclick="checkMulti('a')">A</button>
-                    <button id = "b" class="" onclick="checkMulti('b')">B</button>
+                    <button id = "a" class="multipleChoiceButton" onclick="checkMulti('a')">A</button>
+                    <button id = "b" class="multipleChoiceButton" onclick="checkMulti('b')">B</button>
                 </div>
                 <div style="display:flex; flex-direction:row; align-items:center;">
-                    <button id = "c" class="" onclick="checkMulti('c')">C</button>
-                    <button id = "d" class="" onclick="checkMulti('d')">D</button>
+                    <button id = "c" class="multipleChoiceButton" onclick="checkMulti('c')">C</button>
+                    <button id = "d" class="multipleChoiceButton" onclick="checkMulti('d')">D</button>
                 </div>
             </div>
         </div>
 
     </div>
 
-
+    <div id="incorrect" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; opacity: 0; pointer-events:none; z-index:1500; background-color: rgba(0, 0, 0, 0.5);">
+        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat; text-align: center;">
+            
+            <div style="margin-top: 10px; color:#001945; font-size:20px; margin-bottom:10px;"><strong>Incorrect</strong></div>
+            <div id="correctedHolderMulti">
+                
+            </div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="continueMulti()">Continue</div>
+        </div>
+    </div>
 
     <div class="inputdiv panelContainer" style="display: none; height:100%;" id="write">
         <div class="panelContainer">
@@ -421,15 +464,18 @@ color: var(--primary-light);
             </div>
 
             
-            <div style="margin-top: 10px; color:#001945; font-size:20px;"><strong>About Train</strong></div>
-            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;">Train is a scaling, repetition based, memory training mode. It works best when you do not previously know the material being studied.</div>
+            <div style="margin-top: 10px; color:#001945; font-size:30px;"><strong>About Train</strong></div>
+            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;">Train is a <strong>scaling, repetition based, memory training mode</strong>. It works best when you do not previously know the material being studied.</div>
             <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;">Train uses three modes to help you ease into your knowledge:</div>
-            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;"> - A learn mode, where you are told both the question and answer</div>
-            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;"> - A multiple choice mode, where you are given multiple options and must choose the correct one</div>
-            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;"> - A write mode, where you must fill in the correct answer.</div>
-            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;">Train groups questions into smaller groups so that you can learn portions at a time. You can choose the size of these groups.</div>
+            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;"> - A <strong>learn mode</strong>, where you are told both the question and answer</div>
+            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;"> - A <strong>multiple choice mode</strong>, where you are given multiple options and must choose the correct one</div>
+            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;"> - A <strong>write mode</strong>, where you must fill in the correct answer.</div>
             <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;">To ensure you retain the information, Train quizzes you on previous "groups" in later ones.</div>
-            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;">To keep track of your progress, the bar at the top of the screen will display your progress through the Studysheet as a whole, while the bar at the bottom will show your progress through the current group.</div>
+            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;">To keep track of your progress, <strong>the bar at the top of the screen will display your progress through the Studysheet as a whole, while the bar at the bottom will show your progress through the current group.</strong></div>
+            <div style="margin-top: 10px; color:#001945; font-size:30px;"><strong>Customization</strong></div>
+            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;">Train groups questions into smaller groups so that you can learn portions at a time. <strong>You can choose the size of these groups.</strong></div>
+            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;">Just like other Lang modes, you can choose whether to answer with the <strong>term</strong> or the <strong>definition</strong>. <strong>You cannot change your decision after you start Train, without losing progress.</strong></div>
+
             <!-- <div style="width:100%; align-items: center; justify-content: center; display:flex;">
                 <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(this.parentNode.parentNode.parentNode)">Ok</div>
 

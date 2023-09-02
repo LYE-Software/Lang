@@ -257,7 +257,7 @@ body{
     border: none;
     font-family: 'Poppins', sans-serif;
     min-width:200px;
-  
+    transition:0.5s;
     border:5px;
     border-color: #001945;
     border-radius: 15px;

@@ -28,6 +28,7 @@ var theTerm;
 var buttonArr;
 
 function runMultipleChoice() {
+    console.warn("MASTER OUTPUT: havedone: "+haveDone+" total:" +total+" correct: "+correct+" incorrect: "+incorrect+ " num: "+num+" mnum: "+mnum)
     if (num>=sheet.length){
         showElement(document.getElementById("completedMode"))
         num = 0;
@@ -43,6 +44,7 @@ function runMultipleChoice() {
     
     document.getElementById("term_image").style.display = "none";
     theTerm = sheet.getNthTerm(num);
+    console.log("CHOOSING TERM "+theTerm.term+" WITH NUM "+num)
     if (theTerm.hasImage) {
         let urlForImage = connect()+"/"+window.localStorage.getItem("usertoken")+"/image/get/"+theTerm.imageSrc;
         document.getElementById("term_image").children[0].src = urlForImage;
@@ -86,11 +88,11 @@ function runMultipleChoice() {
 }
 
 async function checkMulti(element) {
+    var callback = "failed";
     if (timing){
         clearInterval(interval);
         
     }
-    haveDone++;
     if (theTerm.isMulti){
         if (element.innerHTML == theTerm.answers[mnum]){
             element.style.backgroundColor = "#3e8e41";
@@ -103,7 +105,8 @@ async function checkMulti(element) {
                 width = 0;
                 interval = setInterval(timer, 1000)
             }
-            runMultipleChoice();
+            callback = "correct";
+
         } else {
             var correctElem;
             for (var i = 0; i<buttonArr.length; i++){
@@ -118,13 +121,14 @@ async function checkMulti(element) {
             correctElem.style.backgroundColor = "wheat";
             element.style.backgroundColor = "wheat";
             incorrect++;
-            doIncorrect(element.innerHTML);
+            callback = "incorrect"
         }
         if (mnum<theTerm.length-1){
             console.log("the term len: "+theTerm.length+" mnum: "+mnum)
             mnum++
         } else {
             mnum = 0;
+            console.log("UPDATING NUM TO: "+num)
             num++;
         }
     } else {
@@ -139,7 +143,7 @@ async function checkMulti(element) {
                 width = 0;
                 interval = setInterval(timer, 1000)
             }
-            runMultipleChoice();
+            callback = "correct";
         } else {
             var correctElem;
             for (var i = 0; i<buttonArr.length; i++){
@@ -154,11 +158,23 @@ async function checkMulti(element) {
             correctElem.style.backgroundColor = "wheat";
             element.style.backgroundColor = "wheat";   
             incorrect++;
-            doIncorrect(element.innerHTML);
+            callback = "incorrect"
         }
+        console.log("UPDATING NUM FROM: "+num)
         num++;
+        console.log("NUM IS: "+num)
     }
-    
+    console.log("UPDATING HAVEDONE FROM: "+haveDone)
+    haveDone++;
+    console.log("HAVEDONE IS: "+haveDone)
+
+    if (callback == "correct"){
+        runMultipleChoice();
+    } else if (callback == "incorrect"){
+        doIncorrect(element.innerHTML);
+    } else {
+        console.error("FAILED TO CHECK");
+    }
 }
 
 function continueMulti(){

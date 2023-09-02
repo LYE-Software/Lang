@@ -146,11 +146,17 @@ function logic(){
     } else if (whatMode == 2){
         console.log("entering multi")
         var copy = currentGroup;
+        if (currentGroup.length <=3){
+            copy = sheet.returnRawData();
+        }
         multipleChoice(currentTerm, copy)
         
     } else if (whatMode == 3){
         console.log("entering multi")
         var copy = currentGroup;
+        if (currentGroup.length <=3){
+            copy = sheet.returnRawData();
+        }
         multipleChoice(currentTerm, copy)
         
     } else if (whatMode == 4){
@@ -195,20 +201,26 @@ function postModeChecks(){
         if (moveOn == true){
             console.warn("[POSTMODE]: Moving on from Group "+subLocation+" and will now go to "+(subLocation+1))
             subLocation++;
-            groupPosition = 0;
-            review_t = 0;
-            ttlForGp = (arrayOfGroups[subLocation].length*5)+reviewIDX.length
-            crForGp = 0;
-            moveBar(0, document.getElementById("groupBar"))
             if (subLocation==arrayOfGroups.length){
                 //Train finished
                 showElement(document.getElementById("completedTrain"))
             }
+            groupPosition = 0;
+            review_t = 0;
+            ttlForGp = (arrayOfGroups[subLocation].length*5)+reviewIDX.length
+            crForGp = 0;
+            moveBar(100, document.getElementById("groupBar"))
+            setTimeout(function(){
+                moveBar(0, document.getElementById("groupBar"))
+            }, 500)
+            
+            
         } else {
             logic()
         }
     }
     logic()
+    
     
 }
 

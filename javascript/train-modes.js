@@ -131,6 +131,7 @@ async function checkMulti(letter){
         await sleep(1000);
         document.getElementById(letter).style.backgroundColor = "wheat";
         advance(term);
+        postModeChecks()
     } else {
         var arrOf = [document.getElementById("a"), document.getElementById("b"), document.getElementById("c"), document.getElementById("d")]
         var correctId;
@@ -144,8 +145,9 @@ async function checkMulti(letter){
         await sleep(1000);
         document.getElementById(correctId).style.backgroundColor = "wheat";
         document.getElementById(letter).style.backgroundColor = "wheat";
+        doIncorrectM(document.getElementById(letter).innerHTML)
     }
-    postModeChecks()
+    
 }
 
 function learn(term_){
@@ -163,5 +165,19 @@ function learn(term_){
 
 function completeLearn(){
     advance(term)
+    postModeChecks()
+}
+
+function doIncorrectM(clicked){
+
+    var toShow = `You chose <strong>${clicked}</strong><br>The correct answer was <strong>${term.answer}</strong>`
+    console.log("APPENDING "+toShow+" TO "+document.getElementById("correctedHolder"))
+    console.log(document.getElementById("correctedHolderMulti"))
+    document.getElementById("correctedHolderMulti").innerHTML = toShow;
+    showElement(document.getElementById("incorrect"))
+}
+
+function continueMulti(){
+    hideElement(document.getElementById("incorrect"))
     postModeChecks()
 }
