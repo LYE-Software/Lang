@@ -62,11 +62,11 @@ function saveToCloud(lucy, dl){
                 var textInputs = currentDiv.querySelectorAll("div[data-input]");
                 console.log("textinputs: "+textInputs)
                 console.log("textinput length "+textInputs.length)
-                console.log("textinput vals: "+textInputs[0].innerHTML+" | "+textInputs[1].innerHTML)
+                console.log("textinput vals: "+textInputs[0].innerText+" | "+textInputs[1].innerText)
                 if (currentDiv.children[0].children[0].className == "showImageHolder"){
                     hasImage = true;
                 }
-                const term = new Term(false, textInputs[0].innerHTML, textInputs[1].innerHTML, hasImage);
+                const term = new Term(false, textInputs[0].innerText, textInputs[1].innerText, hasImage);
                 if (hasImage){
                     var imageUrl = currentDiv.children[0].children[0].src
                     imageUrl = imageUrl.split("/")
@@ -81,17 +81,17 @@ function saveToCloud(lucy, dl){
                 var answers = []
                 for (var j = 2; j<textInputs.length; j++){
                     if (j%2==0){
-                        console.log("appending "+textInputs[j].innerHTML+" to terms")
-                        terms.push(textInputs[j].innerHTML);
+                        console.log("appending "+textInputs[j].innerText+" to terms")
+                        terms.push(textInputs[j].innerText);
                     } else {
                         console.log("appending "+textInputs[j].innerHTML+" to answers")
-                        answers.push(textInputs[j].innerHTML)
+                        answers.push(textInputs[j].innerText)
                     }
                 }
                 if (currentDiv.children[0].children[0].className == "showImageHolder"){
                     hasImage = true;
                 }
-                const term = new MultiTerm(terms, answers, textInputs[0].innerHTML, hasImage)
+                const term = new MultiTerm(terms, answers, textInputs[0].innerText, hasImage)
                 if (hasImage){
                     var imageUrl = currentDiv.children[0].children[0].src
                     imageUrl = imageUrl.split("/")
@@ -146,11 +146,23 @@ function saveToCloud(lucy, dl){
                 }
                 xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
             
-                xhr.onreadystatechange = function () {
+                xhr.onload = function () {
                     if (xhr.readyState === 4) {
                         console.log(xhr.status);
                         console.log(xhr.responseText);
-                        window.location.href="homepage.html";
+                    }
+                    if (xhr.responseText == "name_already_exists"){
+                        showPopup("Please choose a different name for your Studysheet. [ERR: name_already_exists]")
+                        hideElement(document.getElementById("sendingLoader"));
+                        okToUpload = false;
+                    } 
+                    else if (xhr.status !=200){
+                        showPopup("We encountered an error uploading your Studysheet.")
+                        hideElement(document.getElementById("sendingLoader"));
+                        okToUpload = false;
+                    } else {
+                        console.log("going home")
+                        window.location.href = "homepage.html"
                     }
                 };
                 var data = toUpload;
@@ -159,6 +171,7 @@ function saveToCloud(lucy, dl){
             } else if (lucy){
                 return toUpload;
             }
+            
             
         }
     }

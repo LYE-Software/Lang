@@ -4,6 +4,7 @@ function parseFromJSON(rawjson){
     console.log("recieved studysheet: ")
     console.log(recievedStudysheet)
     recievedStudysheet.parseTerms();
+    recievedStudysheet.prep();
     return recievedStudysheet;
 }
 
@@ -103,6 +104,12 @@ class Studysheet {
         }
     }
 
+    prep(){
+        for (var i = 0; i<this.terms.length; i++){
+            this.terms[i].stripExcess();
+        }
+    }
+
 }
 
 class Term {
@@ -126,6 +133,7 @@ class Term {
     }
 
     check(against){
+        var ans = this.answer.toLowerCase;
         if (against.toLowerCase() == this.answer.toLowerCase()){
             return true;
         }
@@ -140,6 +148,13 @@ class Term {
         let tmp = this.answer;
         this.answer = this.term;
         this.term = tmp;
+    }
+
+    stripExcess(){
+        this.answer = this.answer.replaceAll("&nbsp;", "")
+        this.term = this.term.replaceAll("&nbsp;", "")
+        this.answer = this.answer.replaceAll("<div></div>", "")
+        this.term = this.term.replaceAll("<div></div>", "")
     }
 }
 
@@ -175,6 +190,15 @@ class MultiTerm extends Term{
             let tmp = this.terms[i];
             this.terms[i] = this.answers[i];
             this.answers[i] = tmp;
+        }
+    }
+
+    stripExcess(){
+        for (var i = 0; i<this.answers.length; i++){
+            this.answers[i] = this.answers[i].replaceAll("&nbsp;", "");
+            this.terms[i] = this.terms[i].replaceAll("&nbsp;", "");
+            this.answer = this.answer.replaceAll("<div></div>", "")
+            this.term = this.term.replaceAll("<div></div>", "")
         }
     }
 
