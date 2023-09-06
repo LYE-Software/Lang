@@ -34,7 +34,17 @@ async function httpGet(theUrl, lye, sessionid){
         xmlHttp.onerror = (e) => {
             window.localStorage.setItem("serverStatus", `{"error": "Server Not Working", "server":"${window.localStorage.getItem("currentServer")}", "date":"${Date.now()}"}`)
             console.log("Logged server outage")
-            failedServerConnectionOnStart()
+            try {
+                failedServerConnectionOnStart()
+            } catch (e){
+                console.log("not on homepage");
+            }
+
+            try {
+                showElement(document.getElementById("unableToFind"))
+            } catch (e) {
+                console.log("not on sspage")
+            }
         }
     
         xmlHttp.send( null );

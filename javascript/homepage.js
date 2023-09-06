@@ -92,6 +92,9 @@ async function getLibraryList(){
         if (json.error == "session_invalid"){
             failedSignIn();
         }
+        if (json.error == "luna"){
+            sheetJsonInvalid();
+        }
         
         
         // else if (serverData.contains("<!doctype html>")){
@@ -229,6 +232,12 @@ async function getLibraryList(){
     }
 }
 
+function sheetJsonInvalid(){
+    showElement(document.getElementById("jsonMessedUp"))
+    sendFeedback("[SYSTEM] [HOMEPAGE ERROR] UNREADABLE STUDYSHEET USERID "+window.localStorage.getItem("usertoken"))
+}
+
+
 function hideLoadingView() {
     document.getElementById("loadingscreen").style.opacity = "0";
     setTimeout(function(){
@@ -280,9 +289,15 @@ function goToSSPage(){
 }
 
 
-function sendFeedback(){
+function sendFeedback(auto){
     let sessionid = window.localStorage.getItem("usertoken")
-    let feedback = document.getElementById("feedbackInput").value;
+    let feedback = "[SYSTEM] error: feedback did not work"
+    if (auto == null){
+        feedback = document.getElementById("feedbackInput").value;
+    } else {
+        feedback = auto;
+    }
+    
     if (feedback == "" || feedback == null){
         alert("The feedback message cannot be nothing.")
     } else {

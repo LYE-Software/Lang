@@ -108,7 +108,7 @@ function saveToCloud(lucy, dl){
 
         if (dl){
             okToUpload = false;
-            save(JSON.stringify(studysheet), document.getElementById("sstitle").innerHTML)
+            save(JSON.stringify(studysheet), document.getElementById("sstitle").innerText)
             hideElement(document.getElementById("sendingLoader"));
 
         }
