@@ -30,9 +30,13 @@ function saveToCloud(lucy, dl){
     }
     else{
         filename = document.getElementById("sstitle").innerText;
+        filename = filename.replaceAll("&nbsp;", "")
+        filename = filename.replaceAll("<div><br></div>", "")
+        filename = filename.replaceAll("?", "");
         const studysheet = new Studysheet(filename);
         
         var all = document.querySelectorAll("div[data-input]")
+        
         for (var i = 0; i>all.length; i++){
             all[i] = all[i].replaceAll("&nbsp;", "")
             all[i] = all[i].replaceAll("&nbsp;", "")
@@ -108,7 +112,7 @@ function saveToCloud(lucy, dl){
 
         if (dl){
             okToUpload = false;
-            save(JSON.stringify(studysheet), document.getElementById("sstitle").innerText)
+            save(JSON.stringify(studysheet), filename)
             hideElement(document.getElementById("sendingLoader"));
 
         }
