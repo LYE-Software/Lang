@@ -176,8 +176,14 @@ function logic(){
 
 function postModeChecks(){
     var toMove = (totalCorrect/totalNeededToFinish)*100;
+    if (toMove > 100){
+        toMove = 100;
+    }
     moveBar(toMove, document.getElementById("progBar"));
     var toMoveGp = (crForGp/ttlForGp)*100;
+    if (toMoveGp > 100){
+        toMoveGp = 100;
+    }
     moveBar(toMoveGp, document.getElementById("groupBar"))
     console.log("[POSTMODE] Post Mode Checking...")
     console.log("[POSTMODE] currentGroup: "+currentGroup)
