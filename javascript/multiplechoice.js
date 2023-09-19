@@ -60,29 +60,40 @@ function runMultipleChoice() {
         }
     } else {
         var fakeAnswers = getFake(num, sheet);
+        var crAns;
         if (theTerm.isMulti) {
             document.getElementById("multiheader").innerHTML = theTerm.question;
             document.getElementById("multiheader").style.display = "";
             document.getElementById("singleheader").innerHTML = theTerm.terms[mnum];
-            fakeAnswers.push(theTerm.answers[mnum]);
+            crAns = theTerm.answers[mnum];
         } else {
             document.getElementById("singleheader").innerHTML = theTerm.term;
             document.getElementById("multiheader").style.display = "none";
-            fakeAnswers.push(theTerm.answer);
+            crAns = theTerm.answer;
         }
     }
-
     for (let i = fakeAnswers.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         const temp = fakeAnswers[i];
         fakeAnswers[i] = fakeAnswers[j];
         fakeAnswers[j] = temp;
     }
-    document.getElementById("a").innerHTML = fakeAnswers[0];
-    document.getElementById("b").innerHTML = fakeAnswers[1];
-    document.getElementById("c").innerHTML = fakeAnswers[2];
-    document.getElementById("d").innerHTML = fakeAnswers[3];
-
+    idx = Math.floor(Math.random() * 3);
+    fakeAnswers.splice(idx, 0, crAns);
+    if (idx == 0){
+        document.getElementById("a").setAttribute("data-correct", "true");
+    } else if (idx == 1){
+        document.getElementById("b").setAttribute("data-correct", "true");
+    } else if (idx == 2){
+        document.getElementById("c").setAttribute("data-correct", "true");
+    } else if (idx == 3){
+        document.getElementById("d").setAttribute("data-correct", "true");
+    }
+    document.getElementById("a").innerText = fakeAnswers[0];
+    document.getElementById("b").innerText = fakeAnswers[1];
+    document.getElementById("c").innerText = fakeAnswers[2];
+    document.getElementById("d").innerText = fakeAnswers[3];
+    
 
 
 }
@@ -93,8 +104,9 @@ async function checkMulti(element) {
         clearInterval(interval);
         
     }
+    
     if (theTerm.isMulti){
-        if (element.innerHTML == theTerm.answers[mnum]){
+        if (element.getAttribute("data-correct") == "true"){
             element.style.backgroundColor = "#3e8e41";
             await sleep(1000);
             element.style.backgroundColor = "wheat";
@@ -107,14 +119,7 @@ async function checkMulti(element) {
             }
             callback = "correct";
 
-        } else {
-            var correctElem;
-            for (var i = 0; i<buttonArr.length; i++){
-                if (buttonArr[i].innerHTML == theTerm.answers[mnum]){
-                    correctElem = buttonArr[i];
-                    break;
-                }
-            }
+        } else {            
             correctElem.style.backgroundColor = "#3e8e41";
             element.style.backgroundColor = "red";
             await sleep(1000);
@@ -132,7 +137,7 @@ async function checkMulti(element) {
             num++;
         }
     } else {
-        if (element.innerHTML == theTerm.answer){
+        if (element.getAttribute("data-correct") == "true"){
             element.style.backgroundColor = "#3e8e41";
             await sleep(1000);
             element.style.backgroundColor = "wheat";
@@ -147,7 +152,12 @@ async function checkMulti(element) {
         } else {
             var correctElem;
             for (var i = 0; i<buttonArr.length; i++){
-                if (buttonArr[i].innerHTML == theTerm.answer){
+                var toCheck = buttonArr[i].innerText;
+                toCheck = toCheck.replaceAll("&nbsp;", " ")
+                toCheck = toCheck.replaceAll("<div><br></div>", "")
+                toCheck = toCheck.replaceAll('"', "\u2019")  
+                console.log("checking "+toCheck+" AGAINST "+theTerm.answer)
+                if (toCheck == theTerm.answer){
                     correctElem = buttonArr[i];
                     break;
                 }
@@ -164,6 +174,11 @@ async function checkMulti(element) {
         num++;
         console.log("NUM IS: "+num)
     }
+
+    for (var i = 0; i<buttonArr.length; i++){
+        buttonArr[i].setAttribute("data-correct", "false");
+    }
+
     console.log("UPDATING HAVEDONE FROM: "+haveDone)
     haveDone++;
     console.log("HAVEDONE IS: "+haveDone)

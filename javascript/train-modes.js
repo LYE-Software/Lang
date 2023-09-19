@@ -88,19 +88,28 @@ function multipleChoice(term_, arr){
         document.getElementById("term_image_mcq").children[0].src = urlForImage;
         document.getElementById("term_image_mcq").style.display = "";
     }
-    fakes.push(term_)
-    console.log("[MULT] pre-random "+fakes)
-    for (let z = fakes.length - 1; z > 0; z--) {
-        const j = Math.floor(Math.random() * (z + 1));
-        const temp = fakes[z];
-        fakes[z] = fakes[j];
+    for (let i = fakes.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = fakes[i];
+        fakes[i] = fakes[j];
         fakes[j] = temp;
     }
-    console.log("[MULT]fakes: "+fakes)
-    document.getElementById("a").innerHTML = fakes[0].answer;
-    document.getElementById("b").innerHTML = fakes[1].answer;
-    document.getElementById("c").innerHTML = fakes[2].answer;
-    document.getElementById("d").innerHTML = fakes[3].answer;
+    crAns = term_;
+    idx = Math.floor(Math.random() * 3);
+    fakes.splice(idx, 0, crAns);
+    if (idx == 0){
+        document.getElementById("a").setAttribute("data-correct", "true");
+    } else if (idx == 1){
+        document.getElementById("b").setAttribute("data-correct", "true");
+    } else if (idx == 2){
+        document.getElementById("c").setAttribute("data-correct", "true");
+    } else if (idx == 3){
+        document.getElementById("d").setAttribute("data-correct", "true");
+    }
+    document.getElementById("a").innerText = fakes[0].answer;
+    document.getElementById("b").innerText = fakes[1].answer;
+    document.getElementById("c").innerText = fakes[2].answer;
+    document.getElementById("d").innerText = fakes[3].answer;
 
 }
 
@@ -126,10 +135,15 @@ function getMultiFakes(real, arr){
 }
 
 async function checkMulti(letter){
-    if (document.getElementById(letter).innerHTML == term.answer){
+    if (document.getElementById(letter).getAttribute("data-correct") == "true"){
         document.getElementById(letter).style.backgroundColor = "#3e8e41";
         await sleep(1000);
         document.getElementById(letter).style.backgroundColor = "wheat";
+        document.getElementById("a").setAttribute("data-correct", "false");
+        document.getElementById("b").setAttribute("data-correct", "false");
+        document.getElementById("c").setAttribute("data-correct", "false");
+        document.getElementById("d").setAttribute("data-correct", "false");
+
         advance(term);
         postModeChecks()
     } else {
@@ -145,6 +159,10 @@ async function checkMulti(letter){
         await sleep(1000);
         document.getElementById(correctId).style.backgroundColor = "wheat";
         document.getElementById(letter).style.backgroundColor = "wheat";
+        document.getElementById("a").setAttribute("data-correct", "false");
+        document.getElementById("b").setAttribute("data-correct", "false");
+        document.getElementById("c").setAttribute("data-correct", "false");
+        document.getElementById("d").setAttribute("data-correct", "false");  
         doIncorrectM(document.getElementById(letter).innerHTML)
     }
     

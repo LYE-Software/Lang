@@ -75,7 +75,16 @@ function saveToCloud(lucy, dl){
                 if (currentDiv.children[0].children[0].className == "showImageHolder"){
                     hasImage = true;
                 }
-                const term = new Term(false, textInputs[0].innerText.trim(), textInputs[1].innerText.trim(), hasImage);
+                var toAdd1 = textInputs[0].innerText.trim();
+                var toAdd2 = textInputs[1].innerText.trim();
+                toAdd1 = toAdd1.replaceAll("&nbsp;", "")
+                toAdd2 = toAdd2.replaceAll("&nbsp;", "")
+                toAdd1 = toAdd1.replaceAll("<div><br></div>", "")
+                toAdd2 = toAdd2.replaceAll("<div><br></div>", "")
+                toAdd1 = toAdd1.replaceAll('"', "\u2019")      
+                
+                          
+                const term = new Term(false, toAdd1, toAdd2, hasImage);
                 if (hasImage){
                     var imageUrl = currentDiv.children[0].children[0].src
                     imageUrl = imageUrl.split("/")
