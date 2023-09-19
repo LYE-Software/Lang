@@ -119,7 +119,13 @@ async function checkMulti(element) {
             }
             callback = "correct";
 
-        } else {            
+        } else {       
+            var correctElem;
+            for (var i = 0; i<buttonArr.length; i++){
+                if (buttonArr[i].getAttribute("data-correct") == "true"){
+                    correctElem = buttonArr[i];
+                }
+            }     
             correctElem.style.backgroundColor = "#3e8e41";
             element.style.backgroundColor = "red";
             await sleep(1000);
@@ -152,16 +158,10 @@ async function checkMulti(element) {
         } else {
             var correctElem;
             for (var i = 0; i<buttonArr.length; i++){
-                var toCheck = buttonArr[i].innerText;
-                toCheck = toCheck.replaceAll("&nbsp;", " ")
-                toCheck = toCheck.replaceAll("<div><br></div>", "")
-                toCheck = toCheck.replaceAll('"', "\u2019")  
-                console.log("checking "+toCheck+" AGAINST "+theTerm.answer)
-                if (toCheck == theTerm.answer){
+                if (buttonArr[i].getAttribute("data-correct") == "true"){
                     correctElem = buttonArr[i];
-                    break;
                 }
-            }
+            }     
             correctElem.style.backgroundColor = "#3e8e41";
             element.style.backgroundColor = "red";
             await sleep(1000);
