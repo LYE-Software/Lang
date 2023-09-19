@@ -13,17 +13,20 @@ function saveToCloud(lucy, dl){
     if (!lucy){
         showElement(document.getElementById("sendingLoader"));
     }
-    if(document.getElementById("sstitle").innerHTML == "" && !lucy){
+    if(document.getElementById("sstitle").innerText == "" && !lucy){
         showPopup("You forgot to name your Studysheet!")
         hideElement(document.getElementById("sendingLoader"));
         okToUpload = false;
-    } else if (document.getElementById("sstitle").innerHTML.includes("/")){
-        document.getElementById("sstitle").innerHTML = document.getElementById("sstitle").innerHTML.replace("/", "-");
+    } else if (document.getElementById("sstitle").innerText.includes("/")){
+        document.getElementById("sstitle").innerText = document.getElementById("sstitle").innerText.replaceAll("/", "-");
     } 
-    else if (document.getElementById("sstitle").innerHTML.includes("'")){
-        document.getElementById("sstitle").innerHTML = document.getElementById("sstitle").innerHTML.replace("'", "\u2019");
+    if (document.getElementById("sstitle").innerText.includes("'")){
+        document.getElementById("sstitle").innerText = document.getElementById("sstitle").innerText.replaceAll("'", "\u2019");
     }
-    else if (customusername == "invalidsession"){
+    if (document.getElementById("sstitle").innerText.includes("\n")){
+        document.getElementById("sstitle").innerText = document.getElementById("sstitle").innerText.replaceAll("\n", "-");
+    }
+    if (customusername == "invalidsession"){
         // document.getElementById("sendingLoader").style.display="none";
         hideElement(document.getElementById("sendingLoader"));
         document.getElementById("failedSignIn").style.display="";
@@ -33,6 +36,7 @@ function saveToCloud(lucy, dl){
         filename = filename.replaceAll("&nbsp;", "")
         filename = filename.replaceAll("<div><br></div>", "")
         filename = filename.replaceAll("?", "");
+        filename = filename.replaceAll("\n", "-")
         const studysheet = new Studysheet(filename);
         
         var all = document.querySelectorAll("div[data-input]")
@@ -88,7 +92,7 @@ function saveToCloud(lucy, dl){
                         console.log("appending "+textInputs[j].innerText+" to terms")
                         terms.push(textInputs[j].innerText);
                     } else {
-                        console.log("appending "+textInputs[j].innerHTML+" to answers")
+                        console.log("appending "+textInputs[j].innerText+" to answers")
                         answers.push(textInputs[j].innerText)
                     }
                 }
@@ -201,8 +205,8 @@ function creatorModeSelect(){
         customWords = window.localStorage.getItem("fullstudysheet")
         var tmpss = parseFromJSON(customWords)
         window.localStorage.setItem("fullstudysheet", "");
-        document.getElementById("topheader").innerHTML = "Editing "+window.localStorage.getItem("chosenSheet");
-        document.getElementById("sstitle").innerHTML = window.localStorage.getItem("chosenSheet");
+        document.getElementById("topheader").innerText = "Editing "+window.localStorage.getItem("chosenSheet");
+        document.getElementById("sstitle").innerText = window.localStorage.getItem("chosenSheet");
         for (i = 0; i<tmpss.length; i++){
             var term = tmpss.getNthTerm(i);
             
