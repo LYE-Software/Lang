@@ -75,7 +75,7 @@ function saveToCloud(lucy, dl){
                 if (currentDiv.children[0].children[0].className == "showImageHolder"){
                     hasImage = true;
                 }
-                const term = new Term(false, textInputs[0].innerText, textInputs[1].innerText, hasImage);
+                const term = new Term(false, textInputs[0].innerText.trim(), textInputs[1].innerText.trim(), hasImage);
                 if (hasImage){
                     var imageUrl = currentDiv.children[0].children[0].src
                     imageUrl = imageUrl.split("/")
@@ -91,10 +91,10 @@ function saveToCloud(lucy, dl){
                 for (var j = 2; j<textInputs.length; j++){
                     if (j%2==0){
                         console.log("appending "+textInputs[j].innerText+" to terms")
-                        terms.push(textInputs[j].innerText);
+                        terms.push(textInputs[j].innerText.trim());
                     } else {
                         console.log("appending "+textInputs[j].innerText+" to answers")
-                        answers.push(textInputs[j].innerText)
+                        answers.push(textInputs[j].innerText.trim())
                     }
                 }
                 if (currentDiv.children[0].children[0].className == "showImageHolder"){
