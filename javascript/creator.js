@@ -341,9 +341,9 @@ function makeInputs(version, idNum, question, answer, imageSrc){
         answerInput.innerHTML = document.getElementById(usableId).innerHTML;
         document.getElementById(usableId).style.display = "none";
         document.getElementById(usableId).innerHTML = "";
-        document.getElementById("input"+currentId.slice(-1)).style.textAlign = "center";
-        document.getElementById("input"+currentId.slice(-1)).style.fontWeight = "bolder"
-        document.getElementById("input"+currentId.slice(-1)).style.fontSize = "10vw;"
+        //document.getElementById("input"+currentId.slice(-1)).style.textAlign = "center";
+        //document.getElementById("input"+currentId.slice(-1)).style.fontWeight = "bolder"
+        //document.getElementById("input"+currentId.slice(-1)).style.fontSize = "10vw;"
         answerInput.id=id2;
         answerInput.setAttribute("id",id2)
         answerInput.className="definition"
