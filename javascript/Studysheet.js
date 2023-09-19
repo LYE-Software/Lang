@@ -4,7 +4,6 @@ function parseFromJSON(rawjson){
     console.log("recieved studysheet: ")
     console.log(recievedStudysheet)
     recievedStudysheet.parseTerms();
-    recievedStudysheet.prep();
     return recievedStudysheet;
 }
 
@@ -155,6 +154,20 @@ class Term {
         this.term = this.term.replaceAll("&nbsp;", "")
         this.answer = this.answer.replaceAll("<div></div>", "")
         this.term = this.term.replaceAll("<div></div>", "")
+        this.term = this.term.replaceAll("<div><br></div>", "")
+        this.term = this.term.replaceAll("<div><br></div>", "")
+        this.term = this.term.replaceAll('"', "\u2019")
+        this.term = this.term.replaceAll("\n", "_")
+        this.term = this.term.replaceAll("\n", "_")
+        this.term = this.term.replaceAll("\t", "   ")
+        this.term = this.term.replaceAll("\t", "   ")
+        this.answer = this.answer.replaceAll("<div><br></div>", "")
+        this.answer = this.answer.replaceAll("<div><br></div>", "")
+        this.answer = this.answer.replaceAll('"', "\u2019")
+        this.answer = this.answer.replaceAll("\n", "_")
+        this.answer = this.answer.replaceAll("\n", "_")
+        this.answer = this.answer.replaceAll("\t", "   ")
+        this.answer = this.answer.replaceAll("\t", "   ")
     }
 }
 

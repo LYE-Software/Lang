@@ -46,6 +46,7 @@ function saveToCloud(lucy, dl){
             all[i] = all[i].replaceAll("&nbsp;", "")
             all[i] = all[i].replaceAll("<div><br></div>", "")
             all[i] = all[i].replaceAll("<div><br></div>", "")
+            all[i] = all[i].replaceAll('"', "\u2019")
             if (all[i].getAttribute("data-text") == "Answer"){
                 all[i] = all[i].replaceAll("\n", "_")
                 all[i] = all[i].replaceAll("\n", "_")
@@ -128,7 +129,7 @@ function saveToCloud(lucy, dl){
                 hideElement(document.getElementById("sendingLoader"));
                 okToUpload = false;
             }
-            
+            studysheet.prep();
             var toUpload = JSON.stringify(studysheet)
 
             console.log(toUpload);
