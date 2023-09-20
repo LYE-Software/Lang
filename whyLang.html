@@ -25,6 +25,7 @@
         display:flex;
         justify-content: center;
         align-items: center;
+        z-index:3;
     }
     .followingHeader{
         width: 92vw;
@@ -164,6 +165,34 @@
         font-weight:500;
         text-align:left;
     }
+
+    .featureHolder{
+        width:90vw;
+        max-width:900px;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius:20px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding:20px;
+    }
+
+    .detailsHolder{
+        display:flex;
+        align-items: center;
+        flex-wrap:wrap;
+        justify-content: space-evenly;
+    }
+    .details{
+        font-weight:600;
+        font-size:20px;
+    }
+    .trainPic{
+        width:20vw;
+        margin:40px;
+    }
 </style>
 <body>
     
@@ -193,8 +222,11 @@
     <!-- page1 -->
 
     <div class="sectionContainer centerElems wr">
-        <h1 class="bigHeader wt dglow">Why Lang?</h1>
-        <p class="explanatory wt">Scroll to view how we define<br>ourselves, Lang's key advantages, <Br>user testimonials, and a note <br>from our founder.</p>
+        <div>
+            <h1 class="bigHeader wt dglow">Why Should You Use Lang?</h1>
+            <p class="explanatory wt">Scroll to view how we define<br>ourselves, Lang's key advantages, <Br>user testimonials, and a note <br>from our founder.</p>
+        </div>
+       
     </div>
 
 
@@ -207,7 +239,52 @@
     <!--page3-->
     <div class="sectionContainer virtFlex centerVirt wr">
         <h2 class="mainHeader wt dglow">Check Out our Key Features!</h2>
+        <div class="virtFlex">
+            <div class="featureHolder">
+                <h2>Make your class notes into a study guide, instantly.</h2>
+                <div class="detailsHolder">
+                    <img src="assets/onboarding_pics/Langbot_Screenshot.png" style="width:25vw;">
+                    <div style="width:50%;">
+                        <img src="assets/onboarding_pics/note_apps.png" style="width:25vw;">
+                        <p class="details wt">Lang Assistant lets you generate a studysheet from anything- a PDF, class notes, or even just an idea.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="height:40px;"> <!--spacer--></div>
+
+            <div class="featureHolder">
+                <h2>Become the hero of your class, with Lang Share.</h2>
+                <div class="detailsHolder">
+                    <img src="assets/onboarding_pics/Lang_Share.png" style="width:25vw;">
+                    <div style="width:50%;">
+                        
+                        <p class="details wt">Lang creates a unique link to every Studysheet, allowing you to give your friends access to study guides you created.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="height:40px;"> <!--spacer--></div>
+
+            <div class="featureHolder">
+                <h2>Go from knowing nothing to knowing it all, with Lang Train.</h2>
+                <div class="detailsHolder">
+
+                    <div class="virtFlex">
+                        <img class="trainPic" src="assets/onboarding_pics/train_images/flashcard-train.png">
+                        <img class="trainPic" src="assets/onboarding_pics/train_images/mult-train.png">
+                        <img class="trainPic" src="assets/onboarding_pics/train_images/write-train.png">
+                    </div>
+
+                    <div style="width:50%;">
+                        
+                        <p class="details wt">Lang Train -just one of five unique modes- allows you to advance through different modes: flashcards, multiple choice, and write-in, building long-term memory quickly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
         
+
     </div>
 
 
@@ -216,20 +293,18 @@
         <h2 class="mainHeader wt dglow">User Testimonials</h2>
         <div class="testimonialContainer">
             <div class="testimonial">
-                <h2>A User Testimonial</h2>
                 <div class="tcText">
-                    
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet metus gravida, sodales est ac, lacinia quam. Vestibulum hendrerit sem ipsum, sed sodales leo accumsan sed. Integer massa lectus, gravida id suscipit vitae, tempor id justo. Sed non velit et ante convallis vulputate at id libero. Praesent justo nunc, ultrices nec hendrerit id, pulvinar sed erat. Maecenas et metus pharetra, condimentum mi et, dictum felis. In dictum risus lorem, vel euismod nisi semper vel. Duis tellus tellus, cursus eu justo in, suscipit porta risus.
+                    <h2>Lang Train: So Much Faster</h2>
+                    Lang Train's repetition allows me to learn new information much faster than Quizlet's Learn, as you only have to do it once to get a full understanding of the material.    
                 </div>
             </div>
 
             <div style="width:40px;"> <!--spacer--></div>
 
             <div class="testimonial">
-                <h2>A User Testimonial</h2>
                 <div class="tcText">
-                    
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet metus gravida, sodales est ac, lacinia quam. Vestibulum hendrerit sem ipsum, sed sodales leo accumsan sed. Integer massa lectus, gravida id suscipit vitae, tempor id justo. Sed non velit et ante convallis vulputate at id libero. Praesent justo nunc, ultrices nec hendrerit id, pulvinar sed erat. Maecenas et metus pharetra, condimentum mi et, dictum felis. In dictum risus lorem, vel euismod nisi semper vel. Duis tellus tellus, cursus eu justo in, suscipit porta risus.
+                    <h2>Lang Assistant: The Best Way to Go From Notes to Study guide</h2>
+                    Lang Assistant's notes feature lets me take my class notes and turn them directly into a study guide, with no work on my part. This changed my studying routine as I could spend so much more time actually learning the material instead of prepping to learn it.                    
                 </div>
             </div>
         </div>
@@ -239,7 +314,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet metus 
     <!--page5-->
     <div class="sectionContainer virtFlex centerVirt">
         <h2 class="mainHeader wt dglow">A note from our founder.</h2>
-        <div style="width:90vw; max-width: 600px; border-radius:20px; z-index:1;" class="whiteBackdrop">
+        <div style="width:90vw; max-width: 600px; border-radius:20px; z-index:0;" class="whiteBackdrop">
             <div class="tcText">
                 Hi, I'm Nate, and I founded Lang in May of 2022 for one simple reason- because I wanted a studying experience better than existed at the time. As our about page says,
                 I was studying for a French test and grew annoyed of the constant advertisements, or if not advertisements, the constant begging to "please turn off your ad-blocker."
