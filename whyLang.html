@@ -1,0 +1,285 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lang Study is a customizable studying program from Lye Software that prioritizes your privacy and is completely free.">
+    <meta name="keywords" content="Lang, Study, Lang Study, langstudy, langstudy tech, lang study tech, langstudy.tech, lang, language, lye software, Lye Software, quizlet, memrise, flashcard, flashcards, quiz, test, convert from quizlet, export from quizlet">
+    <meta name="author" content="Nate Vemuri">
+    <meta name="author" content="Ryan Pineda">
+    <link rel="icon" href="assets/logos/lang-wheat.png">
+    <title>Why Lang</title>
+    <link rel="stylesheet" href="css/stylesheet.css">
+
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Jost:wght@500;800&family=Poppins:wght@400;500;600;800&display=swap');
+    body{
+        padding:0px;
+        font-family:Poppins;
+    }
+    .followingHeaderBox{
+        position: fixed;
+        width: 100vw;
+        height:15vh;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .followingHeader{
+        width: 92vw;
+        height:10vh;
+        border-radius:10px 10px 0px 0px;
+        display:flex;
+        justify-content: space-evenly;
+        align-items: center;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 20%));
+    }
+    .line{
+        width: 7vw;
+        height:3px;
+        opacity:100% !important;
+        z-index:4;
+        pointer-events:none;
+    }
+    .itemImage{
+        height:8vh;
+        opacity:100% !important;
+        z-index:4;
+        pointer-events:none;
+    }
+    .sectionContainer{
+        width:100vw;
+        min-height:100vh;
+        height:min-content;
+        background-image: linear-gradient(to right, #f5deb3, #001945);
+    }
+    .centerElems{
+        display:flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .bigHeader{
+        font-size:70px;
+    }
+    .explanatory{
+        font-size:30px;
+        text-align: center;
+        font-weight:600;
+    }
+    .wt{
+        color:white;
+    }
+    .bd{
+        font-weight: bold;
+    }
+    .wr{
+        flex-wrap: wrap;
+    }
+    .dglow{
+        text-shadow: #001945 1px 0 10px;
+    }
+    .virtFlex{
+        display:flex;
+        flex-direction: column;
+    }
+    .centerVirt{
+        align-items: center;
+    }
+    .mainHeader{
+        font-size:50px;
+
+    }
+
+
+    .mouse-cursor-gradient-tracking {
+        position: relative;
+        
+        padding: 0.5rem 1rem;
+        font-size: 1.2rem;
+        border: none;
+        color: white;
+        outline: none;
+        overflow: hidden;
+    }
+
+    .mouse-cursor-gradient-tracking span {
+        position: relative;
+    }
+
+    .mouse-cursor-gradient-tracking::before {
+        --size: 0;
+        content: '';
+        position: absolute;
+        left: var(--x);
+        top: var(--y);
+        width: var(--size);
+        height: var(--size);
+        background: radial-gradient(circle closest-side, #f5deb3, transparent);
+        transform: translate(-50%, -50%);
+        transition: width 0.2s ease, height 0.2s ease;
+    }
+
+    .mouse-cursor-gradient-tracking:hover::before {
+        --size: 400px;
+    }
+
+    .progress-container {
+        width: 100%;
+        height: 1vh;
+        background-color: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        z-index:5;
+        pointer-events: all;
+        border-radius:0px 0px 20px 20px;
+    }
+
+    /* The progress bar (scroll indicator) */
+    .progress-bar {
+        height: 1vh;
+        background: #001945;
+        width: 8%;
+        border-radius:0px 0px 20px 20px;
+    }
+
+    .testimonial{
+        height:50vh;
+        width:20vw;
+        background-color: wheat;
+        color:#001945;
+        border-radius:10px;
+        text-align: center;
+        overflow-y:scroll;
+    }
+
+    .testimonialContainer{
+        display:flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .tcText{
+        padding:20px;
+        font-weight:500;
+        text-align:left;
+    }
+</style>
+<body>
+    
+    <!-- HEADER -->
+
+    <div class="followingHeaderBox">
+        <div>
+            <div class="followingHeader whiteBackdrop mouse-cursor-gradient-tracking">
+                <img src="assets/logos/circular lang icon.png" class="itemImage"> 
+                <img class="line" src="assets/icons/seperatorLine.png">
+                <img src="assets/icons/target.png" class="itemImage">
+                <img class="line" src="assets/icons/seperatorLine.png">
+                <img src="assets/icons/upArrow.png" class="itemImage">
+                <img class="line" src="assets/icons/seperatorLine.png">
+                <img src="assets/icons/darkUserIcon.png" class="itemImage"> 
+                <img class="line" src="assets/icons/seperatorLine.png">
+                <img src="assets/icons/note.png" class="itemImage">
+                
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="myBar"></div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- page1 -->
+
+    <div class="sectionContainer centerElems wr">
+        <h1 class="bigHeader wt dglow">Why Lang?</h1>
+        <p class="explanatory wt">Scroll to view how we define<br>ourselves, Lang's key advantages, <Br>user testimonials, and a note <br>from our founder.</p>
+    </div>
+
+
+    <!--page2-->
+    <div class="sectionContainer virtFlex centerVirt wr">
+        <h2 class="mainHeader wt dglow">What is Lang?</h2>
+        <img src="assets/onboarding_pics/mock sspage.png" style="width:70vw;">
+    </div>
+
+    <!--page3-->
+    <div class="sectionContainer virtFlex centerVirt wr">
+        <h2 class="mainHeader wt dglow">Check Out our Key Features!</h2>
+        
+    </div>
+
+
+    <!--page4-->
+    <div class="sectionContainer virtFlex centerVirt wr">
+        <h2 class="mainHeader wt dglow">User Testimonials</h2>
+        <div class="testimonialContainer">
+            <div class="testimonial">
+                <h2>A User Testimonial</h2>
+                <div class="tcText">
+                    
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet metus gravida, sodales est ac, lacinia quam. Vestibulum hendrerit sem ipsum, sed sodales leo accumsan sed. Integer massa lectus, gravida id suscipit vitae, tempor id justo. Sed non velit et ante convallis vulputate at id libero. Praesent justo nunc, ultrices nec hendrerit id, pulvinar sed erat. Maecenas et metus pharetra, condimentum mi et, dictum felis. In dictum risus lorem, vel euismod nisi semper vel. Duis tellus tellus, cursus eu justo in, suscipit porta risus.
+                </div>
+            </div>
+
+            <div style="width:40px;"> <!--spacer--></div>
+
+            <div class="testimonial">
+                <h2>A User Testimonial</h2>
+                <div class="tcText">
+                    
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet metus gravida, sodales est ac, lacinia quam. Vestibulum hendrerit sem ipsum, sed sodales leo accumsan sed. Integer massa lectus, gravida id suscipit vitae, tempor id justo. Sed non velit et ante convallis vulputate at id libero. Praesent justo nunc, ultrices nec hendrerit id, pulvinar sed erat. Maecenas et metus pharetra, condimentum mi et, dictum felis. In dictum risus lorem, vel euismod nisi semper vel. Duis tellus tellus, cursus eu justo in, suscipit porta risus.
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--page5-->
+    <div class="sectionContainer virtFlex centerVirt">
+        <h2 class="mainHeader wt dglow">A note from our founder.</h2>
+        <div style="width:90vw; max-width: 600px; border-radius:20px; z-index:1;" class="whiteBackdrop">
+            <div class="tcText">
+                Hi, I'm Nate, and I founded Lang in May of 2022 for one simple reason- because I wanted a studying experience better than existed at the time. As our about page says,
+                I was studying for a French test and grew annoyed of the constant advertisements, or if not advertisements, the constant begging to "please turn off your ad-blocker."
+                I felt like I had to spend much longer than necessary using these sites, or perform the tedious work of making physical flashcards. So, I decided to try my hand at making a studying program.
+                I could continue forever about how Lang has grown and grown since that day in May, sometimes getting worse before getting better, but that's not what you're here for.
+                <br><br>
+                I want to tell you, potential Lang user, that we here at Lang truly believe in the power of accessible education. Locking these servies behind paywalls is not just bad because you
+                have to watch ads, but because many are missing out on a better education. Sure, these sites don't replace a school, but they surely do help people perform better in school. 
+                <br><br>
+                So, even if you do not decide to use Lang, I just want to say thank you for coming to our site and giving it a chance. Lang runs off of your support, as it is even more powerful than money.
+
+                <br><br>
+                Thanks for visiting,<br><br>
+                Natesh Vemuri
+                <br>Current Co-CEO of Lye Software, Inc.<br>
+                Founder of Lang Study
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let btn = document.querySelector('.mouse-cursor-gradient-tracking');
+    btn.addEventListener('mousemove', e => {
+    let rect = e.target.getBoundingClientRect();
+    let x = e.clientX - rect.left;
+    let y = e.clientY - rect.top;
+    btn.style.setProperty('--x', x + 'px');
+    btn.style.setProperty('--y', y + 'px');
+    });
+
+    window.onscroll = function() {doBar()};
+
+    function doBar() {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100 + 8;
+        if (scrolled > 100){
+            scrolled = 100;
+        }
+        document.getElementById("myBar").style.width = scrolled + "%";
+    }
+</script>
+</html>
