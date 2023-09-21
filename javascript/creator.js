@@ -83,6 +83,12 @@ function saveToCloud(lucy, dl){
                 toAdd2 = toAdd2.replaceAll("<div><br></div>", "")
                 toAdd1 = toAdd1.replaceAll('"', "\u2019")      
                 
+                if (textInputs[0].innerText == "" || textInputs[1].innerText == ""){
+                    showPopup("You cannot have an empty term. Please fill in term #"+(i+1));
+                    okToUpload = false;
+                    hideElement(document.getElementById("sendingLoader"));
+                } console.log("passed nullcheck with "+textInputs[0].innerText +" and "+textInputs[1].innerText)
+
                           
                 const term = new Term(false, toAdd1, toAdd2, hasImage);
                 if (hasImage){
@@ -98,6 +104,11 @@ function saveToCloud(lucy, dl){
                 var terms = []
                 var answers = []
                 for (var j = 2; j<textInputs.length; j++){
+                    if (textInputs[j].innerText == ""){
+                        showPopup("You cannot have an empty term. Please fill in term #"+(i+1)+"'s alternate.");
+                        okToUpload = false;
+                        hideElement(document.getElementById("sendingLoader"));
+                    }
                     if (j%2==0){
                         console.log("appending "+textInputs[j].innerText+" to terms")
                         terms.push(textInputs[j].innerText.trim());
@@ -108,6 +119,11 @@ function saveToCloud(lucy, dl){
                 }
                 if (currentDiv.children[0].children[0].className == "showImageHolder"){
                     hasImage = true;
+                }
+                if (textInputs[0].innerText == ""){
+                    showPopup("You cannot have an empty term. Please fill in multiterm #"+(i+1)+"overall term.");
+                    okToUpload = false;
+                    hideElement(document.getElementById("sendingLoader"));
                 }
                 const term = new MultiTerm(terms, answers, textInputs[0].innerText, hasImage)
                 if (hasImage){
