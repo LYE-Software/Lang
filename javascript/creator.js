@@ -344,7 +344,7 @@ function makeInputs(version, idNum, question, answer, imageSrc){
         
             // verbInput.innerHTML="Put Term / Question Here";
         br.appendChild(verbInput);
-        usableId = "ans"+currentId.slice(-1);
+        usableId = "ans"+currentId.slice(6);
         console.log(usableId)
         var answerInput = document.createElement("div");
         answerInput.innerHTML = document.getElementById(usableId).innerHTML;
