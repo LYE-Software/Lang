@@ -354,6 +354,12 @@
                 transform: scale(1);
             }
         }
+
+        .noIssuesWBD{
+            background-color: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
     </style>
 </head>
 <body onload="doPreviewAndLocal()">
@@ -381,7 +387,7 @@
             <div class="functionRowItem">
                 Create
                 <div class="functionRowItemContents" style="z-index:500;">
-                    <div onclick="window.location.href='creator.html'">New Studysheet</div>
+                    <div onclick="goToCreator()">New Studysheet</div>
                     <div onclick="window.location.href='notes.html'">From Notes</div>
                     <div onclick="window.location.href='quizletconvert.html'">From Quizlet</div>
                 </div>
@@ -485,7 +491,7 @@
         </div>
     </div>
     <div id="notOwned" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:1100; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
-        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:1100; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat;">
+        <div class="verticalFlex centerFlex lightGlow centerText noIssuesWBD" style="z-index:1100; border-radius: 15px; padding: 20px; width: 30vw;">
             <div style="margin-top: 10px; color:red; font-size:20px;"><strong>This Studysheet has been shared.</strong></div>
             <div style="margin-top: 10px;"><strong>You cannot edit a Studysheet that has been shared with you.</strong> </div>
             <div style="margin-top: 10px;">If you are the original creator of this Studysheet, please select it from the Homepage to edit it.</div>
@@ -504,14 +510,29 @@
         </div>
     </div>
     <div id="sharinglink" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:1000; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
-        <div id="thething" class="linkContainer verticalFlex centerFlex centerText whiteBackdrop onclick=null" style="z-index:500;">
+        <div id="thething" class="linkContainer verticalFlex centerFlex centerText whiteBackdrop onclick=null" style="z-index:500; pointer-events:none; opacity:0;">
             <div class="horizontalFlex" style="justify-content: space-between; max-width: 450px; width: 80vw; align-items: center; margin-top: 10px; ">
                 <div onclick="">Send this Lang Studysheet link to your friends!</div>
-                <img style="height: 30px; width: 30px;" src="assets/icons/closeCircle.svg" class="closeIcon" onclick="hideElement(document.getElementById('sharinglink'))">
+                <img style="height: 30px; width: 30px;" src="assets/icons/closeCircle.svg" class="closeIcon" onclick="hideShare()">
             </div>
 
             <div id="linkholder" style="margin: none;" onclick="">Generating your sharable link...</div>
             
+        </div>
+    </div>
+
+    <div class="verticalFlex darkGlow" style="background-color: white; bottom:0; right:0; margin:10px; position:fixed; width:17vw; border-radius:20px; z-index:5000; padding:20px; opacity:0; pointer-events: none;" id="makeAnAccount">
+        <div class="horizontalFlex" style="justify-content: left; width:100%; margin-bottom:20px;">
+            <img style="height: 30px; width: 30px;" src="assets/icons/closeCircle.svg" class="closeIcon" onclick="hideElement(document.getElementById('makeAnAccount'))">
+        </div>
+        <div style="text-align: center; font-weight: bold; font-size:17px;">
+            Save this Studysheet and make your own with a Lang Account.
+        </div>
+        <div class="horizontalFlex">
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 50%; left:0.5; align-items:center; text-align: center; " onclick="window.location.href='https://lye.software/signup?forward=langstudy.tech-homepage.html'">Sign Up</div>
+        </div>
+        <div style="text-align: center; font-size:10px;">
+            By signing up for Lang Study, you agree to the <a href="langlegal.html">Terms & Conditions, as well as the privacy policy.</a>
         </div>
     </div>
 
@@ -537,6 +558,12 @@
 
     function initializeEdit(){
         window.localStorage.setItem("editSheet", "true");
+        window.location.href='creator.html';
+    }
+
+    function goToCreator(){
+        window.localStorage.setItem("fullstudysheet", "");
+        window.localStorage.setItem("chosenSheet", "");
         window.location.href='creator.html';
     }
 

@@ -37,6 +37,12 @@ async function doPreviewAndLocal(){
             showPopup("You already saved this Studysheet!")
         };
         }
+        if (window.localStorage.getItem("usertoken") == null || window.localStorage.getItem("usertoken") == "" || window.localStorage.getItem("usertoken") == "signedout"){
+            document.getElementById("homeusername").innerText = "Sign In"
+            document.getElementById("homeusername").onclick=function(){window.location.href='onboarding-new.html'}
+            showElement(document.getElementById('makeAnAccount'))
+            
+        }
         //document.getElementById("saveBtnHolder").style.display = "";
         console.log("inside shareEvent")
         sessionid = url.searchParams.get("userid")
@@ -47,7 +53,12 @@ async function doPreviewAndLocal(){
         window.localStorage.setItem("lastsheet", chosensheet)
         console.log(chosensheet)
         sheet = await httpGet(connect()+"/v2/studysheet/get?user_id="+sessionid+"&studysheet_id="+chosensheet, false, window.localStorage.getItem("usertoken"))
-        document.getElementById("studysheetname").innerHTML = chosensheet.slice(0,15)+"..."
+        if (chosensheet.length>15){
+            document.getElementById("studysheetname").innerHTML = chosensheet.slice(0,15)+"..."
+
+        } else {
+            document.getElementById("studysheetname").innerHTML = chosensheet
+        }
         document.getElementById("editbutton").style.borderColor = "#a0a0a0"
         document.getElementById("editbutton").style.backgroundColor = "#a0a0a0"
 
@@ -57,6 +68,8 @@ async function doPreviewAndLocal(){
         }
         document.getElementById("shareDisclaimer").style.display = "flex"
         document.getElementById("saveBtn").style.display = ""
+
+        
     
     } 
     //SHARED BACK
@@ -78,7 +91,12 @@ async function doPreviewAndLocal(){
         chosensheet = chosensheet.replaceAll("%26", "&")
         chosensheet = chosensheet.replaceAll("%20", " ");
 
-        document.getElementById("studysheetname").innerHTML = chosensheet.slice(0,15)+"..."
+        if (chosensheet.length>15){
+            document.getElementById("studysheetname").innerHTML = chosensheet.slice(0,15)+"..."
+
+        } else {
+            document.getElementById("studysheetname").innerHTML = chosensheet
+        }
         document.getElementById("editbutton").style.borderColor = "#a0a0a0"
         document.getElementById("editbutton").style.backgroundColor = "#a0a0a0"
 
@@ -240,6 +258,8 @@ async function shareLink(){
     document.getElementById("sharinglink").style.display = ""
     document.getElementById("sharinglink").style.opacity = 1;
     document.getElementById("sharinglink").style.pointerEvents = "all";
+    document.getElementById("thething").style.opacity = 1;
+    document.getElementById("thething").style.pointerEvents = "all";
     var url_string = window.location.href; //window.location.href
     var url = new URL(url_string);
     if(url.searchParams.get("userid") != null){
@@ -265,14 +285,17 @@ async function shareLink(){
 }
 
 
-
+function hideShare(){
+    hideElement(document.getElementById('sharinglink'));
+    hideElement(document.getElementById('thething'));
+}
 
 function saveToLib(){
     if (window.localStorage.getItem("savedShare")){
         showPopup("You already saved this Studysheet!")
         return;
     } 
-    else if (window.localStorage.getItem("usertoken") == null || window.localStorage.getItem("usertoken") == null){
+    else if (window.localStorage.getItem("usertoken") == null || window.localStorage.getItem("usertoken") == "" || window.localStorage.getItem("usertoken") == "signedout"){
         showPopup("You need to be logged in to save Studysheets!")
         return;
     }
