@@ -5,6 +5,14 @@ var correct = 0;
 var incorrect = 0;
 var timing = false;
 var randomized = false;
+descForError = "undefined";
+
+window.onerror = function (msg, url, lineNo, columnNo, error) {
+    console.log("Handling error.")
+    var err =  new LangError(msg, url, lineNo, descForError, "Something unexpected happened. \n", true)
+    return true;
+}
+
 function starter() {
     buttonArr = [document.getElementById("a"), document.getElementById("b"), document.getElementById("c"), document.getElementById("d")];
     // let randomthing = window.localStorage.getItem("random");

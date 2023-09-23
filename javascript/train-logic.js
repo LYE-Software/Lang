@@ -13,6 +13,15 @@ var totalCorrect;
 var ttlForGp;
 var crForGp;
 var swap = false;
+var descForError = "--waiting to start (user configuring settings)--"
+
+window.onerror = function (msg, url, lineNo, columnNo, error) {
+    console.log("Handling error.")
+    var err =  new LangError(msg, url, lineNo, descForError, "Something unexpected happened. \nTrain encountered an error and is unable to continue functioning at the moment.", true)
+    return true;
+}
+
+
 function overrideServer(json){
     window.localStorage.setItem("fullstudysheet", json)
 }
@@ -41,6 +50,7 @@ function doTrain(){
         }
     });
     configureInterface()
+    descForError = "Parsing sheet."
     rawJson = window.localStorage.getItem("fullstudysheet")
     document.title = window.localStorage.getItem("chosenSheet") + " | Lang"
     sheet = parseFromJSON(rawJson)
@@ -57,9 +67,11 @@ function doTrain(){
     } else if (document.getElementById("termsperround").value>=sheet.length) {
         groupLength = sheet.length-1;
     }
+    descForError = "Calculating indexes of review."
     reviewIDX = calculateReview(groupLength);
 
     //dividing questions into groups
+    descForError = "Placing terms into groups."
     var amtOfArr = parseInt(((sheet.length/groupLength)+0.9))
     var cutoff = sheet.length;
     for (var i = 0; i< amtOfArr; i++){
@@ -100,6 +112,7 @@ function doTrain(){
     
 
     //setting up game...
+    descForError = "Setting up game"
     if (swap == true){
         sheet.swapTD();
     }
@@ -118,6 +131,7 @@ function doTrain(){
 
 
 function logic(){
+    descForError = "In logic."
     clearScreen()
     console.warn("[LOGIC] Train Segement Seperation")
     currentGroup = arrayOfGroups[subLocation]
@@ -134,16 +148,19 @@ function logic(){
         }
     }
     if (whatMode == -1){
+        descForError = "While reviewing."
         console.log("entering review");
         var toReview = arrayOfGroups[(subLocation-1)][review_t];
         write(toReview, true)
         review_t++;
     }
     else if (whatMode == 1){
+        descForError = "Learn"
         console.log("entering learn")
         learn(currentTerm)
         
     } else if (whatMode == 2){
+        descForError = "multi"
         console.log("entering multi")
         var copy = currentGroup;
         if (currentGroup.length <=3){
@@ -152,6 +169,7 @@ function logic(){
         multipleChoice(currentTerm, copy)
         
     } else if (whatMode == 3){
+        descForError = "multi"
         console.log("entering multi")
         var copy = currentGroup;
         if (currentGroup.length <=3){
@@ -160,10 +178,12 @@ function logic(){
         multipleChoice(currentTerm, copy)
         
     } else if (whatMode == 4){
+        descForError = "write"
         console.log("entering write")
         write(currentTerm)
         
     } else if (whatMode == 5){
+        descForError = "write"
         console.log("entering write")
         write(currentTerm)
         
@@ -175,6 +195,7 @@ function logic(){
 
 
 function postModeChecks(){
+    descForError = "Doing postmode checks"
     var toMove = (totalCorrect/totalNeededToFinish)*100;
     if (toMove > 100){
         toMove = 100;

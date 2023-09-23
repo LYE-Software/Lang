@@ -10,7 +10,13 @@ onresize = (event) => {
         document.getElementById("shelf").style.display = ""
     }
 };
+descForError = "undefined";
 
+window.onerror = function (msg, url, lineNo, columnNo, error) {
+    console.log("Handling error.")
+    var err =  new LangError(msg, url, lineNo, descForError, "Something unexpected happened. \nMastery is unable to continue.", true)
+    return true;
+}
 
 
 function checkSettings(){

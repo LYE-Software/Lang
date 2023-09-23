@@ -1,7 +1,13 @@
 //Written by nwvbug- https://github.com/nwvbug 
 //GitHub Repo: https://github.com/lye-software/Lang
+descForError = "undefined";
 
-
+window.onerror = function (msg, url, lineNo, columnNo, error) {
+    console.log("Handling error.")
+    var err =  new LangError(msg, url, lineNo, descForError, "Something unexpected happened. \n", true)
+    return true;
+}
+descForError = "undefined";
 var sessionid;
 var toSend;
 //saving & creator stuff

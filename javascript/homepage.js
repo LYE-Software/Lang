@@ -3,6 +3,13 @@ if (window.localStorage.getItem("serverStatus") == null){
     console.log("first time server init")
     window.localStorage.setItem("serverStatus", "no-issues")
 }
+descForError = "undefined";
+
+window.onerror = function (msg, url, lineNo, columnNo, error) {
+    console.log("Handling error.")
+    var err =  new LangError(msg, url, lineNo, descForError, "Something unexpected happened.", true)
+    return true;
+}
 
 var switchServerTimeout = setTimeout(function(){
     console.warn("its been 10 seconds, asking switch")

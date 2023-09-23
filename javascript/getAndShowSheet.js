@@ -21,6 +21,14 @@
 //     `
 //     return true;
 // }
+descForError = "undefined";
+
+window.onerror = function (msg, url, lineNo, columnNo, error) {
+    console.log("Handling error.")
+    var err =  new LangError(msg, url, lineNo, descForError, "Something unexpected happened. \n", true)
+    return true;
+}
+
 async function doPreviewAndLocal(){
     hideElement(document.getElementById("flashcardBox"))
     console.log("in dopreview")

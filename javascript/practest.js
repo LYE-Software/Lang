@@ -1,5 +1,10 @@
+descForError = "undefined";
 
-
+window.onerror = function (msg, url, lineNo, columnNo, error) {
+    console.log("Handling error.")
+    var err =  new LangError(msg, url, lineNo, descForError, "Something unexpected happened. \n", true)
+    return true;
+}
 var sheet;
 function doPracticeTest(){
     rawJson = window.localStorage.getItem("fullstudysheet")
