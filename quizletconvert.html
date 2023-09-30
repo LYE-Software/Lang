@@ -160,8 +160,12 @@
                 console.log(xhr.responseText);
                 var newStudysheet = xhr.responseText;
                 readableSS = JSON.parse(newStudysheet)
-                if (readableSS.error != null){
-                    showPopup("Quizlet Converter was unable to process your request. Check your link and try again. Error message: "+readableSS.quizlet_error)
+                if (typeof readableSS.error !== 'undefined'){
+                    if (readableSS.error == "unknown_quizlet_error"){
+                        showPopup("Quizlet Converter was unable to process your request. Check your link and try again. Error message: "+readableSS.quizlet_error)
+                    } else {
+                        showPopup("Quizlet Converter was unable to process your request. Check your link and try again. Error message: "+readableSS.error)
+                    }
                 } else {
                     window.localStorage.setItem("fullstudysheet", newStudysheet);
                     window.location.href="creator.html";
