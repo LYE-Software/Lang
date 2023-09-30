@@ -9,6 +9,7 @@
     <link rel="icon" href="assets/logos/circular lang icon.png">
     <script src="javascript/loadBalancer.js"></script>
     <script src="javascript/utils.js"></script>
+    <script src="javascript/LangError.js"></script>
     <style>
         #studysetinput {
             left: 0;
@@ -161,10 +162,12 @@
                 var newStudysheet = xhr.responseText;
                 readableSS = JSON.parse(newStudysheet)
                 if (typeof readableSS.error !== 'undefined'){
-                    if (readableSS.error == "unknown_quizlet_error"){
-                        showPopup("Quizlet Converter was unable to process your request. Check your link and try again. Error message: "+readableSS.quizlet_error)
-                    } else {
-                        showPopup("Quizlet Converter was unable to process your request. Check your link and try again. Error message: "+readableSS.error)
+                    if (readableSS.error == "unknown_quizlet_error") { 
+                        showPopup("We ran into an unexpected issue with Quizlet. Here's what Quizlet said when we tried to read your Quizlet Study Set: "+readableSS.quizlet_error)
+                        e = new LangError("Unexpected Quizlet Issue: "+readableSS.quizlet_error, "quizletconvert", "unknown", "unknown", "We ran into an unexpected issue with Quizlet. Here's what Quizlet said when we tried to read your Studysheet: "+readableSS.quizlet_error, false)
+                    } 
+                    else { 
+                        showPopup("We couldn't get your Quizlet Study Set because it's marked as private on Quizlet.")
                     }
                 } else {
                     window.localStorage.setItem("fullstudysheet", newStudysheet);
