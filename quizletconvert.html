@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/stylesheet.css">
     <link rel="icon" href="assets/logos/circular lang icon.png">
     <script src="javascript/loadBalancer.js"></script>
+    <script src="javascript/utils.js"></script>
     <style>
         #studysetinput {
             left: 0;
@@ -113,7 +114,16 @@
             Continue
         </div>
     </div>
-
+    <div id="popup" class="popupContainer" style="z-index:2000;">
+        <div class="popup centerFlex verticalFlex">
+            <div style="margin: 50px;">
+                <img style="height:10vh;" src="assets/icons/langerror.png" alt="error">
+            </div>
+            <div style="margin-bottom: 30px;" id="popupText">Quizlet Convert had an error.</div>
+            
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="window.location.href='../homepage.html'">Ok</div>
+        </div>
+    </div>
 
 
 
@@ -149,8 +159,14 @@
                 console.log(xhr.status);
                 console.log(xhr.responseText);
                 var newStudysheet = xhr.responseText;
-                window.localStorage.setItem("fullstudysheet", newStudysheet);
-                window.location.href="creator.html";
+                readableSS = JSON.parse(newStudysheet)
+                if (readableSS.error != null){
+                    showPopup("Quizlet Converter was unable to process your request. Check your link and try again. Error message: "+readableSS.quizlet_error)
+                } else {
+                    window.localStorage.setItem("fullstudysheet", newStudysheet);
+                    window.location.href="creator.html";
+                }
+                
             }
         };
         var data = link;
