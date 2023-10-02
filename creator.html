@@ -234,16 +234,30 @@
             transform: scaleX(1.02)
         }
 
+        .termDefContainer > input {}
+
         .term {
+            width: 100px;
+
+            all: unset;
+
             flex: 1;
-            border-bottom: var(--primary-dark) 1px solid;
+            border-bottom: var(--primary-dark) 1px solid !important;
             margin-right: 25px;
+
+            width: auto;
+
         }
 
         .definition {
+            all: unset;
+
             flex: 1;
-            border-bottom: var(--primary-dark) 1px solid;
+            border-bottom: var(--primary-dark) 1px solid !important;
+
+            width: auto;
         }
+        
         .arrowAlt{
             width: 50px;
             height: 27px;
