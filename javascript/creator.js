@@ -357,18 +357,19 @@ function makeInputs(version, idNum, question, answer, imageSrc){
         id1 = "input"+generateIdV
         id2 = "input"+generateIdA
 
-        var verbInput = document.createElement('div');
+        var verbInput = document.createElement('INPUT');
         verbInput.id=id1;
         verbInput.className="term"
         verbInput.setAttribute("data-text", "Question");
         verbInput.setAttribute("data-input", "true");
+        verbInput.setAttribute("type", "text");
         verbInput.contentEditable="true";
         
             // verbInput.innerHTML="Put Term / Question Here";
         br.appendChild(verbInput);
         usableId = "ans"+currentId.slice(6);
         console.log(usableId)
-        var answerInput = document.createElement("div");
+        var answerInput = document.createElement("INPUT");
         answerInput.innerHTML = document.getElementById(usableId).innerHTML;
         document.getElementById(usableId).style.display = "none";
         document.getElementById(usableId).innerHTML = "";
@@ -381,6 +382,7 @@ function makeInputs(version, idNum, question, answer, imageSrc){
         answerInput.setAttribute("data-input", "true");
         answerInput.contentEditable="true";
         answerInput.setAttribute("data-text", "Answer");
+        verbInput.setAttribute("type", "text");
         
         // answerInput.innerHTML="Put Answer Here";
         br.appendChild(answerInput);
@@ -436,18 +438,19 @@ function createCreatorInput(term, definition, imageSrc) {
         }
         imageHolder.append(blankImage);
 
-        var verbInput = document.createElement('div');
+        var verbInput = document.createElement('INPUT');
         verbInput.id=id1;
         verbInput.className="term"
         verbInput.innerHTML=term;
         verbInput.setAttribute("data-text", "Question");
         verbInput.setAttribute("data-input", "true");
+        verbInput.setAttribute("type", "text");
         verbInput.contentEditable="true";
         generateIdV++
             // verbInput.innerHTML="Put Term / Question Here";
         stuffHolder.appendChild(verbInput);
     
-        var answerInput = document.createElement("div");
+        var answerInput = document.createElement("INPUT");
         answerInput.id=id2;
         answerInput.setAttribute("id",id2)
         answerInput.className="definition"
@@ -456,6 +459,7 @@ function createCreatorInput(term, definition, imageSrc) {
         answerInput.innerHTML=definition;
         answerInput.setAttribute("data-text", "Answer");
         answerInput.setAttribute("data-input", "true");
+        answerInput.setAttribute("type", "text");
         generateIdA++
         // answerInput.innerHTML="Put Answer Here";
         stuffHolder.appendChild(answerInput);
