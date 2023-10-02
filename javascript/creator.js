@@ -202,12 +202,12 @@ function saveToCloud(lucy, dl){
                         okToUpload = false;
                     } else {
                         console.log("going home")
-                        //window.location.href = "homepage.html"
+                        window.location.href = "homepage.html"
                     }
                 };
                 var data = toUpload;
                 console.log("sending " + data + " to " + url);
-                //xhr.send(data);
+                xhr.send(data);
             } else if (lucy){
                 return toUpload;
             }
