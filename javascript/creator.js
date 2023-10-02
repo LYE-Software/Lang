@@ -74,26 +74,26 @@ function saveToCloud(lucy, dl){
             var hasImage = false;
             var currentDiv = overallDivArray[i];
             if (currentDiv.getAttribute("data-multi") == "false"){
-                var textInputs = currentDiv.querySelectorAll("div[data-input]");
+                var textInputs = currentDiv.querySelectorAll("input");
                 console.log("textinputs: "+textInputs)
                 console.log("textinput length "+textInputs.length)
-                console.log("textinput vals: "+textInputs[0].innerText+" | "+textInputs[1].innerText)
+                console.log("textinput vals: "+textInputs[0].value+" | "+textInputs[1].value)
                 if (currentDiv.children[0].children[0].className == "showImageHolder"){
                     hasImage = true;
                 }
-                var toAdd1 = textInputs[0].innerText.trim();
-                var toAdd2 = textInputs[1].innerText.trim();
+                var toAdd1 = textInputs[0].value.trim();
+                var toAdd2 = textInputs[1].value.trim();
                 toAdd1 = toAdd1.replaceAll("&nbsp;", "")
                 toAdd2 = toAdd2.replaceAll("&nbsp;", "")
                 toAdd1 = toAdd1.replaceAll("<div><br></div>", "")
                 toAdd2 = toAdd2.replaceAll("<div><br></div>", "")
                 toAdd1 = toAdd1.replaceAll('"', "\u2019")      
                 
-                if (textInputs[0].innerText == "" || textInputs[1].innerText == ""){
+                if (textInputs[0].value == "" || textInputs[1].value == ""){
                     showPopup("You cannot have an empty term. Please fill in term #"+(i+1));
                     okToUpload = false;
                     hideElement(document.getElementById("sendingLoader"));
-                } console.log("passed nullcheck with "+textInputs[0].innerText +" and "+textInputs[1].innerText)
+                } console.log("passed nullcheck with "+textInputs[0].value +" and "+textInputs[1].value)
 
                           
                 const term = new Term(false, toAdd1, toAdd2, hasImage);
@@ -105,33 +105,33 @@ function saveToCloud(lucy, dl){
                 }
                 studysheet.add(term);
             } else {
-                var textInputs = currentDiv.querySelectorAll("div[data-input]");
+                var textInputs = currentDiv.querySelectorAll("input[data-input]");
                 console.log("textinputs: "+textInputs)
                 var terms = []
                 var answers = []
                 for (var j = 2; j<textInputs.length; j++){
-                    if (textInputs[j].innerText == ""){
+                    if (textInputs[j].value == ""){
                         showPopup("You cannot have an empty term. Please fill in term #"+(i+1)+"'s alternate.");
                         okToUpload = false;
                         hideElement(document.getElementById("sendingLoader"));
                     }
                     if (j%2==0){
-                        console.log("appending "+textInputs[j].innerText+" to terms")
-                        terms.push(textInputs[j].innerText.trim());
+                        console.log("appending "+textInputs[j].value+" to terms")
+                        terms.push(textInputs[j].value.trim());
                     } else {
-                        console.log("appending "+textInputs[j].innerText+" to answers")
-                        answers.push(textInputs[j].innerText.trim())
+                        console.log("appending "+textInputs[j].value+" to answers")
+                        answers.push(textInputs[j].value.trim())
                     }
                 }
                 if (currentDiv.children[0].children[0].className == "showImageHolder"){
                     hasImage = true;
                 }
-                if (textInputs[0].innerText == ""){
+                if (textInputs[0].value == ""){
                     showPopup("You cannot have an empty term. Please fill in multiterm #"+(i+1)+"overall term.");
                     okToUpload = false;
                     hideElement(document.getElementById("sendingLoader"));
                 }
-                const term = new MultiTerm(terms, answers, textInputs[0].innerText, hasImage)
+                const term = new MultiTerm(terms, answers, textInputs[0].value, hasImage)
                 if (hasImage){
                     var imageUrl = currentDiv.children[0].children[0].src
                     imageUrl = imageUrl.split("/")
@@ -202,12 +202,12 @@ function saveToCloud(lucy, dl){
                         okToUpload = false;
                     } else {
                         console.log("going home")
-                        window.location.href = "homepage.html"
+                        //window.location.href = "homepage.html"
                     }
                 };
                 var data = toUpload;
                 console.log("sending " + data + " to " + url);
-                xhr.send(data);
+                //xhr.send(data);
             } else if (lucy){
                 return toUpload;
             }
@@ -370,9 +370,9 @@ function makeInputs(version, idNum, question, answer, imageSrc){
         usableId = "ans"+currentId.slice(6);
         console.log(usableId)
         var answerInput = document.createElement("INPUT");
-        answerInput.innerHTML = document.getElementById(usableId).innerHTML;
+        answerInput.value = document.getElementById(usableId).value;
         document.getElementById(usableId).style.display = "none";
-        document.getElementById(usableId).innerHTML = "";
+        document.getElementById(usableId).value = "";
         //document.getElementById("input"+currentId.slice(-1)).style.textAlign = "center";
         //document.getElementById("input"+currentId.slice(-1)).style.fontWeight = "bolder"
         //document.getElementById("input"+currentId.slice(-1)).style.fontSize = "10vw;"
@@ -382,7 +382,7 @@ function makeInputs(version, idNum, question, answer, imageSrc){
         answerInput.setAttribute("data-input", "true");
         answerInput.contentEditable="true";
         answerInput.setAttribute("data-text", "Answer");
-        verbInput.setAttribute("type", "text");
+        answerInput.setAttribute("type", "text");
         
         // answerInput.innerHTML="Put Answer Here";
         br.appendChild(answerInput);
@@ -441,7 +441,7 @@ function createCreatorInput(term, definition, imageSrc) {
         var verbInput = document.createElement('INPUT');
         verbInput.id=id1;
         verbInput.className="term"
-        verbInput.innerHTML=term;
+        verbInput.value=term;
         verbInput.setAttribute("data-text", "Question");
         verbInput.setAttribute("data-input", "true");
         verbInput.setAttribute("type", "text");
@@ -456,7 +456,7 @@ function createCreatorInput(term, definition, imageSrc) {
         answerInput.className="definition"
         answerInput.contentEditable="true";
         console.log("def going in is the: "+definition)
-        answerInput.innerHTML=definition;
+        answerInput.value=definition;
         answerInput.setAttribute("data-text", "Answer");
         answerInput.setAttribute("data-input", "true");
         answerInput.setAttribute("type", "text");
