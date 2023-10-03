@@ -32,6 +32,9 @@ function saveToCloud(lucy, dl){
     if (document.getElementById("sstitle").innerText.includes("\n")){
         document.getElementById("sstitle").innerText = document.getElementById("sstitle").innerText.replaceAll("\n", "-");
     }
+    if (document.getElementById("sstitle").innerText.includes(":")){
+        document.getElementById("sstitle").innerText = document.getElementById("sstitle").innerText.replaceAll(":", "-");
+    }
     if (customusername == "invalidsession"){
         // document.getElementById("sendingLoader").style.display="none";
         hideElement(document.getElementById("sendingLoader"));
