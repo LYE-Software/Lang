@@ -257,16 +257,16 @@ function creatorModeSelect(){
                 document.getElementById("tdc"+i).children[1].children[2].click();
                 //document.getElementById("tdc"+i).children[1].children[1].innerHTML = term.question;
                 console.log("WHAT IS THE TERM QUESTION:: "+term.question)
-                var firstTwo = document.getElementById("tdc"+i).children[2].children[1].querySelectorAll("div[data-input]");
-                firstTwo[0].innerHTML = term.terms[0];
-                firstTwo[1].innerHTML = term.answers[0];
+                var firstTwo = document.getElementById("tdc"+i).children[2].children[1].querySelectorAll("input[data-input]");
+                firstTwo[0].value = term.terms[0];
+                firstTwo[1].value = term.answers[0];
                 var x = 3;
                 for (var j =1; j<term.length; j++){
                     //continue making & filling after 1st alt
                     document.getElementById("tdc"+i).children[1].children[2].click();
-                    var next = document.getElementById("tdc"+i).children[x].children[1].querySelectorAll("div[data-input]");
-                    next[0].innerHTML = term.terms[j]
-                    next[1].innerHTML = term.answers[j]
+                    var next = document.getElementById("tdc"+i).children[x].children[1].querySelectorAll("input[data-input]");
+                    next[0].value = term.terms[j]
+                    next[1].value = term.answers[j]
                     x++;
                 }
 
