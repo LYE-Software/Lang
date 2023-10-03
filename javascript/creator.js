@@ -477,6 +477,7 @@ function createCreatorInput(term, definition, imageSrc) {
         var image = document.createElement("img");
         image.src="assets/icons/proto.nobg.arrow.svg";
         image.className="arrowAlt";
+        image.setAttribute("title", "Multi Answer");
         image.id = id3;
         generateIdYou++;
         image.onclick = function(){
@@ -491,6 +492,7 @@ function createCreatorInput(term, definition, imageSrc) {
         var svg = document.createElement("div");
         svg.innerHTML = trash_svg;
         svg.className = "trash";
+        svg.setAttribute("title", "Delete");
         svg.onclick = function(){
             generateIdA--;
             generateIdV--;
@@ -504,6 +506,7 @@ function createCreatorInput(term, definition, imageSrc) {
         var svg2 = document.createElement("div");
         svg2.innerHTML = image_svg;
         svg2.className = "trash";
+        svg2.setAttribute("title", "Add Image");
         svg2.onclick = function(){
             parent = this.parentNode  
             grandparent = parent.parentNode         
