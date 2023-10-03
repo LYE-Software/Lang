@@ -91,6 +91,7 @@ function saveToCloud(lucy, dl){
                 toAdd1 = toAdd1.replaceAll("<div><br></div>", "")
                 toAdd2 = toAdd2.replaceAll("<div><br></div>", "")
                 toAdd1 = toAdd1.replaceAll('"', "\u2019")      
+                toAdd2 = toAdd2.replaceAll('"', "\u2019")      
                 toAdd2 = toAdd2.replaceAll("\\,", ",")
                 toAdd1 = toAdd1.replaceAll('\\,', ",")   
                 
