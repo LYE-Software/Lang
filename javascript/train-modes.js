@@ -30,7 +30,7 @@ function checkWrite(){
         console.log("[WRITE] nothing detected")
     } else {
         console.log("[WRITE]Checking answer by comparing "+usrInput+" to "+term.answer.toLowerCase())
-        if (usrInput == term.answer){
+        if (usrInput.toLowercase() == term.answer.toLowercase(){
             console.log("[WRITE]Answer determined to be correct")
             // console.log("Advancing T "+t+"which would be "+group[t])
             
