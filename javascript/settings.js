@@ -112,7 +112,7 @@ function build(elem){
         <div style="display:flex; justify-content:space-evenly;">
         <img style="height:100px; " src='assets/logos/Lang 5.png'>  
         </div>
-        <p>Lang Client: Version 5.2.3</p>
+        <p>Lang Client: Version 5.2.4</p>
         <p>Lang Servers: LS Version 2</p>
         <p>Lang Assistant: LA Version 2</p>
         <p>Lang is owned by Lye Software, Inc.</p>
