@@ -234,6 +234,10 @@
                 display: none;
             }
 
+            .notif{
+                display:none;
+            }
+
             #contentContainer {
                 margin: 0;
                 width: 100%;
@@ -269,7 +273,29 @@
 
             pointer-events: all;
         }
-        
+
+        .notif{
+            transition:0.5s;
+            padding:10px;
+            border-radius:400px;
+            cursor:pointer;
+        }
+        .notif:hover{
+            background-color: white;
+        }
+
+        .notifBox{
+            border-top: #001945 4px solid;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .notifTitle{
+            width:25%;
+            border-right: #001945 2px solid;
+            padding:15px;
+        }
     </style>
 </head>
 <body onload="getLibraryList()"> 
@@ -330,6 +356,9 @@
                 </div>
             </div>
             <notdiv class="flexSpacer"></notdiv>
+            <div class="notif" style="margin-right:3vh;" onclick="showElement(document.getElementById('notificationPopup'))">
+                <img src="assets/icons/notifications.png" style="height:3vh;">
+            </div>
         </div>
 
         <div id="bodyContent" class="body centerFlex verticalFlex" style="justify-content: center; margin-top: 50px;">
@@ -496,6 +525,38 @@
         </div>
     </div>
     
+    <div class="popupContainer" id="notificationPopup">
+        <div class="popup" style="width:700px; max-width: 90vw;">
+            <img src="assets/icons/closeCircle.svg" style="height:30px; cursor:pointer;" onclick="hideElement(document.getElementById('notificationPopup'))">
+            <div class="horizonalFlex centerFlex" style="display:flex; margin:30px;">
+                <img src="assets/icons/notifications.png" style="height:5vh;">
+            </div>
+            <div style="text-align: center;font-size: 30px; margin-bottom:10px;"><strong>Notifications</strong></div>
+            <div style="text-align: center; font-size: 20px; margin-bottom:20px;" >Read what the developers have to say.</div>
+
+            <div class="notifBox">
+                <div class="notifTitle">
+                    <strong>We're working on it!</strong>
+                </div>
+                <p style="padding:10px; width:75%;">Huge thank-yous to everyone using Lang and reporting errors in the bug / feedback reporter. We see your messages and are working on them. Train and Practice Test specifically are getting patches soon. New features are on their way!</p>
+            </div>
+
+            <div class="notifBox">
+                <div class="notifTitle">
+                    <strong>PG&E Outages</strong>
+                </div>
+                <p style="padding:10px; width:75%;">We want to apologize to those users who found themselves imapcted by the Lang outage on October 3rd relating to the PG&E Power Shutoff. We are taking measures to ensure this cannot happen again, regardless of what PG&E decides to do.</p>
+            </div>
+
+            <div class="notifBox">
+                <div class="notifTitle">
+                    <strong>Thank you for using Lang!</strong>
+                </div>
+                <p style="padding:10px; width:75%;">Thank you for signing up to Lang! Your support allows us to continue providing this service free for all.</p>
+            </div>
+        </div>
+    </div>
+
 </body> 
 <script>
     function noStudySheets() {
