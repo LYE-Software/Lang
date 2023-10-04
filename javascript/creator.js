@@ -477,7 +477,7 @@ function createCreatorInput(term, definition, imageSrc) {
         var image = document.createElement("img");
         image.src="assets/icons/proto.nobg.arrow.svg";
         image.className="arrowAlt";
-        image.setAttribute("title", "Multi Answer");
+        image.setAttribute("title", "Add Subquestion");
         image.id = id3;
         generateIdYou++;
         image.onclick = function(){
