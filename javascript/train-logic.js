@@ -149,10 +149,16 @@ function logic(){
     }
     if (whatMode == -1){
         descForError = "While reviewing."
-        console.log("entering review");
-        var toReview = arrayOfGroups[(subLocation-1)][review_t];
+        console.log("entering review"); // YOU ARE THE PROBLEM
+        var toReview = arrayOfGroups[(subLocation-1)][review_t]; // REVIEW t GOT TOO HIGH
+        if (toReview >= arrayOfGroups[(subLocation-1)].length-1){
+            console.log("huh that went too high");
+        } else {
+            review_t++;
+        }
         write(toReview, true)
-        review_t++;
+        
+        
     }
     else if (whatMode == 1){
         descForError = "Learn"
@@ -231,6 +237,7 @@ function postModeChecks(){
             if (subLocation==arrayOfGroups.length){
                 //Train finished
                 showElement(document.getElementById("completedTrain"))
+                return
             }
             groupPosition = 0;
             review_t = 0;
