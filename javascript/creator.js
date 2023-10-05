@@ -94,8 +94,10 @@ function saveToCloud(lucy, dl){
                 toAdd2 = toAdd2.replaceAll('"', "\u2019")      
                 toAdd2 = toAdd2.replaceAll("\\,", ",")
                 toAdd1 = toAdd1.replaceAll('\\,', ",")   
-                toAdd1 = (toAdd1 + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
-                toAdd2 = (toAdd2 + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
+                toAdd2 = toAdd2.replaceAll("\\'", "'")
+                toAdd1 = toAdd1.replaceAll("\\'", "'")
+                // toAdd1 = (toAdd1 + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
+                // toAdd2 = (toAdd2 + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
                 if (textInputs[0].value == "" || textInputs[1].value == ""){
                     showPopup("You cannot have an empty term. Please fill in term #"+(i+1));
                     okToUpload = false;
