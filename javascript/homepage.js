@@ -199,8 +199,9 @@ async function getLibraryList(){
                     div3.style.stroke = "var(--primary-light)";
                     div3.setAttribute("studysheet", library[i].name);
                     div3.id = "studysheet"+i;
+                    div3.setAttribute("data-studysheetID", library[i].studysheet_id)
                     div3.onclick = function(){
-                        var studysheetname = document.getElementById(this.id).getAttribute("studysheet")       
+                        var studysheetname = document.getElementById(this.id).getAttribute("data-studysheetID")       
                         window.localStorage.setItem("chosenSheet", studysheetname)
                         window.location.href="studysheetpage.html";
                     }
@@ -291,7 +292,7 @@ function goToSSPage(){
     index = document.getElementsByClassName("selected")[0].id;
     console.log("index is: "+index)
     console.log("newarr[index] is: "+library[index])
-    window.localStorage.setItem("chosenSheet", library[index].name)
+    window.localStorage.setItem("chosenSheet", library[index].studysheet_id)
     window.location.href="studysheetpage.html";
 }
 
