@@ -76,9 +76,9 @@ function startMastery(){
     //document.getElementById("hint").classList.remove("showHint");
 
     input = document.getElementById("input")
-    input.setAttribute("autocorrect", "off")
-    input.setAttribute("autocomplete", "off")
-    input.setAttribute("spellcheck", "off")
+    input.setAttribute("autocorrect", "false")
+    input.setAttribute("autocomplete", "false")
+    input.setAttribute("spellcheck", "false")
     input.style.display = "flex";
     total = sheet.getFullLength();
 

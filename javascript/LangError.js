@@ -46,6 +46,10 @@ class LangError{
             console.log("Unable to report error. Returning.")
             return;
         }
+        if (location.hostname!="langstudy.tech"){
+            console.log("Not on LANGSTUDY- not reporting.");
+            return;
+        }
         var em = "[AUTO ERROR LOG ON "+this.filename+"]" + "Line#: "+this.lineno+" | Program desc: "+this.where+" | Shown to User: "+this.userReadable+" | ERROR MESSAGE: "+this.devMessage;
         var url = "https://backend.langstudy.tech/feedback/"+sessionid;
         var xhr = new XMLHttpRequest();
