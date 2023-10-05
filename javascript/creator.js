@@ -94,7 +94,8 @@ function saveToCloud(lucy, dl){
                 toAdd2 = toAdd2.replaceAll('"', "\u2019")      
                 toAdd2 = toAdd2.replaceAll("\\,", ",")
                 toAdd1 = toAdd1.replaceAll('\\,', ",")   
-                
+                toAdd1 = (toAdd1 + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
+                toAdd2 = (toAdd2 + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
                 if (textInputs[0].value == "" || textInputs[1].value == ""){
                     showPopup("You cannot have an empty term. Please fill in term #"+(i+1));
                     okToUpload = false;
@@ -235,7 +236,10 @@ function creatorModeSelect(){
     } else {
         console.log("Local Studying is disabled.")
     }
-
+    if (window.localStorage.getItem("usertoken") == "" || window.localStorage.getItem("usertoken") == null || window.localStorage.getItem("usertoken") == "signedout"){
+        console.log("Attempting to show blocker.")
+        showBlocker("To create and upload your own Studysheets, use AI assistance, and connect to Quizlet, please create a Lang account.")
+    }
     if(window.localStorage.getItem("fullstudysheet")=="" || window.localStorage.getItem("fullstudysheet")==null){
         console.log("Entering Standard Creator Mode")
     } else if(window.localStorage.getItem('editSheet')=="true") {

@@ -10,4 +10,12 @@ class Notification {
             `
         }
     }
+
+    static checkIfUnreads(){
+        if (window.localStorage.getItem("notifs") != amountOfNotifications){
+            document.getElementById("notif").className = "notif hasUnreads"
+        } else {
+            document.getElementById("notif").className = "notif"
+        }
+    }
 }

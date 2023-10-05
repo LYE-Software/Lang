@@ -10,6 +10,7 @@
     <script src="javascript/loadBalancer.js"></script>
     <script src="javascript/utils.js"></script>
     <script src="javascript/LangError.js"></script>
+    <script src="javascript/signInChecker.js"></script>
     <style>
         #studysetinput {
             left: 0;
@@ -146,7 +147,11 @@
 <script>
         
     function grabQuizlet(link) {
-
+        if (window.localStorage.getItem("usertoken") == "" || window.localStorage.getItem("usertoken") == null || window.localStorage.getItem("usertoken") == "signedout"){
+            console.log("Attempting to show blocker.")
+            showBlocker("To create and upload your own Studysheets, use AI assistance, and connect to Quizlet, please create a Lang account.")
+            return;
+        }
         console.log("link+ "+link)
         var url = "https://backend.langstudy.tech/v2/quizlet";
 

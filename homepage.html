@@ -16,6 +16,7 @@
     <script src="javascript/httpGet.js"></script>
     <script src="javascript/loadBalancer.js"></script>
     <script src="javascript/LangError.js"></script>
+    <script src="javascript/Notification.js"></script>
     <style>
 
         #studysheetGridContainer::-webkit-scrollbar {
@@ -295,6 +296,25 @@
             width:25%;
             border-right: #001945 2px solid;
             padding:15px;
+            font-size:17px;
+        }
+        .hasUnreads{
+            transition:0.5s;
+            animation: unreads 1s ease-in-out infinite;
+        }
+        @keyframes unreads{
+            0%{
+                opacity: 0%;
+            }
+            50%{
+                opacity: 100%;
+            }
+            100%{
+                opacity: 0%;
+            }
+        }
+        .hasUnreads:hover{
+            animation:none;
         }
     </style>
 </head>
@@ -356,7 +376,7 @@
                 </div>
             </div>
             <notdiv class="flexSpacer"></notdiv>
-            <div class="notif" style="margin-right:3vh;" onclick="showElement(document.getElementById('notificationPopup'))">
+            <div class="notif hasUnreads" style="margin-right:3vh;" id="notif" onclick="openNotifs()">
                 <img src="assets/icons/notifications.png" style="height:3vh;">
             </div>
         </div>
@@ -533,32 +553,45 @@
             </div>
             <div style="text-align: center;font-size: 30px; margin-bottom:10px;"><strong>Notifications</strong></div>
             <div style="text-align: center; font-size: 20px; margin-bottom:20px;" >Read what the developers have to say.</div>
-
-            <div class="notifBox">
-                <div class="notifTitle">
-                    <strong>We're working on it!</strong>
+            <div style="overflow-y:scroll; height:400px; max-height:70%;">
+                <div class="notifBox">
+                    <div class="notifTitle">
+                        <strong>Changes Coming Soon</strong>
+                    </div>
+                    <p style="padding:10px; width:75%;">I thought we'd give you a heads up for some new things we are working on for Lang:<br><br><strong>Practice Test Styles</strong>- Make a practice test in the style of an AP FRQ, MCQ, or anything you can think of!<br><br><strong>Updates to the Flashcards UI</strong>- the Flashcards UI needs major changes, and we are working on delivering them.</p>
                 </div>
-                <p style="padding:10px; width:75%;">Huge thank-yous to everyone using Lang and reporting errors in the bug / feedback reporter. We see your messages and are working on them. Train's patch has already rolled out and Practice Test is getting upgrades soon. New features are on their way!</p>
-            </div>
 
-            <div class="notifBox">
-                <div class="notifTitle">
-                    <strong>PG&E Outages</strong>
+                <div class="notifBox">
+                    <div class="notifTitle">
+                        <strong>We're working on it!</strong>
+                    </div>
+                    <p style="padding:10px; width:75%;">Huge thank-yous to everyone using Lang and reporting errors in the bug / feedback reporter. We see your messages and are working on them. Train's patch has already rolled out and Practice Test is getting upgrades soon. New features are on their way!</p>
                 </div>
-                <p style="padding:10px; width:75%;">We want to apologize to those users who found themselves imapcted by the Lang outage on October 3rd relating to the PG&E Power Shutoff. We are taking measures to ensure this cannot happen again, regardless of what PG&E decides to do.</p>
-            </div>
-
-            <div class="notifBox">
-                <div class="notifTitle">
-                    <strong>Thank you for using Lang!</strong>
+    
+                <div class="notifBox">
+                    <div class="notifTitle">
+                        <strong>PG&E Outages</strong>
+                    </div>
+                    <p style="padding:10px; width:75%;">We want to apologize to those users who found themselves imapcted by the Lang outage on October 3rd relating to the PG&E Power Shutoff. We are taking measures to ensure this cannot happen again, regardless of what PG&E decides to do.</p>
                 </div>
-                <p style="padding:10px; width:75%;">Thank you for signing up to Lang! Your support allows us to continue providing this service free for all.</p>
+    
+                <div class="notifBox">
+                    <div class="notifTitle">
+                        <strong>Thank you for using Lang!</strong>
+                    </div>
+                    <p style="padding:10px; width:75%;">Thank you for signing up to Lang! Your support allows us to continue providing this service free for all.</p>
+                </div>
             </div>
+            
         </div>
     </div>
 
 </body> 
 <script>
+    const amountOfNotifications = 4;
+
+    Notification.checkIfUnreads();
+
     function noStudySheets() {
         document.getElementById("nostudysheets").style.opacity = 1;
         document.getElementById("nostudysheets").style.pointerEvents = "all"
@@ -588,7 +621,11 @@
         }
     }
 
-    
+    function openNotifs(){
+        window.localStorage.setItem("notifs", amountOfNotifications);
+        document.getElementById("notif").className = "notif";
+        showElement(document.getElementById('notificationPopup'))
+    }
 </script>
 </html>
 
