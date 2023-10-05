@@ -267,7 +267,7 @@ async function deleteSS(){
     document.getElementById("loadingscreen").classList = "verticalFlex";
     document.getElementById("loadingscreen").style.display = "flex"
     hideElement(document.getElementById("deleteConfirmation"))
-    link = connect()+"/"+sessionid+"/Studysheets/"+ library[index].name+"/delete"
+    link = connect()+"/"+sessionid+"/Studysheets/"+ library[index].studysheet_id+"/delete"
     console.log("link is: "+link)
     await httpGet(link)
     window.location.reload()
