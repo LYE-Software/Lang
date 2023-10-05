@@ -172,7 +172,7 @@
                         e = new LangError("Unexpected Quizlet Issue: "+readableSS.quizlet_error, "quizletconvert", "unknown", "unknown", "We ran into an unexpected issue with Quizlet. Here's what Quizlet said when we tried to read your Studysheet: "+readableSS.quizlet_error, false)
                     } 
                     else { 
-                        showPopup("We couldn't get your Quizlet Study Set because it's marked as private on Quizlet.")
+                        showPopup("We couldn't get your Quizlet Study Set because it's marked as private on Quizlet. To bypass this, try our new <a href=\"https://chrome.google.com/webstore/detail/quizlet-to-langstudy/ckmfofefmcaieajjkelnakglpkkmeomd/related\">Chrome Extension</a>.")
                     }
                 } else {
                     window.localStorage.setItem("fullstudysheet", newStudysheet);
