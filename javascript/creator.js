@@ -96,6 +96,8 @@ function saveToCloud(lucy, dl){
                 toAdd1 = toAdd1.replaceAll('\\,', ",")   
                 toAdd2 = toAdd2.replaceAll("\\'", "'")
                 toAdd1 = toAdd1.replaceAll("\\'", "'")
+                toAdd1 = toAdd1.replaceAll("\\'", "'")
+                toAdd2 = toAdd2.replaceAll("\\'", "'")
                 // toAdd1 = (toAdd1 + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
                 // toAdd2 = (toAdd2 + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
                 if (textInputs[0].value == "" || textInputs[1].value == ""){
