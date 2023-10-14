@@ -56,14 +56,15 @@ function display(elem){
     elem.style.backgroundColor = "#f5deb3"
     var data = `
     <div class="">
-    <p  font-weight:bold;" class="">Disable Fireflies</p>
+    <p  font-weight:bold;" class="">Disable Animated Backgrounds</p>
 
         <label class="switch" style="display: inline-block"> 
             <input id = "firefliesChoice" type="checkbox" onclick="doFireflies()">
             <span class="slider round"></span>
         </label>
         </div>
-        <p>This disables the glowing spot effect floating on the homepage.</p>
+        <p>This disables the festive seasonal effect on the homepage.</p>
+        <p>Disabling this can help with performance issues.</p>
     <p style="margin-top: 20px; font-weight:bold;">More display customization is coming soon, including custom colors.</p>
     `
     append(data)
