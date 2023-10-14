@@ -10,6 +10,8 @@
     height:100%;
     width:100%;
     text-align:center;
+    display: flex;
+    justify-content: space-around;
 }
 #leaves i {
     display: inline-block;

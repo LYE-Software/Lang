@@ -61,7 +61,7 @@ function doTrain(){
     sheet = singleSheet;
     console.log("[SETUP] SHEET IS: "+sheet)
     loc = 0;
-    groupLength = document.getElementById("termsperround").value;
+    groupLength = Math.floor(document.getElementById("termsperround").value);
     if (document.getElementById("termsperround").value == null || document.getElementById("termsperround").value <=3){
         groupLength = 5;
     } else if (document.getElementById("termsperround").value>=sheet.length) {
