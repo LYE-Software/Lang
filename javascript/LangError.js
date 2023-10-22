@@ -1,7 +1,7 @@
 
 class LangError{
 
-    constructor(devMessage, filename, lineno, where, userReadable, show){
+    constructor(devMessage, filename, lineno, where, userReadable, show, additionalInfo){
         console.log("LangError is handling the error.")
         console.log(devMessage, filename, lineno, where, userReadable, show)
         this.filename = filename;
@@ -9,6 +9,7 @@ class LangError{
         this.where = where;
         this.userReadable = userReadable;
         this.devMessage = devMessage;
+        this.additionalInfo = additionalInfo;
         if (show){
             this.showError();
         }
@@ -36,7 +37,7 @@ class LangError{
         popup.style.height = "600px";
         popup.style.textAlign = "center";
         popup.style.borderRadius = "20px";
-        popup.innerHTML = "<img src='../assets/icons/langerror.png' style='width:100px; height:100px;'><h1>[Lang Error]</h1>\n<h3>"+this.userReadable+"<h3>\n\n<p><strong>We apologize for this. A bug report was sent to the Lang Study team and we are working on fixing the issue.</strong></p><p style='font-weight:100;'><em>Error Information (For Lang Developers): "+this.devMessage+"</em></p><button style='width:150px; height:70px; background-color:#001945; color:wheat; border-radius:15px; font-family:Poppins;' onclick='window.location.href=\"../homepage.html\"'>Home</button>";
+        popup.innerHTML = "<img src='../assets/icons/langerror.png' style='width:100px; height:100px;'><h1>[Lang Error]</h1>\n<h3>"+this.userReadable+"<h3>\n\n<p><strong>We apologize for this. Most errors can be fixed by restarting your Lang session. A bug report was sent to the Lang Study team and we are working on fixing the issue.</strong></p><p style='font-weight:100;'><em>Error Information (For Lang Developers): "+this.devMessage+"</em></p><button style='width:150px; height:70px; background-color:#001945; color:wheat; border-radius:15px; font-family:Poppins;' onclick='window.location.href=\"../homepage.html\"'>Home</button>";
         background.appendChild(popup)
     }
 
@@ -48,9 +49,12 @@ class LangError{
         }
         if (location.hostname!="langstudy.tech"){
             console.log("Not on LANGSTUDY- not reporting.");
+            console.log("Would have reported this: ")
+            var em = "[AUTO ERROR LOG ON "+this.filename+"]" + "Line#: "+this.lineno+" | Program desc: "+this.where+" | Shown to User: "+this.userReadable+" | ERROR MESSAGE: "+this.devMessage +" | Additional Info: "+this.additionalInfo;
+            console.log(em);
             return;
         }
-        var em = "[AUTO ERROR LOG ON "+this.filename+"]" + "Line#: "+this.lineno+" | Program desc: "+this.where+" | Shown to User: "+this.userReadable+" | ERROR MESSAGE: "+this.devMessage;
+        var em = "[AUTO ERROR LOG ON "+this.filename+"]" + "Line#: "+this.lineno+" | Program desc: "+this.where+" | Shown to User: "+this.userReadable+" | ERROR MESSAGE: "+this.devMessage +" | Additional Info: "+this.additionalInfo;
         var url = "https://backend.langstudy.tech/feedback/"+sessionid;
         var xhr = new XMLHttpRequest();
         xhr.open("POST", url);

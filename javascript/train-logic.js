@@ -14,10 +14,10 @@ var ttlForGp;
 var crForGp;
 var swap = false;
 var descForError = "--waiting to start (user configuring settings)--"
-
+var jsonData;
 window.onerror = function (msg, url, lineNo, columnNo, error) {
     console.log("Handling error.")
-    var err =  new LangError(msg, url, lineNo, descForError, "Something unexpected happened. \nTrain encountered an error and is unable to continue functioning at the moment.", true)
+    var err =  new LangError(msg, url, lineNo, descForError, "Something unexpected happened. \nTrain encountered an error and is unable to continue functioning at the moment.", true, jsonData)
     return true;
 }
 
@@ -53,6 +53,7 @@ function doTrain(){
     descForError = "Parsing sheet."
     rawJson = window.localStorage.getItem("fullstudysheet")
     document.title = window.localStorage.getItem("chosenSheet") + " | Lang"
+    jsonData = rawJson;
     sheet = parseFromJSON(rawJson)
     var singleSheet = arrayToSheet(sheet.convertToSingle(), window.localStorage.getItem("chosenSheet"));
     for (i=0; i<singleSheet.length; i++){

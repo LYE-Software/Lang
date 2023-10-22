@@ -6,10 +6,10 @@ var incorrect = 0;
 var timing = false;
 var randomized = false;
 descForError = "undefined";
-
+var jsonData;
 window.onerror = function (msg, url, lineNo, columnNo, error) {
     console.log("Handling error.")
-    var err =  new LangError(msg, url, lineNo, descForError, "Something unexpected happened. \n", true)
+    var err =  new LangError(msg, url, lineNo, descForError, "Something unexpected happened. \n", true, jsonData)
     return true;
 }
 
@@ -22,7 +22,7 @@ function starter() {
 
     rawJson = window.localStorage.getItem("fullstudysheet")
     document.title = window.localStorage.getItem("chosenSheet") + " | Lang"
-
+    jsonData = rawJson;
     sheet = parseFromJSON(rawJson)
     total = sheet.getFullLength();
     runMultipleChoice()

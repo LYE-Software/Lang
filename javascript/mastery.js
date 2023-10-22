@@ -14,7 +14,7 @@ descForError = "undefined";
 
 window.onerror = function (msg, url, lineNo, columnNo, error) {
     console.log("Handling error.")
-    var err =  new LangError(msg, url, lineNo, descForError, "Something unexpected happened. \nMastery is unable to continue.", true)
+    var err =  new LangError(msg, url, lineNo, descForError, "Something unexpected happened. \nMastery is unable to continue.", true, jsonData)
     return true;
 }
 
@@ -44,6 +44,7 @@ var counter;
 var randomized = false;
 var timing = false;
 var endless = false;
+var jsonData;
 function startMastery(){
     console.log("[FUNCTION CALL: START MASTERY]")
     var wage = document.getElementById("input");
@@ -62,7 +63,7 @@ function startMastery(){
     if (qNum == 0){
         rawJson = window.localStorage.getItem("fullstudysheet")
         document.title = window.localStorage.getItem("chosenSheet") + " | Lang"
-    
+        jsonData = rawJson;
         sheet = parseFromJSON(rawJson)
     }
     
