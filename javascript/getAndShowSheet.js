@@ -147,9 +147,10 @@ async function doPreviewAndLocal(){
     
     console.log("og sheet: "+sheet)
     var newSheet = parseFromJSON(sheet);
-    if (sheet.error == "studysheet_not_found"){
+    if (newSheet.error == "studysheet_not_found"){
         document.getElementById("unableToFind").style.opacity = "1";
         document.getElementById("unableToFind").style.pointerEvents = "all"; 
+        return;
     }
     if (newSheet.type == "pointer"){
         console.log("redirecting pointers")
