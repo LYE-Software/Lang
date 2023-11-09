@@ -1,6 +1,6 @@
 var review = false;
 var term;
-
+var TEMP_ENTERPRESSES = 0;
 function review(term){
     write(term)
     review = true;
@@ -52,6 +52,7 @@ function checkWrite(){
             
             document.getElementById("goButton").style.backgroundColor = "#ce1483"
             var toappend = `You wrote <strong>${usrInput}</strong><br>The correct answer was <strong>${term.answer}</strong>`
+            setKeybinds("clickthruW");
             document.getElementById("correctedHolder").innerHTML = toappend;
             showElement(document.getElementById("wrongWrite"))
             setTimeout(function () { document.getElementById("goButton").style.backgroundColor = "wheat" }, 1000)
@@ -110,6 +111,7 @@ function multipleChoice(term_, arr){
     document.getElementById("b").innerText = fakes[1].answer;
     document.getElementById("c").innerText = fakes[2].answer;
     document.getElementById("d").innerText = fakes[3].answer;
+    unlockButtons();
 
 }
 
@@ -136,13 +138,13 @@ function getMultiFakes(real, arr){
 
 async function checkMulti(letter){
     if (document.getElementById(letter).getAttribute("data-correct") == "true"){
-        document.getElementById(letter).style.backgroundColor = "#3e8e41";
-        await sleep(1000);
-        document.getElementById(letter).style.backgroundColor = "wheat";
         document.getElementById("a").setAttribute("data-correct", "false");
         document.getElementById("b").setAttribute("data-correct", "false");
         document.getElementById("c").setAttribute("data-correct", "false");
         document.getElementById("d").setAttribute("data-correct", "false");
+        document.getElementById(letter).style.backgroundColor = "#3e8e41";
+        await sleep(1000);
+        document.getElementById(letter).style.backgroundColor = "wheat";
 
         advance(term);
         postModeChecks()
@@ -154,17 +156,49 @@ async function checkMulti(letter){
                 correctId = arrOf[i].id;
             }
         }
+        document.getElementById("a").setAttribute("data-correct", "false");
+        document.getElementById("b").setAttribute("data-correct", "false");
+        document.getElementById("c").setAttribute("data-correct", "false");
+        document.getElementById("d").setAttribute("data-correct", "false"); 
         document.getElementById(correctId).style.backgroundColor = "#3e8e41";
         document.getElementById(letter).style.backgroundColor = "red";
         await sleep(1000);
         document.getElementById(correctId).style.backgroundColor = "wheat";
         document.getElementById(letter).style.backgroundColor = "wheat";
-        document.getElementById("a").setAttribute("data-correct", "false");
-        document.getElementById("b").setAttribute("data-correct", "false");
-        document.getElementById("c").setAttribute("data-correct", "false");
-        document.getElementById("d").setAttribute("data-correct", "false");  
+        document.getElementById(letter).blur()
         doIncorrectM(document.getElementById(letter).innerHTML)
     }
+    
+}
+
+function lockButtons(){
+    var arrOf = [document.getElementById("a"), document.getElementById("b"), document.getElementById("c"), document.getElementById("d")]
+    for (i=0; i<arrOf.length; i++){
+        arrOf[i].onclick = function(){console.log("%c enter press eaten", 'background: #222; color: #bada55');}
+            
+    }
+    console.log("%c buttons locked, waiting", 'background: #222; color: #bada55');
+
+} function unlockButtons(){
+    var arrOf = [document.getElementById("a"), document.getElementById("b"), document.getElementById("c"), document.getElementById("d")]
+    var arrLetters = ["a", "b", "c", "d"]
+    for (i=0; i<arrOf.length; i++){
+        switch(i){
+            case(0):arrOf[i].onclick = function(){
+                checkMulti("a");
+            }; break;
+            case(1):arrOf[i].onclick = function(){
+                checkMulti("b");
+            }; break;
+            case(2):arrOf[i].onclick = function(){
+                checkMulti("c");
+            }; break;
+            case(3):arrOf[i].onclick = function(){
+                checkMulti("d");
+            }; break;
+        }
+    }
+    console.log("%c buttons unlocked, ready to go", 'background: #222; color: #bada55');
     
 }
 
@@ -187,7 +221,9 @@ function completeLearn(){
 }
 
 function doIncorrectM(clicked){
-
+    console.log("%c Answered incorrectly in multiple choice.", 'background: #222; color: #bada55');
+    setKeybinds("clickthruM")
+    lockButtons();
     var toShow = `You chose <strong>${clicked}</strong><br>The correct answer was <strong>${term.answer}</strong>`
     console.log("APPENDING "+toShow+" TO "+document.getElementById("correctedHolder"))
     console.log(document.getElementById("correctedHolderMulti"))
@@ -196,6 +232,7 @@ function doIncorrectM(clicked){
 }
 
 function continueMulti(){
+    
     hideElement(document.getElementById("incorrect"))
     postModeChecks()
 }

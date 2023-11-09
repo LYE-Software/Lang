@@ -289,7 +289,7 @@ color: var(--primary-light);
             </div>
             <div style="width:10vw; display:flex; justify-content: center; align-items: center;  border-radius: 20px;"></div>
             <div class="lightGlow" style="width:40vw; display:flex; flex-direction: column; justify-content: center; align-items: center; background-color: wheat; border-radius: 20px;">
-                <p style="font-family:Poppins; color:#001945; font-size: 2vw; font-weight:bold;">Train</p>
+                <p style="font-family:Poppins; color:#001945; font-size: 1.5vw; font-weight:bold;">Train</p>
                 <div style="display:flex; flex-direction: column; align-items:center;">
                     <div style="font-family:Poppins; color:#001945; font-size: 1.25vw; font-weight:bold;">Terms per Round</div>
                     <input placeholder = "5" type = "number" min="3" id="termsperround" style="background-color: #001945; color: wheat; width:20vw; height:7vh; border-radius: 20px; text-align: center; display:flex; flex-direction: column; justify-content: center;" contenteditable>
@@ -302,6 +302,14 @@ color: var(--primary-light);
                             <div style="font-size:0.75vw; color:#001945;"><em>Default</em></div>
                         </div>
                         <div class="deselected" id="defSwap" onclick="swapper(this, document.getElementById('termSwap'))">Definition</div>
+                    </div>
+                    <div style="font-family:Poppins; color:#001945; font-size: 1.25vw; font-weight:bold; margin-bottom:5px;">Order of terms:</div>
+                    <div style="display: flex; justify-content: center;">
+                        <div>
+                            <div class = "selected" id="orderedSwap" onclick="shuffler(this, document.getElementById('shuffledSwap'))">Ordered</div>
+                            <div style="font-size:0.75vw; color:#001945;"><em>Default</em></div>
+                        </div>
+                        <div class="deselected" id="shuffledSwap" onclick="shuffler(this, document.getElementById('orderedSwap'))">Shuffled</div>
                     </div>
                     <br>
                 </div> 
@@ -416,7 +424,7 @@ color: var(--primary-light);
             <div id="correctedHolderMulti">
                 
             </div>
-            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="continueMulti()">Continue</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" id="continueMultiBtn" onclick="continueMulti()">Continue</div>
         </div>
     </div>
 

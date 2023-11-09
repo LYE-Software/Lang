@@ -168,7 +168,7 @@
                 readableSS = JSON.parse(newStudysheet)
                 if (typeof readableSS.error !== 'undefined'){
                     if (readableSS.error == "unknown_quizlet_error") { 
-                        showPopup("We ran into an unexpected issue with Quizlet. Here's what Quizlet said when we tried to read your Quizlet Study Set: "+readableSS.quizlet_error)
+                        showPopup("We ran into an unexpected issue with Quizlet. Here's what Quizlet said when we tried to read your Quizlet Study Set: "+readableSS.quizlet_error+" If this converter still does not work, you can use the <a href=\"https://chrome.google.com/webstore/detail/quizlet-to-langstudy/ckmfofefmcaieajjkelnakglpkkmeomd/related\">Chrome Extension (Only for Google Chrome Users)</a>.")
                         e = new LangError("Unexpected Quizlet Issue: "+readableSS.quizlet_error, "quizletconvert", "unknown", "unknown", "We ran into an unexpected issue with Quizlet. Here's what Quizlet said when we tried to read your Studysheet: "+readableSS.quizlet_error, false)
                     } 
                     else { 

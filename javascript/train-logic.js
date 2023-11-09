@@ -15,6 +15,7 @@ var crForGp;
 var swap = false;
 var descForError = "--waiting to start (user configuring settings)--"
 var jsonData;
+var shuffle = false;
 window.onerror = function (msg, url, lineNo, columnNo, error) {
     console.log("Handling error.")
     var err =  new LangError(msg, url, lineNo, descForError, "Something unexpected happened. \nTrain encountered an error and is unable to continue functioning at the moment.", true, jsonData)
@@ -41,20 +42,34 @@ function swapper(elem, that){
     }
 }
 
+
+function shuffler(elem, that){
+    if (elem.id == "termSwap"){
+        console.log("term");
+        shuffle = false;
+        elem.className = "selected";
+        that.className = "deselected";
+    }
+    else{
+        console.log("def");
+        shuffle = true;
+        elem.className = "selected";
+        that.className = "deselected";
+    }
+}
+
+
 function doTrain(){
-    var wage = document.getElementById("input");
-    wage.addEventListener("keydown", function (e) {
-        if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
-            // console.log("ENTER PRESS: t = "+t+" customAnswer = "+customAnswer+"")
-            checkWrite()
-        }
-    });
+    
     configureInterface()
     descForError = "Parsing sheet."
     rawJson = window.localStorage.getItem("fullstudysheet")
     document.title = window.localStorage.getItem("chosenSheet") + " | Lang"
     jsonData = rawJson;
     sheet = parseFromJSON(rawJson)
+    if (shuffle == true){
+        sheet.randomize()
+    }
     var singleSheet = arrayToSheet(sheet.convertToSingle(), window.localStorage.getItem("chosenSheet"));
     for (i=0; i<singleSheet.length; i++){
         console.log(singleSheet.terms[i].returnArray())
@@ -113,6 +128,13 @@ function doTrain(){
     
 
     //setting up game...
+    document.addEventListener("keydown", function(e){
+        if (e.code === "Enter"){
+            TEMP_ENTERPRESSES++;
+            console.log("%c Enter Pressed, enterpress number "+TEMP_ENTERPRESSES, 'background: #222; color: #bada55');
+            handleKeyPress();
+        }
+    });
     descForError = "Setting up game"
     if (swap == true){
         sheet.swapTD();
@@ -129,8 +151,6 @@ function doTrain(){
 }
 
 
-
-
 function logic(){
     descForError = "In logic."
     clearScreen()
@@ -139,7 +159,7 @@ function logic(){
     currentTerm = currentGroup[t]
     //train id ranges from 1 - 5
     var whatMode = currentTerm.trainId;
-    
+    setKeybinds("clear")
     console.log("[LOGIC] Current group is: "+currentGroup)
     if (subLocation > 0){
         for (var i = 0; i< reviewIDX.length; i++){
@@ -148,7 +168,9 @@ function logic(){
             }
         }
     }
+    setKeybinds("clear")
     if (whatMode == -1){
+        setKeybinds("write")
         descForError = "While reviewing."
         console.log("entering review"); // YOU ARE THE PROBLEM
         var toReview = arrayOfGroups[(subLocation-1)][review_t]; // REVIEW t GOT TOO HIGH
@@ -162,11 +184,13 @@ function logic(){
         
     }
     else if (whatMode == 1){
+        setKeybinds("learn")
         descForError = "Learn"
         console.log("entering learn")
         learn(currentTerm)
         
     } else if (whatMode == 2){
+        setKeybinds("multi")
         descForError = "multi"
         console.log("entering multi")
         var copy = currentGroup;
@@ -176,6 +200,7 @@ function logic(){
         multipleChoice(currentTerm, copy)
         
     } else if (whatMode == 3){
+        setKeybinds("multi")
         descForError = "multi"
         console.log("entering multi")
         var copy = currentGroup;
@@ -185,11 +210,13 @@ function logic(){
         multipleChoice(currentTerm, copy)
         
     } else if (whatMode == 4){
+        setKeybinds("write")
         descForError = "write"
         console.log("entering write")
         write(currentTerm)
         
     } else if (whatMode == 5){
+        setKeybinds("write")
         descForError = "write"
         console.log("entering write")
         write(currentTerm)
@@ -199,6 +226,48 @@ function logic(){
     }
     
 }
+
+var keybindMode;
+function setKeybinds(mode){
+
+    // instead of doing it like this where i change the actual event listener
+    // just set the event listener to a function that determines its action based on what is happening rn
+    // would require a global var to say the current mode, actually no i could just use t
+    // determineAction() where [t] is checked to determine what function is called on enter press, and still only have one eventlistner
+    // start by still trying to have 2 (one on doc and one in inpt) inpt can just stay on write and when t==write, doc can just lead to nothing
+
+
+    if (mode=="write"){
+        keybindMode = "w";
+    } else if (mode=="learn"){
+        keybindMode = "l";
+    } else if (mode=="clickthruM"){
+        keybindMode = "pM";
+    } else if (mode=="multi"){
+        keybindMode = "m";
+    } else if (mode=="clear"){
+        keybindMode = null;
+    } else if (mode=="clickthruW"){
+        keybindMode ="pW";
+    }
+}
+
+
+function handleKeyPress(){
+    console.log("Handling key press... keybind set to "+keybindMode)
+    if(keybindMode == "w"){
+        checkWrite();
+    } else if (keybindMode == "l") {
+        completeLearn();
+    } else if (keybindMode == "pM") {
+        continueMulti();
+    } else if (keybindMode == "m") {
+        console.log("On multi, eating press")
+    } else if (keybindMode == "pW"){
+        continueWrite();
+    }
+}
+
 
 
 function postModeChecks(){
