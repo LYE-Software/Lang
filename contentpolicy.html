@@ -1,0 +1,86 @@
+<html lang="en">
+<head>
+    <meta name="robots" content="noindex">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lang | Legal</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="assets/logos/circular lang icon.png">
+    <script src="../code.js"></script> 
+    <link rel="icon" href="assets/logos/lang-wheat.png">
+
+</head>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+    .boxshadow{
+        -webkit-box-shadow:0px 0px 50px 0px var(--primary-dark);
+        -moz-box-shadow: 0px 0px 50px 0px var(--primary-dark);
+        box-shadow: 0px 0px 50px 0px var(--primary-dark);
+    }
+    .tac{
+        font-family: Poppins;
+    }
+    .toScroll{
+        font-family:Poppins;
+        color:white;
+        font-weight:bold;
+        cursor:pointer;
+    }
+</style>
+<body class="homepage" style="background-image:linear-gradient(to bottom right, wheat, #001945); display:flex; flex-direction: row; align-items: center; justify-content: center; text-align: center;">
+    <div onclick="window.history.back()" style="cursor:pointer;">
+        <svg style="height: 5vw; width: 5vw; position: absolute; top: 20px; left: 20px; display:inline-block; fill: #001945; " enable-background="new 0 0 26.676 26.676" version="1.1" viewBox="0 0 26.676 26.676" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"><path d="m26.105 21.891c-0.229 0-0.439-0.131-0.529-0.346-0.066-0.156-1.716-3.857-7.885-4.59-1.285-0.156-2.824-0.236-4.693-0.25v4.613c0 0.213-0.115 0.406-0.304 0.508-0.188 0.098-0.413 0.084-0.588-0.033l-11.852-7.978c-0.16-0.107-0.254-0.287-0.254-0.476 0-0.191 0.094-0.365 0.254-0.477l11.857-7.979c0.175-0.121 0.398-0.129 0.588-0.029 0.19 0.102 0.303 0.295 0.303 0.502v4.293c2.578 0.336 13.674 2.33 13.674 11.674 0 0.271-0.191 0.508-0.459 0.562-0.037 6e-3 -0.076 6e-3 -0.112 6e-3z"/></svg>
+    </div>
+    <div style="display:flex; justify-content: space-evenly; border-radius:15px; padding:10px; margin-top: 0vh; width:100%; flex-wrap:wrap;">
+        <div class="boxshadow" style="display:flex; flex-direction:column; background-color: wheat; padding:20px; max-width: calc(25vw + 300px); width:90vw; height:80vh; align-items: center; text-align: center; overflow-y:scroll; border-radius:20px; min-width:400;">
+            <img src="assets/logos/redesLangTr.png" style="height:40vh; width:40vh;" >
+            <div class="tac">
+                <h4 class="tac">Scroll to read the Lang Study Content Policy</h4>
+                <h1 id="1">Content we want to see on Lang</h1>
+                <p>
+                    Lang is meant to be a place where anyone can come and learn, regardless of who they are. We have worked
+                    to make our tools as accessible as possible, and part of that responsiblity rests on the shoulders of our Lang 
+                    community. We expect everyone who uses Lang to follow these guidelines about content.
+                    Infractions can lead to removal of the content or termination of the account, depending on severity.
+                </p>
+                <p>
+                    <ul style="text-align:left;">
+                        <li><strong>Be respectful, kind, and caring.</strong> We strictly forbid any discrimination on any basis, whether that be race, ethnicity, religion, gender, age, sexual orientation, disability, or anything else. Creating content that harasses or endangers another group of people is strictly forbidden and can result in termination of an account.</li>
+                        <li><strong>Stay on topic.</strong> Lang is not the place for your latest fanfic or blog post. Lang is not an image sharing website. Lang is not a chatroom.</li>
+                        <li><strong>Be wary of using copyrighted content.</strong> Respect the works of others, and posting content that infringens on intellectual property rights is strictly forbidden.</li>
+                        <li><strong>Respect people's privacy.</strong> Do not post any revealing private information, about yourself or others, on Lang.</li>
+                        <li><strong>Stay away from NSFW (Not Safe For Work) Content.</strong> Just don't post it.</li>
+                        </ul>
+                <p>With the cooperation and support of our users, Lang can be the learning community it was always meant to be.<br><br>Thank you for using Lang.</p>
+            </div>
+            
+            
+            
+            
+        </div>
+        
+        
+    </div>
+    
+    
+</body>
+<style>
+    ::-webkit-scrollbar {
+        display: none;
+    }
+</style>
+<script>
+    if (window.innerHeight > window.innerWidth){
+        document.getElementById("contents").style.display = "none"
+    }
+
+    onresize = (event) => {
+        if (window.innerHeight > window.innerWidth){
+            document.getElementById("contents").style.display = "none"
+        } else if (window.innerHeight < window.innerWidth){
+            document.getElementById("contents").style.display = ""
+        }
+    };
+</script>
+</html>
