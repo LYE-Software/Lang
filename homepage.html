@@ -557,19 +557,13 @@
             <div style="text-align: center;font-size: 30px; margin-bottom:10px;"><strong>Notifications</strong></div>
             <div style="text-align: center; font-size: 20px; margin-bottom:20px;" >Read what the developers have to say.</div>
             <div style="overflow-y:scroll; height:400px; max-height:70%;">
-                <div class="notifBox">
-                    <div class="notifTitle">
-                        <strong>Assistant Issues!</strong>
-                    </div>
-                    <p style="padding:10px; width:75%;">Unfortunately, Lang's provider of AI services, OpenAI, is experiencing issues at the moment. As such, Lang Assistant will be having a higher error rate than is typical. Thank you for your patience.</i></p>
-                </div>
 
 
                 <div class="notifBox">
                     <div class="notifTitle">
-                        <strong>Fall is here!</strong>
+                        <strong>December is here!</strong>
                     </div>
-                    <p style="padding:10px; width:75%;">Coming into the month of October, Lang's seasonally festive background has been updated to reflect the cooling air and end of the first quarter. Good luck on upcoming midterms and the like!<br><br><i>As always, if the backgrounds are distracting or cause a performance hit, you can turn them off in settings.</i></p>
+                    <p style="padding:10px; width:75%;">Lang's background has once again been updated to match the December timeframe. Enjoy the snow, and good luck on finals!<br><br><i>If you do not like the snow, it causes performance issues, or you live in a place where it is not winter right now, feel free to disable the backgrounds in settings.</i></p>
                 </div>
 
                 <div class="notifBox">
@@ -599,7 +593,7 @@
     
 </body> 
 <script>
-    const amountOfNotifications = 6;
+    const amountOfNotifications = 7;
 
     Notification.checkIfUnreads();
 
@@ -616,20 +610,20 @@
         var link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        // link.href = 'snow.css';
+        link.href = 'css/snow.css';
         // link.href = 'css/fireflies.css';
-        link.href='css/leaves.css';
+        //link.href='css/leaves.css';
         document.getElementsByTagName('HEAD')[0].appendChild(link);
         
         var container = document.createElement("div");
-        //container.classList.add("snowflakeContainer");
-        container.classList.add("leaves");
-        container.id="leaves"
+        container.classList.add("snowflakeContainer");
+        //container.classList.add("leaves");
+        //container.id="leaves"
         document.body.appendChild(container);
 
         for (var i = 0; i < 40; i++) {
             var snowflake = document.createElement("i");
-            // snowflake.classList.add("snowflake");
+             snowflake.classList.add("snowflake");
             // snowflake.classList.add("firefly");
             container.appendChild(snowflake);
         }
