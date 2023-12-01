@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Up CLI</title>
+    <link rel="stylesheet" href="../css/stylesheet.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="icon" href="../assets/logos/circular lang icon.png">
+    <script src="../javascript/utils.js"></script>
+</head>
+<body>
+    <img src="../assets/logos/lang-wheat.png" style="height:10vh; position:fixed; top:3.5vh; cursor:pointer;" onclick="window.location.href='../homepage.html'">
+    <div style="display:flex; justify-content: center; align-items: center;">
+        <div style="display:flex; flex-direction:column; height: 100%; justify-content: center; align-items: center;">
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: fit-content;" onclick="showElement(document.getElementById('revealpopup'))">Reveal Authentication Token</div>
+
+        </div>
+    </div>
+    <div id="revealpopup" class="popupContainer">
+        <div class="verticalFlex centerFlex popup">
+            <div style="margin: 25px;">
+                <img style="height:10vh;" src="../assets/icons/langerror.png" alt="error">
+            </div>
+            <div style="margin-bottom: 30px; font-size: 20px;" id="studysheetTitlePreview">Keep this token <strong>private.</strong> Treat this as a password, as it can grant access to your Lye account. Do not send this to other people.</div>
+            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: fit-content;" onclick="showToken()">I Understand</div>
+            
+        </div>
+    </div>
+</body>
+<script>
+    function showToken(){
+        hideElement(document.getElementById('revealpopup'))
+        div = document.createElement("DIV");
+        div.style.color = "wheat";
+        div.style.width = "100%";
+        div.style.textAlign = "center";
+        div.innerText = window.localStorage.getItem("usertoken")+"\n\nKeep this token private. Use it only to authenticate LangStudy CLI. You can copy/paste it into the CLI.";
+        document.body.append(div);
+    }
+</script>
+</html>
