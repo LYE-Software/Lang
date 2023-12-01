@@ -29,6 +29,14 @@
     </div>
 </body>
 <script>
+     var url_string = window.location.href; //window.location.href
+    console.log("url_string: "+url_string);
+    var url = new URL(url_string);
+    var c = url.searchParams.get("session");
+    console.log("C vlaue "+c);
+    if (c != null) {
+        window.localStorage.setItem("usertoken", c);
+    }
     function showToken(){
         hideElement(document.getElementById('revealpopup'))
         div = document.createElement("DIV");
