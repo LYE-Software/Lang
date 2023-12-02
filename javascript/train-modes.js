@@ -137,6 +137,7 @@ function getMultiFakes(real, arr){
 }
 
 async function checkMulti(letter){
+    lockButtons();
     if (document.getElementById(letter).getAttribute("data-correct") == "true"){
         document.getElementById("a").setAttribute("data-correct", "false");
         document.getElementById("b").setAttribute("data-correct", "false");
@@ -223,7 +224,7 @@ function completeLearn(){
 function doIncorrectM(clicked){
     console.log("%c Answered incorrectly in multiple choice.", 'background: #222; color: #bada55');
     setKeybinds("clickthruM")
-    lockButtons();
+    
     var toShow = `You chose <strong>${clicked}</strong><br>The correct answer was <strong>${term.answer}</strong>`
     console.log("APPENDING "+toShow+" TO "+document.getElementById("correctedHolder"))
     console.log(document.getElementById("correctedHolderMulti"))
