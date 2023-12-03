@@ -9,27 +9,45 @@
     <link rel="icon" href="../assets/logos/circular lang icon.png">
     <script src="../javascript/utils.js"></script>
 </head>
-<body>
-    <img src="../assets/logos/lang-wheat.png" style="height:10vh; position:fixed; top:3.5vh; cursor:pointer;" onclick="window.location.href='../homepage.html'">
-    <div style="display:flex; justify-content: center; align-items: center;">
-        <div style="display:flex; flex-direction:column; height: 100%; justify-content: center; align-items: center;">
-            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: fit-content;" onclick="showElement(document.getElementById('revealpopup'))">Reveal Authentication Token</div>
+<body style="display:flex;flex-direction: column; justify-content: center; align-items: center;">
+    
 
-        </div>
-    </div>
-    <div id="revealpopup" class="popupContainer">
-        <div class="verticalFlex centerFlex popup">
-            <div style="margin: 25px;">
-                <img style="height:10vh;" src="../assets/icons/langerror.png" alt="error">
+    <div style="display:flex; justify-content: space-evenly; border-radius:15px; padding:10px; margin-top: 0vh; width:100%; flex-wrap:wrap;">
+        <div class="boxshadow" style="display:flex; flex-direction:column; background-color: wheat; padding:20px; max-width: calc(25vw + 300px); width:90vw; height:80vh; align-items: center; text-align: center; overflow-y:scroll; border-radius:20px; min-width:400;">
+            <img src="../assets/logos/redesLangTr.png" style="height:40vh; width:40vh;" >
+            <div class="removeable">Click the button below to reveal your authentication token. Once you have it, you can copy/paste it into the CLI to authenticate your session.</div>
+            <div class="removeable" style="display:flex; justify-content: center; align-items: center;">
+                <div style="display:flex; flex-direction:column; height: 100%; justify-content: center; align-items: center;">
+                    <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: fit-content;" onclick="showElement(document.getElementById('revealpopup'))">Reveal Authentication Token</div>
+        
+                </div>
             </div>
-            <div style="margin-bottom: 30px; font-size: 20px;" id="studysheetTitlePreview">Keep this token <strong>private.</strong> Treat this as a password, as it can grant access to your Lye account. Do not send this to other people.</div>
-            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: fit-content;" onclick="showToken()">I Understand</div>
+            <div id="revealpopup" class="popupContainer">
+                <div class="verticalFlex centerFlex popup">
+                    <div style="margin: 25px;">
+                        <img style="height:10vh;" src="../assets/icons/langerror.png" alt="error">
+                    </div>
+                    <div style="margin-bottom: 30px; font-size: 20px;" id="studysheetTitlePreview">Keep this token <strong>private.</strong> Treat this as a password, as it can grant access to your Lye account. Do not send this to other people.</div>
+                    <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: fit-content;" onclick="showToken()">I Understand</div>
+                    
+                </div>
+            </div>
+            <div id="appendTo">
+
+            </div>
+        
+            
+            
+            
             
         </div>
+        
+        
     </div>
+    
 </body>
 <script>
-     var url_string = window.location.href; //window.location.href
+    var url_string = window.location.href; //window.location.href
     console.log("url_string: "+url_string);
     var url = new URL(url_string);
     var c = url.searchParams.get("session");
@@ -40,11 +58,17 @@
     function showToken(){
         hideElement(document.getElementById('revealpopup'))
         div = document.createElement("DIV");
-        div.style.color = "wheat";
+        div.style.color = "#001945";
         div.style.width = "100%";
         div.style.textAlign = "center";
         div.innerText = window.localStorage.getItem("usertoken")+"\n\nKeep this token private. Use it only to authenticate LangStudy CLI. You can copy/paste it into the CLI.";
-        document.body.append(div);
+        if (window.localStorage.getItem("usertoken") == null || window.localStorage.getItem("usertoken")==""){
+            div.innerText = "You are not signed into Lang. Please sign in first, then get your Authentication token."
+        }
+        document.getElementById("appendTo").append(div);
+        var arr = document.getElementsByClassName("removeable");
+        arr[0].style.display = "none";
+        arr[1].style.display = "none";  
     }
 </script>
 </html>
