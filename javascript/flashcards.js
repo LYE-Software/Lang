@@ -1,5 +1,11 @@
 var newSheet;
-var idx = 0;
+var currentlyFocusedCard = 0;
+var cardArray = [];
+window.scrollTo({
+    top: selectedFrame.offsetTop,
+    left: 0,
+    behavior: 'smooth'
+  });
 function doFlashcards(){
     console.log("Flashcarding")
     document.getElementById("listview").style.display = "none"
@@ -35,7 +41,7 @@ function makeCards(){
         }
         let basic = `
         <div class="flashcard">
-            <div class="flashcardContents" data-term="${i}" style="display:flex; flex-direction:column;" data-state="front" onclick="nextCard(this)">
+            <div class="flashcardContents" data-term="${i}" style="display:flex; flex-direction:column;" data-state="front" onclick="cardClick(this)">
                 <div style="width:100%; height:100px; display:${image}; justify-content:center; align-items:center;">
                     <img src=${imgsrc} style="height:100px;">
                 </div>
@@ -49,8 +55,8 @@ function makeCards(){
     }
     console.warn("FLASHCARDS STRING: "+appendTo)
     document.getElementById("flashcardBox").innerHTML += appendTo;
-    document.getElementById("flashcardBox").children[0].children[0].onclick=function(){flipCard(this)}
-    
+    cardArray = document.getElementById("flashcardBox").children;
+    console.log(cardArray);
 }
 
 function flipCard(card){
@@ -90,59 +96,23 @@ function flipCard(card){
     }
 }
 
-function nextCard(card){
-    image = "none"
-    imgsrc = "noimage"
-    currentNum = idx;
-    document.getElementById("outerFlashcards").scrollTop =360*(idx+1);
-    idx++;
-    card.onclick = function(){flipCard(this)}
-    document.getElementById("flashcardBox").children[idx-1].children[0].onclick = function(){previousCard(this)}
-    if (card.getAttribute("data-state") == "back"){
-        image = "none"
-        imgsrc = "noimage"
-        if (newSheet.getNthTerm(card.getAttribute("data-term")).hasImage){
-            console.log("term: "+newSheet.getNthTerm(card.getAttribute("data-term"))+" has an image")
-            image = "flex";
-            imgsrc = connect()+"/"+window.localStorage.getItem("usertoken")+"/image/get/"+newSheet.getNthTerm(card.getAttribute("data-term")).imageSrc
-        }
-        card.innerHTML = `
-        <div style="width:100%; height:100px; display:${image}; justify-content:center; align-items:center;">
-            <img src=${imgsrc} style="height:100px;">
-        </div>
-        ${newSheet.getNthTerm(card.getAttribute("data-term")).term}
-        `
-        card.setAttribute("data-state", "front")     
-
-    }
+function changeCard(card){
+    card.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
 }
 
-function previousCard(card){
-    image = "none"
-    imgsrc = "noimage"
-    console.log("trying to go previous")
-    document.getElementById("outerFlashcards").scrollTop = document.getElementById("outerFlashcards").scrollTop - 360;
-    idx--;
-    card.onclick = function(){flipCard(this)}
-    if ((idx-1)>0){
-        document.getElementById("flashcardBox").children[idx].children[0].onclick = function(){previousCard(this)}
-    }
-    document.getElementById("flashcardBox").children[idx+1].children[0].onclick = function(){nextCard(this)}
-    if (card.getAttribute("data-state") == "back"){
-        image = "none"
-        imgsrc = "noimage"
-        if (newSheet.getNthTerm(card.getAttribute("data-term")).hasImage){
-            console.log("term: "+newSheet.getNthTerm(card.getAttribute("data-term"))+" has an image")
-            image = "flex";
-            imgsrc = connect()+"/"+window.localStorage.getItem("usertoken")+"/image/get/"+newSheet.getNthTerm(card.getAttribute("data-term")).imageSrc
+function cardClick(card){
+    console.log("recieved: ");
+    console.log(card);
+    if (card.getAttribute("data-term") == currentlyFocusedCard){
+        flipCard(card);
+    } else {
+        changeCard(card);
+        currentlyFocusedCard = card.getAttribute("data-term");
+        if ((parseInt(card.getAttribute("data-term"))-1)>=0 && cardArray[parseInt(card.getAttribute("data-term"))-1].children[0].getAttribute("data-state")=="back"){
+            flipCard(cardArray[parseInt(card.getAttribute("data-term"))-1].children[0]);
         }
-        card.innerHTML = `
-        <div style="width:100%; height:100px; display:${image}; justify-content:center; align-items:center;">
-            <img src=${imgsrc} style="height:100px;">
-        </div>
-        ${newSheet.getNthTerm(card.getAttribute("data-term")).term}
-        `
-        card.setAttribute("data-state", "front")     
-
+        if ((parseInt(card.getAttribute("data-term"))+1)<cardArray.length && cardArray[parseInt(card.getAttribute("data-term"))+1].children[0].getAttribute("data-state")=="back"){
+            flipCard(cardArray[parseInt(card.getAttribute("data-term"))+1].children[0]);
+        }
     }
 }
