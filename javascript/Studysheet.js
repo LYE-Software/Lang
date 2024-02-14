@@ -21,6 +21,7 @@ class Studysheet {
         this.name = name;
         this.terms = []
         this.length = 0;
+        this.trainCloudsave = null;
     }
     add(term){
         this.terms.push(term)
@@ -58,6 +59,25 @@ class Studysheet {
             this.terms[j] = temp;
         }
     }
+
+    random(seed) {
+        var x = Math.sin(seed++) * 10000; 
+        return x - Math.floor(x);
+    }
+
+    randomizeWithSeed(seed){
+        var m = this.terms.length, t, i;
+        while (m) {
+            i = Math.floor(this.random(seed) * m--);     
+            t = this.terms[m];
+            this.terms[m] = this.terms[i];
+            this.terms[i] = t;
+            ++seed                                     
+        }
+        console.log(this.terms);
+    }
+
+    
 
     remove(n){
         return this.terms.splice(n, 1);
