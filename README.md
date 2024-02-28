@@ -17,4 +17,4 @@ Lang has no ads and is completely free to use. Forever. Lye Software promises to
 # You can study effectively, and with peace of mind, for FREE today at https://langstudy.tech
 
 
-*Lang Study is owned and operated by Lye Software LLC. Lang Study names and iconography are copyrights of Lye Software LLC. All Rights Reserved.*
+*Lang Study is owned and operated by Lye Software, Inc. https://lye.software*
