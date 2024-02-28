@@ -16,43 +16,154 @@
     <link rel="icon" href="../assets/logos/circular lang icon.png">
 </head>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Rubik+Mono+One&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap');
-    :root {
-    --primary-dark: #001945;
-    --primary-light: wheat;
-}
-body{
-    font-weight: lighter;
-}
-    .absolute {
-        position: absolute;
-    }
-    .horizontalFlex {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-    
-.fullAbsolute {
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+
+.sideIconContainer {
+    position: fixed;
     top: 0;
     left: 0;
-    right: 0;
     bottom: 0;
-}
 
-.verticalFlex {
+    width: 150px;
+
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
 }
 
-.centerFlex {
-    justify-content: center;
+.mainPreTrainView {
+    display: flex;
+    flex-direction: column;
+
     align-items: center;
+    justify-content: center;
+    
+    max-width: 600px;
+    width: 95vw;
+}
+    .preTrainPanel {
+        background-color: var(--primary-light);
+
+        max-width: 500px;
+        width: 95vw;
+
+        border-radius: 25px;
+        box-sizing: border-box;
+        padding: 15px;
+    }
+        #toggleTrainOptions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-right: 10px;
+            border-top: 2px solid var(--primary-dark);
+        }
+
+    .preTrainInsert {
+        max-width: 600px;
+        width: 95vw;
+        border-radius: 25px;
+
+        box-sizing: border-box;
+        padding: 15px;
+        
+        transition: height 0.25s, padding 0.25s;
+    }
+        .preTrainInsert > div {
+            display: flex;
+            width: 100%;
+
+            margin-top: 6px;
+
+
+            transition: opacity 0.25s;
+        }
+        .preTrainInsert > div > p {
+            flex-basis: 200px;
+        }
+        .preTrainInsert > .inputOption > input {
+            flex-grow: 1;
+        }
+
+        .preTrainInsert > .dropdownOption > div {
+            flex-grow: 1;
+            display: flex;
+            justify-content: space-between;
+            gap: 6px;
+        }
+
+        .preTrainInsert > .dropdownOption > div > button {
+            flex: 1;
+            font-size: 15px;
+        }
+        .preTrainInsert > .dropdownOption > div > .selected {
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+        }
+    
+    #startButton {
+        max-width: 300px;
+        width: 95%;
+        cursor:pointer;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+@media (max-width: 575px) {
+    .preTrainInsert {
+
+        /* set border radius to page width - 550px */
+        border-radius: calc((100vw - 525px) / 2);
+    }
+}
+
+input {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+
+    border: 2px solid var(--primary-dark);
+    border-radius: 15px;
+    font-family: "Poppins";
+
+    padding: 10px;
+
+    font-size: 15px;
+}
+
+button {
+    background-color: var(--primary-dark);
+    color: var(--primary-light);
+    cursor:pointer;
+    border: 2px solid var(--primary-light);
+    border-radius: 15px;
+    font-family: "Poppins";
+
+    padding: 15px;
+
+    transition: 0.25s;
+
+    box-sizing: border-box;
+}
+
+button:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+    border: 2px solid var(--primary-dark);
+}
+
+#informationAbt {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+:root {
+    --primary-dark: #001945;
+    --primary-light: wheat;
 }
 
 .flexSpacer {
@@ -68,29 +179,7 @@ body{
     text-align: center;
 }
 
-.buttonHoverDark {
-    transition: all 0.25s ease-in-out;
-    background-color: var(--primary-dark);
-    color: var(--primary-light);
-    border: 3px solid var(--primary-dark);
-}
 
-.buttonHoverDark:hover {
-    background-color: var(--primary-light);
-    color: var(--primary-dark);
-}
-
-
-.button {
-    border-radius: 1000000px;
-    height: 3vh;
-    width: 10vw;
-    padding: 1vh;
-    background-color: var(--primary-dark);
-    margin: 2vh;
-    cursor: pointer;
-    user-select: none;
-}
 
 .multiplechoicefooter button {
     width: 40vw;
@@ -165,64 +254,44 @@ color: var(--primary-light);
 
 }
 .bar{
-        width: 0vw;
-        height:2vh;
-        transition: 0.5s;
-    }
+    width: 0vw;
+    height:2vh;
+    transition: 0.5s;
+}
 
-    .selected{
-        background-color: #001945; 
-        color:wheat;
-        border:2px solid #001945;
-        margin:20px;
-        border-radius: 10px;
-        font-family:Poppins; 
-        font-size: 1vw;
-        cursor:pointer;
-        width:5vw;
-        height:1.5vw;
-        text-align: center;
-        margin-top:0px; margin-bottom:0px;
-        padding:20px;
-        transition:0.5ms;
-    }
-    .deselected{
-        background-color: wheat; 
-        color:#001945;
-        margin:20px;
-        border-radius: 10px;
-        font-family:Poppins; 
-        font-size: 1vw;
-        cursor:pointer;
-        border:2px solid #001945;
-        width:5vw;
-        height:1.5vw;
-        text-align: center;
-        margin-top:0px; margin-bottom:0px;
-        padding:20px;
-        transition:0.5s;
-    }
+    
 
-    .greyHover:hover {
-        transform: scale(1.05);
+.greyHover:hover {
+    transform: scale(1.05);
 
-    }
+}
 
-    .deselected:hover{
-        opacity: 0.7;    
-        background-color: #001945;
-        color:#f5deb3;
-        transform: scale(1.05);
+.deselected:hover{
+    opacity: 0.7;    
+    background-color: #001945;
+    color:#f5deb3;
+    transform: scale(1.05);
 
-    }
+}
 
-    .multipleChoiceButton:hover{
-        transform: scale(1.03);
-    }
+.multipleChoiceButton:hover{
+    transform: scale(1.03);
+}
 
-    .multipleChoiceButton{
-        transition:0.5s;
-    }
+.multipleChoiceButton{
+    transition:0.5s;
+}
+
+.nextButton {
+    border-radius: 1000000px;
+    height: 3vh;
+    width: 10vw;
+    padding: 1vh;
+    background-color: var(--primary-dark);
+    margin: 2vh;
+    cursor: pointer;
+    user-select: none;
+}
 
 </style>
 <body class="darkHomepage">
@@ -262,61 +331,53 @@ color: var(--primary-light);
     </div> -->
 
     <div id="topBar">
-        <a href="../studysheetpage.html"><img src="../assets/icons/back.svg" style="left:0; top:0; position: absolute; width: 150px; height: auto; z-index: 100"></a>
         <div class="centerText">
             <h1 id="whatGroup" style="font-family:Poppins; color:wheat; "></h1>
             <h1 id="whatPercent" style="font-family:Poppins; color:wheat;"></h1>
         </div>
-        <a href="../studysheetpage.html"><img src="../assets/logos/lang-wheat.png"  style="position:absolute; width:100px; right:0; top:0; margin:20px; z-index: 100" onclick="window.location.href='../homepage.html'"></a>
     </div>
 
-    <div class="horizontalFlex" style="flex-direction: column; font-family:Poppins; justify-content: center; text-align: center; color:wheat;" id="informationAbt">
-        <div style="width:50vw; height:20vh; display:flex; justify-content: center; align-items: center;">
+    <div id="informationAbt">
+        <div class="sideIconContainer">
+            <img src="../assets/logos/circular lang icon.png" style="padding: 20px; aspect-ratio: 1" onclick="window.location.href = '../homepage.html'">
+            <img src="../assets/icons/back.svg" style="aspect-ratio: 1" onclick="window.location.href = '../studysheetpage.html'">
         </div>
-        
-        
-        
-        <div style="display:flex; flex-direction: row; justify-content: space-between;">
-            
-            
-            <div class="" style="width:40vw; height:60vh; display:flex; justify-content: center; align-items: center; color:white; border-radius: 20px; padding: 20px;">
-                <div>
-                    <p style="font-family:Poppins; color:white; font-size: 2vw; font-weight:bold;">Train allows you to dynamically learn your Studysheet. </p>
-                    <p style="font-family:Poppins; color:white; font-size: 2vw; font-weight:lighter;">Cycle through rounds of learning, multiple choice, and write-in to gain long-term memory.</p>
-                    <button class="dropbtn greyHover" id="myBtnBegin" style="margin:20px; background-color: white; color: #001945; font-weight: bold; cursor:pointer;" onclick="showElement(document.getElementById('explainer'))">How does it work?</button>
+
+        <div class="mainPreTrainView">
+            <h1 style="font-size: 40px; color: var(--primary-light);">Train</h1>
+            <div class="preTrainPanel" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0; padding-bottom: 0;">
+                Train allows you to dynamically learn your Studysheet.
+                <div style="margin-top: 4px;"></div>
+                Cycle through rounds of learning, multiple choice, and write-in to gain long-term memory.
+                <div id="toggleTrainOptions">
+                    <p>Show Options</p>
+                    <img style="height: 25px;" src="../assets/icons/upArrow.png">
                 </div>
-                
             </div>
-            <div style="width:10vw; display:flex; justify-content: center; align-items: center;  border-radius: 20px;"></div>
-            <div class="lightGlow" style="width:40vw; display:flex; flex-direction: column; justify-content: center; align-items: center; background-color: wheat; border-radius: 20px;">
-                <p style="font-family:Poppins; color:#001945; font-size: 1.5vw; font-weight:bold;">Train</p>
-                <div style="display:flex; flex-direction: column; align-items:center;">
-                    <div style="font-family:Poppins; color:#001945; font-size: 1.25vw; font-weight:bold;">Terms per Round</div>
-                    <input placeholder = "5" type = "number" min="3" id="termsperround" style="background-color: #001945; color: wheat; width:20vw; height:7vh; border-radius: 20px; text-align: center; display:flex; flex-direction: column; justify-content: center;" contenteditable>
-                    <div style="font-size:0.75vw; color:#001945;"><em>Lang recommends 4-7 terms per round for the bext experience.</em></div>
-                    <br>
-                    <div style="font-family:Poppins; color:#001945; font-size: 1.25vw; font-weight:bold; margin-bottom:5px;">Answer With:</div>
-                    <div style="display: flex; justify-content: center;">
-                        <div>
-                            <div class = "selected" id="termSwap" onclick="swapper(this, document.getElementById('defSwap'))">Term</div>
-                            <div style="font-size:0.75vw; color:#001945;"><em>Default</em></div>
-                        </div>
-                        <div class="deselected" id="defSwap" onclick="swapper(this, document.getElementById('termSwap'))">Definition</div>
+            <div class="whiteBackdrop preTrainInsert">
+                <div class="inputOption">
+                    <p>Terms per Group</p>
+                    <input type="number" id="termsperround" value="5" min="1" max="100">
+                </div>
+                <div class="dropdownOption">
+                    <p>Shuffle Questions:</p>
+                    <div>
+                        <button class = "selected" id="orderedSwap" onclick="shuffler(this, document.getElementById('shuffledSwap'))">Yes</button>
+                        <button class="deselected" id="shuffledSwap" onclick="shuffler(this, document.getElementById('orderedSwap'))">No</button>
                     </div>
-                    <div style="font-family:Poppins; color:#001945; font-size: 1.25vw; font-weight:bold; margin-bottom:5px;">Order of terms:</div>
-                    <div style="display: flex; justify-content: center;">
-                        <div>
-                            <div class = "selected" id="orderedSwap" onclick="shuffler(this, document.getElementById('shuffledSwap'))">Ordered</div>
-                            <div style="font-size:0.75vw; color:#001945;"><em>Default</em></div>
-                        </div>
-                        <div class="deselected" id="shuffledSwap" onclick="shuffler(this, document.getElementById('orderedSwap'))">Shuffled</div>
+                </div>
+                <div class="dropdownOption">
+                    <p>Answer With:</p>
+                    <div>
+                        <button class = "selected" id="termSwap" onclick="swapper(this, document.getElementById('defSwap'))">Term</button>
+                        <button class="deselected" id="defSwap" onclick="swapper(this, document.getElementById('termSwap'))">Definition</button>
                     </div>
-                    <br>
-                </div> 
-                <button class="dropbtn greyHover" id="myBtnBegin" style="margin:20px; background-color: #001945; color: wheat; cursor: pointer;" onclick="doTrain()">Begin</button>
+                </div>
+            </div>
+            <div class="preTrainPanel flexCentered" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+                <button id="startButton" onclick="doTrain()">Start</button>
             </div>
         </div>
-        
 
     </div>
     <div id="restarting" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; z-index:2001; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
@@ -493,5 +554,55 @@ color: var(--primary-light);
     </div>
     
 </body>
+<script>
+    var optionsHidden = true;
+    var isChangingOptions = false;
+    var optionsHeight = document.getElementsByClassName("preTrainInsert")[0].offsetHeight;
+    function toggleOptions() {
+        if (isChangingOptions) return;
+        isChangingOptions = true;
+
+        let options = document.getElementsByClassName("preTrainInsert")[0];
+        let toggle = document.getElementById("toggleTrainOptions").children[1];
+
+        if (optionsHidden) {
+            toggle.style.transform = "rotate(270deg)";
+
+            // get the current height of options, set its height, iterate over all elements and make them display: none, then set its height to 0
+            optionsHeight = options.offsetHeight;
+            options.style.height = optionsHeight + "px";
+            for (let i = 0; i < options.children.length; i++) {
+                options.children[i].style.opacity = "0";
+                options.children[i].style.pointerEvents = "none";
+            }
+            setTimeout(() => {
+                options.style.height = "0px";
+                options.style.padding = "0px";
+                isChangingOptions = false;
+            }, 250);
+        } else {
+            toggle.style.transform = "rotate(180deg)";
+
+            options.style.height = optionsHeight + "px";
+            options.style.padding = "15px";
+            setTimeout(() => {
+                for (let i = 0; i < options.children.length; i++) {
+                    options.children[i].style.opacity = "1";
+                    options.children[i].style.pointerEvents = "all";
+                }
+                isChangingOptions = false;
+            }, 250);
+        }
+        
+        optionsHidden = !optionsHidden;
+    }
+    setTimeout(() => {
+        toggleOptions();
+        document.getElementsByClassName("preTrainInsert")[0].style.height = "0px";
+        document.getElementsByClassName("preTrainInsert")[0].style.padding = "0px";
+    }, 100);
+
+    document.getElementById("toggleTrainOptions").addEventListener("click", toggleOptions);
+</script>
 <script src="../javascript/sidebar.js"></script>
 </html>

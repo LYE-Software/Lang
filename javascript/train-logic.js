@@ -44,14 +44,14 @@ function swapper(elem, that){
 
 
 function shuffler(elem, that){
-    if (elem.id == "termSwap"){
-        console.log("term");
+    if (elem.id == "shuffledSwap"){
+        console.log("shuffle off");
         shuffle = false;
         elem.className = "selected";
         that.className = "deselected";
     }
     else{
-        console.log("def");
+        console.log("shuffl on");
         shuffle = true;
         elem.className = "selected";
         that.className = "deselected";
@@ -441,7 +441,7 @@ function groupLoc(){
 
 function configureInterface(){
     document.getElementById("informationAbt").style.display = "none";
-    document.getElementById("myBtnBegin").style.display = "none";
+    document.getElementById("startButton").style.display = "none";
     try {
         document.getElementById("file").style.display = "none";
 

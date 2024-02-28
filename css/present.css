@@ -1,0 +1,57 @@
+:root{
+    --darkgreen: #539987;
+    --lightgreen: #70CEB6;
+}
+
+.presentHeader {
+    height: 10vh;
+    background: linear-gradient(180deg, #70CEB6 -24.47%, #F5DEB3 45.79%);
+    width: 100vw;
+    border-bottom: 2px solid var(--primary-dark);
+    width: calc(100vw - 20px);
+    padding: 10px; 
+}
+
+.functionRow {
+    background-color: var(--primary-light);
+    height: 6vh;
+    width: 100vw;
+
+    -webkit-box-shadow:0px 0px 20px 0px var(--lightgreen);
+    -moz-box-shadow: 0px 0px 20px 0px var(--lightgreen);
+    box-shadow: 0px 10px 20px -10px var(--lightgreen);
+
+}
+
+#topheader{
+    background: linear-gradient(180deg, #539987 -20%, #001945 100%);
+background-clip: text;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.bigGreenText{
+    text-align: center;
+    font-family: Poppins;
+    font-size: 35px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    color: var(--lightgreen);
+}
+
+.bigSelection{
+    width:400px; 
+    height:400px; 
+    border-radius: 20px; 
+    display:flex; 
+    justify-content: center; 
+    align-items: center;
+    transition:0.5s;
+    cursor:pointer;
+}
+
+.bigSelection:hover{
+    background-color: white;
+    
+}
