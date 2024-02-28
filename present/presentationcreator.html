@@ -1,0 +1,91 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating a Presentation on Lang Present</title>
+    <script src="../javascript/utils.js"></script>
+    <script src="../javascript/present/Presentation.js"></script>
+    <script src="../javascript/loadBalancer.js"></script>
+    <script src="../javascript/LangError.js"></script>
+    <script src="../javascript/signInChecker.js"></script>
+    <!-- <script src="../javascript/presentationcreator.js"></script> -->
+    <link rel="stylesheet" href="../css/stylesheet.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/present.css">
+    <link rel="icon" href="../assets/logos/circular lang icon.png">
+</head>
+<body>
+    <div id="header" class="presentHeader horizontalFlex">
+        <div style="cursor:pointer;" onclick="window.location.href='../homepage.html'">
+            <img style="height: 10vh;" src="../assets/logos/Present Lockup.png" alt='Lang Logo'>
+        </div>
+        <div id="homeusername" class="noverticalshow button verticalFlex" style="cursor: pointer; color:wheat; background-color:#001945;" onclick="window.location.href='../settings.html'">Loading your name...</div>
+    </div>
+    <div class="functionRow horizontalFlex" style="justify-content: start;">
+        <div class="functionRowItem">
+            Create
+            <div class="functionRowItemContents" style="z-index:500;">
+                <div onclick="window.location.href='creator.html'">New Studysheet</div>
+                <div onclick="window.location.href='notes.html'">From Notes</div>
+                <div onclick="window.location.href='quizletconvert.html'">From Quizlet</div>
+            </div>
+        </div>
+        <div class="functionRowItem" style="display:none;" id="localAdvanced">
+            Local
+            <div class="functionRowItemContents" style="z-index:500;">
+                <div>Not Available Currently</div>
+                <!-- <div onclick="window.location.href='train.html'">Train</div>
+                <div onclick="window.location.href='mastery.html'">Mastery</div>
+                <div onclick="window.location.href='multiplechoice.html'">Multiple Choice</div>
+                <div onclick="window.location.href='flashcardsnewtml'">Flashcards</div>
+                <div onclick="window.location.href='practestnew.html'">Practice Test</div> -->
+            </div>
+        </div>
+        <div class="functionRowItem">
+            Settings
+            <div class="functionRowItemContents" style="z-index:500;">
+                <div onclick="window.open('https://lye.software/manageuser')">Account Settings</div>
+                <div onclick="window.location.href='settings.html'">Lang Settings</div>
+            </div>
+        </div>
+        <div class="functionRowItem">
+            About
+            <div class="functionRowItemContents" style="z-index:500;">
+                <div onclick="window.location.href='about.html'">About Lang</div>
+                <div onclick="window.location.href='langlegal.html'">Legal & Credits</div>
+                <div onclick="window.location.href='langAssistantFAQ.html'">About Lang Assistant</div>
+            </div>
+        </div>
+        <div class="functionRowItem">
+            Contact Us
+            <div class="functionRowItemContents" style="z-index:500;">
+                <a href="https://github.com/LYE-software/Lang/issues">Visit our GitHub</a>
+                <a href="mailto:customersupport@langstudy.tech" >Email Us</a>
+                <a href="https://discord.gg/FtdtvkdfHy" >Join us on Discord</a>
+                <a href="https://instagram.com/studylangtech\" >Follow us on Instagram</a>
+            </div>
+        </div>
+        <notdiv class="flexSpacer"></notdiv>
+    </div>
+    <img id='output' style="height:100px; width:100px; display:none;">
+
+    <div class="verticalFlex centerFlex noverticalshow" style="align-items:center; text-align: center; position: absolute; top:0; width:100%; height:11.9vh; pointer-events:none;">
+        <div class="horizontalFlex" style="">
+            <div id="topheader" style="font-size:35px; font-family:Rubik Mono One; top:50%;">Creating a new Presentation</div>
+        </div>
+    </div>
+
+
+    <div style="height:70vh; display:flex; flex-direction: column; justify-content: center;">
+        <h1 class="bigGreenText">Select Presentation Style</h1>
+        <div class="horizontalFlex" style="justify-content: space-evenly; flex-wrap:wrap;">
+            <div class="whiteBackdrop bigSelection">
+                <img src="../assets/icons/slideshow.png">
+            </div>
+            <div class="whiteBackdrop bigSelection" >
+                <img src="../assets/icons/speaking.png">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
