@@ -516,3 +516,9 @@ input {
     color: var(--primary-dark);
     border: 2px solid var(--primary-dark);
 }
+
+.flexCentered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
