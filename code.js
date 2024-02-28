@@ -1,4 +1,4 @@
-//This is the main JavaScript file for Lang (www.langstudy.tech)
+//This is the old/depreciated main JavaScript file for Lang (www.langstudy.tech)
 //Written by nwvbug- https://github.com/nwvbug 
 //GitHub Repo: https://github.com/lye-software/Lang
 

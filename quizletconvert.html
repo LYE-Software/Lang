@@ -126,7 +126,10 @@
             <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="window.location.href='../homepage.html'">Ok</div>
         </div>
     </div>
-
+    <div style="position:absolute; bottom:0; right:0; margin:20px; display:flex; cursor:pointer;" id="storeLink" onclick="window.location.href='https://chromewebstore.google.com/detail/quizlet-to-langstudy/ckmfofefmcaieajjkelnakglpkkmeomd'"> 
+        <p style="color:white; font-weight:bold; margin-right:10px;">Get the Quizlet Convert Extension for Google Chrome!</p>
+        <img src="assets/icons/chromewebstore.svg" style="height:50px;">
+    </div>
 
 
     <!-- <div id="header0" class="absolute" style="width: 100vw">
@@ -168,13 +171,18 @@
                 readableSS = JSON.parse(newStudysheet)
                 if (typeof readableSS.error !== 'undefined'){
                     if (readableSS.error == "unknown_quizlet_error") { 
-                        showPopup("We ran into an unexpected issue with Quizlet. Here's what Quizlet said when we tried to read your Quizlet Study Set: "+readableSS.quizlet_error+" If this converter still does not work, you can use the <a href=\"https://chrome.google.com/webstore/detail/quizlet-to-langstudy/ckmfofefmcaieajjkelnakglpkkmeomd/related\">Chrome Extension (Only for Google Chrome Users)</a>.")
+                        showPopup("We ran into an unexpected issue with Quizlet. Here's what Quizlet said when we tried to read your Quizlet Study Set: "+readableSS.quizlet_error+" If this converter still does not work, you can use the <a href=\"https://chromewebstore.google.com/detail/quizlet-to-langstudy/ckmfofefmcaieajjkelnakglpkkmeomd\">Chrome Extension (Only for Google Chrome Users)</a>.")
                         e = new LangError("Unexpected Quizlet Issue: "+readableSS.quizlet_error, "quizletconvert", "unknown", "unknown", "We ran into an unexpected issue with Quizlet. Here's what Quizlet said when we tried to read your Studysheet: "+readableSS.quizlet_error, false)
                     } 
                     else { 
-                        showPopup("We couldn't get your Quizlet Study Set because it's marked as private on Quizlet. To bypass this, try our new <a href=\"https://chrome.google.com/webstore/detail/quizlet-to-langstudy/ckmfofefmcaieajjkelnakglpkkmeomd/related\">Chrome Extension</a>.")
+                        showPopup("We couldn't get your Quizlet Study Set because it's marked as private on Quizlet. To bypass this, try our <a href=\"https://chromewebstore.google.com/detail/quizlet-to-langstudy/ckmfofefmcaieajjkelnakglpkkmeomd\">Chrome Extension</a>.")
                     }
-                } else {
+                }
+                else if (readableSS.length == 0){
+                    showPopup("We ran into an unexpected issue with Quizlet. To convert this set, you may need to use the more reliable and faster <a href=\"https://chromewebstore.google.com/detail/quizlet-to-langstudy/ckmfofefmcaieajjkelnakglpkkmeomd\">Chrome Extension (Only for Google Chrome Users)</a>.")
+                    e = new LangError("Unexpected Quizlet Issue: "+readableSS.quizlet_error, "quizletconvert", "unknown", "unknown", "We ran into an unexpected issue with Quizlet. Here's what Quizlet said when we tried to read your Studysheet: "+readableSS.quizlet_error, false)
+                } 
+                else {
                     window.localStorage.setItem("fullstudysheet", newStudysheet);
                     window.location.href="creator.html";
                 }

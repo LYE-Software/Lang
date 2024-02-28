@@ -2,19 +2,33 @@
 class LangError{
 
     constructor(devMessage, filename, lineno, where, userReadable, show, additionalInfo){
-        console.log("LangError is handling the error.")
-        console.log(devMessage, filename, lineno, where, userReadable, show)
-        this.filename = filename;
-        this.lineno = lineno;
-        this.where = where;
-        this.userReadable = userReadable;
-        this.devMessage = devMessage;
-        this.additionalInfo = additionalInfo;
-        if (show){
-            this.showError();
+        var doError = false;
+        if (devMessage.trim() == "Uncaught SyntaxError: Unexpected end of JSON input"){
+            doError = true;
         }
-        this.reportError();
-        console.error(devMessage)
+        else {
+            if (filename.slice(-4) == "html" || filename == "" || filename == null){
+                console.log("Extension error. Lang ignoring.")
+            } else {
+                doError = true;
+            }
+        }
+        if (doError){
+            console.log("LangError is handling the error.")
+            console.log(devMessage, filename, lineno, where, userReadable, show)
+            this.filename = filename;
+            this.lineno = lineno;
+            this.where = where;
+            this.userReadable = userReadable;
+            this.devMessage = devMessage;
+            this.additionalInfo = additionalInfo;
+            if (show){
+                this.showError();
+            }
+            this.reportError();
+            console.error(devMessage)
+        }
+        
     }
 
     showError(){
