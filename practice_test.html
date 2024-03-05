@@ -1,0 +1,232 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <title>Practice Test</title>
+    <style>
+        #container {
+            width: 100vw;
+            height: 100vh;    
+        }
+        
+        #main {
+            width: 90vw;
+            max-width: 700px;
+
+        }
+
+        #progressBarContainer {
+            width: 100%;
+            height: 20px;
+            border-radius: 15px;
+        }
+
+        #progressBar {
+            height: 100%;
+            background-color: white;
+            border-radius: 15px;
+        }
+
+        #progressText {
+            color: white !important;
+        }
+
+        h2 {
+            color: var(--primary-light);
+        }
+
+        #answerPanel {
+            border-radius: 25px;
+
+            height: 300px;
+            transition: all 0.5s ease-in-out;
+
+            padding: 20px;
+
+            width: 100%;
+        }
+
+        #answerPanel > * {
+            transition: all 0.125s ease-in-out;
+        }
+
+        #mcq {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: stretch;
+            justify-content: space-around;
+            gap: 10px;
+            height: 100%;
+            width: 100%;
+        }
+
+        #answerPanel .newButton {
+            margin: 0;
+            border-radius: 25px;
+
+            border: none !important;
+            transition: all 0.25s ease-in-out;
+
+            background-color: var(--primary-light);
+        }
+
+        #mcq > .newButton {
+            flex-basis: 300px;
+            flex-grow: 1;
+        }
+
+        .newButton:hover {
+            transform: scale(1.025);
+        }
+
+        #definition {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+
+            width: 100%;
+        }
+
+        #definition > p {
+            color: white;
+            font-size: 1.5em;
+        }
+
+        #definition > div {
+            width: 100%;
+            text-align: right;
+        }
+
+        #definition > div > .newButton {
+            width: 50%;
+            min-width: 100px;
+            height: 50px;
+            font-size: 1.25em;
+
+            font-weight: bold;
+        }
+
+        #frq {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+
+            width: 100%;
+            height: 200px;
+
+            text-align: right;
+
+            gap: 10px;
+        }
+
+        #frq > .newButton {
+            width: 50%;
+            min-width: 100px;
+            height: 50px;
+            font-size: 1.25em;
+
+            font-weight: bold;
+        }
+
+        #frqAnswerInput {
+            width: 100%;
+            height: 20px;
+            
+            flex: 1;
+
+            background-color: var(--primary-light);
+            border-radius: 25px;
+
+            font-size: 1.5em;
+
+            padding: 10px;
+            color: var(--primary-dark);
+
+            border: none;
+            border-radius: 25px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="rightSidebarContainer verticalFlex" style="z-index:1100;" id="shelf">
+        <div class="whiteBackdrop">
+            <button class="lightGlow newbutton" onclick="window.location.href='studysheetpage.html'" ><img src="assets/icons/blackBackButton.png"></button>
+            <button class="lightGlow newbutton" onclick="showElement(document.getElementById('shuffling'))" ><img src="assets/icons/shuffle.png"></button>
+            <button class="lightGlow newbutton" onclick="showElement(document.getElementById('swapping'))"><img src="assets/icons/swapTD.png"></button>
+            <button class="lightGlow newbutton" onclick="showElement(document.getElementById('timerPopup'))"><img src="assets/icons/timer.png"></button>
+            <button class="lightGlow newbutton" style="cursor:pointer;" onclick="stats()" ><img src="assets/icons/stats.png"></button>
+            <button class="lightGlow newbutton" onclick="showElement(document.getElementById('restarting'))"><img src="assets/icons/reset.png"></button>
+
+        </div>
+    </div>
+
+    <div class="sideIconContainer">
+        <img src="assets/logos/circular lang icon.png" style="padding: 20px; aspect-ratio: 1" onclick="window.location.href = 'homepage.html'">
+        <img src="assets/icons/back.svg" style="aspect-ratio: 1" onclick="window.location.href = 'studysheetpage.html'">
+    </div>
+
+    <div id="container" class="flexCentered" style="flex-direction: column">
+        <div id="main">
+            <div class="flexCentered" style="flex-direction: column">
+                <div style="width: 100%">
+                    <h2 style="color: white;">I would not subject myself to reading ________.</h2>
+                </div>
+
+                <div id="answerPanel" class="grayBackdrop flexCentered">
+                    <div id="mcq" target-height="300" style="opacity: 0; pointer-events: none;">
+                        <button class="newbutton">something so boring</button>
+                        <button class="newbutton">javascript</button>
+                        <button class="newbutton">neuromancer</button>
+                        <button class="newbutton">ur mom</button>
+                    </div>
+                    <div id="frq" target-height="200" style="opacity: 0; pointer-events: none;">
+                        <input id="frqAnswerInput">
+                        <button class="newButton">> Go!</button>
+                    </div>
+                    <div id="definition" target-height="125" style="opacity: 0; pointer-events: none;">
+                        <p style="color: white;">something so boring</p>
+                        <div>
+                            <button class="newButton">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div>
+                <div id="progressBarContainer">
+                    <div id="progressBar" style="width: 50%"></div>
+                </div>
+                <p id="progressText" style="color: var(--primary-light)">
+                    5 of 10
+                </p> 
+            </div>
+
+        </div>
+    </div>
+</body>
+<script src="javascript/sidebar.js"></script>
+<script>
+    function showView(viewType) {
+        let answerPanel = document.getElementById('answerPanel');
+        for (let i = 0; i < answerPanel.children.length; i++) {
+            answerPanel.children[i].style.opacity = 0;
+            answerPanel.children[i].style.pointerEvents = 'none';
+        }
+        let featuredPanel = document.getElementById(viewType);
+        answerPanel.style.height = featuredPanel.getAttribute('target-height') + 'px';
+        setTimeout(() => {
+            for (let i = 0; i < answerPanel.children.length; i++) {
+                answerPanel.children[i].style.display = 'none';
+            }
+            featuredPanel.style.opacity = 1;
+            featuredPanel.style.pointerEvents = 'all';
+            featuredPanel.style.display = "flex";
+        }, 175);
+    }
+
+</script>
+</html>

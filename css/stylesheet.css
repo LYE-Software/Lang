@@ -496,6 +496,10 @@ input {
     pointer-events: all;
 }
 
+.grayBackdrop {
+    background-color: #ffffff44;
+}
+
 .newbutton {
     background-color: white;
     padding: 10px;
@@ -521,4 +525,17 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.sideIconContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    width: 150px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
