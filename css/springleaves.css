@@ -1,5 +1,13 @@
 
 /* leaf animations */
+:root {
+    --leaf-color-1: #309900;
+    --leaf-color-2: #005600;
+    --leaf-color-3: #309900;
+    --leaf-color-4: #8a4e0a;
+    --leaf-color-5: #990;
+    --leaf-color-6: #564500;
+}
 
 /* #leaves {position:relative;top:-50px;width:100%;} */
 .leaves{
@@ -18,7 +26,7 @@
 
     width: 200px;
     height: 150px;
-    background: linear-gradient(to bottom right, #309900, #005600);
+    background: linear-gradient(to bottom right, var(--leaf-color-1), var(--leaf-color-2));
     transform: skew(20deg);
     border-radius: 5% 40% 70%;
     box-shadow: inset 0px 0px 1px #222;
@@ -43,7 +51,7 @@
   border-bottom: 1px solid #222;
   border-left: 0px solid #222;
   border-right: 1px solid #222;
-  background: linear-gradient(to right, rgba(0,100,0,1), #005600);
+  background: linear-gradient(to right, var(--leaf-color-1), var(--leaf-color-2));
   z-index: 1;
 }
 
@@ -88,9 +96,9 @@
 #leaves i:nth-of-type(14n) { -webkit-animation-delay: 4.7s;}
 #leaves i:nth-of-type(15n) { -webkit-animation-delay: 3s;  }
 
-#leaves i:nth-of-type(n)    { background: linear-gradient(to bottom right, #309900, #005600); }
-#leaves i:nth-of-type(2n+2)  { background: linear-gradient(to bottom right, #309900, #309900); }
-#leaves i:nth-of-type(4n+1)  { background: linear-gradient(to bottom right, #990, #309900); }
+#leaves i:nth-of-type(n)    { background: linear-gradient(to bottom right, var(--leaf-color-1), var(--leaf-color-2)); }
+#leaves i:nth-of-type(2n+2)  { background: linear-gradient(to bottom right, var(--leaf-color-3), var(--leaf-color-4)); }
+#leaves i:nth-of-type(4n+1)  { background: linear-gradient(to bottom right, var(--leaf-color-5), var(--leaf-color-6)); }
 
 #leaves i:nth-of-type(n)    { opacity: .7;}
 #leaves i:nth-of-type(3n+1)  { opacity: .5;}
