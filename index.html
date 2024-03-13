@@ -53,18 +53,19 @@
     </div>
 </body>
 <script>
-     if (window.localStorage.getItem("usertoken") == null || window.localStorage.getItem("usertoken") == "") {
-         console.log("new user");
-         firstSignIn();
-     } else {
-         console.log("Recurring user");
-         user();
-     }
-    function firstSignIn() {
-        window.location.href="onboarding-new.html";
-    }
-    function user(){
-        window.location.href="homepage.html"
-    }
+    window.location.href='other/mait.html'
+    //  if (window.localStorage.getItem("usertoken") == null || window.localStorage.getItem("usertoken") == "") {
+    //      console.log("new user");
+    //      firstSignIn();
+    //  } else {
+    //      console.log("Recurring user");
+    //      user();
+    //  }
+    // function firstSignIn() {
+    //     window.location.href="onboarding-new.html";
+    // }
+    // function user(){
+    //     window.location.href="homepage.html"
+    // }
 </script>
 </html>
