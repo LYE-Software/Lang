@@ -99,10 +99,16 @@
             justify-content: space-between;
             padding: 0 15px;
             box-sizing: border-box;
+
+            transition: background-color 0.125s ease-in-out;
         }
         .sheetEntry > div > svg {
             stroke: white;
             fill: white;
+        }
+
+        .sheetEntry:hover {
+            background-color: rgba(255, 255, 255, 0.25);
         }
 
         .studysheetInfoContainer {
