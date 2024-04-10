@@ -174,6 +174,12 @@ async function getLibraryList(){
                     sheetElement.innerHTML = sheetHtml
                     sheetElement = sheetElement.firstChild
 
+                    let editButton = sheetElement.getElementsByClassName("studysheetEdit")[0]
+                    editButton.addEventListener("click", function(){
+                        window.localStorage.setItem("chosenSheet", sheet_id)
+                        window.location.href="studysheetpage.html";
+                    })
+
                     console.log("Adding event listener to "+sheet_id)
                     sheetElement.addEventListener("click", function(){
                         console.log("clicked on "+sheet_id)

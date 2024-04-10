@@ -241,10 +241,6 @@
                 display: none;
             }
 
-            .notif{
-                display:none;
-            }
-
             #contentContainer {
                 margin: 0;
                 width: 100%;
@@ -286,18 +282,26 @@
         }
 
         .notifBox{
-            border-top: #001945 4px solid;
-            display:flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            display: flex;
+
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-wrap: wrap;
+
+            padding: 10px;
         }
-        .notifTitle{
-            width:25%;
-            border-right: #001945 2px solid;
-            padding:15px;
-            font-size:17px;
+
+        .notifBox > h3 {
+            min-width: 300px;
+            text-align: left;
+
         }
+
+        .notifBox > p {
+            flex: 1;
+            flex-basis: 300px;
+        }
+
         .hasUnreads{
             transition:0.5s;
             animation: unreads 1s ease-in-out infinite;
@@ -543,45 +547,34 @@
     <div class="popupContainer" id="notificationPopup">
         <div class="popup" style="width:700px; max-width: 90vw;">
             <img src="assets/icons/closeCircle.svg" style="height:30px; cursor:pointer;" onclick="hideElement(document.getElementById('notificationPopup'))">
-            <div class="horizonalFlex centerFlex" style="display:flex; margin:30px;">
+            <div class="horizonalFlex centerFlex" style="display:flex; margin:10px;">
                 <img src="assets/icons/notifications.png" style="height:5vh;">
             </div>
-            <div style="text-align: center;font-size: 30px; margin-bottom:10px;"><strong>Notifications</strong></div>
-            <div style="text-align: center; font-size: 20px; margin-bottom:20px;" >Read what the developers have to say.</div>
-            <div style="overflow-y:scroll; height:400px; max-height:70%;">
+            <h2 style="text-align: center;font-size: 30px; margin: 10px;">Notifications</h2>
+            <div style="overflow-y:scroll; height:400px; max-height:70%;background-color: wheat; border-radius: 25px;">
                 <div class="notifBox">
-                    <div class="notifTitle">
-                        <strong>Flashcards fixed!</strong>
-                    </div>
-                    <p style="padding:10px; width:75%;">Flashcards has been updated to fix some errors with rapid movement through cards. Also, it has a pretty animation now!</i></p>
+                    <h3>Flashcards fixed!</h3>
+                    <p>Flashcards has been updated to fix some errors with rapid movement through cards. Also, it has a pretty animation now!</i></p>
                 </div>
 
                 <div class="notifBox">
-                    <div class="notifTitle">
-                        <strong>December is here!</strong>
-                    </div>
-                    <p style="padding:10px; width:75%;">Lang's background has once again been updated to match the December timeframe. Enjoy the snow, and good luck on finals!<br><br><i>If you do not like the snow, it causes performance issues, or you live in a place where it is not winter right now, feel free to disable the backgrounds in settings.</i></p>
+                    <h3>December is here!</h3>
+                    <p>Lang's background has once again been updated to match the December timeframe. Enjoy the snow, and good luck on finals!<br><br><i>If you do not like the snow, it causes performance issues, or you live in a place where it is not winter right now, feel free to disable the backgrounds in settings.</i></p>
                 </div>
 
                 <div class="notifBox">
-                    <div class="notifTitle">
-                        <strong>Changes Coming Soon</strong>
-                    </div>
-                    <p style="padding:10px; width:75%;">I thought we'd give you a heads up for some new things we are working on for Lang:<br><br><strong>Practice Test Styles</strong>- Make a practice test in the style of an AP FRQ, MCQ, or anything you can think of!</p>
+                    <h3>Changes coming soon.</h3>
+                    <p>I thought we'd give you a heads up for some new things we are working on for Lang:<br><br><strong>Practice Test Styles</strong>- Make a practice test in the style of an AP FRQ, MCQ, or anything you can think of!</p>
                 </div>
 
                 <div class="notifBox">
-                    <div class="notifTitle">
-                        <strong>We're working on it!</strong>
-                    </div>
-                    <p style="padding:10px; width:75%;">Huge thank-yous to everyone using Lang and reporting errors in the bug / feedback reporter. We see your messages and are working on them. Train's patch has already rolled out and Practice Test is getting upgrades soon. New features are on their way!</p>
+                    <h3>We're working on it!</h3>
+                    <p>Huge thank-yous to everyone using Lang and reporting errors in the bug / feedback reporter. We see your messages and are working on them. Train's patch has already rolled out and Practice Test is getting upgrades soon. New features are on their way!</p>
                 </div>
     
                 <div class="notifBox">
-                    <div class="notifTitle">
-                        <strong>Thank you for using Lang!</strong>
-                    </div>
-                    <p style="padding:10px; width:75%;">Thank you for signing up to Lang! Your support allows us to continue providing this service free for all.</p>
+                    <h3>Thank you for using Lang!</h3>
+                    <p>Thank you for signing up to Lang! Your support allows us to continue providing this service free for all.</p>
                 </div>
             </div>
             
