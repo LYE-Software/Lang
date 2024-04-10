@@ -172,9 +172,9 @@ class PopupDismissButton extends PopupButton {
             this.parentElement.parentElement.style.opacity = '0';
             this.parentElement.parentElement.style.pointerEvents = 'none';
             
-            setTimeout(function() {
-                this.parentElement.parentElement.remove();
-            }, 250);
+            setTimeout(function(buttonElem) {
+                buttonElem.parentElement.parentElement.remove();
+            }.bind(null, this), 250);
         }, style);
     }
 }
