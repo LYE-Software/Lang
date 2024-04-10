@@ -16,6 +16,7 @@ var switchServerTimeout = setTimeout(function(){
     console.warn("its been 10 seconds, asking switch")
 }, 10000)
 
+var reloads = 0;
 async function getLibraryList(){
     
     // check for local studying
@@ -87,6 +88,7 @@ async function getLibraryList(){
         //     serverData = response.text();
         // });        
         console.log("[TOTAL SERVER DATA] "+serverData)
+
         try {
              json = JSON.parse(serverData)
              clearTimeout(switchServerTimeout)
@@ -94,7 +96,24 @@ async function getLibraryList(){
         } catch(error){
             console.error("IMPROPER JSON")
             json = null;
-            failedServerConnectionOnStart()
+            reloads++;
+            if (reloads > 2){
+                console.log("Server is down probably")
+
+                let popup = new PopupBuilder()
+                popup.add(new PopupImage("assets/logos/FullLangLogo.png", "height: 80px; margin: 10px"))
+                popup.add(new PopupText("Unfortunately, we were unable to establish a connection to the Lang servers. <b>This error has been logged.</b>"))
+                popup.add(new PopupText("If you are seeing this message multiple times, it may be an issue with your network connection."))
+                popup.add(new PopupText("We apologize for any inconvience this may have caused."))
+                popup.add(new PopupText("Thank you for using Lang."))
+                popup.add(new PopupButton("Retry", function(){
+                    window.location.reload()
+                }, "width: 100px; color: #001945;"))
+                popup.show()
+                
+                return;
+            }
+            getLibraryList();
         }
 
         if (json.error == "session_invalid"){
@@ -119,8 +138,8 @@ async function getLibraryList(){
             username = json.username
         }
         console.warn("LIBRARY: "+library)
-        if(library == "[]"&& json.error != "session_invalid"){
-            console.log("1")
+        if((library == "[]"&& json.error != "session_invalid")) {
+            console.log("1") 
              noStudySheets()
         } else if (library == ""&& json.error != "session_invalid"){
             noStudySheets()
@@ -205,7 +224,14 @@ async function getLibraryList(){
 }
 
 function sheetJsonInvalid(){
-    showElement(document.getElementById("jsonMessedUp"))
+    let popup = new PopupBuilder()
+    popup.add(new PopupImage("assets/icons/langerror.png", "height: 80px; margin: 10px"))
+    popup.add(new PopupText("We couldn't read one or more of your Lang Studysheets.").setStyle("color: red; font-weight: bold;"))
+    popup.add(new PopupText("Your data is safe and the Lang team has been notified.").setStyle("font-weight: bold;"))
+    popup.add(new PopupText("For priority support, please email us at customersupport@langstudy.tech."))
+    popup.add(new PopupDismissButton("Ok"))
+    popup.show()
+
     sendFeedback("[SYSTEM] [HOMEPAGE ERROR] UNREADABLE STUDYSHEET USERID "+window.localStorage.getItem("usertoken"))
 }
 
@@ -218,8 +244,18 @@ function hideLoadingView() {
 }
 
 function failedSignIn() {
-    // document.getElementById("failedSignIn").style.display = "flex";
-    showElement(document.getElementById("failedSignIn"))
+    let popup = new PopupBuilder();
+    popup.add(new PopupImage("assets/logos/FullLangLogo.png", "height: 80px; margin: 10px"))
+    popup.add(new PopupText("You have been logged out of Lang."))
+    popup.add(new PopupText("Please <b>log in</b> or <b>create a new account</b> to continue."))
+    popup.add(new PopupButton("Log In", function(){
+        window.location.href='https://lye.software/signin?forward=langstudy.tech-homepage.html'
+    }))
+    popup.add(new PopupButton("Sign Up", function(){
+        window.location.href='https://lye.software/signup?forward=langstudy.tech-homepage.html'
+    }))
+    popup.add(new PopupText(`By signing up for an account, you agree to the Lang Terms of Service, which can be found <a href='langlegal.html' style="color: var(--primary-dark)">here</a>.`).setStyle("font-size: 10px;"))
+    popup.show()
     console.log("failedsignin")
 }
 
@@ -238,19 +274,6 @@ function showDeletePopup() {
         window.location.reload()
     }, "color: red;"))
     popup.show()
-}
-
-var reloads = 0;
-function failedServerConnectionOnStart(){
-    
-    if (reloads < 2){
-        getLibraryList()
-        reloads++;
-    } else {
-        showElement(document.getElementById("failedServerConnection"))
-    }
-
-    console.log("failed server connection")
 }
 
 function goToSSPage(){
@@ -292,4 +315,17 @@ function sendFeedback(auto){
         console.log("sending " + data + " to " + url);
         xhr.send(data);
     }
+}
+
+function noStudySheets() {
+    let popup = new PopupBuilder()
+    popup.add(new PopupImage("assets/logos/FullLangLogo.png", "height: 80px; margin: 10px"))
+    popup.add(new PopupText("Welcome to Lang!").setStyle("font-size: 20px; color: #001945;"))
+    popup.add(new PopupText("To study, you need to create a Studysheet. A Studysheet is a collection of flashcards that you can dynamically learn."))
+    popup.add(new PopupText("Click below to create a new Studysheet!").setStyle("color: red; font-weight: bold;"))
+    popup.add(new PopupButton("Create New Studysheet", "creator.html"))
+    popup.add(new PopupText("Or, make one from an already existing source."))
+    popup.add(new PopupButton("From Quizlet", "quizletconvert.html"))
+    popup.add(new PopupButton("From Notes", "notes.html"))
+    popup.show()
 }

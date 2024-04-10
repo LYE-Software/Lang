@@ -61,11 +61,16 @@ class PopupBuilder {
 
 class PopupElement {
     constructor() {
-
+        this.style = "";
     }
 
     getHTML() {
 
+    }
+
+    setStyle(style) {
+        this.style = style;
+        return this;
     }
 
     getInputElements() {
@@ -82,6 +87,7 @@ class PopupText extends PopupElement {
     getHTML() {
         var element = document.createElement('p');
         element.innerHTML = this.text;
+        element.style = this.style;
         return element;
     }
 }
@@ -100,6 +106,25 @@ class PopupButton extends PopupElement {
         element.onclick = this.onclick;
         element.classList.add("newbutton");
         element.classList.add("buttonHoverDark")
+        element.style = this.style;
+
+        element.style.color = "#001945";
+        element.style.width = "100px";
+
+        return element;
+    }
+}
+
+class PopupImage extends PopupElement {
+    constructor(src, style) {
+        super();
+        this.src = src;
+        this.style = style;
+    }
+
+    getHTML() {
+        var element = document.createElement('img');
+        element.src = this.src;
         element.style = this.style;
 
         return element;
