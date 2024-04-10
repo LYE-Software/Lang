@@ -430,7 +430,7 @@
                             Study
                         </div>
                         <div class="flexSpacer"></div>
-                        <div class="studysheetOption verticalFlex newbutton" style="cursor:pointer;" onclick="showElement(document.getElementById('deleteConfirmation'))">
+                        <div class="studysheetOption verticalFlex newbutton" style="cursor:pointer;" onclick="showDeletePopup()">
                             Delete
                         </div>
                         <div class="flexSpacer"></div>
@@ -490,17 +490,7 @@
             <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="window.location.reload()">Retry</div>
         </div>
     </div>
-    <div id="deleteConfirmation" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
-        <div class="verticalFlex centerFlex lightGlow centerText popup" style="z-index:500; border-radius: 15px; padding: 20px; max-width: 400px;">
-            <div style="margin-top: 10px; color:red; font-size:20px;"><strong>Are you sure you want to delete your Studysheet?</strong></div>
-            <div style="margin-top: 10px;">This action is irreversible and your Studysheet will be deleted forever.</div>
-            <div class="horizontalFlex centerFlex white" style="margin: 10px;">
-                <div class="newbutton buttonHoverDark horizontalFlex centerFlex" style="width: 100px; color: #001945" onclick="hideElement(document.getElementById('deleteConfirmation'))">Go Back</div>
-                <div class="newbutton buttonHoverDark horizontalFlex centerFlex" style="width: 100px; color: red" onclick="deleteSS()">Delete</div>
-            </div>
-
-        </div>
-    </div>
+    
     <div class="createStudysheetOverlay absolute noverticalshow" onclick="window.location.href='creator.html'" style="z-index: 900;">
         <img src="assets/icons/Lang Edit Icon.svg" style="z-index: 900; position:absolute; right:0; bottom:0; height:10vh; cursor: pointer;" alt='Edit'></img>
     </div>
@@ -582,6 +572,7 @@
     </div>
     
 </body> 
+<script src="javascript/popup.js"></script>
 <script>
     const amountOfNotifications = 8;
 

@@ -223,19 +223,21 @@ function failedSignIn() {
     console.log("failedsignin")
 }
 
-async function deleteSS(){
-    document.getElementById("loadingscreen").style.opacity = "1";
-    document.getElementById("loadingscreen").classList = "verticalFlex";
-    document.getElementById("loadingscreen").style.display = "flex"
-    hideElement(document.getElementById("deleteConfirmation"))
-    let sheetId = window.localStorage.getItem("chosenSheet")
-    console.log("Sending DEL request for "+sheetId)
-    link = connect()+"/"+sessionid+"/Studysheets/"+ sheetId+"/delete"
-    console.log("link is: "+link)
-    await httpGet(link)
-    window.location.reload()
-
-
+function showDeletePopup() {
+    let popup = new PopupBuilder()
+    popup.add(new PopupText(`<h2 style="color: red;">Are you sure you want to delete your Studysheet?</h2>`))
+    popup.add(new PopupText("This action is irreversible and your Studysheet will be deleted forever."))
+    popup.add(new PopupDismissButton("Cancel", "color: #001945;"))
+    popup.add(new PopupButton("Delete", async function() {
+        popup.close()
+        let sheetId = window.localStorage.getItem("chosenSheet")
+        console.log("Sending DEL request for "+sheetId)
+        link = connect()+"/"+sessionid+"/Studysheets/"+ sheetId+"/delete"
+        console.log("link is: "+link)
+        await httpGet(link)
+        window.location.reload()
+    }, "color: red;"))
+    popup.show()
 }
 
 var reloads = 0;
