@@ -769,7 +769,7 @@ async function getLibraryList(){
                     div2.innerHTML = newarr[i];
                     div1.append(div2);
 
-                    document.getElementById("studysheetGridContainer").append(div1);
+                    document.getElementById("studysheetFlexContainer").append(div1);
 
                     div3 = document.createElement("div");
                     div3.style.justifyContent = "center";
@@ -801,9 +801,9 @@ async function getLibraryList(){
                         
                     }
                     //div5.innerHTML=`<svg class="studysheetDelete" width="24px" height="24px" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg"><path d="M17 9L11 15M11.0002 9L17.0002 15M9 6H20C20.5523 6 21 6.44772 21 7V17C21 17.5523 20.5523 18 20 18H9L3 12L9 6Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
-                    document.getElementById("studysheetGridContainer").append(div5);
+                    document.getElementById("studysheetFlexContainer").append(div5);
 
-                    document.getElementById("studysheetGridContainer").append(div3);
+                    document.getElementById("studysheetFlexContainer").append(div3);
 
                 }
                 tmp = arrayOfData[0]
@@ -4409,7 +4409,7 @@ function createCreatorInput(term, definition) {
 //         <svg class="studysheetDelete" width="24px" height="24px" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg"><path d="M17 9L11 15M11.0002 9L17.0002 15M9 6H20C20.5523 6 21 6.44772 21 7V17C21 17.5523 20.5523 18 20 18H9L3 12L9 6Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
 //     </div>
 //     `
-//     document.getElementById("studysheetGridContainer").innerHTML += sheet;
+//     document.getElementById("studysheetFlexContainer").innerHTML += sheet;
 // }
 
 function uploadImages(){

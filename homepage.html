@@ -19,8 +19,8 @@
     <script src="javascript/Notification.js"></script>
     <style>
 
-        #studysheetGridContainer::-webkit-scrollbar {
-            display: none !important;
+        #studysheetFlexContainer::-webkit-scrollbar {
+            /* display: none !important;*/
         }
 
   
@@ -78,25 +78,30 @@
             z-index: 100;
         }
 
-        .studysheetGridContainer {
+        #studysheetFlexContainer {
             -webkit-box-shadow:0px 0px 20px 0px black;
             -moz-box-shadow: 0px 0px 20px 0px black;
             box-shadow: 0px 0px 20px 0px black;
             border-radius: 20px 20px 20px 20px;
-            display: grid;
-            row-gap: 10px;
-            column-gap: 10px;
             flex:1.1;
-            grid-template-columns: auto 60px;
-            grid-auto-rows: 60px;
             gap: 0;
             max-width: 500px !important;
-            height: 55vh;
             width: 90vw;
+            height: 55vh;
             overflow-y: scroll;
+        }
 
-            
-            
+        .sheetEntry {
+            width: 100%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        .sheetEntry > div > svg {
+            color: white !important;
         }
 
         .studysheetInfoContainer {
@@ -248,12 +253,6 @@
                 margin: 0 !important;
             }
 
-            .studysheetGridContainer {
-                max-width: 100vw !important;
-                width: 100vw;
-                height: auto;
-            }
-
             #welcomeTextMobile {
                 display: block;
             }
@@ -387,7 +386,7 @@
                 <div style="color: white; margin: 0; margin-left: 1vw;" class="centerText headerText">Studysheets</div>
             </div>
             <div id="welcomeTextMobile">
-                <div style="color: var(--primary-light); margin: 0; margin-right: 0;" class="centerText headerText">Home</div>
+                <div style="color: white; margin: 0; margin-right: 0;" class="centerText headerText">Home</div>
             </div>
             <div id="contentContainer" style="position: relative; display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
                 <div id="loadingscreen" class="verticalFlex loadWhiteBackground" style="transition: all 0.25s ease-in-out; position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 250; border: 1px solid var(--primary-light); border-radius:20px;">
@@ -395,16 +394,8 @@
                         <img class="animatedLoader" src="assets/logos/lang-wheat.png" alt="Loading">
                     </div>
                 </div>
-                <div id="studysheetGridContainer" class="studysheetGridContainer lightWhiteBackdrop">
-                    <!-- <div style="display: flex; align-items: center; background-color: var(--primary-dark);">
-                        <div class="studysheetName">FACIOMENT_2__ELECTRIC_BOOGALOO.lang</div>
-                    </div>
-                    <div style="display: flex; align-items: center; justify-content: center; background-color: var(--primary-dark);">
-                        <svg class="studysheetEdit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488.728 488.728" xmlns:v="https://vecta.io/nano"><path d="M487.147 462.52l-36.4-167.6c0-4.2-2.1-7.3-5.2-10.4l-261.3-261.3c-20-22.9-74.3-38.1-112.4 0l-47.9 47.9c-31 31-31 81.4 0 112.4l261.3 261.3c2.1 2.1 5.2 4.2 9.4 5.2l168.6 38.5c10.1 1.5 29.1-4.9 23.9-26zm-434.1-308.1c-15.6-15.6-15.6-39.6 0-55.2l47.9-47.9c15.2-15.2 40-15.2 55.2 0l238.4 238.4h-27.1c-11.4 0-20.8 9.4-20.8 20.8v34.3h-34.3c-11.4 0-20.8 9.4-20.8 20.8v26.1l-238.5-237.3zm280 261.3v-29.2h34.3c18 1.7 20.8-16.5 20.8-20.8v-34.4h29.2l24 109.3-108.3-24.9z"/></svg>
-                    </div>
-                    <div style="display: flex; align-items: center; justify-content: center; background-color: var(--primary-dark);">
-                        <svg class="studysheetDelete" width="24px" height="24px" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg"><path d="M17 9L11 15M11.0002 9L17.0002 15M9 6H20C20.5523 6 21 6.44772 21 7V17C21 17.5523 20.5523 18 20 18H9L3 12L9 6Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div> -->
+                <div id="studysheetFlexContainer" class="lightWhiteBackdrop">
+
                 </div>
                 <div class="studysheetInfoContainer noverticalshow" style="border-radius:0px 20px 20px 0px">
                     <div class="flexSpacer"></div>
@@ -510,7 +501,7 @@
     </div>
 
     <div id="feedbackUI" class="absolute noverticalshow" style="bottom:0; left:0; z-index: 900;">
-        <div id="feedbackUIInputContainer" class="lightGlow verticalFlex" style="background-color: var(--primary-light); width: 350px; margin: 20px; margin-bottom: 0px; z-index: 1000; border-radius: 25px; padding: 15px; box-sizing: border-box">
+        <div id="feedbackUIInputContainer" class="lightGlow verticalFlex whitebackdrop" style="width: 350px; margin: 20px; margin-bottom: 0px; z-index: 1000; border-radius: 25px; padding: 15px; box-sizing: border-box">
             <div style="background-color: var(--primary-dark); color: var(--primary-light); float: right; text-align: left; padding: 10px; border-radius: 20px;">Have any feedback or suggestions for Lang? Send us a message here!</div>
             <div class="horizontalFlex" style="width:100%;">
                 <input id="feedbackInput" style="font-size: 15px; font-family: 'Poppins' sans-serif; width: 100%; height: 50px; border-top-left-radius: 20px; border-bottom-left-radius: 20px; border: none; margin-top: 10px; padding: 5px;" placeholder="Enter your issue here">
