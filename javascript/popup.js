@@ -106,10 +106,11 @@ class PopupButton extends PopupElement {
         element.onclick = this.onclick;
         element.classList.add("newbutton");
         element.classList.add("buttonHoverDark")
-        element.style = this.style;
-
-        element.style.color = "#001945";
+        
+        
         element.style.width = "100px";
+        element.style = this.style;
+        element.style.color = "#001945";
 
         return element;
     }
