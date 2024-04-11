@@ -7,7 +7,7 @@ class LangError{
             doError = true;
         }
         else {
-            if (filename.slice(-4) == "html" || filename == "" || filename == null){
+            if (filename.includes("html") || filename == "" || filename == null){
                 console.log("Extension error. Lang ignoring.")
             } else {
                 doError = true;
@@ -26,7 +26,7 @@ class LangError{
                 this.showError();
             }
             this.reportError();
-            console.error(devMessage)
+            console.error(devMessage+" FILE "+filename+" LINE NUMBER#"+lineno)
         }
         
     }
