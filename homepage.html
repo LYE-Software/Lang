@@ -482,11 +482,18 @@
     <div class="popupContainer" id="notificationPopup">
         <div class="popup" style="width:700px; max-width: 90vw;">
             <img src="assets/icons/closeCircle.svg" style="height:30px; cursor:pointer;" onclick="hideElement(document.getElementById('notificationPopup'))">
-            <div class="horizonalFlex centerFlex" style="display:flex; margin:10px;">
-                <img src="assets/icons/notifications.png" style="height:5vh;">
-            </div>
-            <h2 style="text-align: center;font-size: 30px; margin: 10px;">Notifications</h2>
-            <div style="overflow-y:scroll; height:400px; max-height:70%;background-color: wheat; border-radius: 25px;">
+            
+            <div style="overflow-y:scroll; height:400px; border-radius: 25px;">
+                <div class="horizonalFlex centerFlex" style="display:flex; margin:10px;">
+                    <img src="assets/icons/notifications.png" style="height:5vh;">
+                </div>
+                <h2 style="text-align: center;font-size: 30px; margin: 10px;">Notifications</h2>
+
+                <div class="notifBox">
+                    <h3>New Train Features!</h3>
+                    <p>Train has been upgraded: Now your progress is saved! Additionally, error complaints were addressed and have been fixed.</i></p>
+                </div>
+
                 <div class="notifBox">
                     <h3>Flashcards fixed!</h3>
                     <p>Flashcards has been updated to fix some errors with rapid movement through cards. Also, it has a pretty animation now!</i></p>
@@ -519,7 +526,7 @@
 </body> 
 <script src="javascript/popup.js"></script>
 <script>
-    const amountOfNotifications = 8;
+    const amountOfNotifications = 9;
 
     Notification.checkIfUnreads();
 
