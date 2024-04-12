@@ -571,9 +571,9 @@
     function initializeEdit(){
         let url_string = window.location.href;
         let url = new URL(url_string)
-        let creator_id = url.pathname.split("/")[1]
+        let creator_id = url.pathname.split("/")[2]
         console.log(creator_id)
-        window.location.href='edit?sheet_id='+window.localStorage.getItem("chosenSheet")+"&creator_id="+creator_id;
+        window.location.href='/edit?sheet_id='+window.localStorage.getItem("chosenSheet")+"&creator_id="+creator_id;
     }
 
     function goToCreator(){
