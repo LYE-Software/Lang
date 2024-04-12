@@ -41,7 +41,7 @@ function doPreviewAndLocal(){
         return;
     }
     window.localStorage.getItem("chosenSheet", studysheetData.name);
-    window.localStorage.setItem("lastsheet", studysheetData);
+    window.localStorage.setItem("lastsheet", JSON.stringify(studysheetData));
     chosensheet = studysheetData.name;
 
     if(chosensheet == null || chosensheet == ""){

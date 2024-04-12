@@ -17,7 +17,7 @@ let jsonData = rawJson;
 var initialSheet = parseFromJSON(rawJson)
 var sheet = arrayToSheet(initialSheet.convertToSingle(), window.localStorage.getItem("chosenSheet"));
 console.log("initalsheet TCS: "+JSON.stringify(initialSheet.trainCloudsave))
-if (initialSheet.is_owned == false){
+if (initialSheet.ownership.is_owned == false){
     doCloudsave = false;
 } else {
     if (initialSheet.trainCloudsave != null){
