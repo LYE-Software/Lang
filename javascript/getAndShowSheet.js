@@ -35,7 +35,9 @@ function doPreviewAndLocal(){
     document.getElementById("homeusername").innerHTML = localStorage.getItem("customusername");
     if (studysheetData.error == "does_not_exist"){
         document.getElementById("unableToFind").style.opacity = "1";
-        document.getElementById("unableToFind").style.pointerEvents = "all"; 
+        document.getElementById("unableToFind").style.pointerEvents = "all";
+        document.getElementById("noclickdiv").style.opacity = "0";
+        document.getElementById("noclickdiv").style.pointerEvents = "none"; 
         return;
     }
     window.localStorage.getItem("chosenSheet", studysheetData.name);
