@@ -52,6 +52,7 @@ function doPreviewAndLocal(){
     }
 
     newSheet = studysheetData;
+    window.localStorage.setItem("fullstudysheet", JSON.stringify(newSheet));
     if (newSheet.error == "studysheet_not_found"){
         document.getElementById("unableToFind").style.opacity = "1";
         document.getElementById("unableToFind").style.pointerEvents = "all"; 
@@ -73,7 +74,7 @@ function doPreviewAndLocal(){
         document.getElementById("multiplechoicebutton").style.borderColor = "#a0a0a0"
     }
 
-    window.localStorage.setItem("fullstudysheet", sheet)
+    
     displaySheet(newSheet)
     document.getElementById("noclickdiv").style.opacity = "0";
     document.getElementById("noclickdiv").style.pointerEvents = "none";
