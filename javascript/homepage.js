@@ -88,7 +88,7 @@ async function getLibraryList(){
         // }).then(function(response) {
         //     serverData = response.text();
         // });        
-        console.log("[TOTAL SERVER DATA] "+serverData)
+        console.log("[TOTAL SERVER DATA] "+json)
 
         try {
             clearTimeout(switchServerTimeout)
