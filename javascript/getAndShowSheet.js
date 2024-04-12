@@ -95,7 +95,7 @@ async function doPreviewAndLocal(){
         chosensheet = window.localStorage.getItem("sharedSheet").replaceAll(" ", "%20");
         chosensheet = chosensheet.replaceAll("&", "%26")
         window.localStorage.setItem("lastsheet", chosensheet)
-        sheet = await httpGet(connect()+"/v2/studysheet/get?user_id="+window.localStorage.getItem('sharedID')+"&studysheet_id="+chosensheet, false, window.localStorage.getItem("usertoken"))
+        // sheet = await httpGet(connect()+"/v2/studysheet/get?user_id="+window.localStorage.getItem('sharedID')+"&studysheet_id="+chosensheet, false, window.localStorage.getItem("usertoken"))
         chosensheet = chosensheet.replaceAll("%26", "&")
         chosensheet = chosensheet.replaceAll("%20", " ");
 
@@ -131,7 +131,7 @@ async function doPreviewAndLocal(){
         } else {
             document.getElementById("studysheetname").innerHTML = chosensheet
         }
-        sheet = await httpGet(connect()+"/v2/studysheet/get?studysheet_id="+chosensheet, false, window.localStorage.getItem("usertoken"))
+        // sheet = await httpGet(connect()+"/v2/studysheet/get?studysheet_id="+chosensheet, false, window.localStorage.getItem("usertoken"))
 
         // console.warn("inside the second go")
     }
@@ -147,6 +147,7 @@ async function doPreviewAndLocal(){
     
     console.log("og sheet: "+sheet)
     var newSheet = parseFromJSON(sheet);
+    newSheet = studysheetData;
     if (newSheet.error == "studysheet_not_found"){
         document.getElementById("unableToFind").style.opacity = "1";
         document.getElementById("unableToFind").style.pointerEvents = "all"; 
