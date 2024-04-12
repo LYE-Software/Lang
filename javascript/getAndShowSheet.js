@@ -34,7 +34,7 @@ function doPreviewAndLocal(){
     console.log("in dopreview")
     document.getElementById("homeusername").innerHTML = localStorage.getItem("customusername");
 
-    window.localStorage.getItem("chosenSheet") = studysheetData.name;
+    window.localStorage.getItem("chosenSheet", studysheetData.name);
     window.localStorage.setItem("lastsheet", studysheetData);
     chosensheet = studysheetData.name;
 
