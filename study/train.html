@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/stylesheet.css">
-    <script src="../javascript/train-logic.js"></script>
-    <script src="../javascript/train-modes.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
     <script src="../javascript/Studysheet.js"></script>
+    <script src="../javascript/LangError.js"></script>
+    <script src="../javascript/train/train-utils.js"></script>
+    <script src="../javascript/train/train-modes.js"></script>
     <script src="../javascript/utils.js"></script>
     <script src="../javascript/loadBalancer.js"></script>
-    <script src="../javascript/LangError.js"></script>
+    <script src="../javascript/popup.js"></script>
     <link rel="icon" href="../assets/logos/circular lang icon.png">
 </head>
 <style>
@@ -58,6 +60,7 @@
             margin-top: 20px;
             padding-right: 10px;
             border-top: 2px solid var(--primary-dark);
+            cursor:pointer;
         }
 
     .preTrainInsert {
@@ -293,6 +296,27 @@ color: var(--primary-light);
     user-select: none;
 }
 
+.trainSaveStatus{
+    position:absolute; 
+    bottom:40px; 
+    left:25px;
+}
+
+.syncing{
+    animation: syncFade ease-in-out 2s infinite;
+}
+
+@keyframes syncFade{
+    0%{
+        opacity:100%;
+    }
+    50%{
+        opacity:0%;
+    }
+    100%{
+        opacity:100%;
+    }
+}
 </style>
 <body class="darkHomepage">
     <div class="bar lightGlow" style="background-color: wheat; position:absolute;" id="progBar"></div>
@@ -313,12 +337,13 @@ color: var(--primary-light);
         <div class="whiteBackdrop">
             <button class="lightGlow newbutton" onclick="window.location.href='../studysheetpage.html'" ><img src="../assets/icons/blackBackButton.png"></button>
             <button class="lightGlow newbutton" style="cursor:pointer;" onclick="stats()" ><img src="../assets/icons/stats.png"></button>
-            <button class="lightGlow newbutton" onclick="showElement(document.getElementById('swapping'))"><img src="../assets/icons/swapTD.png"></button> 
+            <button class="lightGlow newbutton" onclick="swappingPopup()"><img src="../assets/icons/swapTD.png"></button> 
 
-            <button class="lightGlow newbutton" onclick="showElement(document.getElementById('restarting'))"><img src="../assets/icons/reset.png"></button>
-            <button class="lightGlow newbutton" onclick="showElement(document.getElementById('explainer'))"><img src="../assets/icons/help.png"></button>
+            <button class="lightGlow newbutton" onclick="resetPopup()"><img src="../assets/icons/reset.png"></button>
         </div>
+
     </div>
+    <img id="SaveStatus" src="../assets/icons/Train Online.svg" class = "trainSaveStatus" style="display:none;">
     <!-- <div class="horizontalFlex centerFlex" style="justify-content: space-between">
         <a href="studysheetpage.html">
             <img src="assets/icons/back.svg" style="left:0; top:0;">
@@ -340,7 +365,7 @@ color: var(--primary-light);
     <div id="informationAbt">
         <div class="sideIconContainer">
             <img src="../assets/logos/circular lang icon.png" style="padding: 20px; aspect-ratio: 1" onclick="window.location.href = '../homepage.html'">
-            <img src="../assets/icons/back.svg" style="aspect-ratio: 1" onclick="window.location.href = '../studysheetpage.html'">
+            <img src="../assets/icons/back.svg" style="aspect-ratio: 1; cursor:pointer;" onclick="window.location.href = '../studysheetpage.html'">
         </div>
 
         <div class="mainPreTrainView">
@@ -362,8 +387,8 @@ color: var(--primary-light);
                 <div class="dropdownOption">
                     <p>Shuffle Questions:</p>
                     <div>
-                        <button class = "selected" id="orderedSwap" onclick="shuffler(this, document.getElementById('shuffledSwap'))">Yes</button>
-                        <button class="deselected" id="shuffledSwap" onclick="shuffler(this, document.getElementById('orderedSwap'))">No</button>
+                        <button class = "selected" id="shuffledSwap" onclick="shuffler(this, document.getElementById('orderedSwap'))">No</button>
+                        <button class="deselected" id="orderedSwap" onclick="shuffler(this, document.getElementById('shuffledSwap'))">Yes</button>
                     </div>
                 </div>
                 <div class="dropdownOption">
@@ -373,20 +398,15 @@ color: var(--primary-light);
                         <button class="deselected" id="defSwap" onclick="swapper(this, document.getElementById('termSwap'))">Definition</button>
                     </div>
                 </div>
+                
             </div>
             <div class="preTrainPanel flexCentered" style="border-top-left-radius: 0; border-top-right-radius: 0;">
-                <button id="startButton" onclick="doTrain()">Start</button>
+                <button id="startButton" onclick="startTrain()">Start</button>
             </div>
         </div>
 
     </div>
-    <div id="restarting" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; z-index:2001; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
-        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat;">
-            <div style="margin-top: 10px; color:#001945; font-size:20px; text-align:center;"><strong>Are you sure you want to reset your progress on this Studysheet?</strong></div>
-            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0;" onclick="window.location.reload()">Yes</div>
-            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(document.getElementById('restarting'))"">Cancel</div>
-        </div>
-    </div>
+    
     <div style="width:100vw; height:80vh; align-items: center; text-align: center; color:#001945; align-items: center; display:none;" id="TermAndDef">
         <div class="" style="text-align:left; border-radius: 20px; width: 50vw; margin: auto; margin-bottom:0px; height:50vh;">
             <div style="height:100%; display:flex; flex-direction: column; justify-content: center;">
@@ -408,39 +428,13 @@ color: var(--primary-light);
             </div>
             
         </div>
-        <button class="dropbtn greyHover" style="margin-top: 20px; background-color:white; opacity:0.75;" onclick="completeLearn()">Continue</button>
+        <button class="dropbtn greyHover" style="margin-top: 20px; background-color:white; opacity:0.75;" onclick="advanceTrain(true)">Continue</button>
     </div>   
 
-    <div id="stats" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; opacity: 0; pointer-events:none; z-index:1500; background-color: rgba(0, 0, 0, 0.5);">
-        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat; text-align: center;">
-            
-            <img src="../assets/icons/stats.png" style="height:40px;">           
-            <div style="margin-top: 10px; color:#001945; font-size:20px;"><strong>Statistics</strong></div>
-            <div id="statsHolder">
-                
-            </div>
-            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(this.parentNode.parentNode)">Ok</div>
-        </div>
-    </div>
+    
 
-    <div id="wrongWrite" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; opacity: 0; pointer-events:none; z-index:1500; background-color: rgba(0, 0, 0, 0.5);">
-        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat; text-align: center;">
-            
-            <div style="margin-top: 10px; color:#001945; font-size:20px; margin-bottom:10px;"><strong>Incorrect</strong></div>
-            <div id="correctedHolder">
-                
-            </div>
-            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="continueWrite()">Continue</div>
-        </div>
-    </div>
-    <div id="swapping" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; z-index:2001; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">
-        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat;">
-            <div style="margin-top: 10px; color:#001945; font-size:20px; text-align:center;"><strong>To swap whether you answer with Term or Definition in this Studysheet, you will have to restart Train.</strong><br><br> Swapping Term and Definition can only be done from the Train setup menu.</div>
-            <div style="margin-top: 10px; color: red;">This will reset any progress you currently have in Train on this sheet.</div>
-            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%; margin-bottom: 0;" onclick="window.location.reload()">Reset</div>
-            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(document.getElementById('swapping'))"">Cancel</div>
-        </div>
-    </div>
+
+    
     <div class="multiplechoice" style = "height:100%; display:none; flex-direction: column; justify-content: center;" id="multchoice">
         <!-- <h1 id="questionheader" class="header" style="color:wheat;">Multiple Choice</h1>
         
@@ -466,28 +460,18 @@ color: var(--primary-light);
             <h1 id="questionheader" class="centerText" style="color: var(--primary-light);">Multiple Choice</h1>
             <div class="multiplechoicefooter" style="background-color: #ffffff44; padding:15px; border-radius:20px;">
                 <div style="display:flex; flex-direction:row; align-items:center;">
-                    <button id = "a" class="multipleChoiceButton" onclick="checkMulti('a')">A</button>
-                    <button id = "b" class="multipleChoiceButton" onclick="checkMulti('b')">B</button>
+                    <button id = "a" class="multipleChoiceButton" onclick="correctMultiChoice('a')">A</button>
+                    <button id = "b" class="multipleChoiceButton" onclick="correctMultiChoice('b')">B</button>
                 </div>
                 <div style="display:flex; flex-direction:row; align-items:center;">
-                    <button id = "c" class="multipleChoiceButton" onclick="checkMulti('c')">C</button>
-                    <button id = "d" class="multipleChoiceButton" onclick="checkMulti('d')">D</button>
+                    <button id = "c" class="multipleChoiceButton" onclick="correctMultiChoice('c')">C</button>
+                    <button id = "d" class="multipleChoiceButton" onclick="correctMultiChoice('d')">D</button>
                 </div>
             </div>
         </div>
 
     </div>
 
-    <div id="incorrect" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; opacity: 0; pointer-events:none; z-index:1500; background-color: rgba(0, 0, 0, 0.5);">
-        <div class="verticalFlex centerFlex lightGlow centerText" style="z-index:500; border-radius: 15px; padding: 20px; width: 30vw; background-color: wheat; text-align: center;">
-            
-            <div style="margin-top: 10px; color:#001945; font-size:20px; margin-bottom:10px;"><strong>Incorrect</strong></div>
-            <div id="correctedHolderMulti">
-                
-            </div>
-            <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" id="continueMultiBtn" onclick="continueMulti()">Continue</div>
-        </div>
-    </div>
 
     <div class="inputdiv panelContainer" style="display: none; height:100%;" id="write">
         <div class="panelContainer">
@@ -527,31 +511,7 @@ color: var(--primary-light);
         <button class="goButton" id="goButton" onclick="checkTrain()"></button>
     </div> -->
 
-    <div id="explainer" class="absolute horizontalFlex centerFlex fullAbsolute" style="position: absolute; transition: all 0.15s ease-in-out; opacity: 0; pointer-events:none; z-index:1500; background-color: rgba(0, 0, 0, 0.5);">
-        <div class="" style="z-index:500; border-radius: 15px; padding: 30px; width: 40vw; height:80vh; background-color: wheat; text-align: center; overflow-y: scroll;">
-            <div style="width:100%; align-items: right; justify-content: right; display:flex;">
-                <img style="height: 30px; width: 30px; right:0;" src="../assets/icons/closeCircle.svg" class="closeIcon" onclick="hideElement(this.parentNode.parentNode.parentNode)">
-            </div>
 
-            
-            <div style="margin-top: 10px; color:#001945; font-size:30px;"><strong>About Train</strong></div>
-            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;">Train is a <strong>scaling, repetition based, memory training mode</strong>. It works best when you do not previously know the material being studied.</div>
-            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;">Train uses three modes to help you ease into your knowledge:</div>
-            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;"> - A <strong>learn mode</strong>, where you are told both the question and answer</div>
-            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;"> - A <strong>multiple choice mode</strong>, where you are given multiple options and must choose the correct one</div>
-            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;"> - A <strong>write mode</strong>, where you must fill in the correct answer.</div>
-            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;">To ensure you retain the information, Train quizzes you on previous "groups" in later ones.</div>
-            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;">To keep track of your progress, <strong>the bar at the top of the screen will display your progress through the Studysheet as a whole, while the bar at the bottom will show your progress through the current group.</strong></div>
-            <div style="margin-top: 10px; color:#001945; font-size:30px;"><strong>Customization</strong></div>
-            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;">Train groups questions into smaller groups so that you can learn portions at a time. <strong>You can choose the size of these groups.</strong></div>
-            <div style="margin:5px; color:#001945; font-size:20px; font-weight: lighter;">Just like other Lang modes, you can choose whether to answer with the <strong>term</strong> or the <strong>definition</strong>. <strong>You cannot change your decision after you start Train, without losing progress.</strong></div>
-
-            <!-- <div style="width:100%; align-items: center; justify-content: center; display:flex;">
-                <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 25%;" onclick="hideElement(this.parentNode.parentNode.parentNode)">Ok</div>
-
-            </div> -->
-        </div>
-    </div>
     
 </body>
 <script>
@@ -604,5 +564,6 @@ color: var(--primary-light);
 
     document.getElementById("toggleTrainOptions").addEventListener("click", toggleOptions);
 </script>
+<script src="../javascript/train/train-logic.js"></script>
 <script src="../javascript/sidebar.js"></script>
 </html>

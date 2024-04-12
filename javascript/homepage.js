@@ -318,12 +318,13 @@ function sendFeedback(auto){
 }
 
 function noStudySheets() {
+    console.log("Popup: no studysheets")
     let popup = new PopupBuilder()
     popup.add(new PopupImage("assets/logos/FullLangLogo.png", "height: 80px; margin: 10px"))
     popup.add(new PopupText("Welcome to Lang!").setStyle("font-size: 20px; color: #001945;"))
     popup.add(new PopupText("To study, you need to create a Studysheet. A Studysheet is a collection of flashcards that you can dynamically learn."))
     popup.add(new PopupText("Click below to create a new Studysheet!").setStyle("color: red; font-weight: bold;"))
-    popup.add(new PopupButton("Create New Studysheet", "creator.html"))
+    popup.add(new PopupButton("Create New Studysheet", "creator.html").setStyle("width:200px;"))
     popup.add(new PopupText("Or, make one from an already existing source."))
     popup.add(new PopupButton("From Quizlet", "quizletconvert.html"))
     popup.add(new PopupButton("From Notes", "notes.html"))

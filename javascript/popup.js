@@ -50,11 +50,15 @@ class PopupBuilder {
     }
 
     close() {
+        // console.log("CLOSINOG")
+        // console.log(this.container)
         this.container.style.opacity = '0';
         this.container.style.pointerEvents = 'none';
-        
+        let containerReference = this.container;
         setTimeout(function() {
-            this.container.remove();
+            //it's abstracted away from the popup context in the timeout so you have to use a reference not this
+            //we love JS
+            containerReference.remove();
         }, 250);
     }
 }

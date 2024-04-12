@@ -49,6 +49,16 @@ class Studysheet {
                 this.terms[i] = tmpTerm;
             }
         }
+        console.log("TCS: ")
+        console.log(this.trainCloudsave)
+        if (this.trainCloudsave!=null){
+            console.log("CONVERTING TRAIN CLOUDSAVE TO USABLE OBJECT")
+            let previousCloudsave = this.trainCloudsave;
+            this.trainCloudsave = new TrainCloudsave(null, null, null, null, null, null);
+            this.trainCloudsave.jsonToObject(previousCloudsave)
+            console.log("tcs created")
+            console.log(this.trainCloudsave)
+        }
     }
 
     randomize(){
@@ -109,6 +119,7 @@ class Studysheet {
                     if (m.hasImage){
                         newterm.addImage(m.imageSrc);
                     }
+                    newterm.trainId = m.trainIdArray[j];
                     tmpTerms.push(newterm);
                 }
             }
@@ -129,6 +140,44 @@ class Studysheet {
         }
     }
 
+    syncTrainIds(singleSheet){
+        let iterator = 0;
+        for (let i = 0; i<this.terms.length; i++){
+            if (this.terms[i].isMulti){
+                for (let j = 0; j<this.terms[i].terms.length; j++){
+                    this.terms[i].trainIdArray[j] = singleSheet.getNthTerm(iterator).trainId;
+                    iterator++;
+                }
+            } else {
+                this.terms[i].trainId = singleSheet.getNthTerm(iterator).trainId;
+                iterator++;
+            }
+        }
+    }
+    getTrueTermIndex(termIndex){ //returns array of [indexOfTerm, indexOfAlternate], if idexOfAlternate is -1 then its a single term
+        let iterator = 0;
+        for (let i = 0; i<this.terms.length; i++){
+            if (this.terms[i].isMulti){
+                for (let j = 0; j<this.terms[i].terms.length; j++){
+                    if (iterator==termIndex){
+                        return [i, j];
+                    }
+                    iterator++;
+                }
+            } else {
+                if (iterator==termIndex){
+                    return [i, -1];
+                }
+                iterator++;
+            }
+        }
+        return [-1, -1];
+    }
+
+    getTermIndex(termToFind){
+        let isMatch = (element) => element===termToFind;
+        return this.terms.findIndex(isMatch)
+    }
 }
 
 class Term {
@@ -200,6 +249,7 @@ class MultiTerm extends Term{
         this.answers = answers;
         this.question = question;
         this.defs = []
+        this.trainIdArray = [];
         for (var i = 0; i<terms.length; i++){
             var tmpDict = {
                 "question":terms[i],
@@ -238,3 +288,29 @@ class MultiTerm extends Term{
 }
 
 
+class TrainCloudsave{
+    constructor(seed, groupLength, groupIndex, termIndex, totalTurnsInGroup, turnIndex, totalTurns, totalQuestions){
+        console.log("New cloudsave created. seed"+seed+" |grouplen "+groupLength+" | groupindx"+groupIndex+" | termidx"+termIndex+" | totalturngroup"+totalTurnsInGroup+" | turnidex"+turnIndex+" | ");
+        this.seed = seed;
+        this.groupLength = groupLength;
+        this.groupIndex = groupIndex;
+        this.termIndex = termIndex;
+        this.totalTurnsInGroup = totalTurnsInGroup;
+        this.turnIndex = turnIndex;
+        this.time = Date.now;
+        this.totalTurns = totalTurns;
+        this.totalQuestions = totalQuestions;
+    }
+
+    jsonToObject(oldTCS){
+        this.seed = oldTCS.seed;
+        this.groupLength = oldTCS.groupLength;
+        this.groupIndex = oldTCS.groupIndex;
+        this.termIndex = oldTCS.termIndex;
+        this.totalTurnsInGroup = oldTCS.totalTurnsInGroup;
+        this.turnIndex = oldTCS.turnIndex;
+        this.time = oldTCS.time;
+        this.totalTurns = oldTCS.totalTurns;
+        this.totalQuestions = oldTCS.totalQuestions;
+    }
+}
