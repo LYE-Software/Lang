@@ -50,9 +50,7 @@ function doPreviewAndLocal(){
     } else {
         document.getElementById("studysheetname").innerHTML = chosensheet
     }
-    sheet = studysheetData;
-    console.log("og sheet: "+sheet)
-    var newSheet = parseFromJSON(sheet);
+
     newSheet = studysheetData;
     if (newSheet.error == "studysheet_not_found"){
         document.getElementById("unableToFind").style.opacity = "1";
