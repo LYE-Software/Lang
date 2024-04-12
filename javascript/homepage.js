@@ -277,7 +277,7 @@ function showDeletePopup() {
 }
 
 function goToSSPage(){
-    // index = document.getElementsByClassName("selected")[0].id;
+    index = document.getElementsByClassName("selected")[0].id;
     // console.log("index is: "+index)
     // console.log("newarr[index] is: "+library[index])
     // window.localStorage.setItem("chosenSheet", library[index].studysheet_id)
