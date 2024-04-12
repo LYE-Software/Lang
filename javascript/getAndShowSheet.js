@@ -33,7 +33,11 @@ function doPreviewAndLocal(){
     hideElement(document.getElementById("flashcardBox"))
     console.log("in dopreview")
     document.getElementById("homeusername").innerHTML = localStorage.getItem("customusername");
-
+    if (studysheetData.error == "does_not_exist"){
+        document.getElementById("unableToFind").style.opacity = "1";
+        document.getElementById("unableToFind").style.pointerEvents = "all"; 
+        return;
+    }
     window.localStorage.getItem("chosenSheet", studysheetData.name);
     window.localStorage.setItem("lastsheet", studysheetData);
     chosensheet = studysheetData.name;
@@ -51,11 +55,7 @@ function doPreviewAndLocal(){
         document.getElementById("studysheetname").innerHTML = chosensheet
     }
 
-    if (studysheetData.error == "does_not_exist"){
-        document.getElementById("unableToFind").style.opacity = "1";
-        document.getElementById("unableToFind").style.pointerEvents = "all"; 
-        return;
-    }
+    
     newSheet = parseFromJSON(studysheetData)
     window.localStorage.setItem("fullstudysheet", JSON.stringify(newSheet));
     if (newSheet.length<4){
