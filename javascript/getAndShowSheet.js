@@ -52,7 +52,7 @@ function doPreviewAndLocal(){
     }
 
     
-    newSheet = parseFromJson(JSON.stringify(studysheetData))
+    newSheet = parseFromJSON(studysheetData)
     window.localStorage.setItem("fullstudysheet", JSON.stringify(newSheet));
     if (newSheet.error == "studysheet_not_found"){
         document.getElementById("unableToFind").style.opacity = "1";
