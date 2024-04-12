@@ -29,122 +29,28 @@ window.onerror = function (msg, url, lineNo, columnNo, error) {
     return true;
 }
 
-async function doPreviewAndLocal(){
+function doPreviewAndLocal(){
     hideElement(document.getElementById("flashcardBox"))
     console.log("in dopreview")
     document.getElementById("homeusername").innerHTML = localStorage.getItem("customusername");
 
-    var url_string = window.location.href; //window.location.href
-    var url = new URL(url_string);
+    window.localStorage.getItem("chosenSheet") = studysheetData.name;
+    window.localStorage.setItem("lastsheet", studysheetData);
+    chosensheet = studysheetData.name;
 
-    //SHARED LINK
-    if(url.searchParams.get("userid")!= null){
-        if (window.localStorage.getItem("savedShare")){
-            document.getElementById("saveBtnImg").src = "assets/icons/check.png";
-            document.getElementById("saveBtn").onclick = function(){
-            showPopup("You already saved this Studysheet!")
-        };
-        }
-        if (window.localStorage.getItem("usertoken") == null || window.localStorage.getItem("usertoken") == "" || window.localStorage.getItem("usertoken") == "signedout"){
-            document.getElementById("homeusername").innerText = "Sign In"
-            document.getElementById("homeusername").onclick=function(){window.location.href='onboarding-new.html'}
-            showElement(document.getElementById('makeAnAccount'))
-            
-        }
-        //document.getElementById("saveBtnHolder").style.display = "";
-        console.log("inside shareEvent")
-        sessionid = url.searchParams.get("userid")
-        chosensheet = url.searchParams.get("sheetName")
-        window.localStorage.setItem("sharedID", sessionid);
-        window.localStorage.setItem("sharedSheet", chosensheet);
-        window.localStorage.setItem("ssID", chosensheet)
-        window.localStorage.setItem("lastsheet", chosensheet)
-        console.log(chosensheet)
-        sheet = await httpGet(connect()+"/v2/studysheet/get?user_id="+sessionid+"&studysheet_id="+chosensheet, false, window.localStorage.getItem("usertoken"))
-        if (chosensheet.length>15){
-            document.getElementById("studysheetname").innerHTML = chosensheet.slice(0,15)+"..."
-
-        } else {
-            document.getElementById("studysheetname").innerHTML = chosensheet
-        }
-        document.getElementById("editbutton").style.borderColor = "#a0a0a0"
-        document.getElementById("editbutton").style.backgroundColor = "#a0a0a0"
-
-        document.getElementById("editbutton").onclick = function(){
-            document.getElementById('notOwned').style.pointerEvents = "all";
-            document.getElementById('notOwned').style.opacity = 1;
-        }
-        document.getElementById("shareDisclaimer").style.display = "flex"
-        document.getElementById("saveBtn").style.display = ""
-
-        
-    
-    } 
-    //SHARED BACK
-    else if(window.localStorage.getItem("sharedID") != "" &&  window.localStorage.getItem("sharedID") != null){
-        if (window.localStorage.getItem("savedShare")){
-            
-            document.getElementById("saveBtnImg").src = "assets/icons/check.png";
-            document.getElementById("saveBtn").onclick = function(){
-            showPopup("You already saved this Studysheet!")
-        };	
-        }
-        console.log("Shared back")
-        document.getElementById("saveBtn").style.display = "";
-        console.log("inside localstorage")
-        chosensheet = window.localStorage.getItem("sharedSheet").replaceAll(" ", "%20");
-        chosensheet = chosensheet.replaceAll("&", "%26")
-        window.localStorage.setItem("lastsheet", chosensheet)
-        // sheet = await httpGet(connect()+"/v2/studysheet/get?user_id="+window.localStorage.getItem('sharedID')+"&studysheet_id="+chosensheet, false, window.localStorage.getItem("usertoken"))
-        chosensheet = chosensheet.replaceAll("%26", "&")
-        chosensheet = chosensheet.replaceAll("%20", " ");
-
-        if (chosensheet.length>15){
-            document.getElementById("studysheetname").innerHTML = chosensheet.slice(0,15)+"..."
-
-        } else {
-            document.getElementById("studysheetname").innerHTML = chosensheet
-        }
-        document.getElementById("editbutton").style.borderColor = "#a0a0a0"
-        document.getElementById("editbutton").style.backgroundColor = "#a0a0a0"
-
-        document.getElementById("editbutton").onclick = function(){
-            document.getElementById('notOwned').style.pointerEvents = "all";
-            document.getElementById('notOwned').style.opacity = 1;
-        }
-        document.getElementById("shareDisclaimer").style.display = "flex"
-    }
-    //NORMAL
-    else{
-        chosensheet = window.localStorage.getItem("chosenSheet")
-        window.localStorage.setItem("lastsheet", chosensheet)
-
-        if(chosensheet == null || chosensheet == ""){
-            document.getElementById("unableToFind").style.opacity = "1";
-            document.getElementById("unableToFind").style.pointerEvents = "all"; 
-        }
-
-        toek = window.localStorage.getItem("usertoken")
-        if (chosensheet.length>15){
-            document.getElementById("studysheetname").innerHTML = chosensheet.slice(0,15)+"..."
-
-        } else {
-            document.getElementById("studysheetname").innerHTML = chosensheet
-        }
-        // sheet = await httpGet(connect()+"/v2/studysheet/get?studysheet_id="+chosensheet, false, window.localStorage.getItem("usertoken"))
-
-        // console.warn("inside the second go")
-    }
-
-    if (sheet == "" || sheet == null || sheet == "invalidsession"){
-        console.log("could not find")
+    if(chosensheet == null || chosensheet == ""){
         document.getElementById("unableToFind").style.opacity = "1";
         document.getElementById("unableToFind").style.pointerEvents = "all"; 
     }
 
-    // document.getElementById("noclickdiv").style.display = "none";
-    // console.warn("testing bruh why is it doing this")
-    
+    toek = window.localStorage.getItem("usertoken")
+    if (chosensheet.length>15){
+        document.getElementById("studysheetname").innerHTML = chosensheet.slice(0,15)+"..."
+
+    } else {
+        document.getElementById("studysheetname").innerHTML = chosensheet
+    }
+    sheet = studysheetData;
     console.log("og sheet: "+sheet)
     var newSheet = parseFromJSON(sheet);
     newSheet = studysheetData;
@@ -153,17 +59,6 @@ async function doPreviewAndLocal(){
         document.getElementById("unableToFind").style.pointerEvents = "all"; 
         return;
     }
-    if (newSheet.type == "pointer"){
-        console.log("redirecting pointers")
-        sheet = await httpGet(connect()+"/v2/studysheets/get?user_id"+newSheet.user_id+"&studysheet_id="+chosensheet)
-        if (sheet == "" || sheet == null || sheet == "invalidsession"){
-            console.log("could not find")
-            document.getElementById("unableToFind").style.opacity = "1";
-            document.getElementById("unableToFind").style.pointerEvents = "all"; 
-        }
-        newSheet = parseFromJSON(sheet)
-    }
-    console.log(newSheet)
     if (newSheet.length<4){
         console.log("removing...")
         document.getElementById("trainbutton").style.backgroundColor = "#a0a0a0";
@@ -185,8 +80,7 @@ async function doPreviewAndLocal(){
     document.getElementById("noclickdiv").style.opacity = "0";
     document.getElementById("noclickdiv").style.pointerEvents = "none";
     body = document.getElementsByTagName("body")[0];
-    //body.style.background = "linear-gradient(180deg, #001945 35.94%, #000011 100%)"
-    
+
 }
 
 
