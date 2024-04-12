@@ -51,7 +51,8 @@ function doPreviewAndLocal(){
         document.getElementById("studysheetname").innerHTML = chosensheet
     }
 
-    newSheet = studysheetData;
+    
+    newSheet = parseFromJson(JSON.stringify(studysheetData))
     window.localStorage.setItem("fullstudysheet", JSON.stringify(newSheet));
     if (newSheet.error == "studysheet_not_found"){
         document.getElementById("unableToFind").style.opacity = "1";
