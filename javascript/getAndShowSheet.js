@@ -51,14 +51,13 @@ function doPreviewAndLocal(){
         document.getElementById("studysheetname").innerHTML = chosensheet
     }
 
-    
-    newSheet = parseFromJSON(studysheetData)
-    window.localStorage.setItem("fullstudysheet", JSON.stringify(newSheet));
-    if (newSheet.error == "studysheet_not_found"){
+    if (studysheetData.error == "does_not_exist"){
         document.getElementById("unableToFind").style.opacity = "1";
         document.getElementById("unableToFind").style.pointerEvents = "all"; 
         return;
     }
+    newSheet = parseFromJSON(studysheetData)
+    window.localStorage.setItem("fullstudysheet", JSON.stringify(newSheet));
     if (newSheet.length<4){
         console.log("removing...")
         document.getElementById("trainbutton").style.backgroundColor = "#a0a0a0";
