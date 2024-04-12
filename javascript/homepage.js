@@ -82,7 +82,7 @@ async function getLibraryList(){
         sessionid = window.localStorage.getItem("usertoken")
         console.log(sessionid);
         // serverData = await httpGet(connect()+"/v2/home", false, sessionid)
-        serverData = jsonStudysheetData // Comes from a server filled variable in homepage.html
+        json = jsonStudysheetData // Comes from a server filled variable in homepage.html
         // await fetch('https://relay.langstudy.tech:853/"+sessionid+"/returnNameAndList').then(function(response) {
         //     return response.blob();
         // }).then(function(response) {
@@ -91,8 +91,7 @@ async function getLibraryList(){
         console.log("[TOTAL SERVER DATA] "+serverData)
 
         try {
-             json = JSON.parse(serverData)
-             clearTimeout(switchServerTimeout)
+            clearTimeout(switchServerTimeout)
             console.log("cleared switch timeout")
         } catch(error){
             console.error("IMPROPER JSON")
