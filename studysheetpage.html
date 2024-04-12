@@ -3,15 +3,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Studying | Lang</title>
-    <link rel="stylesheet" href="css/stylesheet.css">
-    <script src="javascript/Studysheet.js"></script>
-    <script src="javascript/utils.js"></script>
-    <script src="javascript/getAndShowSheet.js"></script>
-    <script src="javascript/httpGet.js"></script>
-    <script src="javascript/flashcards.js"></script>
-    <script src="javascript/loadBalancer.js"></script>
-    <script src="javascript/LangError.js"></script>
-    <link rel="icon" href="assets/logos/circular lang icon.png">
+    <link rel="stylesheet" href="/css/stylesheet.css">
+    <script src="/javascript/Studysheet.js"></script>
+    <script src="/javascript/utils.js"></script>
+    <script src="/javascript/getAndShowSheet.js"></script>
+    <script src="/javascript/httpGet.js"></script>
+    <script src="/javascript/flashcards.js"></script>
+    <script src="/javascript/loadBalancer.js"></script>
+    <script src="/javascript/LangError.js"></script>
+    <link rel="icon" href="/assets/logos/circular lang icon.png">
     <style id="movingbg"></style>
     <style>
         .mainContainer {
@@ -375,7 +375,7 @@
     <div class="horizontalFlex" style="height: calc(84vh - 22px); pointer-events: all; transition: all 0.15s ease-in-out; opacity: 1; z-index: 5001; align-items: center; justify-content: center; bottom: 0; left: 0; right: 0; position:absolute; background-color: var(--primary-dark)" id="noclickdiv">
         <div class="lightGlow "style="width: 90vw; max-width: 500px; background-color: var(--primary-light); border-radius:15px; padding:20px; text-align: center;">
             <div style="margin: 50px;">
-                <img class="animatedLoader" src="assets/logos/lang-wheat.png" alt="Logo">
+                <img class="animatedLoader" src="/assets/logos/lang-wheat.png" alt="Logo">
             </div>
             Loading your Studysheet
         </div>
@@ -388,7 +388,7 @@
     <div class="content">
         <div id="header" class="header horizontalFlex">
             <div style="cursor:pointer;" onclick="window.location.href='homepage.html'">
-                <img style="height: 10vh;" src="assets/logos/FullLangLogo.png" alt='Lang Logo'>
+                <img style="height: 10vh;" src="/assets/logos/FullLangLogo.png" alt='Lang Logo'>
             </div>
             <div id="homeusername" class="noverticalshow button verticalFlex" style="cursor: pointer; color:wheat;" onclick="window.location.href='settings.html'">Loading your name...</div>
         </div>
@@ -448,18 +448,18 @@
                 <div><button class="lightGlow newbutton" id="multiplechoicebutton" onclick="window.location.href='study/multiplechoice.html'">Multiple Choice</button></div>
             </div>
             <div class="leftSidebarPreview"  id="bobberContainer"> 
-                <img class="bobbing" id="bobber" src="assets/icons/Studying Icon.png">
+                <img class="bobbing" id="bobber" src="/assets/icons/Studying Icon.png">
             </div>
         </div>
     </div>
 
     <div class="rightSidebarContainer" style="z-index:4000">
         <div class="whiteBackdrop">
-            <button class="lightGlow newbutton shareThing" id="saveBtn" onclick="saveToLib()" style="background-color:wheat; display:none;""><img src="assets/icons/langsave.svg" id="saveBtnImg"></button>
-            <button class="lightGlow newbutton" onclick="initializeEdit()" id="editbutton"><img src="assets/icons/edit.png" ></button>
-            <button class="lightGlow newbutton" onclick="shareLink()"><img src="assets/icons/share.png"></button>
-            <button class="lightGlow newbutton"><img src="assets/icons/flashcards.png" style="" id="flashcard" onclick="doFlashcards()"></button>
-            <button class="lightGlow newbutton" onclick="window.location.href='settings.html'"><img src="assets/icons/settings.png"></button>
+            <button class="lightGlow newbutton shareThing" id="saveBtn" onclick="saveToLib()" style="background-color:wheat; display:none;""><img src="/assets/icons/langsave.svg" id="saveBtnImg"></button>
+            <button class="lightGlow newbutton" onclick="initializeEdit()" id="editbutton"><img src="/assets/icons/edit.png" ></button>
+            <button class="lightGlow newbutton" onclick="shareLink()"><img src="/assets/icons/share.png"></button>
+            <button class="lightGlow newbutton"><img src="/assets/icons/flashcards.png" style="" id="flashcard" onclick="doFlashcards()"></button>
+            <button class="lightGlow newbutton" onclick="window.location.href='settings.html'"><img src="/assets/icons/settings.png"></button>
 
         </div>
     </div>
@@ -492,7 +492,7 @@
     <div id="popup" class="popupContainer" style="z-index:2000;">
         <div class="popup centerFlex verticalFlex">
             <div style="margin: 50px;">
-                <img style="height:10vh;" src="assets/icons/langerror.png" alt="error">
+                <img style="height:10vh;" src="/assets/icons/langerror.png" alt="error">
             </div>
             <div style="margin-bottom: 30px;" id="popupText">Uh oh! This prompt does not seem to be working properly. Please dismiss it and if you see it again, contact the developers.</div>
             
@@ -510,7 +510,7 @@
     <div class="horizontalFlex" style="pointer-events: none; transition: all 0.15s ease-in-out; opacity: 0; z-index: 1001; align-items: center; justify-content: center; top: 0; bottom: 0; left: 0; right: 0; position:absolute; background-color: var(--primary-dark)" id="unableToFind">
         <div class="lightGlow "style="width: 90vw; max-width: 500px; background-color: var(--primary-light); border-radius:15px; padding:20px; text-align: center;">
             <div style="margin: 50px;">
-                <img style="height:10vh;" src="assets/icons/langerror.png" alt="error">
+                <img style="height:10vh;" src="/assets/icons/langerror.png" alt="error">
             </div>
             There is an issue with this Studysheet. Please try selecting it again from the main menu.
             <div class="button buttonHoverDark horizontalFlex centerFlex" style="width: 50%; left:0.5; align-items:center; text-align: center; margin-left:23%;" onclick="window.location.href='homepage.html'">Home</div>
@@ -522,7 +522,7 @@
         <div id="thething" class="linkContainer verticalFlex centerFlex centerText whiteBackdrop onclick=null" style="z-index:500; pointer-events:none; opacity:0;">
             <div class="horizontalFlex" style="justify-content: space-between; max-width: 450px; width: 80vw; align-items: center; margin-top: 10px; ">
                 <div onclick="">Send this Lang Studysheet link to your friends!</div>
-                <img style="height: 30px; width: 30px;" src="assets/icons/closeCircle.svg" class="closeIcon" onclick="hideShare()">
+                <img style="height: 30px; width: 30px;" src="/assets/icons/closeCircle.svg" class="closeIcon" onclick="hideShare()">
             </div>
 
             <div id="linkholder" style="margin: none;" onclick="">Generating your sharable link...</div>
@@ -532,7 +532,7 @@
 
     <div class="verticalFlex darkGlow" style="background-color: white; bottom:0; right:0; margin:10px; position:fixed; width:17vw; border-radius:20px; z-index:5000; padding:20px; opacity:0; pointer-events: none;" id="makeAnAccount">
         <div class="horizontalFlex" style="justify-content: left; width:100%; margin-bottom:20px;">
-            <img style="height: 30px; width: 30px;" src="assets/icons/closeCircle.svg" class="closeIcon" onclick="hideElement(document.getElementById('makeAnAccount'))">
+            <img style="height: 30px; width: 30px;" src="/assets/icons/closeCircle.svg" class="closeIcon" onclick="hideElement(document.getElementById('makeAnAccount'))">
         </div>
         <div style="text-align: center; font-weight: bold; font-size:17px;">
             Save this Studysheet and make your own with a Lang Account.
@@ -548,7 +548,7 @@
     <div class="horizontalFlex" style="pointer-events: none; transition: all 0.15s ease-in-out; opacity: 0; z-index: 1001; align-items: center; justify-content: center; top: 0; bottom: 0; left: 0; right: 0; position:absolute; background-color: var(--primary-dark)" id="specificError">
         <div class="lightGlow "style="width: 90vw; max-width: 500px; background-color: var(--primary-light); border-radius:15px; padding:20px; text-align: center;">
             <div style="margin: 50px;">
-                <img style="height:10vh;" src="assets/icons/langerror.png" alt="error">
+                <img style="height:10vh;" src="/assets/icons/langerror.png" alt="error">
             </div>
             <div id="ErrorTextLocation">
 
@@ -595,5 +595,5 @@
         }
     });
 </script>
-<script src="javascript/sidebar.js"></script>
+<script src="/javascript/sidebar.js"></script>
 </html>
