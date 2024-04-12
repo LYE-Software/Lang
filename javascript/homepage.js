@@ -281,6 +281,7 @@ function goToSSPage(){
     // console.log("index is: "+index)
     // console.log("newarr[index] is: "+library[index])
     // window.localStorage.setItem("chosenSheet", library[index].studysheet_id)
+    console.log(library[index]);
     let sspageUrl = "studysheetpage.html/"+library[index].creator_id+"/"+library[index].studysheet_id;
     window.location.href=sspageUrl;
 }
