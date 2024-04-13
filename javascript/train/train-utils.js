@@ -251,7 +251,7 @@ function update_json(json_data, path, value, type, propagate=true, ) { //For ter
                     json_data: json_data,
                     path: path,
                     value: value,
-                    nonce: 1000000
+                    nonce: get_nonce()
                 }
             ]
         });

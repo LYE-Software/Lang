@@ -39,3 +39,11 @@ function reactivate(element, prev){
 function moveBar(newAmt, elem){
     elem.style.width = newAmt + '%';
 }
+
+// CRITICAL
+my_used_nonces = []
+function get_nonce() {
+    let nonce = Math.floor(Math.random() * 1000000000);
+    my_used_nonces.push(nonce);
+    return nonce;
+}

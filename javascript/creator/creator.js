@@ -2,343 +2,36 @@
 //GitHub Repo: https://github.com/lye-software/Lang
 descForError = "undefined";
 
+var sheetId;
+var ownerId;
+var sheet;
+
 window.onerror = function (msg, url, lineNo, columnNo, error) {
     console.log("Handling error.")
     var err =  new LangError(msg, url, lineNo, descForError, "Something unexpected happened. \n", true)
     return true;
 }
-descForError = "undefined";
-var sessionid;
-var toSend;
-//saving & creator stuff
-function saveToCloud(lucy, dl){
-    sessionid = localStorage.getItem("usertoken");
-    var okToUpload = true;
-    customusername = localStorage.getItem("customusername");
-    // document.getElementById("sendingLoader").style.display="";
-    if (!lucy){
-        showElement(document.getElementById("sendingLoader"));
-    }
-    if(document.getElementById("sstitle").innerText == "" && !lucy){
-        showPopup("You forgot to name your Studysheet!")
-        hideElement(document.getElementById("sendingLoader"));
-        okToUpload = false;
-    } else if (document.getElementById("sstitle").innerText.includes("/")){
-        document.getElementById("sstitle").innerText = document.getElementById("sstitle").innerText.replaceAll("/", "-");
-    } 
-    if (document.getElementById("sstitle").innerText.includes("'")){
-        document.getElementById("sstitle").innerText = document.getElementById("sstitle").innerText.replaceAll("'", "\u2019");
-    }
-    if (document.getElementById("sstitle").innerText.includes("\n")){
-        document.getElementById("sstitle").innerText = document.getElementById("sstitle").innerText.replaceAll("\n", "-");
-    }
-    if (document.getElementById("sstitle").innerText.includes(":")){
-        document.getElementById("sstitle").innerText = document.getElementById("sstitle").innerText.replaceAll(":", "-");
-    }
-    if (customusername == "invalidsession"){
-        // document.getElementById("sendingLoader").style.display="none";
-        hideElement(document.getElementById("sendingLoader"));
-        document.getElementById("failedSignIn").style.display="";
-    }
-    else{
-        filename = document.getElementById("sstitle").innerText;
-        filename = filename.replaceAll("&nbsp;", "")
-        filename = filename.replaceAll("<div><br></div>", "")
-        filename = filename.replaceAll("?", "");
-        filename = filename.replaceAll("\n", "-")
-        const studysheet = new Studysheet(filename);
-        
-        var all = document.querySelectorAll("div[data-input]")
-        
-        for (var i = 0; i>all.length; i++){
-            all[i] = all[i].replaceAll("&nbsp;", "")
-            all[i] = all[i].replaceAll("&nbsp;", "")
-            all[i] = all[i].replaceAll("<div><br></div>", "")
-            all[i] = all[i].replaceAll("<div><br></div>", "")
-            all[i] = all[i].replaceAll('"', "\u2019")
-            if (all[i].getAttribute("data-text") == "Answer"){
-                all[i] = all[i].replaceAll("\n", "_")
-                all[i] = all[i].replaceAll("\n", "_")
-                all[i] = all[i].replaceAll("\t", "   ")
-                all[i] = all[i].replaceAll("\t", "   ")
-            }
-            
-        }
-        //loop through overalldivs, loop through each one and get all text input.
-        //loop through array of text inputs and sort based on data-text value into correct array
-        //sorting changes if multi
-        var overallDivArray = document.getElementById("insideCreator").children;
-        console.log("overall div array: "+overallDivArray)
-        for (var i = 0; i<overallDivArray.length; i++){
-            console.log("overall div array item "+i+" it is: "+overallDivArray[i])
-        }
-        var tester = 0;
-        for (var i = 0; i<overallDivArray.length; i++){
-            var hasImage = false;
-            var currentDiv = overallDivArray[i];
-            if (currentDiv.getAttribute("data-multi") == "false"){
-                var textInputs = currentDiv.querySelectorAll("input");
-                console.log("textinputs: "+textInputs)
-                console.log("textinput length "+textInputs.length)
-                console.log("textinput vals: "+textInputs[0].value+" | "+textInputs[1].value)
-                if (currentDiv.children[0].children[0].className == "showImageHolder"){
-                    hasImage = true;
-                }
-                var toAdd1 = textInputs[0].value.trim();
-                var toAdd2 = textInputs[1].value.trim();
-                toAdd1 = toAdd1.replaceAll("&nbsp;", "")
-                toAdd2 = toAdd2.replaceAll("&nbsp;", "")
-                toAdd1 = toAdd1.replaceAll("<div><br></div>", "")
-                toAdd2 = toAdd2.replaceAll("<div><br></div>", "")
-                toAdd1 = toAdd1.replaceAll('"', "\'")      
-                toAdd2 = toAdd2.replaceAll('"', "\'")      
-                toAdd2 = toAdd2.replaceAll("\\,", ",")
-                toAdd1 = toAdd1.replaceAll('\\,', ",")   
-                toAdd2 = toAdd2.replaceAll("\\'", "'")
-                toAdd1 = toAdd1.replaceAll("\\'", "'")
-                toAdd1 = toAdd1.replaceAll("\\'", "'")
-                toAdd2 = toAdd2.replaceAll("\\'", "'")
-                // toAdd1 = (toAdd1 + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
-                // toAdd2 = (toAdd2 + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
-                if (textInputs[0].value == "" || textInputs[1].value == ""){
-                    showPopup("You cannot have an empty term. Please fill in term #"+(i+1));
-                    okToUpload = false;
-                    hideElement(document.getElementById("sendingLoader"));
-                } console.log("passed nullcheck with "+textInputs[0].value +" and "+textInputs[1].value)
-
-                          
-                const term = new Term(false, toAdd1, toAdd2, hasImage);
-                if (hasImage){
-                    var imageUrl = currentDiv.children[0].children[0].src
-                    imageUrl = imageUrl.split("/")
-                    imageUrl = imageUrl[imageUrl.length-1];
-                    term.addImage(imageUrl)                
-                }
-                studysheet.add(term);
-            } else {
-                var textInputs = currentDiv.querySelectorAll("input[data-input]");
-                console.log("textinputs: "+textInputs)
-                var terms = []
-                var answers = []
-                for (var j = 2; j<textInputs.length; j++){
-                    if (textInputs[j].value == ""){
-                        showPopup("You cannot have an empty term. Please fill in term #"+(i+1)+"'s alternate.");
-                        okToUpload = false;
-                        hideElement(document.getElementById("sendingLoader"));
-                    }
-                    if (j%2==0){
-                        console.log("appending "+textInputs[j].value+" to terms")
-                        terms.push(textInputs[j].value.trim());
-                    } else {
-                        console.log("appending "+textInputs[j].value+" to answers")
-                        answers.push(textInputs[j].value.trim())
-                    }
-                }
-                if (currentDiv.children[0].children[0].className == "showImageHolder"){
-                    hasImage = true;
-                }
-                if (textInputs[0].value == ""){
-                    showPopup("You cannot have an empty term. Please fill in multiterm #"+(i+1)+"overall term.");
-                    okToUpload = false;
-                    hideElement(document.getElementById("sendingLoader"));
-                }
-                const term = new MultiTerm(terms, answers, textInputs[0].value, hasImage)
-                if (hasImage){
-                    var imageUrl = currentDiv.children[0].children[0].src
-                    imageUrl = imageUrl.split("/")
-                    imageUrl = imageUrl[imageUrl.length-1];
-                    term.addImage(imageUrl)
-                }
-                studysheet.add(term)
-
-            }
-            tester = i;
-        }
-
-        console.log("i was: "+tester+" when it stopped and ovdivarr length was: "+overallDivArray.length)
-
-        if (dl){
-            okToUpload = false;
-            save(JSON.stringify(studysheet), filename)
-            hideElement(document.getElementById("sendingLoader"));
-
-        }
-
-        if (okToUpload == true){
-           
-            if ((studysheet.returnRawData() == null || studysheet.returnRawData() == [] || studysheet.returnRawData == "" || studysheet.length == 0) && !lucy){
-                showPopup("You cannot upload an empty Studysheet.");
-                hideElement(document.getElementById("sendingLoader"));
-                okToUpload = false;
-            }
-            studysheet.prep();
-            var toUpload = JSON.stringify(studysheet)
-
-            console.log(toUpload);
-
-            // var convertedSS = Object.assign(new Studysheet, JSON.parse(toUpload));
-            // convertedSS.parseTerms();
-            // console.log(convertedSS.returnRawData());
-            // console.log(convertedSS.name)
-            // console.log(convertedSS.getNthTerm(0).check("test"))
-            // console.log("ABOVE")
-
-            if(window.localStorage.getItem('editSheet')=="true") {
-                var url = connect()+"/"+sessionid+"/Studysheets/edit/"+filename;
-            } else {
-                var url = connect()+"/"+sessionid+"/Studysheets/upload/"+filename;
-            }
-            if(okToUpload == true && !lucy){
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", url);
-                if (sessionid != null){
-                    console.log("sessionidHeader")
-                    xhr.setRequestHeader("lye-session", sessionid)
-                }
-                xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
-            
-                xhr.onload = function () {
-                    if (xhr.readyState === 4) {
-                        console.log(xhr.status);
-                        console.log(xhr.responseText);
-                    }
-                    if (xhr.responseText == "name_already_exists"){
-                        showPopup("Please choose a different name for your Studysheet. [ERR: name_already_exists]")
-                        hideElement(document.getElementById("sendingLoader"));
-                        okToUpload = false;
-                    } 
-                    else if (xhr.status !=200){
-                        showPopup("We encountered an error uploading your Studysheet.")
-                        hideElement(document.getElementById("sendingLoader"));
-                        okToUpload = false;
-                    } else {
-                        console.log("going home")
-                        window.location.href = "homepage.html"
-                    }
-                };
-                var data = toUpload;
-                console.log("sending " + data + " to " + url);
-                xhr.send(data);
-            } else if (lucy){
-                return toUpload;
-            }
-            
-            
-        }
-    }
-        
-    
-}
-
 
 function creatorModeSelect(){
-    override = true;
+    let url_string = window.location.href;
+    let url = new URL(url_string);
+    let params = url.searchParams;
+    sheetId = params.get("sheet_id");
+    ownerId = params.get("creator_id");
 
-    if (window.localStorage.getItem("doLocal")=="true"){
-        document.getElementById("localAdvanced").style.display = "";
-        document.getElementById("exporter").style.display = "block";
-    } else {
-        console.log("Local Studying is disabled.")
-    }
-    if (window.localStorage.getItem("usertoken") == "" || window.localStorage.getItem("usertoken") == null || window.localStorage.getItem("usertoken") == "signedout"){
-        console.log("Attempting to show blocker.")
-        showBlocker("To create and upload your own Studysheets, use AI assistance, and connect to Quizlet, please create a Lang account.")
-    }
-    if(window.localStorage.getItem("fullstudysheet")=="" || window.localStorage.getItem("fullstudysheet")==null){
-        console.log("Entering Standard Creator Mode")
-    } else if(window.localStorage.getItem('editSheet')=="true") {
-        console.log("Entering edit mode")
-        customWords = window.localStorage.getItem("fullstudysheet")
-        var tmpss = parseFromJSON(customWords)
-        window.localStorage.setItem("fullstudysheet", "");
-        document.getElementById("topheader").innerText = "Editing "+window.localStorage.getItem("chosenSheet");
-        document.getElementById("sstitle").innerText = window.localStorage.getItem("chosenSheet");
-        for (i = 0; i<tmpss.length; i++){
-            var term = tmpss.getNthTerm(i);
-            
-            if (term.isMulti){
-                imageSrc = null;
-                if (term.hasImage){
-                    imageSrc = term.imageSrc
-                }
-                createCreatorInput(term.question, i, imageSrc)
-                document.getElementById("tdc"+i).children[1].children[2].click();
-                //document.getElementById("tdc"+i).children[1].children[1].innerHTML = term.question;
-                console.log("WHAT IS THE TERM QUESTION:: "+term.question)
-                var firstTwo = document.getElementById("tdc"+i).children[2].children[1].querySelectorAll("input[data-input]");
-                firstTwo[0].value = term.terms[0];
-                firstTwo[1].value = term.answers[0];
-                var x = 3;
-                for (var j =1; j<term.length; j++){
-                    //continue making & filling after 1st alt
-                    document.getElementById("tdc"+i).children[1].children[2].click();
-                    var next = document.getElementById("tdc"+i).children[x].children[1].querySelectorAll("input[data-input]");
-                    next[0].value = term.terms[j]
-                    next[1].value = term.answers[j]
-                    x++;
-                }
-
-
-            } else {
-                console.log("why is that a zero??? term.answer: "+term.answer)
-                imageSrc = null;
-                if (term.hasImage){
-                    imageSrc = term.imageSrc
-                }
-                makeInputs("single", i, term.term, term.answer, imageSrc)
-            }
-        }
-        
-    } else {
-        console.log("Entering Quizlet Creator Mode")
-        customWords = window.localStorage.getItem("fullstudysheet")
-        
-        tmpss = parseFromJSON(customWords)
-        console.log(tmpss)
-        document.getElementById("topheader").innerHTML = "Imported From Outside Source"
-        
-        if (tmpss.length == 0){
-            showPopup("We had an issue with your Studysheet.")
-        }
-        for (i = 0; i<tmpss.length; i++){
-            var term = tmpss.getNthTerm(i);
-            if (term.isMulti){
-                imageSrc = null;
-                if (term.hasImage){
-                    imageSrc = term.imageSrc
-                }
-                createCreatorInput(term.question, i, imageSrc)
-                document.getElementById("tdc"+i).children[1].children[2].click();
-                //document.getElementById("tdc"+i).children[1].children[1].innerHTML = term.question;
-                console.log("WHAT IS THE TERM QUESTION:: "+term.question)
-                var firstTwo = document.getElementById("tdc"+i).children[2].children[1].querySelectorAll("div[data-input]");
-                firstTwo[0].innerHTML = term.terms[0];
-                firstTwo[1].innerHTML = term.answers[0];
-                var x = 3;
-                for (var j =1; j<term.length; j++){
-                    //continue making & filling after 1st alt
-                    document.getElementById("tdc"+i).children[1].children[2].click();
-                    var next = document.getElementById("tdc"+i).children[x].children[1].querySelectorAll("div[data-input]");
-                    next[0].innerHTML = term.terms[j]
-                    next[1].innerHTML = term.answers[j]
-                    x++;
-                }
-
-
-            } else {
-                console.log("why is that a zero??? term.answer: "+term.answer)
-                imageSrc = null;
-                if (term.hasImage){
-                    imageSrc = term.imageSrc
-                }
-                makeInputs("single", i, term.term, term.answer, imageSrc)
-            }
-        }
-        window.localStorage.setItem("fullstudysheet", "");
-    }
+    sendRoomConnectRequest();
 }
 
+function hideLoaders(){
+    hideElement(document.getElementById("LoadingScreen"))
+    hideElement(document.getElementById("WaitingRoom"))
 
+}
+
+function showWaitingRoom(){
+    hideElement(document.getElementById("LoadingScreen"))
+    showElement(document.getElementById("WaitingRoom"))
+}
 
 //creates new input fields for multi & single creators + assigns them ids
 var currentId = "";

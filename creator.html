@@ -6,12 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creating a Studysheet on Lang</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
     <script src="javascript/utils.js"></script>
     <script src="javascript/Studysheet.js"></script>
     <script src="javascript/loadBalancer.js"></script>
     <script src="javascript/LangError.js"></script>
     <script src="javascript/signInChecker.js"></script>
-    <script src="javascript/creator.js"></script>
+    <script src="javascript/creator/creator.js"></script>
+    <script src="javascript/creator/socket_creator.js"></script>
     <link rel="stylesheet" href="css/stylesheet.css">
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="icon" href="assets/logos/circular lang icon.png">
@@ -431,7 +433,22 @@
     </style>
 </head>
 <body onload="creatorOnload()">
-
+    <div class="horizontalFlex" style="height: calc(84vh - 22px); pointer-events: all; transition: all 0.15s ease-in-out; opacity: 1; z-index: 5001; align-items: center; justify-content: center; bottom: 0; left: 0; right: 0; position:absolute; background-color: var(--primary-dark)" id="LoadingScreen">
+        <div class="lightGlow "style="width: 90vw; max-width: 500px; background-color: var(--primary-light); border-radius:15px; padding:20px; text-align: center;">
+            <div style="margin: 50px;">
+                <img class="animatedLoader" src="/assets/logos/lang-wheat.png" alt="Logo">
+            </div>
+            Creating your editing session...
+        </div>
+    </div>
+    <div class="horizontalFlex" style="height: calc(84vh - 22px); pointer-events: none; transition: all 0.15s ease-in-out; opacity: 0; z-index: 5001; align-items: center; justify-content: center; bottom: 0; left: 0; right: 0; position:absolute; background-color: var(--primary-dark)" id="WaitingRoom">
+        <div class="lightGlow "style="width: 90vw; max-width: 500px; background-color: var(--primary-light); border-radius:15px; padding:20px; text-align: center;">
+            <div style="margin: 50px;">
+                <img  src="/assets/icons/timer.png" alt="Timer">
+            </div>
+            Waiting for the Studysheet owner to let you in...
+        </div>
+    </div>
     <div id="failedSignIn" class="popupContainer">
         <div class="popup">
             <img src="assets/logos/FullLangLogo.png" style="height:10vh; margin: 10px;"> 
