@@ -136,7 +136,7 @@ function update_json(json_data, path, value, type, propagate=true, ) {
 
     //window.localStorage.setItem("fullstudysheet", JSON.stringify(initialSheet));
 
-    if (propagate && doCloudsave) {
+    if (propagate) {
         socket.emit('studysheet_edit', {
             type: "update",
             updates: [
