@@ -28,7 +28,8 @@ socket.on("studysheet_edit", function(data){
                 break;
 
             case "editor_trying_join":
-                let requestNotif = new PopupBuilder(is_notif=true, notif_settings={duration: 3000});
+                
+                let requestNotif = new PopupBuilder(is_notif=true, notif_settings={duration: -1});
                 requestNotif.add(new PopupText("Editor wants to join").setStyle("font-size: 20px; font-weight: bold; margin: 0;"));
                 requestNotif.add(new PopupText(data.editor_username+" wants to join the room.").setStyle("font-size: 15px; margin: 0;"));
                 requestNotif.add(new PopupButton("Accept", function(){
@@ -39,6 +40,7 @@ socket.on("studysheet_edit", function(data){
                         "editor_id":data.editor_id,
                         "editor_username":data.editor_username
                     })
+                    requestNotif.close();
                 }))
                 requestNotif.add(new PopupButton("Deny", function(){
                     socket.emit("studysheet_edit", {
@@ -48,6 +50,7 @@ socket.on("studysheet_edit", function(data){
                         "editor_id":data.editor_id,
                         "editor_username":data.editor_username
                     })
+                    requestNotif.close();
                 }))
                 requestNotif.show();
                 break;
