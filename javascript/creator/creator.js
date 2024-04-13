@@ -53,12 +53,14 @@ function showWaitingRoom(){
 }
 
 function changeName(){
-    console.log("changing name to this: "+document.activeElement.value);
-    update_json(sheet, "name", document.activeElement.value, "set_value", true);
+    console.log("changing name to this: "+document.activeElement.innerText);
+    update_json(sheet, "name", document.activeElement.innerText, "set_value", true);
 }
 
 function displaySheet(){
-    for (i = 0; i<sheet.length; i++){
+    console.log("sheet is: ")
+    console.log(sheet)
+    for (i = 0; i<sheet.terms.length; i++){
         var term = sheet.getNthTerm(i);
         
         if (term.isMulti){
