@@ -245,6 +245,7 @@ function createCreatorInput(term, definition, imageSrc) {
         answerInput.setAttribute("data-input", "true");
         answerInput.setAttribute("type", "text");
         answerInput.oninput = (event) => {
+            console.log(this);
             let index = document.getElementById("insideCreator").indexOf(this.parentElement.parentElement);
             console.log("IDX: "+index+" DAEV: "+document.activeElement.value)
             update_json(sheet, ["terms",index,"answer"], document.activeElement.value, "set_value", true);
