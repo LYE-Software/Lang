@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="../css/stylesheet.css" rel="stylesheet">
+
+    <style>
+        .notification {
+            position: fixed;
+            z-index: 10;
+            right: 20px;
+            top: 20px;
+
+            border-radius: 25px;
+            padding: 15px;
+            width: 300px;
+
+            transition: transform 0.5s ease-in-out;
+        }
+ 
+        .notification > * {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="notification whitebackdrop">
+        <h3 class="">User joined!</h3>
+        <p class="">ankleBowl joined the room.</p>
+    </div> -->
+</body>
+<script src="popup.js"></script>
+<script>
+    let popup = new PopupBuilder(is_notif=true, notif_settings={duration: 3000});
+    popup.add(new PopupText("User joined!").setStyle("font-size: 20px; font-weight: bold; margin: 0;"));
+    popup.add(new PopupText("ankleBowl joined the room.").setStyle("font-size: 15px; margin: 0;"));
+    popup.show();
+</script>
+</html>

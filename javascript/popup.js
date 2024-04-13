@@ -1,8 +1,11 @@
 class PopupBuilder {
-    constructor() {
+    constructor(is_notif=false, notif_settings={}) {
         this.elements = []
         this.inputs = {}
         this.container = null;
+
+        this.is_notif = is_notif;
+        this.notif_settings = notif_settings;
     }
 
     add(element) {
@@ -14,19 +17,38 @@ class PopupBuilder {
         this.container = document.createElement('div');
 
         this.container.style.position = 'fixed';
-        this.container.style.top = '0';
-        this.container.style.left = '0';
-        this.container.style.right = '0';
-        this.container.style.bottom = '0';
-
-        this.container.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
-        this.container.style.zIndex = '10000';
-        
         this.container.style.display = 'flex';
-        this.container.style.justifyContent = 'center';
-        this.container.style.alignItems = 'center';
+        this.container.style.zIndex = '10000';
 
-        this.container.style.textAlign = 'center';
+        if (!this.is_notif) {
+            this.container.style.top = '0';
+            this.container.style.left = '0';
+            this.container.style.right = '0';
+            this.container.style.bottom = '0';
+
+            this.container.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
+            
+            this.container.style.justifyContent = 'center';
+            this.container.style.alignItems = 'center';
+
+            this.container.style.textAlign = 'center';
+        } else {
+            this.container.style.bottom = '20px';
+            this.container.style.right = '-400px';
+            this.container.style.width = '350px';
+            this.container.style.transition = 'right 0.25s ease-in-out';
+
+            setTimeout(function() {
+                this.container.style.right = '20px';
+            }.bind(this), 100);
+
+            if (this.notif_settings.duration > 0) {
+                setTimeout(function() {
+                    this.container.style.right = '-400px';
+                }
+                .bind(this), this.notif_settings.duration);
+            }
+        }
 
         var popup = document.createElement('div');
         popup.classList.add('container')
@@ -52,14 +74,21 @@ class PopupBuilder {
     close() {
         // console.log("CLOSINOG")
         // console.log(this.container)
-        this.container.style.opacity = '0';
-        this.container.style.pointerEvents = 'none';
-        let containerReference = this.container;
-        setTimeout(function() {
-            //it's abstracted away from the popup context in the timeout so you have to use a reference not this
-            //we love JS
-            containerReference.remove();
-        }, 250);
+        if (this.is_notif) {
+            this.container.style.right = '-400px';
+            setTimeout(function() {
+                this.container.remove();
+            }.bind(this), 250);
+        } else {
+            this.container.style.opacity = '0';
+            this.container.style.pointerEvents = 'none';
+            let containerReference = this.container;
+            setTimeout(function() {
+                //it's abstracted away from the popup context in the timeout so you have to use a reference not this
+                //we love JS
+                containerReference.remove();
+            }, 250);
+        }
     }
 }
 
