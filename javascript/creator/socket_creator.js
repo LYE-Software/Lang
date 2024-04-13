@@ -161,5 +161,32 @@ function update_json(json_data, path, value, type, propagate=true, ) {
 
     //DOM
 
+    if (path[0] == "terms"){
+        if (path.length ==1){ //adding or removing term
+            if (type == "add_to_array"){
+                console.log("updating json- new term");
+                makeInputs("single");
+            } else if (type == "remove_from_array"){
+                let data_holder = document.getElementById("insideCreator").children;
+                generateIdA--;
+                generateIdV--;
+                generateIdYou--;                    
+                data_holder[value].remove();
+            }
+        }
+        if (type == "set_value"){
+            let container =  document.getElementById("insideCreator").children[path[1]];
+            if (path[2] == "term"){ //single term term
+                let item = container.children[1].children[0].value = value;
+            } else if (path[2] == "answer"){ //single term answer
+                let item = container.children[1].children[1].value = value;
+            } else if (path[2] == "question"){ //multi Q
 
+            } else if (path[2] == "terms") { //multi alternate term
+
+            } else if (path[2] == "answers") { //multi alternate answers
+
+            }
+        }
+    }
 }

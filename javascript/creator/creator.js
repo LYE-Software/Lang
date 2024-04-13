@@ -100,9 +100,7 @@ function displaySheet(){
 }
 
 function registerNewTerm(){
-    console.log("updating json- new term");
-    update_json(sheet, "terms", new Term(false, "", "", false), "add_to_array", true);
-    makeInputs("single");
+    
 }
 
 //creates new input fields for multi & single creators + assigns them ids
@@ -228,7 +226,7 @@ function createCreatorInput(term, definition, imageSrc) {
         verbInput.setAttribute("type", "text");
         verbInput.contentEditable="true";
         verbInput.oninput = (event) => {
-            let index = document.activeElement.parentElement.parentElement.getAttribute("data-idNum");
+            let index = document.getElementById("insideCreator").indexOf(this.parentElement.parentElement);
             console.log("IDX: "+index+" DAEV: "+document.activeElement.value)
             update_json(sheet, "terms."+index+".term", document.activeElement.value, "set_value", true);
         };
@@ -247,7 +245,7 @@ function createCreatorInput(term, definition, imageSrc) {
         answerInput.setAttribute("data-input", "true");
         answerInput.setAttribute("type", "text");
         answerInput.oninput = (event) => {
-            let index = document.activeElement.parentElement.parentElement.getAttribute("data-idNum");
+            let index = document.getElementById("insideCreator").indexOf(this.parentElement.parentElement);
             console.log("IDX: "+index+" DAEV: "+document.activeElement.value)
             update_json(sheet, "terms."+index+".answer", document.activeElement.value, "set_value", true);
         }
@@ -281,7 +279,7 @@ function createCreatorInput(term, definition, imageSrc) {
             generateIdV--;
             generateIdYou--;
             console.log(this)
-            let index = this.parentElement.parentElement.getAttribute("data-idNum");
+            let index = document.getElementById("insideCreator").indexOf(this.parentElement.parentElement);
             update_json(sheet, "terms", index, "remove_from_array", true)
             this.parentNode.parentNode.remove();
             
