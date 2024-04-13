@@ -311,7 +311,7 @@ function showElement(element) {
 
 function fakeload(){
     console.log("loading")
-    window.location.href="homepage.html"
+    window.location.href="/homepage.html"
 }
 
 var i = 0;
@@ -1767,7 +1767,7 @@ function signout(){
         window.localStorage.setItem("chosenSheet", "");
         window.localStorage.setItem("usertoken", null);
         window.localStorage.setItem("username", null);
-        window.location.href="homepage.html"
+        window.location.href="/homepage.html"
       } else {
         
       }
@@ -1815,7 +1815,7 @@ function sendFeedback(){
             if (xhr.readyState === 4) {
                 console.log(xhr.status);
                 console.log(xhr.responseText);
-                // window.location.href="homepage.html";
+                // window.location.href="/homepage.html";
             }
         };
         var data = feedback;
@@ -2492,7 +2492,7 @@ function showVerbs(language) {
 
 
 function returnMain() {
-    location.href = "homepage.html";
+    location.href = "/homepage.html";
 }
 
 
@@ -3654,7 +3654,7 @@ function saveToCloud(){
                     if (xhr.readyState === 4) {
                         console.log(xhr.status);
                         console.log(xhr.responseText);
-                        window.location.href="homepage.html";
+                        window.location.href="/homepage.html";
                     }
                 };
                 var data = downloadArrayString;

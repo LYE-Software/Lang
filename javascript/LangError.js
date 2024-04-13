@@ -79,7 +79,7 @@ class LangError{
             if (xhr.readyState === 4) {
                 console.log(xhr.status);
                 console.log(xhr.responseText);
-                // window.location.href="homepage.html";
+                // window.location.href="/homepage.html";
             }
         };
         var data = em;

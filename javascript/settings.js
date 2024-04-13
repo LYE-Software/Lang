@@ -140,7 +140,7 @@ function append(data){
 function signout(){
     window.localStorage.setItem("usertoken", "signedout")
     window.localStorage.setItem("customusername", "")
-    window.location.href = "homepage.html"
+    window.location.href = "/homepage.html"
 }
 
 function hideDebug(e){
