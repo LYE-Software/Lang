@@ -431,6 +431,60 @@
             border-radius:20px;
             backdrop-filter: blur(5px);
         }
+
+
+        /* MULTI USER EDITING */
+        #sidePanel {
+            display: block;
+
+            padding: 15px;
+            width: 300px;
+            text-align: left;
+            box-sizing: border-box;
+        }
+        #sidePanel > * {
+            margin: 0;
+        }
+        #sidePanel > p {
+            margin-left: 15px;
+            margin-bottom: 10px;
+        }
+        #sidePanel > h3 {
+            margin-left: 15px;
+            font-size: 25px;
+        }
+
+        #editors {
+            padding: 10px;
+            border-radius: 25px;
+            background-color: var(--primary-light);
+
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        #editors > * {
+            display: flex;
+            border-radius: 10px;
+            height: 50px;
+            align-items: center;
+            padding: 15px;
+            box-sizing: border-box;
+            gap: 10px;
+        }
+
+        #editors > * > .status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: green;
+        }
+
+        #editors > * > .offline {
+            background-color: transparent;
+            border: 3px solid gray;
+            box-sizing: border-box;
+        }
     </style>
 </head>
 <body onload="creatorOnload()">
@@ -719,11 +773,30 @@
     </div>
 
 
-    <div id="rightSidebarContainer" class="rightSidebarContainer">
-        <div class="whitebackdrop">
-            <button class="newbutton" id="exporter" style="display: none;">
-                <img src="assets/icons/save.svg" style="height:50px; color:var(--primary-dark);">
-            </button>
+    <div id="rightSidebarContainer" class="rightSidebarContainer" style="flex-direction: column; gap: 10px; align-items: flex-start;">
+        <div class="whitebackdrop" id="sidePanel">
+            <h3>Studysheet Title</h3>
+            <p>Last Modified 4/13/24</p>
+            <div id="editors">
+                <div class="whitebackdrop">
+                    <div class="status"></div>
+                    ankleBowl
+                </div>
+                <div class="whitebackdrop">
+                    <div class="status"></div>
+                    calcwiz
+                </div>
+                <div class="whitebackdrop">
+                    <div class="status"></div>
+                    nwvbug
+                </div>
+                <div class="whitebackdrop">
+                    <div class="status offline"></div>
+                    lang_enjoyer
+                </div>
+            </div>
+        </div>
+        <div class="whitebackdrop" style="width: 85px;">
             <button class="newbutton" onclick="toggleLangBot()">
                 <img src="assets/icons/LangBot Notes Dark.png" style="height:50px;">
             </button>
