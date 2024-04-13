@@ -1,6 +1,5 @@
 const socket = io();
 
-
 socket.on("studysheet_edit", function(data){
     if (my_used_nonces.includes(data.nonce)){
         console.log("own req, ignoring")
@@ -25,7 +24,7 @@ socket.on("studysheet_edit", function(data){
                 hideLoaders();
                 break;
 
-            case "invalid_permissions":
+            case "error":
                 console.log("invalid permissions, performing actions")
                 showWaitingRoom();
                 break;
