@@ -227,7 +227,14 @@ function createCreatorInput(term, definition, imageSrc) {
         verbInput.contentEditable="true";
         verbInput.addEventListener("input", function(){
             console.log(this);
-            let index = document.getElementById("insideCreator").children.indexOf(this.parentElement.parentElement);
+            let childArray = document.getElementById("insideCreator").children;
+            let index = -1;
+            for (let i = 0; i<childArray.length; i++){
+                if (childArray[i] == this.parentElement.parentElement){
+                    index = i;
+                    break;
+                }
+            }
             console.log("IDX: "+index+" DAEV: "+document.activeElement.value)
             update_json(sheet, ["terms",index,"answer"], document.activeElement.value, "set_value", true);
         })
@@ -247,7 +254,14 @@ function createCreatorInput(term, definition, imageSrc) {
         answerInput.setAttribute("type", "text");
         answerInput.addEventListener("input", function(){
             console.log(this);
-            let index = document.getElementById("insideCreator").children.indexOf(this.parentElement.parentElement);
+            let childArray = document.getElementById("insideCreator").children;
+            let index = -1;
+            for (let i = 0; i<childArray.length; i++){
+                if (childArray[i] == this.parentElement.parentElement){
+                    index = i;
+                    break;
+                }
+            }
             console.log("IDX: "+index+" DAEV: "+document.activeElement.value)
             update_json(sheet, ["terms",index,"answer"], document.activeElement.value, "set_value", true);
         })
@@ -282,7 +296,14 @@ function createCreatorInput(term, definition, imageSrc) {
             generateIdV--;
             generateIdYou--;
             console.log(this)
-            let index = document.getElementById("insideCreator").children.indexOf(this.parentElement.parentElement);
+            let childArray = document.getElementById("insideCreator").children;
+            let index = -1;
+            for (let i = 0; i<childArray.length; i++){
+                if (childArray[i] == this.parentElement.parentElement){
+                    index = i;
+                    break;
+                }
+            }
             update_json(sheet, ["terms"], index, "remove_from_array", true)
             this.parentNode.parentNode.remove();
         })
