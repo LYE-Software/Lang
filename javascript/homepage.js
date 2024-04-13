@@ -269,7 +269,7 @@ function showDeletePopup() {
         popup.close()
         let sheetId = window.localStorage.getItem("chosenSheet")
         console.log("Sending DEL request for "+sheetId)
-        link = "/api/v1/delete"
+        link = "api/v1/delete"
         console.log("link is: "+link)
         var xhr = new XMLHttpRequest();
         xhr.open("POST", link);
@@ -277,7 +277,7 @@ function showDeletePopup() {
             console.log("sessionidHeader")
             xhr.setRequestHeader("lye-session", sessionid)
         }
-        xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+        xhr.setRequestHeader("Content-Type", "application/json");
     
         xhr.onload = function () {
             if (xhr.readyState === 4) {
@@ -285,10 +285,10 @@ function showDeletePopup() {
                 console.log(xhr.responseText);
             }
         };
-        var data = {"studysheet_id":sheetId};
+        var data = JSON.stringify({"studysheet_id":sheetId});
         console.log("sending " + data + " to " + link);
         xhr.send(data);
-        window.location.reload()
+        //window.location.reload()
     }, "color: red;"))
     popup.show()
 }
