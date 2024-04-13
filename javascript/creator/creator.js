@@ -236,7 +236,19 @@ function createCreatorInput(term, definition, imageSrc) {
                 }
             }
             console.log("IDX: "+index+" DAEV: "+document.activeElement.value)
-            update_json(sheet, ["terms",index,"term"], document.activeElement.value, "set_value", true);
+            if (document.activeElement.value.length%5 == 0){
+                update_json(sheet, ["terms",index,"term"], document.activeElement.value, "set_value", true);
+            }
+        })
+        verbInput.addEventListener("focusout", function(){
+            let index = -1;
+            for (let i = 0; i<childArray.length; i++){
+                if (childArray[i] == this.parentElement.parentElement){
+                    index = i;
+                    break;
+                }
+            }
+            update_json(sheet, ["terms",index,"term"], this.value, "set_value", true);
         })
         generateIdV++
             // verbInput.innerHTML="Put Term / Question Here";
@@ -263,9 +275,20 @@ function createCreatorInput(term, definition, imageSrc) {
                 }
             }
             console.log("IDX: "+index+" DAEV: "+document.activeElement.value)
+            if (document.activeElement.value.length%5 == 0){
+                update_json(sheet, ["terms",index,"answer"], document.activeElement.value, "set_value", true);
+            }
+        })
+        answerInput.addEventListener("focusout", function(){
+            let index = -1;
+            for (let i = 0; i<childArray.length; i++){
+                if (childArray[i] == this.parentElement.parentElement){
+                    index = i;
+                    break;
+                }
+            }
             update_json(sheet, ["terms",index,"answer"], document.activeElement.value, "set_value", true);
         })
-        
         generateIdA++
         // answerInput.innerHTML="Put Answer Here";
         stuffHolder.appendChild(answerInput);
