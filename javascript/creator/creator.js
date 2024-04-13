@@ -281,7 +281,7 @@ function createCreatorInput(term, definition, imageSrc) {
             generateIdV--;
             generateIdYou--;
             console.log(this)
-            let index = document.activeElement.parentElement.parentElement.getAttribute("data-idNum");
+            let index = this.parentElement.parentElement.getAttribute("data-idNum");
             update_json(sheet, "terms", index, "remove_from_array", true)
             this.parentNode.parentNode.remove();
             
