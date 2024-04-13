@@ -60,6 +60,7 @@ function changeName(){
 function displaySheet(){
     console.log("sheet is: ")
     console.log(sheet)
+    sheet = parseFromJSON(sheet);
     for (i = 0; i<sheet.terms.length; i++){
         var term = sheet.getNthTerm(i);
         
