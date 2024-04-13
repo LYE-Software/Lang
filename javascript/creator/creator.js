@@ -12,7 +12,7 @@ window.onerror = function (msg, url, lineNo, columnNo, error) {
     return true;
 }
 
-function creatorModeSelect(){
+async function creatorModeSelect(){
     let url_string = window.location.href;
     let url = new URL(url_string);
     let params = url.searchParams;
@@ -22,7 +22,7 @@ function creatorModeSelect(){
         console.log("New Sheet")
         let returnJson = null
         try {
-            fetch("/api/v1/create")
+            await fetch("/api/v1/create")
             .then((response) => response.json())
             .then((json) => {
                 console.log(json)
