@@ -289,7 +289,7 @@ function createCreatorInput(term, definition, imageSrc) {
                     break;
                 }
             }
-            update_json(sheet, ["terms",index,"answer"], document.activeElement.value, "set_value", true);
+            update_json(sheet, ["terms",index,"answer"], this.value, "set_value", true);
         })
         generateIdA++
         // answerInput.innerHTML="Put Answer Here";
