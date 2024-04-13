@@ -142,7 +142,6 @@ function update_json(json_data, path, value, type, propagate=true, ) {
             updates: [
                 {
                     update_type: type,
-                    json_data: json_data,
                     path: path,
                     value: value,
                     nonce: get_nonce()

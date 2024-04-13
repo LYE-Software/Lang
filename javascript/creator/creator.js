@@ -175,6 +175,7 @@ var generateIdA = 0
 var generateIdYou = 0
 
 function createCreatorInput(term, definition, imageSrc) {
+    console.log("updating json- new term")
     update_json(sheet, "terms", new Term(false, "", "", false), "add_to_array", true)
     var br = document.createElement("div")
         
@@ -220,6 +221,7 @@ function createCreatorInput(term, definition, imageSrc) {
         verbInput.contentEditable="true";
         verbInput.oninput = (event) => {
             let index = document.activeElement.parentElement.parentElement.getAttribute("data-idNum");
+            console.log("IDX: "+index+" DAEV: "+document.activeElement.value)
             update_json(sheet, "terms."+index+".term", document.activeElement.value, "set_value", true);
         };
         generateIdV++
@@ -238,6 +240,7 @@ function createCreatorInput(term, definition, imageSrc) {
         answerInput.setAttribute("type", "text");
         answerInput.oninput = (event) => {
             let index = document.activeElement.parentElement.parentElement.getAttribute("data-idNum");
+            console.log("IDX: "+index+" DAEV: "+document.activeElement.value)
             update_json(sheet, "terms."+index+".answer", document.activeElement.value, "set_value", true);
         }
         generateIdA++
