@@ -21,12 +21,6 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
-.header {
-    height: 10vh;
-    background-color: var(--primary-light);
-    width: 100vw;
-}
-
 .absolute {
     position: absolute;
 }
@@ -382,106 +376,9 @@ input {
 
 
 
-  .header {
-    border-bottom: 2px solid var(--primary-dark);
-    width: calc(100vw - 20px);
-    padding: 10px;   
-}
 
 
-.functionRow {
-    background-color: var(--primary-light);
-    height: 6vh;
-    width: 100vw;
 
-    -webkit-box-shadow:0px 0px 20px 0px var(--primary-light);
-    -moz-box-shadow: 0px 0px 20px 0px var(--primary-light);
-    box-shadow: 0px 0px 20px 0px var(--primary-light);
-
-}
-
-.functionRowItem {
-    transition: all 0.25s ease-in-out;
-
-    /* border-right: 1px solid var(--primary-dark); */
-    padding: 0 10px 0 10px;
-    height: 100%;
-    cursor: pointer;
-    position: relative;
-
-    display: flex;
-    align-items: center;
-}
-
-.functionRowItem:first-child {
-    /* border-left: 1px solid var(--primary-dark); */
-    margin-left: 10px;
-}
-
-.functionRowItem:last-child {
-    /* border-left: 1px solid var(--primary-dark); */
-    margin-right: 10px;
-}
-
-.functionRowItem:hover {
-    background-color: var(--primary-dark);
-    color: var(--primary-light);
-}
-
-.functionRowItem:hover .functionRowItemContents {
-    display: block;
-}
-
-.functionRowItemContents {
-    display: none;
-    position: absolute;
-    top: 6vh;
-    left: 0;
-    z-index: 1;
-
-    min-width: 100%;
-    max-width: 500%;
-
-    border: 1px solid var(--primary-dark);
-}
-
-.functionRowItemContents div {
-    transition: all 0.25s ease-in-out;
-
-    background-color: var(--primary-light);
-    color: var(--primary-dark);
-    height: 6vh;
-    padding: 0 10px 0 10px;
-    z-index:500;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-}
-
-.functionRowItemContents div:hover {
-    background-color: var(--primary-dark);
-    color: var(--primary-light);
-    z-index:500;
-}
-
-.functionRowItemContents a:hover {
-    background-color: var(--primary-dark);
-    color: var(--primary-light);
-    z-index:500;
-}
-
-.functionRowItemContents a {
-    transition: all 0.25s ease-in-out;
-
-    background-color: var(--primary-light);
-    color: var(--primary-dark);
-    height: 6vh;
-    padding: 0 10px 0 10px;
-    z-index:500;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-}
 
 
 #settingsSidebar {
@@ -539,4 +436,9 @@ input {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+#homeusername {
+    color: white;
+    font-weight:bold;
 }
