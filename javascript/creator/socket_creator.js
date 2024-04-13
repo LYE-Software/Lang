@@ -20,7 +20,7 @@ socket.on("studysheet_edit", function(data){
 
             case "full_sheet_update":
                 console.log("full sheet recieved, performing actions")
-                sheet = data.studysheet_json;
+                sheet = data.data;
                 hideLoaders();
                 displaySheet();
                 break;
