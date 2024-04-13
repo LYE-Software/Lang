@@ -225,11 +225,12 @@ function createCreatorInput(term, definition, imageSrc) {
         verbInput.setAttribute("data-input", "true");
         verbInput.setAttribute("type", "text");
         verbInput.contentEditable="true";
-        verbInput.oninput = (event) => {
+        verbInput.addEventListener("input", function(){
+            console.log(this);
             let index = document.getElementById("insideCreator").indexOf(this.parentElement.parentElement);
             console.log("IDX: "+index+" DAEV: "+document.activeElement.value)
-            update_json(sheet, ["terms",index,"term"], document.activeElement.value, "set_value", true);
-        };
+            update_json(sheet, ["terms",index,"answer"], document.activeElement.value, "set_value", true);
+        })
         generateIdV++
             // verbInput.innerHTML="Put Term / Question Here";
         stuffHolder.appendChild(verbInput);
@@ -244,12 +245,13 @@ function createCreatorInput(term, definition, imageSrc) {
         answerInput.setAttribute("data-text", "Answer");
         answerInput.setAttribute("data-input", "true");
         answerInput.setAttribute("type", "text");
-        answerInput.oninput = (event) => {
+        answerInput.addEventListener("input", function(){
             console.log(this);
             let index = document.getElementById("insideCreator").indexOf(this.parentElement.parentElement);
             console.log("IDX: "+index+" DAEV: "+document.activeElement.value)
             update_json(sheet, ["terms",index,"answer"], document.activeElement.value, "set_value", true);
-        }
+        })
+        
         generateIdA++
         // answerInput.innerHTML="Put Answer Here";
         stuffHolder.appendChild(answerInput);
@@ -275,7 +277,7 @@ function createCreatorInput(term, definition, imageSrc) {
         var svg = document.createElement("div");
         svg.innerHTML = trash_svg;
         svg.className = "trash";
-        svg.onclick = function(){
+        svg.addEventListener("click", function(){
             generateIdA--;
             generateIdV--;
             generateIdYou--;
@@ -283,8 +285,8 @@ function createCreatorInput(term, definition, imageSrc) {
             let index = document.getElementById("insideCreator").indexOf(this.parentElement.parentElement);
             update_json(sheet, ["terms"], index, "remove_from_array", true)
             this.parentNode.parentNode.remove();
-            
-        }
+        })
+        
         stuffHolder.appendChild(svg);
 
         var svg2 = document.createElement("div");
