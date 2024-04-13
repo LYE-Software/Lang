@@ -724,9 +724,6 @@
             <button class="newbutton" id="exporter" style="display: none;">
                 <img src="assets/icons/save.svg" style="height:50px; color:var(--primary-dark);">
             </button>
-            <button class="newbutton" onclick="showSavePopup()">
-                <img src="assets/icons/langsave.svg" style="height:50px;">
-            </button>
             <button class="newbutton" onclick="toggleLangBot()">
                 <img src="assets/icons/LangBot Notes Dark.png" style="height:50px;">
             </button>
@@ -974,22 +971,12 @@
             }   
         // }
     }
-
-    window.addEventListener("beforeunload", function (e) {
-        if (overrider == true){
-            return;
-        }
-        var confirmationMessage = "Are you sure you want to leave without saving?";
-
-        (e || window.event).returnValue = confirmationMessage; // Gecko + IE
-        return confirmationMessage; // Webkit, Safari, Chrome etc.
-    });
     var wage = document.getElementById("LAquery");
-wage.addEventListener("keydown", function (e) {
-    if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
-        sendLucyMessage()
-    }
-});
+    wage.addEventListener("keydown", function (e) {
+        if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+            sendLucyMessage()
+        }
+    });
 </script>
 <script src="javascript/sidebar.js"></script>
 </html>
