@@ -525,8 +525,6 @@
 
     const amountOfNotifications = 8;
 
-    Notification.checkIfUnreads();
-
     function firstSignIn() {
         window.location.href="onboarding-new.html";
     }
@@ -559,6 +557,12 @@
         window.localStorage.setItem("notifs", amountOfNotifications);
         document.getElementById("notif").className = "notif";
         showElement(document.getElementById('notificationPopup'))
+    }
+
+    if (window.localStorage.getItem("notifs") != amountOfNotifications){
+        document.getElementById("notif").className = "notif hasUnreads"
+    } else {
+        document.getElementById("notif").className = "notif"
     }
 
     // if localstorage tag japan is set to true
