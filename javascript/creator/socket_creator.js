@@ -2,91 +2,95 @@ const socket = io();
 
 socket.on("studysheet_edit", function(data){
     console.log("Nonce check "+my_used_nonces.includes(data.nonce));
-    if (my_used_nonces.includes(data.nonce)){
-        console.log("own req, ignoring")
-    } else {
 
-        let intentions = data.type;
-        console.log("PACKET RECIEVED: ")
-        console.log(data)
-        switch(intentions){
+    
+    let intentions = data.type;
+    console.log("PACKET RECIEVED: ")
+    console.log(data)
+    switch(intentions){
 
-            case "editor_joined":
-                console.log("Editor joined, performing actions")
-                let joinedNotif = new PopupBuilder(is_notif=true, notif_settings={duration: 3000});
-                joinedNotif.add(new PopupText("Editor joined!").setStyle("font-size: 20px; font-weight: bold; margin: 0;"));
-                joinedNotif.add(new PopupText(data.editor_username+" joined the room.").setStyle("font-size: 15px; margin: 0;"));
-                joinedNotif.show();
-                break;
+        case "editor_joined":
+            console.log("Editor joined, performing actions")
+            let joinedNotif = new PopupBuilder(is_notif=true, notif_settings={duration: 3000});
+            joinedNotif.add(new PopupText("Editor joined!").setStyle("font-size: 20px; font-weight: bold; margin: 0;"));
+            joinedNotif.add(new PopupText(data.editor_username+" joined the room.").setStyle("font-size: 15px; margin: 0;"));
+            joinedNotif.show();
+            break;
 
-            case "full_sheet_update":
-                console.log("full sheet recieved, performing actions")
-                sheet = data.data;
-                hideLoaders();
-                displaySheet();
-                break;
+        case "full_sheet_update":
+            console.log("full sheet recieved, performing actions")
+            sheet = data.data;
+            hideLoaders();
+            displaySheet();
+            break;
 
-            case "error":
-                if (data.error == "invalid_permissions"){
-                    console.log("invalid permissions, performing actions")
-                    showWaitingRoom();
+        case "error":
+            if (data.error == "invalid_permissions"){
+                console.log("invalid permissions, performing actions")
+                showWaitingRoom();
+            } else {
+                console.log("other error case")
+            }
+            break;
+
+        case "editor_trying_join":
+            console.log("Editor trying to join, performing actions")
+            let requestNotif = new PopupBuilder(is_notif=true, notif_settings={duration: -1});
+            requestNotif.add(new PopupText("Editor wants to join").setStyle("font-size: 20px; font-weight: bold; margin: 0;"));
+            requestNotif.add(new PopupText(data.editor_username+" wants to join the room.").setStyle("font-size: 15px; margin: 0;"));
+            // requestNotif.add(new PopupButton("Accept Once", function(){
+            //     socket.emit("studysheet_edit", {
+            //         "type":"deny_editor",
+            //         "sheet_id":sheetId,
+            //         "owner_id":ownerId,
+            //         "editor_id":data.editor_id,
+            //         "editor_username":data.editor_username,
+            //         "duration":"just_once"
+            //     })
+            //     requestNotif.close();
+            // }))
+            requestNotif.add(new PopupButton("Accept", function(){
+                socket.emit("studysheet_edit", {
+                    "type":"accept_editor",
+                    "sheet_id":sheetId,
+                    "owner_id":ownerId,
+                    "editor_id":data.editor_id,
+                    "editor_username":data.editor_username,
+                    "duration":"always"
+                })
+                requestNotif.close();
+            }))
+            requestNotif.add(new PopupButton("Deny", function(){
+                socket.emit("studysheet_edit", {
+                    "type":"deny_editor",
+                    "sheet_id":sheetId,
+                    "owner_id":ownerId,
+                    "editor_id":data.editor_id,
+                    "editor_username":data.editor_username
+                })
+                requestNotif.close();
+            }))
+            requestNotif.show();
+            break;
+
+        case "editor_accepted":
+            console.log("Editor accepted, performing actions")
+            sendRoomConnectRequest();
+            hideElement(document.getElementById("WaitingRoom")); //swap from waitinglist back to loader
+            showElement(document.getElementById("LoadingScreen"));
+            break;
+
+        case "update":
+            console.log("update, performing actions")
+            for (let i = 0; i<data.updates.length; i++){
+                if (my_used_nonces.includes(data.updates[i].nonce)){
+                    continue
                 } else {
-                    console.log("other error case")
+                    update_json(sheet, data.updates[i].path, data.updates[i].value, data.updates[i].update_type, false);
                 }
-                break;
-
-            case "editor_trying_join":
-                console.log("Editor trying to join, performing actions")
-                let requestNotif = new PopupBuilder(is_notif=true, notif_settings={duration: -1});
-                requestNotif.add(new PopupText("Editor wants to join").setStyle("font-size: 20px; font-weight: bold; margin: 0;"));
-                requestNotif.add(new PopupText(data.editor_username+" wants to join the room.").setStyle("font-size: 15px; margin: 0;"));
-                // requestNotif.add(new PopupButton("Accept Once", function(){
-                //     socket.emit("studysheet_edit", {
-                //         "type":"deny_editor",
-                //         "sheet_id":sheetId,
-                //         "owner_id":ownerId,
-                //         "editor_id":data.editor_id,
-                //         "editor_username":data.editor_username,
-                //         "duration":"just_once"
-                //     })
-                //     requestNotif.close();
-                // }))
-                requestNotif.add(new PopupButton("Accept", function(){
-                    socket.emit("studysheet_edit", {
-                        "type":"accept_editor",
-                        "sheet_id":sheetId,
-                        "owner_id":ownerId,
-                        "editor_id":data.editor_id,
-                        "editor_username":data.editor_username,
-                        "duration":"always"
-                    })
-                    requestNotif.close();
-                }))
-                requestNotif.add(new PopupButton("Deny", function(){
-                    socket.emit("studysheet_edit", {
-                        "type":"deny_editor",
-                        "sheet_id":sheetId,
-                        "owner_id":ownerId,
-                        "editor_id":data.editor_id,
-                        "editor_username":data.editor_username
-                    })
-                    requestNotif.close();
-                }))
-                requestNotif.show();
-                break;
-
-            case "editor_accepted":
-                console.log("Editor accepted, performing actions")
-                sendRoomConnectRequest();
-                hideElement(document.getElementById("WaitingRoom")); //swap from waitinglist back to loader
-                showElement(document.getElementById("LoadingScreen"));
-                break;
-
-            case "update":
-                console.log("update, performing actions")
-                update_json(sheet, data.path, data.value, data.update_type, false);
-                break;
-        }
+            }
+            break;
+        
     }
 });
 
