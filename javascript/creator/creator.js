@@ -25,7 +25,6 @@ function creatorModeSelect(){
 function hideLoaders(){
     hideElement(document.getElementById("LoadingScreen"))
     hideElement(document.getElementById("WaitingRoom"))
-
 }
 
 function showWaitingRoom(){

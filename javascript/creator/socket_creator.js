@@ -35,13 +35,25 @@ socket.on("studysheet_edit", function(data){
                 let requestNotif = new PopupBuilder(is_notif=true, notif_settings={duration: -1});
                 requestNotif.add(new PopupText("Editor wants to join").setStyle("font-size: 20px; font-weight: bold; margin: 0;"));
                 requestNotif.add(new PopupText(data.editor_username+" wants to join the room.").setStyle("font-size: 15px; margin: 0;"));
+                // requestNotif.add(new PopupButton("Accept Once", function(){
+                //     socket.emit("studysheet_edit", {
+                //         "type":"deny_editor",
+                //         "sheet_id":sheetId,
+                //         "owner_id":ownerId,
+                //         "editor_id":data.editor_id,
+                //         "editor_username":data.editor_username,
+                //         "duration":"just_once"
+                //     })
+                //     requestNotif.close();
+                // }))
                 requestNotif.add(new PopupButton("Accept", function(){
                     socket.emit("studysheet_edit", {
                         "type":"accept_editor",
                         "sheet_id":sheetId,
                         "owner_id":ownerId,
                         "editor_id":data.editor_id,
-                        "editor_username":data.editor_username
+                        "editor_username":data.editor_username,
+                        "duration":"always"
                     })
                     requestNotif.close();
                 }))
