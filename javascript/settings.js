@@ -1,17 +1,16 @@
 var elem = document.getElementById("contentdiv")
-function clearAll(){
-    var usrname = window.localStorage.getItem("customusername")
-    document.getElementById("contentdiv").innerHTML = `<h1 id='name'>${usrname}</h1>`
+function selectElem(elem){
+    document.getElementById("contentdiv").innerHTML = ""
+
     var arr = document.getElementsByClassName("option");
     for (var i = 0; i<arr.length; i++){
-        arr[i].style.backgroundColor = "white";
-        
+        arr[i].classList.remove("selected")        
     }
+    elem.classList.add("selected")
 }
 
 function stats(elem){
-    clearAll()
-    elem.style.backgroundColor = "#f5deb3"
+    selectElem(elem)
     var date = "[user sign up date coming soon]"
     var amt = "0"
     var last = "---"
@@ -30,8 +29,7 @@ function stats(elem){
 }
 
 function manage(elem){
-    clearAll()
-    elem.style.backgroundColor = "#f5deb3"
+    selectElem(elem)
     var data = `
     <p>Lang uses the Lye Account System for account management.</p>
     <p>Edit your account details here:</p>
@@ -41,8 +39,7 @@ function manage(elem){
 }
 
 function switchAcc(elem){
-    clearAll()
-    elem.style.backgroundColor = "#f5deb3"
+    selectElem(elem)
     var data = `
     <p>Sign out of Lang Study here, or switch to a different user account.</p>
     <button class="button" onclick="signout()">Sign Out</button>
@@ -52,8 +49,7 @@ function switchAcc(elem){
 }
 
 function display(elem){
-    clearAll()
-    elem.style.backgroundColor = "#f5deb3"
+    selectElem(elem)
     var data = `
     <div class="">
     <p  font-weight:bold;" class="">Disable Animated Backgrounds</p>
@@ -74,8 +70,7 @@ function display(elem){
 }
 
 function connectivity(elem){
-    clearAll()
-    elem.style.backgroundColor = "#f5deb3"
+    selectElem(elem)
     svr = window.localStorage.getItem("currentServer")
     data = `
     <p>You are connected to <strong>${svr}</strong>.</p>
@@ -86,8 +81,7 @@ function connectivity(elem){
 }
 
 function adv(elem){
-    clearAll()
-    elem.style.backgroundColor = "#f5deb3"
+    selectElem(elem)
     var data = `
     <div class="">
         <p class="">Enable Debug Mode</p>
@@ -105,8 +99,7 @@ function adv(elem){
 }
 
 function build(elem){
-    clearAll()
-    elem.style.backgroundColor = "#f5deb3"
+    selectElem(elem)
     document.getElementById("name").innerHTML = "About Application"
     data = `
     <div>

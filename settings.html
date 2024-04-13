@@ -18,20 +18,62 @@
         filter: contrast(170%);
         filter: brightness(40%);
     }
-    .topLayer{
-       font-weight: bold; 
-       display:flex; 
-       flex-direction: column;
-       justify-content: center;
-       text-align: center;
+
+    #settingsSidebar {
+        width: 300px;
+        height: 90%;
+        overflow-y: scroll;
+
+        /* box shadow */
+        box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.75);
+        z-index: 100;
+
+        padding-top: 10px;
+        box-sizing: border-box;
     }
-    .option{
-        width:15vw; 
-        height:7vh; 
-        background-color: white; 
-        border-bottom: 3px solid black;
+
+    #settingsSidebar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .option {
+        padding: 10px 20px;
+        box-sizing: border-box;
+        width: 100%;
+        height: 50px;
         cursor:pointer;
+
+        display: flex;
+        align-items: center;
+        color: white;
+        font-weight: 700;
+
+        transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
     }
+
+    .option:hover {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    #settingsSidebar > .selected {
+        background-color: white;
+        color: #001945;
+    }
+
+    .option:last-child {
+        border-bottom: none;
+    }
+
+    #settingsMainPanel {
+        border-bottom-right-radius: 25px;
+        border-top-right-radius: 25px;
+        background-color: var(--primary-light);
+        height: 80%;
+        width: 70vw;
+        max-width: 600px;
+    }
+    
+
     .button {
         border-radius: 1000000px;
         height: 5vh;
@@ -233,56 +275,37 @@
     </div>
 
 
-    <div style="height:80vh; display:flex; flex-direction: column; justify-content: center;"> <!--surrounds whole page to center vertically-->
-
-        <div style=" width:100vw; display:flex; flex-direction: row; justify-content: center;"> <!--surrounds whole page to make horizontal layout-->
-            <div style="width:15vw; height:60vh; border-radius: 20px 0px 0px 20px; position:relative; overflow-y: scroll; overflow-x: hidden;"> <!--Box for switcher-->
-                <div class="tiledBg" style="position: absolute; top:0; left: 0; right: 0; bottom: 0; width:15vw; height:70vh; z-index:-1; border-radius: 20px 0px 0px 20px;">
-
-                </div>
-                <div class="topLayer" style="width:15vw; height:10vh; "> <!--entry--> 
-                    <div style="display:flex; flex-direction: row; justify-content: center; width:100%;">
-                        <img src="assets/icons/person.png" style="height:7vh; width:7vh;">
-                    </div>
-                </div>
-                <div class="topLayer option" id="stats" onclick="stats(document.getElementById('stats'))"> <!--entry-->
-                    Your Stats
-                </div>
-                <div class="topLayer option" id="manage" onclick="manage(document.getElementById('manage'))"> <!--entry-->
-                    Manage Lye Account               
-                </div>
-                <div class="topLayer option" id="switch" onclick="switchAcc(document.getElementById('switch'))"> <!--entry-->
-                    Switch User               
-                </div>
-                <div class="topLayer" style="width:15vw; height:10vh; "> <!--entry--> 
-                    <div style="display:flex; flex-direction: row; justify-content: center; width:100%;">
-                        <img src="assets/logos/allWhiteLang.png" style="height:7vh; width:7vh;">
-                    </div>
-                </div>
-                <div class="topLayer option" id="display" onclick="display(document.getElementById('display'))"> <!--entry-->
-                    Display
-                </div>
-                <div class="topLayer option" id="conn" onclick="connectivity(document.getElementById('conn'))"> <!--entry-->
-                    Connectivity               
-                </div>
-                <div class="topLayer option" id="adv" onclick="adv(document.getElementById('adv'))"> <!--entry-->
-                    Advanced               
-                </div>
-                <div class="topLayer" style="width:15vw; height:4vh; "></div> <!--entry--> 
-
-                <div class="topLayer option" onclick="build(this)"> <!--entry-->
-                    Version 5.2.7
-                </div>
+    <div style="height:75vh; display:flex; flex-direction: row; justify-content: center; align-items: center;"> <!--surrounds whole page to center vertically-->
+        <div id="settingsSidebar" class="grayBackdrop"> <!--Box for switcher-->
+            <div class="option selected" id="stats" onclick="stats(document.getElementById('stats'))"> <!--entry-->
+                Your Stats
             </div>
-            <div style="background-color: wheat; width:50vw;height:60vh; border-radius: 0px 20px 20px 0px; overflow-y:scroll;"> <!--box for settings-->
-                <div id="contentdiv" style="display:flex; flex-direction: column; align-items: center; text-align: center; padding:20px;">
-                    <h1 id="name"></h1>
-                    <p>Edit your Lye Account and Lang Study application settings here.</p>
-                    <p>Select a category on the left.</p>
-                </div>
+            <div class="option" id="manage" onclick="manage(document.getElementById('manage'))"> <!--entry-->
+                Manage Lye Account               
+            </div>
+            <div class="option" id="switch" onclick="switchAcc(document.getElementById('switch'))"> <!--entry-->
+                Switch User               
+            </div>
+            <div class="option" id="display" onclick="display(document.getElementById('display'))"> <!--entry-->
+                Display
+            </div>
+            <div class="option" id="conn" onclick="connectivity(document.getElementById('conn'))"> <!--entry-->
+                Connectivity               
+            </div>
+            <div class="option" id="adv" onclick="adv(document.getElementById('adv'))"> <!--entry-->
+                Advanced               
+            </div>
+            <div class="option" onclick="build(this)"> <!--entry-->
+                Version 5.2.7
             </div>
         </div>
-
+        <div id="settingsMainPanel"> <!--box for settings-->
+            <div id="contentdiv" style="display:flex; flex-direction: column; align-items: center; text-align: center; padding:20px;">
+                <h1 id="name"></h1>
+                <p>Edit your Lye Account and Lang Study application settings here.</p>
+                <p>Select a category on the left.</p>
+            </div>
+        </div>
     </div> 
 
     <div id="localPrompt" class="absolute horizontalFlex centerFlex fullAbsolute" style="transition: all 0.15s ease-in-out; z-index:500; opacity: 0; pointer-events: none; background-color: rgba(0, 0, 0, 0.5);">

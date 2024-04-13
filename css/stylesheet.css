@@ -484,8 +484,9 @@ input {
 }
 
 
-
-
+#settingsSidebar {
+    border-radius: 25px;
+}
 
 
 .whiteBackdrop {
