@@ -236,7 +236,7 @@ function createCreatorInput(term, definition, imageSrc) {
                 }
             }
             console.log("IDX: "+index+" DAEV: "+document.activeElement.value)
-            update_json(sheet, ["terms",index,"answer"], document.activeElement.value, "set_value", true);
+            update_json(sheet, ["terms",index,"term"], document.activeElement.value, "set_value", true);
         })
         generateIdV++
             // verbInput.innerHTML="Put Term / Question Here";
