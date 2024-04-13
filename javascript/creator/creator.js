@@ -24,7 +24,10 @@ function creatorModeSelect(){
         try {
             fetch("/api/v1/create")
             .then((response) => response.json())
-            .then((json) => returnJson = json);
+            .then((json) => {
+                console.log(json)
+                returnJson = json
+            } );
         } catch {
             console.log("not online?")
         }
