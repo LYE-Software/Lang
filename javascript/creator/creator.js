@@ -62,41 +62,41 @@ function displaySheet(){
     console.log(sheet)
     sheet = parseFromJSON(sheet);
     console.log(sheet);
-    // for (i = 0; i<sheet.terms.length; i++){
-    //     var term = sheet.getNthTerm(i);
+    for (i = 0; i<sheet.terms.length; i++){
+        var term = sheet.getNthTerm(i);
         
-    //     if (term.isMulti){
-    //         imageSrc = null;
-    //         if (term.hasImage){
-    //             imageSrc = term.imageSrc
-    //         }
-    //         createCreatorInput(term.question, i, imageSrc)
-    //         document.getElementById("tdc"+i).children[1].children[2].click();
-    //         //document.getElementById("tdc"+i).children[1].children[1].innerHTML = term.question;
-    //         console.log("WHAT IS THE TERM QUESTION:: "+term.question)
-    //         var firstTwo = document.getElementById("tdc"+i).children[2].children[1].querySelectorAll("input[data-input]");
-    //         firstTwo[0].value = term.terms[0];
-    //         firstTwo[1].value = term.answers[0];
-    //         var x = 3;
-    //         for (var j =1; j<term.length; j++){
-    //             //continue making & filling after 1st alt
-    //             document.getElementById("tdc"+i).children[1].children[2].click();
-    //             var next = document.getElementById("tdc"+i).children[x].children[1].querySelectorAll("input[data-input]");
-    //             next[0].value = term.terms[j]
-    //             next[1].value = term.answers[j]
-    //             x++;
-    //         }
+        if (term.isMulti){
+            imageSrc = null;
+            if (term.hasImage){
+                imageSrc = term.imageSrc
+            }
+            createCreatorInput(term.question, i, imageSrc)
+            document.getElementById("tdc"+i).children[1].children[2].click();
+            //document.getElementById("tdc"+i).children[1].children[1].innerHTML = term.question;
+            console.log("WHAT IS THE TERM QUESTION:: "+term.question)
+            var firstTwo = document.getElementById("tdc"+i).children[2].children[1].querySelectorAll("input[data-input]");
+            firstTwo[0].value = term.terms[0];
+            firstTwo[1].value = term.answers[0];
+            var x = 3;
+            for (var j =1; j<term.length; j++){
+                //continue making & filling after 1st alt
+                document.getElementById("tdc"+i).children[1].children[2].click();
+                var next = document.getElementById("tdc"+i).children[x].children[1].querySelectorAll("input[data-input]");
+                next[0].value = term.terms[j]
+                next[1].value = term.answers[j]
+                x++;
+            }
 
 
-    //     } else {
-    //         console.log("why is that a zero??? term.answer: "+term.answer)
-    //         imageSrc = null;
-    //         if (term.hasImage){
-    //             imageSrc = term.imageSrc
-    //         }
-    //         makeInputs("single", i, term.term, term.answer, imageSrc)
-    //     }
-    // }
+        } else {
+            console.log("why is that a zero??? term.answer: "+term.answer)
+            imageSrc = null;
+            if (term.hasImage){
+                imageSrc = term.imageSrc
+            }
+            makeInputs("single", i, term.term, term.answer, imageSrc)
+        }
+    }
 }
 
 
