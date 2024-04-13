@@ -1,26 +1,3 @@
-// window.onerror = (a, b, c, d, e) => {
-//     console.error(e);
-//     showElement(document.getElementById("specificError"));
-//     hideElement(document.getElementById("noclickdiv"));
-//     document.getElementById("ErrorTextLocation").innerHTML = `
-//     We have encountered an error. Please report this using the feedback button on the homepage, as well as the error message below:
-//     ${a}
-//     `
-//     return true;
-// }
-
-// addEventListener("error", onerror);
-
-// function onerror(event){
-//     console.log("erroring!!");
-//     showElement(document.getElementById("specificError"));
-//     hideElement(document.getElementById("noclickdiv"));
-//     document.getElementById("ErrorTextLocation").innerHTML = `
-//     We have encountered an error. Please report this using the feedback button on the homepage, as well as the error message below:
-//     ${a}
-//     `
-//     return true;
-// }
 descForError = "undefined";
 
 window.onerror = function (msg, url, lineNo, columnNo, error) {
@@ -34,56 +11,50 @@ function doPreviewAndLocal(){
     console.log("in dopreview")
     document.getElementById("homeusername").innerHTML = localStorage.getItem("customusername");
     if (studysheetData.error == "does_not_exist"){
-        document.getElementById("unableToFind").style.opacity = "1";
-        document.getElementById("unableToFind").style.pointerEvents = "all";
-        // document.getElementById("noclickdiv").style.opacity = "0";
-        // document.getElementById("noclickdiv").style.pointerEvents = "none"; 
+        let popup = new PopupBuilder()
+        popup.add(new PopupImage("/assets/icons/langerror.png").setStyle("width: 100px; margin: 10px"))
+        popup.add(new PopupText("We couldn't find that studysheet").setStyle("color: black;"))
+        popup.add(new PopupButton("Home", function() {
+            window.location.href = "homepage.html";
+        }).setStyle("width: 200px"))
+        popup.show()
         return;
     }
     window.localStorage.getItem("chosenSheet", studysheetData.name);
     window.localStorage.setItem("lastsheet", JSON.stringify(studysheetData));
     chosensheet = studysheetData.name;
 
-    if(chosensheet == null || chosensheet == ""){
-        document.getElementById("unableToFind").style.opacity = "1";
-        document.getElementById("unableToFind").style.pointerEvents = "all"; 
-    }
-
     toek = window.localStorage.getItem("usertoken")
     if (chosensheet.length>15){
         document.getElementById("studysheetname").innerHTML = chosensheet.slice(0,15)+"..."
-
     } else {
         document.getElementById("studysheetname").innerHTML = chosensheet
     }
-
-    
     newSheet = parseFromJSON(studysheetData)
     window.localStorage.setItem("fullstudysheet", JSON.stringify(newSheet));
-    if (newSheet.length<4){
+    if (newSheet.length<4 || true){
         console.log("removing...")
         document.getElementById("trainbutton").style.backgroundColor = "#a0a0a0";
         document.getElementById("multiplechoicebutton").style.backgroundColor = "#a0a0a0";
         document.getElementById("trainbutton").onclick = function(){
-            document.getElementById('tooFewTerms').style.pointerEvents = "all";
-            document.getElementById('tooFewTerms').style.opacity = 1;
+            showTooFewTermsPopup()
         }
         document.getElementById("multiplechoicebutton").onclick = function(){
-            document.getElementById('tooFewTerms').style.pointerEvents = "all";
-            document.getElementById('tooFewTerms').style.opacity = 1;
+            showTooFewTermsPopup()
         }
         document.getElementById("trainbutton").style.borderColor = "#a0a0a0"
         document.getElementById("multiplechoicebutton").style.borderColor = "#a0a0a0"
     }
-
-    
     displaySheet(newSheet)
-    // document.getElementById("noclickdiv").style.opacity = "0";
-    // document.getElementById("noclickdiv").style.pointerEvents = "none";
-    body = document.getElementsByTagName("body")[0];
-
 }
 
+function showTooFewTermsPopup() {
+    let popup = new PopupBuilder()
+    popup.add(new PopupText("The mode you selected requires 4 or more terms.").setStyle("color: red;"))
+    popup.add(new PopupText("Please select a different Study mode, or add more terms by editing your Studysheet."))
+    popup.add(new PopupDismissButton("Ok.").setStyle("width: 200px"))
+    popup.show()
+}
 
 var allhtml = "";
 function displaySheet(newSheet){
