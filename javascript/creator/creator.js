@@ -241,6 +241,7 @@ function createCreatorInput(term, definition, imageSrc) {
             }
         })
         verbInput.addEventListener("focusout", function(){
+            let childArray = document.getElementById("insideCreator").children;
             let index = -1;
             for (let i = 0; i<childArray.length; i++){
                 if (childArray[i] == this.parentElement.parentElement){
@@ -280,6 +281,7 @@ function createCreatorInput(term, definition, imageSrc) {
             }
         })
         answerInput.addEventListener("focusout", function(){
+            let childArray = document.getElementById("insideCreator").children;
             let index = -1;
             for (let i = 0; i<childArray.length; i++){
                 if (childArray[i] == this.parentElement.parentElement){
