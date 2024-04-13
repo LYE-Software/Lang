@@ -99,7 +99,11 @@ function displaySheet(){
     }
 }
 
-
+function registerNewTerm(){
+    console.log("updating json- new term");
+    update_json(sheet, "terms", new Term(false, "", "", false), "add_to_array", true);
+    makeInputs("single");
+}
 
 //creates new input fields for multi & single creators + assigns them ids
 var currentId = "";
@@ -180,8 +184,7 @@ var generateIdA = 0
 var generateIdYou = 0
 
 function createCreatorInput(term, definition, imageSrc) {
-    console.log("updating json- new term")
-    update_json(sheet, "terms", new Term(false, "", "", false), "add_to_array", true)
+    
     var br = document.createElement("div")
         
         br.dataset.image = "false";
