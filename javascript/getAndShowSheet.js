@@ -36,8 +36,8 @@ function doPreviewAndLocal(){
     if (studysheetData.error == "does_not_exist"){
         document.getElementById("unableToFind").style.opacity = "1";
         document.getElementById("unableToFind").style.pointerEvents = "all";
-        document.getElementById("noclickdiv").style.opacity = "0";
-        document.getElementById("noclickdiv").style.pointerEvents = "none"; 
+        // document.getElementById("noclickdiv").style.opacity = "0";
+        // document.getElementById("noclickdiv").style.pointerEvents = "none"; 
         return;
     }
     window.localStorage.getItem("chosenSheet", studysheetData.name);
@@ -78,8 +78,8 @@ function doPreviewAndLocal(){
 
     
     displaySheet(newSheet)
-    document.getElementById("noclickdiv").style.opacity = "0";
-    document.getElementById("noclickdiv").style.pointerEvents = "none";
+    // document.getElementById("noclickdiv").style.opacity = "0";
+    // document.getElementById("noclickdiv").style.pointerEvents = "none";
     body = document.getElementsByTagName("body")[0];
 
 }
