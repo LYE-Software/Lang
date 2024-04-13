@@ -165,7 +165,7 @@ async function getLibraryList(){
             else{
                 document.getElementById("homeusername").innerHTML = "Hello, "+username;
                 
-                hideLoadingView();
+                // hideLoadingView();
                 window.localStorage.setItem("studysheetcount", library.length);
                 let studysheetEntryContainer = document.getElementById("studysheetFlexContainer")
                 const baseSheetHtml = `<div class="sheetEntry" id="{SHEET_ID}" length="{SHEET_LENGTH}" date_created="{SHEET_DATE_CREATED}" date_modified="{SHEET_DATE_MODIFIED}" data-index="{SHEET_INDEX}">
