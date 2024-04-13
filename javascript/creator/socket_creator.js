@@ -1,6 +1,7 @@
 const socket = io();
 
 socket.on("studysheet_edit", function(data){
+    console.log("Nonce check "+my_used_nonces.includes(data.nonce));
     if (my_used_nonces.includes(data.nonce)){
         console.log("own req, ignoring")
     } else {

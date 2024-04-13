@@ -53,6 +53,7 @@ function showWaitingRoom(){
 }
 
 function changeName(){
+    console.log("changing name to this: "+document.activeElement.value);
     update_json(sheet, "name", document.activeElement.value, "set_value", true);
 }
 
