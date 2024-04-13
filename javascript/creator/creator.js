@@ -236,9 +236,7 @@ function createCreatorInput(term, definition, imageSrc) {
                 }
             }
             console.log("IDX: "+index+" DAEV: "+document.activeElement.value)
-            if (document.activeElement.value.length%5 == 0){
-                update_json(sheet, ["terms",index,"term"], document.activeElement.value, "set_value", true);
-            }
+            update_json(sheet, ["terms",index,"term"], document.activeElement.value, "set_value", true);
         })
         verbInput.addEventListener("focusout", function(){
             let childArray = document.getElementById("insideCreator").children;
