@@ -22,11 +22,16 @@ socket.on("studysheet_edit", function(data){
                 console.log("full sheet recieved, performing actions")
                 sheet = data.studysheet_json;
                 hideLoaders();
+                displaySheet();
                 break;
 
             case "error":
-                console.log("invalid permissions, performing actions")
-                showWaitingRoom();
+                if (data.error == "invalid_permissions"){
+                    console.log("invalid permissions, performing actions")
+                    showWaitingRoom();
+                } else {
+                    console.log("other error case")
+                }
                 break;
 
             case "editor_trying_join":
@@ -129,7 +134,7 @@ function update_json(json_data, path, value, type, propagate=true, ) {
         obj.splice(value, 1);
     }
 
-    window.localStorage.setItem("fullstudysheet", JSON.stringify(initialSheet));
+    //window.localStorage.setItem("fullstudysheet", JSON.stringify(initialSheet));
 
     if (propagate && doCloudsave) {
         socket.emit('studysheet_edit', {

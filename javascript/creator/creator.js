@@ -18,7 +18,24 @@ function creatorModeSelect(){
     let params = url.searchParams;
     sheetId = params.get("sheet_id");
     ownerId = params.get("creator_id");
-
+    if (sheetId == null || ownerId == null){
+        console.log("New Sheet")
+        let returnJson = null
+        try {
+            fetch("/api/v1/create")
+            .then((response) => response.json())
+            .then((json) => returnJson = json);
+        } catch {
+            console.log("not online?")
+        }
+        if (returnJson.success == false){
+            console.log("error case?")
+        } else {
+            sheetId = returnJson.studysheet_id;
+            ownerId = returnJson.user_id;
+        }
+        window.location.href = '/edit?sheet_id='+sheetId+"&creator_id="+ownerId;
+    }
     sendRoomConnectRequest();
 }
 
@@ -31,6 +48,50 @@ function showWaitingRoom(){
     hideElement(document.getElementById("LoadingScreen"))
     showElement(document.getElementById("WaitingRoom"))
 }
+
+function changeName(){
+    update_json(sheet, "name", document.activeElement.value, "set_value", true);
+}
+
+function displaySheet(){
+    for (i = 0; i<sheet.length; i++){
+        var term = sheet.getNthTerm(i);
+        
+        if (term.isMulti){
+            imageSrc = null;
+            if (term.hasImage){
+                imageSrc = term.imageSrc
+            }
+            createCreatorInput(term.question, i, imageSrc)
+            document.getElementById("tdc"+i).children[1].children[2].click();
+            //document.getElementById("tdc"+i).children[1].children[1].innerHTML = term.question;
+            console.log("WHAT IS THE TERM QUESTION:: "+term.question)
+            var firstTwo = document.getElementById("tdc"+i).children[2].children[1].querySelectorAll("input[data-input]");
+            firstTwo[0].value = term.terms[0];
+            firstTwo[1].value = term.answers[0];
+            var x = 3;
+            for (var j =1; j<term.length; j++){
+                //continue making & filling after 1st alt
+                document.getElementById("tdc"+i).children[1].children[2].click();
+                var next = document.getElementById("tdc"+i).children[x].children[1].querySelectorAll("input[data-input]");
+                next[0].value = term.terms[j]
+                next[1].value = term.answers[j]
+                x++;
+            }
+
+
+        } else {
+            console.log("why is that a zero??? term.answer: "+term.answer)
+            imageSrc = null;
+            if (term.hasImage){
+                imageSrc = term.imageSrc
+            }
+            makeInputs("single", i, term.term, term.answer, imageSrc)
+        }
+    }
+}
+
+
 
 //creates new input fields for multi & single creators + assigns them ids
 var currentId = "";
@@ -71,6 +132,7 @@ function makeInputs(version, idNum, question, answer, imageSrc){
         verbInput.setAttribute("type", "text");
         verbInput.contentEditable="true";
         
+        
             // verbInput.innerHTML="Put Term / Question Here";
         br.appendChild(verbInput);
         usableId = "ans"+currentId.slice(6);
@@ -110,6 +172,7 @@ var generateIdA = 0
 var generateIdYou = 0
 
 function createCreatorInput(term, definition, imageSrc) {
+    update_json(sheet, "terms", new Term(false, "", "", false), "add_to_array", true)
     var br = document.createElement("div")
         
         br.dataset.image = "false";
@@ -152,6 +215,10 @@ function createCreatorInput(term, definition, imageSrc) {
         verbInput.setAttribute("data-input", "true");
         verbInput.setAttribute("type", "text");
         verbInput.contentEditable="true";
+        verbInput.oninput = (event) => {
+            let index = document.activeElement.parentElement.parentElement.getAttribute("data-idNum");
+            update_json(sheet, "terms."+index+".term", document.activeElement.value, "set_value", true);
+        };
         generateIdV++
             // verbInput.innerHTML="Put Term / Question Here";
         stuffHolder.appendChild(verbInput);
@@ -166,6 +233,10 @@ function createCreatorInput(term, definition, imageSrc) {
         answerInput.setAttribute("data-text", "Answer");
         answerInput.setAttribute("data-input", "true");
         answerInput.setAttribute("type", "text");
+        answerInput.oninput = (event) => {
+            let index = document.activeElement.parentElement.parentElement.getAttribute("data-idNum");
+            update_json(sheet, "terms."+index+".answer", document.activeElement.value, "set_value", true);
+        }
         generateIdA++
         // answerInput.innerHTML="Put Answer Here";
         stuffHolder.appendChild(answerInput);
@@ -196,6 +267,8 @@ function createCreatorInput(term, definition, imageSrc) {
             generateIdV--;
             generateIdYou--;
             console.log(this)
+            let index = document.activeElement.parentElement.parentElement.getAttribute("data-idNum");
+            update_json(sheet, "terms", index, "remove_from_array", true)
             this.parentNode.parentNode.remove();
             
         }
