@@ -7,7 +7,8 @@ socket.on("studysheet_edit", function(data){
     } else {
 
         let intentions = data.type;
-
+        console.log("PACKET RECIEVED: ")
+        console.log(data)
         switch(intentions){
 
             case "editor_joined":
