@@ -54,7 +54,7 @@ function showWaitingRoom(){
 
 function changeName(){
     console.log("changing name to this: "+document.activeElement.innerText);
-    update_json(sheet, "name", document.activeElement.innerText, "set_value", true);
+    update_json(sheet, ["name"], document.activeElement.innerText, "set_value", true);
 }
 
 function displaySheet(){
@@ -228,7 +228,7 @@ function createCreatorInput(term, definition, imageSrc) {
         verbInput.oninput = (event) => {
             let index = document.getElementById("insideCreator").indexOf(this.parentElement.parentElement);
             console.log("IDX: "+index+" DAEV: "+document.activeElement.value)
-            update_json(sheet, "terms."+index+".term", document.activeElement.value, "set_value", true);
+            update_json(sheet, ["terms",index,"term"], document.activeElement.value, "set_value", true);
         };
         generateIdV++
             // verbInput.innerHTML="Put Term / Question Here";
@@ -247,7 +247,7 @@ function createCreatorInput(term, definition, imageSrc) {
         answerInput.oninput = (event) => {
             let index = document.getElementById("insideCreator").indexOf(this.parentElement.parentElement);
             console.log("IDX: "+index+" DAEV: "+document.activeElement.value)
-            update_json(sheet, "terms."+index+".answer", document.activeElement.value, "set_value", true);
+            update_json(sheet, ["terms",index,"answer"], document.activeElement.value, "set_value", true);
         }
         generateIdA++
         // answerInput.innerHTML="Put Answer Here";
@@ -280,7 +280,7 @@ function createCreatorInput(term, definition, imageSrc) {
             generateIdYou--;
             console.log(this)
             let index = document.getElementById("insideCreator").indexOf(this.parentElement.parentElement);
-            update_json(sheet, "terms", index, "remove_from_array", true)
+            update_json(sheet, ["terms"], index, "remove_from_array", true)
             this.parentNode.parentNode.remove();
             
         }

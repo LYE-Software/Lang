@@ -1,7 +1,6 @@
 const socket = io();
 
 socket.on("studysheet_edit", function(data){
-    console.log("Nonce check "+my_used_nonces.includes(data.nonce));
 
     
     let intentions = data.type;
@@ -81,11 +80,11 @@ socket.on("studysheet_edit", function(data){
             break;
 
         case "update":
-            console.log("update, performing actions")
             for (let i = 0; i<data.updates.length; i++){
                 if (my_used_nonces.includes(data.updates[i].nonce)){
                     continue
                 } else {
+                    console.log("update, performing actions")
                     update_json(sheet, data.updates[i].path, data.updates[i].value, data.updates[i].update_type, false);
                 }
             }
@@ -107,7 +106,7 @@ function sendRoomConnectRequest(){
 
 function update_json(json_data, path, value, type, propagate=true, ) { 
     console.log("Setting " + path + " to " + value + " (" + type + ")")
-    var path = path.split('.');
+    //var path = path.split('.');
     for (let i = 0; i < path.length; i++) {
         if (!isNaN(path[i])) {
             path[i] = parseInt(path[i]);
