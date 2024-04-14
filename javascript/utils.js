@@ -1,3 +1,6 @@
+const notifications = [
+    ``
+]
 
 function hideElement(element) {
     element.style.pointerEvents = "none";
