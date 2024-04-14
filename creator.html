@@ -594,32 +594,6 @@
         </div>
     </div>
 
-    <!-- <div style="display:none; height:100vh; width:100vw; z-index: 100; position:absolute; background-color: rgba(0,0,0,0.75);" id="sendingLoader">
-        <div style="position:absolute; background-color: var(--primary-dark); top:50%; left:50%; text-align: center; display:flex; flex-direction: column; align-items: center; transform: translate(-50%, -50%); border-radius:15px; padding:20px; box-sizing: border-box; text-align: center;">
-            <div class="lds-ellipsis" style="color:var(--primary-dark); " id="studyloader" ><div></div><div></div><div></div><div></div></div>
-            <p style="color:var(--primary-light);">Syncing your Studysheet with our servers...</p>
-        </div>
-    </div> -->
-
-    
-
-
-
-    <!-- <div id="header0" class="lightGlow" style="width: 100vw">
-        <div class="horizontalFlex header">
-            <div onclick="returnMain()" style="cursor:pointer;">
-                <img style="height: 10vh;" src="assets/logos/lang.png">
-            </div>
-            <div class="flexSpacer"></div>
-            <div id="topheader" style="font-family: 'Rubik Mono One', sans-serif; font-size:25px;">Study Sheet Creator</div>
-            <div class="flexSpacer"></div>
-            <div id="homeusername">Getting your userinfo...</div>
-            <div>
-                <img class="pfp" style="height: 5vh;" src="assets/icons/newsettings.svg" onclick="window.location.href='settings.html'">
-            </div>
-        </div>
-    </div> -->
-
     <lang_header></lang_header>
     <img id='output' style="height:100px; width:100px; display:none;">
 
@@ -946,8 +920,6 @@
 
     var overrider = false;
     function creatorOnload(){
-        document.getElementById("homeusername").innerHTML = localStorage.getItem("customusername");
-        
         creatorModeSelect();
     }
 

@@ -58,7 +58,6 @@ async function getLibraryList(){
     window.localStorage.setItem("fullstudysheet", "");
     window.localStorage.setItem("chosenSheet", "")
     window.localStorage.setItem('editSheet', "false");
-    document.getElementById("homeusername").innerHTML = "Hello";
     console.log("generating library list")
     var url_string = window.location.href; //window.location.href
     console.log("url_string: "+url_string);
@@ -163,8 +162,6 @@ async function getLibraryList(){
                 failedSignIn();
             } 
             else{
-                document.getElementById("homeusername").innerHTML = "Hello, "+username;
-                
                 // hideLoadingView();
                 window.localStorage.setItem("studysheetcount", library.length);
                 let studysheetEntryContainer = document.getElementById("studysheetFlexContainer")

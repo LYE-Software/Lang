@@ -121,7 +121,6 @@ function build(elem){
 
 function getname(){
 
-    document.getElementById("homeusername").innerHTML = window.localStorage.getItem("customusername")
     document.getElementById("name").innerHTML = window.localStorage.getItem("customusername")
 
 }
