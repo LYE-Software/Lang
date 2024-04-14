@@ -15,6 +15,18 @@
     <link rel="icon" href="/assets/logos/circular lang icon.png">
     <style id="movingbg"></style>
     <style>
+        h1 {
+            color: wheat;
+            font-family: 'Rubik Mono One', sans-serif;
+            text-align: left;
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .lightText {
+            color: var(--primary-light);
+        }
+
         .mainContainer {
             display: flex;
             flex-direction: column;
@@ -373,11 +385,11 @@
     </style>
 </head>
 <body onload="doPreviewAndLocal()">
-    <div class="verticalFlex centerFlex noverticalshow" style="align-items:center; text-align: center; position: absolute; top:0; width:100%; height:11.9vh; pointer-events:none;">
+    <!-- <div class="verticalFlex centerFlex noverticalshow" style="align-items:center; text-align: center; position: absolute; top:0; width:100%; height:11.9vh; pointer-events:none;">
         <div class="horizontalFlex" style="">
             <div id="studysheetname" style="color:#001945; font-size:40px; font-family:Rubik Mono One; top:50%; max-width:60vw;">Your studysheet</div>
         </div>
-    </div>
+    </div> -->
     <lang_header></lang_header>
 
     <div class="leftSidebarContainer">
@@ -410,13 +422,24 @@
         </div>
     </div>
     <div class="mainContainer">
-        <div class="termList" id="listview">
-            <div class="termDefTitle"><div>Term</div><div>Definition</div></div>
-            <div class="termListMain" id="termsContainer"></div>
+        <div>
+            <div style="margin-bottom: 40px;">
+                <h1 id="studysheetname"></h1>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <img id="sheetcreatorpfp" src="" style="width: 30px; aspect-ratio: 1;">
+                    <p class="lightText" id="sheetcreator"></p>
+                </div>
+            </div>
+
+            <div class="termList" id="listview">
+                <div class="termDefTitle"><div>Term</div><div>Definition</div></div>
+                <div class="termListMain" id="termsContainer"></div>
+            </div>
+            <div class="flashcards innerFade" style="display:none; opacity:0; pointer-events:none;" id="outerFlashcards">
+                <div class="flashcardContainer" id="flashcardBox"></div>
+            </div>
         </div>
-        <div class="flashcards innerFade" style="display:none; opacity:0; pointer-events:none;" id="outerFlashcards">
-            <div class="flashcardContainer" id="flashcardBox"></div>
-        </div>
+
     </div>
     <div id="popup" class="popupContainer" style="z-index:2000;">
         <div class="popup centerFlex verticalFlex">
