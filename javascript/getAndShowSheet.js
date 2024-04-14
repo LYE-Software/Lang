@@ -7,6 +7,9 @@ window.onerror = function (msg, url, lineNo, columnNo, error) {
 }
 
 function doPreviewAndLocal(){
+    window.localStorage.setItem("back_link", window.location.pathname);
+
+    
     hideElement(document.getElementById("flashcardBox"))
     console.log("in dopreview")
     document.getElementById("homeusername").innerHTML = localStorage.getItem("customusername");
@@ -20,10 +23,9 @@ function doPreviewAndLocal(){
         popup.show()
         return;
     }
-    window.localStorage.getItem("chosenSheet", studysheetData.name);
-    window.localStorage.setItem("lastsheet", JSON.stringify(studysheetData));
+    window.localStorage.setItem("lastsheet", studysheetData.name);
     chosensheet = studysheetData.name;
-
+    
     toek = window.localStorage.getItem("usertoken")
     if (chosensheet.length>15){
         document.getElementById("studysheetname").innerHTML = chosensheet.slice(0,15)+"..."
@@ -32,7 +34,7 @@ function doPreviewAndLocal(){
     }
     newSheet = parseFromJSON(studysheetData)
     window.localStorage.setItem("fullstudysheet", JSON.stringify(newSheet));
-    if (newSheet.length<4 || true){
+    if (newSheet.terms.length<4){
         console.log("removing...")
         document.getElementById("trainbutton").style.backgroundColor = "#a0a0a0";
         document.getElementById("multiplechoicebutton").style.backgroundColor = "#a0a0a0";
@@ -58,7 +60,9 @@ function showTooFewTermsPopup() {
 
 var allhtml = "";
 function displaySheet(newSheet){
-    for (var i = 0; i<newSheet.length; i++){
+    console.log("DIsplaying SHEET")
+    console.log(newSheet)
+    for (var i = 0; i<newSheet.terms.length; i++){
         if (newSheet.getNthTerm(i).isMulti){
             if (newSheet.getNthTerm(i).hasImage){
                 src = connect()+"/"+window.localStorage.getItem("usertoken")+"/image/get/"+newSheet.getNthTerm(i).imageSrc;

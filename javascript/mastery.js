@@ -64,7 +64,7 @@ function startMastery(){
         rawJson = window.localStorage.getItem("fullstudysheet")
         document.title = window.localStorage.getItem("chosenSheet") + " | Lang"
         jsonData = rawJson;
-        sheet = parseFromJSON(rawJson)
+        sheet = parseFromJSON(rawJson, true)
     }
     
     if (window.localStorage.getItem("random")=="true"){
@@ -96,7 +96,7 @@ function runSheet(){
         document.getElementById("term_image").style.display = "none";
     }
     
-    if (qNum >= sheet.length){
+    if (qNum >= sheet.terms.length){
         if (!endless){
             showElement(document.getElementById("completedMode"))
             stats(true)

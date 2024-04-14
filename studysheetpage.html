@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Studying | Lang</title>
+    <script src="/javascript/LangError.js"></script>
     <link rel="stylesheet" href="/css/stylesheet.css">
     <script src="/javascript/popup.js"></script>
     <script src="/javascript/Studysheet.js"></script>
@@ -11,7 +12,6 @@
     <script src="/javascript/httpGet.js"></script>
     <script src="/javascript/flashcards.js"></script>
     <script src="/javascript/loadBalancer.js"></script>
-    <script src="/javascript/LangError.js"></script>
     <link rel="icon" href="/assets/logos/circular lang icon.png">
     <style id="movingbg"></style>
     <style>
@@ -383,10 +383,10 @@
     <div class="leftSidebarContainer">
         <div class="whiteBackdrop">
             <div class="leftSidebarOptions">
-                <div><button class="lightGlow newbutton" id="trainbutton" onclick="window.location.href='study/train.html'">Train</button></div>
-                <div><button class="lightGlow newbutton" onclick="window.location.href='study/mastery.html'">Mastery</button></div>
-                <div><button class="lightGlow newbutton" onclick="window.location.href='study/practicetest.html'">Practice Test</button></div>
-                <div><button class="lightGlow newbutton" id="multiplechoicebutton" onclick="window.location.href='study/multiplechoice.html'">Multiple Choice</button></div>
+                <div><button class="lightGlow newbutton" id="trainbutton" onclick="window.location.href='/study/train.html'">Train</button></div>
+                <div><button class="lightGlow newbutton" onclick="window.location.href='/study/mastery.html'">Mastery</button></div>
+                <div><button class="lightGlow newbutton" onclick="window.location.href='/study/practicetest.html'">Practice Test</button></div>
+                <div><button class="lightGlow newbutton" id="multiplechoicebutton" onclick="window.location.href='/study/multiplechoice.html'">Multiple Choice</button></div>
             </div>
             <div class="leftSidebarPreview"  id="bobberContainer"> 
                 <img class="bobbing" id="bobber" src="/assets/icons/Studying Icon.png">
@@ -400,7 +400,7 @@
             <button class="lightGlow newbutton" onclick="initializeEdit()" id="editbutton"><img src="/assets/icons/edit.png" ></button>
             <button class="lightGlow newbutton" onclick="shareLink()"><img src="/assets/icons/share.png"></button>
             <button class="lightGlow newbutton"><img src="/assets/icons/flashcards.png" style="" id="flashcard" onclick="doFlashcards()"></button>
-            <button class="lightGlow newbutton" onclick="window.location.href='settings.html'"><img src="/assets/icons/settings.png"></button>
+            <button class="lightGlow newbutton" onclick="window.location.href='/settings.html'"><img src="/assets/icons/settings.png"></button>
 
         </div>
     </div>
@@ -559,7 +559,7 @@
     function goToCreator(){
         window.localStorage.setItem("fullstudysheet", "");
         window.localStorage.setItem("chosenSheet", "");
-        window.location.href='creator.html';
+        window.location.href='/creator.html';
     }
 
     document.addEventListener('keydown', function(e) {

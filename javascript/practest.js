@@ -9,16 +9,17 @@ var sheet;
 function doPracticeTest(){
     rawJson = window.localStorage.getItem("fullstudysheet")
     document.title = window.localStorage.getItem("chosenSheet") + " | Lang"
-    document.getElementById("testName").innerHTML = window.localStorage.getItem("chosenSheet")
+    
     jsonData = rawJson;
-    sheet = parseFromJSON(rawJson)
-
-    console.log("this is what the sheet is "+sheet)
-    var singleSheet = arrayToSheet(sheet.convertToSingle(), window.localStorage.getItem("chosenSheet"));
-    for (i=0; i<singleSheet.length; i++){
+    sheet = parseFromJSON(rawJson, true)
+    document.getElementById("testName").innerHTML = sheet.name
+    console.log("this is what the sheet is ")
+    console.log(sheet)
+    var singleSheet = arrayToSheet(sheet.convertToSingle(), sheet.name);
+    for (i=0; i<singleSheet.terms.length; i++){
         console.log(singleSheet.terms[i].returnArray())
     }
-    for(i=0; i<singleSheet.length; i++){
+    for(i=0; i<singleSheet.terms.length; i++){
         
         makeTestInputs(i+1, singleSheet.terms[i].term, i, "response"+i, singleSheet.terms[i].answer);
     }

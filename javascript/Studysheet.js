@@ -1,6 +1,10 @@
-function parseFromJSON(rawjson){
+function parseFromJSON(rawjson, convertFromString = false){
     console.log("PARSING STUDYSHEET FROM JSON: ")
-    var recievedStudysheet = Object.assign(new Studysheet, rawjson);
+    if (convertFromString){
+        var recievedStudysheet = Object.assign(new Studysheet, JSON.parse(rawjson))
+    } else {
+        var recievedStudysheet = Object.assign(new Studysheet, rawjson);
+    }
     console.log("recieved studysheet: ")
     console.log(recievedStudysheet)
     recievedStudysheet.parseTerms();

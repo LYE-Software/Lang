@@ -14,7 +14,7 @@ var shuffle = false;
 let rawJson = window.localStorage.getItem("fullstudysheet")
 document.title = window.localStorage.getItem("chosenSheet") + " | Lang"
 let jsonData = rawJson;
-var initialSheet = parseFromJSON(rawJson)
+var initialSheet = parseFromJSON(rawJson, true)
 var sheet = arrayToSheet(initialSheet.convertToSingle(), window.localStorage.getItem("chosenSheet"));
 console.log("initalsheet TCS: "+JSON.stringify(initialSheet.trainCloudsave))
 if (initialSheet.ownership.is_owned == false){
@@ -57,8 +57,8 @@ function startTrain(){
         groupLength = Math.floor(document.getElementById("termsperround").value);
         initialSheet.trainCloudsave = new TrainCloudsave(seed, groupLength, groupIndex, termIndex, totalTurnsInGroup, turnIndex)
     }
-    var amtOfArr = parseInt(((sheet.length/groupLength)+0.9))
-    var cutoff = sheet.length;
+    var amtOfArr = parseInt(((sheet.terms.length/groupLength)+0.9))
+    var cutoff = sheet.terms.length;
     for (var i = 0; i< amtOfArr; i++){
         var tempArr = [];
         for (var j = 0; j<groupLength; j++){

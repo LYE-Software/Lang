@@ -66,12 +66,12 @@ function doTrain(){
     rawJson = window.localStorage.getItem("fullstudysheet")
     document.title = window.localStorage.getItem("chosenSheet") + " | Lang"
     jsonData = rawJson;
-    sheet = parseFromJSON(rawJson)
+    sheet = parseFromJSON(rawJson, true)
     if (shuffle == true){
         sheet.randomize()
     }
     var singleSheet = arrayToSheet(sheet.convertToSingle(), window.localStorage.getItem("chosenSheet"));
-    for (i=0; i<singleSheet.length; i++){
+    for (i=0; i<singlesheet.terms.length; i++){
         console.log(singleSheet.terms[i].returnArray())
     }
     sheet = singleSheet;
@@ -80,16 +80,16 @@ function doTrain(){
     groupLength = Math.floor(document.getElementById("termsperround").value);
     if (document.getElementById("termsperround").value == null || document.getElementById("termsperround").value <=3){
         groupLength = 5;
-    } else if (document.getElementById("termsperround").value>=sheet.length) {
-        groupLength = sheet.length-1;
+    } else if (document.getElementById("termsperround").value>=sheet.terms.length) {
+        groupLength = sheet.terms.length-1;
     }
     descForError = "Calculating indexes of review."
     reviewIDX = calculateReview(groupLength);
 
     //dividing questions into groups
     descForError = "Placing terms into groups."
-    var amtOfArr = parseInt(((sheet.length/groupLength)+0.9))
-    var cutoff = sheet.length;
+    var amtOfArr = parseInt(((sheet.terms.length/groupLength)+0.9))
+    var cutoff = sheet.terms.length;
     for (var i = 0; i< amtOfArr; i++){
         var tempArr = [];
         for (var j = 0; j<groupLength; j++){
@@ -143,7 +143,7 @@ function doTrain(){
     t = 0;
     groupPosition = 1;
     review_t = 0;
-    totalNeededToFinish = (sheet.length*5)+(reviewIDX.length*(arrayOfGroups.length-1))
+    totalNeededToFinish = (sheet.terms.length*5)+(reviewIDX.length*(arrayOfGroups.length-1))
     totalCorrect = 0;
     ttlForGp = arrayOfGroups[0].length*5;
     crForGp = 0;

@@ -187,7 +187,7 @@
             <img src="../assets/logos/lang-wheat.png" style="height:10vh; position:fixed; top:3.5vh; cursor:pointer;" onclick="window.location.href='../homepage.html'">
 
             <div class="whiteBackdrop">
-                <button class="lightGlow newbutton" onclick="window.location.href='../studysheetpage.html'" ><img src="../assets/icons/blackBackButton.png"></button>
+                <button class="lightGlow newbutton" onclick="window.location.href=window.localStorage.getItem('back_link')" ><img src="../assets/icons/blackBackButton.png"></button>
                 <button class="lightGlow newbutton" onclick="showElement(document.getElementById('shuffling'))" ><img src="../assets/icons/shuffle.png"></button>
                 <button class="lightGlow newbutton" onclick="showElement(document.getElementById('swapping'))"><img src="../assets/icons/swapTD.png"></button>
                 <button class="lightGlow newbutton" onclick="showElement(document.getElementById('timerPopup'))"><img src="../assets/icons/timer.png"></button>

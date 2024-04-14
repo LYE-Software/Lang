@@ -23,7 +23,7 @@ function starter() {
     rawJson = window.localStorage.getItem("fullstudysheet")
     document.title = window.localStorage.getItem("chosenSheet") + " | Lang"
     jsonData = rawJson;
-    sheet = parseFromJSON(rawJson)
+    sheet = parseFromJSON(rawJson, true)
     total = sheet.getFullLength();
     runMultipleChoice()
     update()
@@ -37,7 +37,7 @@ var buttonArr;
 
 function runMultipleChoice() {
     console.warn("MASTER OUTPUT: havedone: "+haveDone+" total:" +total+" correct: "+correct+" incorrect: "+incorrect+ " num: "+num+" mnum: "+mnum)
-    if (num>=sheet.length){
+    if (num>=sheet.terms.length){
         showElement(document.getElementById("completedMode"))
         num = 0;
         if (randomized){
@@ -59,7 +59,7 @@ function runMultipleChoice() {
         document.getElementById("term_image").style.display = "";
     }
 
-    if (num >= sheet.length) {
+    if (num >= sheet.terms.length) {
         showElement(document.getElementById("completedMode"))
         num = 0;
         if (window.localStorage.getItem("random") == "true") {

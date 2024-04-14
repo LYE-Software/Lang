@@ -3493,7 +3493,7 @@ function addResponse(studysheetReturned){
     
     response = responses[Math.floor(Math.random() * (responses.length))];
     parsedSheet = studysheetReturned.split("\n");
-    for (i = 0; i<parsedSheet.length; i++){
+    for (i = 0; i<parsedsheet.terms.length; i++){
         try{
             wordPair = getRandomQuestion(studysheetReturned);
         } catch(error){
@@ -4162,7 +4162,7 @@ function grabMemrise(link) {
 
 function initializeEdit(){
     window.localStorage.setItem("editSheet", "true");
-    window.location.href='creator.html';
+    window.location.href='/creator.html';
 }
 
 function creatorModeSelect(){

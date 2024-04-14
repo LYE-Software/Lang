@@ -5,7 +5,7 @@ descForError = "undefined";
 var sheetId;
 var ownerId;
 var sheet;
-
+var currentEditors;
 window.onerror = function (msg, url, lineNo, columnNo, error) {
     console.log("Handling error.")
     var err =  new LangError(msg, url, lineNo, descForError, "Something unexpected happened. \n", true)
@@ -96,6 +96,9 @@ function displaySheet(){
             }
             makeInputs("single", i, term.term, term.answer, imageSrc)
         }
+    }
+    for (let editor_id in currentEditors){
+        let editor_name = currentEditors[editor_id];
     }
 }
 
@@ -615,7 +618,7 @@ function addResponse(studysheetReturned){
     console.log(parsed)
     
     try{
-        for (i = 0; i<parsedSheet.length; i++){
+        for (i = 0; i<parsedsheet.terms.length; i++){
             var term = parsedSheet.getNthTerm(i)
             if (term.isMulti){
                 console.log("ITS MULTI")

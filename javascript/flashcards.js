@@ -31,7 +31,7 @@ function makeCards(){
     newSheet = parseFromJSON(sheet)
     newSheet = arrayToSheet(newSheet.convertToSingle(), "sheet")
     var appendTo = "";
-    for (let i = 0; i<newSheet.length; i++){
+    for (let i = 0; i<newsheet.terms.length; i++){
         image = "none";
         imgsrc = "noimage";
         if (newSheet.getNthTerm(i).hasImage){
