@@ -474,20 +474,17 @@
             align-items: center;
             padding: 15px;
             box-sizing: border-box;
-            gap: 10px;
+            gap: 15px;
         }
 
         #editors > * > .status {
-            width: 10px;
-            height: 10px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
-            background-color: green;
         }
 
         #editors > * > .offline {
-            background-color: transparent;
-            border: 3px solid gray;
-            box-sizing: border-box;
+            filter: grayscale(100%);
         }
     </style>
 </head>
@@ -706,19 +703,19 @@
             <p>Last Modified 4/13/24</p>
             <div id="editors">
                 <div class="whitebackdrop">
-                    <div class="status"></div>
+                    <img class="status"></img>
                     ankleBowl
                 </div>
                 <div class="whitebackdrop">
-                    <div class="status"></div>
+                    <img class="status"></img>
                     calcwiz
                 </div>
                 <div class="whitebackdrop">
-                    <div class="status"></div>
+                    <img class="status"></img>
                     nwvbug
                 </div>
                 <div class="whitebackdrop">
-                    <div class="status offline"></div>
+                    <img class="status offline"></img>
                     lang_enjoyer
                 </div>
             </div>
