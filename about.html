@@ -16,13 +16,8 @@
 
         body {
             margin: 0;
-            background-color: var(--primary-dark);
             /* font-family: 'Josefin Sans', sans-serif; */
             font-family: 'Poppins', sans-serif;
-
-            overflow-y: hidden;
-            height: 100vh;
-            width: 100vw;
 
             /*  disable text selection on chrome */
             user-select: none;
@@ -36,10 +31,6 @@
         .fadeOut {
             transition: opacity 0.25s ease-in-out;  
             opacity: 0;
-        }
-
-        .fullHeight {
-            height: 100vh;
         }
 
         .verticalFlex {
@@ -64,17 +55,22 @@
             transition: all 0.25s ease-in-out;
         }
 
+        .aboutpanel {
+            padding: 25px;
+            border-radius: 25px;
+            margin-left: 25px;
+        }
+
     </style>
 </head>
 <body>
-    <div class="absolute horizontalFlex fullHeight" style="height: 100vh; width: 100vw;">
-        <div class="verticalFlex fullHeight" style="z-index: 100; padding-left: 50px; padding-right: 50px; flex: 1;  background-color: var(--primary-light); overflow-y: scroll">
-            <a href="index.html" class="flexSpacer"><img style="color: var(--primary-dark); height: 5vh; margin-top: 50px;" src="assets/icons/blackBackButton.png"></a>
-            <div class="flexSpacer"></div>
-            <div style="width: 100%; color: var(--primary-dark); font-size: 50px; font-family: 'alfarn', sans-serif;">LANG</div>
-            <div style="width: 100%; color: var(--primary-dark); font-family: 'Rubik Mono One'">Study ideas, not terms</div>
+    <lang_header></lang_header>
+    <div class="horizontalFlex" style="position: absolute; top: calc(18vh + 2px); bottom: 0; overflow: hidden;">
+        <div class="verticalFlex graybackdrop aboutpanel" style="flex: 1; color: white;">
+            <div style="width: 100%; font-size: 50px; font-family: 'alfarn', sans-serif;">LANG</div>
+            <div style="width: 100%; font-family: 'Rubik Mono One'">Study ideas, not terms</div>
             <br>
-            <div class="preload" id="textContainer" style="overflow: hidden; height: 0px; color:var(--primary-dark)">
+            <div class="preload" id="textContainer" style="overflow: hidden; height: 0px;">
                 <div style="width: 100%;">
                     
                     Lang was first built the night before a French test, as Nate, our founder, was trying to study a week's worth of material in one night.
@@ -95,19 +91,17 @@
                 </div>
             </div>
             <br>
-            <div id="downButton" class="horizontalFlex" style="color: var(--primary-dark); justify-content: center; width: 100%;">
+            <button id="downButton" class="newbutton horizontalFlex" style="justify-content: center; width: 100%;">
                 Continue
-            </div>
-            <div class="flexSpacer"></div>
-            <div class="flexSpacer"></div>
+            </button>
         </div>
-        <div class="fullHeight verticalFlex" style="align-items: center; justify-content: center; flex: 2; background-color:var(--primary-dark);">
-            <div style="color: var(--primary-light); font-family: 'Rubik Mono One'; font-size: 30px;">Who makes Lang possible?</div>
+        <div class="verticalFlex" style="align-items: center; justify-content: center; flex: 2;">
+            <div style="color: white; font-family: 'Rubik Mono One'; font-size: 30px;">Who makes Lang possible?</div>
             <div style="height: 400px"></div>
             <div id="tinderPanel" class="absolute">
 
             </div>
-            <div style="color: var(--primary-light);">Swipe or Click</div>
+            <div style="color: white;">Swipe or Click</div>
         </div>
     </div>
 </body>
@@ -210,6 +204,11 @@
 
     document.getElementById("downButton").addEventListener("click", function() {
         paragraph++;
+        if (paragraph == paragraphContainer.children.length - 1) {
+            this.innerHTML = "Restart";
+        } else {
+            this.innerHTML = "Continue";
+        }
         if (paragraph >= paragraphContainer.children.length) {
             paragraph = 0;
         }
