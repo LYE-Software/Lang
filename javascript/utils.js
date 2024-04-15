@@ -1,6 +1,33 @@
 const notifications = [
-    ``
+    `<div class="notifBox">
+    <h3>New Train Features!</h3>
+    <p>Train has been upgraded: Now your progress is saved! Additionally, error complaints were addressed and have been fixed.</p>
+    </div>`,
+    `<div class="notifBox">
+    <h3>Flashcards fixed!</h3>
+    <p>Flashcards has been updated to fix some errors with rapid movement through cards. Also, it has a pretty animation now!</p>
+    </div>`,
+    `<div class="notifBox">
+    <h3>December is here!</h3>
+    <p>Lang's background has once again been updated to match the December timeframe. Enjoy the snow, and good luck on finals!<br><br><i>If you do not like the snow, it causes performance issues, or you live in a place where it is not winter right now, feel free to disable the backgrounds in settings.</i></p>
+    </div>`,
+    `<div class="notifBox">
+    <h3>Changes coming soon.</h3>
+    <p>I thought we'd give you a heads up for some new things we are working on for Lang:<br><br><strong>Practice Test Styles</strong>- Make a practice test in the style of an AP FRQ, MCQ, or anything you can think of!</p>
+    </div>`,
+    `<div class="notifBox">
+    <h3>We're working on it!</h3>
+    <p>Huge thank-yous to everyone using Lang and reporting errors in the bug / feedback reporter. We see your messages and are working on them. Train's patch has already rolled out and Practice Test is getting upgrades soon. New features are on their way!</p>
+    </div>`,
+    `<div class="notifBox">
+    <h3>Thank you for using Lang!</h3>
+    <p>Thank you for signing up to Lang! Your support allows us to continue providing this service free for all.</p>
+    </div>`
 ]
+
+function displayNotifications(){
+    
+}
 
 function hideElement(element) {
     element.style.pointerEvents = "none";

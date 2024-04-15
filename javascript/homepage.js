@@ -165,7 +165,7 @@ async function getLibraryList(){
                 // hideLoadingView();
                 window.localStorage.setItem("studysheetcount", library.length);
                 let studysheetEntryContainer = document.getElementById("studysheetFlexContainer")
-                const baseSheetHtml = `<div class="sheetEntry" id="{SHEET_ID}" length="{SHEET_LENGTH}" date_created="{SHEET_DATE_CREATED}" date_modified="{SHEET_DATE_MODIFIED}" data-index="{SHEET_INDEX}">
+                const baseSheetHtml = `<div class="sheetEntry" id="{SHEET_ID}" length="{SHEET_LENGTH}" date_created="{SHEET_DATE_CREATED}" date_modified="{SHEET_DATE_MODIFIED}" data-index="{SHEET_INDEX}" data-creator="{SHEET_CREATOR}">
     <p>{SHEET_NAME}</p>
     <div>
         <svg class="studysheetEdit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488.728 488.728" xmlns:v="https://vecta.io/nano"><path d="M487.147 462.52l-36.4-167.6c0-4.2-2.1-7.3-5.2-10.4l-261.3-261.3c-20-22.9-74.3-38.1-112.4 0l-47.9 47.9c-31 31-31 81.4 0 112.4l261.3 261.3c2.1 2.1 5.2 4.2 9.4 5.2l168.6 38.5c10.1 1.5 29.1-4.9 23.9-26zm-434.1-308.1c-15.6-15.6-15.6-39.6 0-55.2l47.9-47.9c15.2-15.2 40-15.2 55.2 0l238.4 238.4h-27.1c-11.4 0-20.8 9.4-20.8 20.8v34.3h-34.3c-11.4 0-20.8 9.4-20.8 20.8v26.1l-238.5-237.3zm280 261.3v-29.2h34.3c18 1.7 20.8-16.5 20.8-20.8v-34.4h29.2l24 109.3-108.3-24.9z"/></svg>
@@ -184,7 +184,8 @@ async function getLibraryList(){
                         .replace("{SHEET_LENGTH}", length)
                         .replace("{SHEET_DATE_CREATED}", date_created)
                         .replace("{SHEET_DATE_MODIFIED}", date_modified)
-                        .replace("{SHEET_INDEX}", i);
+                        .replace("{SHEET_INDEX}", i)
+                        .replace("{SHEET_CREATOR}", library[i].creator_username)
                     
                     // convert to dom element
                     let sheetElement = document.createElement("div")
@@ -209,8 +210,7 @@ async function getLibraryList(){
                         document.getElementById("termCount").innerHTML = this.getAttribute("length");
                         document.getElementById("lastModified").innerHTML = this.getAttribute("date_modified");
                         document.getElementById("created").innerHTML = this.getAttribute("date_created");
-                        document.getElementById("createdBy").innerHTML = username;
-
+                        document.getElementById("createdBy").innerHTML = this.getAttribute("data-creator");
                         window.localStorage.setItem("chosenSheet", sheet_id)
                     })
                     studysheetEntryContainer.appendChild(sheetElement)

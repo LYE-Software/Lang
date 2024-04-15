@@ -14,13 +14,26 @@ socket.on("studysheet_edit", function(data){
             joinedNotif.add(new PopupText("Editor joined!").setStyle("font-size: 20px; font-weight: bold; margin: 0;"));
             joinedNotif.add(new PopupText(data.editor_username+" joined the room.").setStyle("font-size: 15px; margin: 0;"));
             joinedNotif.show();
+            let alreadyDisplayed = false;
+            for (let i = 0; i<document.getElementById("editors").children.length; i++){
+                if (document.getElementById("editors").children[i].getAttribute("data-editor_id") == data.editor_id){
+                    alreadyDisplayed = true;
+                }
+            }
+            if (!alreadyDisplayed){
+                showEditors(data);
+            }
             break;
 
         case "full_sheet_update":
             console.log("full sheet recieved, performing actions")
             sheet = data.data;
             currentEditors = data.current_editors;
+            for (let item in data.data.sharing.editors){
+                currentEditors[item] = data.data.sharing.editors[item];
+            }
             hideLoaders();
+            showEditors();
             displaySheet();
             break;
 
@@ -28,8 +41,10 @@ socket.on("studysheet_edit", function(data){
             if (data.error == "invalid_permissions"){
                 console.log("invalid permissions, performing actions")
                 showWaitingRoom();
+            } else if (data.error == "sheet_does_not_exist"){
+                console.log("not exist error")
             } else {
-                console.log("other error case")
+                console.log("other error")
             }
             break;
 
@@ -187,6 +202,12 @@ function update_json(json_data, path, value, type, propagate=true, ) {
             } else if (path[2] == "answers") { //multi alternate answers
 
             }
+        }
+    }
+    if (path[0]=="name"){
+        if (type == "update_value"){
+            document.getElementById("sstitle").innerText = value
+            document.getElementById("StudysheetTitleSidebar").innerText = value
         }
     }
 }

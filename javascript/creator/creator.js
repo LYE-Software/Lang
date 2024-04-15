@@ -54,6 +54,7 @@ function showWaitingRoom(){
 
 function changeName(){
     console.log("changing name to this: "+document.activeElement.innerText);
+    document.getElementById("StudysheetTitleSidebar").innerText = document.activeElement.innerText;
     update_json(sheet, ["name"], document.activeElement.innerText, "set_value", true);
 }
 
@@ -62,6 +63,8 @@ function displaySheet(){
     console.log(sheet)
     sheet = parseFromJSON(sheet);
     console.log(sheet);
+    document.getElementById("StudysheetTitleSidebar").innerText = sheet.name;
+    document.getElementById("sstitle").innerHTML = sheet.name;
     for (i = 0; i<sheet.terms.length; i++){
         var term = sheet.getNthTerm(i);
         
@@ -97,9 +100,32 @@ function displaySheet(){
             makeInputs("single", i, term.term, term.answer, imageSrc)
         }
     }
-    for (let editor_id in currentEditors){
-        let editor_name = currentEditors[editor_id];
+    
+}
+
+async function showEditors(newEditor=null){
+    let toAppend = '';
+    if (newEditor == null){
+        for (let editor_id in currentEditors){
+            let editor_name = currentEditors[editor_id];
+            let base_html = `
+            <div class="whitebackdrop" data-editor_id = '${editor_id}'>
+                <img class="status" src='https://lye.software/v2/pfp?id=${editor_id}'></img>
+                ${editor_name}
+            </div>`
+            toAppend+=base_html;
+        }
+        document.getElementById("editors").innerHTML+=toAppend;
+    } else {
+        let base_html = `
+        <div class="whitebackdrop" data-editor_id = '${newEditor.editor_id}'>
+            <img class="status" src='https://lye.software/v2/pfp?id=${newEditor.editor_id}'></img>
+            ${newEditor.editor_name}
+        </div>`
+        toAppend+=base_html;
+        
     }
+    
 }
 
 function registerNewTerm(){

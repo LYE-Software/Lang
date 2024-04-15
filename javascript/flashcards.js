@@ -1,12 +1,9 @@
 var newSheet;
 var currentlyFocusedCard = 0;
 var cardArray = [];
-window.scrollTo({
-    top: selectedFrame.offsetTop,
-    left: 0,
-    behavior: 'smooth'
-  });
+
 function doFlashcards(){
+    
     console.log("Flashcarding")
     document.getElementById("listview").style.display = "none"
     showElement(document.getElementById("flashcardBox"))
@@ -27,11 +24,11 @@ function doFlashcards(){
 
 
 function makeCards(){
-    console.log("sheet: "+sheet)
-    newSheet = parseFromJSON(sheet)
+    // console.log("sheet: "+sheet)
+    // newSheet = parseFromJSON(sheet)
     newSheet = arrayToSheet(newSheet.convertToSingle(), "sheet")
     var appendTo = "";
-    for (let i = 0; i<newsheet.terms.length; i++){
+    for (let i = 0; i<newSheet.terms.length; i++){
         image = "none";
         imgsrc = "noimage";
         if (newSheet.getNthTerm(i).hasImage){

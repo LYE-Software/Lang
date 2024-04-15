@@ -7,10 +7,14 @@ class LangError{
             doError = true;
         }
         else {
-            if (filename.includes("html") || filename == "" || filename == null){
+            if (filename.includes("html") || filename == "" || filename == null ||){
                 console.log("Extension error. Lang ignoring.")
             } else {
-                doError = true;
+                if (devMessaeg.includes("googletag")){
+                    doError = false;
+                } else {
+                    doError = true;
+                }
             }
         }
         if (doError){
