@@ -203,6 +203,10 @@
             /* border-top: 5px solid var(--primary-light);
             border-bottom: 5px solid var(--primary-light); */
             margin-right: 10px;
+            
+            margin-left: 100px;
+
+            /* I need a number, where 1 is at 700px, and 0 is at 1000px */
         }
 
         .langCreatorContainer::-webkit-scrollbar {
@@ -439,21 +443,43 @@
 
         /* MULTI USER EDITING */
         #sidePanel {
+            gap: 30px;
+            transition: transform 0.25s;
+            transform: translateX(calc(-100% + 85px));
+        }
+
+        #sidePanel:hover {
+            transform: translateX(0);
+        }
+
+        #editorsHover {
+            transition: opacity 0.25s;
+            opacity: 1;
+        }
+
+        #sidePanel:hover #editorsHover {
+            opacity: 0;
+        }
+
+
+        .editorsView {
             display: block;
 
-            padding: 15px;
+            padding: 10px;
             width: 300px;
             text-align: left;
             box-sizing: border-box;
+
+            border-radius: 25px;
         }
-        #sidePanel > * {
+        .editorsView >  * {
             margin: 0;
         }
-        #sidePanel > p {
+        .editorsView > p {
             margin-left: 15px;
             margin-bottom: 10px;
         }
-        #sidePanel > h3 {
+        .editorsView > h3 {
             margin-left: 15px;
             font-size: 25px;
         }
@@ -693,11 +719,18 @@
 
 
     <div id="rightSidebarContainer" class="rightSidebarContainer" style="flex-direction: column; gap: 10px; align-items: flex-start;">
-        <div class="whitebackdrop" id="sidePanel">
-            <h3 id="StudysheetTitleSidebar">!</h3>
-            <p>Last Modified 4/13/24</p>
-            <div id="editors">
-                
+        <div id="sidePanel" style="display: flex; flex-direction: row; justify-content: space-between; align-items: stretch;">
+            <div class="whitebackdrop editorsView">
+                <h3 id="StudysheetTitleSidebar">!</h3>
+                <p>Last Modified 4/13/24</p>
+                <div id="editors">
+                    
+                </div>
+            </div>
+            <div id="editorsHover" class="whitebackdrop" style="width: 85px; border-radius: 35px; display: flex; justify-content: center; align-items: center;">
+                <div class="newbutton">
+                    <img style="width: 50px; height: 50px;">
+                </div>
             </div>
         </div>
         <div class="whitebackdrop" style="width: 85px;">
