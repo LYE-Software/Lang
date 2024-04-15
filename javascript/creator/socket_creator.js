@@ -21,6 +21,7 @@ socket.on("studysheet_edit", function(data){
                 }
             }
             if (!alreadyDisplayed){
+                console.log("showing new editor")
                 showEditors(data);
             }
             break;

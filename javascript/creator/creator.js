@@ -115,17 +115,16 @@ async function showEditors(newEditor=null){
             </div>`
             toAppend+=base_html;
         }
-        document.getElementById("editors").innerHTML+=toAppend;
     } else {
         let base_html = `
         <div class="whitebackdrop" data-editor_id = '${newEditor.editor_id}'>
             <img class="status" src='https://lye.software/v2/pfp?id=${newEditor.editor_id}'></img>
-            ${newEditor.editor_name}
+            ${newEditor.editor_username}
         </div>`
         toAppend+=base_html;
-        
     }
-    
+    document.getElementById("editors").innerHTML+=toAppend;
+
 }
 
 function registerNewTerm(){
