@@ -15,7 +15,7 @@ socket.on("studysheet_edit", function(data){
             joinedNotif.add(new PopupText(data.editor_username+" joined the room.").setStyle("font-size: 15px; margin: 0;"));
             joinedNotif.show();
             let alreadyDisplayed = false;
-            for (let i = 0; i<document.getElementById("editors").children.length; i++){
+            for (let i = 0; i<document.getElementById("editors").children.length; i++){ //come back and lolkk at this
                 if (document.getElementById("editors").children[i].getAttribute("data-editor_id") == data.editor_id){
                     alreadyDisplayed = true;
                 }
@@ -206,7 +206,7 @@ function update_json(json_data, path, value, type, propagate=true, ) {
         }
     }
     if (path[0]=="name"){
-        if (type == "update_value"){
+        if (type == "set_value"){
             document.getElementById("sstitle").innerText = value
             document.getElementById("StudysheetTitleSidebar").innerText = value
         }
