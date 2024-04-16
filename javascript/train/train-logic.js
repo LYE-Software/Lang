@@ -33,6 +33,7 @@ if (initialSheet.is_owned == false){
         termIndex = cloudsave.termIndex;
         turnIndex = cloudsave.turnIndex;
         totalTurns = cloudsave.totalTurns;
+        
         updateBars();
     } 
 }
@@ -130,6 +131,11 @@ function startTrain(){
     //to ensure it stops fucking erroring at the end of the set
     if (usingSave){
         groupIndex = cloudsave.groupIndex;
+        if (groupIndex >0){
+            for (let item in arrayOfGroups[groupIndex-1]){
+                reviewStack.push(arrayOfGroups[groupIndex-1][item]);
+            }
+        }
     }
     
     logic();
@@ -201,6 +207,7 @@ function advanceTrain(passed){
 var certianReview = false;
 
 function checkForReview(){
+    
     if (reviewStack.length==0){
         return false;
     }
@@ -208,7 +215,7 @@ function checkForReview(){
         return false;
     }
     if (!certianReview){
-        randomChance = (arrayOfGroups[groupIndex].length*5) / arrayOfGroups[groupIndex-1]
+        randomChance = (arrayOfGroups[groupIndex].length*5) / arrayOfGroups[groupIndex-1].length
         if (Math.floor(Math.random() * randomChance) == 1){ // should space them out pretty evenly
             return true;
         }

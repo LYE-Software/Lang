@@ -88,8 +88,11 @@ function checkWrite(){
             totalTurns++;
         } else {
             displayWriteCorrected();
+            console.log("BEING RETURNED TO REVIEW STACK: THIS IS THE TERM")
+            console.log(currentTerm)
             reviewStack.push(currentTerm);
         }
+        clearScreen();
         logic();
     } else {
         if (currentTerm.check(usrInput)){
