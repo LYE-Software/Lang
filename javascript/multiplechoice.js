@@ -214,8 +214,13 @@ function continueMulti(){
 }
 
 function doIncorrect(clicked){
-
-    var toShow = `You chose <strong>${clicked}</strong><br>The correct answer was <strong>${theTerm.answer}</strong>`
+    let answerToShow;
+    if (theTerm.isMulti){
+        answerToShow = theTerm.answers[mnum];
+    } else {
+        answerToShow = theTerm.answer;
+    }
+    var toShow = `You chose <strong>${clicked}</strong><br>The correct answer was <strong>${answerToShow}</strong>`
     document.getElementById("correctedHolder").innerHTML = toShow;
     showElement(document.getElementById("incorrect"))
 }
