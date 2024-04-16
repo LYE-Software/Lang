@@ -31,6 +31,28 @@
             }
         }
 
+        @media (max-width: 500px) {
+            #rightSidebarContainer {
+                display: none;
+            }
+
+            #langCreatorContainer {
+                margin-left: 0;
+            }
+
+            .termDefContainer {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .termDefContainer > input {
+                min-width: 100%;
+                margin: 0;
+                margin-bottom: 20px;
+                height: 40px;
+            }
+        }
+
         #langBotContainer {
             position: fixed;
             right: 10px;
