@@ -1,167 +1,254 @@
-<div id="header" class="horizontalFlex">
-    <style>
-        #header {
-            border-bottom: 2px solid var(--primary-dark);
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-
-            height: calc(10vh + 20px);
-            background-color: var(--primary-light);
-            width: 100vw;
-        }
-
-        #homeusername {
-            color: var(--primary-dark);
-        }
-
-        #pfp {
-            height: 50px;
-            aspect-ratio: 1/1;
-            border-radius: 50%;
-        }
-
-        .functionRow {
-            background-color: var(--primary-light);
-            height: 6vh;
-            width: 100vw;
-            box-shadow: 0px 0px 20px 0px var(--primary-light);
-        
-        }
-        
-        .functionRowItem {
-            transition: all 0.25s ease-in-out;
-            padding: 0 10px 0 10px;
-            height: 100%;
-            cursor: pointer;
-            position: relative;
-        
-            display: flex;
-            align-items: center;
-        }
-        
-        .functionRowItem:first-child {
-            margin-left: 10px;
-        }
-        
-        .functionRowItem:last-child {
-            margin-right: 10px;
-        }
-        
-        .functionRowItem:hover {
-            background-color: var(--primary-dark);
-            color: var(--primary-light);
-        }
-        
-        .functionRowItem:hover .functionRowItemContents {
-            display: block;
-        }
-        
-        .functionRowItemContents {
-            display: none;
-            position: absolute;
-            top: 6vh;
-            left: 0;
-            z-index: 1;
-        
-            min-width: 100%;
-            max-width: 500%;
-
-            box-shadow: 0px 0px 20px 0px var(--primary-dark);
-        }
-        
-        .functionRowItemContents div {
-            transition: all 0.25s ease-in-out;
-        
-            color: var(--primary-dark);
-            height: 6vh;
-            padding: 0 10px 0 10px;
-            z-index:500;
-            display: flex;
-            align-items: center;
-            white-space: nowrap;
-
+<div style="position: relative;">
+    <div id="header" class="horizontalFlex">
+        <style>
+            #header {
+                border-bottom: 2px solid var(--primary-dark);
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+    
+                height: calc(5vh + 20px + 2vw);
+                background-color: var(--primary-light);
+                width: 100vw;
+    
+                position:relative;
+            }
+    
+            #homeusername {
+                color: var(--primary-dark);
+            }
+    
+            #pfp {
+                height: 50px;
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+            }
+    
+            .functionRow {
+                background-color: var(--primary-light);
+                height: 6vh;
+                width: 100vw;
+                box-shadow: 0px 0px 20px 0px var(--primary-light);
             
-        }
-        
-        .functionRowItemContents div:hover {
-            background-color: rgba(255, 255, 255, 0.5);
-            z-index:500;
-        }
-        
-        .functionRowItemContents a:hover {
-            background-color: rgba(255, 255, 255, 0.5);
-            z-index:500;
-        }
-        
-        .functionRowItemContents a {
-            transition: all 0.25s ease-in-out;
-            color: var(--primary-dark);
-            height: 6vh;
-            padding: 0 10px 0 10px;
-            z-index:500;
-            display: flex;
-            align-items: center;
-            white-space: nowrap;
-        }
+            }
+            
+            .functionRowItem {
+                transition: all 0.25s ease-in-out;
+                padding: 0 10px 0 10px;
+                height: 100%;
+                cursor: pointer;
+                position: relative;
+            
+                display: flex;
+                align-items: center;
+            }
+            
+            .functionRowItem:first-child {
+                margin-left: 10px;
+            }
+            
+            .functionRowItem:last-child {
+                margin-right: 10px;
+            }
+            
+            .functionRowItem:hover {
+                background-color: var(--primary-dark);
+                color: var(--primary-light);
+            }
+            
+            .functionRowItem:hover .functionRowItemContents {
+                display: block;
+            }
+            
+            .functionRowItemContents {
+                display: none;
+                position: absolute;
+                top: 6vh;
+                left: 0;
+                z-index: 1;
+            
+                min-width: 100%;
+                max-width: 500%;
+    
+                box-shadow: 0px 0px 20px 0px var(--primary-dark);
+            }
+            
+            .functionRowItemContents div {
+                transition: all 0.25s ease-in-out;
+            
+                color: var(--primary-dark);
+                height: 6vh;
+                padding: 0 10px 0 10px;
+                z-index:500;
+                display: flex;
+                align-items: center;
+                white-space: nowrap;
+    
+                
+            }
+            
+            .functionRowItemContents div:hover {
+                background-color: rgba(255, 255, 255, 0.5);
+                z-index:500;
+            }
+            
+            .functionRowItemContents a:hover {
+                background-color: rgba(255, 255, 255, 0.5);
+                z-index:500;
+            }
+            
+            .functionRowItemContents a {
+                transition: all 0.25s ease-in-out;
+                color: var(--primary-dark);
+                height: 6vh;
+                padding: 0 10px 0 10px;
+                z-index:500;
+                display: flex;
+                align-items: center;
+                white-space: nowrap;
+            }
+    
+            .mobileOnly {
+                display: none;
+                width: 100%;
+                background-color: var(--primary-light);
+            }
+    
+            #headerDropdownBtn {
+                height: 40px;
+                background: transparent;
+                border: none;
+            }
+    
+            @media screen and (max-width: 800px) {
+                .functionRow {
+                    display: none;
+                }
+    
+                .functionRowVisible {
+                    display: block !important;
+                    position: absolute;
+                    height: auto;
+                    top: 100%;
 
-        
-    </style>
-    <a style="cursor:pointer;" href="/">
-        <img style="height: 10vh;" src="/assets/logos/FullLangLogo.png" alt='Lang Logo'>
-    </a>
-    <div class="horizontalFlex grayBackdrop" style="gap: 20px; border-radius: 25px; padding-left: 10px; cursor:pointer; margin-right: 10px;" onclick="window.location.href='/settings.html'">
-        <p id="homeusername">{{username}}</p>
-        <img src="{{user_pfp_src}}" id="pfp">
-    </div>
-</div>
-<div class="functionRow horizontalFlex" style="justify-content: start;">
-    <div class="functionRowItem">
-        Create
-        <div class="whitebackdrop functionRowItemContents" style="z-index:500;">
-            <div onclick="window.location.href='creator.html'">New Studysheet</div>
-            <div onclick="window.location.href='notes.html'">From Notes</div>
-            <div onclick="window.location.href='quizletconvert.html'">From Quizlet</div>
+                    z-index: 1000;
+                }
+
+                .functionRowItem {
+                    display: flex;
+                    flex-direction: column;
+
+                    width: 100%;
+                    height: auto;
+                    padding: 10px 0;
+                    box-sizing: border-box;
+                    margin: 0;
+                    gap: 10px;
+                }
+
+                .functionRowItem:first-child {
+                    margin-left: 0;
+                }
+    
+                .mobileOnly {
+                    display: block;
+                }
+
+                .functionRowItem:hover .functionRowItemContents {
+                    display: none;
+                }
+
+
+                .functionRowItemVisible {
+                    top: 0;
+                    display: block !important;
+                    position: relative !important;
+                    box-shadow: none;
+                }
+    
+            }
+    
+            
+    
+            
+        </style>
+        <a style="cursor:pointer;" href="/">
+            <img style="height: 100%" src="/assets/logos/FullLangLogo.png" alt='Lang Logo'>
+        </a>
+        <div class="horizontalFlex grayBackdrop" style="gap: 20px; border-radius: 25px; padding-left: 10px; cursor:pointer; margin-right: 10px;" onclick="window.location.href='/settings.html'">
+            <p id="homeusername">{{username}}</p>
+            <img src="{{user_pfp_src}}" id="pfp">
         </div>
     </div>
-    <div class="functionRowItem" style="display:none;" id="localAdvanced">
-        Local
-        <div class="whitebackdrop functionRowItemContents" style="z-index:500;">
-            <div>Not Available Currently</div>
-            <!-- <div onclick="window.location.href='train.html'">Train</div>
-            <div onclick="window.location.href='mastery.html'">Mastery</div>
-            <div onclick="window.location.href='multiplechoice.html'">Multiple Choice</div>
-            <div onclick="window.location.href='flashcardsnewtml'">Flashcards</div>
-            <div onclick="window.location.href='practestnew.html'">Practice Test</div> -->
-        </div>
+    <div class="mobileOnly">
+        <button id="headerDropdownBtn" onclick="showHeaderDropdown()">
+            <img src="/assets/icons/sidebarIcon.svg" height="100%">
+        </button>
     </div>
-    <div class="functionRowItem">
-        Settings
-        <div class="whitebackdrop functionRowItemContents" style="z-index:500;">
-            <div onclick="window.open('https://lye.software/manageuser')">Account Settings</div>
-            <div onclick="window.location.href='settings.html'">Lang Settings</div>
+    <div class="functionRow horizontalFlex" style="justify-content: start;">
+        <div class="functionRowItem">
+            Create
+            <div class="whitebackdrop functionRowItemContents" style="z-index:500;">
+                <div onclick="window.location.href='creator.html'">New Studysheet</div>
+                <div onclick="window.location.href='notes.html'">From Notes</div>
+                <div onclick="window.location.href='quizletconvert.html'">From Quizlet</div>
+            </div>
         </div>
-    </div>
-    <div class="functionRowItem">
-        About
-        <div class="whitebackdrop functionRowItemContents" style="z-index:500;">
-            <div onclick="window.location.href='about.html'">About Lang</div>
-            <div onclick="window.location.href='langlegal.html'">Legal & Credits</div>
-            <div onclick="window.location.href='langAssistantFAQ.html'">About Lang Assistant</div>
+        <div class="functionRowItem" style="display:none;" id="localAdvanced">
+            Local
+            <div class="whitebackdrop functionRowItemContents" style="z-index:500;">
+                <div>Not Available Currently</div>
+                <!-- <div onclick="window.location.href='train.html'">Train</div>
+                <div onclick="window.location.href='mastery.html'">Mastery</div>
+                <div onclick="window.location.href='multiplechoice.html'">Multiple Choice</div>
+                <div onclick="window.location.href='flashcardsnewtml'">Flashcards</div>
+                <div onclick="window.location.href='practestnew.html'">Practice Test</div> -->
+            </div>
         </div>
-    </div>
-    <div class="functionRowItem">
-        Contact Us
-        <div class="whitebackdrop functionRowItemContents" style="z-index:500;">
-            <a href="https://github.com/LYE-software/Lang/issues">Visit our GitHub</a>
-            <a href="mailto:customersupport@langstudy.tech" >Email Us</a>
-            <a href="https://discord.gg/FtdtvkdfHy" >Join us on Discord</a>
-            <a href="https://instagram.com/studylangtech\" >Follow us on Instagram</a>
-            <a href="https://youtube.com/@studylangtech">Subscribe to our YouTube</a>
+        <div class="functionRowItem">
+            Settings
+            <div class="whitebackdrop functionRowItemContents" style="z-index:500;">
+                <div onclick="window.open('https://lye.software/manageuser')">Account Settings</div>
+                <div onclick="window.location.href='settings.html'">Lang Settings</div>
+            </div>
         </div>
-    </div>
-    <notdiv class="flexSpacer"></notdiv>
-    <div class="notif hasUnreads" style="margin-right:3vh;" id="notif" onclick="openNotifs()">
-        <img src="assets/icons/notifications.png" style="height:3vh;">
+        <div class="functionRowItem">
+            About
+            <div class="whitebackdrop functionRowItemContents" style="z-index:500;">
+                <div onclick="window.location.href='about.html'">About Lang</div>
+                <div onclick="window.location.href='langlegal.html'">Legal & Credits</div>
+                <div onclick="window.location.href='langAssistantFAQ.html'">About Lang Assistant</div>
+            </div>
+        </div>
+        <div class="functionRowItem">
+            Contact Us
+            <div class="whitebackdrop functionRowItemContents" style="z-index:500;">
+                <a href="https://github.com/LYE-software/Lang/issues">Visit our GitHub</a>
+                <a href="mailto:customersupport@langstudy.tech" >Email Us</a>
+                <a href="https://discord.gg/FtdtvkdfHy" >Join us on Discord</a>
+                <a href="https://instagram.com/studylangtech\" >Follow us on Instagram</a>
+                <a href="https://youtube.com/@studylangtech">Subscribe to our YouTube</a>
+            </div>
+        </div>
+        <notdiv class="flexSpacer"></notdiv>
+        <div class="notif hasUnreads" style="margin-right:3vh;" id="notif" onclick="openNotifs()">
+            <img src="assets/icons/notifications.png" style="height:3vh;">
+        </div>
+        <script>
+            function showHeaderDropdown() {
+                document.querySelector(".functionRow").classList.toggle("functionRowVisible");
+            }
+
+            let functionRowItems = document.querySelectorAll(".functionRowItem");
+            for (let i = 0; i < functionRowItems.length; i++) {
+                functionRowItems[i].addEventListener("click", function() {
+                    let contents = functionRowItems[i].querySelector(".functionRowItemContents");
+                    contents.classList.toggle("functionRowItemVisible");
+                });
+            }
+
+            // 
+            
+        </script>
     </div>
 </div>

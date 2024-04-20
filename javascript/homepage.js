@@ -195,7 +195,7 @@ async function getLibraryList(){
                     let editButton = sheetElement.getElementsByClassName("studysheetEdit")[0]
                     editButton.addEventListener("click", function(){
                         window.localStorage.setItem("chosenSheet", sheet_id)
-                        window.location.href="studysheetpage.html";
+                        goToSSPage()
                     })
 
                     console.log("Adding event listener to "+sheet_id)

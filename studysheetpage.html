@@ -36,6 +36,8 @@
             padding-bottom: 50px;
         }  
 
+
+
         .termDefTitle {
             padding-left: 15px;
             padding-right: 15px;
@@ -49,7 +51,7 @@
         }
         
         .termListMain {
-            max-width: calc(40vw + 200px);
+            max-width:800px;
             width: 95vw;
             box-sizing: border-box;
         }
@@ -316,7 +318,7 @@
             animation: cardFlip 0.25s ease-in-out;
         }
 
-        @media (max-width: 750px) {
+        @media (max-width: 1000px) {
             .leftSidebarContainer {
                 position: relative;
 
@@ -350,10 +352,22 @@
             }
 
             #studysheetname {
-                display: none;
+                font-size: 30px;
+                max-width: 95vw;
             }
             #makeAnAccount{
                 display:none;
+            }
+
+            .termdef > div {
+                flex-direction: column;
+            }
+            .termdef > div > div:first-child {
+                font-weight: bold;
+            }
+            
+            .termDefTitle {
+                display: none;
             }
         }
 
